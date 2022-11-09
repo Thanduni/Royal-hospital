@@ -35,7 +35,6 @@ nav img {
 nav p,
 nav a {
     display: inline;
-    font-family: 'Montserrat';
     text-decoration: none;
     font-style: normal;
     font-weight: 400;
@@ -586,7 +585,7 @@ a {
 }
 
 .userContents button,
-.form button {
+#form button {
     width: 139px;
     height: 40px;
     background: #24354E;
@@ -629,6 +628,7 @@ a {
 .userContents table {
     display: flex;
     justify-content: center;
+    box-shadow: 3px 3px 20px 0px #24354E;
     /* border-style: solid; */
     background-color: #AADDDD;
     color: #24354E;
@@ -673,12 +673,9 @@ a {
     }
 }
 
-
-/* Click event example - note style */
-
 #note {
     color: #fff;
-    display: flex;
+    display: none;
     justify-content: center;
     background-color: #000;
     opacity: 0.9;
@@ -692,90 +689,81 @@ a {
     left: 0;
 }
 
-#note .header+div {
-    background: rgb(255, 255, 255);
-    background: rgba(255, 255, 255, 1);
-    position: relative;
-    text-align: center;
-    top: 1px;
-    color: #d7666b;
-    padding: 20px;
-    margin: 30px;
-    border: 1px solid #d7666b;
+#note.active {
+    display: flex;
 }
 
-#note h2 {
-    color: #d7666b;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-#note a {
-    text-decoration: none;
-    color: #fff;
-}
-
-#note .header {
-    text-align: right;
-    background-color: #000;
-    border: none;
-    padding: 0 0 0 10px;
-}
-
-.form table {
+#note p {
     padding: 10px;
+    text-align: left;
+}
+
+#form table {
+    padding: 10px;
+    /* display: flex; */
+    /* flex-direction: column; */
     margin: 10px;
+    flex-wrap: wrap;
     font-weight: 400;
     font-size: 15px;
     line-height: 18px;
 }
 
-.form th,
+#form th,
 td {
     padding: 5px;
 }
 
-.form {
+#form {
     background-color: white;
+    display: flex;
+    position: fixed;
+    height: 500px;
+    overflow: auto;
     font-style: normal;
+    margin: 50px;
     font-weight: 400;
     font-size: 30px;
     line-height: 37px;
-    height: max-content;
     border-radius: 10px;
-    /* identical to box height */
     color: #000000;
+    /* display: none; */
 }
 
-.form input[type="text"],
-.form input[type="email"],
-.form textarea {
+#form input[type="text"],
+#form input[type="email"],
+#form textarea,
+#form select {
     width: 351px;
     background: #BDC8E6;
     border: 1px solid rgba(36, 53, 78, 0.5);
     border-radius: 10px;
     font-style: normal;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 15px;
     line-height: 37px;
     /* identical to box height */
     color: #000000;
 }
 
+#form select {
+    height: 37px
+}
 
-/* .form input[type="text"],
-.form input[type="email"] {
-    height: 55px;
-} */
-
-.form td:first-child {
+#form td:first-child {
     text-align: right;
 }
 
 
-/* .form button {
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    height: 35px;
+/* img .profilePic {
+    height: 150px;
+    border-style: solid;
+    border-radius: 50%;
 } */
+
+td>img {
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    border-radius: 50%;
+}

@@ -14,6 +14,15 @@ if (isset($_SESSION['mailaddress'])) {
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/style.php">
         <title>Admin dashboard - user</title>
+        <style>
+            p.royal {
+                font-size: 20px;
+            }
+
+            p.addUSer {
+                font-size: 30px;
+            }
+        </style>
     </head>
 
     <body>
@@ -79,6 +88,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <th>gender</th>
                             <th>password</th>
                             <th>user_role</th>
+                            <th>profile_image</th>
                         </tr>
                         <?php
                         for ($j = 0; $j < $rows; ++$j) {
@@ -92,6 +102,12 @@ if (isset($_SESSION['mailaddress'])) {
                                         <?php echo $row[$k]; ?>
                                     </td>
                                 <?php } ?>
+                                <td>
+                                    <?php
+                                    echo "<img class='profilePic' src='uploads/$row[8]' alt='Upload Image' width=150px>";
+                                    // echo $row[8];
+                                    ?>
+                                </td>
                             </tr>
                         <?php } ?>
                     </table>
@@ -99,6 +115,108 @@ if (isset($_SESSION['mailaddress'])) {
             </div>
         </div>
         <script src="js/addUser.js"></script>
+        <div id="note">
+            <div id="form">
+                <form action="addUser.php" method="post" enctype="multipart/form-data">
+
+                    <p class="royal">Royal Hospital Management System </p>
+                    <p class="addUser">Add user </p>
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="nic">NIC:</label>
+                            </td>
+                            <td colspan="2">
+                                <input type="text" name="nic" id="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Name">Name:</label>
+                            </td>
+                            <td colspan="2">
+                                <input type="text" name="name" id="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="address">Address:</label>
+                            </td>
+                            <td colspan="2">
+                                <textarea type="text" name="address" id="" rows=3></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="email">Email:</label>
+                            </td>
+                            <td colspan="2">
+                                <input type="text" name="email" id="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="contact">Contact number:</label>
+                            </td>
+                            <td colspan="2">
+                                <input type="text" name="contactNum" id="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="address">Gender:</label>
+                            </td>
+                            <td colspan="1">
+                                <label for="address">Male:</label>
+                                <input type="radio" name="gender" value="m">
+                            </td>
+                            <td colspan="1">
+                                <label for="address">Female:</label>
+                                <input type="radio" name="gender" value="f">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="userRole">User role:</label>
+                            </td>
+                            <td colspan="2">
+                                <select name="userRole">
+                                    <option value="Patient">Patient</option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Receptionist">Receptionist</option>
+                                    <option value="Storekeeper">Storekeeper</option>
+                                    <option value="Nurse">Nurse</option>
+                                </select>
+                                <br><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="password">Password:</label>
+                            </td>
+                            <td colspan="2">
+                                <input type="text" name="password" id="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="profile_image">Profile picture:</label>
+                            </td>
+                            <td colspan="2">
+                                <input type="file" name="profile_image">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2">
+                                <button name="addUser">Apply</button>
+                                <button name="cancel" id="cancel">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </body>
 
     </html>
