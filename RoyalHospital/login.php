@@ -2,7 +2,7 @@
 require_once("DBconnect.php");
 session_start();
 if (!isset($_SESSION['mailaddress'])) {
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -16,46 +16,62 @@ if (!isset($_SESSION['mailaddress'])) {
     </head>
 
     <body>
-        <div class="page">
-            <div class="p1">
-                <div class="loginContents">
-                    <p><img src="images/logo5.png" alt="logo" align="middle"><br>
-                        Royal Hospital Management System
-                    </p>
-                    <?php
-                    if (@$_GET['Empty'] == true) {
-                    ?>
-                        <div class="alert">
-                            <?php
-                            echo $_GET["Empty"];
-                            ?>
-                        </div>
-                    <?php
-                    } else if (@$_GET['Invalid'] == true) {
-                    ?>
-                        <div class="alert">
-                            <?php
-                            echo $_GET["Invalid"];
-                            ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                    <form action="loginProcess.php" method="post">
-                        <input type="email" name="email" placeholder="Email"><br>
-                        <input type="password" name="password" placeholder="Password"><br>
-                        <button name="login">Login</button>
-                    </form>
-                </div>
-            </div>
-            <div class="p2"></div>
+    <nav>
+        <a href="index.php">
+            <p><img src="images/logo5.png" alt="logo" align="middle">
+                Royal Hospital Management System
+            </p>
+        </a>
+        <div class="nav-links">
+            <ul>
+                <li><a href="index.php"> Home </a></li>
+                <li><a href=""> About us </a></li>
+                <li><a href=""> Appointment </a></li>
+                <li><a href=""> Register patient </a></li>
+                <li><a href="login.php"> Login </a></li>
+            </ul>
         </div>
+    </nav>
+    <div class="page">
+        <div class="p1">
+            <div class="loginContents">
+                <p><img src="images/logo5.png" alt="logo" align="middle"><br>
+                    Royal Hospital Management System
+                </p>
+                <?php
+                if (@$_GET['Empty'] == true) {
+                    ?>
+                    <div class="alert">
+                        <?php
+                        echo $_GET["Empty"];
+                        ?>
+                    </div>
+                    <?php
+                } else if (@$_GET['Invalid'] == true) {
+                    ?>
+                    <div class="alert">
+                        <?php
+                        echo $_GET["Invalid"];
+                        ?>
+                    </div>
+                    <?php
+                }
+                ?>
+                <form action="loginProcess.php" method="post">
+                    <input type="email" name="email" placeholder="Email"><br>
+                    <input type="password" name="password" placeholder="Password"><br>
+                    <button name="login">Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="p2"></div>
+    </div>
     </body>
 
     </html>
-<?php
+    <?php
 } else {
-?>
+    ?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -97,28 +113,29 @@ if (!isset($_SESSION['mailaddress'])) {
     </head>
 
     <body>
-        <div class="alreadyLogged">
-            <h1>Confirm</h1>
-            <hr>
-            <?php echo "<p>You are already logged in as "
-                . $_SESSION['name'] . " you need to log 
+
+    <div class="alreadyLogged">
+        <h1>Confirm</h1>
+        <hr>
+        <?php echo "<p>You are already logged in as "
+            . $_SESSION['name'] . " you need to log 
             out before logging in as different user.</p>" ?>
-            <hr>
-            <button>
-                <a href="logout.php?logout">
-                    Logout
-                </a>
-            </button>
-            <button>
-                <a href="logout.php?cancel">
-                    Cancel
-                </a>
-            </button>
-        </div>
+        <hr>
+        <button>
+            <a href="logout.php?logout">
+                Logout
+            </a>
+        </button>
+        <button>
+            <a href="logout.php?cancel">
+                Cancel
+            </a>
+        </button>
+    </div>
     </body>
 
     </html>
 
-<?php
+    <?php
 }
 ?>
