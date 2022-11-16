@@ -38,13 +38,11 @@ if (isset($_POST['addUser'])) {
     $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $gender = $_POST['gender'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $userRole = $_POST['userRole'];
     $profile_image = $new_img_name;
 
-    // echo "<pre>";
-    // print_r($_FILES['profile_image']);
-    // echo "</pre>";
+
     $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image) VALUES ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image');";
     $result = mysqli_query($con, $query);
     header("location:adminDash.php");

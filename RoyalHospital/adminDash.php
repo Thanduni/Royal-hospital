@@ -58,7 +58,7 @@ if (isset($_SESSION['mailaddress'])) {
                         </a></li>
                 </ul>
             </div>
-            <div class="userContents">
+            <div class="userContents" id="center">
                 <div class="title">
                     Royal Hospital Management System
                 </div>
@@ -73,12 +73,14 @@ if (isset($_SESSION['mailaddress'])) {
                 <div class="userClass">
                     <?php
                     $query = "SELECT * FROM user";
-                    echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";
+//                    echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";
                     $result = $con->query($query);
                     if (!$result) die("Database access failed: " . $con->error);
                     $rows = $result->num_rows;
+                    $rows = $result->num_rows;
                     ?>
                     <table class="table">
+
                         <tr>
                             <th>nic</th>
                             <th>name</th>
@@ -98,11 +100,11 @@ if (isset($_SESSION['mailaddress'])) {
                             <tr>
                                 <?php
                                 for ($k = 0; $k < 8; ++$k) { ?>
-                                    <td>
+                                    <td >
                                         <?php echo $row[$k]; ?>
                                     </td>
                                 <?php } ?>
-                                <td>
+                                <td style="width:100px">
                                     <?php
                                     echo "<img class='profilePic' src='uploads/$row[8]' alt='Upload Image' width=150px>";
                                     // echo $row[8];
@@ -127,7 +129,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="nic">NIC:</label>
                             </td>
                             <td colspan="2">
-                                <input type="text" name="nic" id="">
+                                <input type="text" name="nic" id="" required>
                             </td>
                         </tr>
                         <tr>
@@ -135,7 +137,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="Name">Name:</label>
                             </td>
                             <td colspan="2">
-                                <input type="text" name="name" id="">
+                                <input type="text" name="name" id="" required>
                             </td>
                         </tr>
                         <tr>
@@ -143,7 +145,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="address">Address:</label>
                             </td>
                             <td colspan="2">
-                                <textarea type="text" name="address" id="" rows=3></textarea>
+                                <textarea type="text" name="address" id="" rows=3 required></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -151,7 +153,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="email">Email:</label>
                             </td>
                             <td colspan="2">
-                                <input type="text" name="email" id="">
+                                <input type="text" name="email" id="" required>
                             </td>
                         </tr>
                         <tr>
@@ -159,7 +161,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="contact">Contact number:</label>
                             </td>
                             <td colspan="2">
-                                <input type="text" name="contactNum" id="">
+                                <input type="text" name="contactNum" id="" required>
                             </td>
                         </tr>
                         <tr>
@@ -168,11 +170,11 @@ if (isset($_SESSION['mailaddress'])) {
                             </td>
                             <td colspan="1">
                                 <label for="address">Male:</label>
-                                <input type="radio" name="gender" value="m">
+                                <input type="radio" name="gender" value="m" required>
                             </td>
                             <td colspan="1">
                                 <label for="address">Female:</label>
-                                <input type="radio" name="gender" value="f">
+                                <input type="radio" name="gender" value="f" required>
                             </td>
                         </tr>
                         <tr>
@@ -195,7 +197,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="password">Password:</label>
                             </td>
                             <td colspan="2">
-                                <input type="text" name="password" id="">
+                                <input type="text" name="password" id="" required>
                             </td>
                         </tr>
                         <tr>
@@ -203,7 +205,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <label for="profile_image">Profile picture:</label>
                             </td>
                             <td colspan="2">
-                                <input type="file" name="profile_image">
+                                <input type="file" name="profile_image" required>
                             </td>
                         </tr>
                         <tr>

@@ -1,8 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
+
 * {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat';
+
 }
 
 html,
@@ -17,7 +19,8 @@ body {
 
 nav {
     display: flex;
-    /* position: fixed; */
+    position: sticky;
+    top: 0px;
     /* width: 100%; */
     padding: 2% 6%;
     z-index: 100;
@@ -130,6 +133,8 @@ p.slider-description {
     color: rgb(255, 255, 255);
 }
 
+
+
 .options {
     display: flex;
     position: absolute;
@@ -151,11 +156,11 @@ p.slider-description {
 }
 
 .articleHome {
-    position: absolute;
+    position: relative;
     display: flex;
     width: 100%;
     text-align: left;
-    top: 1200px
+    top: 300px
 }
 
 .articleHome img {
@@ -171,7 +176,7 @@ p.slider-description {
     flex: 1;
 }
 
-.articleHome .hospitalArticle {
+.articleHome .hospitalArticle p {
     flex: 1;
     font-style: normal;
     font-weight: 400;
@@ -188,14 +193,16 @@ p.slider-description {
         justify-content: center;
         align-items: center;
     }
+
     .articleHome {
         display: block;
-        position: absolute;
+        position: relative;
         width: 100%;
         text-align: center;
         justify-content: center;
-        top: 1550px
+        top: 500px
     }
+
     .articleHome img {
         padding: 20px;
         position: relative;
@@ -203,13 +210,14 @@ p.slider-description {
         left: 0;
         transform: translate(0%, 0%);
     }
+
     .articleHome .hospitalArticle {
         padding: 10px;
     }
 }
 
-.optionA>p,
-.optionB>p {
+.optionA > p,
+.optionB > p {
     position: relative;
     top: 50%;
     transform: translate(0%, -50%);
@@ -264,7 +272,7 @@ p.slider-description {
     flex-direction: row;
 }
 
-.page>.p1 {
+.page > .p1 {
     flex: 3;
     display: flex;
     justify-content: center;
@@ -273,7 +281,7 @@ p.slider-description {
     height: 100vh;
 }
 
-.page>.p2 {
+.page > .p2 {
     flex: 5;
     display: flex;
     background-image: url(../images/loginImg.jpg);
@@ -345,7 +353,7 @@ form button {
     font-weight: 400;
     font-size: 30px;
     line-height: 37px;
-    color: #AADDDD;
+    color: #ADB6CD;
     margin: 10px;
 }
 
@@ -369,7 +377,7 @@ button:active {
 }
 
 #sidebarMenu {
-    height: 100%;
+    height: 150vh;
     position: relative;
     left: 0;
     width: 60px;
@@ -387,14 +395,6 @@ button:active {
     padding: 0;
 }
 
-.vector {
-    position: absolute;
-    left: 29.17%;
-    right: 29.17%;
-    top: 62.5%;
-    bottom: 12.5%;
-    border: 2px solid #ADB6CD;
-}
 
 .sidebarMenuInner li {
     list-style: none;
@@ -408,8 +408,55 @@ button:active {
     margin: 12px 0;
 }
 
-input[type="checkbox"]:checked~#sidebarMenu {
+@media screen and (max-width: 1229px) {
+    #sidebarMenu {
+        height: 150vh;
+        position: relative;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 60px;
+        overflow: hidden;
+        margin-top: 0px;
+        transform: translateX(0px);
+        transition: width .10s linear;
+        background: linear-gradient(180deg, #24354E 100%, #ffffff 0%);
+    }
+
+    .sidebarMenuInner {
+        position: relative;
+        height: 100vh;
+        margin-top: 125px;
+        padding: 0;
+    }
+
+
+    .sidebarMenuInner li {
+        list-style: none;
+        height: 30px;
+        color: #fff;
+        text-transform: lowercase;
+        padding: 2.5px;
+        cursor: pointer;
+        text-align: left;
+        overflow: hidden;
+        margin: 12px 0;
+    }
+}
+
+.vector {
+    position: absolute;
+    left: 29.17%;
+    right: 29.17%;
+    top: 62.5%;
+    bottom: 12.5%;
+    border: 2px solid #ADB6CD;
+}
+
+
+input[type="checkbox"]:checked ~ #sidebarMenu {
     width: 250px;
+    height: 100vh;
     overflow: visible;
     transition: width .10s linear;
 }
@@ -440,7 +487,7 @@ input[type=checkbox] {
     position: absolute;
     height: 3px;
     width: 100%;
-    background-color: #AADDDD;
+    background-color: #ADB6CD;
 }
 
 .horizontal {
@@ -466,20 +513,20 @@ input[type=checkbox] {
     margin-top: 3px;
 }
 
-input[type=checkbox]:checked~.sidebarIconToggle>.horizontal {
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
     transition: all 0.3s;
     box-sizing: border-box;
     opacity: 0;
 }
 
-input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-1 {
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
     transition: all 0.3s;
     box-sizing: border-box;
     transform: rotate(135deg);
     margin-top: 8px;
 }
 
-input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     transition: all 0.3s;
     box-sizing: border-box;
     transform: rotate(-135deg);
@@ -490,7 +537,7 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
     height: 20px;
     width: 20px;
     border-style: solid;
-    border-color: #AADDDD;
+    border-color: #ADB6CD;
     border-radius: 10px;
     border-width: 1px;
     padding: 5px;
@@ -500,7 +547,7 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
 .sidebarMenuInner p {
     display: inline;
     margin: 15px;
-    color: #AADDDD;
+    color: #ADB6CD;
     /* border-style: solid; */
     font-style: normal;
     font-weight: 400;
@@ -519,7 +566,7 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
 }
 
 .sidebarMenuInner p:hover::after {
-    width: 51%;
+    width: 100%;
 }
 
 a {
@@ -589,7 +636,7 @@ a {
     width: 139px;
     height: 40px;
     background: #24354E;
-    color: #AADDDD;
+    color: #ADB6CD;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -601,13 +648,26 @@ a {
 }
 
 .midPortion {
-    background-image: url("../images/homeMidShape.png");
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #24354E;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 280px;
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
     line-height: 32px;
-    color: #AADDDD;
+    color: #ADB6CD;
 }
+
+.midPortion p, h4 {
+    width: 600px;
+    padding: 20px;
+}
+
 
 .alert {
     color: red;
@@ -631,7 +691,7 @@ a {
     box-shadow: 3px 3px 20px 0px #24354E;
     /* border-style: solid; */
     background-color: #AADDDD;
-    color: #24354E;
+    /*color: #24354E;*/
     border-radius: 10px;
     font-weight: 400;
     font-size: 15px;
@@ -643,34 +703,21 @@ a {
 
 .userContents th,
 .userContents td {
+    display: flex;
+    width: 100px;
     text-align: left;
+    overflow-wrap: break-word;
     padding: 0.25em;
-    /* border-style: solid; */
-    /* border-color: #24354E; */
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+    height: max-content;
 }
 
 .userContents tr {
     padding: 0.25em;
     border-style: solid;
     border-color: #000000;
-}
-
-@media screen and (max-width: 1229px) {
-    .userContents table {
-        margin: 20px;
-    }
-    .userContents tr {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0.5em 0;
-        border-style: none;
-    }
-    .userContents td,
-    .userContents th {
-        flex: 1 1 150px;
-        border: 0.25px solid #24354E;
-    }
 }
 
 #note {
@@ -700,6 +747,7 @@ a {
 
 #form table {
     padding: 10px;
+    table-layout: fixed;
     /* display: flex; */
     /* flex-direction: column; */
     margin: 10px;
@@ -754,16 +802,240 @@ td {
     text-align: right;
 }
 
-
-/* img .profilePic {
-    height: 150px;
-    border-style: solid;
-    border-radius: 50%;
-} */
-
-td>img {
+td > img {
     height: 50px;
     width: 50px;
     border-style: none;
     border-radius: 50%;
+}
+
+.userClass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+
+.next {
+    position: relative;
+    top: 330px;
+    height: auto;
+}
+
+.container {
+    max-width: 100%;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer {
+    background-color: #24354E;
+    padding: 43px 0;
+}
+
+.footer-col {
+    padding: 0 15px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ADB6CD;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col img {
+    width: 60px;
+}
+
+.slogen {
+    padding: 10px 0;
+    text-align: left;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ADB6CD;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+#one {
+    min-width: 50%;
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: left;
+
+}
+
+#two {
+    min-width: 25%;
+    max-width: 100%
+}
+
+#three {
+    min-width: 25%;
+    max-width: 100%
+}
+
+.txt {
+    padding: 50px 0;
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #ADB6CD;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a,
+.footer-col p,
+.footer-col li {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ADB6CD;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ADB6CD;
+    padding-left: 8px;
+}
+
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: #24354E;
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ADB6CD;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+    color: #ADB6CD;
+    background-color: #24354E;
+}
+
+/*responsive*/
+@media (max-width: 767px) {
+    .footer-col {
+        width: 33%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 574px) {
+    .footer-col {
+        width: 100%;
+    }
+}
+
+.cards {
+    position: relative;
+    width: 100%;
+    top: 300px;
+}
+
+.cards ul {
+    display: flex;
+    width: 100%;
+    margin: 20px 0px 20px 0px;
+    justify-content: space-around;
+}
+
+.cards ul li {
+    text-align: justify;
+    font-style: normal;
+    width: 25%;
+    border-style: none;
+    background-color: #F8F9FF;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    margin: 10px;
+    font-size: 20px;
+    line-height: 24px;
+    color: #24354E;
+}
+
+@media screen and (max-width: 1229px) {
+    .userContents table {
+        margin: 20px;
+    }
+
+    .userContents tr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0.5em 0;
+        border-style: none;
+    }
+
+    .userContents td,
+    .userContents th {
+        flex: 1 1 150px;
+        border: 0.25px solid #24354E;
+        margin: 0px;
+    }
+
+    .midPortion {
+        position: relative;
+        background-size: 100%;
+        height: 300px;
+        top: 500px;
+    }
+
+    .cards ul {
+        display: block;
+        width: 100%;
+        margin: 20px 0px 20px 0px;
+        justify-content: space-around;
+    }
+
+    .cards ul li {
+        width: 94%;
+        margin: 10px;
+    }
+
+    .cards {
+        position: relative;
+        width: 100%;
+        top: 500px;
+    }
+
+    .next{
+        position: relative;
+        top: 500px;
+        height: auto;
+    }
 }
