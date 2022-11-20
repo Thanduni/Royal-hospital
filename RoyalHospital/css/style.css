@@ -133,7 +133,7 @@ p.slider-description {
     color: rgb(255, 255, 255);
 }
 
-.loginContents{
+.loginContents {
     color: #F8F9FF;
     border-style: none;
     border-radius: 10px;
@@ -366,11 +366,6 @@ form button {
 }
 
 button:hover {
-    /* background-color: #24354E; */
-    /* border-style: solid; */
-    /* border-color: #AADDDD; */
-    /* border-width: 4px; */
-    /* color: #AADDDD; */
     transform: scale(1.125);
 }
 
@@ -385,7 +380,7 @@ button:active {
 }
 
 #sidebarMenu {
-    height: 150vh;
+    height: 100%;
     position: relative;
     left: 0;
     width: 60px;
@@ -418,7 +413,7 @@ button:active {
 
 @media screen and (max-width: 1229px) {
     #sidebarMenu {
-        height: 150vh;
+        height: 100%;
         position: relative;
         left: 0;
         top: 0;
@@ -464,7 +459,7 @@ button:active {
 
 input[type="checkbox"]:checked ~ #sidebarMenu {
     width: 250px;
-    height: 100vh;
+    height: 100%;
     overflow: visible;
     transition: width .10s linear;
 }
@@ -603,6 +598,11 @@ a {
     line-height: 51px;
     text-align: center;
     color: #000000;
+}
+
+.title img {
+    height: 42px;
+    width: 42px;
 }
 
 .userContents ul {
@@ -996,6 +996,30 @@ ul {
     color: #24354E;
 }
 
+/*input[type="checkbox"]:checked + .welcomeUser p {*/
+/*    displa*/
+/*}*/
+
+.welcomeUser > p {
+    position: relative;
+    /*display: inline;*/
+    top: 50px;
+    margin: 10px;
+    color: #ADB6CD;
+    height: 38px;
+    overflow: hidden;
+}
+
+.welcomeUser img {
+    position: relative;
+    border-style: none;
+    vertical-align: middle;
+    /*display: inline;*/
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+}
+
 @media screen and (max-width: 1229px) {
     .userContents table {
         margin: 20px;
@@ -1041,9 +1065,10 @@ ul {
         top: 500px;
     }
 
-    .next{
+    .next {
         position: relative;
         top: 500px;
         height: auto;
     }
 }
+
