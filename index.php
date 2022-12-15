@@ -20,6 +20,7 @@ require_once("DBconnect.php");
     </style>
 </head>
 
+
 <body>
 <section class="header">
     <nav>
@@ -32,8 +33,8 @@ require_once("DBconnect.php");
             <ul>
                 <li><a href=""> Home </a></li>
                 <li><a href=""> About us </a></li>
-                <li><a href=""> Appointment </a></li>
-                <li><a href=""> Register patient </a></li>
+                <li><a href="makeappointment.php"> Appointment </a></li>
+                <li><a href="registration.php"> Register patient </a></li>
                 <li><a href="login.php"> Login </a></li>
             </ul>
         </div>
@@ -57,7 +58,7 @@ require_once("DBconnect.php");
             <p>
                 <img src="images/calendar.svg" alt="calender"><br>
                 Doctor appointment <br><br>
-                <a href="">
+                <a href="makeappointment.php">
                     <button type="button">Book an appointment</button>
                 </a>
             </p>
@@ -151,7 +152,7 @@ require_once("DBconnect.php");
                             <li><a href=""> Home </a></li>
                             <li><a href=""> About us </a></li>
                             <li><a href=""> Appointment </a></li>
-                            <li><a href=""> Register patient </a></li>
+                            <li><a href="registration.php"> Register patient </a></li>
                             <li><a href="login.php"> Login </a></li>
                         </ul>
                     </div>

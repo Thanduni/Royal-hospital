@@ -15,8 +15,29 @@ if (isset($_SESSION['mailaddress'])) {
         <link rel="stylesheet" href="css/style.php">
         <title>Admin dashboard - user</title>
         <style>
+
+            table{
+                max-height: 70vh;
+                overflow-y: scroll;
+            }
+
+            ul{
+                list-style-type: url("images/circle-exclamation-solid.svg");
+                text-align: justify;
+                padding-left: 20px ;
+            }
+
+            td:first-child{
+                vertical-align: top;
+                padding-top: 15px;
+            }
+
             p.royal {
                 font-size: 20px;
+            }
+
+            td div{
+                width: 351px;
             }
 
             p.addUSer {
@@ -134,17 +155,19 @@ if (isset($_SESSION['mailaddress'])) {
     <script src="js/addUser.js"></script>
     <div id="note">
         <div id="form">
-            <form action="addUser.php" method="post" enctype="multipart/form-data">
-
+            <form action="addUser.php" method="post" onsubmit=" return validateForm()" enctype="multipart/form-data" id="userForm" name="userForm">
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser">Add user </p>
                 <table>
+                    <tr colspan="3">
+                        <div class="alert" id="warning"></div>
+                    </tr>
                     <tr>
                         <td>
                             <label for="nic">NIC:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="nic" id="" required>
+                            <input type="text" name="nic" id="" required><div class="alert" id="nic"></div>
                         </td>
                     </tr>
                     <tr>
@@ -152,7 +175,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <label for="Name">Name:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="name" id="" required>
+                            <input type="text" name="name" id="" required><div class="alert" id="name"></div>
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +183,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <label for="address">Address:</label>
                         </td>
                         <td colspan="2">
-                            <textarea type="text" name="address" id="" rows=3 required></textarea>
+                            <textarea type="text" name="address" id="" rows=3 required></textarea><div class="alert" id="address"></div>
                         </td>
                     </tr>
                     <tr>
@@ -168,7 +191,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <label for="email">Email:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="email" id="" required>
+                            <input type="email" name="email" id="" required><div class="alert" id="email"></div>
                         </td>
                     </tr>
                     <tr>
@@ -176,7 +199,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <label for="contact">Contact number:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="contactNum" id="" required>
+                            <input type="text" name="contactNum" id="" required><div class="alert" id="contactNum"></div>
                         </td>
                     </tr>
                     <tr>
@@ -212,7 +235,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <label for="password">Password:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="password" id="" required>
+                            <input type="text" name="password" id="" required><div class="alert" id="password"></div>
                         </td>
                     </tr>
                     <tr>
@@ -226,7 +249,7 @@ if (isset($_SESSION['mailaddress'])) {
                     <tr>
                         <td></td>
                         <td colspan="2">
-                            <button name="addUser">Apply</button>
+                            <button id="submit" name="addUser">Apply</button>
                             <button name="cancel" id="cancel">Cancel</button>
                         </td>
                     </tr>
@@ -234,6 +257,8 @@ if (isset($_SESSION['mailaddress'])) {
             </form>
         </div>
     </div>
+    <script src="js/ValidateForm.js"></script>
+
     </body>
 
     </html>

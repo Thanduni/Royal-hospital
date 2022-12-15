@@ -1,15 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
+/* @import url(https://kinsta.com/blog/web-safe-fonts/#28-segoe-ui); */
 
 * {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat';
-
+    display: inline;
 }
 
 html,
 body {
     height: 100%;
+}
+
+b{
+    text-align: center;
+    display: block;
 }
 
 .header {
@@ -683,12 +689,6 @@ a {
     font-weight: bold;
 }
 
-.hint {
-    color: #24354E;
-    text-align: center;
-    font-weight: bold;
-}
-
 .alreadyLogged {
     height: max-content;
     width: max-content;
@@ -850,7 +850,7 @@ td > img {
     flex-wrap: wrap;
 }
 
-footer ul {
+ul {
     list-style: none;
 }
 
@@ -1008,11 +1008,11 @@ footer ul {
 
 .welcomeUser > p {
     position: relative;
+    /*display: inline;*/
     top: 50px;
     margin: 10px;
     color: #ADB6CD;
     height: 38px;
-    font-size: x-large;
     overflow: hidden;
 }
 
@@ -1024,18 +1024,6 @@ footer ul {
     height: 35px;
     width: 35px;
     border-radius: 100%;
-}
-
-input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser img {
-    height: 150px;
-    width: 150px;
-    overflow: visible;
-    transition: width .10s, height .10s;
-}
-
-input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
-    height: auto;
-    overflow: visible;
 }
 
 @media screen and (max-width: 1229px) {
@@ -1073,7 +1061,6 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     }
 
     .cards ul li {
-
         width: 94%;
         margin: 10px;
     }

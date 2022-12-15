@@ -26,8 +26,8 @@ if (!isset($_SESSION['mailaddress'])) {
             <ul>
                 <li><a href="index.php"> Home </a></li>
                 <li><a href=""> About us </a></li>
-                <li><a href=""> Appointment </a></li>
-                <li><a href=""> Register patient </a></li>
+                <li><a href="makeappointment.php"> Appointment </a></li>
+                <li><a href="registration.php"> Register patient </a></li>
                 <li><a href="login.php"> Login </a></li>
             </ul>
         </div>
