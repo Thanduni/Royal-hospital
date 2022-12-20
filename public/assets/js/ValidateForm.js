@@ -12,7 +12,7 @@ let passwordDiv = document.getElementById("password");
 // let address = addressDiv.previousSibling.value;
 // let email = emailDiv.previousSibling.value;
 // let contactNum = contactNumDiv.previousSibling.value;
-// let password = passwordDiv.previousSibling.value;1DasdWE!
+// let password = passwordDiv.previousSibling.value;
 
 let regNic = "/^\d{12}[A-Z]?$/g";
 let regName = "/^[a-zA-Z]{3,}/";

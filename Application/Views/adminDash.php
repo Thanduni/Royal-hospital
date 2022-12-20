@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="<?php echo BASEURL . '/public/assets/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/public/assets/css/adminDash.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .next {
+            position: initial;
+            height: auto;
+        }
+    </style>
     <title>Admin Users</title>
 </head>
 <body>

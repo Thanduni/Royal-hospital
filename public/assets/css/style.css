@@ -829,8 +829,8 @@ td > img {
 
 
 .next {
-    /*position: relative;*/
-    /*top: 330px;*/
+    position: relative;
+    top: 330px;
     height: auto;
 }
 
@@ -1078,8 +1078,8 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     }
 
     .next {
-        /*position: relative;*/
-        /*top: 500px;*/
+        position: relative;
+        top: 500px;
         height: auto;
     }
 }
