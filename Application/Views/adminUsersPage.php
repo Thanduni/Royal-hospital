@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href= <?php echo BASEURL . '/public/assets/css/style.css'; ?>>
     <link rel="stylesheet" href= <?php echo BASEURL . '/public/assets/css/adminUsersPage.css'; ?>>
+    <style>
+        .next {
+            position: initial;
+            height: auto;
+        }
+    </style>
     <title>Admin dashboard - user</title>
 </head>
 
@@ -70,6 +76,7 @@
                                  Image' width=150px>
                         </td>
                         <td style="100px" class="UDfunc">
+                            <?php $result[$j] ?>
                             <button><img src="<?php echo BASEURL . '/public/assets/images/edit.svg' ?>" alt="Edit"> Edit
                             </button>
                             <a href="<?php echo BASEURL . '/Admin/removeUser?NIC='.$result[$j][0] ?>">
@@ -85,9 +92,12 @@
         <?php include('adminFooter.php'); ?>
     </div>
     <script src=<?php echo BASEURL . '/public/assets/js/addUser.js' ?>></script>
+    <script src=<?php echo BASEURL . '/public/assets/js/updateUser.js' ?>>
+
+    </script>
     <div id="note">
         <div id="form">
-            <form action="<?php echo BASEURL . '/Admin/addUser' ?>" method="post" onsubmit=" return validateForm()" enctype="multipart/form-data"
+            <form action="<?php echo BASEURL . '/Admin/addUser' ?>" method="post" onsubmit="return validateForm()" enctype="multipart/form-data"
                   id="userForm" name="userForm">
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser">Add user </p>

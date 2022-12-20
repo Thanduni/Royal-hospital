@@ -36,8 +36,22 @@
         transform: translate(-50%);
     }
 
-
     .actorCards ul li{
         width: 300px;
     }
+
+    .next {
+        height: auto;
+    }
 }
+
+/*@media screen and (max-width: 1229px) {*/
+/*    .next {*/
+/*        !* position: relative; *!*/
+/*        !*top: 500px;*!*/
+/*        height: auto;*/
+/*    }*/
+/*}*/
+/*.next {*/
+/*    height: auto;*/
+/*}*/
