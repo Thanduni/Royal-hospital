@@ -1,0 +1,47 @@
+p.royal {
+    font-size: 20px;
+}
+
+p.addUSer {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1229px) {
+    .userContents table {
+        height: 650px;
+    }
+}
+
+.userContents td button {
+    height: auto;
+    padding: 1px;
+    text-align: center;
+}
+
+.tableCon{
+    display: none;
+}
+
+td:first-child {
+    vertical-align: top;
+}
+
+.hint {
+    color: #24354E;
+    text-align: justify;
+    font-weight: bold;
+}
+
+.hint li {
+    list-style-type: disc;
+    margin-left: 15px;
+}
+
+td div {
+    width: 351px;
+}
+
+table {
+    height: 420px;
+    overflow-y: scroll;
+}
