@@ -32,20 +32,19 @@ if (isset($_POST['addUser'])) {
         }
     }
 
-    $nic = $_POST['nic'];
+    $nic = $_GET['id'];
     $name = $_POST['name'];
     $address = $_POST['address'];
     $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $gender = $_POST['gender'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $userRole = $_POST['userRole'];
     $profile_image = $new_img_name;
 
 
 
-    $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image) VALUES
-                            ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image');";
+    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', user_role = '$userRole', profile_image = '$profile_image' WHERE
+                nic = '$nic';";
     $result = mysqli_query($con, $query);
 
     header("location:". BASEURL . "/Admin/adminUsersPage.php");
