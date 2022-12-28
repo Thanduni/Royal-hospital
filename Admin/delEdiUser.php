@@ -6,6 +6,10 @@ if ($_GET['op'] == "delete") {
     $query = "Delete FROM user where nic=" . $nic;
     $con->query($query);
     header("location: " . BASEURL . "/Admin/adminUsersPage.php");
-} else if ($_GET['op'] == "edit") {
-    $result = unserialize($_GET['result']);
+}
+if ($_GET['op'] == "deleteDoctor") {
+    $nic = $_GET['id'];
+    $query = "Delete FROM user where nic=" . $nic;
+    $con->query($query);
+    header("location: " . BASEURL . "/Admin/adminDoctorPage.php");
 }

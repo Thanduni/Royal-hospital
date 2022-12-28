@@ -50,7 +50,7 @@ if (isset($_SESSION['mailaddress'])) {
                 <a href="<?php echo BASEURL . '/Admin/adminUsersPage.php' ?>">
                     <li>User</li>
                 </a>
-                <a href="">
+                <a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>">
                     <li>Doctor</li>
                 </a>
                 <a href="">

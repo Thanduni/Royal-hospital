@@ -167,6 +167,10 @@ nicDiv.previousSibling.addEventListener("focus", function () {
         "</ul>"
 }, false)
 
+function validateDoctorForm(){
+
+}
+
 function validateForm() {
     address = addressDiv.previousSibling.value;
     email = emailDiv.previousSibling.value;

@@ -1,14 +1,12 @@
 <?php
 session_start();
-//die( $_SESSION['profilePic']);
+
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress'])) {
 ?>
 
     <!DOCTYPE html>
     <html lang="en">
-    <!--    <php echo "" ?>-->
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,9 +29,10 @@ if (isset($_SESSION['mailaddress'])) {
             }
         </style>
         <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
+
     </head>
 
-    <body>
+    <body >
         <div class="user">
             <?php include(BASEURL . '/Components/AdminSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
             <div class="userContents" id="center">
@@ -50,8 +49,26 @@ if (isset($_SESSION['mailaddress'])) {
                     <img src="../images/arrow-right-circle.svg" alt="arrow">User
                 </div>
                 <p>
-                    <button type="button" id="addButton" onclick="displayUserAddForm()">+Add user</button>
                     <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
+                    <button type="button" id="addButton" onclick="displayUserAddForm()">+Add user</button>
+
+<!--                    <script>-->
+<!--                        // alert(document.getElementById("addButton"));-->
+<!--                        // document.getElementById("addButton").click();-->
+<!--                        let parts = window.location.search.substr(1).split("&");-->
+<!--                        let $_GET = {};-->
+<!--                        for (let i = 0; i < parts.length; i++) {-->
+<!--                            let temp = parts[i].split("=");-->
+<!--                            $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);-->
+<!--                        }-->
+<!--                        // alert("'addUser'" + " - " + $_GET['click']);-->
+<!--                        if($_GET['click'] === "addUser"){-->
+<!--                            // alert(document.getElementById("addButton"));-->
+<!--                            displayUserAddForm()-->
+<!--                            // document.getElementById("addButton").click();-->
+<!--                        }-->
+<!--                    </script>-->
+
                 </p>
                 <div class="userClass">
                     <?php
@@ -223,7 +240,11 @@ if (isset($_SESSION['mailaddress'])) {
         <?php include(BASEURL . '/Components/Footer.php'); ?>
 
         <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
-
+        <?php
+        if($_GET['click'] == "addUser"){
+            echo "<script> displayUserAddForm();</script>";
+        }
+        ?>
 
     </body>
 

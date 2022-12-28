@@ -12,6 +12,10 @@ p.addUSer {
     }
 }
 
+#fromDoctorPage{
+    display: none;
+}
+
 .tableCon{
     display: none;
 }
@@ -69,6 +73,6 @@ td div {
 }
 
 table {
-    height: 420px;
+    max-height: 500px;
     overflow-y: scroll;
 }
