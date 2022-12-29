@@ -43,7 +43,7 @@ if (isset($_SESSION['mailaddress'])) {
             </div>
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
-                <li class="logout"><a href="../Homepage/logout.php?logout">Logout <img src="../images/logout.jpg">
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>" <img src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">
@@ -122,15 +122,15 @@ if (isset($_SESSION['mailaddress'])) {
                             <label for="nic">NIC:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="nic" id="IN_nic" ><div class="alert" id="nic"></div>
+                            <input type="text" name="nic" id="IN_nic"><div class="alert" id="nic"></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="department">Name:</label>
+                            <label for="department">Department:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="department" id="IN_department" required><div class="alert" id="department"></div>
+                            <input type="text" name="department" id="IN_department" required><div class="alert" id="name"></div>
                         </td>
                     </tr>
                     </tr>

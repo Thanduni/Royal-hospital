@@ -1,12 +1,13 @@
 // alert("hai");
 // let add = document.getElementById("addButton");
 
-function displayUserAddForm() {
+function displayUserAddForm(userRole=[]) {
     let form = document.getElementById("addForm");
-    // console.log(form);
-    alert(form);
-
-    form.action = '/royalhospital/Admin/addUser.php';
+    // if(userRole[0] === "Doctor"){
+    //     alert(userRole[0]);
+    // }else{
+        form.action = '/royalhospital/Admin/addUser.php';
+    // }
     document.getElementById("nicRow").classList.remove("hide");
     document.getElementById("passRow").classList.remove("hide");
     document.getElementById("IN_name").value = "";

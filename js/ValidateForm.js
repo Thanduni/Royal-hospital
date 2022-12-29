@@ -168,7 +168,29 @@ nicDiv.previousSibling.addEventListener("focus", function () {
 }, false)
 
 function validateDoctorForm(){
+    nic = nicDiv.previousSibling.value;
+    department = nameDiv.previousSibling.value;
 
+    if(regName.test(department) && regNic.test(nic)){
+        return true;
+    }else{
+        if(!regName.test(department)){
+            nameDiv.classList.remove("hint");
+            nameDiv.classList.add("alert");
+            nameDiv.innerHTML = "<ul>\n" +
+                "    <li>Please enter a valid dpeartment name.</li>\n" +
+                "</ul>"
+        }
+        if(!regNic.test(nic)){
+            nicDiv.classList.remove("hint");
+            nicDiv.classList.add("alert");
+            nicDiv.innerHTML = "<ul>\n" +
+                "    <li>Please enter your email properly.</li>\n" +
+                "</ul>"
+        }
+        form.scrollIntoView();
+        return false;
+    }
 }
 
 function validateForm() {
