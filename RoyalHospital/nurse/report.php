@@ -1,6 +1,8 @@
+<?php session_start(); ?>
 <?php
 $page = 'report';
 include 'include/sidebar.php';
+include 'include/topbar.php';
 include 'connect.php';
 ?>
 <style>
@@ -19,49 +21,89 @@ include 'connect.php';
 </head>
 <body>
     <div class="main-container">
-    <div class="table">
-        <button><a href="reportForm.php">
+    
+        <!-- <button ><a href="reportForm.php">
             Add report</a>
-        </button>
-            <table>
+        </button> -->
+        <!-- <a href="#" class="button" id="button">Add Report</a> -->
+
+
+        <!-- <button class="button" id="button">Add Report</button>
+        <script>
+            document.getElementById("button").addEventListener("click", function(){
+            document.querySelector(".popup").style.display = "flex";
+        })
+        </script> -->
+
+        <div class="table-container">
+            <table class="table">
                 <thead>    
+                    
+                    <th>patient ID</th>
                     <th>Name</th>
-                    <th>patientID</th>
-                    <th>roomNo</th>
-                    <th>admit date</th>
-                    <th>admit time</th>
-                    <th>Emergency No</th>
+                    <th>room No</th>
                 </thead>
 
                 <tbody>
 
             <?php
-$sql="select * from `admission`";
+$sql="select name,patientID,roomNo from `admission`";
 $result=mysqli_query($con,$sql);
 
 if($result){
     while($row=mysqli_fetch_assoc($result)){
-        $name =  $row['name'];
         $patientID = $row['patientID'];
+        $name =  $row['name'];
         $RoomNo = $row['roomNo'];
-        $admit_date = $row['admit_date'];
-        $admit_time = $row['admit_time'];
-        $emergency_contact_num = $row['emergency_contact_num'];
         echo '<tr>
-        <th scope="row">'.$name.'</th>
-        <td>'.$patientID.'</td>
+        <th scope="row">'.$patientID.'</th>
+        <td>'.$name.'</td>
         <td>'.$RoomNo.'</td>
-        <td>'.$admit_date.'</td>
-        <td>'.$admit_time.'</td>
-        <td>'.$emergency_contact_num.'</td>
+        <td> <button class="button" id="report-button"><a href="dailyReport.php?reportid='.$patientID.' &name='.$name.'">
+        View
+    </button></td>
+
     </tr>';
     }
 }
     ?>    
-            </tbody>
+               </tbody>
             
-        </table>
+            </table>
         </div>
     </div>
+
+    <!-- <div class="form-container"> -->
+        
+    <!-- <div class="popup">
+        <div class="popup-content">
+            <h1>Daily Report</h1>
+            <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" class="form-control" placeholder="" name="date" required>
+            </div>
+            <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" class="form-control" placeholder="" name="time" required>
+            </div>
+            <div class="form-group">
+                    <label>Temperature</label>
+                    <input type="number" class="form-control" placeholder="" name="temperature">
+            </div>
+            <div class="form-group">
+                    <label>Blood Preasure</label>
+                    <input type="number" class="form-control" placeholder="" name="temperature">
+            </div>
+            <div class="form-group">
+                    <label>O2 Saturation</label>
+                    <input type="number" class="form-control" placeholder="" name="temperature">
+            </div>
+                
+            
+            <button type="submit" name ="submit">Submit</button>
+        </div>
+    </div> -->
+    <!-- </div> -->
+
 </body>
 </html>

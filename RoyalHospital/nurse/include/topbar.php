@@ -1,20 +1,28 @@
+
 <style>
-    <?php include 'style.css';
+    <?php include 'topbar.css';
     ?>
 </style>
+
+
+        <div class="top-bar">
+            <div class="toggle">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>  
+        </div>
 
 <div class="top-bar">
     <div class="toggle">
         <i class="fa fa-bars" aria-hidden="true"></i>
+</div>
+
+    <div class="profile">
+        <img src="./images/Ellipse 21.jpg" alt="">
+        <div class="user-details">
+            <div class="user-role"></div>
+            <div class="user-name"></div>
+        </div>
     </div>
-    <!-- <div class="search">
-        <label for="">
-        <input type="text" placeholder="Search here">
-        </label>
-    </div> -->
-    <div class="user">
-        <img src="./images/OIP.jfif" alt="">
-        <!-- <div class="user-role">Nurse</div>
-        <div class="user-name">Ms.Jennie</div> -->
-    </div>
+    <a href="logout.php">
+    <button class="logout-button" >Log out</button>
 </div>
