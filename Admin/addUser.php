@@ -1,7 +1,10 @@
 <?php
+session_start();
 require_once("../conf/config.php");
 
 if (isset($_POST['addUser'])) {
+
+
     echo "<pre>";
     print_r($_FILES['profile_image']);
     echo "</pre>";
@@ -15,16 +18,12 @@ if (isset($_POST['addUser'])) {
         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
         $img_ex_lc = strtolower($img_ex);
 
-        $allowed_exs = array("jpg", "jpeg", "png");
+        $allowed_exs = array("jpg", "jpeg", "png", "PNG");
 
         if (in_array($img_ex, $allowed_exs)) {
             $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
             $img_upload_path = '../uploads/' . $new_img_name;
             move_uploaded_file($tmp_name, $img_upload_path);
-            // $sql = "INSERT INTO user(profile_image) VALUES ('$new_img_name');";
-            // header("location: adminUsersPage.php");
-            // if (mysqli_query($con, $sql)) die("Success");
-            // else die("Fail");
         } else {
             $em = "You can't upload files of this type";
             header("location:" .BASEURL . "/Admin/adminUsersPage.php?error = $em");
@@ -47,6 +46,23 @@ if (isset($_POST['addUser'])) {
                             ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image');";
     $result = mysqli_query($con, $query);
 
+    if($_SESSION['which_user'] == "Doctor"){
+        $nic = $_SESSION['nic'];
+        $department = $_SESSION['department'];
+        $query = "INSERT INTO doctor(nic, department) VALUES ('$nic', '$department');";
+        $result = mysqli_query($con, $query);
+        unset($_SESSION['which_user']);
+        header("location:". BASEURL . "/Admin/adminDoctorPage.php");
+        exit();
+    }
+    if($_SESSION['which_user'] == "Nurse"){
+        $nic = $_SESSION['nic'];
+        $query = "INSERT INTO nurse(nic) VALUES ('$nic');";
+        $result = mysqli_query($con, $query);
+        unset($_SESSION['which_user']);
+        header("location:". BASEURL . "/Admin/adminNursePage.php");
+        exit();
+    }
     header("location:". BASEURL . "/Admin/adminUsersPage.php");
 } else if (isset($_POST['cancel'])) {
     header("location: " .BASEURL . "/Admin/adminUsersPage.php");

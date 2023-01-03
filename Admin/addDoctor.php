@@ -9,7 +9,6 @@ if (isset($_POST['addDoctor'])) {
     $row = mysqli_fetch_assoc($result);
     $department = $_POST['department'];
 
-//    die($row['count(*)']);
 
     if ($row['count(*)']) {
 
@@ -18,12 +17,7 @@ if (isset($_POST['addDoctor'])) {
 
         header("location:" . BASEURL . "/Admin/adminDoctorPage.php");
     } else {
-//        $department = $_POST['department'];
-//
-//        $query = "INSERT INTO doctor(nic, department) VALUES ('$nic', '$department');";
-//        $result = mysqli_query($con, $query);
-
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php?click=addUser&nic=" . $nic . "&department=" . $department);
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?click=addDoctor&nic=" . $nic . "&department=" . $department);
     }
 } else if (isset($_POST['cancel'])) {
     header("location: " . BASEURL . "/Admin/adminDoctorPage.php");

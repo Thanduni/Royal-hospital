@@ -403,7 +403,6 @@ button:active {
     list-style: none;
     height: 30px;
     color: #fff;
-    text-transform: lowercase;
     padding: 2.5px;
     cursor: pointer;
     text-align: left;
@@ -438,7 +437,6 @@ button:active {
         list-style: none;
         height: 30px;
         color: #fff;
-        text-transform: lowercase;
         padding: 2.5px;
         cursor: pointer;
         text-align: left;
@@ -558,19 +556,19 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     line-height: 18px;
 }
 
-.sidebarMenuInner p::after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #ADB6CD;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-}
+/*.sidebarMenuInner p::after {*/
+/*    content: '';*/
+/*    width: 0%;*/
+/*    height: 2px;*/
+/*    background: #ADB6CD;*/
+/*    display: block;*/
+/*    margin: auto;*/
+/*    transition: 0.5s;*/
+/*}*/
 
-.sidebarMenuInner p:hover::after {
-    width: 100%;
-}
+/*.sidebarMenuInner p:hover::after {*/
+/*    width: 100%;*/
+/*}*/
 
 a {
     text-decoration: none;
@@ -839,7 +837,7 @@ td > img {
     margin: auto;
 }
 
-.row {
+.row-footer {
     display: flex;
     flex-wrap: wrap;
 }
@@ -1049,8 +1047,9 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     .userContents td,
     .userContents th {
         flex: 1 1 150px;
-        border: 0.25px solid #24354E;
+        border: 1px solid RGB(36, 53, 78, 0.2);
         height: 65px;
+        border-radius: 5px;
         margin: 0px;
     }
 

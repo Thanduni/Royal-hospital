@@ -40,7 +40,7 @@ if (isset($_SESSION['mailaddress'])) {
             </li>
         </ul>
         <div class="arrow">
-            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">User
+            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
         </div>
         <div class="actorCards">
             <ul>
@@ -53,7 +53,7 @@ if (isset($_SESSION['mailaddress'])) {
                 <a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>">
                     <li>Doctor</li>
                 </a>
-                <a href="">
+                <a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>">
                     <li>Nurse</li>
                 </a>
                 <a href="">

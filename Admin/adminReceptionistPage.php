@@ -7,14 +7,13 @@ if (isset($_SESSION['mailaddress'])) {
 
     <!DOCTYPE html>
     <html lang="en">
-    <!--    <php echo "" ?>-->
 
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminDoctorPage.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminReceptionistPage.css' ?>">
         <title>Admin dashboard - user</title>
         <style>
             p.royal {
@@ -44,19 +43,19 @@ if (isset($_SESSION['mailaddress'])) {
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout <img
-                                src="../images/logout.jpg">
+                            src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Doctor
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Receptionist
             </div>
             <p>
-                <button type="button" id="addButton" onclick="displayDoctorAddForm()">+Add doctor</button>
+                <button type="button" id="addButton" onclick="displayReceptionistAddForm()">+Add receptionist</button>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             </p>
             <div class="userClass">
                 <?php
-                $query = " SELECT user.nic, doctor.doctorID, user.name, doctor.department, user.profile_image FROM doctor inner join user where doctor.nic=user.nic;";
+                $query = " SELECT user.nic, receptionist.receptionistID, user.name, user.profile_image FROM receptionist inner join user where receptionist.nic=user.nic;";
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
@@ -64,21 +63,18 @@ if (isset($_SESSION['mailaddress'])) {
                 <table class="table">
                     <tr class="tableHead">
                         <th>NIC</th>
-                        <th>DoctorID</th>
-                        <th>Doctor Name</th>
-                        <th>Department</th>
+                        <th>receptionistID</th>
+                        <th>Receptionist Name</th>
                         <th>Profile image</th>
                         <th>Options</th>
                     </tr>
-                    <tr>
                     <?php
                     for ($j = 0; $j < $rows; ++$j) {
                         $result->data_seek($j);
                         $row = $result->fetch_array(MYSQLI_NUM);
                         ?>
-                        <!--                        <div id="UDfunc">-->
                         <?php
-                        for ($k = 0; $k < 4; ++$k) { ?>
+                        for ($k = 0; $k < 3; ++$k) { ?>
                             <td>
                                 <?php echo $row[$k]; ?>
                             </td>
@@ -86,18 +82,16 @@ if (isset($_SESSION['mailaddress'])) {
 
                         <td style="width:100px">
                             <?php
-                            echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[4]' alt='Upload Image' width=150px>";
+                            echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[3]' alt='Upload Image' width=150px>";
                             ?>
                         </td>
                         <ul class="tableCon">
+                            <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[2] ?></li>
                             <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
                         </ul>
 
                         <td style="100px">
-                            <button class="edit" id="<?php echo $row[0] ?>" onclick="displayDoctorUpdateForm(<?php echo $row[0] ?>);"><img src="<?php echo BASEURL . '/images/edit.svg' ?>" alt="Edit">
-                                Edit
-                            </button>
-                            <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteDoctor&id=' . $row[0] ?>">
+                            <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteReceptionist&id=' . $row[0] ?>">
                                 <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
                                 </button>
                             </a>
@@ -110,7 +104,7 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" onsubmit="return validateDoctorForm()" enctype="multipart/form-data" id="addForm" name="userForm">
+            <form method="post" onsubmit="return validateNurseReceptionistForm()" enctype="multipart/form-data" id="addForm" name="userForm">
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Add user</p>
                 <table>
@@ -126,17 +120,9 @@ if (isset($_SESSION['mailaddress'])) {
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="department">Department:</label>
-                        </td>
-                        <td colspan="2">
-                            <input type="text" name="department" id="IN_department" required><div class="alert" id="name"></div>
-                        </td>
-                    </tr>
-                    </tr>
                         <td></td>
                         <td colspan="2">
-                            <button type="submit" id="submit" name="addDoctor">Apply</button>
+                            <button type="submit" id="submit" name="addReceptionist">Apply</button>
                             <button name="cancel" id="cancel">Cancel</button>
                         </td>
                     </tr>
@@ -148,7 +134,9 @@ if (isset($_SESSION['mailaddress'])) {
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
 
+
     </body>
+
     </html>
     <?php
 } else {

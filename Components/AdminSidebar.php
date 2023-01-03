@@ -38,17 +38,22 @@ require_once("../conf/config.php");
                                             align="middle">
                 <p>Doctor</p>
             </a></li>
-        <li><a href="" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/nurse.svg' ?> alt="nurse"
                                             align="middle">
                 <p>Nurse</p>
             </a></li>
-        <li><a href="" target="_blank"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="noticeboard"
+        <li><a href="<?php echo BASEURL . '/Admin/adminReceptionistPage.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="Receptionist"
                                             align="middle">
                 <p>Receptionist</p>
             </a></li>
-        <li><a href="" target="_blank"><img class="icons"
+        <li><a href="" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/database.svg' ?> alt="Store keeper"
+                                            align="middle">
+                <p>Store keeper</p>
+            </a></li>
+        <li><a href="" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/noticeboard.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>

@@ -152,7 +152,7 @@ function validateNIC() {
         nicDiv.classList.remove("hint");
         nicDiv.classList.add("alert");
         nicDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter your email properly.</li>\n" +
+            "    <li>Please enter your NIC properly.</li>\n" +
             "</ul>"
     }
 }
@@ -167,31 +167,68 @@ nicDiv.previousSibling.addEventListener("focus", function () {
         "</ul>"
 }, false)
 
-function validateDoctorForm(){
-    nic = nicDiv.previousSibling.value;
-    department = nameDiv.previousSibling.value;
+function validateDoctorForm() {
+    department = document.getElementById("IN_department").value;
 
-    if(regName.test(department) && regNic.test(nic)){
-        return true;
-    }else{
-        if(!regName.test(department)){
-            nameDiv.classList.remove("hint");
-            nameDiv.classList.add("alert");
-            nameDiv.innerHTML = "<ul>\n" +
-                "    <li>Please enter a valid dpeartment name.</li>\n" +
-                "</ul>"
+    if (document.getElementById("nicRow").classList[0] === "hide") {
+        if (regName.test(department)) {
+            return true;
+        } else {
+            if (!regName.test(department)) {
+                nameDiv.classList.remove("hint");
+                nameDiv.classList.add("alert");
+                nameDiv.innerHTML = "<ul>\n" +
+                    "    <li>Please enter a valid department name.</li>\n" +
+                    "</ul>"
+            }
+            form.scrollIntoView();
+            return false;
         }
-        if(!regNic.test(nic)){
+    } else {
+        nic = document.getElementById("IN_nic").value;
+        if (regName.test(department) &&
+            regNic.test(nic)) {
+            return true;
+        } else {
+            if (!regName.test(department)) {
+                nameDiv.classList.remove("hint");
+                nameDiv.classList.add("alert");
+                nameDiv.innerHTML = "<ul>\n" +
+                    "    <li>Please enter a valid dpeartment name.</li>\n" +
+                    "</ul>"
+            }
+            if (!regNic.test(nic)) {
+                nicDiv.classList.remove("hint");
+                nicDiv.classList.add("alert");
+                nicDiv.innerHTML = "<ul>\n" +
+                    "    <li>Please enter your email properly.</li>\n" +
+                    "</ul>"
+            }
+
+            form.scrollIntoView();
+            return false;
+        }
+    }
+}
+
+function validateNurseReceptionistForm() {
+    nic = document.getElementById("IN_nic").value;
+    if (regNic.test(nic)) {
+        return true;
+    } else {
+        if (!regNic.test(nic)) {
             nicDiv.classList.remove("hint");
             nicDiv.classList.add("alert");
             nicDiv.innerHTML = "<ul>\n" +
-                "    <li>Please enter your email properly.</li>\n" +
+                "    <li>Please enter your NIC properly.</li>\n" +
                 "</ul>"
         }
+
         form.scrollIntoView();
         return false;
     }
 }
+
 
 function validateForm() {
     address = addressDiv.previousSibling.value;
@@ -200,8 +237,8 @@ function validateForm() {
     name = nameDiv.previousSibling.value;
 
 
-    if(document.getElementById("nicRow").classList[0] === "hide" &&
-        document.getElementById("passRow").classList[0] === "hide"){
+    if (document.getElementById("nicRow").classList[0] === "hide" &&
+        document.getElementById("passRow").classList[0] === "hide") {
         if (regAddress.test(address) &&
             regEmail.test(email) &&
             regName.test(name) &&
@@ -209,28 +246,28 @@ function validateForm() {
             return true;
         } else {
 
-            if(!regAddress.test(address)){
+            if (!regAddress.test(address)) {
                 addressDiv.classList.remove("alert");
                 addressDiv.classList.add("hint");
                 addressDiv.innerHTML = "<ul>\n" +
                     "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
                     "</ul>";
             }
-            if(!regEmail.test(email)){
+            if (!regEmail.test(email)) {
                 emailDiv.classList.remove("hint");
                 emailDiv.classList.add("alert");
                 emailDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid email.</li>\n" +
                     "</ul>"
             }
-            if(!regName.test(name)){
+            if (!regName.test(name)) {
                 nameDiv.classList.remove("hint");
                 nameDiv.classList.add("alert");
                 nameDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid name.</li>\n" +
                     "</ul>"
             }
-            if( !regContactNum.test(contactNum)){
+            if (!regContactNum.test(contactNum)) {
                 contactNumDiv.classList.remove("hint");
                 contactNumDiv.classList.add("alert");
                 contactNumDiv.innerHTML = "<ul>\n" +
@@ -241,7 +278,7 @@ function validateForm() {
             form.scrollIntoView();
             return false;
         }
-    } else{
+    } else {
         nic = nicDiv.previousSibling.value;
         password = passwordDiv.previousSibling.value;
         if (regAddress.test(address) &&
@@ -253,42 +290,42 @@ function validateForm() {
             return true;
         } else {
 
-            if(!regAddress.test(address)){
+            if (!regAddress.test(address)) {
                 addressDiv.classList.remove("alert");
                 addressDiv.classList.add("hint");
                 addressDiv.innerHTML = "<ul>\n" +
                     "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
                     "</ul>";
             }
-            if(!regEmail.test(email)){
+            if (!regEmail.test(email)) {
                 emailDiv.classList.remove("hint");
                 emailDiv.classList.add("alert");
                 emailDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid email.</li>\n" +
                     "</ul>"
             }
-            if(!regName.test(name)){
+            if (!regName.test(name)) {
                 nameDiv.classList.remove("hint");
                 nameDiv.classList.add("alert");
                 nameDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid name.</li>\n" +
                     "</ul>"
             }
-            if( !regContactNum.test(contactNum)){
+            if (!regContactNum.test(contactNum)) {
                 contactNumDiv.classList.remove("hint");
                 contactNumDiv.classList.add("alert");
                 contactNumDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid contact number.</li>\n" +
                     "</ul>"
             }
-            if(!regNic.test(nic)){
+            if (!regNic.test(nic)) {
                 nicDiv.classList.remove("hint");
                 nicDiv.classList.add("alert");
                 nicDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter your email properly.</li>\n" +
                     "</ul>"
             }
-            if(!regPassword.test(password)){
+            if (!regPassword.test(password)) {
                 passwordDiv.classList.remove("hint");
                 passwordDiv.classList.add("alert");
                 passwordDiv.innerHTML = "<ul>\n" +

@@ -9,7 +9,25 @@ if ($_GET['op'] == "delete") {
 }
 if ($_GET['op'] == "deleteDoctor") {
     $nic = $_GET['id'];
+    $query = "Delete FROM doctor where nic=" . $nic;
+    $con->query($query);
     $query = "Delete FROM user where nic=" . $nic;
     $con->query($query);
     header("location: " . BASEURL . "/Admin/adminDoctorPage.php");
+}
+if ($_GET['op'] == "deleteNurse") {
+    $nic = $_GET['id'];
+    $query = "Delete FROM doctor where nic=" . $nic;
+    $con->query($query);
+    $query = "Delete FROM user where nic=" . $nic;
+    $con->query($query);
+    header("location: " . BASEURL . "/Admin/adminNursePage.php");
+}
+if ($_GET['op'] == "deleteReceptionist") {
+    $nic = $_GET['id'];
+    $query = "Delete FROM receptionist where nic=" . $nic;
+    $con->query($query);
+    $query = "Delete FROM user where nic=" . $nic;
+    $con->query($query);
+    header("location: " . BASEURL . "/Admin/adminReceptionistPage.php");
 }
