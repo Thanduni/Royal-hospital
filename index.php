@@ -9,7 +9,7 @@ require_once("conf/config.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL .'/css/style.css' ?>">
     <!--    <link rel="stylesheet" href="css/navandfooter.css">-->
     <title>Home</title>
     <style>
@@ -54,7 +54,7 @@ require_once("conf/config.php");
         </div>
         <div class="optionB">
             <p>
-                <img src="<?php echo BASEURL . 'images/calendar.svg' ?>" alt="calender"><br>
+                <img src="<?php echo BASEURL . '/images/calendar.svg' ?>" alt="calender"><br>
                 Doctor appointment <br><br>
                 <a href="">
                     <button type="button">Book an appointment</button>
@@ -66,7 +66,7 @@ require_once("conf/config.php");
     </div>
     <div class="articleHome">
         <div class="doctorImage">
-            <img src="<?php echo BASEURL . 'images/homepageDoctor.jpg' ?>" alt="homepageDoctor">
+            <img src="<?php echo BASEURL . '/images/homepageDoctor.jpg' ?>" alt="homepageDoctor">
         </div>
         <div class="hospitalArticle">
             <p style="font-size:26px;text-align: center">About Bayanno Diagnostic Center</p>

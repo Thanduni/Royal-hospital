@@ -34,7 +34,7 @@ if (isset($_POST['login'])) {
                 else if ($userRole == "Receptionist")
                     header("location:receptionistDash.php");
                 else if ($userRole == "Patient")
-                    header("location:adminUsersPage.php");
+                    header("location:/royalhospital/patient/patientDash.php");
                 else if ($userRole == "Storekeeper")
                     header("location:storekeeperDash.php");
                 $_SESSION['mailaddress'] = $_POST["email"];
