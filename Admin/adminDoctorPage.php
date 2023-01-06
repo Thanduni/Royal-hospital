@@ -61,50 +61,60 @@ if (isset($_SESSION['mailaddress'])) {
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
                 ?>
-                <table class="table">
-                    <tr class="tableHead">
-                        <th>NIC</th>
-                        <th>DoctorID</th>
-                        <th>Doctor Name</th>
-                        <th>Department</th>
-                        <th>Profile image</th>
-                        <th>Options</th>
-                    </tr>
-                    <tr>
-                    <?php
-                    for ($j = 0; $j < $rows; ++$j) {
-                        $result->data_seek($j);
-                        $row = $result->fetch_array(MYSQLI_NUM);
-                        ?>
-                        <!--                        <div id="UDfunc">-->
+                <div class="wrapper">
+                    <div class="table">
+                        <div class="row headerT">
+                            <div class="cell">NIC</div>
+                            <div class="cell">DoctorID</div>
+                            <div class="cell">Doctor Name</div>
+                            <div class="cell">Department</div>
+                            <div class="cell">Profile image</div>
+                            <div class="cell">Options</div>
+                        </div>
                         <?php
-                        for ($k = 0; $k < 4; ++$k) { ?>
-                            <td>
-                                <?php echo $row[$k]; ?>
-                            </td>
-                        <?php } ?>
-
-                        <td style="width:100px">
-                            <?php
-                            echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[4]' alt='Upload Image' width=150px>";
+                        for ($j = 0; $j < $rows; ++$j) {
+                            $result->data_seek($j);
+                            $row = $result->fetch_array(MYSQLI_NUM);
                             ?>
-                        </td>
-                        <ul class="tableCon">
-                            <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
-                        </ul>
 
-                        <td style="100px">
-                            <button class="edit" id="<?php echo $row[0] ?>" onclick="displayDoctorUpdateForm(<?php echo $row[0] ?>);"><img src="<?php echo BASEURL . '/images/edit.svg' ?>" alt="Edit">
-                                Edit
-                            </button>
-                            <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteDoctor&id=' . $row[0] ?>">
-                                <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
-                                </button>
-                            </a>
-                        </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+                            <div class="row">
+                                <div class="cell" data-title="NIC">
+                                    <?php echo $row[0]; ?>
+                                </div>
+                                <div class="cell" data-title="Doctor ID">
+                                    <?php echo $row[1]; ?>
+                                </div>
+                                <div class="cell" data-title="Doctor Name">
+                                    <?php echo $row[2]; ?>
+                                </div>
+                                <div class="cell" data-title="Department">
+                                    <?php echo $row[3]; ?>
+                                </div>
+                                <div class="cell" style="width:100px" data-title="Profile image">
+                                    <?php
+                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[4]' alt='Upload Image' width=150px>";
+                                    ?>
+                                </div>
+                                <div class="cell" style="100px" data-title="Options">
+                                    <button class="edit" id="<?php echo $row[0] ?>" onclick="displayDoctorUpdateForm(<?php echo $row[0] ?>);"><img src="<?php echo BASEURL . '/images/edit.svg' ?>" alt="Edit">
+                                        Edit
+                                    </button>
+                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteDoctor&id=' . $row[0] ?>">
+                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <ul class="tableCon">
+                                    <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
+                                </ul>
+
+                            </div>
+
+                        <?php } ?>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

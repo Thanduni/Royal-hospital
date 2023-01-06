@@ -53,7 +53,7 @@ require_once("../conf/config.php");
                                             align="middle">
                 <p>Store keeper</p>
             </a></li>
-        <li><a href="" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/noticeboard.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>

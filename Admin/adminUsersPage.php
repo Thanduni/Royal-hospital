@@ -60,6 +60,7 @@ if (isset($_SESSION['mailaddress'])) {
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
                 ?>
+
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
@@ -79,6 +80,14 @@ if (isset($_SESSION['mailaddress'])) {
                             $result->data_seek($j);
                             $row = $result->fetch_array(MYSQLI_NUM);
                             ?>
+                            <ul class="tableCon">
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[1] ?></li>
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[2] ?></li>
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[4] ?></li>
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[5] ?></li>
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[7] ?></li>
+                            </ul>
                             <!--                        <div id="UDfunc">-->
                             <div class="row">
                                 <div class="cell" data-title="NIC">
@@ -236,39 +245,39 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-<!--    <script src=--><?php //echo BASEURL . '/js/ValidateForm.js' ?><!--></script>-->
-<!--    --><?php
-//    if ($_GET['click'] == "addDoctor") {
-//        $_SESSION['nic'] = $_GET['nic'];
-//        $_SESSION['department'] = $_GET['department'];
-//        $_SESSION['which_user'] = "Doctor";
-//        echo
-//        "<script>
-//                displayUserAddForm();
-//                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-//                document.getElementById('IN_userRole').selectedIndex = 1;
-//            </script>";
-//        }
-//    if ($_GET['click'] == "addNurse") {
-//        $_SESSION['nic'] = $_GET['nic'];
-//        $_SESSION['which_user'] = "Nurse";
-//        echo
-//            "<script>
-//                displayUserAddForm();
-//                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-//                document.getElementById('IN_userRole').selectedIndex = 4;
-//            </script>";
-//    }
-//    if ($_GET['click'] == "addReceptionist") {
-//        $_SESSION['nic'] = $_GET['nic'];
-//        $_SESSION['which_user'] = "Receptionist";
-//        echo
-//            "<script>
-//                displayUserAddForm();
-//                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-//                document.getElementById('IN_userRole').selectedIndex = 4;
-//            </script>";
-//    }
+    <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+    <?php
+    if ($_GET['click'] == "addDoctor") {
+        $_SESSION['nic'] = $_GET['nic'];
+        $_SESSION['department'] = $_GET['department'];
+        $_SESSION['which_user'] = "Doctor";
+        echo
+        "<script>
+                displayUserAddForm();
+                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
+                document.getElementById('IN_userRole').selectedIndex = 1;
+            </script>";
+        }
+    if ($_GET['click'] == "addNurse") {
+        $_SESSION['nic'] = $_GET['nic'];
+        $_SESSION['which_user'] = "Nurse";
+        echo
+            "<script>
+                displayUserAddForm();
+                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
+                document.getElementById('IN_userRole').selectedIndex = 4;
+            </script>";
+    }
+    if ($_GET['click'] == "addReceptionist") {
+        $_SESSION['nic'] = $_GET['nic'];
+        $_SESSION['which_user'] = "Receptionist";
+        echo
+            "<script>
+                displayUserAddForm();
+                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
+                document.getElementById('IN_userRole').selectedIndex = 4;
+            </script>";
+    }
 //    ?>
 
     </body>

@@ -2,6 +2,7 @@
 
 function displayUserUpdateForm(nic) {
     let form = document.getElementById("addForm");
+
     form.action = '/royalhospital/Admin/updateUser.php?id=' + nic;
     document.getElementById("nicRow").classList.add("hide");
     document.getElementById("passRow").classList.add("hide");

@@ -4,7 +4,12 @@ require_once("../conf/config.php");
 if ($_GET['op'] == "delete") {
     $nic = $_GET['id'];
     $query = "Delete FROM user where nic=" . $nic;
+    die($query);
     $con->query($query);
+//    if($con->query($query))
+//        die("asdasd");
+//    else
+//        die("fail");
     header("location: " . BASEURL . "/Admin/adminUsersPage.php");
 }
 if ($_GET['op'] == "deleteDoctor") {

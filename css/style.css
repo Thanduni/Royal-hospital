@@ -243,7 +243,7 @@ p.slider-description {
     width: max-content;
     height: max-content;
     color: #24354E;
-    background: #AADDDD;
+    background: #ADB6CD;
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -255,20 +255,20 @@ p.slider-description {
 
 .optionB button:hover {
     transform: scale(1.040);
-    /* color: #AADDDD;
+    /* color: #ADB6CD;
     background: #24354E;
     border-style: solid;
     border-width: 4px;
-    border-color: #AADDDD; */
+    border-color: #ADB6CD; */
 }
 
 .optionB button:active {
     transform: scale(1.025);
-    /* color: #AADDDD;
+    /* color: #ADB6CD;
     background: #24354E;
     border-style: solid;
     border-width: 4px;
-    border-color: #AADDDD; */
+    border-color: #ADB6CD; */
 }
 
 .page {
@@ -314,37 +314,6 @@ p.slider-description {
     transform: translate(-50%);
     width: 351px;
     margin: 0px 0px 20px 0px;
-}
-
-.p1 input {
-    box-sizing: border-box;
-    width: 351px;
-    height: 55px;
-    background: #AADDDD;
-    border: 1px solid rgba(36, 53, 78, 0.5);
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    font-style: normal;
-    color: #24354E;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 37px;
-}
-
-.p1 input:focus {
-    box-sizing: border-box;
-    width: 351px;
-    height: 55px;
-    background: #BDC8E6;
-    border: 1px solid rgba(36, 53, 78, 0.5);
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 37px;
 }
 
 form {
@@ -691,41 +660,6 @@ a {
     border-color: #24354E;
 }
 
-.userContents table {
-    display: flex;
-    justify-content: center;
-    box-shadow: 3px 3px 20px 0px #24354E;
-    /* border-style: solid; */
-    background-color: #AADDDD;
-    /*color: #24354E;*/
-    border-radius: 10px;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    padding: 20px;
-    margin: 20px;
-    border-spacing: 20px;
-}
-
-.userContents th,
-.userContents td {
-    display: flex;
-    width: 100px;
-    text-align: left;
-    overflow-wrap: break-word;
-    padding: 0.25em;
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top;
-    height: max-content;
-}
-
-.userContents tr {
-    padding: 0.25em;
-    border-style: solid;
-    border-color: #000000;
-}
-
 #userForm {
     color: #fff;
     display: none;
@@ -1032,26 +966,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
 
 
 @media screen and (max-width: 1229px) {
-    .userContents table {
-        margin: 20px;
-    }
 
-    .userContents tr {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0.5em 0;
-        border-style: none;
-    }
-
-    .userContents td,
-    .userContents th {
-        flex: 1 1 150px;
-        border: 1px solid RGB(36, 53, 78, 0.2);
-        height: 65px;
-        border-radius: 5px;
-        margin: 0px;
-    }
 
     .midPortion {
         position: relative;

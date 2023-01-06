@@ -3,8 +3,6 @@ session_start();
 require_once("../conf/config.php");
 
 if (isset($_POST['addUser'])) {
-
-
     echo "<pre>";
     print_r($_FILES['profile_image']);
     echo "</pre>";

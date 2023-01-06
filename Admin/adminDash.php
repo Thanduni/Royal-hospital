@@ -59,7 +59,7 @@ if (isset($_SESSION['mailaddress'])) {
                 <a href="">
                     <li>Receptionist</li>
                 </a>
-                <a href="">
+                <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>">
                     <li>Noticeboard</li>
                 </a>
             </ul>
