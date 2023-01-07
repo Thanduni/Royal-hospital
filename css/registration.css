@@ -29,14 +29,15 @@ h3{
     margin-left: 650px;
 }
 .content{
-    display: grid;
+    /*display: grid;*/
+    display: flex;
     grid-template-columns: repeat(2,700px);
     height: 1100px;
     width: 1400px;
     margin-top: 10px;
     margin-left: 43px;
     background-color: #fff;
-    grid-gap: 20px;
+    grid-gap: 400px;
     border-radius: 10px;
     padding-left: 40px;
     border-color: #24354E;
