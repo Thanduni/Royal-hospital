@@ -4,8 +4,8 @@
 @import url(https://kinsta.com/blog/web-safe-fonts/#28-segoe-ui); */
 
 * {
-    margin: 0;
-    padding: 0;
+    /* margin: 0;
+    padding: 0; */
     font-family: 'Montserrat';
 }
 
@@ -13,19 +13,6 @@ html,
 body {
     background-color: #f8f9ff;
 }
-.Form{
-    margin-top: 10px;
-    margin-left: 20px;
-    height: 2030px;
-    width: 1400px;
-    background-color: #fff;
-    border-radius: 15px;
-    padding-left: 40px;
-    border-color: #24354E;
-    border: .025px solid #000000 ;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-}
-
 .heading{
     background-color: #f8f9ff;
     width: 100%;
@@ -41,26 +28,78 @@ h3{
     margin-top: 20px;
     margin-left: 650px;
 }
+.content{
+    display: grid;
+    grid-template-columns: repeat(2,700px);
+    height: 1100px;
+    width: 1400px;
+    margin-top: 10px;
+    margin-left: 43px;
+    background-color: #fff;
+    grid-gap: 20px;
+    border-radius: 10px;
+    padding-left: 40px;
+    border-color: #24354E;
+    border: .025px solid #ccc ;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+.box{
+    padding: 20px;
+    width: 220px;
+    height: 50px;
+    display: block;
 
-input[type=text],input[type=date],input[type=password],input[type=email]{
+}
+.box input[type=checkbox] {
+    /* transition: all 0.3s; */
+    /* box-sizing: border-box; */
+    display:ruby-base;
+}
+label{
+    font-weight: 550;
+    font-size: 15px;
+}
+.ill label{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+
+.content .box input[type=text],input[type=date],input[type=password],input[type=email]{
     width: 530px;
     height: 30px;
-    border-radius: 10px;
-    border: 0.5px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgba(102, 102, 102, 0.25); */
+    /* border-radius: 10px; */
     padding-left: 10px;
     padding-right: 10px;
     font-weight: 500;
+    background: #fff;
 }
+/* input[type=text],input[type=date],input[type=password],input[type=email]:hover{ */
+    /* width: 530px;
+    height: 30px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* border-radius: 10px; */
+    /* padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500; */ 
+    /* background: #ccc;
+    cursor: pointer;
+} */
 
 textarea{
-    width: 530px;
+    width: 540px;
     height: 80px;
-    border-radius: 10px;
-    border: 0.5px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    /* border-radius: 10px; */
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
@@ -69,10 +108,10 @@ textarea{
 select{
     width: 553px;
     height: 33px;
-    border-radius: 10px;
-    border: 0.5px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    /* border-radius: 10px; */
     padding-left: 10px;
     padding-right: 10px;
     font-weight: 500;
@@ -87,148 +126,51 @@ select{
     background: #FFFFFF;
     border: 0.5px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     padding-left: 10px;
     padding-right: 10px;
     font-weight: 500;
 }
 
 #btn{
-    border-radius: 15px;
-    margin-top: -40px;
-    margin-left: 210px;
-    height: 35px;
-    width: 120px;
+    border-radius: 10px;
+    margin-top: 830px;
+    margin-left: -728px;
+    height: 46px;
+    width: 1368px;
     background-color: #24354E;
     color: white;
     border-color: #f9f7ff;
-    font-weight: 500;
-}
-/* 
-button:hover{
-    background-color: #24354E;
-    color: white;
-} */
-
-
-.footer {
-    background-color: #24354E;
-    padding: 43px 0;
-    margin-top: 10px;
-    text-align: left;
+    font-size: larger;
+    font-weight: 600;
 }
 
-.footer-col {
-    padding: 0 15px;
+.illness{
+    display: grid;
+    grid-template-columns: repeat(2,300px);
+    grid-gap: 20px;
 }
-
-.footer-col h4 {
-    font-size: 18px;
-    color: #ADB6CD;
-    text-transform: capitalize;
-    margin-bottom: 35px;
-    font-weight: 500;
-    position: relative;
-}
-
-.footer-col img {
-    width: 60px;
-}
-
-.slogen {
-    padding: 10px 0;
-    text-align: left;
-    font-size: 16px;
-    text-transform: capitalize;
-    color: #ADB6CD;
-    text-decoration: none;
-    font-weight: 300;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-#one {
-    min-width: 50%;
-    max-width: 100%;
-    align-items: flex-start;
-    text-align: left;
-
-}
-
-#two {
-    min-width: 25%;
-    max-width: 100%
-}
-
-#three {
-    min-width: 25%;
-    max-width: 100%
-}
-
-.txt {
-    padding: 50px 0;
-}
-
-.footer-col h4::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    background-color: #ADB6CD;
-    height: 2px;
-    box-sizing: border-box;
+.ill{
     width: 50px;
-}
-
-.footer-col ul li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.footer-col ul li a,
-.footer-col p,
-.footer-col li {
-    font-size: 16px;
-    text-transform: capitalize;
-    color: #ADB6CD;
-    text-decoration: none;
-    font-weight: 300;
+    height:auto;
     display: block;
-    transition: all 0.3s ease;
 }
+.illness .ill input[type=checkbox]{
+    display: flex;
 
-.footer-col ul li a:hover {
-    color: #ADB6CD;
-    padding-left: 8px;
 }
-
-.footer-col .social-links a {
-    display: inline-block;
-    height: 40px;
-    width: 40px;
-    background-color: #24354E;
-    margin: 0 10px 10px 0;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    color: #ADB6CD;
-    transition: all 0.5s ease;
+.illness .ill a{
+    margin-left: 10px;
+    margin-top: 10px;
 }
-
-.footer-col .social-links a:hover {
-    color: #ADB6CD;
-    background-color: #24354E;
+.illness .ill label{
+   border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0 0 10px;
+    display: flex;
+    width: 220px;
 }
-
-/*responsive*/
-@media (max-width: 767px) {
-    .footer-col {
-        width: 33%;
-        margin-bottom: 30px;
-    }
-}
-
-@media (max-width: 574px) {
-    .footer-col {
-        width: 100%;
-    }
+.illness .ill label:hover{
+   background: #eee;
+   cursor: pointer;
 }

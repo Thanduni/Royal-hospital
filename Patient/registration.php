@@ -87,20 +87,20 @@ if(isset($_POST["nic"])){
     <div class="heading">
         <h3>Registration</h3>
     </div>
-    <div class="Form">
         <form action=" " method="post">
-            <br><br>
+        <div class="content">
+            <div class="box">
             <label for="">Name</label><br><br>
             <input type="text" name="name" id="name" placeholder="eg:- S.W.A.Siriwardana">
             <br><br>
 
-            <label for="">NIC(if you have not NIC please enter your gurdian's NIC number)</label><br><br>
+            <label>NIC(if you have not NIC please enter your guardian's NIC number)</label><br><br>
             <input type="text" name="nic" id="nic" placeholder="eg:- 19XXXXXXXXX/99XXXXXXXV"><br><br>
 
-            <label for="">Email</label><br><br>
+            <label>Email</label><br><br>
             <input type="email" name="email" id="email" placeholder="eg:- kumarsanga84@gmail.com"><br><br>
 
-            <label for="">Password</label><br><br>
+            <label>Password</label><br><br>
             <input type="password" name="password" id="password" placeholder="XXXXXXXXXXX"><br><br>
 
             <label for="">Confirm Password</label><br><br>
@@ -125,34 +125,49 @@ if(isset($_POST["nic"])){
 
             <label for="">Emergency Contact Number</label><br><br>
             <input type="text" name="ecn" id="ecn" placeholder="eg:- 07XXXXXXXX"><br><br>
+
+            </div>
+
+            <div class="box">
             <label for="">Currently Using Medicines</label><br><br>
-            <textarea name="cmed" id="cmed" cols="30" rows="50" placeholder="If you currently use any medicines please mention"></textarea><br><br>
+            <textarea name="cmed" id="cmed" cols="30" rows="3" placeholder="If you currently use any medicines please mention"></textarea><br><br>
             <label for="">Drug Allergies</label><br><br>
-            <textarea name="allergies" id="allergies" cols="30" rows="50" placeholder="If you have any drug allergies please mention"></textarea><br><br>
+            <textarea name="allergies" id="allergies" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
             <label for="">Illness</label><br><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Asthma"><a>&numsp;Asthma</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Diarrhea"><a>&numsp;Diarrhea</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Headaches"><a>&numsp;Headaches</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Mononucleosis"><a>&numsp;Mononucleosis</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Dysentery"><a>&numsp;Dysentery</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Giardiasis"><a>&numsp;Giardiasis</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Blood pressure"><a>&numsp;Blood pressure</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Cholesterol"><a>&numsp;Cholesterol</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Diabetes"><a>&numsp;Diabetes</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Nausea and Vomiting"><a>&numsp;Nausea and Vomiting</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Cancers"><a>&numsp;Cancers</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Hypertension"><a>&numsp;Hypertension</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Blindness"><a>&numsp;Blindness</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Hyperlipidemia"><a>&numsp;Hyperlipidemia</a><br>
-            <input type="checkbox" name="illness[]" id="illness" value="Gastritis "><a>&numsp;Gastritis</a><br><br>
+            <div class="illness">
+                <div class="ill">
+                <label><input type="checkbox" name="illness[]" id="illness" value="Asthma">&numsp;Asthma</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Diarrhea">&numsp;Diarrhea</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Gastritis ">&numsp;Gastritis</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Mononucleosis">&numsp;Mononucleosis</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Dysentery">&numsp;Dysentery</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Giardiasis">&numsp;Giardiasis</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Blood pressure">&numsp;Blood pressure</label>
+                
+                </div>
+                <div class="ill">
+                <label><input type="checkbox" name="illness[]" id="illness" value="Cholesterol">&numsp;Cholesterol</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Diabetes">&numsp;Diabetes</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Nausea and Vomiting">&numsp;Nausea and Vomiting</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Cancers">&numsp;Cancers</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Hypertension">&numsp;Hypertension</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Blindness">&numsp;Blindness</label>
+                <label><input type="checkbox" name="illness[]" id="illness" value="Hyperlipidemia">&numsp;Hyperlipidemia</label>
+                
+                </div>
+                
+            </div>
+                
             <label for="">Other Illness</label><br><br>
-            <textarea name="oillness" id="oillness" cols="30" rows="50" placeholder="If you have any other illness please mention"></textarea><br><br>
+            <textarea name="oillness" id="oillness" cols="30" rows="3" placeholder="If you have any other illness please mention"></textarea><br><br>
             <label for="">Any Medical Comments</label><br><br>
-            <textarea name="comments" id="comments" cols="30" rows="50" placeholder="If you have any drug allergies please mention"></textarea><br><br>
+            <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
+            </div>
+
             <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn">
+        </div>
+           
         </form> 
-        
-    </div>
 
     <?php include(BASEURL.'/Components/Footer.php'); ?>
     </section>
