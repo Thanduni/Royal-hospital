@@ -61,6 +61,22 @@ if (isset($_POST['addUser'])) {
         header("location:". BASEURL . "/Admin/adminNursePage.php");
         exit();
     }
+    if($_SESSION['which_user'] == "Storekeeper"){
+        $nic = $_SESSION['nic'];
+        $query = "INSERT INTO storekeeper(nic) VALUES ('$nic');";
+        $result = mysqli_query($con, $query);
+        unset($_SESSION['which_user']);
+        header("location:". BASEURL . "/Admin/adminStorekeeperPage.php");
+        exit();
+    }
+    if($_SESSION['which_user'] == "Receptionist"){
+        $nic = $_SESSION['nic'];
+        $query = "INSERT INTO receptionist(nic) VALUES ('$nic');";
+        $result = mysqli_query($con, $query);
+        unset($_SESSION['which_user']);
+        header("location:". BASEURL . "/Admin/adminReceptionistPage.php");
+        exit();
+    }
     header("location:". BASEURL . "/Admin/adminUsersPage.php");
 } else if (isset($_POST['cancel'])) {
     header("location: " .BASEURL . "/Admin/adminUsersPage.php");

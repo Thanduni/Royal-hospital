@@ -52,6 +52,11 @@ textarea{
     border-radius: 5px;
 }
 
+.disable{
+    background: #ADB6CD;
+    color: #24354E;
+}
+
 
 @media screen and (max-width: 1229px) {
     .editRegion{
@@ -74,6 +79,13 @@ textarea{
     padding: 20px;
     margin: 20px;
     border-spacing: 20px;
+}
+
+.userContents .sliderImg{
+    border-style: none;
+    border-radius: 20px;
+    height: 100px;
+    width: auto;
 }
 
 .col-1{

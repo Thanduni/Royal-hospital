@@ -82,45 +82,16 @@ nav a {
     width: 100%;
 }
 
-.advertise {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url("../images/AD1.jpg") no-repeat 0, 0 #616161;
-    /* filter: brightness(50%); */
-    background-blend-mode: multiply;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    align-items: center;
-    height: 800px;
-}
-
-
-/* .advertise:after {
-    position: absolute;
-    content: " ";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: block;
-} */
-
 p.slider-title {
     font-style: normal;
     font-weight: 700;
     font-size: 60px;
-    top: 50%;
     line-height: 73px;
 }
 
 p.slider-description {
     font-style: normal;
     font-weight: 400;
-    top: 50%;
     font-size: 40px;
     line-height: 49px;
 }
@@ -168,7 +139,6 @@ p.slider-description {
     display: flex;
     width: 100%;
     text-align: left;
-    top: 300px
 }
 
 .articleHome img {
@@ -208,7 +178,6 @@ p.slider-description {
         width: 100%;
         text-align: center;
         justify-content: center;
-        top: 500px
     }
 
     .articleHome img {
@@ -630,7 +599,6 @@ a {
     justify-content: center;
     align-items: center;
     text-align: center;
-    top: 280px;
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
@@ -903,7 +871,6 @@ ul {
 .cards {
     position: relative;
     width: 100%;
-    top: 300px;
 }
 
 .cards ul {
@@ -972,7 +939,6 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
         position: relative;
         background-size: 100%;
         height: 300px;
-        top: 500px;
     }
 
     .cards ul {
@@ -990,13 +956,28 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     .cards {
         position: relative;
         width: 100%;
-        top: 500px;
     }
 
     .next {
         position: relative;
-        /*top: 500px;*/
         height: auto;
     }
 }
 
+.aboutUs{
+    height: auto;
+    margin: 20px;
+    padding: 10px;
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    color: #24354E;
+}
+
+/**/
+
+.success {
+    color: green;
+    text-align: justify;
+    font-weight: bold;
+}

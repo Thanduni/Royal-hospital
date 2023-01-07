@@ -48,7 +48,7 @@ require_once("../conf/config.php");
                                             align="middle">
                 <p>Receptionist</p>
             </a></li>
-        <li><a href="" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Admin/adminStorekeeperPage.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/database.svg' ?> alt="Store keeper"
                                             align="middle">
                 <p>Store keeper</p>

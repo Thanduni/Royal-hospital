@@ -247,7 +247,7 @@ if (isset($_SESSION['mailaddress'])) {
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
     <?php
-    if ($_GET['click'] == "addDoctor") {
+    if (@$_GET['click'] == "addDoctor") {
         $_SESSION['nic'] = $_GET['nic'];
         $_SESSION['department'] = $_GET['department'];
         $_SESSION['which_user'] = "Doctor";
@@ -258,7 +258,7 @@ if (isset($_SESSION['mailaddress'])) {
                 document.getElementById('IN_userRole').selectedIndex = 1;
             </script>";
         }
-    if ($_GET['click'] == "addNurse") {
+    if (@$_GET['click'] == "addNurse") {
         $_SESSION['nic'] = $_GET['nic'];
         $_SESSION['which_user'] = "Nurse";
         echo
@@ -268,7 +268,7 @@ if (isset($_SESSION['mailaddress'])) {
                 document.getElementById('IN_userRole').selectedIndex = 4;
             </script>";
     }
-    if ($_GET['click'] == "addReceptionist") {
+    if (@$_GET['click'] == "addReceptionist") {
         $_SESSION['nic'] = $_GET['nic'];
         $_SESSION['which_user'] = "Receptionist";
         echo
