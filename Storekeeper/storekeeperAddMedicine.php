@@ -1,4 +1,4 @@
- <?php
+<?php
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
@@ -11,8 +11,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperDash.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .next {
@@ -20,7 +20,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             height: auto;
         }
     </style>
-    <title>Storekeeper Dashboard</title>
+    <title>Storekeeper Add Medicine</title>
 </head>
 <body>
 <div class="user">
@@ -47,61 +47,38 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             
         </div>
         <!-- content start -->
-
-                        <div class="cards-list">
-                
-                <div class="card 1">
-                
-                <div class="card_title">
-                    <p>All medicine count</p>
-                </div>
-                </div>
-
-                <div class="card 2">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-
-                <div class="card 3">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-                
-                
-
-                </div>
-
-
-                <div class="cards-list">
-                
-                <div class="card 1">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-
-                <div class="card 2">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-
-                <div class="card 3">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-                
-                
-
-                </div>
+        
+              <table>
+        <tr>
+          <th>medicine ID</th>
+          <th>medicine name</th>
+          <th>badge no.</th>
+          <th>company name</th>
+          <th>suplier name</th>
+          <th>unit type</th>
+          <th>unit cost</th>
+          <th>qantity</th>
+          <th>manufacture date</th>
+          <th>expire date</th>
+          <th>use state</th>
+          
+        </tr>
+        <tr>
+          <td>Jill</td>
+          <td>Smith</td>
+          <td>50</td>
+          <td>Jill</td>
+          <td>Smith</td>
+          <td>50</td>
+          <td>Jill</td>
+          <td>Smith</td>
+          <td>50</td>
+          <td>Jill</td>
+          <td>Smith</td>
+          
+        </tr>
+       
+      </table>
 
         <!-- content start -->
         <?php include(BASEURL . '/Components/Footer.php'); ?>

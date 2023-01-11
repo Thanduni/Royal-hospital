@@ -1,4 +1,4 @@
- <?php
+<?php
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
@@ -47,62 +47,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             
         </div>
         <!-- content start -->
-
-                        <div class="cards-list">
-                
-                <div class="card 1">
-                
-                <div class="card_title">
-                    <p>All medicine count</p>
-                </div>
-                </div>
-
-                <div class="card 2">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-
-                <div class="card 3">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-                
-                
-
-                </div>
-
-
-                <div class="cards-list">
-                
-                <div class="card 1">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-
-                <div class="card 2">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-
-                <div class="card 3">
-                
-                <div class="card_title">
-                    <p>Card Title</p>
-                </div>
-                </div>
-                
-                
-
-                </div>
-
+        
         <!-- content start -->
         <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
