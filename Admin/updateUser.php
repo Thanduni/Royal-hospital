@@ -22,10 +22,6 @@ if (isset($_POST['addUser'])) {
             $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
             $img_upload_path = '../uploads/' . $new_img_name;
             move_uploaded_file($tmp_name, $img_upload_path);
-            // $sql = "INSERT INTO user(profile_image) VALUES ('$new_img_name');";
-            // header("location: adminUsersPage.php");
-            // if (mysqli_query($con, $sql)) die("Success");
-            // else die("Fail");
         } else {
             $em = "You can't upload files of this type";
             header("location:" .BASEURL . "/Admin/adminUsersPage.php?error = $em");
@@ -38,12 +34,9 @@ if (isset($_POST['addUser'])) {
     $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $gender = $_POST['gender'];
-    $userRole = $_POST['userRole'];
     $profile_image = $new_img_name;
 
-
-
-    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', user_role = '$userRole', profile_image = '$profile_image' WHERE
+    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image' WHERE
                 nic = '$nic';";
     $result = mysqli_query($con, $query);
 

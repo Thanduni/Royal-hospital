@@ -13,7 +13,7 @@ if (isset($_SESSION['mailaddress'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
-        <title>Admin dashboard - user</title>
+        <title>Admin dashboard - User</title>
         <style>
             p.royal {
                 font-size: 20px;
@@ -53,6 +53,12 @@ if (isset($_SESSION['mailaddress'])) {
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
                 <button type="button" id="addButton" onclick="displayUserAddForm()">+Add user</button>
             </p>
+
+            <div class="filter">
+                <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+                <input type="text" id="myInputRole" onkeyup="filterByRole()" placeholder="Search for user role.." title="Type in a name">
+            </div>
+
             <div class="userClass">
                 <?php
                 $query = "SELECT * FROM user";
@@ -64,16 +70,16 @@ if (isset($_SESSION['mailaddress'])) {
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
+                            <div class="cell">Options</div>
                             <div class="cell">NIC</div>
                             <div class="cell">Name</div>
+                            <div class="cell">Profile image</div>
+                            <div class="cell">User role</div>
                             <div class="cell">Address</div>
                             <div class="cell">Email</div>
                             <div class="cell">Contact number</div>
                             <div class="cell">Gender</div>
                             <div class="cell">Password</div>
-                            <div class="cell">User role</div>
-                            <div class="cell">Profile image</div>
-                            <div class="cell">Options</div>
                         </div>
                         <?php
                         for ($j = 0; $j < $rows; ++$j) {
@@ -90,11 +96,30 @@ if (isset($_SESSION['mailaddress'])) {
                             </ul>
                             <!--                        <div id="UDfunc">-->
                             <div class="row">
+                                <div class="cell" style="100px" data-title="Options">
+                                    <button class="edit" id="<?php echo $row[0] ?>"
+                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
+                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
+                                        Edit
+                                    </button>
+                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
+                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        </button>
+                                    </a>
+                                </div>
                                 <div class="cell" data-title="NIC">
                                     <?php echo $row[0]; ?>
                                 </div>
                                 <div class="cell" data-title="Name">
                                     <?php echo $row[1]; ?>
+                                </div>
+                                <div class="cell" style="width:100px" data-title="Profile image">
+                                    <?php
+                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[8]' alt='Upload Image' width=150px>";
+                                    ?>
+                                </div>
+                                <div class="cell" data-title="User role">
+                                    <?php echo $row[7]; ?>
                                 </div>
                                 <div class="cell" data-title="Address">
                                     <?php echo $row[2]; ?>
@@ -110,25 +135,6 @@ if (isset($_SESSION['mailaddress'])) {
                                 </div>
                                 <div class="cell" data-title="Password">
                                     <?php echo $row[6]; ?>
-                                </div>
-                                <div class="cell" data-title="User role">
-                                    <?php echo $row[7]; ?>
-                                </div>
-                                <div class="cell" style="width:100px" data-title="Profile image">
-                                    <?php
-                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[8]' alt='Upload Image' width=150px>";
-                                    ?>
-                                </div>
-                                <div class="cell" style="100px" data-title="Options">
-                                    <button class="edit" id="<?php echo $row[0] ?>"
-                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
-                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
-                                        Edit
-                                    </button>
-                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
-                                        </button>
-                                    </a>
                                 </div>
                             </div>
 
@@ -208,7 +214,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <input type="text" name="password" id="IN_password"><div class="alert" id="password"></div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="userRoleRow">
                         <td>
                             <label for="userRole">User role:</label>
                         </td>
@@ -246,6 +252,8 @@ if (isset($_SESSION['mailaddress'])) {
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
+
     <?php
     if (@$_GET['click'] == "addDoctor") {
         $_SESSION['nic'] = $_GET['nic'];
@@ -275,7 +283,17 @@ if (isset($_SESSION['mailaddress'])) {
             "<script>
                 displayUserAddForm();
                 document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-                document.getElementById('IN_userRole').selectedIndex = 4;
+                document.getElementById('IN_userRole').selectedIndex = 2;
+            </script>";
+    }
+    if (@$_GET['click'] == "addStorekeeper") {
+        $_SESSION['nic'] = $_GET['nic'];
+        $_SESSION['which_user'] = "Storekeeper";
+        echo
+            "<script>
+                displayUserAddForm();
+                document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
+                document.getElementById('IN_userRole').selectedIndex = 3;
             </script>";
     }
 //    ?>

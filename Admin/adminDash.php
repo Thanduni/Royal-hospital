@@ -20,7 +20,7 @@ if (isset($_SESSION['mailaddress'])) {
             height: auto;
         }
     </style>
-    <title>Admin Users</title>
+    <title>Admin dashboard</title>
 </head>
 <body>
 <div class="user">

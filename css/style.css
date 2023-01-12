@@ -981,3 +981,14 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     text-align: justify;
     font-weight: bold;
 }
+
+#myInputName, #myInputRole {
+    background-image: url('../images/search.png');
+    background-position: 4px 6px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin: 20px;
+    display: inline-block;
+}

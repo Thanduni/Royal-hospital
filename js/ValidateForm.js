@@ -7,7 +7,6 @@ let emailDiv = document.getElementById("email");
 let contactNumDiv = document.getElementById("contactNum");
 let passwordDiv = document.getElementById("password");
 
-// alert(nameDiv);
 
 // let nic = nicDiv.previousSibling.value;
 // let name = nameDiv.previousSibling.value;
@@ -22,6 +21,7 @@ let regAddress = /^[\W\s\w]{3,},[\s\w]{3,},[\s\w]{3,}\.$/;
 let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regContactNum = /^[0-9]{10}$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
+
 
 function validateAddress() {
     addressDiv.innerHTML = "";
@@ -166,69 +166,6 @@ nicDiv.previousSibling.addEventListener("focus", function () {
         "    <li>NIC should contain only 12 digits or with character at last after the digits.</li>\n" +
         "</ul>"
 }, false)
-
-function validateDoctorForm() {
-    department = document.getElementById("IN_department").value;
-
-    if (document.getElementById("nicRow").classList[0] === "hide") {
-        if (regName.test(department)) {
-            return true;
-        } else {
-            if (!regName.test(department)) {
-                nameDiv.classList.remove("hint");
-                nameDiv.classList.add("alert");
-                nameDiv.innerHTML = "<ul>\n" +
-                    "    <li>Please enter a valid department name.</li>\n" +
-                    "</ul>"
-            }
-            form.scrollIntoView();
-            return false;
-        }
-    } else {
-        nic = document.getElementById("IN_nic").value;
-        if (regName.test(department) &&
-            regNic.test(nic)) {
-            return true;
-        } else {
-            if (!regName.test(department)) {
-                nameDiv.classList.remove("hint");
-                nameDiv.classList.add("alert");
-                nameDiv.innerHTML = "<ul>\n" +
-                    "    <li>Please enter a valid dpeartment name.</li>\n" +
-                    "</ul>"
-            }
-            if (!regNic.test(nic)) {
-                nicDiv.classList.remove("hint");
-                nicDiv.classList.add("alert");
-                nicDiv.innerHTML = "<ul>\n" +
-                    "    <li>Please enter your email properly.</li>\n" +
-                    "</ul>"
-            }
-
-            form.scrollIntoView();
-            return false;
-        }
-    }
-}
-
-function validateNurseReceptionistForm() {
-    nic = document.getElementById("IN_nic").value;
-    if (regNic.test(nic)) {
-        return true;
-    } else {
-        if (!regNic.test(nic)) {
-            nicDiv.classList.remove("hint");
-            nicDiv.classList.add("alert");
-            nicDiv.innerHTML = "<ul>\n" +
-                "    <li>Please enter your NIC properly.</li>\n" +
-                "</ul>"
-        }
-
-        form.scrollIntoView();
-        return false;
-    }
-}
-
 
 function validateForm() {
     address = addressDiv.previousSibling.value;

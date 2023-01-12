@@ -15,7 +15,7 @@ if (isset($_SESSION['mailaddress'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminDoctorPage.css' ?>">
-        <title>Admin dashboard - user</title>
+        <title>Admin dashboard - Doctor</title>
         <style>
             p.royal {
                 font-size: 20px;
@@ -54,6 +54,9 @@ if (isset($_SESSION['mailaddress'])) {
                 <button type="button" id="addButton" onclick="displayDoctorAddForm()">+Add doctor</button>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             </p>
+
+            <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+
             <div class="userClass">
                 <?php
                 $query = " SELECT user.nic, doctor.doctorID, user.name, doctor.department, user.profile_image FROM doctor inner join user where doctor.nic=user.nic;";
@@ -156,7 +159,18 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateDoctor.js' ?>></script>
+
+    <?php
+    if (@$_GET['task'] == "insertDoctor") {
+        $nic = $_GET['nic'];
+        echo
+        "<script>
+                displayDoctorAddForm();
+                document.getElementById('IN_nic').value = ". $nic. ";
+            </script>";
+        } ?>
 
     </body>
     </html>

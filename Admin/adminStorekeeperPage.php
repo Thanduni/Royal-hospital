@@ -47,12 +47,15 @@ if (isset($_SESSION['mailaddress'])) {
                     </a></li>
             </ul>
             <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Nurse
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Storekeeper
             </div>
             <p>
-                <button type="button" id="addButton" onclick="displayStorekeeperAddForm()">+Add nurse</button>
+                <button type="button" id="addButton" onclick="displayStorekeeperAddForm()">+Add storekeeper</button>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             </p>
+
+            <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+
             <div class="userClass">
                 <?php
                 $query = " SELECT user.nic, storekeeper.storekeeperID, user.name, user.profile_image FROM storekeeper inner join user where storekeeper.nic=user.nic;";
@@ -112,7 +115,7 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" onsubmit="return validateNurseReceptionistForm()" enctype="multipart/form-data" id="addForm" name="userForm">
+            <form method="post" onsubmit="return validateNurseReceptionistStorekeeperForm()" enctype="multipart/form-data" id="addForm" name="userForm">
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Add user</p>
                 <table>
@@ -140,8 +143,8 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
-
+    <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateRecepStoreNurse.js' ?>></script>
 
     </body>
 

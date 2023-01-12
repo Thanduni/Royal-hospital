@@ -12,7 +12,7 @@ require_once("../conf/config.php");
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/index.css' ?>">
     <!--    <link rel="stylesheet" href="css/navandfooter.css">-->
-    <title>Home</title>
+    <title>About us</title>
     <style>
         b{
             text-align: center;

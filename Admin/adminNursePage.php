@@ -1,6 +1,6 @@
 <?php
 session_start();
-//die( $_SESSION['profilePic']);
+
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress'])) {
     ?>
@@ -14,7 +14,7 @@ if (isset($_SESSION['mailaddress'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminNursePage.css' ?>">
-        <title>Admin dashboard - user</title>
+        <title>Admin dashboard - Nurse</title>
         <style>
             p.royal {
                 font-size: 20px;
@@ -53,6 +53,9 @@ if (isset($_SESSION['mailaddress'])) {
                 <button type="button" id="addButton" onclick="displayNurseAddForm()">+Add nurse</button>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             </p>
+
+            <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+
             <div class="userClass">
                 <?php
                 $query = " SELECT user.nic, nurse.nurseID, user.name, user.profile_image FROM nurse inner join user where nurse.nic=user.nic;";
@@ -112,7 +115,7 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" onsubmit="return validateNurseReceptionistForm()" enctype="multipart/form-data" id="addForm" name="userForm">
+            <form method="post" onsubmit="return validateNurseReceptionistStorekeeperForm()" enctype="multipart/form-data" id="addForm" name="userForm">
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Add user</p>
                 <table>
@@ -140,8 +143,8 @@ if (isset($_SESSION['mailaddress'])) {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
-
+    <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateRecepStoreNurse.js' ?>></script>
 
     </body>
 

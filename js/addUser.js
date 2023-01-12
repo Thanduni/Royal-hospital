@@ -62,10 +62,27 @@ function displayNurseAddForm() {
 
 function displayReceptionistAddForm() {
     let form = document.getElementById("addForm");
-    form.action = '/royalhospital/Admin/addReceptionist.php';
+    form.action = '/royalhospital/Admin/addStorekeeper.php';
     document.getElementById("nicRow").classList.remove("hide");
 
     document.getElementById("titleOperation").innerHTML = "Add Receptionist";
+
+    let userForm = document.getElementById('userForm');
+    userForm.classList.add("active");
+    form.scrollIntoView();
+
+    let close = document.getElementById('cancel');
+    close.addEventListener('click', function () {
+        userForm.classList.remove("active");
+    }, false);
+}
+
+function displayStorekeeperAddForm() {
+    let form = document.getElementById("addForm");
+    form.action = '/royalhospital/Admin/addReceptionist.php';
+    document.getElementById("nicRow").classList.remove("hide");
+
+    document.getElementById("titleOperation").innerHTML = "Add Storekeeper";
 
     let userForm = document.getElementById('userForm');
     userForm.classList.add("active");

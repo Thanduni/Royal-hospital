@@ -12,11 +12,11 @@ p.addUSer {
     }
 }
 
-#fromDoctorPage{
+#fromDoctorPage {
     display: none;
 }
 
-.tableCon{
+.tableCon {
     display: none;
 }
 
@@ -26,11 +26,11 @@ p.addUSer {
     text-align: center;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-input[type='submit']{
+input[type='submit'] {
     width: 159px;
     height: 40px;
     background: #24354E;
@@ -76,6 +76,7 @@ table {
     max-height: 500px;
     overflow-y: scroll;
 }
+
 /*Table*/
 
 
@@ -102,7 +103,6 @@ table {
     /* padding: 40px; */
     max-width: 1440px;
 }
-
 
 
 @media screen and (max-width: 1229px) {
@@ -147,6 +147,7 @@ table {
     .wrapper {
         margin: 0 auto;
         max-width: 590px;
+        min-width: 500px;
     }
 
     .row {
@@ -247,3 +248,24 @@ table {
 }
 
 /*Table */
+
+/*Dropdown */
+
+.filter {
+    display: flex;
+}
+
+#myInputName, #myInputRole {
+    background-image: url('../images/search.png');
+    background-position: 4px 6px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin: 20px;
+    width: 50%;
+    display: inline-block;
+}
+
+
+/*Dropdown */
