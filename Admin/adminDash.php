@@ -20,7 +20,7 @@ if (isset($_SESSION['mailaddress'])) {
             height: auto;
         }
     </style>
-    <title>Admin Users</title>
+    <title>Admin dashboard</title>
 </head>
 <body>
 <div class="user">
@@ -34,13 +34,13 @@ if (isset($_SESSION['mailaddress'])) {
             <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">
                 Admin
             </li>
-            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/Logout?url=' . $_SERVER['REQUEST_URI'] ?>">Logout
+            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
                             src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
             </li>
         </ul>
         <div class="arrow">
-            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">User
+            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
         </div>
         <div class="actorCards">
             <ul>
@@ -50,16 +50,16 @@ if (isset($_SESSION['mailaddress'])) {
                 <a href="<?php echo BASEURL . '/Admin/adminUsersPage.php' ?>">
                     <li>User</li>
                 </a>
-                <a href="">
+                <a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>">
                     <li>Doctor</li>
                 </a>
-                <a href="">
+                <a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>">
                     <li>Nurse</li>
                 </a>
                 <a href="">
                     <li>Receptionist</li>
                 </a>
-                <a href="">
+                <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>">
                     <li>Noticeboard</li>
                 </a>
             </ul>

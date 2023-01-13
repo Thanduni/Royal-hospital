@@ -7,7 +7,6 @@ let emailDiv = document.getElementById("email");
 let contactNumDiv = document.getElementById("contactNum");
 let passwordDiv = document.getElementById("password");
 
-// alert(nameDiv);
 
 // let nic = nicDiv.previousSibling.value;
 // let name = nameDiv.previousSibling.value;
@@ -23,6 +22,7 @@ let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regContactNum = /^[0-9]{10}$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
 
+
 function validateAddress() {
     addressDiv.innerHTML = "";
     let address = addressDiv.previousSibling.value;
@@ -37,13 +37,12 @@ function validateAddress() {
 
 addressDiv.previousSibling.addEventListener("blur", validateAddress, false)
 
-addressDiv.previousSibling.addEventListener("focus", function () {
+addressDiv.previousSibling.addEventListener("focus", function() {
     addressDiv.classList.remove("alert");
     addressDiv.classList.add("hint");
     addressDiv.innerHTML = "<ul>\n" +
         "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
-        "</ul>";
-    ;
+        "</ul>";;
 
     // alert("Hai");
 }, false)
@@ -62,13 +61,12 @@ function validateName() {
 
 nameDiv.previousSibling.addEventListener("blur", validateName, false)
 
-nameDiv.previousSibling.addEventListener("focus", function () {
+nameDiv.previousSibling.addEventListener("focus", function() {
     nameDiv.classList.remove("alert");
     nameDiv.classList.add("hint");
     nameDiv.innerHTML = "<ul>\n" +
         "    <li>Name should contain more than 2 characters and no numbers.</li>\n" +
-        "</ul>";
-    ;
+        "</ul>";;
 
     // alert("Hai");
 }, false)
@@ -87,7 +85,7 @@ function validateEmail() {
 
 emailDiv.previousSibling.addEventListener("blur", validateEmail, false)
 
-emailDiv.previousSibling.addEventListener("focus", function () {
+emailDiv.previousSibling.addEventListener("focus", function() {
     emailDiv.classList.remove("alert");
     emailDiv.classList.add("hint");
     emailDiv.innerHTML = "<ul>\n" +
@@ -109,7 +107,7 @@ function validatePassword() {
 
 passwordDiv.previousSibling.addEventListener("blur", validatePassword, false)
 
-passwordDiv.previousSibling.addEventListener("focus", function () {
+passwordDiv.previousSibling.addEventListener("focus", function() {
     passwordDiv.classList.remove("alert");
     passwordDiv.classList.add("hint");
     passwordDiv.innerHTML = "<ul>\n" +
@@ -136,13 +134,13 @@ function validateContactNum() {
 
 contactNumDiv.previousSibling.addEventListener("blur", validateContactNum, false)
 
-contactNumDiv.previousSibling.addEventListener("focus", function () {
+contactNumDiv.previousSibling.addEventListener("focus", function() {
     contactNumDiv.classList.remove("alert");
     contactNumDiv.classList.add("hint");
     contactNumDiv.innerHTML = "<ul>\n" +
         "    <li>Contact number should contain 10 integers.</li>\n" +
         "</ul>"
-    // alert("Hai");
+        // alert("Hai");
 }, false)
 
 function validateNIC() {
@@ -152,14 +150,14 @@ function validateNIC() {
         nicDiv.classList.remove("hint");
         nicDiv.classList.add("alert");
         nicDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter your email properly.</li>\n" +
+            "    <li>Please enter your NIC properly.</li>\n" +
             "</ul>"
     }
 }
 
 nicDiv.previousSibling.addEventListener("blur", validateNIC, false)
 
-nicDiv.previousSibling.addEventListener("focus", function () {
+nicDiv.previousSibling.addEventListener("focus", function() {
     nicDiv.classList.remove("alert");
     nicDiv.classList.add("hint");
     nicDiv.innerHTML = "<ul>\n" +
@@ -174,8 +172,8 @@ function validateForm() {
     name = nameDiv.previousSibling.value;
 
 
-    if(document.getElementById("nicRow").classList[0] === "hide" &&
-        document.getElementById("passRow").classList[0] === "hide"){
+    if (document.getElementById("nicRow").classList[0] === "hide" &&
+        document.getElementById("passRow").classList[0] === "hide") {
         if (regAddress.test(address) &&
             regEmail.test(email) &&
             regName.test(name) &&
@@ -183,28 +181,28 @@ function validateForm() {
             return true;
         } else {
 
-            if(!regAddress.test(address)){
+            if (!regAddress.test(address)) {
                 addressDiv.classList.remove("alert");
                 addressDiv.classList.add("hint");
                 addressDiv.innerHTML = "<ul>\n" +
                     "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
                     "</ul>";
             }
-            if(!regEmail.test(email)){
+            if (!regEmail.test(email)) {
                 emailDiv.classList.remove("hint");
                 emailDiv.classList.add("alert");
                 emailDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid email.</li>\n" +
                     "</ul>"
             }
-            if(!regName.test(name)){
+            if (!regName.test(name)) {
                 nameDiv.classList.remove("hint");
                 nameDiv.classList.add("alert");
                 nameDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid name.</li>\n" +
                     "</ul>"
             }
-            if( !regContactNum.test(contactNum)){
+            if (!regContactNum.test(contactNum)) {
                 contactNumDiv.classList.remove("hint");
                 contactNumDiv.classList.add("alert");
                 contactNumDiv.innerHTML = "<ul>\n" +
@@ -215,7 +213,7 @@ function validateForm() {
             form.scrollIntoView();
             return false;
         }
-    } else{
+    } else {
         nic = nicDiv.previousSibling.value;
         password = passwordDiv.previousSibling.value;
         if (regAddress.test(address) &&
@@ -227,42 +225,42 @@ function validateForm() {
             return true;
         } else {
 
-            if(!regAddress.test(address)){
+            if (!regAddress.test(address)) {
                 addressDiv.classList.remove("alert");
                 addressDiv.classList.add("hint");
                 addressDiv.innerHTML = "<ul>\n" +
                     "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
                     "</ul>";
             }
-            if(!regEmail.test(email)){
+            if (!regEmail.test(email)) {
                 emailDiv.classList.remove("hint");
                 emailDiv.classList.add("alert");
                 emailDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid email.</li>\n" +
                     "</ul>"
             }
-            if(!regName.test(name)){
+            if (!regName.test(name)) {
                 nameDiv.classList.remove("hint");
                 nameDiv.classList.add("alert");
                 nameDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid name.</li>\n" +
                     "</ul>"
             }
-            if( !regContactNum.test(contactNum)){
+            if (!regContactNum.test(contactNum)) {
                 contactNumDiv.classList.remove("hint");
                 contactNumDiv.classList.add("alert");
                 contactNumDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter a valid contact number.</li>\n" +
                     "</ul>"
             }
-            if(!regNic.test(nic)){
+            if (!regNic.test(nic)) {
                 nicDiv.classList.remove("hint");
                 nicDiv.classList.add("alert");
                 nicDiv.innerHTML = "<ul>\n" +
                     "    <li>Please enter your email properly.</li>\n" +
                     "</ul>"
             }
-            if(!regPassword.test(password)){
+            if (!regPassword.test(password)) {
                 passwordDiv.classList.remove("hint");
                 passwordDiv.classList.add("alert");
                 passwordDiv.innerHTML = "<ul>\n" +
@@ -275,23 +273,4 @@ function validateForm() {
         }
     }
 
-}
-    nic = nicDiv.previousSibling.value;
-    name = nameDiv.previousSibling.value;
-    address = addressDiv.previousSibling.value;
-    email = emailDiv.previousSibling.value;
-    contactNum = contactNumDiv.previousSibling.value;
-    password = passwordDiv.previousSibling.value;
-
-    if (regAddress.test(address) &&
-        regPassword.test(password) &&
-        regEmail.test(email) &&
-        regName.test(name) &&
-        regNic.test(nic) &&
-        regContactNum.test(contactNum)) {
-        return true;
-    } else {
-        form.scrollIntoView();
-        return false;
-    }
 }

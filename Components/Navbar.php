@@ -11,7 +11,7 @@ require_once("../conf/config.php");
     <div class="nav-links">
         <ul>
             <li><a href="<?php echo BASEURL.'/index.php'?>"> Home </a></li>
-            <li><a href=""> About us </a></li>
+            <li><a href="<?php echo BASEURL.'/Homepage/aboutUs.php'?>"> About us </a></li>
             <li><a href=""> Appointment </a></li>
             <li><a href=""> Register patient </a></li>
             <li><a href="<?php echo BASEURL.'/Homepage/login.php'?>"> Login </a></li>

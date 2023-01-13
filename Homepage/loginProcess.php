@@ -8,7 +8,7 @@ session_start();
 
 if (isset($_POST['login'])) {
     if (empty($_POST["email"]) || empty($_POST["password"])) {
-        header("location: BASEURL . /Homepage/login.php?Empty=Please fill in the blanks");
+        header("location:". BASEURL . "/Homepage/login.php?Empty=Please fill in the blanks");
     } else {
         $query = $con->prepare("select name, email, password, user_role, profile_image from user where email=?;");
         $query->bind_param("s", $_POST["email"]);
@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['name'] = $name;
                 $_SESSION['profilePic'] = $profilePic;
                 if ($userRole == "Admin")
-                    header("location: ".BASEURL . "/Admin/adminDash.php");
+                    header("location: " . BASEURL . "/Admin/adminDash.php");
                 else if ($userRole == "Doctor")
                     header("location:doctorDash.php");
                 else if ($userRole == "Nurse")
@@ -39,10 +39,10 @@ if (isset($_POST['login'])) {
                     header("location:storekeeperDash.php");
                 $_SESSION['mailaddress'] = $_POST["email"];
             } else {
-                header("location: BASEURL . Homepage/login.php?Invalid=Incorrect login credentials i.e. email or password!");
+                header("location:" . BASEURL . "/Homepage/login.php?Invalid=Incorrect login credentials i.e. email or password!");
             }
         } else {
-            header("location: BASEURL . Homepage/login.php?Invalid=Incorrect login credentials i.e. email or password!");
+            header("location:" . BASEURL .  "/Homepage/login.php?Invalid=Incorrect login credentials i.e. email or password!");
         }
     }
 } else {

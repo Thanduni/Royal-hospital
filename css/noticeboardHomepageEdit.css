@@ -1,0 +1,114 @@
+#aboutUs,#slider{
+    display: block;
+    float: none;
+}
+
+.editRegion{
+    display: flex;
+    flex-direction: row;
+}
+
+.editForm{
+    flex-basis: 78%;
+    background-color: white;
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    padding: 20px;
+    margin: 20px;
+}
+
+h2{
+    color: #24354E;
+}
+
+.disable{
+    background: #ADB6CD;
+    color: #24354E;
+}
+
+label{
+    font-size: 20px;
+}
+
+input[type='text']{
+    width: 100%;
+    font-size: 20px;
+    background: #D9D9D9;
+    border: 1px solid rgba(36, 53, 78, 0.5);
+    border-radius: 5px;
+    height: 36px;
+}
+
+tbody{
+    width: 100%;
+}
+
+textarea{
+    width: 100%;
+    font-size: 20px;
+    background: #D9D9D9;
+    border: 1px solid rgba(36, 53, 78, 0.5);
+    border-radius: 5px;
+}
+
+.disable{
+    background: #ADB6CD;
+    color: #24354E;
+}
+
+
+@media screen and (max-width: 1229px) {
+    .editRegion{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #aboutUs,#slider{
+        display: inline;
+    }
+}
+
+/*Table*/
+
+.userContents table {
+    width: 100%;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    padding: 20px;
+    margin: 20px;
+    border-spacing: 20px;
+}
+
+.userContents .sliderImg{
+    border-style: none;
+    border-radius: 20px;
+    height: 100px;
+    width: auto;
+}
+
+.col-1{
+    text-align: left;
+}
+
+.userContents th,
+.userContents td {
+    overflow-wrap: break-word;
+    padding: 0.25em;
+    margin: 10px;
+    vertical-align: top;
+}
+
+.userContents tr {
+    padding: 0.25em;
+    border-style: solid;
+    border-color: #000000;
+}
+
+
+
+/* Table */
+
+
+
