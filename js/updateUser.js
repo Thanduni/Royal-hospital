@@ -1,3 +1,25 @@
+// let update = document.getElementById("")
+
+function displayUserUpdateForm(nic) {
+    let form = document.getElementById("addForm");
+    form.action = '/royalhospital/Admin/updateUser.php?id=' + nic;
+    document.getElementById("nicRow").classList.add("hide");
+    document.getElementById("passRow").classList.add("hide");
+
+
+    let tableCon = document.getElementsByClassName(nic + "_tableCon");
+
+    document.getElementById("titleOperation").innerHTML = "Update User | NIC : " + nic;
+
+    let name = tableCon[0].textContent;
+    let address = tableCon[1].textContent;
+    let email = tableCon[2].textContent;
+    let contactNum = tableCon[3].textContent;
+    let gender = tableCon[4].textContent;
+    let userRole = tableCon[5].textContent;
+
+    // alert(tableCon[0].textContent);
+
 function displayUserUpdateForm() {
     let name = document.getElementsByClassName("tableCon")[0].textContent;
     let address = document.getElementsByClassName("tableCon")[1].textContent;
@@ -36,11 +58,13 @@ function displayUserUpdateForm() {
         IN_userRole.selectedIndex = 3;
     else if(userRole === "Nurse")
         IN_userRole.selectedIndex = 4;
+    form.scrollIntoView();
 
 
     let close = document.getElementById('cancel');
     close.addEventListener('click', function() {
         userForm.classList.remove("active");
+        // document.getElementById("passToJS").innerHTML = "";
     }, false);
 }
 
