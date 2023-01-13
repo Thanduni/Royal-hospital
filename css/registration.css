@@ -29,19 +29,19 @@ h3{
     margin-left: 650px;
 }
 .content{
-    display: grid;
-    grid-template-columns: repeat(2,700px);
+    display: flex;
+    /* grid-template-columns: repeat(2,700px); */
     height: 1100px;
-    width: 1400px;
+    width: 1300px;
     margin-top: 10px;
-    margin-left: 43px;
+    margin-left: 93px;
     background-color: #fff;
-    grid-gap: 20px;
+    grid-gap: 387px;
     border-radius: 10px;
     padding-left: 40px;
     border-color: #24354E;
-    border: .025px solid #ccc ;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    border: 0.025px solid #ccc;
+    box-shadow: 0 7px 25px 0 rgb(0 0 0 / 8%);
     margin-bottom: 30px;
 }
 .box{
@@ -79,19 +79,12 @@ label{
     font-weight: 500;
     background: #fff;
 }
-/* input[type=text],input[type=date],input[type=password],input[type=email]:hover{ */
-    /* width: 530px;
-    height: 30px;
-    border-radius: 0px;
-    border: 1px solid #ccc;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    /* border-radius: 10px; */
-    /* padding-left: 10px;
-    padding-right: 10px;
-    font-weight: 500; */ 
-    /* background: #ccc;
-    cursor: pointer;
-} */
+input[type=text],input[type=date],input[type=password],input[type=email]::hover{ 
+   
+ 
+    background: #ccc;
+    /* cursor: pointer; */
+}
 
 textarea{
     width: 540px;
@@ -120,7 +113,7 @@ select{
 #msg{
     width: 530px;
     height: 150px;
-    border-radius: 10px;
+    border-radius: 5px;
     border-color: #24354E;
     position: absolute;
     background: #FFFFFF;
@@ -134,15 +127,18 @@ select{
 
 #btn{
     border-radius: 10px;
-    margin-top: 830px;
-    margin-left: -728px;
+    margin-top: 1020px;
+    margin-left: -1687px;
     height: 46px;
-    width: 1368px;
+    width: 1268px;
     background-color: #24354E;
     color: white;
     border-color: #f9f7ff;
     font-size: larger;
     font-weight: 600;
+}
+#btn:hover{
+    background-color: #294979;
 }
 
 .illness{

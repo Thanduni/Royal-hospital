@@ -23,18 +23,21 @@ if(isset($_SESSION['mailaddress'])){
 </head>
 <body>
     <div class="user">
-        <?php include(BASEURL.'/Components/PatientSidebar.php'); ?>
+        <?php include(BASEURL.'/Components/PatientSidebar.php');
+        $_SESSION['plogout'] = $_SERVER['REQUEST_URI'];
+        ?>
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
         <div class="userContents"  id="center">
             <div class="title">
                 <img src="<?php echo BASEURL.'/images/logo5.png' ?>" alt="logo">
                 Royal Hospital Management System
+                
             </div>
             <ul>
                 <li class="userType"><img src="<?php echo BASEURL.'/images/userInPage.svg' ?>" alt="">
                 Patient
                 </li>
-                <li class="logout"><a href="<?php echo BASEURL.'/Homepage/Logout?url='.$_SERVER['REQUEST_URI'] ?>" alt="">Logout
+                <li class="logout"><a href="<?php echo BASEURL.'/Homepage/patientlogout.php' ?>">Logout
                     <img src="<?php echo BASEURL.'/images/logout.jpg' ?>" alt="logout"></a> 
                 </li>
             </ul>

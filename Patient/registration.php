@@ -33,6 +33,7 @@ if(isset($_POST["nic"])){
     $select = "SELECT * FROM `user` where email='.$email.' and nic='.$nic.' and user_role ='Patient'";
 
     $result = $con->query($select);
+    // echo "$result";
     if (!$result)
         die("Fail");
     $rows = $result->num_rows;
@@ -55,13 +56,14 @@ if(isset($_POST["nic"])){
             ('$nic','$name','$address','$email','$phone','$gender','$hash','Patient','','$dob')";
             
             $query2 = "INSERT INTO `patient`(`patientID`, `nic`, `weight`, `receptionistID`, `patient_type`, `height`, `illness`, `drug_allergies`, `medical_history_comments`, `currently_using_medicine`, `emergency_contact`) VALUES 
-            ('','$nic','---','---','---','---','$ill','$allergies','$hash','---','$dob')";
-        
+            ('','$nic','---','---','---','---','$ill','$allergies','$comments','$cmed','$ecn')";
+           
             $result1 = mysqli_query($con,$query1);
             $result2 = mysqli_query($con,$query2);
             if($query1 & $query2){echo "Query is successful";}
-        
-            header('location:".BASEURL."/Homepage/login.php');
+
+            echo '<script>alert("Registration Successful!")</script>';
+            header("location:".BASEURL."/Homepage/login.php");
         }
     }
 } 
@@ -86,6 +88,7 @@ if(isset($_POST["nic"])){
         <?php include(BASEURL.'/Components/Navbar.php'); ?>
     <div class="heading">
         <h3>Registration</h3>
+        <!-- <?php //echo $error; ?> -->
     </div>
         <form action=" " method="post">
         <div class="content">
