@@ -23,6 +23,8 @@ function displayUserAddForm(e) {
     let userForm = document.getElementById('userForm');
     userForm.classList.add("active");
     form.scrollIntoView();
+    let userForm = document.getElementById('userForm');
+    userForm.classList.add("active");
 
     let close = document.getElementById('cancel');
     close.addEventListener('click', function() {

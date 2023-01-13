@@ -276,3 +276,22 @@ function validateForm() {
     }
 
 }
+    nic = nicDiv.previousSibling.value;
+    name = nameDiv.previousSibling.value;
+    address = addressDiv.previousSibling.value;
+    email = emailDiv.previousSibling.value;
+    contactNum = contactNumDiv.previousSibling.value;
+    password = passwordDiv.previousSibling.value;
+
+    if (regAddress.test(address) &&
+        regPassword.test(password) &&
+        regEmail.test(email) &&
+        regName.test(name) &&
+        regNic.test(nic) &&
+        regContactNum.test(contactNum)) {
+        return true;
+    } else {
+        form.scrollIntoView();
+        return false;
+    }
+}
