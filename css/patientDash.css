@@ -1,0 +1,232 @@
+.cards{
+    margin-top: -300px;
+    margin-left: 70px;
+    width: 80%;
+    padding: 35px 20px ;
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) ;
+    grid-gap: 10px;
+}
+
+.card {
+    padding: 20px;
+    width: 220px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.number{
+    font-size: 35px;
+    font-weight: 500;
+    color: #24354E;
+}
+
+.card-name {
+    color: #24354E;
+    font-weight: 600;
+}
+
+.icon-box i {
+    font-size: 45px;
+    color: black;
+}
+.icon-box img {
+    font-size: 45px;
+    color: black;
+}
+
+.charts {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+    
+}
+.mcontainer .card{
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+}
+
+
+.pay{
+    padding: 10px;
+    width: 150px;
+    height: 40px;
+    margin-left: 1100px;
+    margin-top: -620px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #24354E;
+    border-radius: 20px;
+    color: #fff;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.payment a i{
+    color: white;
+    font-size: 24px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.tcontent{
+    width: 1020px;
+    height: 500px;
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+    display: flex;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+}
+
+.card1{
+    grid-template-columns: repeat(1,0px);
+    margin-left: 1050px;
+    margin-top: 80px;
+    padding: 10px;
+    width: 190px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+.card2{
+    grid-template-columns: repeat(1,0px);
+    margin-left: 1050px;
+    margin-top: 20px;
+    padding: 10px;
+    width: 190px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+.card3{
+    grid-template-columns: repeat(1,0px);
+    margin-left: 1050px;
+    margin-top: 20px;
+    padding: 10px;
+    width: 190px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.payment .mtable{
+    margin-left: -100px;
+    margin-top: 80px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    height: 480px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.card1-content,.card2-content,.card3-content{
+    font-weight: 700;
+}
+/* .mtable{
+    
+    /* width: 80%;
+    left: 240px;
+    top: 200px; */
+.mtable table{
+    margin: 40px;
+    padding: 10px;
+    width: 90%;
+    text-align: center;
+    border-collapse: collapse;
+    background: #F8F9FF;
+    border: 1px solid #fff;  
+    /* vertical-align: ; */
+}
+
+/* table tr:nth-child(even){
+    background-color: #f2f2f2;
+} */
+.mtable table thead{
+    background-color: #EAEAEA;
+    padding: 15px;
+    
+}
+.mtable tbody{
+    padding: 13px;
+}
+.mtable tbody tr:hover{
+    background-color: #ffffff;
+}
+.mtable{
+    transform: translate(-50%, -50%);
+    background-color: #f9f8ff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    /* width: 80%;
+    left: 240px;
+    top: 200px; */
+}
+table,td,th,tr{
+    padding: 15px;
+    border: .25px solid lightgray;
+    border-collapse: collapse;
+    text-align: center;
+
+}
+/* table tr:nth-child(even){
+    background-color: #f2f2f2;
+} */
+
+a button{
+    margin-top: -50px;
+    margin-left: 1050px;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    padding: 5px;
+    font-size: medium;
+}
+a button i{
+    color: #fff;
+}

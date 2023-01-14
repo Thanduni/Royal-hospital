@@ -1,0 +1,172 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
+
+/* @import url(https://kinsta.com/blog/web-safe-fonts/#23-microsoft-sans-serif);
+@import url(https://kinsta.com/blog/web-safe-fonts/#28-segoe-ui); */
+
+* {
+    /* margin: 0;
+    padding: 0; */
+    font-family: 'Montserrat';
+}
+
+html,
+body {
+    background-color: #f8f9ff;
+}
+.heading{
+    background-color: #f8f9ff;
+    width: 100%;
+    height: 50px;
+    margin-left: 60px;
+    /* border: 0.5px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px; */
+    
+}
+
+h3{
+    margin-top: 20px;
+    margin-left: 650px;
+}
+.content{
+    display: flex;
+    /* grid-template-columns: repeat(2,700px); */
+    height: 1100px;
+    width: 1300px;
+    margin-top: 10px;
+    margin-left: 93px;
+    background-color: #fff;
+    grid-gap: 387px;
+    border-radius: 10px;
+    padding-left: 40px;
+    border-color: #24354E;
+    border: 0.025px solid #ccc;
+    box-shadow: 0 7px 25px 0 rgb(0 0 0 / 8%);
+    margin-bottom: 30px;
+}
+.box{
+    padding: 20px;
+    width: 220px;
+    height: 50px;
+    display: block;
+
+}
+.box input[type=checkbox] {
+    /* transition: all 0.3s; */
+    /* box-sizing: border-box; */
+    display:ruby-base;
+}
+label{
+    font-weight: 550;
+    font-size: 15px;
+}
+.ill label{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+
+.content .box input[type=text],input[type=date],input[type=password],input[type=email]{
+    width: 530px;
+    height: 30px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgba(102, 102, 102, 0.25); */
+    /* border-radius: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+    background: #fff;
+}
+input[type=text],input[type=date],input[type=password],input[type=email]::hover{ 
+   
+ 
+    background: #ccc;
+    /* cursor: pointer; */
+}
+
+textarea{
+    width: 540px;
+    height: 80px;
+    /* border-radius: 10px; */
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    /* border-radius: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    font-weight: 500;
+}
+select{
+    width: 553px;
+    height: 33px;
+    /* border-radius: 10px; */
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    /* border-radius: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+}
+
+#msg{
+    width: 530px;
+    height: 150px;
+    border-radius: 5px;
+    border-color: #24354E;
+    position: absolute;
+    background: #FFFFFF;
+    border: 0.5px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* border-radius: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+}
+
+#btn{
+    border-radius: 10px;
+    margin-top: 1020px;
+    margin-left: -1687px;
+    height: 46px;
+    width: 1268px;
+    background-color: #24354E;
+    color: white;
+    border-color: #f9f7ff;
+    font-size: larger;
+    font-weight: 600;
+}
+#btn:hover{
+    background-color: #294979;
+}
+
+.illness{
+    display: grid;
+    grid-template-columns: repeat(2,300px);
+    grid-gap: 20px;
+}
+.ill{
+    width: 50px;
+    height:auto;
+    display: block;
+}
+.illness .ill input[type=checkbox]{
+    display: flex;
+
+}
+.illness .ill a{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.illness .ill label{
+   border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0 0 10px;
+    display: flex;
+    width: 220px;
+}
+.illness .ill label:hover{
+   background: #eee;
+   cursor: pointer;
+}
