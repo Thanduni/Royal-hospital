@@ -1,0 +1,271 @@
+p.royal {
+    font-size: 20px;
+}
+
+p.addUSer {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1229px) {
+    .userContents table {
+        height: 650px;
+    }
+}
+
+#fromDoctorPage {
+    display: none;
+}
+
+.tableCon {
+    display: none;
+}
+
+.userContents td button {
+    height: auto;
+    padding: 1px;
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+input[type='submit'] {
+    width: 159px;
+    height: 40px;
+    background: #24354E;
+    border-style: none;
+    border-radius: 50px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 37px;
+    color: #ADB6CD;
+    margin: 10px;
+}
+
+input[type='submit']:hover {
+    transform: scale(1.125);
+}
+
+input[type='submit']:active {
+    transform: scale(1.025);
+}
+
+
+td:first-child {
+    vertical-align: top;
+}
+
+.hint {
+    color: #24354E;
+    text-align: justify;
+    font-weight: bold;
+}
+
+.hint li {
+    list-style-type: disc;
+    margin-left: 15px;
+}
+
+td div {
+    width: 351px;
+}
+
+table {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+/*Table*/
+
+
+.table {
+    margin: 0 0 40px 0;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    height: 500px;
+    overflow-y: scroll;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    border-style: none;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 1229px) {
+    body {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+.wrapper {
+    margin: 0 auto;
+    /* padding: 40px; */
+    max-width: 1440px;
+}
+
+
+@media screen and (max-width: 1229px) {
+    .table {
+        display: block;
+    }
+}
+
+.row {
+    display: table-row;
+    background: #f6f6f6;
+}
+
+.row:nth-of-type(odd) {
+    background: #e9e9e9;
+}
+
+.row.headerT {
+    font-weight: 900;
+    color: #ffffff;
+    background: #24354E;
+}
+
+@media screen and (max-width: 1229px) {
+
+    .row .cell:before {
+        margin-bottom: 3px;
+        content: attr(data-title);
+        min-width: 98px;
+        font-size: 10px;
+        line-height: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #969696;
+        display: block;
+    }
+
+    .wrapper button {
+        float: none;
+    }
+
+    .wrapper {
+        margin: 0 auto;
+        max-width: 590px;
+        min-width: 500px;
+    }
+
+    .row {
+        padding: 14px 0 7px;
+        display: block;
+    }
+
+    .row.headerT {
+        padding: 0;
+        height: 6px !important;
+    }
+
+    .row.headerT .cell {
+        display: none;
+    }
+
+}
+
+.row .cell {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+
+.profilePic {
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    border-radius: 50%;
+}
+
+.cell {
+    padding: 6px 12px;
+    display: table-cell;
+}
+
+@media screen and (max-width: 1229px) {
+    .cell {
+        padding: 2px 16px;
+        display: block;
+    }
+
+    .userContents table {
+        margin: 20px;
+    }
+
+    .userContents tr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0.5em 0;
+        border-style: none;
+    }
+
+    .userContents td,
+    .userContents th {
+        flex: 1 1 150px;
+        /*border: 1px solid RGB(36, 53, 78, 0.2);*/
+        height: 65px;
+        border-radius: 5px;
+        margin: 0px;
+    }
+}
+
+/*Table*/
+
+.userContents table {
+    display: flex;
+    justify-content: center;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    /* border-style: solid; */
+    background-color: #ADB6CD;
+    /*color: #24354E;*/
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    padding: 20px;
+    margin: 20px;
+    border-spacing: 20px;
+}
+
+.userContents th,
+.userContents td {
+    width: 100px;
+    text-align: left;
+    overflow-wrap: break-word;
+    padding: 0.25em;
+    margin: 10px;
+    vertical-align: top;
+    height: max-content;
+}
+
+.userContents tr {
+    padding: 0.25em;
+    border-style: solid;
+    border-color: #000000;
+}
+
+/*Table */
+
+/*Dropdown */
+
+.filter {
+    display: flex;
+}
+
+#myInputName, #myInputRole {
+    background-image: url('../images/search.png');
+    background-position: 4px 6px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin: 20px;
+    width: 50%;
+    display: inline-block;
+}
+
+
+/*Dropdown */
