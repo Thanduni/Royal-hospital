@@ -6,6 +6,7 @@ function displayUserUpdateForm(nic) {
     form.action = '/royalhospital/Admin/updateUser.php?id=' + nic;
     document.getElementById("nicRow").classList.add("hide");
     document.getElementById("passRow").classList.add("hide");
+    document.getElementById("userRoleRow").classList.add("hide");
 
 
     let tableCon = document.getElementsByClassName(nic + "_tableCon");
@@ -17,10 +18,6 @@ function displayUserUpdateForm(nic) {
     let email = tableCon[2].textContent;
     let contactNum = tableCon[3].textContent;
     let gender = tableCon[4].textContent;
-    let userRole = tableCon[5].textContent;
-
-    // alert(tableCon[0].textContent);
-
 
     let userForm = document.getElementById('userForm');
     userForm.classList.add("active");
@@ -36,22 +33,11 @@ function displayUserUpdateForm(nic) {
     else
         F_gender.setAttribute("checked", "checked");
 
-    let IN_userRole = document.getElementById("IN_userRole");
 
     IN_name.value = name;
     IN_address.value = address;
     IN_email.value = email;
     IN_contnum.value = contactNum;
-    if(userRole === "Patient")
-        IN_userRole.selectedIndex = 0;
-    else if(userRole === "Doctor")
-        IN_userRole.selectedIndex = 1;
-    else if(userRole === "Receptionist")
-        IN_userRole.selectedIndex = 2;
-    else if(userRole === "Storekeeper")
-        IN_userRole.selectedIndex = 3;
-    else if(userRole === "Nurse")
-        IN_userRole.selectedIndex = 4;
     form.scrollIntoView();
 
 
