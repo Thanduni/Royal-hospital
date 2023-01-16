@@ -33,7 +33,7 @@ require_once("../conf/config.php");
                                                                          align="middle">
                 <p>Add Medicine</p>
             </a></li>
-        <li><a href="" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperViewStock.php' ?>" target="_blank"><img class="icons"
                                             src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
                                             align="middle">
                 <p>View Stocks</p>

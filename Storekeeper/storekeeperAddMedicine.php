@@ -48,37 +48,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
         <!-- content start -->
         
-              <table>
-        <tr>
-          <th>medicine ID</th>
-          <th>medicine name</th>
-          <th>badge no.</th>
-          <th>company name</th>
-          <th>suplier name</th>
-          <th>unit type</th>
-          <th>unit cost</th>
-          <th>qantity</th>
-          <th>manufacture date</th>
-          <th>expire date</th>
-          <th>use state</th>
-          
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          
-        </tr>
-       
-      </table>
+              
 
         <!-- content start -->
         <?php include(BASEURL . '/Components/Footer.php'); ?>

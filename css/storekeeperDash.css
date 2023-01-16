@@ -1,9 +1,31 @@
 .pad{
-    hight: 50px;
+    height: 50px;
     width: 100%;
     position: fixed;
 }
 
+.content{
+  height: 100vh;
+  width: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: row;
+  
+}
+.left{
+  height: 90%;
+  width: 50%;
+  background: rgb(175, 84, 84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right{
+  height: 90%;
+  width: 50%;
+  background: rgb(32, 31, 139);
+}
 .cards-list {
     z-index: 0;
     
