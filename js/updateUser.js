@@ -20,6 +20,13 @@ function displayUserUpdateForm(nic) {
 
     // alert(tableCon[0].textContent);
 
+function displayUserUpdateForm() {
+    let name = document.getElementsByClassName("tableCon")[0].textContent;
+    let address = document.getElementsByClassName("tableCon")[1].textContent;
+    let email = document.getElementsByClassName("tableCon")[2].textContent;
+    let contactNum = document.getElementsByClassName("tableCon")[3].textContent;
+    let gender = document.getElementsByClassName("tableCon")[4].textContent;
+    let userRole = document.getElementsByClassName("tableCon")[5].textContent;
 
     let userForm = document.getElementById('userForm');
     userForm.classList.add("active");

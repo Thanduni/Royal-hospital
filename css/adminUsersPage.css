@@ -49,6 +49,10 @@ input[type='submit']:active {
 }
 
 
+.tableCon{
+    display: none;
+}
+
 td:first-child {
     vertical-align: top;
 }
