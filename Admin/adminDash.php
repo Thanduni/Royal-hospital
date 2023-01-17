@@ -64,9 +64,10 @@ if (isset($_SESSION['mailaddress'])) {
                 </a>
             </ul>
         </div>
-        <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
 </div>
+<?php include(BASEURL . '/Components/Footer.php'); ?>
+
 </body>
 </html>
 
