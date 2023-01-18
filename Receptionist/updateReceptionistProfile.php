@@ -138,7 +138,18 @@ if (isset($_SESSION['mailaddress'])) {
                             <?php
                         } ?>
                         <table>
-
+                            <tr>
+                                <td><label for="oldPassword">Old Password: </label></td>
+                                <td colspan="2"><input type="password" name="oldPassword"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="newPassword">New Password: </label></td>
+                                <td colspan="2"><input type="password" name="newPassword"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="confirmPass">Confirm Password: </label></td>
+                                <td colspan="2"><input type="password" name="passAgain"></td>
+                            </tr>
                         </table>
                     </form>
 
