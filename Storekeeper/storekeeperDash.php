@@ -11,7 +11,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperDash.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
@@ -50,46 +50,69 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 
         <div class="content">
-        <div class="left">
-                <div class="cards-list">
+        <div class="card-list">
+        <div class="card">
+            <div class="card-cont">
                 
-                <div class="card 1">
-                
-                <div class="card_title">
-                    <p>Total medicine</p>
-                </div>
+                <div class="card-h">
+                    <p>Total medicines</p>
                 </div>
 
-                <div class="card 2">
+                <div class="card-b">
+                    <p>40</p>
+                </div>
                 
-                <div class="card_title">
+                
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="card-cont">
+                
+                <div class="card-h">
                     <p>Available medicine</p>
                 </div>
-                </div>
 
-                <div class="card 3">
+                <div class="card-b">
+                    <p>40</p>
+                </div>
                 
-                <div class="card_title">
+                
+            </div>
+
+        </div><div class="card">
+            <div class="card-cont">
+                
+                <div class="card-h">
                     <p>Out of stock medicine</p>
                 </div>
-                </div>
 
-                <div class="card 4">
-                
-                <div class="card_title">
-                    <p>expired medicine</p>
+                <div class="card-b">
+                    <p>40</p>
                 </div>
                 
-                </div>
-                </div>
-
-                </div>
-
-
-                <div class="right">
                 
+            </div>
 
+        </div><div class="card">
+            <div class="card-cont">
+                
+                <div class="card-h">
+                    <p>Expired medicine</p>
                 </div>
+
+                <div class="card-b">
+                    <p>40</p>
+                </div>
+                
+                
+            </div>
+
+        </div>
+
+    </div>
+                
                 </div>
         <!-- content start -->
         <?php include(BASEURL . '/Components/Footer.php'); ?>

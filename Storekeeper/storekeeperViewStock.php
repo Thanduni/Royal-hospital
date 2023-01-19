@@ -11,7 +11,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperViewStock.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
@@ -48,38 +48,40 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
         <!-- content start -->
 
+        <div class="table-box">
+                <table>
+                <tr>
+                <th>medicine ID</th>
+                <th>medicine name</th>
+                <th>badge no.</th>
+                <th>company name</th>
+                <th>suplier name</th>
+                <th>unit type</th>
+                <th>unit cost</th>
+                <th>qantity</th>
+                <th>manufacture date</th>
+                <th>expire date</th>
+                <th>use state</th>
+                
+                </tr>
+                <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+                <td>Jill</td>
+                <td>Smith</td>
+                
+                </tr>
+            
+            </table>
+        </div>
         
-        <table class="table_header">
-        <tr>
-          <th>medicine ID</th>
-          <th>medicine name</th>
-          <th>badge no.</th>
-          <th>company name</th>
-          <th>suplier name</th>
-          <th>unit type</th>
-          <th>unit cost</th>
-          <th>qantity</th>
-          <th>manufacture date</th>
-          <th>expire date</th>
-          <th>use state</th>
-          
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          
-        </tr>
-       
-      </table>
 
 
         <!-- content start -->
