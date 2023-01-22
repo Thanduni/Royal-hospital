@@ -2,7 +2,7 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress'])) {
+if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
     ?>
 
     <!DOCTYPE html>
@@ -42,8 +42,8 @@ if (isset($_SESSION['mailaddress'])) {
             </div>
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout <img
-                            src="../images/logout.jpg">
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
+                        <img                         src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">

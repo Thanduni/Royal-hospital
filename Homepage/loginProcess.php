@@ -25,6 +25,8 @@ if (isset($_POST['login'])) {
 
                 $_SESSION['name'] = $name;
                 $_SESSION['profilePic'] = $profilePic;
+                $_SESSION['mailaddress'] = $_POST["email"];
+                $_SESSION['userRole'] = $userRole;
                 if ($userRole == "Admin")
                     header("location: " . BASEURL . "/Admin/adminDash.php");
                 else if ($userRole == "Doctor")
@@ -37,7 +39,6 @@ if (isset($_POST['login'])) {
                     header("location: " . BASEURL . "/patient/patientDash.php");
                 else if ($userRole == "Storekeeper")
                     header("location:storekeeperDash.php");
-                $_SESSION['mailaddress'] = $_POST["email"];
             } else {
                 header("location:" . BASEURL . "/Homepage/login.php?Invalid=Incorrect login credentials i.e. email or password!");
             }

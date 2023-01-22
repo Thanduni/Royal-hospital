@@ -40,6 +40,8 @@ input[type='text']{
     height: 36px;
 }
 
+
+
 tbody{
     width: 100%;
 }
@@ -68,6 +70,7 @@ textarea{
         display: inline;
     }
 }
+
 
 /*Table*/
 

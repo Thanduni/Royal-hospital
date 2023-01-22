@@ -34,9 +34,10 @@ if (isset($_POST['addUser'])) {
     $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $gender = $_POST['gender'];
+    $dob = $_POST['dob'];
     $profile_image = $new_img_name;
 
-    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image' WHERE
+    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image', DOB = '$dob' WHERE
                 nic = '$nic';";
     $result = mysqli_query($con, $query);
 
