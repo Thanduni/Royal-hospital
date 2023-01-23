@@ -52,11 +52,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <div class="editForm">
                     <h2>Edit profile</h2>
                     <?php
-                    if (@$_GET['result'] == true) {
+                    if (@$_GET['wrongResult']) {
+                        ?>
+                        <div class="alert">
+                            <?php
+                            echo $_GET["wrongResult"];
+                            ?>
+                        </div>
+                        <?php
+                    } ?>
+                    <?php
+                    if (@$_GET['correctResult']) {
                         ?>
                         <div class="success">
                             <?php
-                            echo $_GET["result"];
+                            echo $_GET["correctResult"];
                             ?>
                         </div>
                         <?php
@@ -69,24 +79,24 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         <table>
                             <tr>
                                 <td><label for="Name">Name: </label></td>
-                                <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required></td>
+                                <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required></td>
+                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
                                 <td colspan="2"><textarea name="address" cols="30"
-                                                          rows="3" required><?php echo $row['address'] ?></textarea></td>
+                                                          rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="address"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="contactnum">Contact number: </label></td>
-                                <td colspan="2"><input type="text" name="contactNum" value="<?php echo $row['contact_num'] ?>" required></td>
+                                <td colspan="2"><input type="text" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="dob">Date of birth: </label></td>
-                                <td colspan="2"><input type="date" name="dob" required></td>
+                                <td colspan="2"><input type="date" name="dob" max="<?php echo date("Y-m-d") ?>" required></td>
                                 <script>document.getElementsByName('dob')[0].value="<?php echo $row['DOB'] ?>";</script>
                             </tr>
                             <tr>
@@ -99,6 +109,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                     <label for="address">Female:</label>
                                     <input type="radio" id="F_gender" name="gender" value="f" required>
                                 </td>
+                                <script>
+                                    if('<?php echo $row['gender'] ?>' == 'm')
+                                        document.getElementById('M_gender').checked = true;
+                                    else
+                                        document.getElementById('F_gender').checked = true;
+                                </script>
                             </tr>
                             <tr>
                                 <td><label for="profilePic">Profile Image: </label></td>
@@ -114,42 +130,24 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Change password</h2>
-                    <?php
-                    if (@$_GET['result'] == true) {
-                        ?>
-                        <div class="success">
-                            <?php
-                            echo $_GET["result"];
-                            ?>
-                        </div>
-                        <?php
-                    } ?>
-                    <form action="updateHomepage.php" method="post">
-                        <?php
-                        if (@$_GET['Empty'] == true) {
-                            ?>
-                            <div class="alert">
-                                <?php
-                                echo $_GET["Empty"];
-                                ?>
-                            </div>
-                            <?php
-                        } ?>
+
+                    <form action="updateProfile.php" onsubmit="validatePasswordForm()" method="post">
+
                         <table>
                             <tr>
                                 <td><label for="Old password">Old password: </label></td>
-                                <td colspan="2"><input type="text" name="oldPassword" required></td>
+                                <td colspan="2"><input type="password" name="oldPassword" required><div class="alert password"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="New password">New password: </label></td>
-                                <td colspan="2"><input type="text" name="newPassword" required></td>
+                                <td colspan="2"><input type="password" name="newPassword" required><div class="alert password" ></div></td>
                             </tr>
                             <tr>
                                 <td><label for="confirmPassword">Confirm Password: </label></td>
-                                <td colspan="2"><input type="text" name="confirmPassword" required></td>
+                                <td colspan="2"><input type="password" name="confirmPassword" required><div class="alert password"></div></td>
                             </tr>
                         </table>
-                        <button name="updateReceptionist" type="submit">Save changes</button>
+                        <button name="changePassword" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -157,7 +155,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateFormReceptionist.js' ?>></script>
 
 
     </body>

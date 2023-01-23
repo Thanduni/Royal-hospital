@@ -618,6 +618,12 @@ a {
     font-weight: bold;
 }
 
+.hint{
+    color: #24354E;
+    text-align: center;
+    font-weight: bold;
+}
+
 .alreadyLogged {
     height: max-content;
     width: max-content;
