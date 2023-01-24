@@ -19,6 +19,34 @@
     margin: 10px;
     font-weight: 600;
     text-align: center;
+    transition: 0.4s;
+    vertical-align: center;
+    font-size: 30px;
+    line-height: 37px;
+    border-style: none;
+    border-radius: 10px;
+    width: 200px;
+    padding: 35px;
+    color: #24354E;
+}
+
+.actorCards ul li:hover{
+    transform: scale(0.9, 0.9);
+}
+
+.card-set{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+    background-color: #AADDDD;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    margin: 10px;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.4s;
     vertical-align: center;
     font-size: 30px;
     line-height: 37px;

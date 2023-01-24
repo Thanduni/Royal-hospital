@@ -126,7 +126,7 @@ if (!isset($_SESSION['mailaddress'])) {
             </a>
         </button>
         <button>
-            <a href="<?php echo BASEURL . '/Homepage/logout.php?cancel' ?>">
+            <a href="<?php echo BASEURL . '/Homepage/logout.php?cancel'?>">
                 Cancel
             </a>
         </button>

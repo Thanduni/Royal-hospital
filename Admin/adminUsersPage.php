@@ -2,7 +2,7 @@
 session_start();
 
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress'])) {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     ?>
 
     <!DOCTYPE html>
@@ -42,8 +42,8 @@ if (isset($_SESSION['mailaddress'])) {
             </div>
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout <img
-                                src="../images/logout.jpg">
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
+                        <img                          src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">
@@ -78,6 +78,7 @@ if (isset($_SESSION['mailaddress'])) {
                             <div class="cell">Address</div>
                             <div class="cell">Email</div>
                             <div class="cell">Contact number</div>
+                            <div class="cell">Date of Birth</div>
                             <div class="cell">Gender</div>
                             <div class="cell">Password</div>
                         </div>
@@ -93,6 +94,7 @@ if (isset($_SESSION['mailaddress'])) {
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[4] ?></li>
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[5] ?></li>
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[7] ?></li>
+                                <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[9] ?></li>
                             </ul>
                             <!--                        <div id="UDfunc">-->
                             <div class="row">
@@ -129,6 +131,9 @@ if (isset($_SESSION['mailaddress'])) {
                                 </div>
                                 <div class="cell" data-title="Contact number">
                                     <?php echo $row[4]; ?>
+                                </div>
+                                <div class="cell" data-title="Date of Birth">
+                                    <?php echo $row[9]; ?>
                                 </div>
                                 <div class="cell" data-title="Gender">
                                     <?php echo $row[5]; ?>
@@ -195,15 +200,23 @@ if (isset($_SESSION['mailaddress'])) {
                     </tr>
                     <tr>
                         <td>
-                            <label for="address">Gender:</label>
+                            <label for="gender">Gender:</label>
                         </td>
                         <td colspan="1">
-                            <label for="address">Male:</label>
+                            <label for="gender">Male:</label>
                             <input type="radio" id="M_gender" name="gender" value="m" required>
                         </td>
                         <td colspan="1">
-                            <label for="address">Female:</label>
+                            <label for="gender">Female:</label>
                             <input type="radio" id="F_gender" name="gender" value="f" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="dob">Date of Birth:</label>
+                        </td>
+                        <td colspan="2">
+                            <input type="date" name="dob" id="IN_dob" required><div class="alert" id="dob"></div>
                         </td>
                     </tr>
                     <tr id="passRow">

@@ -1,8 +1,8 @@
 <?php
 session_start();
-//die( $_SESSION['profilePic']);
+//die( $_SESSION['mailaddress']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress'])) {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') {
     ?>
 
     <!DOCTYPE html>
@@ -13,8 +13,8 @@ if (isset($_SESSION['mailaddress'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/noticeboardHomepageEdit.css' ?>">
-        <title>Admin dashboard - user</title>
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/updateProfile.css' ?>">
+        <title>Receptionist update profile - Receptionist</title>
         <style>
             p.royal {
                 font-size: 20px;
@@ -41,9 +41,8 @@ if (isset($_SESSION['mailaddress'])) {
                 Royal Hospital Management System
             </div>
             <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout <img
-                                src="../images/logout.jpg">
+                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Receptionist</li>
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img                                src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">
@@ -53,46 +52,52 @@ if (isset($_SESSION['mailaddress'])) {
                 <div class="editForm">
                     <h2>Edit profile</h2>
                     <?php
-                    if (@$_GET['result'] == true) {
+                    if (@$_GET['wrongResult']) {
                         ?>
-                        <div class="success">
+                        <div class="alert">
                             <?php
-                            echo $_GET["result"];
+                            echo $_GET["wrongResult"];
                             ?>
                         </div>
                         <?php
                     } ?>
-                    <form action="updateHomepage.php" method="post">
-                        <?php
-                        if (@$_GET['Empty'] == true) {
-                            ?>
-                            <div class="alert">
-                                <?php
-                                echo $_GET["Empty"];
-                                ?>
-                            </div>
+                    <?php
+                    if (@$_GET['correctResult']) {
+                        ?>
+                        <div class="success">
                             <?php
-                        } ?>
+                            echo $_GET["correctResult"];
+                            ?>
+                        </div>
+                        <?php
+                    } ?>
+                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                        <?php
+                        $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
+                        $row = mysqli_fetch_array($result);
+                        ?>
                         <table>
                             <tr>
                                 <td><label for="Name">Name: </label></td>
-                                <td colspan="2"><input type="text" name="name" ></td>
+                                <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="name" ></td>
+                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
-                                <td  colspan="2"><textarea name="address" cols="30" rows="3"></textarea></td>
+                                <td colspan="2"><textarea name="address" cols="30"
+                                                          rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="address"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="contactnum">Contact number: </label></td>
-                                <td  colspan="2"><input type="text" name="conNum"></td>
+                                <td colspan="2"><input type="text" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
                             </tr>
                             <tr>
-                                <td><label for="contactnum">Contact number: </label></td>
-                                <td colspan="2"><input type="text" name="conNum"></td>
+                                <td><label for="dob">Date of birth: </label></td>
+                                <td colspan="2"><input type="date" name="dob" max="<?php echo date("Y-m-d") ?>" required></td>
+                                <script>document.getElementsByName('dob')[0].value="<?php echo $row['DOB'] ?>";</script>
                             </tr>
                             <tr>
                                 <td><label for="gender">Gender: </label></td>
@@ -104,62 +109,53 @@ if (isset($_SESSION['mailaddress'])) {
                                     <label for="address">Female:</label>
                                     <input type="radio" id="F_gender" name="gender" value="f" required>
                                 </td>
+                                <script>
+                                    if('<?php echo $row['gender'] ?>' == 'm')
+                                        document.getElementById('M_gender').checked = true;
+                                    else
+                                        document.getElementById('F_gender').checked = true;
+                                </script>
                             </tr>
                             <tr>
                                 <td><label for="profilePic">Profile Image: </label></td>
-                                <td colspan="2"><img src="" alt=""></td>
+                                <td colspan="2"><img  src="<?php echo BASEURL . '/uploads/' . $row['profile_image'] ?>" id="profilePic" alt=""><br>
+                                    <input type="file"  name="profile_image" required>
+                                </td>
                             </tr>
                         </table>
+                        <button name="updateReceptionist" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Change password</h2>
-                    <?php
-                    if (@$_GET['result'] == true) {
-                        ?>
-                        <div class="success">
-                            <?php
-                            echo $_GET["result"];
-                            ?>
-                        </div>
-                        <?php
-                    } ?>
-                    <form action="updateHomepage.php" method="post">
-                        <?php
-                        if (@$_GET['Empty'] == true) {
-                            ?>
-                            <div class="alert">
-                                <?php
-                                echo $_GET["Empty"];
-                                ?>
-                            </div>
-                            <?php
-                        } ?>
+
+                    <form action="updateProfile.php" onsubmit="validatePasswordForm()" method="post">
+
                         <table>
                             <tr>
-                                <td><label for="oldPassword">Old Password: </label></td>
-                                <td colspan="2"><input type="password" name="oldPassword"></td>
+                                <td><label for="Old password">Old password: </label></td>
+                                <td colspan="2"><input type="password" name="oldPassword" required><div class="alert password"></div></td>
                             </tr>
                             <tr>
-                                <td><label for="newPassword">New Password: </label></td>
-                                <td colspan="2"><input type="password" name="newPassword"></td>
+                                <td><label for="New password">New password: </label></td>
+                                <td colspan="2"><input type="password" name="newPassword" required><div class="alert password" ></div></td>
                             </tr>
                             <tr>
-                                <td><label for="confirmPass">Confirm Password: </label></td>
-                                <td colspan="2"><input type="password" name="passAgain"></td>
+                                <td><label for="confirmPassword">Confirm Password: </label></td>
+                                <td colspan="2"><input type="password" name="confirmPassword" required><div class="alert password"></div></td>
                             </tr>
                         </table>
+                        <button name="changePassword" type="submit">Save changes</button>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateFormReceptionist.js' ?>></script>
 
 
     </body>

@@ -18,6 +18,7 @@ function displayUserUpdateForm(nic) {
     let email = tableCon[2].textContent;
     let contactNum = tableCon[3].textContent;
     let gender = tableCon[4].textContent;
+    let dob = tableCon[6].textContent;
 
     let userForm = document.getElementById('userForm');
     userForm.classList.add("active");
@@ -32,13 +33,16 @@ function displayUserUpdateForm(nic) {
         M_gender.setAttribute("checked", "checked");
     else
         F_gender.setAttribute("checked", "checked");
+    let IN_dob = document.getElementById("IN_dob");
 
 
     IN_name.value = name;
     IN_address.value = address;
     IN_email.value = email;
     IN_contnum.value = contactNum;
+    IN_dob.value = dob;
     form.scrollIntoView();
+
 
 
     let close = document.getElementById('cancel');

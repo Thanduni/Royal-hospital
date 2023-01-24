@@ -62,7 +62,7 @@ function displayNurseAddForm() {
 
 function displayReceptionistAddForm() {
     let form = document.getElementById("addForm");
-    form.action = '/royalhospital/Admin/addStorekeeper.php';
+    form.action = '/royalhospital/Admin/addReceptionist.php';
     document.getElementById("nicRow").classList.remove("hide");
 
     document.getElementById("titleOperation").innerHTML = "Add Receptionist";
@@ -79,7 +79,7 @@ function displayReceptionistAddForm() {
 
 function displayStorekeeperAddForm() {
     let form = document.getElementById("addForm");
-    form.action = '/royalhospital/Admin/addReceptionist.php';
+    form.action = '/royalhospital/Admin/addStorekeeper.php';
     document.getElementById("nicRow").classList.remove("hide");
 
     document.getElementById("titleOperation").innerHTML = "Add Storekeeper";

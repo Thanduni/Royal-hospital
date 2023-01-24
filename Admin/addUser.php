@@ -36,10 +36,11 @@ if (isset($_POST['addUser'])) {
     $gender = $_POST['gender'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $userRole = $_POST['userRole'];
+    $dob = $_POST['dob'];
     $profile_image = $new_img_name;
 
-    $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image) VALUES
-                            ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image');";
+    $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image, DOB) VALUES
+                            ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob');";
     $result = mysqli_query($con, $query);
 
     if ($userRole == "Nurse"){

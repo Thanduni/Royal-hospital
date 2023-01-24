@@ -618,6 +618,12 @@ a {
     font-weight: bold;
 }
 
+.hint{
+    color: #24354E;
+    text-align: center;
+    font-weight: bold;
+}
+
 .alreadyLogged {
     height: max-content;
     width: max-content;
@@ -688,6 +694,7 @@ td {
 
 #form input[type="text"],
 #form input[type="email"],
+#form input[type="date"],
 #form textarea,
 #form select {
     width: 351px;
