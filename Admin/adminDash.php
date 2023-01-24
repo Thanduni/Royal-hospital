@@ -42,28 +42,51 @@ if (isset($_SESSION['mailaddress'])) {
         <div class="arrow">
             <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
         </div>
-        <div class="actorCards">
-            <ul>
-                <a href="<?php echo BASEURL . '/Admin/adminDash.php' ?>">
-                    <li>Dashboard</li>
-                </a>
-                <a href="<?php echo BASEURL . '/Admin/adminUsersPage.php' ?>">
-                    <li>User</li>
-                </a>
-                <a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>">
-                    <li>Doctor</li>
-                </a>
-                <a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>">
-                    <li>Nurse</li>
-                </a>
-                <a href="">
-                    <li>Receptionist</li>
-                </a>
-                <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>">
-                    <li>Noticeboard</li>
-                </a>
-            </ul>
+        <div class="card-set">
+            <div class="card">
+                Number of appointments
+            </div>
+            <div class="card">
+                Number of total users
+            </div>
+            <div class="card">
+                Number of doctors
+            </div>
+            <div class="card">
+                Number of nurses
+            </div>
+            <div class="card">
+                Number of receptionists
+            </div>
+            <div class="card">
+                Number of storekeepers
+            </div>
         </div>
+        <aside>
+            <div class="actorCards">
+                <ul>
+                    <a href="<?php echo BASEURL . '/Admin/adminDash.php' ?>">
+                        <li>Dashboard</li>
+                    </a>
+                    <a href="<?php echo BASEURL . '/Admin/adminUsersPage.php' ?>">
+                        <li>User</li>
+                    </a>
+                    <a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>">
+                        <li>Doctor</li>
+                    </a>
+                    <a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>">
+                        <li>Nurse</li>
+                    </a>
+                    <a href="">
+                        <li>Receptionist</li>
+                    </a>
+                    <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>">
+                        <li>Noticeboard</li>
+                    </a>
+                </ul>
+            </div>
+        </aside>
+
     </div>
 </div>
 <?php include(BASEURL . '/Components/Footer.php'); ?>
