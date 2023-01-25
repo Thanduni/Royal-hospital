@@ -14,7 +14,6 @@
 }
 
 .actorCards ul li{
-    background-color: #AADDDD;
     box-shadow: 3px 3px 20px 0px #24354E;
     margin: 10px;
     font-weight: 600;
@@ -40,22 +39,74 @@
     justify-content: center;
 }
 
+table th,
+table td{
+    padding: 15px;
+}
+
+.appoitmentNum{
+    min-height: 200px;
+}
+
+.val{
+    font-weight: bold;
+    font-size: 30px;
+}
+
 .card{
-    background-color: #AADDDD;
     box-shadow: 3px 3px 20px 0px #24354E;
     margin: 10px;
-    font-weight: 600;
     text-align: center;
+    font-weight: 300;
     transition: 0.4s;
     vertical-align: center;
-    font-size: 30px;
+    font-size: 15px;
     line-height: 37px;
     border-style: none;
     border-radius: 10px;
-    width: 200px;
+    min-width: 200px;
     padding: 35px;
     color: #24354E;
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
 }
+
+#second-head{
+    margin: 20px;
+    font-size: 25px;
+    color: #24354E;
+}
+
+.tab-cards{
+    background-repeat: no-repeat;
+    background-position: 20px;
+    background-size: contain;
+}
+
+.tab-cards#dashboard{
+    background-image: url("../images/dashboard.svg");
+}
+
+.tab-cards#user{
+    background-image: url("../images/user_in_card.svg");
+}
+
+.tab-cards#doctor{
+    background-image: url("../images/doctor.svg");
+}
+
+.tab-cards#nurse{
+    background-image: url("../images/nurse.svg");
+}
+
+.tab-cards#receptionist{
+    background-image: url("../images/receptionist.svg");
+}
+
+.tab-cards#notice{
+    background-image: url("../images/user_in_card.svg");
+}
+
 
 @media screen and (min-width: 1686.250px) {
     .actorCards ul{
@@ -73,13 +124,3 @@
     }
 }
 
-/*@media screen and (max-width: 1229px) {*/
-/*    .next {*/
-/*        !* position: relative; *!*/
-/*        !*top: 500px;*!*/
-/*        height: auto;*/
-/*    }*/
-/*}*/
-/*.next {*/
-/*    height: auto;*/
-/*}*/

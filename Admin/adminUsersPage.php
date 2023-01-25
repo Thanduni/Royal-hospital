@@ -43,7 +43,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img                          src="../images/logout.jpg">
+                        <img                          src="../images/logout.svg">
                     </a></li>
             </ul>
             <div class="arrow">
@@ -233,7 +233,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                         </td>
                         <td colspan="2">
                             <select name="userRole" id="IN_userRole">
-                                <option value="Patient">Patient</option>
                                 <option value="Doctor">Doctor</option>
                                 <option value="Receptionist">Receptionist</option>
                                 <option value="Storekeeper">Storekeeper</option>

@@ -157,6 +157,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
 
     <script src=<?php echo BASEURL . '/js/validateFormReceptionist.js' ?>></script>
 
+    <div id="counter">0</div>
 
     </body>
 

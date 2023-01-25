@@ -45,7 +45,7 @@ if (isset($_SESSION['mailaddress'])) {
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src="../images/logout.jpg">
+                                src="../images/logout.svg">
                     </a></li>
             </ul>
             <div class="arrow">

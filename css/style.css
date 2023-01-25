@@ -533,7 +533,7 @@ a {
     font-size: 42px;
     line-height: 51px;
     text-align: center;
-    color: #000000;
+    color: #24354E;
 }
 
 .title img {
@@ -541,10 +541,12 @@ a {
     width: 42px;
 }
 
+
 .userContents ul {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
+    color: #24354E;
     line-height: 18px;
 }
 
@@ -555,7 +557,7 @@ a {
 }
 
 .userContents ul .logout a {
-    color: #000000;
+    color: #24354E;
 }
 
 .userContents ul .userType {
@@ -573,6 +575,7 @@ a {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+    color: #24354E;
 }
 
 .userContents button,
