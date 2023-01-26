@@ -33,7 +33,7 @@ require_once("../conf/config.php");
                                            align="middle">
                 <p>Appointments</p>
             </a></li>
-        <li><a href="" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Receptionist/patientPage.php' ?>" target="_self"><img class="icons"
                                            src=<?php echo BASEURL . '/images/patient.svg' ?> alt="Patient"
                                            align="middle">
                 <p>Patient</p>

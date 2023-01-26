@@ -32,13 +32,14 @@ if (isset($_POST['login'])) {
                 else if ($userRole == "Doctor")
                     header("location:doctorDash.php");
                 else if ($userRole == "Nurse")
-                    header("location:nurseDash.php");
+                    header("location: " . BASEURL . "/Nurse/nursedashboard.php");
                 else if ($userRole == "Receptionist")
                     header("location: " . BASEURL . "/Receptionist/receptionistDash.php");
                 else if ($userRole == "Patient")
-                    header("location: " . BASEURL . "/patient/patientDash.php");
+                    header("location: " . BASEURL . "/Patient/patientDash.php");
                 else if ($userRole == "Storekeeper")
-                    header("location:storekeeperDash.php");
+                    header("location: " . BASEURL . "/Storekeeper/storekeeperDash.php");
+
             } else {
                 header("location:" . BASEURL . "/Homepage/login.php?Invalid=Incorrect login credentials i.e. email or password!");
             }
