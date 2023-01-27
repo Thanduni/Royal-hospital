@@ -96,7 +96,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             </tr>
                             <tr>
                                 <td><label for="dob">Date of birth: </label></td>
-                                <td colspan="2"><input type="date" name="dob" max="<?php echo date("Y-m-d") ?>" required></td>
+                                <td colspan="2"><input type="date" name="dob" max="<?php echo date("2005-m-d")?>" required></td>
                                 <script>document.getElementsByName('dob')[0].value="<?php echo $row['DOB'] ?>";</script>
                             </tr>
                             <tr>

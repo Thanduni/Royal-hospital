@@ -80,7 +80,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <div class="cell">Contact number</div>
                             <div class="cell">Date of Birth</div>
                             <div class="cell">Gender</div>
-                            <div class="cell">Password</div>
                         </div>
                         <?php
                         for ($j = 0; $j < $rows; ++$j) {
@@ -137,9 +136,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 </div>
                                 <div class="cell" data-title="Gender">
                                     <?php echo $row[5]; ?>
-                                </div>
-                                <div class="cell" data-title="Password">
-                                    <?php echo $row[6]; ?>
                                 </div>
                             </div>
 
@@ -216,7 +212,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <label for="dob">Date of Birth:</label>
                         </td>
                         <td colspan="2">
-                            <input type="date" name="dob" id="IN_dob" required><div class="alert" id="dob"></div>
+                            <input type="date" name="dob" id="IN_dob" max="<?php echo date("2005-m-d") ?>" required><div class="alert" id="dob"></div>
                         </td>
                     </tr>
                     <tr id="passRow">

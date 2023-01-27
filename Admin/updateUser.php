@@ -1,5 +1,6 @@
 <?php
 require_once("../conf/config.php");
+session_start();
 
 if (isset($_POST['addUser'])) {
 
@@ -40,6 +41,12 @@ if (isset($_POST['addUser'])) {
     $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image', DOB = '$dob' WHERE
                 nic = '$nic';";
     $result = mysqli_query($con, $query);
+
+    if($nic == $_SESSION['nic']){
+        $_SESSION['name'] = $name;
+        $_SESSION['profilePic'] = $profile_image;
+        $_SESSION['mailaddress'] = $email;
+    }
 
     header("location:". BASEURL . "/Admin/adminUsersPage.php");
 } else if (isset($_POST['cancel'])) {

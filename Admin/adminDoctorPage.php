@@ -2,7 +2,7 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress'])) {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     ?>
 
     <!DOCTYPE html>
