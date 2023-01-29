@@ -5,6 +5,30 @@ require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
 ?> 
 
+<?php
+
+if(isset($_POST['submit'])){
+
+    $itemId = $_POST['itemID'];
+    $badgeNo = $_POST['badgeNo'];
+    $medicineName = $_POST['medicineName'];
+    $companyName = $_POST['companyName'];
+    $supplierName = $_POST['supplierName'];
+    $unitType = $_POST['unitType'];
+    $unitCost = $_POST['unitCost'];
+    $qantity = $_POST['quantity'];
+    $manufacturedDate = $_POST['manufactureDate'];
+    $expiredDate = $_POST['expireDate'];
+    $useState = $_POST['useState'];
+
+    $sql="insert into `inventory` (itemID,medicineName,badgeNo,companyName,supplierName,unitType,unitCost,quantity,manufactureDate,expireDate,useState) values('$itemId','$badgeNo','$medicineName','$companyName','$supplierName','$unitType','$unitCost','$qantity','$manufacturedDate','$expiredDate','$useState')";
+
+    $result=mysqli_query($con,$sql);
+
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -57,19 +81,19 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         <div class="form-box">
         <h1>ADD MEDICINE</h1>
         
-        <form>
+        <form method="post">
             <div class="row">
                 <div class="column">
                     <label for="name">Item ID</label>
-                    <input type="text" id="name" placeholder="Enter Item ID here">
+                    <input name="itemId" type="text" id="name" placeholder="Enter Item ID here">
                 </div>
                 <div class="column">
                     <label for="email">Badge no.</label>
-                    <input type="email" id="email" placeholder="Enter Badge no. here">
+                    <input name="badgeNo" type="text" id="email" placeholder="Enter Badge no. here">
                 </div>
                 <div class="column">
                     <label for="email">Medicine name</label>
-                    <input type="email" id="email" placeholder="Enter Medicine name here">
+                    <input name="medicineName" type="text" id="email" placeholder="Enter Medicine name here">
                 </div>
                 
                 
@@ -77,41 +101,41 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             <div class="row">
                 <div class="column">
                     <label for="name">Company Name</label>
-                    <input type="text" id="name" placeholder="Enter Company Name here">
+                    <input name="companyName" type="text" id="name" placeholder="Enter Company Name here">
                 </div>
                 <div class="column">
                     <label for="email">Supplier Name</label>
-                    <input type="email" id="email" placeholder="Enter Supplier Name here">
+                    <input name="supplierName" type="text" id="email" placeholder="Enter Supplier Name here">
                 </div>
                 
             </div>
             <div class="row">
                 <div class="column">
                     <label for="subject">Unit Type</label>
-                    <input type="text" id="subject" placeholder="Enter Unit Type here">
+                    <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here">
                 </div>
                 <div class="column">
                     <label for="contact">Unit Cost</label>
-                    <input type="tel" id="contact" placeholder="Enter Unit Cos here">
+                    <input name="unitCost" type="text" id="contact" placeholder="Enter Unit Cos here">
                 </div>
                 <div class="column">
                     <label for="contact">Qantity</label>
-                    <input type="tel" id="contact" placeholder="Enter Qantity here">
+                    <input name="qantity" type="text" id="contact" placeholder="Enter Qantity here">
                 </div>
                 
             </div>
             <div class="row">
                 <div class="column">
                     <label for="name">Manufactured date</label>
-                    <input type="text" id="name" placeholder="Enter Manufactured date here">
+                    <input name="manufacturedDate" type="text" id="name" placeholder="Enter Manufactured date here">
                 </div>
                 <div class="column">
                     <label for="name">Expired date</label>
-                    <input type="text" id="name" placeholder="Enter Expired date here">
+                    <input name="expiredDate" type="text" id="name" placeholder="Enter Expired date here">
                 </div>
                 <div class="column">
                     <label for="email">Use state</label>
-                    <input type="email" id="email" placeholder="Enter Use state here">
+                    <input name="useState" type="text" id="email" placeholder="Enter Use state here">
                 </div>
                 
             </div>
@@ -122,7 +146,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                     <textarea id="issue" placeholder="Describe your issue in detail here" rows="3"></textarea>
                 </div>
             </div> -->
-            <button>Submit</button>
+            <button name="submit">Submit</button>
         </form>
     </div>
             

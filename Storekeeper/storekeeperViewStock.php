@@ -64,7 +64,64 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 <th>use state</th>
                 
                 </tr>
-                <tr>
+
+
+                <?php
+                    $sql="Select *from `inventory`";
+                    $allResult=mysqli_query($con,$sql);
+                    $num=mysqli_num_rows($allResult);
+                    
+                    $numberPages=2;
+                    $totalPages=ceil($num/$numberPages);
+                    
+
+                    
+            if(isset($_GET['page'])){
+                $page=$_GET['page'];
+            }
+            else{
+                $page=1;
+            }
+
+            $startinglimit=($page-1)*$numberPages;
+            $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
+            $result=mysqli_query($con,$sql);
+
+
+                    if($result){
+                        while($row=mysqli_fetch_assoc($result)){
+                            $itemId = $row['itemID'];
+                            $badgeNo = $row['badgeNo'];
+                            $medicineName = $row['medicineName'];
+                            $companyName = $row['companyName'];
+                            $supplierName = $row['supplierName'];
+                            $unitType = $row['unitType'];
+                            $unitCost = $row['unitCost'];
+                            $qantity = $row['quantity'];
+                            $manufacturedDate = $row['manufactureDate'];
+                            $expiredDate = $row['expireDate'];
+                            $useState = $row['useState'];
+
+                            echo '<tr>
+                            <td>'.$itemId.'</td>
+                            <td>'.$badgeNo.'</td>
+                            <td>'.$medicineName.'</td>
+                            <td>'.$companyName.'</td>
+                            <td>'.$supplierName.'</td>
+                            <td>'.$unitType.'</td>
+                            <td>'.$unitCost.'</td>
+                            <td>'.$qantity.'</td>
+                            <td>'.$manufacturedDate.'</td>
+                            <td>'.$expiredDate.'</td>
+                            <td>'.$useState.'</td>
+                            
+                            </tr>';
+                        }
+                    }
+                ?>
+
+
+                <!-- <tr>
                 <td>Jill</td>
                 <td>Smith</td>
                 <td>50</td>
@@ -77,11 +134,41 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 <td>Jill</td>
                 <td>Smith</td>
                 
-                </tr>
+                </tr> -->
             
             </table>
         </div>
+
+        <!-- pagination buttons -->
         
+
+        <div class="pagination-container">
+        <div class="pagination">
+          <ul class="pagination-2">
+
+          <?php
+            for($btn=1;$btn<=$totalPages;$btn++){
+                echo '<li class="page-number active"><a href="storekeeperViewStock.php?page='.$btn.'">'.$btn.'</a></li>';
+            }
+
+            // if(isset($_GET['page'])){
+            //     $page=$_GET['page'];
+            // }
+            // else{
+            //     $page=1;
+            // }
+
+            // $startinglimit=($page-1)*$numberPages;
+            // $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
+            // $result=mysqli_query($con,$sql);
+          ?>
+            <!-- <li class="page-number prev"><a href="#">&laquo;</a></li>
+            <li class="page-number"><a href="#">1</a></li>
+            <li class="page-number active"><a href="#">2</a></li>
+            <li class="page-number prev"><a href="#">&raquo;</a></li> -->
+          </ul>
+        </div>
+        </div>
 
 
         <!-- content start -->
