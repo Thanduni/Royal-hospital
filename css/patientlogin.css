@@ -1,0 +1,37 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+
+}
+
+html,
+body {
+    height: 100%;
+}
+.alreadyLogged button {
+    width: max-content;
+    height: max-content;
+    color: #24354E;
+    background: #AADDDD;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 39px;
+    padding: 10px;
+    border-style: none;
+    border-radius: 50px;
+    align-content: center;
+}
+.alreadyLogged {
+    text-align: center;
+    height: max-content;
+    width: max-content;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 220px auto;
+    border-color: #24354E;
+}

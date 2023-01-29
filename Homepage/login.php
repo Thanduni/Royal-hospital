@@ -12,6 +12,7 @@ if (!isset($_SESSION['mailaddress'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/login.css' ?>">
         <title>Login</title>
     </head>
 
@@ -44,8 +45,18 @@ if (!isset($_SESSION['mailaddress'])) {
                     }
                     ?>
                     <form action="<?php echo BASEURL . '/Homepage/loginProcess.php' ?>" method="post">
-                        <input type="email" name="email" placeholder="Email"><br>
-                        <input type="password" name="password" placeholder="Password"><br>
+                        <div class="group">
+                            <input type="email" name="email">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Email</label>
+                        </div>
+                        <div class="group">
+                            <input type="password" name="password">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Password</label>
+                        </div>
                         <button name="login">Login</button>
                     </form>
                 </div>
@@ -115,7 +126,7 @@ if (!isset($_SESSION['mailaddress'])) {
             </a>
         </button>
         <button>
-            <a href="<?php echo BASEURL . '/Homepage/logout.php?cancel' ?>">
+            <a href="<?php echo BASEURL . '/Homepage/logout.php?cancel'?>">
                 Cancel
             </a>
         </button>

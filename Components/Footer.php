@@ -5,7 +5,7 @@ require_once("../conf/config.php");
 <div class="next">
     <footer class="footer">
         <div class="container">
-            <div class="row">
+            <div class="row-footer">
                 <div class="footer-col" id="one">
                     <img src=<?php echo BASEURL.'/images/logo5.png' ?> alt="">
                     <p class="slogen">Modern medicine is a negation of health. It isn’t organised to serve human

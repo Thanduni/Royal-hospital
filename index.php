@@ -10,24 +10,23 @@ require_once("conf/config.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/index.css' ?>">
     <!--    <link rel="stylesheet" href="css/navandfooter.css">-->
     <title>Home</title>
     <style>
-        b{
+        b {
             text-align: center;
             display: block;
         }
 
         .next {
             position: relative;
-            top: 330px;
             height: auto;
         }
 
         @media screen and (max-width: 1229px) {
             .next {
                 position: relative;
-                top: 500px;
                 height: auto;
             }
         }
@@ -37,32 +36,29 @@ require_once("conf/config.php");
 <body>
 <section class="header">
     <?php include(BASEURL . '/Components/Navbar.php'); ?>
-    <div class="advertise">
-        <div class="centered-element">
-            <p style="color: white" class="slider-title">The skill to heal, the spirit to care</p>
-            <p style="color: white" class="slider-description">Dedicated to providing multidisciplinary
-                medical care and backed by state-of-the-art facilities.</p>
-        </div>
-    </div>
-    <div class="options">
-        <div class="optionA">
-            <p>
-                <img src="<?php echo BASEURL . '/images/Vector.svg' ?>" alt="Phone"><br>
-                Emergency contact <br><br>
-                123-456-789
-            </p>
-        </div>
-        <div class="optionB">
-            <p>
-                <img src="<?php echo BASEURL . '/images/calendar.svg' ?>" alt="calender"><br>
-                Doctor appointment <br><br>
-                <a href="">
-                    <button type="button">Book an appointment</button>
-                </a>
-            </p>
-        </div>
-        <br>
+    <div class="slider">
+        <input type="radio" name="slider" title="slide1" checked="checked" class="slider__nav"/>
+        <input type="radio" name="slider" title="slide2" class="slider__nav"/>
+        <input type="radio" name="slider" title="slide3" class="slider__nav"/>
+        <div class="slider__inner">
+            <?php
+            $query = "SELECT * FROM homepagecontent";
+            $result = $con->query($query);
+            if (!$result) die("Database access failed: " . $con->error);
+            $rows = $result->num_rows;
 
+            for ($j = 0; $j < $rows; $j++) {
+                $result->data_seek($j);
+                $row = $result->fetch_array(MYSQLI_NUM);
+                ?>
+                <div class="slider__contents animate-left"
+                     style="background: center / cover no-repeat url('<?php echo BASEURL . '/uploads/' . $row[3] ?>'), 0 #616161;"
+                     class="slider-title">
+                    <p style="color: white" class="slider-title"><?php echo $row[1] ?></p>
+                    <p style="color: white" class="slider-description"><?php echo $row[2] ?></p>
+                </div>
+            <?php } ?>
+        </div>
     </div>
     <div class="articleHome">
         <div class="doctorImage">
@@ -94,7 +90,7 @@ require_once("conf/config.php");
             Ut enim ad minim veniam.</p>
     </div>
     <div class="cards">
-        <ul >
+        <ul>
             <li><b>Careers With Us</b>
                 We’re proud to belong to a pioneer in healthcare that
                 continuously innovates. We welcome passionate individuals
@@ -119,6 +115,16 @@ require_once("conf/config.php");
 
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
+    <script>
+        var slides = document.getElementsByName('slider');
+        var  i = 0;
+
+        setInterval(function () {
+            slides[i % 3].click();
+            i++;
+        }, 4000);
+
+    </script>
 
 </section>
 
