@@ -20,7 +20,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             height: auto;
         }
     </style>
-    <title>Storekeeper View Stock</title>
+    <title>Storekeeper Expired Stocks</title>
 </head>
 <body>
 <div class="user">
@@ -40,7 +40,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             </li>
         </ul>
         <div class="arrow">
-            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">View Stock
+            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Expired Stocks
         </div>
 
         <div class="pad">
@@ -51,17 +51,17 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         <div class="table-box">
                 <table>
                 <tr>
-                <th>medicine ID</th>
+                <!-- <th>medicine ID</th> -->
                 <th>medicine name</th>
                 <th>badge no.</th>
-                <th>company name</th>
-                <th>suplier name</th>
-                <th>unit type</th>
-                <th>unit cost</th>
+                <!-- <th>company name</th> -->
+                <!-- <th>suplier name</th> -->
+                <!-- <th>unit type</th> -->
+                <!-- <th>unit cost</th> -->
                 <th>qantity</th>
-                <th>manufacture date</th>
+                <!-- <th>manufacture date</th> -->
                 <th>expire date</th>
-                <th>use state</th>
+                <!-- <th>use state</th> -->
                 
                 </tr>
 
@@ -71,7 +71,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                     $allResult=mysqli_query($con,$sql);
                     $num=mysqli_num_rows($allResult);
                     
-                    $numberPages=2;
+                    $numberPages=8;
                     $totalPages=ceil($num/$numberPages);
                     
 
@@ -90,30 +90,27 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                     if($result){
                         while($row=mysqli_fetch_assoc($result)){
-                            $itemId = $row['itemID'];
+                            // $itemId = $row['itemID'];
                             $badgeNo = $row['badgeNo'];
                             $medicineName = $row['medicineName'];
-                            $companyName = $row['companyName'];
-                            $supplierName = $row['supplierName'];
-                            $unitType = $row['unitType'];
-                            $unitCost = $row['unitCost'];
+                            // $companyName = $row['companyName'];
+                            // $supplierName = $row['supplierName'];
+                            // $unitType = $row['unitType'];
+                            // $unitCost = $row['unitCost'];
                             $qantity = $row['quantity'];
-                            $manufacturedDate = $row['manufactureDate'];
+                            // $manufacturedDate = $row['manufactureDate'];
                             $expiredDate = $row['expireDate'];
-                            $useState = $row['useState'];
+                            // $useState = $row['useState'];
 
                             echo '<tr>
-                            <td>'.$itemId.'</td>
+                            
                             <td>'.$badgeNo.'</td>
                             <td>'.$medicineName.'</td>
-                            <td>'.$companyName.'</td>
-                            <td>'.$supplierName.'</td>
-                            <td>'.$unitType.'</td>
-                            <td>'.$unitCost.'</td>
+                            
                             <td>'.$qantity.'</td>
-                            <td>'.$manufacturedDate.'</td>
+                            
                             <td>'.$expiredDate.'</td>
-                            <td>'.$useState.'</td>
+                            
                             
                             </tr>';
                         }
@@ -148,7 +145,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
           <?php
             for($btn=1;$btn<=$totalPages;$btn++){
-                echo '<li class="page-number active"><a href="storekeeperViewStock.php?page='.$btn.'">'.$btn.'</a></li>';
+                echo '<li class="page-number active"><a href="storekeeperExpire.php?page='.$btn.'">'.$btn.'</a></li>';
             }
 
             // if(isset($_GET['page'])){
