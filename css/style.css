@@ -82,45 +82,16 @@ nav a {
     width: 100%;
 }
 
-.advertise {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url("../images/AD1.jpg") no-repeat 0, 0 #616161;
-    /* filter: brightness(50%); */
-    background-blend-mode: multiply;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    align-items: center;
-    height: 800px;
-}
-
-
-/* .advertise:after {
-    position: absolute;
-    content: " ";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: block;
-} */
-
 p.slider-title {
     font-style: normal;
     font-weight: 700;
     font-size: 60px;
-    top: 50%;
     line-height: 73px;
 }
 
 p.slider-description {
     font-style: normal;
     font-weight: 400;
-    top: 50%;
     font-size: 40px;
     line-height: 49px;
 }
@@ -168,7 +139,6 @@ p.slider-description {
     display: flex;
     width: 100%;
     text-align: left;
-    top: 300px
 }
 
 .articleHome img {
@@ -208,7 +178,6 @@ p.slider-description {
         width: 100%;
         text-align: center;
         justify-content: center;
-        top: 500px
     }
 
     .articleHome img {
@@ -243,7 +212,7 @@ p.slider-description {
     width: max-content;
     height: max-content;
     color: #24354E;
-    background: #AADDDD;
+    background: #ADB6CD;
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -255,20 +224,20 @@ p.slider-description {
 
 .optionB button:hover {
     transform: scale(1.040);
-    /* color: #AADDDD;
+    /* color: #ADB6CD;
     background: #24354E;
     border-style: solid;
     border-width: 4px;
-    border-color: #AADDDD; */
+    border-color: #ADB6CD; */
 }
 
 .optionB button:active {
     transform: scale(1.025);
-    /* color: #AADDDD;
+    /* color: #ADB6CD;
     background: #24354E;
     border-style: solid;
     border-width: 4px;
-    border-color: #AADDDD; */
+    border-color: #ADB6CD; */
 }
 
 .page {
@@ -314,37 +283,6 @@ p.slider-description {
     transform: translate(-50%);
     width: 351px;
     margin: 0px 0px 20px 0px;
-}
-
-.p1 input {
-    box-sizing: border-box;
-    width: 351px;
-    height: 55px;
-    background: #AADDDD;
-    border: 1px solid rgba(36, 53, 78, 0.5);
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    font-style: normal;
-    color: #24354E;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 37px;
-}
-
-.p1 input:focus {
-    box-sizing: border-box;
-    width: 351px;
-    height: 55px;
-    background: #BDC8E6;
-    border: 1px solid rgba(36, 53, 78, 0.5);
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 37px;
 }
 
 form {
@@ -403,7 +341,6 @@ button:active {
     list-style: none;
     height: 30px;
     color: #fff;
-    text-transform: lowercase;
     padding: 2.5px;
     cursor: pointer;
     text-align: left;
@@ -438,7 +375,6 @@ button:active {
         list-style: none;
         height: 30px;
         color: #fff;
-        text-transform: lowercase;
         padding: 2.5px;
         cursor: pointer;
         text-align: left;
@@ -558,19 +494,19 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     line-height: 18px;
 }
 
-.sidebarMenuInner p::after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #ADB6CD;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-}
+/*.sidebarMenuInner p::after {*/
+/*    content: '';*/
+/*    width: 0%;*/
+/*    height: 2px;*/
+/*    background: #ADB6CD;*/
+/*    display: block;*/
+/*    margin: auto;*/
+/*    transition: 0.5s;*/
+/*}*/
 
-.sidebarMenuInner p:hover::after {
-    width: 100%;
-}
+/*.sidebarMenuInner p:hover::after {*/
+/*    width: 100%;*/
+/*}*/
 
 a {
     text-decoration: none;
@@ -597,7 +533,7 @@ a {
     font-size: 42px;
     line-height: 51px;
     text-align: center;
-    color: #000000;
+    color: #24354E;
 }
 
 .title img {
@@ -605,10 +541,12 @@ a {
     width: 42px;
 }
 
+
 .userContents ul {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
+    color: #24354E;
     line-height: 18px;
 }
 
@@ -619,7 +557,7 @@ a {
 }
 
 .userContents ul .logout a {
-    color: #000000;
+    color: #24354E;
 }
 
 .userContents ul .userType {
@@ -637,6 +575,7 @@ a {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+    color: #24354E;
 }
 
 .userContents button,
@@ -663,7 +602,6 @@ a {
     justify-content: center;
     align-items: center;
     text-align: center;
-    top: 280px;
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
@@ -683,6 +621,12 @@ a {
     font-weight: bold;
 }
 
+.hint{
+    color: #24354E;
+    text-align: center;
+    font-weight: bold;
+}
+
 .alreadyLogged {
     height: max-content;
     width: max-content;
@@ -691,41 +635,6 @@ a {
     padding: 20px;
     margin: 20px;
     border-color: #24354E;
-}
-
-.userContents table {
-    display: flex;
-    justify-content: center;
-    box-shadow: 3px 3px 20px 0px #24354E;
-    /* border-style: solid; */
-    background-color: #AADDDD;
-    /*color: #24354E;*/
-    border-radius: 10px;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    padding: 20px;
-    margin: 20px;
-    border-spacing: 20px;
-}
-
-.userContents th,
-.userContents td {
-    display: flex;
-    width: 100px;
-    text-align: left;
-    overflow-wrap: break-word;
-    padding: 0.25em;
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top;
-    height: max-content;
-}
-
-.userContents tr {
-    padding: 0.25em;
-    border-style: solid;
-    border-color: #000000;
 }
 
 #userForm {
@@ -774,7 +683,7 @@ td {
     background-color: white;
     display: flex;
     position: fixed;
-    height: 500px;
+    max-height: 500px;
     overflow: auto;
     font-style: normal;
     margin: 50px;
@@ -788,6 +697,8 @@ td {
 
 #form input[type="text"],
 #form input[type="email"],
+#form input[type="date"],
+#form input[type="number"],
 #form textarea,
 #form select {
     width: 351px;
@@ -839,7 +750,7 @@ td > img {
     margin: auto;
 }
 
-.row {
+.row-footer {
     display: flex;
     flex-wrap: wrap;
 }
@@ -971,7 +882,6 @@ ul {
 .cards {
     position: relative;
     width: 100%;
-    top: 300px;
 }
 
 .cards ul {
@@ -1034,31 +944,12 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
 
 
 @media screen and (max-width: 1229px) {
-    .userContents table {
-        margin: 20px;
-    }
 
-    .userContents tr {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0.5em 0;
-        border-style: none;
-    }
-
-    .userContents td,
-    .userContents th {
-        flex: 1 1 150px;
-        border: 0.25px solid #24354E;
-        height: 65px;
-        margin: 0px;
-    }
 
     .midPortion {
         position: relative;
         background-size: 100%;
         height: 300px;
-        top: 500px;
     }
 
     .cards ul {
@@ -1076,13 +967,39 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     .cards {
         position: relative;
         width: 100%;
-        top: 500px;
     }
 
     .next {
         position: relative;
-        /*top: 500px;*/
         height: auto;
     }
 }
 
+.aboutUs{
+    height: auto;
+    margin: 20px;
+    padding: 10px;
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    color: #24354E;
+}
+
+/**/
+
+.success {
+    color: green;
+    text-align: justify;
+    font-weight: bold;
+}
+
+#myInputName, #myInputRole {
+    background-image: url('../images/search.png');
+    background-position: 4px 6px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin: 20px;
+    display: inline-block;
+}
