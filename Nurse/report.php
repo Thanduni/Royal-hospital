@@ -1,15 +1,8 @@
-
 <?php
-$page = 'report';
-include '../Components/nurseSidebar.php';
-include '../Components/nursetopbar.php';
-require_once("../conf/config.php")
-// include 'connect.php';
-?>
-<style>
-    <?php include '../css/nurseStyle.css';
+session_start();
+require_once("../conf/config.php");
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
-</style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,94 +10,82 @@ require_once("../conf/config.php")
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Report</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
+    <style>
+        .next {
+            position: initial;
+            height: auto;
+        }
+    </style> 
+    <title>Reports</title>
 </head>
+
 <body>
-    <div class="main-container">
-    
-        <!-- <button ><a href="reportForm.php">
-            Add report</a>
-        </button> -->
-        <!-- <a href="#" class="button" id="button">Add Report</a> -->
+<div class="user">
+        <?php include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <div class="userContents" id="center">
+            <div class="title">
+                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
+                Royal Hospital Management System
+            </div>
+            <ul>
+                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">
+                    Nurse
+                </li>
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
+                        <img
+                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                </li>
+            </ul>
+            <div class="arrow">
+                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
+            </div>
 
 
-        <!-- <button class="button" id="button">Add Report</button>
-        <script>
-            document.getElementById("button").addEventListener("click", function(){
-            document.querySelector(".popup").style.display = "flex";
-        })
-        </script> -->
-
-        <div class="table-container">
-            <table class="table">
-                <thead>    
+            <div class="main-container">
+                <div class="table-container" id="reportContainer">
+                    <table class="table">
+                        <thead>    
                     
-                    <th>patient ID</th>
-                    <th>Name</th>
-                    <th>room No</th>
-                </thead>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Room No</th>
+                            <th>Option</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $sql="select patient.patientID,user.name,inpatient.roomNo from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                                $result=mysqli_query($con,$sql);
 
-                <tbody>
+                                if($result){
+                                    while($row=mysqli_fetch_assoc($result)){
+                                     $patientID = $row['patientID'];
+                                        $name =  $row['name'];
+                                        $RoomNo = $row['roomNo'];
+                                        echo '<tr>
+                                        <td>'.$patientID.'</td>
+                                        <td>'.$name.'</td>
+                                        <td>'.$RoomNo.'</td>
+                                        <td> <button class="button" id="report-button"><a href="dailyReport.php?reportid='.$patientID.' &name='.$name.'">
+                                        View </a>
+                                    </button></td>
 
-            <?php
-$sql="select patientID,roomNo from `admission`";
-$result=mysqli_query($con,$sql);
-
-if($result){
-    while($row=mysqli_fetch_assoc($result)){
-        $patientID = $row['patientID'];
-        $name =  $row['name'];
-        $RoomNo = $row['roomNo'];
-        echo '<tr>
-        <th scope="row">'.$patientID.'</th>
-        <td>'.$name.'</td>
-        <td>'.$RoomNo.'</td>
-        <td> <button class="button" id="report-button"><a href="dailyReport.php?reportid='.$patientID.' &name='.$name.'">
-        View
-    </button></td>
-
-    </tr>';
-    }
-}
-    ?>    
-               </tbody>
-            
-            </table>
+                                    </tr>';
+                                    }
+                                }
+                            ?>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <!-- <div class="form-container"> -->
-        
-    <!-- <div class="popup">
-        <div class="popup-content">
-            <h1>Daily Report</h1>
-            <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" class="form-control" placeholder="" name="date" required>
-            </div>
-            <div class="form-group">
-                    <label>Time</label>
-                    <input type="time" class="form-control" placeholder="" name="time" required>
-            </div>
-            <div class="form-group">
-                    <label>Temperature</label>
-                    <input type="number" class="form-control" placeholder="" name="temperature">
-            </div>
-            <div class="form-group">
-                    <label>Blood Preasure</label>
-                    <input type="number" class="form-control" placeholder="" name="temperature">
-            </div>
-            <div class="form-group">
-                    <label>O2 Saturation</label>
-                    <input type="number" class="form-control" placeholder="" name="temperature">
-            </div>
-                
-            
-            <button type="submit" name ="submit">Submit</button>
-        </div>
-    </div> -->
-    <!-- </div> -->
+</div>
 
 </body>
 </html>
+<?php
+} else {
+    header("location: " . BASEURL . "/Homepage/login.php");
+}
+?>

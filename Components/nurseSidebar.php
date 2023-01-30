@@ -1,57 +1,51 @@
-<style>
-    <?php include '../../css/style.css';
-    ?>
-</style>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-<div class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <img src="./images/hospital-logo.PNG" alt="">
-            </div>
-            <div class="sidebar-name">
-                Royal Hospital
-                <!-- <h1><span class="lab la-accosoft"></span>Royal Hospital</h1> -->
-            </div>
-        </div>
-        <!-- <div class="logo">
-            <img src="./images/hospital-logo.PNG" alt="">
-        </div>
-        <div class="sidebar-name">
-            <h1><span class="lab la-accosoft"></span>System</h1>
-        </div> -->
-        <div class="sidebar-menu">
-            <ul>
-            <li class="<?php if($page=='nurseDashboard'){echo 'active';}?>">
-                    <a href="nursedashboard.php">
-                        <i class="fas fa-th-large"></i>
-                        <div>Dashboard</div>
-                    </a>
-                </li>
-                <li class="<?php if($page=='display'){echo 'active';}?>">
-                    <a href="display.php">
-                        <i class="fas fa-user-injured"></i>
-                        <div>Patient</div>
-                    </a>
-                </li>
-                <li class="<?php if($page=='beds'){echo 'active';}?>">
-                    <a href="beds.php">
-                        <i class="fas fa-bed"></i>
-                        <div>Beds</div>
-                    </a>
-                </li>
-                <li class="<?php if($page=='report'){echo 'active';}?>">
-                    <a href="report.php">
-                        <i class="fas fa-file"></i>
-                        <div>Report</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fas fa-user"></i>
-                        <div>Profile</div>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
+<?php
+session_start();
+require_once("../conf/config.php");
+?>
+<input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+<label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+</label>
+<div id="sidebarMenu">
+    <div class="welcomeUser">
+        <?php
+        $profilePic = $_GET['profilePic'];
+        echo
+        "<p align='middle'>"
+        ?>
+        <img class='profilePic' align='middle' src=<?php echo BASEURL . '/uploads/' . $profilePic ?>
+        alt='Upload Image'>
+        <?php
+        echo $_GET['name'] . "</p>";
+        ?>
     </div>
+    <ul class="sidebarMenuInner">
+        <li><a href="<?php echo BASEURL . '/Nurse/nurseDash.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+                                            align="middle">
+                <p>Dashboard</p>
+            </a></li>
+        <li><a href="<?php echo BASEURL.'/Nurse/display.php'?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/addpatient.png' ?> alt="patient"
+                                            align="middle">
+                <p>Patient</p>
+            </a></li>
+        <li><a href="<?php echo BASEURL . '/Nurse/beds.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/bed.png' ?> alt="bedr"
+                                            align="middle">
+                <p>Rooms</p>
+            </a></li>
+        <li><a href="<?php echo BASEURL . '/Nurse/report.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/dailyreport.png' ?> alt="report"
+                                            align="middle">
+                <p>Report</p>
+            </a></li>
+        <li><a href="<?php echo BASEURL . '/Nurse/updateNurseProfile.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/nurseProfile.png' ?> alt="profile"
+                                            align="middle">
+                <p>Profile</p>
+            </a></li>
+    </ul>
+</div>

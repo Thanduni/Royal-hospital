@@ -1,15 +1,16 @@
 <?php
-// $page = 'daily-report';
-include 'include/sidebar.php';
-include 'include/topbar.php';
+session_start();
+//die( $_SESSION['profilePic']);
+require_once("../conf/config.php");
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
+    ?>
 
-require_once 'connect.php';
+<?php
 if(isset($_GET['reportid'])){
     $patientID = $_GET['reportid'];
     $patientName = $_GET['name'];
 }
 ?>
-
 
 <?php
 if(isset($_POST['submit'])){
@@ -34,104 +35,99 @@ if(isset($_POST['submit'])){
 
 ?>
 
-<style>
-    <?php include '../css/nurseStyle.css';
-    ?>
-</style>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
+    <style>
+        .next {
+            position: initial;
+            height: auto;
+        }
+    </style> 
     <title>Daily Report</title>
 </head>
 <body>
-    <div class="main-container">
-        <div class="patient-details">
-            <div class="patient-name">Patient Name: <?php echo $patientName ?>  </div>
-            <div class="patient-id">Patient ID: <?php echo $patientID ?></div>
-        </div>
-        <div class="table-container">
-            <h2>Vital Signs</h2>
-            <table class="table">
-                <thead>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Temperature</th>
-                    <th>Pulse</th>
-                    <th>Blood Preasure</th>
-                    <th>O2 Saturation</th>
-                </thead>
-                <tbody>
+    <div class="user">
+        <?php include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <div class="userContents" id="center">
+            <div class="title">
+                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
+                Royal Hospital Management System
+            </div>
+            <ul>
+                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">
+                    Nurse
+                </li>
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
+                        <img
+                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                </li>
+            </ul>
+            <div class="arrow">
+                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
+            </div>
 
-                <?php
-$sql="select patientID,date,time,pulse,temperature,blood_preasure,o2_saturation from daily_report where patientID = '$patientID'";
-// die($sql);
-// $result=mysqli_query($con,$sql);
-$result = $con -> query($sql);
-$rows = $result->num_rows; 
+            <div class="main-container">
+                <div class="patient-details">
+                    <div class="patient-name">Patient Name: <?php echo $patientName ?>  </div>
+                    <div class="patient-id">Patient ID: <?php echo $patientID ?></div>
+                </div>
+                <div class="table-container">
+                    <h2>Vital Signs</h2>
+                    <button class="button" id="dailyreportbutton">
+                        New entry
+                    </button>
+                    <table class="table">
+                        <thead>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Temperature</th>
+                            <th>Pulse</th>
+                            <th>Blood Preasure</th>
+                            <th>O2 Saturation</th>
+                        </thead>
+                        <tbody>
 
-if($result){
-//     die("fgdhgasjd");
-// for($j=0; $j<$rows; $j++){
-//     $result = data_seek($j);
-//     $row = $result -> fetch_array(MYSQLI_NUM);
-//     $date = $row[0];
-//     die($date);
-//     $Time = $row[1];
-//     $temperature = $row[2];
-//     $pulse = $row[3];
-//     $blood_preasure = $row[4];
-//     $o2_saturation = $row[5];
-//     echo '<tr>
-//         <th scope="row">'.$date.'</th>
-//         <td>'.$time.'</td>
-//         <td>'.$pulse.'</td>
-//         <td>'.$temperature.'</td>
-//         <td>'.$blood_preasure.'</td>
-//         <td>'.$o2_saturation.'</td>
-        
-//     </tr>';
-// }
-    while($row=$result->fetch_assoc()){
-        $date =  $row['date'];
-        $time =  $row['time'];
-        $pulse = $row['pulse'];
-        $temperature = $row['temperature'];
-        $blood_preasure = $row['blood_preasure'];
-        $o2_saturation = $row['o2_saturation'];
-        echo '<tr>
-        <th scope="row">'.$date.'</th>
-        <td>'.$time.'</td>
-        <td>'.$pulse.'</td>
-        <td>'.$temperature.'</td>
-        <td>'.$blood_preasure.'</td>
-        <td>'.$o2_saturation.'</td>
-        
-    </tr>';
-    }
-}
-    ?> 
-                </tbody>
-            </table>
-            <button class="button" id="report-button">
-            New entry
-            </button>
+                            <?php
+                                $sql="select patientID,date,time,pulse,temperature,blood_preasure,o2_saturation from daily_report where patientID = '$patientID'";
+                                $result = $con -> query($sql);
+                                $rows = $result->num_rows; 
 
-        <script>
-            document.getElementById("report-button").addEventListener("click", function(){
-            document.querySelector("#report-popup").style.display = "flex";
-        })
-        </script>
+                                if($result){
+                                    while($row=$result->fetch_assoc()){
+                                        $date =  $row['date'];
+                                        $time =  $row['time'];
+                                        $pulse = $row['pulse'];
+                                        $temperature = $row['temperature'];
+                                        $blood_preasure = $row['blood_preasure'];
+                                        $o2_saturation = $row['o2_saturation'];
+                                        echo '<tr>
+                                        <th scope="row">'.$date.'</th>
+                                        <td>'.$time.'</td>
+                                        <td>'.$pulse.'</td>
+                                        <td>'.$temperature.'</td>
+                                        <td>'.$blood_preasure.'</td>
+                                        <td>'.$o2_saturation.'</td>
         
+                                    </tr>';
+                                    }
+                                }
+                            ?> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    
+ 
     <div class="popup" id="report-popup">
         <div class="popup-content">
+        <img src="../images/close.png" alt="close" class="close">
         <form method="post">
             <h1>Daily Report</h1>
             
@@ -164,7 +160,19 @@ if($result){
         </div>
     </div>
 
-
+<script>
+    document.getElementById("dailyreportbutton").addEventListener("click", function(){
+        document.querySelector(".popup").style.display = "flex";
+    })
+    document.querySelector(".close").addEventListener("click", function(){
+        document.querySelector(".popup").style.display = "none";
+    })
+</script>
 
 </body>
 </html>
+<?php
+} else {
+    header("location: " . BASEURL . "/Homepage/login.php");
+}
+?>
