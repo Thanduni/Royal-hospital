@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
             <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="Storekeeper">
                 Storekeeper
             </li>
-            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/Logout?url=' . $_SERVER['REQUEST_URI'] ?>">Logout
+            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
                             src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
             </li>
