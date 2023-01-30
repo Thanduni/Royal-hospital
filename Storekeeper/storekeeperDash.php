@@ -52,58 +52,109 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         <div class="content">
         <div class="card-list">
         <div class="card">
+        <!-- <a href="storekeeperTotalMedicine.php"> -->
             <div class="card-cont">
                 
                 <div class="card-h">
                     <p>Total medicines</p>
                 </div>
 
+                <div class="card-m">
+                    <?php
+                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $result = mysqli_query($con,$sql);
+                        $row = mysqli_num_rows($result);
+                        echo '<h1>'.$row.'</h1>';
+                    ?>
+                    <!-- <p>40</p> -->
+                </div>
+
                 <div class="card-b">
-                    <p>40</p>
+                    <a href="storekeeperTotalMedicine.php">
+                        <button>More details</button>
+                    </a>
                 </div>
                 
                 
             </div>
 
         </div>
-
+</a>
         <div class="card">
+        <!-- <a href="storekeeperAvailableMedicine.php"> -->
             <div class="card-cont">
                 
                 <div class="card-h">
                     <p>Available medicine</p>
                 </div>
 
-                <div class="card-b">
-                    <p>40</p>
+                <div class="card-m">
+                <?php
+                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $result = mysqli_query($con,$sql);
+                        $row = mysqli_num_rows($result);
+                        echo '<h1>'.$row.'</h1>';
+                    ?>
+                    <!-- <p>40</p> -->
                 </div>
-                
+
+                <div class="card-b">
+                    <a href="storekeeperAvailableMedicine.php">
+                        <button>More details</button>
+                    </a>
+                </div>
                 
             </div>
 
         </div><div class="card">
+        <!-- <a href="storekeeperOutofStock.php"> -->
             <div class="card-cont">
                 
                 <div class="card-h">
                     <p>Out of stock medicine</p>
                 </div>
 
+                <div class="card-m">
+                <?php
+                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $result = mysqli_query($con,$sql);
+                        $row = mysqli_num_rows($result);
+                        echo '<h1>'.$row.'</h1>';
+                    ?>
+                    <!-- <p>40</p> -->
+                </div>
+
                 <div class="card-b">
-                    <p>40</p>
+                    <a href="storekeeperOutofStock.php">
+                        <button>More details</button>
+                    </a>
                 </div>
                 
                 
             </div>
 
         </div><div class="card">
+        <!-- <a href="storekeeperExpire.php"> -->
             <div class="card-cont">
                 
                 <div class="card-h">
                     <p>Expired medicine</p>
                 </div>
 
+                <div class="card-m">
+                <?php
+                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $result = mysqli_query($con,$sql);
+                        $row = mysqli_num_rows($result);
+                        echo '<h1>'.$row.'</h1>';
+                    ?>
+                    <!-- <p>40</p> -->
+                </div>
+
                 <div class="card-b">
-                    <p>40</p>
+                    <a href="storekeeperExpire.php">
+                        <button>More details</button>
+                    </a>
                 </div>
                 
                 
