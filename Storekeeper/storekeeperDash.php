@@ -61,7 +61,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                     <?php
-                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $sql = "SELECT itemID FROM items ORDER BY itemID";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
@@ -116,7 +116,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $sql = "SELECT itemID FROM items ORDER BY itemID";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
