@@ -51,7 +51,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </div>
             <p>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
-                <button type="button" id="addButton" onclick="displayPatientAddForm()">+Add nurse</button>
+                <button type="button" id="addButton" onclick="displayPatientAddForm()">+Add patient</button>
             </p>
 
             <div class="filter">
