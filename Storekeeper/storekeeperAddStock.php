@@ -67,16 +67,7 @@ if(isset($_POST['submit'])){
             <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Add Stock
         </div>
 
-        <!-- <div class="pad">
-            
-        </div> -->
         <div class="form-content">
-
-        <div class="pad">
-            
-        </div>
-
-
 
         <div class="form-box">
         <h1>ADD STOCK</h1>

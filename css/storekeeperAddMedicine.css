@@ -6,7 +6,6 @@
 } */
 
 .form-content{
-    height: 100vh;
     width: 100%;
     background-color: rgb(255, 255, 255);
     display: flex;
@@ -19,8 +18,9 @@
     background-color: #efefef;
     width: 70%;
     min-width: 420px;
-    padding: 35px 50px;
     position: initial;
+    padding: 30px;
+    margin: 30px;
     left: 60%;
     top: 50%;
     border-radius: 10px;

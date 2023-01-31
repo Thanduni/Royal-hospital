@@ -26,7 +26,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;  
-    
 }
 
 .card-list .card{
@@ -117,7 +116,7 @@
   /* background: #1d5766; */
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 1229px) {
     .card-list {
       /* On small screens, we are no longer using row direction but column */
       flex-direction: column;

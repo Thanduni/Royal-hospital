@@ -36,7 +36,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             </li>
             <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
-                            src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
             </li>
         </ul>
         <div class="arrow">
@@ -49,7 +49,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         <!-- content start -->
 
 
-        <div class="content">
+<!--        <div class="content">-->
         <div class="card-list">
         <div class="card">
         <!-- <a href="storekeeperTotalMedicine.php"> -->
@@ -61,16 +61,20 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                     <?php
-                        $sql = "SELECT itemID FROM items ORDER BY itemID";
+                        $sql = "SELECT itemID FROM item ORDER BY itemID";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
+//                        if($result)
+//                            die("success");
+//                        else
+//                            die("Fail");
                         echo '<h1>'.$row.'</h1>';
                     ?>
                     <!-- <p>40</p> -->
                 </div>
 
                 <div class="card-b">
-                    <a href="storekeeperTotalMedicine.php">
+                    <a href="storekeeperTotalMedicine.php" target="_self">
                         <button>More details</button>
                     </a>
                 </div>
@@ -116,7 +120,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT itemID FROM items ORDER BY itemID";
+                        $sql = "SELECT itemID FROM item ORDER BY itemID";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
@@ -164,7 +168,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
     </div>
                 
-                </div>
+<!--                </div>-->
         <!-- content start -->
         <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
