@@ -50,7 +50,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <ul id="billInfo">
                 <li id="billDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageBill.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Billing details</a></li>
                 <li id="headDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageHead.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Header details</a></li>
-                <li id="patientInfo"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Patient information</a></li>
+                <li id="patientInfo"><a href="<?php echo BASEURL . '/Receptionist/payrollPagePatientInfo.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Patient information</a></li>
             </ul>
             <button>Print receipt</button>
             <div class="wrapper">
