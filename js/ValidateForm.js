@@ -259,7 +259,7 @@ function validateForm() {
                 nicDiv.classList.remove("hint");
                 nicDiv.classList.add("alert");
                 nicDiv.innerHTML = "<ul>\n" +
-                    "    <li>Please enter your email properly.</li>\n" +
+                    "    <li>Please enter your NIC properly.</li>\n" +
                     "</ul>"
             }
             if (!regPassword.test(password)) {

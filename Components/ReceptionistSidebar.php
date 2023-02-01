@@ -38,7 +38,7 @@ require_once("../conf/config.php");
                                            align="middle">
                 <p>Patient</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Receptionist/patientBills.php' ?>" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Receptionist/viewBillPage.php' ?>" target="_self"><img class="icons"
                                            src=<?php echo BASEURL . '/images/payroll.svg' ?> alt="Payroll"
                                            align="middle">
                 <p>Payroll</p>

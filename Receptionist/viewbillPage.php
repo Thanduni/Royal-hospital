@@ -86,7 +86,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             ?>
                             <div class="row">
                                 <div class="cell" style="100px" data-title="Options">
-                                    <a href="<?php echo BASEURL . '/Receptionist/displayBills.php?id=' . $row1['nic'] ?>">
+                                    <a href="<?php echo BASEURL . '/Receptionist/displayInduvidualBillsPage.php?id=' . $row2['patientID'] ?>">
                                         <button class="edit"><img
                                                     src="<?php echo BASEURL . '/images/bill.svg' ?>" alt=" Edit">
                                             View Bills

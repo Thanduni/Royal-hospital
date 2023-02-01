@@ -42,9 +42,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Payroll
             </div>
+            <div class="patientInfo">
+                <h2>Patient Information</h2><br>
+                <p>Patient Name :- <?php echo $_GET['name'] ?></p>
+                <p>Patient ID :- <?php echo $_GET['id'] ?> </p>
+            </div>
             <ul id="billInfo">
-                <li id="billDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageBill.php' ?>">Billing details</a></li>
-                <li id="headDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageHead.php' ?>">Header details</a></li>
+                <li id="billDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageBill.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Billing details</a></li>
+                <li id="headDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageHead.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Header details</a></li>
                 <li id="patientInfo"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Patient information</a></li>
             </ul>
             <div class="wrapper">
