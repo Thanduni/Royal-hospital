@@ -80,3 +80,9 @@ button{
     color: #ffffff;
     border-radius: 3px;
 }
+
+
+select{
+    width: 200px;
+    height: 25px;
+}

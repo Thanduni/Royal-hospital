@@ -9,14 +9,14 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 if(isset($_POST['submit'])){
 
-    $itemId = $_POST['itemID'];
+    // $itemId = $_POST['itemID'];
     $medicineName = $_POST['medicineName'];
     $companyName = $_POST['companyName'];
     $unitType = $_POST['unitType'];
     $unitCost = $_POST['unitCost'];
     
 
-    $sql="insert into `items` (itemID,medicineName,companyName,unitType,unitCost) values('$itemId','$medicineName','$companyName','$unitType','$unitCost')";
+    $sql="insert into `item` (medicineName,companyName,unitType,unitCost) values('$medicineName','$companyName','$unitType','$unitCost')";
 
     $result=mysqli_query($con,$sql);
 
@@ -77,27 +77,18 @@ if(isset($_POST['submit'])){
         <h1>ADD MEDICINE</h1>
         
         <form method="post">
-            <div class="row">
-                <div class="column">
-                    <label for="name">Item ID</label>
-                    <input name="itemId" type="text" id="name" placeholder="Enter Item ID here">
-                </div>
-                
-                
-                
-                
-            </div>
+            
             <div class="row">
                 
             <div class="column">
-                    <label for="email">Medicine name</label>
+                    <label>Medicine name</label>
                     <input name="medicineName" type="text" id="email" placeholder="Enter Medicine name here">
                 </div>
                 
             </div>
             <div class="row">
             <div class="column">
-                    <label for="name">Company Name</label>
+                    <label>Company Name</label>
                     <input name="companyName" type="text" id="name" placeholder="Enter Company Name here">
                 </div>
                 
@@ -105,17 +96,28 @@ if(isset($_POST['submit'])){
                 
             </div>
             <div class="row">
-            <div class="column">
-                    <label for="subject">Unit Type</label>
-                    <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here">
+                <div class="column">
+                    <label>Unit Type</label>
+                    <select name="unitType" id="">
+                        <option value="">Select type</option>
+                        <option value="cards">cards</option>
+                        <option value="bottles">bottles</option>
+                        <option value="pills">pills</option>
+                        <option value="injections">injections</option>
+                        <option value="tablets">tablets</option>
+
+                    </select>
+                    <!-- <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here"> -->
                 </div>
+                
+               
                 
             </div>
 
             <div class="row">
             <div class="column">
-                    <label for="contact">Unit Cost</label>
-                    <input name="unitCost" type="text" id="contact" placeholder="Enter Unit Cos here">
+                    <label>Unit Cost</label>
+                    <input name="unitCost" type="text" id="contact" placeholder="Enter Unit Cost here">
                 </div>
                 
             </div>
