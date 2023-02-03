@@ -52,15 +52,16 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 <table>
                 <tr>
                 <!-- <th>medicine ID</th> -->
-                <th>medicine name</th>
                 <th>badge no.</th>
+                <th>medicine name</th>
+                
                 <!-- <th>company name</th> -->
                 <!-- <th>suplier name</th> -->
                 <!-- <th>unit type</th> -->
                 <!-- <th>unit cost</th> -->
                 <th>qantity</th>
                 <!-- <th>manufacture date</th> -->
-                <th>expire date</th>
+                <th>expired date</th>
                 <!-- <th>use state</th> -->
                 
                 </tr>
@@ -99,12 +100,14 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             // $unitCost = $row['unitCost'];
                             $qantity = $row['quantity'];
                             // $manufacturedDate = $row['manufactureDate'];
-                            $expiredDate = $row['expireDate'];
+                            $expiredDate = $row['expiredDate'];
                             // $useState = $row['useState'];
 
                             echo '<tr>
+
                             
                             <td>'.$badgeNo.'</td>
+                            
                             <td>'.$medicineName.'</td>
                             
                             <td>'.$qantity.'</td>

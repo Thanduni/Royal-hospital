@@ -54,10 +54,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 <!-- <th>medicine ID</th> -->
                 <th>medicine name</th>
                 <!-- <th>badge no.</th> -->
-                <th>company name</th>
-                <th>suplier name</th>
+                <!-- <th>company name</th> -->
+                <!-- <th>suplier name</th> -->
                 <!-- <th>unit type</th> -->
-                <th>unit cost</th>
+                <!-- <th>unit cost</th> -->
                 <!-- <th>qantity</th> -->
                 <!-- <th>manufacture date</th> -->
                 <!-- <th>expire date</th> -->
@@ -67,7 +67,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 
                 <?php
-                    $sql="Select *from `inventory`";
+                    $sql="SELECT * FROM `availableitemstock` WHERE fullQuantity=0";
                     $allResult=mysqli_query($con,$sql);
                     $num=mysqli_num_rows($allResult);
                     
@@ -84,7 +84,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             }
 
             $startinglimit=($page-1)*$numberPages;
-            $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
+            $sql="SELECT * FROM `availableitemstock` WHERE fullQuantity=0 limit ".$startinglimit.','.$numberPages;
             $result=mysqli_query($con,$sql);
 
 
@@ -93,10 +93,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             // $itemId = $row['itemID'];
                             // $badgeNo = $row['badgeNo'];
                             $medicineName = $row['medicineName'];
-                            $companyName = $row['companyName'];
-                            $supplierName = $row['supplierName'];
+                            // $companyName = $row['companyName'];
+                            // $supplierName = $row['supplierName'];
                             // $unitType = $row['unitType'];
-                            $unitCost = $row['unitCost'];
+                            // $unitCost = $row['unitCost'];
                             // $qantity = $row['quantity'];
                             // $manufacturedDate = $row['manufactureDate'];
                             // $expiredDate = $row['expireDate'];
@@ -105,10 +105,6 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             echo '<tr>
                             
                             <td>'.$medicineName.'</td>
-                            <td>'.$companyName.'</td>
-                            <td>'.$supplierName.'</td>
-                            
-                            <td>'.$unitCost.'</td>
                             
                             
                             </tr>';

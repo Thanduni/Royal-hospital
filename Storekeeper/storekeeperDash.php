@@ -51,7 +51,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 <!--        <div class="content">-->
         <div class="card-list">
+            
         <div class="card">
+        <!-- onclick='window.location.replace("google.com")' direct linking part farzan-->
         <!-- <a href="storekeeperTotalMedicine.php"> -->
             <div class="card-cont">
                 
@@ -94,7 +96,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        $sql = "SELECT medicineName FROM availableitemstock WHERE fullQuantity>0";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
@@ -110,7 +112,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 
             </div>
 
-        </div><div class="card">
+        </div>
+        <div class="card">
         <!-- <a href="storekeeperOutofStock.php"> -->
             <div class="card-cont">
                 
@@ -120,7 +123,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT itemID FROM item ORDER BY itemID";
+                        $sql = "SELECT * FROM `availableitemstock` WHERE fullQuantity=0";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
@@ -137,7 +140,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 
             </div>
 
-        </div><div class="card">
+        </div>
+        <div class="card">
         <!-- <a href="storekeeperExpire.php"> -->
             <div class="card-cont">
                 
@@ -147,10 +151,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT itemID FROM inventory ORDER BY itemID";
-                        $result = mysqli_query($con,$sql);
-                        $row = mysqli_num_rows($result);
-                        echo '<h1>'.$row.'</h1>';
+                        // $sql = "SELECT itemID FROM inventory ORDER BY itemID";
+                        // $result = mysqli_query($con,$sql);
+                        // $row = mysqli_num_rows($result);
+                        // echo '<h1>'.$row.'</h1>';
                     ?>
                     <!-- <p>40</p> -->
                 </div>
@@ -170,6 +174,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 
 <!--                </div>-->
         <!-- content start -->
+        <?php echo "hgjh" ?>
         <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
 </div>

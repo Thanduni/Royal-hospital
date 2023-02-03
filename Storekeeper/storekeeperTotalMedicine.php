@@ -67,7 +67,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 
                 <?php
-                    $sql="Select *from `inventory`";
+                    $sql="Select *from `item`";
                     $allResult=mysqli_query($con,$sql);
                     $num=mysqli_num_rows($allResult);
                     
@@ -84,7 +84,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             }
 
             $startinglimit=($page-1)*$numberPages;
-            $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
+            $sql="Select * from `item` limit ".$startinglimit.','.$numberPages;
             $result=mysqli_query($con,$sql);
 
 
