@@ -41,7 +41,7 @@ require_once("../conf/config.php");
         <li><a href="<?php echo BASEURL . '/Receptionist/viewBillPage.php' ?>" target="_self"><img class="icons"
                                            src=<?php echo BASEURL . '/images/payroll.svg' ?> alt="Payroll"
                                            align="middle">
-                <p>Payroll</p>
+                <p>Bills</p>
             </a></li>
         <li><a href="<?php echo BASEURL . '/Receptionist/updateReceptionistProfile.php' ?>" target="_self"><img
                         class="icons"

@@ -12,7 +12,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/viewBillPage.css' ?>">
         <title>Receptionist patient page - Patient</title>
         <style>
             p.royal {
@@ -47,13 +47,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     </a></li>
             </ul>
             <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Patient
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Bills
             </div>
-            <p>
-                <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
-                <button type="button" id="addButton" onclick="displayPatientAddForm()">+Add patient</button>
-            </p>
-
             <div class="filter">
                 <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
             </div>
@@ -86,10 +81,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             ?>
                             <div class="row">
                                 <div class="cell" style="100px" data-title="Options">
-                                    <a href="<?php echo BASEURL . '/Receptionist/displayInduvidualBillsPage.php?id=' . $row2['patientID'] ?>">
-                                        <button class="edit"><img
+                                    <a href="<?php echo BASEURL . '/Receptionist/serviceDetails.php?id=' . $row2['patientID'] ?>">
+                                        <button id="billGen"><img
                                                     src="<?php echo BASEURL . '/images/bill.svg' ?>" alt=" Edit">
-                                            View Bills
+                                            Generate bill
                                         </button>
                                     </a>
                                 </div>

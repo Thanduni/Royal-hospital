@@ -139,6 +139,12 @@ table td{
     }
 }
 
+
+.userClass{
+    display: flex;
+    flex-direction: column;
+}
+
 /*Table*/
 
 
@@ -249,10 +255,6 @@ table td{
 @media screen and (max-width: 1229px) {
     .cell {
         padding: 2px 16px;
-        display: block;
-    }
-
-    .userClass{
         display: block;
     }
 

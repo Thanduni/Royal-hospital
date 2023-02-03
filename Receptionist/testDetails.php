@@ -12,7 +12,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/displayInduvidualBillsPage.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/testDetails.css' ?>">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
             .next {
@@ -36,7 +36,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
@@ -48,7 +48,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </p>
             <div class="userClass">
                 <?php
-                $query1 = "SELECT * FROM bill where patientID = '" . $_GET['id'] . "'";
+                $query1 = "SELECT purchases.date, test.test_name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='".$_GET['id']."'";
                 $result1 = $con->query($query1);
 
                 $rows = $result1->num_rows;
@@ -61,55 +62,40 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     <p>Patient Name :- <?php echo $patientResult['name'] ?></p>
                     <p>Patient ID :- <?php echo $patientResult['patientID'] ?> </p>
                 </div>
+                <ul id="billInfo">
+                    <li id="serviceDetails"><a href="<?php echo BASEURL . '/Receptionist/serviceDetails.php?id=' . $_GET['id']?>">Service</a></li>
+                    <li id="testDetails"><a href="<?php echo BASEURL . '/Receptionist/testDetails.php?id=' . $_GET['id'] ?>">Test</a></li>
+                    <li id="drugDetails"><a href="<?php echo BASEURL . '/Receptionist/drugDetails.php?id=' . $_GET['id'] ?>">Drug</a></li>
+                </ul>
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
-                            <div class="cell">Options</div>
-                            <div class="cell">Bill ID</div>
                             <div class="cell">Date</div>
-                            <div class="cell">Profile Image</div>
-                            <div class="cell">ID of Receptionist handles the bill</div>
-                            <div class="cell">Patient type</div>
+                            <div class="cell">Test name</div>
+                            <div class="cell">Quantity</div>
+                            <div class="cell">Rate</div>
                             <div class="cell">Status</div>
                         </div>
                         <?php
                         for ($j = 0; $j < $rows; ++$j) {
                             $result1->data_seek($j);
                             $row1 = $result1->fetch_array(MYSQLI_ASSOC);
-                            $query2 = "SELECT bill.billID, bill.bill_date, user.profile_image, bill.receptionistID, patient.patient_type, bill.status FROM 
-                            bill join patient on bill.patientID = patient.patientID join user on user.nic = patient.nic where patient.patientID = '".$_GET['id']."'";
-                            $result2 = $con->query($query2);
-                            $result2->data_seek(0);
-                            $row2 = $result2->fetch_array(MYSQLI_ASSOC);
                             ?>
                             <div class="row">
-                                <div class="cell" style="100px" data-title="Options">
-                                    <a href="<?php echo BASEURL . '/Receptionist/payrollPageBill.php?id= '.$patientResult['patientID'].'&name='.$patientResult['name'] ?>">
-                                        <button class="edit"><img
-                                                    src="<?php echo BASEURL . '/images/bill.svg' ?>" alt=" Edit">
-                                            View Bill
-                                        </button>
-                                    </a>
+                                <div class="cell" data-title="Date">
+                                    <?php echo $row1['date']; ?>
                                 </div>
-                                <div class="cell" data-title="Bill ID">
-                                    <?php echo $row2['billID']; ?>
+                                <div class="cell" data-title="Test name">
+                                    <?php echo $row1['test_name']; ?>
                                 </div>
-                                <div class="cell" data-title="Patient ID">
-                                    <?php echo $row2['bill_date']; ?>
+                                <div class="cell" data-title="Quantity">
+                                    <?php echo $row1['quantity']; ?>
                                 </div>
-                                <div class="cell" style="width:100px" data-title="Profile image">
-                                    <?php
-                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/".$row2['profile_image']." alt='Upload Image' width=150px>";
-                                    ?>
+                                <div class="cell" data-title="Rate">
+                                    <?php echo $row1['rate']; ?>
                                 </div>
-                                <div class="cell" data-title="Patient type">
-                                    <?php echo $row2['receptionistID']; ?>
-                                </div>
-                                <div class="cell" data-title="Patient type">
-                                    <?php echo $row2['patient_type']; ?>
-                                </div>
-                                <div class="cell" data-title="Patient type">
-                                    <?php echo $row2['status']; ?>
+                                <div class="cell" data-title="Status">
+                                    <?php echo $row1['paid_status']; ?>
                                 </div>
                             </div>
                         <?php } ?>
