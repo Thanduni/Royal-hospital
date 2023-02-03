@@ -51,11 +51,11 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         <div class="table-box">
                 <table>
                 <tr>
-                <th>medicine ID</th>
+                <!-- <th>medicine ID</th> -->
                 <th>medicine name</th>
                 <th>badge no.</th>
                 <th>company name</th>
-                <th>suplier name</th>
+                <!-- <th>suplier name</th> -->
                 <th>unit type</th>
                 <th>unit cost</th>
                 <th>qantity</th>
@@ -65,13 +65,13 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 
                 </tr>
 
-
-                <?php
+                <!-- table print function start -->
+                <!-- <?php
                     $sql="Select *from `inventory`";
                     $allResult=mysqli_query($con,$sql);
                     $num=mysqli_num_rows($allResult);
                     
-                    $numberPages=2;
+                    $numberPages=8;
                     $totalPages=ceil($num/$numberPages);
                     
 
@@ -84,17 +84,21 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             }
 
             $startinglimit=($page-1)*$numberPages;
-            $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
+            $sql="SELECT inventory.medicineName, inventory.badgeNo, inventory.quantity, inventory.manufactureDate, inventory.expireDate, 
+            item.companyName, item.unitType, item.unitCost, medicineState.useState
+     FROM inventory
+     JOIN item ON inventory.itemID = itemID
+     JOIN medicineState ON inventory.itemID = medicineStatee.itemID".$startinglimit.','.$numberPages;
             $result=mysqli_query($con,$sql);
 
 
                     if($result){
                         while($row=mysqli_fetch_assoc($result)){
-                            $itemId = $row['itemID'];
+                            // $itemId = $row['itemID'];
                             $badgeNo = $row['badgeNo'];
                             $medicineName = $row['medicineName'];
                             $companyName = $row['companyName'];
-                            $supplierName = $row['supplierName'];
+                            // $supplierName = $row['supplierName'];
                             $unitType = $row['unitType'];
                             $unitCost = $row['unitCost'];
                             $qantity = $row['quantity'];
@@ -102,12 +106,14 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             $expiredDate = $row['expireDate'];
                             $useState = $row['useState'];
 
+
+                            // <td>'.$itemId.'</td><td>'.$supplierName.'</td>
                             echo '<tr>
-                            <td>'.$itemId.'</td>
+                            
                             <td>'.$badgeNo.'</td>
                             <td>'.$medicineName.'</td>
                             <td>'.$companyName.'</td>
-                            <td>'.$supplierName.'</td>
+                            
                             <td>'.$unitType.'</td>
                             <td>'.$unitCost.'</td>
                             <td>'.$qantity.'</td>
@@ -118,7 +124,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             </tr>';
                         }
                     }
-                ?>
+                ?> -->
+                <!-- table print function start -->
 
 
                 <!-- <tr>

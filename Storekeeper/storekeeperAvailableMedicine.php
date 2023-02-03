@@ -52,22 +52,23 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 <table>
                 <tr>
                 <!-- <th>medicine ID</th> -->
-                <th>medicine name</th>
+                <th>Medicine name</th>
                 <!-- <th>badge no.</th> -->
                 <!-- <th>company name</th> -->
                 <!-- <th>suplier name</th> -->
                 <!-- <th>unit type</th> -->
                 <!-- <th>unit cost</th> -->
-                <th>qantity</th>
+                
                 <!-- <th>manufacture date</th> -->
-                <th>expire date</th>
+                <th>Quantity</th>
+                <th>Type</th>
                 <!-- <th>use state</th> -->
                 
                 </tr>
 
 
                 <?php
-                    $sql="Select *from `inventory`";
+                    $sql="SELECT medicineName FROM availableitemstock WHERE fullQuantity>0";
                     $allResult=mysqli_query($con,$sql);
                     $num=mysqli_num_rows($allResult);
                     
@@ -82,9 +83,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             else{
                 $page=1;
             }
+            // "SELECT * FROM `availableitemstock` WHERE fullQuantity>0"
 
             $startinglimit=($page-1)*$numberPages;
-            $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
+            $sql="SELECT * FROM `availableitemstock` WHERE fullQuantity>0 limit ".$startinglimit.','.$numberPages;
             $result=mysqli_query($con,$sql);
 
 
@@ -97,18 +99,18 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             // $supplierName = $row['supplierName'];
                             // $unitType = $row['unitType'];
                             // $unitCost = $row['unitCost'];
-                            $qantity = $row['quantity'];
+                            $fullQuantity = $row['fullQuantity'];
                             // $manufacturedDate = $row['manufactureDate'];
-                            $expiredDate = $row['expireDate'];
+                            $unitType = $row['unitType'];
                             // $useState = $row['useState'];
 
                             echo '<tr>
                             
                             <td>'.$medicineName.'</td>
                             
-                            <td>'.$qantity.'</td>
+                            <td>'.$fullQuantity.'</td>
                             
-                            <td>'.$expiredDate.'</td>
+                            <td>'.$unitType.'</td>
                             
                             
                             </tr>';
@@ -179,3 +181,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     header("location: " . BASEURL . "/Homepage/login.php");
 }
 ?>
+
+
+
+<!-- CREATE TRIGGER updateStock AFTER INSERT ON inventory FOR EACH ROW BEGIN UPDATE availableitemstock SET fullQuantity = fullQuantity + NEW.quantity WHERE medicineName = NEW.medicineName AND unitType = NEW.unitType; END;
+
+full stock count update trigger -->

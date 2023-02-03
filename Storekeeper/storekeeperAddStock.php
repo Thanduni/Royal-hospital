@@ -12,17 +12,20 @@ if(isset($_POST['submit'])){
     // $itemId = $_POST['itemID'];
     // $badgeNo = $_POST['badgeNo'];
     $medicineName = $_POST['medicineName'];
+
     $companyName = $_POST['companyName'];
     $supplierName = $_POST['supplierName'];
     $unitType = $_POST['unitType'];
+
     // $unitCost = $_POST['unitCost'];
     $quantity = $_POST['quantity'];
     $manufacturedDate = $_POST['manufacturedDate'];
     $expiredDate = $_POST['expiredDate'];
     // $useState = $_POST['useState'];
 
-    $sql="insert into `inventory` (medicineName,companyName,supplierName,unitType,quantity,manufacturedDate,expiredDate) values('$medicineName','$companyName','$supplierName','$unitType','$quantity','$manufacturedDate','$expiredDate')";
 
+    $sql="insert into `inventory` (medicineName,quantity,manufacturedDate,expiredDate) values ('$medicineName','$quantity','$manufacturedDate','$expiredDate')";
+    // echo $sql;
     $result=mysqli_query($con,$sql);
 
 }
@@ -60,7 +63,7 @@ if(isset($_POST['submit'])){
             </li>
             <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
-                            src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
             </li>
         </ul>
         <div class="arrow">
@@ -111,6 +114,7 @@ if(isset($_POST['submit'])){
             </div>
 
             <div class="row">
+
                 <div class="column">
                     <label>Company Name</label>
                     <input name="companyName" type="text" id="name" placeholder="Enter Company Name here">
@@ -123,8 +127,8 @@ if(isset($_POST['submit'])){
                     <input name="supplierName" type="text" id="email" placeholder="Enter Supplier Name here">
                 </div>
                 
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="column">
                     <label>Unit Type</label>
                     <select name="unitType" id="">
@@ -136,12 +140,14 @@ if(isset($_POST['submit'])){
                         <option value="tablets">tablets</option>
 
                     </select>
-                    <!-- <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here"> -->
+
+                    <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here">
                 </div>
                 
                
                 
-            </div>
+
+            </div> -->
 
             
 
@@ -154,8 +160,20 @@ if(isset($_POST['submit'])){
                     <label>Qantity</label>
                     <input name="quantity" type="text" id="contact" placeholder="Enter Qantity here">
                 </div></div>
-            <div class="row">
+
+
+                <div class="row"> <div class="column">
                 <div class="column">
+                    <label>Manufactured date</label>
+                    <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here">
+                </div>
+                    
+            </div></div>
+
+            <div class="row">
+                
+                <div class="column">
+
                     <label>Manufactured date</label>
                     <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here">
                 </div>
@@ -163,6 +181,7 @@ if(isset($_POST['submit'])){
                     <label>Expired date</label>
                     <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here">
                 </div>
+
                 <!-- <div class="column">
                     <label for="email">Use state</label>
                     <input name="useState" type="text" id="email" placeholder="Enter Use state here">
