@@ -23,28 +23,28 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Patient/patientDash.php' ?>" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Patient/patientDash.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php'?>" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL.'/Patient/appointment.php'?>" target="_self"><img class="icons"
                                                                          src=<?php echo BASEURL . '/images/MakeAnAppointments.svg' ?> alt="user"
                                                                          align="middle">
                 <p>Make an Appointment</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php' ?>" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL.'/Patient/appointment.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
                                             align="middle">
                 <p>Patient Reports</p>
             </a></li>
-        <li><a href="" target="_blank"><img class="icons"
+        <li><a href="" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/Payroll.svg' ?> alt="nurse"
                                             align="middle">
                 <p>Payroll</p>
             </a></li>
         
-        <li><a href="" target="_blank"><img class="icons"
+        <li><a href="" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/noticeboard.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>

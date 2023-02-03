@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("../conf/config.php");
-if(isset($_SESSION['mailaddress'])){
+if(isset($_SESSION['mailaddress'])  && $_SESSION['userRole'] == 'Patient'){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@ if(isset($_SESSION['mailaddress'])){
 </head>
 <body>
     <div class="user">
-        <?php include(BASEURL.'/Components/PatientSidebar.php');
+        <?php include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']);
         $_SESSION['plogout'] = $_SERVER['REQUEST_URI'];
         ?>
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
@@ -38,7 +38,7 @@ if(isset($_SESSION['mailaddress'])){
                 Patient
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL.'/Homepage/patientlogout.php' ?>">Logout
-                    <img src="<?php echo BASEURL.'/images/logout.jpg' ?>" alt="logout"></a> 
+                    <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a>
                 </li>
             </ul>
 

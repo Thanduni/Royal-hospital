@@ -12,7 +12,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/payrollPageHead.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/payrollPagePatientInfo.css' ?>">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
             .next {
@@ -36,7 +36,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
+                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
@@ -48,35 +48,25 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <p>Patient ID :- <?php echo $_GET['id'] ?> </p>
             </div>
             <ul id="billInfo">
-                <li id="billDetails"><a
-                            href="<?php echo BASEURL . '/Receptionist/payrollPageBill.php?id= ' . $_GET['id'] . '&name=' . $_GET['name'] ?>">Billing
-                        details</a></li>
-                <li id="headDetails"><a
-                            href="<?php echo BASEURL . '/Receptionist/payrollPageHead.php?id= ' . $_GET['id'] . '&name=' . $_GET['name'] ?>">Header
-                        details</a></li>
-                <li id="patientInfo"><a
-                            href="<?php echo BASEURL . '/Receptionist/payrollPagePatientInfo.php?id= ' . $_GET['id'] . '&name=' . $_GET['name'] ?>">Patient
-                        information</a></li>
+                <li id="billDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageBill.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Billing details</a></li>
+                <li id="headDetails"><a href="<?php echo BASEURL . '/Receptionist/payrollPageHead.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Header details</a></li>
+                <li id="patientInfo"><a href="<?php echo BASEURL . '/Receptionist/payrollPagePatientInfo.php?id= '.$_GET['id'].'&name='.$_GET['name'] ?>">Patient information</a></li>
             </ul>
             <div class="wrapper">
-                <table id="header">
-                    <tr>
-                        <td class="tableLabel">Bill ID</td>
-                        <td>Nareash</td>
-                    </tr>
-                    <tr>
-                        <td class="tableLabel">Bill date</td>
-                        <td>Nareash</td>
-                    </tr>
-                    <tr>
-                        <td class="tableLabel">Total Items</td>
-                        <td>Nareash</td>
-                    </tr>
-                    <tr>
-                        <td class="tableLabel">Total amount</td>
-                        <td>Nareash</td>
-                    </tr>
-                </table>
+                <div class="table">
+                    <div class="row headerT">
+                        <div class="cell">Particular Name</div>
+                        <div class="cell">Quantity</div>
+                        <div class="cell">Rate</div>
+                        <div class="cell">Amount</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

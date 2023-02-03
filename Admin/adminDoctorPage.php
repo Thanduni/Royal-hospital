@@ -144,7 +144,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <label for="department">Department:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="department" id="IN_department" required><div class="alert" id="name"></div>
+                            <input type="text" name="department" id="IN_department" required><div class="alert" id="depName"></div>
                         </td>
                     </tr>
                     </tr>

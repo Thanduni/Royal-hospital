@@ -6,15 +6,37 @@
     font-weight: bold;
 }
 
+#billInfo{
+    height: 20px;
+}
+
 #billInfo li a{
     color: #24354E;
 }
 
-#billInfo{
-    margin-top: 20px;
+#billInfo li a:hover{
+    transform: scale(1.040);
+    color: #ADB6CD;
+    font-size: 25px;
 }
 
-#billDetails{
+#billInfo{
+    margin: 20px;
+}
+
+.userClass{
+    display: flex;
+    flex-direction: column;
+}
+
+.table-set{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#serviceDetails{
     border-style: solid;
     border-width: 5px 0px 0px 0px;
 }
@@ -25,12 +47,13 @@
     margin: 0 0 40px 0;
     width: 100%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    height: 500px;
+    height: 250px;
     overflow-y: scroll;
     box-shadow: 3px 3px 20px 0px #24354E;
     border-style: none;
     border-radius: 10px;
 }
+
 
 @media screen and (max-width: 1229px) {
     body {
@@ -40,8 +63,7 @@
 }
 
 .wrapper {
-    margin: 0 auto;
-    /* padding: 40px; */
+    margin: 10px;
     max-width: 1440px;
 }
 
@@ -101,4 +123,10 @@
     background-repeat: no-repeat;
     background-position: right;
     padding-right: 200px;
+}
+
+#filterInfo{
+    border-style: none;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    padding: 20px;
 }
