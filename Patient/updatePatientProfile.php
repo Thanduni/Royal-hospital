@@ -2,7 +2,7 @@
 session_start();
 //die( $_SESSION['mailaddress']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     ?>
 
     <!DOCTYPE html>
@@ -14,7 +14,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/updateProfile.css' ?>">
-        <title>Receptionist update profile - Receptionist</title>
+        <title>Patient update profile - Receptionist</title>
         <style>
             p.royal {
                 font-size: 20px;
@@ -34,15 +34,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
 
     <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php include(BASEURL . '/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="../images/logo5.png" alt="logo">
                 Royal Hospital Management System
             </div>
             <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Receptionist</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img src="../images/logout.jpg">
+                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Patient</li>
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img                                src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">

@@ -1,5 +1,5 @@
 .cards{
-    margin-top: -300px;
+    margin-top: 0px;
     margin-left: 70px;
     width: 80%;
     padding: 35px 20px ;
@@ -170,6 +170,8 @@ a{
     top: 200px; */
 .mtable table{
     margin: 40px;
+    border-left: 10px;
+    color: #F8F9FF;
     padding: 10px;
     width: 90%;
     text-align: center;
@@ -183,7 +185,7 @@ a{
     background-color: #f2f2f2;
 } */
 .mtable table thead{
-    background-color: #EAEAEA;
+    background-color: #2b226e;
     padding: 15px;
     
 }
@@ -194,6 +196,7 @@ a{
     background-color: #ffffff;
 }
 .mtable{
+    margin-top: 20px;
     transform: translate(-50%, -50%);
     background-color: #f9f8ff;
     position: absolute;
@@ -229,4 +232,73 @@ a button{
 }
 a button i{
     color: #fff;
+}
+
+textarea{
+    width: 380px;
+    height: 80px;
+    /* border-radius: 10px; */
+    border: 1px solid #ccc;
+    /* box-shadow: 0px 4px 4px rgb(0 0 0 / 25%); */
+    /* border-radius: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    font-weight: 500;
+    border-radius: 10px;
+    border-color: black;
+}
+#login-modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+form button ,#cancel,#btn {
+    width: 129px;
+    height: 41px;
+    background: #24354E;
+    border-style: none;
+    border-radius: 50px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 37px;
+    color: #ADB6CD;
+    margin: 10px;
+    cursor: pointer;
+   
+}
+.login-form input{
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
+
+}
+
+.login-form{
+    padding: 20px 10px;
+    text-align: center;
+    background-color: lavender;
+    width: 500px;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom:30px ;
+
+}
+a #login-show{
+    cursor: pointer;
+}
+
+.login-form select{
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
 }

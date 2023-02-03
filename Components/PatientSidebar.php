@@ -28,12 +28,12 @@ require_once("../conf/config.php");
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php'?>" target="_blank"><img class="icons"
+        <li><a id="openform"  target="_blank"><img class="icons"
                                                                          src=<?php echo BASEURL . '/images/MakeAnAppointments.svg' ?> alt="user"
                                                                          align="middle">
-                <p>Make an Appointment</p>
+                <p>Appointment</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php' ?>" target="_blank"><img class="icons"
+        <li><a  target="_blank"><img class="icons"
                                             src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
                                             align="middle">
                 <p>Patient Reports</p>
@@ -48,6 +48,13 @@ require_once("../conf/config.php");
                                             src=<?php echo BASEURL . '/images/noticeboard.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>
+            </a></li>
+
+        <li><a href="<?php echo BASEURL . '/Patient/updatePatientProfile.php' ?>" target="_self"><img
+                        class="icons"
+                        src=<?php echo BASEURL . '/images/profile.svg' ?> alt="Profile"
+                        align="middle">
+                <p>Profile</p>
             </a></li>
     </ul>
 </div>
