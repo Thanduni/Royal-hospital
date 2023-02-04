@@ -75,7 +75,7 @@ function filterTables(){
         row = document.getElementsByClassName("row");
         for (i = 1; i < row.length; i++) {
             cell = row[i].getElementsByClassName("cell")[4];
-            if (cell) {
+            if (cell && row[i].style.display === "none") {
                     row[i].style.display = "";
             }
         }
@@ -83,6 +83,7 @@ function filterTables(){
 }
 
 function filterByDate(){
+    filterButton.checked = true;
     let startDateWarn = document.getElementById("startDateWarn");
     let endDateWarn = document.getElementById("endDateWarn");
     let finalWarn = document.getElementById("finalWarning");

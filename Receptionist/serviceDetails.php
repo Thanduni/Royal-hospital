@@ -48,8 +48,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
 
             <div class="userClass">
                 <?php
-                $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                if(@$_GET['startDate'] && @$_GET['endDate']){
+                    $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.date between '".$_GET['startDate']."' AND '".$_GET['endDate']."'";
+                } else {
+                    $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
                         purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'";
+                }
                 $result1 = $con->query($query1);
                 $rows = $result1->num_rows;
 
@@ -64,20 +70,22 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <div id="filterInfo">
                     <h3 style="text-align: center"><u>Filter Cost Information</u></h3>
                     <table>
+                        <form action="dateFilter.php?id=<?php echo $_GET['id'] ?>" method="post">
                         <tr>
                             <td><label for="Start date">Start date: </label></td>
-                            <td><input type="date" id="startDate" placeholder="Enter the start date"></td>
+                            <td><input type="date" name="startDate" id="startDate" placeholder="Enter the start date"></td>
                         </tr>
                         <tr><td colspan="2" id="startDateWarn"></td></tr>
                         <tr>
                             <td><label for="End date">End date: </label></td>
-                            <td><input type="date" id="endDate" placeholder="Enter the end date"></td>
+                            <td><input type="date" name="endDate" id="endDate" placeholder="Enter the end date"></td>
                         </tr>
                         <tr><td colspan="2" id="endDateWarn"></td></tr>
                         <tr>
-                            <td colspan="2"><button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" id="filterAppointment">
+                            <td colspan="2"><button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" id="filterAppointment" name="filterAppointment">
                                     Filter appointments</button></td>
                         </tr>
+                        </form>
                         <tr><td colspan="2" id="finalWarning"></td></tr>
                         <tr>
                             <td>
@@ -351,7 +359,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         </div>
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
-    <script src="<?php echo BASEURL . '/js/filterCostInfo.js' ?>"></script>
+<!--    <script src="--><?php //echo BASEURL . '/js/filterCostInfo.js' ?><!--"></script>-->
     </body>
     </html>
     <?php
