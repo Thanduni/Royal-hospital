@@ -39,7 +39,7 @@ require_once("../conf/config.php");
                 <p>Patient</p>
             </a></li>
         <li><a href="<?php echo BASEURL . '/Receptionist/viewBillPage.php' ?>" target="_self"><img class="icons"
-                                           src=<?php echo BASEURL . '/images/payroll.svg' ?> alt="Payroll"
+                                           src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="Payroll"
                                            align="middle">
                 <p>Bills</p>
             </a></li>

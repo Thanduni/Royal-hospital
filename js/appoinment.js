@@ -7,7 +7,7 @@ $(document).ready(function(){
         }
         else if(val == "Cardiology")
         {
-            $("#doctor").html("<option value='De.Nareash'>Dr.Nareash</option><option value='Dr.Dhathchaya'>Dr.Dhathchaya</option>");
+            $("#doctor").html("<option value='Predeep'>Pradeep</option><option value='Dr.Dhathchaya'>Dr.Dhathchaya</option>");
         }
         else if(val == "Gastroentology"){
             $("#doctor").html("<option value='Dr.Anjana'>Dr.Anjana</option><option value='Dr.Saduni'>Dr.Saduni</option>");

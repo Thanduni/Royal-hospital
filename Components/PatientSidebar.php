@@ -29,25 +29,19 @@ require_once("../conf/config.php");
                 <p>Dashboard</p>
             </a></li>
 
-        <li><a id="openform"  target="_blank"><img class="icons"
-
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php'?>" target="_self"><img class="icons"
-                                    src=<?php echo BASEURL . '/images/MakeAnAppointments.svg' ?> alt="user"
-                                                                         align="middle">
+        <li><a id="openform" target="_self"><img class="icons"
+                src=<?php echo BASEURL . '/images/MakeAnAppointments.svg' ?> alt="user" align="middle">
                 <p>Appointment</p>
             </a></li>
 
-        <li><a  target="_blank"><img class="icons"
-
         <li><a href="<?php echo BASEURL.'/Patient/appointment.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
-                                            align="middle">
+                src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor" align="middle">
                 <p>Patient Reports</p>
             </a></li>
+
         <li><a href="" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/Payroll.svg' ?> alt="nurse"
-                                            align="middle">
-                <p>Payroll</p>
+                 src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="nurse" align="middle">
+                <p>Payment</p>
             </a></li>
         
         <li><a href="" target="_self"><img class="icons"

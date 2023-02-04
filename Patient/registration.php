@@ -56,7 +56,7 @@ if(isset($_POST["nic"])){
             ('$nic','$name','$address','$email','$phone','$gender','$hash','Patient','','$dob')";
             
             $query2 = "INSERT INTO `patient`(`patientID`, `nic`, `weight`, `receptionistID`, `patient_type`, `height`, `illness`, `drug_allergies`, `medical_history_comments`, `currently_using_medicine`, `emergency_contact`) VALUES 
-            ('','$nic','---','---','---','---','$ill','$allergies','$comments','$cmed','$ecn')";
+            ('','$nic','','','','','$ill','$allergies','$comments','$cmed','$ecn')";
            
             $result1 = mysqli_query($con,$query1);
             $result2 = mysqli_query($con,$query2);
