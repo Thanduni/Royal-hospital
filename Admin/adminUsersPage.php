@@ -271,7 +271,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         "<script>
                 displayUserAddForm();
                 document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-                document.getElementById('IN_userRole').selectedIndex = 1;
+                document.getElementById('IN_userRole').selectedIndex = 0;
             </script>";
         }
     if (@$_GET['click'] == "addNurse") {
@@ -281,7 +281,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             "<script>
                 displayUserAddForm();
                 document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-                document.getElementById('IN_userRole').selectedIndex = 4;
+                document.getElementById('IN_userRole').selectedIndex = 3;
             </script>";
     }
     if (@$_GET['click'] == "addReceptionist") {
@@ -291,7 +291,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             "<script>
                 displayUserAddForm();
                 document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-                document.getElementById('IN_userRole').selectedIndex = 2;
+                document.getElementById('IN_userRole').selectedIndex = 1;
             </script>";
     }
     if (@$_GET['click'] == "addStorekeeper") {
@@ -301,7 +301,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             "<script>
                 displayUserAddForm();
                 document.getElementById('IN_nic').value = ". $_GET['nic'] . ";
-                document.getElementById('IN_userRole').selectedIndex = 3;
+                document.getElementById('IN_userRole').selectedIndex = 2;
             </script>";
     }
 //    ?>

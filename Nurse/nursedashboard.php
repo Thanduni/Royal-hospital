@@ -1,13 +1,9 @@
-
-<?php $page = 'nurseDashboard';?>
-<?php include '../Components/nurseSidebar.php';
-include '../Components/nursetopbar.php';
-require_once("../conf/config.php")
-?>
-<style>
-    <?php include '../css/nurseStyle.css';
+<?php
+session_start();
+//die( $_SESSION['profilePic']);
+require_once("../conf/config.php");
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
-</style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,15 +11,44 @@ require_once("../conf/config.php")
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse Dashboard</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-</head>
-<body>
     
-    <div class="main-container">
-        <div class="cards">
-            <div class="card">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
+    <style>
+        .next {
+            position: initial;
+            height: auto;
+        }
+    </style>   
+    <title>Nurse Dashboard</title> 
+</head>
+
+
+<body>
+    <div class="user">
+        <?php include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <div class="userContents" id="center">
+            <div class="title">
+                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
+                Royal Hospital Management System
+            </div>
+            <ul>
+                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">
+                    Nurse
+                </li>
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
+                        <img
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
+                </li>
+            </ul>
+            <div class="arrow">
+                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
+            </div>
+
+
+            <div class="main-container">
+              <div class="nurse-cards">
+              <div class="nurse-card">
                 <div class="card-content">
                     <div class="number">
                       <?php
@@ -37,13 +62,15 @@ require_once("../conf/config.php")
                       }
                       ?>
                     </div>
-                    <div class="card-name">Total Patients</div>
+                    <div class="card-name">
+                      Total Patients
+                    </div>
                 </div>
                 <div class="icon-box">
                     <i class="fas fa-user-injured"></i>
                 </div>
-            </div>
-            <div class="card">
+              </div>
+              <div class="nurse-card">
                 <div class="card-content">
                     <div class="number">
                       <?php
@@ -57,78 +84,24 @@ require_once("../conf/config.php")
                       }
                       ?>
                     </div>
-                    <div class="card-name">Available Beds</div>
+                    <div class="card-name">
+                      Available Beds
+                    </div>
                 </div>
                 <div class="icon-box">
                     <i class="fas fa-bed"></i>
                 </div>
+              </div>
+              </div>
             </div>
         </div>
-        
-        
-        <!-- <div class="charts">
-            <div class="chart">
-                <h2>Patient Count</h2>
-                <canvas id="myChart"></canvas>
-                <script>
-                    var xValues = ["jan","feb","march","apr","may","june","july","agu","sep","oct","nov","dec"];
-                    var yValues = [70,30,80,90,50,90,100,110,120,140,150,130];
-                    
-                    new Chart("myChart", {
-                      type: "line",
-                      data: {
-                        labels: xValues,
-                        datasets: [{
-                          fill: false,
-                          lineTension: 0,
-                          backgroundColor: "rgba(0,0,255,1.0)",
-                          borderColor: "rgba(0,0,255,0.1)",
-                          data: yValues
-                        }]
-                      },
-                      options: {
-                        legend: {display: false},
-                        scales: {
-                          yAxes: [{ticks: {min: 0, max:150}}],
-                        }
-                      }
-                    });
-                    </script>
-            </div>
-            
-            <div class="chart">
-                <h2>Patient Count Gender vise</h2>
-                <canvas id="pie-chart"></canvas>
-                <script>
-                    var xValues = ["Male", "Female"];
-                    var yValues = [55, 45];
-                    var barColors = [
-                      "#189AB4",
-                      "#75E6DA"
-                    ];
-                    
-                    new Chart("pie-chart", {
-                      type: "pie",
-                      data: {
-                        labels: xValues,
-                        datasets: [{
-                          backgroundColor: barColors,
-                          data: yValues
-                        }]
-                      },
-                      options: {
-                        title: {
-                          display: true,
-                        //   text: "Patient Count Gender"
-                        }
-                      }
-                    });
-                    </script>
-            </div>
-        </div> -->
-        
     </div>
+    
     
 </body>
 </html>
-
+<?php
+} else {
+    header("location: " . BASEURL . "/Homepage/login.php");
+}
+?>

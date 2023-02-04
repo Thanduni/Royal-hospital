@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../conf/config.php");
+
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
 // if(isset($_POST["submit"])){
@@ -29,6 +30,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
 // }
 
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +58,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 </head>
 <body>
     <div class="user">
-        <?php include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name=".$_SESSION['name']);
+
+        <?php include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']);
         $_SESSION['plogout'] = $_SERVER['REQUEST_URI'];
         ?>
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
@@ -68,9 +73,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 <li class="userType"><img src="<?php echo BASEURL.'/images/userInPage.svg' ?>" alt="">
                 Patient
                 </li>
+
                 <li class="logout"><a href="<?php echo BASEURL.'/Homepage/logout.php?logout&url= http:/localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout
                     <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
-                </li>
+
             </ul>
 
             <div class="cards">

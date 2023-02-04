@@ -5,6 +5,25 @@ require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
 ?> 
 
+<?php
+
+if(isset($_POST['submit'])){
+
+    // $itemId = $_POST['itemID'];
+    $medicineName = $_POST['medicineName'];
+    $companyName = $_POST['companyName'];
+    $unitType = $_POST['unitType'];
+    $unitCost = $_POST['unitCost'];
+    
+
+    $sql="insert into `item` (medicineName,companyName,unitType,unitCost) values('$medicineName','$companyName','$unitType','$unitCost')";
+
+    $result=mysqli_query($con,$sql);
+
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,7 +53,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="Storekeeper">
                 Storekeeper
             </li>
-            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/Logout?url=' . $_SERVER['REQUEST_URI'] ?>">Logout
+            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
                             src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
             </li>
@@ -57,61 +76,48 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         <div class="form-box">
         <h1>ADD MEDICINE</h1>
         
-        <form>
+        <form method="post">
+            
             <div class="row">
-                <div class="column">
-                    <label for="name">Item ID</label>
-                    <input type="text" id="name" placeholder="Enter Item ID here">
+                
+            <div class="column">
+                    <label>Medicine name</label>
+                    <input name="medicineName" type="text" id="email" placeholder="Enter Medicine name here">
                 </div>
-                <div class="column">
-                    <label for="email">Badge no.</label>
-                    <input type="email" id="email" placeholder="Enter Badge no. here">
+                
+            </div>
+            <div class="row">
+            <div class="column">
+                    <label>Company Name</label>
+                    <input name="companyName" type="text" id="name" placeholder="Enter Company Name here">
                 </div>
-                <div class="column">
-                    <label for="email">Medicine name</label>
-                    <input type="email" id="email" placeholder="Enter Medicine name here">
-                </div>
+                
                 
                 
             </div>
             <div class="row">
                 <div class="column">
-                    <label for="name">Company Name</label>
-                    <input type="text" id="name" placeholder="Enter Company Name here">
-                </div>
-                <div class="column">
-                    <label for="email">Supplier Name</label>
-                    <input type="email" id="email" placeholder="Enter Supplier Name here">
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="subject">Unit Type</label>
-                    <input type="text" id="subject" placeholder="Enter Unit Type here">
-                </div>
-                <div class="column">
-                    <label for="contact">Unit Cost</label>
-                    <input type="tel" id="contact" placeholder="Enter Unit Cos here">
-                </div>
-                <div class="column">
-                    <label for="contact">Qantity</label>
-                    <input type="tel" id="contact" placeholder="Enter Qantity here">
+                    <label>Unit Type</label>
+                    <select name="unitType" id="">
+                        <option value="">Select type</option>
+                        <option value="cards">cards</option>
+                        <option value="bottles">bottles</option>
+                        <option value="pills">pills</option>
+                        <option value="injections">injections</option>
+                        <option value="tablets">tablets</option>
+
+                    </select>
+                    <!-- <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here"> -->
                 </div>
                 
+               
+                
             </div>
+
             <div class="row">
-                <div class="column">
-                    <label for="name">Manufactured date</label>
-                    <input type="text" id="name" placeholder="Enter Manufactured date here">
-                </div>
-                <div class="column">
-                    <label for="name">Expired date</label>
-                    <input type="text" id="name" placeholder="Enter Expired date here">
-                </div>
-                <div class="column">
-                    <label for="email">Use state</label>
-                    <input type="email" id="email" placeholder="Enter Use state here">
+            <div class="column">
+                    <label>Unit Cost</label>
+                    <input name="unitCost" type="text" id="contact" placeholder="Enter Unit Cost here">
                 </div>
                 
             </div>
@@ -122,7 +128,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                     <textarea id="issue" placeholder="Describe your issue in detail here" rows="3"></textarea>
                 </div>
             </div> -->
-            <button>Submit</button>
+            <button name="submit">Submit</button>
         </form>
     </div>
             

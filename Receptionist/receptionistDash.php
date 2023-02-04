@@ -36,7 +36,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
