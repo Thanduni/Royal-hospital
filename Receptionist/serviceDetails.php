@@ -4,7 +4,6 @@ session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') {
     ?>
-
     <!doctype html>
     <html lang="en">
     <head>
@@ -67,18 +66,25 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     <table>
                         <tr>
                             <td><label for="Start date">Start date: </label></td>
-                            <td><input type="date" placeholder="Enter the start date"></td>
+                            <td><input type="date" id="startDate" placeholder="Enter the start date"></td>
                         </tr>
+                        <tr><td colspan="2" id="startDateWarn"></td></tr>
                         <tr>
                             <td><label for="End date">End date: </label></td>
-                            <td><input type="date" placeholder="Enter the end date"></td>
+                            <td><input type="date" id="endDate" placeholder="Enter the end date"></td>
                         </tr>
+                        <tr><td colspan="2" id="endDateWarn"></td></tr>
+                        <tr>
+                            <td colspan="2"><button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" id="filterAppointment">
+                                    Filter appointments</button></td>
+                        </tr>
+                        <tr><td colspan="2" id="finalWarning"></td></tr>
                         <tr>
                             <td>
                                 <label for="Not paid">Not paid</label>
                             </td>
                             <td>
-                                <input type="checkbox" style="display: inline">
+                                <input type="checkbox" style="display: inline" id="paidStatus">
                             </td>
                         </tr>
                     </table>
@@ -134,7 +140,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="row">
+                            <div class="row total">
                                 <div class="cell" data-title="Rate">
 
                                 </div>
@@ -194,7 +200,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="row">
+                            <div class="row total">
                                 <div class="cell" data-title="Rate">
 
                                 </div>
@@ -254,7 +260,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="row">
+                            <div class="row total">
                                 <div class="cell" data-title="Rate">
 
                                 </div>
@@ -320,7 +326,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="row">
+                            <div class="row total">
                                 <div class="cell" data-title="Rate">
 
                                 </div>
@@ -345,6 +351,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         </div>
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
+    <script src="<?php echo BASEURL . '/js/filterCostInfo.js' ?>"></script>
     </body>
     </html>
     <?php
