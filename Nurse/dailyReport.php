@@ -65,21 +65,19 @@ if(isset($_POST['submit'])){
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
-                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">daily Report
+
+                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Daily Report
+
             </div>
 
             <div class="main-container">
                 <div class="patient-details">
-                    <div class="patient-name">Patient Name: <?php
-                                                                // $patientName =  $patientName;
-                                                                echo " $patientName "?>  </div>
-                    <div class="patient-id">Patient ID: <?php 
-                                                                // $patientID = $patientID;
-                                                                echo " $patientID "?></div>
+                    <div class="patient-name">Patient Name: <?php echo $patientName ?>  </div>
+                    <div class="patient-id">Patient ID: <?php echo $patientID ?></div>
                 </div>
                 <div class="table-container">
                     <h2>Vital Signs</h2>
@@ -111,7 +109,7 @@ if(isset($_POST['submit'])){
                                         $blood_preasure = $row['blood_preasure'];
                                         $o2_saturation = $row['o2_saturation'];
                                         echo '<tr>
-                                        <td>'.$date.'</td>
+                                        <th scope="row">'.$date.'</th>
                                         <td>'.$time.'</td>
                                         <td>'.$pulse.'</td>
                                         <td>'.$temperature.'</td>
@@ -137,13 +135,11 @@ if(isset($_POST['submit'])){
             
             <div class="form-group">
                     <label>Date</label>
-                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>">
-                    <!-- <input type="date" class="form-control" placeholder="" name="date" required> -->
+                    <input type="date" class="form-control" placeholder="" name="date" required>
             </div>
             <div class="form-group">
                     <label>Time</label>
-                    <input type="time" id="time" name="time" required>
-                    <!-- <input type="time" class="form-control" placeholder="" name="time" required> -->
+                    <input type="time" class="form-control" placeholder="" name="time" required>
             </div>
             <div class="form-group">
                     <label>Pulse</label>
@@ -167,15 +163,6 @@ if(isset($_POST['submit'])){
     </div>
 
 <script>
-
-    let objectDate = new Date();
-
-    var time = objectDate.toLocaleTimeString([], {
-        hourCycle: 'h24',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-    document.getElementById('time').value = time;
     document.getElementById("dailyreportbutton").addEventListener("click", function(){
         document.querySelector(".popup").style.display = "flex";
     })

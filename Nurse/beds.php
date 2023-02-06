@@ -5,22 +5,6 @@ require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
 
-<?php
-if(isset($_POST['submit'])){
-    $room_availability =  $_POST['room_availability'];
-    $room_no = $_POST['room_no'];
-
-    $sql="UPDATE room SET room_availability = '$room_availability' WHERE room_no = '$room_no';";
-    $result=mysqli_query($con,$sql);
-
-    if($result){
-        header('location:beds.php');
-    }else{
-        die(mysqli_error($con));
-    }
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +14,6 @@ if(isset($_POST['submit'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
         .next {
             position: initial;
@@ -54,11 +37,12 @@ if(isset($_POST['submit'])){
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
-                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Room
+
+                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Rooms
             </div>
 
             <div class="main-container">
@@ -84,15 +68,12 @@ if(isset($_POST['submit'])){
                     <div class="room">
                         <div class="room-content">
                             <div class="room-no">Room No: <?php print $row['room_no']; ?></div>
-                            <div class="room-availability">Availability: <?php if($row['room_availability']=='available'){echo "<p style='color:Green;'>Yes </p>";} else{echo "<p style='color:red;'>No </p>";} ?></div>
+                            <div class="room-availability">Availability: <?php if($row['room_availability']=='available'){print 'Yes';} else{print 'No';} ?></div>
                         </div>
                         <div class="icon-box">
-                            <?php if($row['room_availability']=='available'){?>
-                                <i style='color:Green;' class="fas fa-bed"></i>
-                            <?php }
-                            else if($row['room_availability']=='not_available'){?>
-                                <i style='color:Red;' class="fas fa-bed"></i>
-                            <?php }?>
+                            <?php if($row['room_availability']==1){?> 
+                            <i src="./images/available.png"></i>
+                            <?php } ?>
                         </div>
                     </div> 
                     <?php endforeach ?>
@@ -106,13 +87,13 @@ if(isset($_POST['submit'])){
                                 <h1>Update Room</h1>
                                 <div class="form-group">
                                     <label>Room No</label>
-                                    <input type="text" class="form-control" placeholder="Enter name" name="room_no">
+                                    <input type="text" class="form-control" placeholder="Enter name" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>Availability</label>
-                                    <select name="room_availability" id="room_availability">
-                                        <option value="available">Available</option>
-                                        <option value="not_available">not_available</option>
+                                    <select name="roomavailability" id="roomavailability">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
                                     </select>
                                 </div>
                                 <button type="submit" name ="submit">Submit</button>

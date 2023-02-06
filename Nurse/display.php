@@ -55,7 +55,7 @@ if(isset($_POST['submit'])){
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
@@ -74,8 +74,8 @@ if(isset($_POST['submit'])){
                         <thead>    
                             <th>Name</th>
                             <th>Room No</th>
-                            <th>Admit date</th>
-                            <th>Admit time</th>
+                            <th>admit date</th>
+                            <th>admit time</th>
                             <th>Drug allergies</th>
                             <th>Emergency No</th>
                         </thead>
@@ -129,26 +129,17 @@ if(isset($_POST['submit'])){
                 </div>
                 <div class="form-group">
                     <label>Admit date</label>
-                    <input type="date" name ="admit_date"value ="<?php echo date('Y-m-d') ?>">
+                    <input type="date" class="form-control" placeholder="" name="admit_date" >
                 </div>
                 <div class="form-group">
                     <label>Admit time</label>
-                    <input type="time" id="time" name="admit_time" required>
+                    <input type="time" class="form-control" placeholder="" name="admit_time">
                 </div>
                 <button class="submit" type="submit" name ="submit">Submit</button>
             </form>
         </div>
     </div>
 <script>
-    let objectDate = new Date();
-
-    var time = objectDate.toLocaleTimeString([], {
-      hourCycle: 'h24',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-    document.getElementById('time').value = time;
-
    document.getElementById("admission-button").addEventListener("click", function(){
         document.querySelector("#admission-popup").style.display = "flex";
     })
