@@ -33,10 +33,7 @@
     color: #24354E;
     font-weight: 600;
 }
-.icon-box{
-    width: 45px;
-    height: 45px;
-}
+
 .icon-box i {
     font-size: 45px;
     color: black;
@@ -44,32 +41,6 @@
 .icon-box img {
     font-size: 45px;
     color: black;
-}
-.charts {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 20px; */
-    padding: 20px;
-    padding-top: 0;
-    
-}
-
-.chart {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
-    width: 650px;
-}
-#myChart{
-    width: 50%;
-    height: fit-content;
-}
-#pie-chart{
-    width: 50%;
 }
 
 .popup{
