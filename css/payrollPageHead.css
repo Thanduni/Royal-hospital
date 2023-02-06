@@ -1,0 +1,56 @@
+#billInfo li{
+    display: inline;
+    padding: 5px 20px 20px 20px;
+    font-size: 18px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+#billInfo li a{
+    color: #24354E;
+}
+
+#billInfo{
+    margin: 20px;
+}
+
+#headDetails{
+    border-style: solid;
+    border-width: 5px 0px 0px 0px;
+}
+
+/*Table*/
+
+.tableLabel{
+    background-color: #24354E;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+#header{
+    margin: 20px;
+    border-style: none;
+    border-radius: 20px;
+}
+
+tr{
+    border-style: none;
+    border-radius: 10px;
+}
+
+/*Table*/
+
+.patientInfo{
+    padding: 20px;
+    margin: 20px;
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 20px 0px #24354E;
+    color: #24354E;
+    font-weight: bold;
+    background-image: url("../images/Bill.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 200px;
+}

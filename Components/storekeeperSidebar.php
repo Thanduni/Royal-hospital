@@ -23,22 +23,27 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperDash.php' ?>" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperDash.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Storekeeper/storekeeperAddMedicine.php'?>" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL.'/Storekeeper/storekeeperAddMedicine.php'?>" target="_self"><img class="icons"
                                                                          src=<?php echo BASEURL . '/images/user.svg' ?> alt="user"
                                                                          align="middle">
                 <p>Add Medicine</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperViewStock.php' ?>" target="_blank"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddStock.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+                                            align="middle">
+                <p>Add Stock</p>
+            </a></li>
+        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperViewStock.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
                                             align="middle">
                 <p>View Stocks</p>
             </a></li>
-        <li><a href="" target="_blank"><img class="icons"
+        <li><a href="" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/nurse.svg' ?> alt="nurse"
                                             align="middle">
                 <p>Profile</p>
