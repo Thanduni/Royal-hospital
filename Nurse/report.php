@@ -42,7 +42,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
             </div>
 
-
             <div class="main-container">
                 <div class="table-container" id="reportContainer">
                     <table class="table">
