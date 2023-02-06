@@ -14,6 +14,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
     <style>
         .next {
             position: initial;
@@ -38,7 +42,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
@@ -93,6 +97,50 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 </div>
               </div>
               </div>
+
+              <div class="table-container">
+                    <table class="table">
+
+                        <thead>    
+                            <th>Name</th>
+                            <th>Room No</th>
+                            <th>Admit date</th>
+                            <th>Admit time</th>
+                            <th>Drug allergies</th>
+                            <th>Emergency No</th>
+                        </thead>
+
+                        <tbody>
+
+                            <?php
+                                $sql="select user.name,inpatient.roomNo,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                                $result=mysqli_query($con,$sql);
+
+                                if($result){
+                                while($row=mysqli_fetch_assoc($result)){
+                                $name =  $row['name'];
+                                $RoomNo = $row['roomNo'];
+                                $admit_date = $row['admit_date'];
+                                $admit_time = $row['admit_time'];
+                                $drug_allergies = $row['drug_allergies'];
+                                $emergency_contact = $row['emergency_contact'];
+                                echo '<tr> 
+
+                                <td>'.$name.'</td>
+                                <td>'.$RoomNo.'</td>
+                                <td>'.$admit_date.'</td>
+                                <td>'.$admit_time.'</td>
+                                <td>'.$drug_allergies.'</td>
+                                <td>'.$emergency_contact.'</td>
+                                </tr>';
+                                }
+                                }
+                            ?>    
+                        </tbody>
+                    </table>
+                </div>
+
+              
             </div>
         </div>
     </div>
