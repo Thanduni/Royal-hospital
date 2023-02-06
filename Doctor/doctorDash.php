@@ -1,9 +1,8 @@
 <?php
 session_start();
-//die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
-    ?>
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,24 +12,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
     <style>
         .next {
             position: initial;
             height: auto;
         }
     </style>   
-    <title>Nurse Dashboard</title> 
+    <title>Doctor Dashboard</title> 
 </head>
 
 
 <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -51,8 +46,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 
 
             <div class="main-container">
-              <div class="nurse-cards">
-              <div class="nurse-card">
+              <div class="doctor-cards">
+                <div class="doctor-card">
                 <div class="card-content">
                     <div class="number">
                       <?php
@@ -73,8 +68,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 <div class="icon-box">
                     <i class="fas fa-user-injured"></i>
                 </div>
-              </div>
-              <div class="nurse-card">
+                </div>
+                <div class="doctor-card">
                 <div class="card-content">
                     <div class="number">
                       <?php
@@ -95,52 +90,43 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 <div class="icon-box">
                     <i class="fas fa-bed"></i>
                 </div>
-              </div>
+                </div>
               </div>
 
-              <div class="table-container">
+              <div class="appointment">
+                <div class="table-container">
                     <table class="table">
-
-                        <thead>    
+                        <thead>
+                            <th>Profile pic</th>
                             <th>Name</th>
-                            <th>Room No</th>
-                            <th>Admit date</th>
-                            <th>Admit time</th>
-                            <th>Drug allergies</th>
-                            <th>Emergency No</th>
+                            <th>Time</th>
+                            <th>Status</th>
                         </thead>
-
                         <tbody>
-
                             <?php
-                                $sql="select user.name,inpatient.roomNo,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                                $sql="select user.name,user.profile_image,appointment.time,appointment.status from user join patient on user.nic=patient.nic join appointment on appointment.patientID=patient.patientID;";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
-                                while($row=mysqli_fetch_assoc($result)){
-                                $name =  $row['name'];
-                                $RoomNo = $row['roomNo'];
-                                $admit_date = $row['admit_date'];
-                                $admit_time = $row['admit_time'];
-                                $drug_allergies = $row['drug_allergies'];
-                                $emergency_contact = $row['emergency_contact'];
-                                echo '<tr> 
+                                  while($row=mysqli_fetch_assoc($result)){
+                                    $profile_image =  $row['profile_image'];
+                                    $name = $row['name'];
+                                    $time = $row['time'];
+                                    $status = $row['status'];
+                                    echo '<tr> 
 
-                                <td>'.$name.'</td>
-                                <td>'.$RoomNo.'</td>
-                                <td>'.$admit_date.'</td>
-                                <td>'.$admit_time.'</td>
-                                <td>'.$drug_allergies.'</td>
-                                <td>'.$emergency_contact.'</td>
-                                </tr>';
+                                    <td>'.$profile_image.'</td>
+                                    <td>'.$name.'</td>
+                                    <td>'.$time.'</td>
+                                    <td>'.$status.'</td>
+                                    </tr>';
+                                  }
                                 }
-                                }
-                            ?>    
+                            ?> 
                         </tbody>
                     </table>
                 </div>
-
-              
+              </div>
             </div>
         </div>
     </div>

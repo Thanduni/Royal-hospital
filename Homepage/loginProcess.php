@@ -30,7 +30,7 @@ if (isset($_POST['login'])) {
                 if ($userRole == "Admin")
                     header("location: " . BASEURL . "/Admin/adminDash.php");
                 else if ($userRole == "Doctor")
-                    header("location:doctorDash.php");
+                    header("location: " . BASEURL . "/Doctor/doctorDash.php");
                 else if ($userRole == "Nurse")
                     header("location: " . BASEURL . "/Nurse/nursedashboard.php");
                 else if ($userRole == "Receptionist")
