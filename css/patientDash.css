@@ -1,12 +1,12 @@
 .cards{
     margin-top: 0px;
-    margin-left: 70px;
+    margin-left: 185px;
     width: 80%;
     padding: 35px 20px ;
 
 
     display: flex;
-    margin: 20px;
+    /* margin: 20px; */
     flex-wrap: nowrap;
 
     /*margin-top: -300px;*/
@@ -310,4 +310,19 @@ form button ,#cancel,#btn {
     width: 400px;
     height: 30px;
     border-radius: 10px;
+}
+
+.table-box{
+    margin-top: 273px;
+    width: 500px;
+    margin-left: -1400px;
+}
+
+.table-box table,th,td,tr{
+    border: 0.25px solid lightgray;
+    border-collapse: collapse;
+    background: #24354E;
+    text-align: center;
+    color: white;
+    width: 970px;
 }

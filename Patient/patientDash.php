@@ -3,7 +3,19 @@ session_start();
 require_once("../conf/config.php");
 
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
-    
+            
+            if (isset($_POST["submit"])) {
+
+                $date = $_POST['date'];
+                $department = $_POST['department'];
+                $doctor = $_POST['doctor'];
+                $msg = $_POST['msg'];
+            }
+
+                // $dnic = mysqli_fetch_assoc(mysqli_query($con, "SELECT `nic` FROM `user` WHERE user_role = 'doctor' and name = '.$doctor.'"));
+                // $pnic =  mysqli_fetch_assoc(mysqli_query($con,"SELECT `nic` FROM `user` WHERE user_role = 'patient' and patientID = '.$email.'"));
+                // $docid = mysqli_fetch_assoc(mysqli_query($con, "SELECT `doctorID` FROM `doctor` WHERE nic='.$dnic.'"));
+                // $pid =  mysqli_fetch_assoc(mysqli_query($con,"SELECT patientID FROM patient WHERE nic='.$pnic.'"));
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +44,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <div class="user">
 
         <?php include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']);
-        $_SESSION['plogout'] = $_SERVER['REQUEST_URI'];
+        
         ?>
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
         <div class="userContents"  id="center">
@@ -62,7 +74,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
             </a>
 
-            <a href="">
+            <!-- <a href="">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Appointment Confirmation</div>
@@ -70,7 +82,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <i class="fas fa-book"></i>
                 </div>
                 </div> 
-            </a>
+            </a> -->
 
             <a href="">
                 <div class="card">
@@ -82,7 +94,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div> 
             </a>
 
-            <a href="">
+            <a href="<?php echo BASEURL.'/Patient/billDetails.php' ?>">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Bill Details</div>
@@ -92,51 +104,72 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div> 
             </a> 
             </div>
-            <div class="wrapper">
-                <div class="table">
-                    <div class="row headerT">
-                        <div class="cell">Date</div>
-                        <div class="cell">Time</div>
-                        <div class="cell">Venue</div>
-                        <div class="cell">Doctor</div>
-                        <!-- <div class="cell">Status</div> -->
-                        <?php
+        </div>
+        <div class="wrapper">
+            <div class="table">
+                <div class="row headerT">
+                    <div class="cell">Date</div>
+                    <div class="cell">Time</div>
+                    <div class="cell">Venue</div>
+                    <div class="cell">Doctor</div>
+                    <!-- <div class="cell">Status</div> -->
+                    <?php
 
-                        if (isset($_POST["submit"])) {
+                    if (isset($_POST["submit"])) {
 
-                            $date = $_POST['date'];
-                            $department = $_POST['department'];
-                            $doctor = $_POST['doctor'];
-                            $msg = $_POST['msg'];
+                        $date = $_POST['date'];
+                        $department = $_POST['department'];
+                        $doctor = $_POST['doctor'];
+                        $msg = $_POST['msg'];
 
-                            // $dnic = mysqli_fetch_assoc(mysqli_query($con, "SELECT `nic` FROM `user` WHERE user_role = 'doctor' and name = '.$doctor.'"));
-                            // $pnic =  mysqli_fetch_assoc(mysqli_query($con,"SELECT `nic` FROM `user` WHERE user_role = 'patient' and patientID = '.$email.'"));
-                            // $docid = mysqli_fetch_assoc(mysqli_query($con, "SELECT `doctorID` FROM `doctor` WHERE nic='.$dnic.'"));
-                            // $pid =  mysqli_fetch_assoc(mysqli_query($con,"SELECT patientID FROM patient WHERE nic='.$pnic.'"));
-                            $pid = $_SESSION['patientID'];
-                            $select_slot = mysqli_fetch_assoc(mysqli_query($con, "select * from appointment where patientID = 'NULL'"));
-
-                            header('location:./patient/patientdash.php?pid=' . $pid . '');
-
-                            if ($select_slot) {
-                                mysqli_query($con, "INSERT INTO `appointment`(`appointmentID`, `date`, `time`, `venue`, `doctorID`, `receptionistID`, `patientID`, `message`, `status`)
-                            VALUES ('','','','','','','$pid','','')");
-                                $query = "select date,time,venue,doctor from appointment where patientID = '.$pid.'";
-                                $result = mysqli_query($con, $query);
-                                $rows = mysqli_num_rows($result);
-                                echo $rows;
-                                echo $result;
-                                echo $query;
-                                // for($j=0;$j< $rows;++$j)
-                            }
-                        }
-                        ?>
-                    </div>
+                        // $dnic = mysqli_fetch_assoc(mysqli_query($con, "SELECT `nic` FROM `user` WHERE user_role = 'doctor' and name = '.$doctor.'"));
+                        // $pnic =  mysqli_fetch_assoc(mysqli_query($con,"SELECT `nic` FROM `user` WHERE user_role = 'patient' and patientID = '.$email.'"));
+                        // $docid = mysqli_fetch_assoc(mysqli_query($con, "SELECT `doctorID` FROM `doctor` WHERE nic='.$dnic.'"));
+                        // $pid =  mysqli_fetch_assoc(mysqli_query($con,"SELECT patientID FROM patient WHERE nic='.$pnic.'"));
+                    
+                        $select_slot = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM appointment WHERE patientID = 'NULL'"));
+                        $nic = $_SESSION['nic'];
+                        $pid_query = "SELECT patientID FROM patient WHERE nic = '.$nic.'";
+                        $result_pid = mysqli_query($con,$pid_query);
+                        $pid = mysqli_fetch_assoc($result_pid);
+                        // echo $pid;
+                        if ($select_slot) {
+                            mysqli_query($con, "INSERT INTO `appointment`(`patientID`)
+                            VALUES ('$pid')");
+                            $query = "SELECT date,time,venue,doctor,patientID FROM appointment WHERE patientID = '.$pid.'";
+                            $result = mysqli_query($con, $query);
+                            $rows = mysqli_num_rows($result);
+                            for($j=0;$j< $rows;++$j){
+                                $result->data_seek($j);
+                                $row = $result->fetch_array(MYSQLI_ASSOC);
+                    ?>
+                          <ul class="tableCon">
+                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['date'] ?></li>
+                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['time'] ?></li>
+                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['venue'] ?></li>
+                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['doctor'] ?></li>
+                            </ul>
+                            <div class="row">
+                                <div class="cell" data-title="Date">
+                                    <?php echo $row1['date']; ?>
+                                </div>
+                                <div class="cell" data-title="Time">
+                                    <?php echo $row1['time']; ?>
+                                </div>
+                                <div class="cell" data-title="Venue">
+                                    <?php echo $row1['venue']; ?>
+                                </div>
+                                <div class="cell" data-title="Doctor">
+                                    <?php echo $row1['doctor']; ?>
+                                </div>
+                            </div>
+                        <?php }}}
+                        //  header('location:./patient/patientdash.php?pid='.$pid.''); ?>
                 </div>
             </div>
-
         </div>
     </div>
+
     <div id="login-modal">
         <div class="modal">
             <div class="login-form">
@@ -165,7 +198,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
         </div>
     </div>
-    <?php include(BASEURL.'/Components/Footer.php'); ?>
+    
     <script type="text/javascript">
         $(function(){
             $('#openform').click(function(){
@@ -176,6 +209,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             });
         });
     </script>
+    <?php include(BASEURL.'/Components/Footer.php'); ?>
 </body>
 </html>
 
