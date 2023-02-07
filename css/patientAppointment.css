@@ -97,8 +97,9 @@ table {
     box-shadow: 3px 3px 20px 0px #24354e;
     border-style: none;
     border-radius: 10px;
-    margin-top: 300px;
-    margin-left: -1250px;
+    margin-left: -140px;
+
+    
 }
 
 @media screen and (max-width: 1229px) {
@@ -237,7 +238,7 @@ table {
     font-size: 15px;
     line-height: 18px;
     padding: 20px;
-    margin: 20px;
+    /* margin: 20px; */
     border-spacing: 20px;
 }
 
