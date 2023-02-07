@@ -311,3 +311,18 @@ form button ,#cancel,#btn {
     height: 30px;
     border-radius: 10px;
 }
+
+.table-box{
+    margin-top: 273px;
+    width: 500px;
+    margin-left: -1400px;
+}
+
+.table-box table,th,td,tr{
+    border: 0.25px solid lightgray;
+    border-collapse: collapse;
+    background: #24354E;
+    text-align: center;
+    color: white;
+    width: 970px;
+}

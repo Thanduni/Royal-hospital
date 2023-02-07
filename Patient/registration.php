@@ -60,6 +60,7 @@ if(isset($_POST["nic"])){
            
             $result1 = mysqli_query($con,$query1);
             $result2 = mysqli_query($con,$query2);
+            
             if($query1 & $query2){echo "Query is successful";}
 
             echo '<script>alert("Registration Successful!")</script>';
