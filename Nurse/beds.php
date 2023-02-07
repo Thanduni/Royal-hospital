@@ -6,20 +6,34 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
 
 <?php
-if(isset($_POST['submit'])){
+if(isset($_POST['updateRoom'])){
     $room_availability =  $_POST['room_availability'];
     $room_no = $_POST['room_no'];
 
     $sql="UPDATE room SET room_availability = '$room_availability' WHERE room_no = '$room_no';";
-    $result=mysqli_query($con,$sql);
+    $updateresult=mysqli_query($con,$sql);
 
-    if($result){
+    if($updateresult){
         header('location:beds.php');
     }else{
         die(mysqli_error($con));
     }
 }
+?>
+<?php
+if(isset($_POST['addRoom'])){
+    $room_availability =  $_POST['room_availability'];
+    $room_no = $_POST['room_no'];
 
+    $sql = "INSERT INTo room(room_no,room_availability) VALUES('$room_no','$room_availability');";
+    $addresult=mysqli_query($con,$sql);
+
+    if($addresult){
+        header('location:beds.php');
+    }else{
+        die(mysqli_error($con));
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +79,9 @@ if(isset($_POST['submit'])){
                 <button class="button" id="update-room">
                     Update Room
                 </button>
+                <button class="button" id="add-room">
+                    Add Room
+                </button>
                 <div class="room-cards">
                     <?php
                         $sql = "select room_no,room_availability from `room`";
@@ -101,7 +118,7 @@ if(isset($_POST['submit'])){
                 <div class="update-rooms">
                     <div class="popup" id="update-room-popup">
                         <div class="popup-content">
-                            <img src="../images/close.png" alt="close" class="close">
+                            <!-- <img src="../images/close.png" alt="close" class="close"> -->
                             <form method="post">
                                 <h1>Update Room</h1>
                                 <div class="form-group">
@@ -115,7 +132,37 @@ if(isset($_POST['submit'])){
                                         <option value="not_available">not_available</option>
                                     </select>
                                 </div>
-                                <button type="submit" name ="submit">Submit</button>
+                                <div class="button-container">
+                                    <button type="submit" name ="updateRoom">Submit</button>
+                                    <button class="close-button" name ="close">Close</button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="add-rooms">
+                    <div class="popup" id="add-room-popup">
+                        <div class="popup-content">
+                            <!-- <img src="../images/close.png" alt="close" class="close"> -->
+                            <form method="post">
+                                <h1>Add Room</h1>
+                                <div class="form-group">
+                                    <label>Room No</label>
+                                    <input type="text" class="form-control" placeholder="Enter Room No" name="room_no">
+                                </div>
+                                <div class="form-group">
+                                    <label>Availability</label>
+                                    <select name="room_availability" id="room_availability">
+                                        <option value="available">Available</option>
+                                        <option value="not_available">not_available</option>
+                                    </select>
+                                </div>
+                                <div class="button-container">
+                                    <button type="submit" name ="addRoom">Submit</button>
+                                    <button class="close-button" name ="close">Close</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -130,8 +177,14 @@ if(isset($_POST['submit'])){
    document.getElementById("update-room").addEventListener("click", function(){
         document.querySelector("#update-room-popup").style.display = "flex";
     })
-    document.querySelector(".close").addEventListener("click", function(){
+    document.querySelector(".close-button").addEventListener("click", function(){
         document.querySelector("#update-room-popup").style.display = "none";
+    })
+    document.getElementById("add-room").addEventListener("click", function(){
+        document.querySelector("#add-room-popup").style.display = "flex";
+    })
+    document.querySelector(".close").addEventListener("click", function(){
+        document.querySelector("#add-room-popup").style.display = "none";
     })
 </script>
 

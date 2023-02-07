@@ -87,25 +87,6 @@
     background-color: #fff;
     border: 1px solid #e5e5e5;
     border-radius: 3px;
-    /* margin-top: 20px;
-    width: 50%;
-    padding: 8px;
-    background: #f9f8ff;
-    padding: 10px;
-    border-radius: 15px;
-    display: inline-block;
-    align-items: flex-start; */
-
-
-    /* display: block;
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box; */
 }
 .popup-content label{
     display: flex;
@@ -177,37 +158,17 @@
     margin-left: 20px;
     font-size: 20px;
 }
-/* button{
-    background-color: #24354E;
-    font-size: 10px;
-    font-weight: normal;
-    border-radius: 8px;
-    padding: 10px;
-    float: right;
-    margin: 5px;
-    color: #f9f8ff;
-    
-} */
-/* button:hover{
-    cursor: pointer;
-}
-button a{
-    color: #f9f8ff;
-    text-decoration: none;
-} */
 
 .room-cards{
     width: 100%;
     padding: 35px 20px ;
-    /* display: flex;
-    flex-direction: row; */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) ;
-    grid-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .room {
     padding: 20px;
+    margin: 10px;
     width: 250px;
     display: flex;
     align-items: center;
@@ -290,4 +251,15 @@ button a{
     padding: 8px 10px;
     background: #fff;
 }
-
+select{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+select option{
+    padding: 5px;
+}
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
