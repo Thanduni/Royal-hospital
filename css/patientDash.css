@@ -1,12 +1,12 @@
 .cards{
     margin-top: 0px;
-    margin-left: 70px;
+    margin-left: 185px;
     width: 80%;
     padding: 35px 20px ;
 
 
     display: flex;
-    margin: 20px;
+    /* margin: 20px; */
     flex-wrap: nowrap;
 
     /*margin-top: -300px;*/
