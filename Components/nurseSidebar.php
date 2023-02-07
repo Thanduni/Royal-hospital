@@ -22,7 +22,7 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Nurse/nurseDash.php' ?>" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL . '/Nurse/nursedashboard.php' ?>" target="_self"><img class="icons"
                                             src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>

@@ -106,54 +106,46 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </a> 
             </div>
         </div>
-
-        <div class="table-box">
-            <div class="table-body">
-                <table>
-                    <thead>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Venue</th>
-                        <th>Doctor</th>
-                        <th>Department</th>
-                    </thead>
-                    <tbody>
+        <div class="wrapper">
+            <div class="table">
+                <div class="row headerT">
+                    <div class="cell">Date</div>
+                    <div class="cell">Time</div>
+                    <div class="cell">Venue</div>
+                    <div class="cell">Doctor</div>
+                    <!-- <div class="cell">Status</div> -->
                     <?php
-                        
+
+                    if (isset($_POST["submit"])) {
+
+                        $date = $_POST['date'];
+                        $department = $_POST['department'];
+                        $doctor = $_POST['doctor'];
+                        $msg = $_POST['msg'];
+
+                        // $dnic = mysqli_fetch_assoc(mysqli_query($con, "SELECT `nic` FROM `user` WHERE user_role = 'doctor' and name = '.$doctor.'"));
+                        // $pnic =  mysqli_fetch_assoc(mysqli_query($con,"SELECT `nic` FROM `user` WHERE user_role = 'patient' and patientID = '.$email.'"));
+                        // $docid = mysqli_fetch_assoc(mysqli_query($con, "SELECT `doctorID` FROM `doctor` WHERE nic='.$dnic.'"));
+                        // $pid =  mysqli_fetch_assoc(mysqli_query($con,"SELECT patientID FROM patient WHERE nic='.$pnic.'"));
+                        $pid = $_SESSION['patientID'];
                         $select_slot = mysqli_fetch_assoc(mysqli_query($con, "select * from appointment where patientID = 'NULL'"));
 
-                        header('location:./patient/patientdash.php?pid='.$pid.'');
+                        header('location:./patient/patientdash.php?pid=' . $pid . '');
 
                         if ($select_slot) {
-                            mysqli_query($con, "INSERT INTO `appointment`(` `patientID`)
-                            VALUES ('$pid')");
+                            mysqli_query($con, "INSERT INTO `appointment`(`appointmentID`, `date`, `time`, `venue`, `doctorID`, `receptionistID`, `patientID`, `message`, `status`)
+                            VALUES ('','','','','','','$pid','','')");
                             $query = "select date,time,venue,doctor from appointment where patientID = '.$pid.'";
                             $result = mysqli_query($con, $query);
                             $rows = mysqli_num_rows($result);
                             echo $rows;
                             echo $result;
                             echo $query;
-                            for($j=0;$j< $rows;++$j){
-                                $resilt1->data_seek($j);
-                                $row1 = $result1->fetch_array(MYSQLI_ASSOC);
-                                $date = $row[0];
-                                $time = $row[1];
-                                $venue = $row[2];
-                                $doctor = $row[3];
-                                $department = $row[4];
-
-                                echo '<tr>
-                                        <td scope= "row">'.$date.'</td>
-                                        <td>'.$time.'</td>
-                                        <td>'.$venue.'</td>
-                                        <td>'.$doctor.'</td>
-                                        <td>'.$department.'</td>
-                                </tr>';
-                            }
+                            // for($j=0;$j< $rows;++$j)
                         }
+                    }
                     ?>
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     </div>

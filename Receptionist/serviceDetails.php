@@ -23,7 +23,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
     </head>
     <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name'] . "&id=" . $_GET['id']); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -41,17 +41,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Bill List
             </div>
-            <p>
-                <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
-                <button type="button" id="addButton" onclick="displayPatientAddForm()">+Create Bill</button>
-            </p>
-
             <div class="userClass">
                 <?php
-                if(@$_GET['startDate'] && @$_GET['endDate']){
+                if (@$_GET['startDate'] && @$_GET['endDate'] && @$_GET['status']) {
                     $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
                         purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'
-                         and purchases.date between '".$_GET['startDate']."' AND '".$_GET['endDate']."'";
+                        and purchases.paid_status='" . $_GET['status'] . "' and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                }else if((@$_GET['startDate'] && @$_GET['endDate']) && !@$_GET['status']){
+                    $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                } else if ((!@$_GET['startDate'] || !@$_GET['endDate']) && @$_GET['status']) {
+                    $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'
+                        and purchases.paid_status='" . $_GET['status'] . "'";
                 } else {
                     $query1 = "SELECT purchases.date, service.Service_name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
                         purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'";
@@ -71,29 +74,41 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     <h3 style="text-align: center"><u>Filter Cost Information</u></h3>
                     <table>
                         <form action="dateFilter.php?id=<?php echo $_GET['id'] ?>" method="post">
-                        <tr>
-                            <td><label for="Start date">Start date: </label></td>
-                            <td><input type="date" name="startDate" id="startDate" placeholder="Enter the start date"></td>
-                        </tr>
-                        <tr><td colspan="2" id="startDateWarn"></td></tr>
-                        <tr>
-                            <td><label for="End date">End date: </label></td>
-                            <td><input type="date" name="endDate" id="endDate" placeholder="Enter the end date"></td>
-                        </tr>
-                        <tr><td colspan="2" id="endDateWarn"></td></tr>
-                        <tr>
-                            <td colspan="2"><button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" id="filterAppointment" name="filterAppointment">
-                                    Filter appointments</button></td>
-                        </tr>
+                            <tr>
+                                <td><label for="Start date">Start date: </label></td>
+                                <td><input type="date" name="startDate" id="startDate"
+                                           placeholder="Enter the start date"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" id="startDateWarn"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="End date">End date: </label></td>
+                                <td><input type="date" name="endDate" id="endDate" placeholder="Enter the end date">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" id="endDateWarn"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Not paid">Not paid</label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" style="display: inline" id="paidStatus" name="paidStatus">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit"
+                                            id="filterAppointment" name="filterAppointment">
+                                        Filter appointments
+                                    </button>
+                                </td>
+                            </tr>
                         </form>
-                        <tr><td colspan="2" id="finalWarning"></td></tr>
                         <tr>
-                            <td>
-                                <label for="Not paid">Not paid</label>
-                            </td>
-                            <td>
-                                <input type="checkbox" style="display: inline" id="paidStatus">
-                            </td>
+                            <td colspan="2" id="finalWarning"></td>
                         </tr>
                     </table>
                     <br>
@@ -168,8 +183,22 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         </div>
                     </div>
                     <?php
-                    $query1 = "SELECT purchases.date, test.test_name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                    if (@$_GET['startDate'] && @$_GET['endDate'] && @$_GET['status']) {
+                        $query1 = "SELECT purchases.date, test.test_name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'
+                        and purchases.paid_status='" . $_GET['status'] . "' and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                    } else if((@$_GET['startDate'] && @$_GET['endDate']) && !@$_GET['status']){
+                        $query1 = "SELECT purchases.date, test.test_name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                    } else if ((!@$_GET['startDate'] || !@$_GET['endDate']) && @$_GET['status']) {
+                        $query1 = "SELECT purchases.date, test.test_name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'
+                        and purchases.paid_status='" . $_GET['status'] . "'";
+                    } else {
+                        $query1 = "SELECT purchases.date, test.test_name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
                         purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'";
+                    }
                     $result1 = $con->query($query1);
                     $rows = $result1->num_rows;
                     ?>
@@ -228,8 +257,23 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         </div>
                     </div>
                     <?php
-                    $query1 = "SELECT purchases.date, item.item_name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                    if (@$_GET['startDate'] && @$_GET['endDate'] && @$_GET['status']) {
+                        $query1 = "SELECT purchases.date, item.item_name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                        purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.paid_status='" . $_GET['status'] . "' and  purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                    } else if((@$_GET['startDate'] && @$_GET['endDate']) && !@$_GET['status']){
+                        $query1 = "SELECT purchases.date, item.item_name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                        purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'
+                        and  purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                    } else if ((!@$_GET['startDate'] || !@$_GET['endDate']) && @$_GET['status']) {
+                        $query1 = "SELECT purchases.date, item.item_name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                        purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.paid_status='" . $_GET['status'] . "'";
+                    } else {
+                        $query1 = "SELECT purchases.date, item.item_name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
                         purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'";
+                    }
+
                     $result1 = $con->query($query1);
                     $rows = $result1->num_rows;
                     ?>
@@ -288,14 +332,54 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         </div>
                     </div>
                     <?php
-                    $query1 = "SELECT purchases.date, service.Service_name AS name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+
+                    if (@$_GET['startDate'] && @$_GET['endDate'] && @$_GET['status']) {
+                        $query1 = "SELECT purchases.date, service.Service_name AS name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.paid_status='" . $_GET['status'] . "' and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'"
+                            . " UNION " .
+                            "SELECT purchases.date, test.test_name AS name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.paid_status='" . $_GET['status'] . "' and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'"
+                            . " UNION " .
+                            "SELECT purchases.date, item.item_name AS name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                        purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.paid_status='" . $_GET['status'] . "' and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                    } else if((@$_GET['startDate'] && @$_GET['endDate']) && !@$_GET['status']){
+                        $query1 = "SELECT purchases.date, service.Service_name AS name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'
+                        and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'"
+                            . " UNION " .
+                            "SELECT purchases.date, test.test_name AS name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'"
+                            . " UNION " .
+                            "SELECT purchases.date, item.item_name AS name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                        purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'
+                         and purchases.date between '" . $_GET['startDate'] . "' AND '" . $_GET['endDate'] . "'";
+                    } else if ((!@$_GET['startDate'] || !@$_GET['endDate']) && @$_GET['status']) {
+                        $query1 = "SELECT purchases.date, service.Service_name AS name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "' AND 
+                        purchases.paid_status = '" . $_GET['status'] . "'"
+                            . " UNION " .
+                            "SELECT purchases.date, test.test_name AS name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                        purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "' AND 
+                        purchases.paid_status = '" . $_GET['status'] . "'"
+                            . " UNION " .
+                            "SELECT purchases.date, item.item_name AS name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                        purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "' AND 
+                        purchases.paid_status = '" . $_GET['status'] . "'";
+                    } else {
+                        $query1 = "SELECT purchases.date, service.Service_name AS name, purchases.quantity, purchases.quantity * service.cost as rate, purchases.paid_status from 
                         purchases inner JOIN service ON purchases.item = service.serviceID where purchases.item_flag='s' and purchases.patientID='" . $_GET['id'] . "'"
-                        . " UNION " .
-                        "SELECT purchases.date, test.test_name AS name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
+                            . " UNION " .
+                            "SELECT purchases.date, test.test_name AS name, purchases.quantity, purchases.quantity * test.cost as rate, purchases.paid_status from 
                         purchases inner JOIN test ON purchases.item = test.testID where purchases.item_flag='t' and purchases.patientID='" . $_GET['id'] . "'"
-                        . " UNION " .
-                        "SELECT purchases.date, item.item_name AS name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
+                            . " UNION " .
+                            "SELECT purchases.date, item.item_name AS name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
                         purchases inner JOIN item ON purchases.item = item.itemID where purchases.item_flag='d' and purchases.patientID='" . $_GET['id'] . "'";
+                    }
+
                     $result1 = $con->query($query1);
                     $rows = $result1->num_rows;
                     ?>
@@ -354,12 +438,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         </div>
                     </div>
                 </div>
-
             </div>
+            <p>
+                <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
+            <form action="invoice.php?query=<?php echo $query1 ?>&id=<?php echo $_GET['id'] ?>" method="post">
+                <button type="submit" name="createBill">+Create Bill</button>
+            </form>
+            </p>
         </div>
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
-<!--    <script src="--><?php //echo BASEURL . '/js/filterCostInfo.js' ?><!--"></script>-->
+    <!--    <script src="--><?php //echo BASEURL . '/js/filterCostInfo.js' ?><!--"></script>-->
     </body>
     </html>
     <?php
