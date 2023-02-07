@@ -6,8 +6,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
 
 <?php
-if(isset($_GET['reportid'])){
-    $patientID = $_GET['reportid'];
+if(isset($_GET['patientid'])){
+    $patientID = $_GET['patientid'];
     $patientName = $_GET['name'];
 }
 ?>
@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
 
     if($result){
         
-        header('location:dailyReport.php?reportid ='.$patientID);
+        header('location:dailyReport.php?patientid='.$patientID.'&name='.$patientName);
     }else{
         die(mysqli_error($con));
     }
@@ -76,10 +76,10 @@ if(isset($_POST['submit'])){
                 <div class="patient-details">
                     <div class="patient-name">Patient Name: <?php
                                                                 // $patientName =  $patientName;
-                                                                echo " $patientName "?>  </div>
+                                                                echo $patientName ?>  </div>
                     <div class="patient-id">Patient ID: <?php 
                                                                 // $patientID = $patientID;
-                                                                echo " $patientID "?></div>
+                                                                echo $patientID?></div>
                 </div>
                 <div class="table-container">
                     <h2>Vital Signs</h2>
