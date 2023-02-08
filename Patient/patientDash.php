@@ -145,7 +145,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         <div class="modal">
             <div class="login-form">
             <h2>Put Your Appointment</h2><br>
-            <form  action="appointment.php" method="post"></form>
+            <form  action="appointment.php" method="post"> 
                 <label for="">Date</label><br><br>
                 <input type="date" name="date" id="date"><br><br>
                 <label for="">Department</label><br><br>
