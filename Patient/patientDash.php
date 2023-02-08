@@ -49,9 +49,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
 
             </ul>
-            <!-- <div class="payment">
-                <button>Online Payment</button>  
-            </div> -->
             <div class="cards">
             <a href="">
                 <div class="card">
@@ -82,7 +79,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div> 
             </a> 
-            <a id=openform target="_self" style="cursor:pointer">
+            <a id=open target="_self" style="cursor:pointer">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Appointment</div>
@@ -176,6 +173,17 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <script type="text/javascript">
         $(function(){
             $('#openform').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('.cancel-modal').click(function(){
+                $('#login-modal').fadeOut();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#open').click(function(){
                 $('#login-modal').fadeIn().css("display","flex");
             });
             $('.cancel-modal').click(function(){
