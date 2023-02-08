@@ -42,7 +42,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 Royal Hospital Management System
             </div>
             <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Nurse</li>
+                <li class="userType"><img src="../images/userInPage.svg" alt="nurse"> Nurse</li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img                                src="../images/logout.jpg">
                     </a></li>
             </ul>
