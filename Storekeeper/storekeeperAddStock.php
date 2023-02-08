@@ -2,32 +2,24 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 ?> 
 
 <?php
 
 if(isset($_POST['submit'])){
 
-    // $itemId = $_POST['itemID'];
-    // $badgeNo = $_POST['badgeNo'];
-    $medicineName = $_POST['medicineName'];
-
-    $companyName = $_POST['companyName'];
-    $supplierName = $_POST['supplierName'];
-    $unitType = $_POST['unitType'];
-
-    // $unitCost = $_POST['unitCost'];
+    $medicineName = $_POST['item_name'];
     $quantity = $_POST['quantity'];
     $manufacturedDate = $_POST['manufacturedDate'];
     $expiredDate = $_POST['expiredDate'];
-    // $useState = $_POST['useState'];
 
+    $itemIDSql = "select itemID from item where item_name='".$medicineName."'";
+    $result=mysqli_query($con,$itemIDSql);
+    $itemID = mysqli_fetch_array($result, MYSQLI_ASSOC)['itemID'];
 
-    $sql="insert into `inventory` (medicineName,quantity,manufacturedDate,expiredDate) values ('$medicineName','$quantity','$manufacturedDate','$expiredDate')";
-    // echo $sql;
+    $sql="insert into `inventory` (itemID, quantity, manufacturedDate, expiredDate) values ('$itemID','$quantity','$manufacturedDate','$expiredDate')";
     $result=mysqli_query($con,$sql);
-
 }
 
 ?>
@@ -51,7 +43,9 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 <div class="user">
-    <?php include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -77,28 +71,19 @@ if(isset($_POST['submit'])){
         
         <form method="post">
             <div class="row">
-                <!-- <div class="column">
-                    <label for="name">Item ID</label>
-                    <input name="itemId" type="text" id="name" placeholder="Enter Item ID here">
-                </div> -->
-                <!-- <div class="column">
-                    <label for="email">Badge no.</label>
-                    <input name="badgeNo" type="text" id="email" placeholder="Enter Badge no. here">
-                </div> -->
                 <div class="column">
                     <label>Medicine name</label>
 
-                    <select name="medicineName" id="">
-                    <!-- <option>--Select--</option> -->
+                    <select name="item_name" id="">
                     <?php
-                    $sql="Select medicineName from `item`";
+                    $sql="Select * from `item`";
                     $result=mysqli_query($con,$sql);
                     
                     
 
                     
                         while($row=mysqli_fetch_assoc($result)){
-                            $medicineName = $row['medicineName'];
+                            $medicineName = $row['item_name'];
                             
 
                         ?>
@@ -113,80 +98,46 @@ if(isset($_POST['submit'])){
                 
             </div>
 
-            <div class="row">
-
-                <div class="column">
-                    <label>Company Name</label>
-                    <input name="companyName" type="text" id="name" placeholder="Enter Company Name here">
-                </div></div>
-
-            <div class="row">
-                
-                <div class="column">
-                    <label>Supplier Name</label>
-                    <input name="supplierName" type="text" id="email" placeholder="Enter Supplier Name here">
-                </div>
-                
-            </div> -->
-            <!-- <div class="row">
-                <div class="column">
-                    <label>Unit Type</label>
-                    <select name="unitType" id="">
-                        <option value="">Select type</option>
-                        <option value="cards">cards</option>
-                        <option value="bottles">bottles</option>
-                        <option value="pills">pills</option>
-                        <option value="injections">injections</option>
-                        <option value="tablets">tablets</option>
-
-                    </select>
-
-                    <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here">
-                </div>
-                
-               
-                
-
-            </div> -->
-
-            
-
-            <!-- <div class="row"><div class="column">
-                    <label>Unit Cost</label>
-                    <input name="unitCost" type="text" id="contact" placeholder="Enter Unit Cos here">
-                </div></div> -->
+<!--            <div class="row">-->
+<!--                <div class="column">-->
+<!--                    <label>Unit Type</label>-->
+<!--                    <select name="unitType" id="" value="">-->
+<!--                        <option value="">Select type</option>-->
+<!--                        <option value="cards">cards</option>-->
+<!--                        <option value="bottles">bottles</option>-->
+<!--                        <option value="pills">pills</option>-->
+<!--                        <option value="injections">injections</option>-->
+<!--                        <option value="tablets">tablets</option>-->
+<!---->
+<!--                    </select>-->
+<!---->
+<!--                    <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here">-->
+<!--                </div>-->
+<!--                -->
+<!--               -->
+<!--                -->
+<!---->
+<!--            </div>-->
 
             <div class="row"> <div class="column">
-                    <label>Qantity</label>
-                    <input name="quantity" type="text" id="contact" placeholder="Enter Qantity here">
+                    <label>Quantity</label>
+                    <input name="quantity" type="number" id="contact" placeholder="Enter Quantity here">
                 </div></div>
 
 
-                <div class="row"> <div class="column">
-                <div class="column">
-                    <label>Manufactured date</label>
-                    <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here">
-                </div>
-                    
-            </div></div>
 
             <div class="row">
                 
                 <div class="column">
 
                     <label>Manufactured date</label>
-                    <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here">
+                    <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>">
                 </div>
                 <div class="column">
                     <label>Expired date</label>
-                    <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here">
+                    <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
                 </div>
 
-                <!-- <div class="column">
-                    <label for="email">Use state</label>
-                    <input name="useState" type="text" id="email" placeholder="Enter Use state here">
-                </div> -->
-                
             </div>
             
             <!-- <div class="row">

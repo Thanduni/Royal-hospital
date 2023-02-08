@@ -1,16 +1,14 @@
  <?php
 session_start();
-//die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 ?> 
 
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperDash.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,7 +22,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 </head>
 <body>
 <div class="user">
-    <?php include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -58,7 +58,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             <div class="card-cont">
                 
                 <div class="card-h">
-                    <p>Total medicines</p>
+                    <p>Available Medicines</p>
                 </div>
 
                 <div class="card-m">
@@ -66,13 +66,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         $sql = "SELECT itemID FROM item ORDER BY itemID";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
-//                        if($result)
-//                            die("success");
-//                        else
-//                            die("Fail");
                         echo '<h1>'.$row.'</h1>';
                     ?>
-                    <!-- <p>40</p> -->
                 </div>
 
                 <div class="card-b">
@@ -87,21 +82,19 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
 </a>
         <div class="card">
-        <!-- <a href="storekeeperAvailableMedicine.php"> -->
             <div class="card-cont">
                 
                 <div class="card-h">
-                    <p>Available medicine</p>
+                    <p>Medicines in stock</p>
                 </div>
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT medicineName FROM availableitemstock WHERE fullQuantity>0";
+                        $sql = "select DISTINCT itemID from inventory where expiredDate > CURRENT_DATE and quantity > 0;";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
                     ?>
-                    <!-- <p>40</p> -->
                 </div>
 
                 <div class="card-b">
@@ -123,7 +116,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        $sql = "SELECT * FROM `availableitemstock` WHERE fullQuantity=0";
+                        $sql = "select * from inventory where expiredDate > CURRENT_DATE group by itemID having sum(quantity)=0";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
@@ -151,10 +144,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                 <div class="card-m">
                 <?php
-                        // $sql = "SELECT itemID FROM inventory ORDER BY itemID";
-                        // $result = mysqli_query($con,$sql);
-                        // $row = mysqli_num_rows($result);
-                        // echo '<h1>'.$row.'</h1>';
+                         $sql = "SELECT * from inventory INNER JOIN item on inventory.itemID=item.itemID where expiredDate < CURRENT_DATE GROUP BY inventory.itemID;";
+                         $result = mysqli_query($con,$sql);
+                         $row = mysqli_num_rows($result);
+                         echo '<h1>'.$row.'</h1>';
                     ?>
                     <!-- <p>40</p> -->
                 </div>
@@ -174,7 +167,6 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 
 <!--                </div>-->
         <!-- content start -->
-        <?php echo "hgjh" ?>
         <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
 </div>
