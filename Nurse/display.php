@@ -8,11 +8,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 <?php
 if(isset($_POST['submit'])){
     // $patientID =  $_POST['patientID'];
-    $RoomNo = $_POST['roomNo'];
+    $RoomNo = $_POST['room_no'];
     $admit_date = $_POST['admit_date'];
     $admit_time = $_POST['admit_time'];
 
-    $sql="INSERT INTO inpatient(admit_time,admit_date,roomNo) values('$admit_time','$admit_date','$RoomNo');";
+    $sql="INSERT INTO inpatient(admit_time,admit_date,room_no) values('$admit_time','$admit_date','$RoomNo');";
     $result=mysqli_query($con,$sql);
 
     if($result){
@@ -85,13 +85,13 @@ if(isset($_POST['submit'])){
                         <tbody>
 
                             <?php
-                                $sql="select user.name,inpatient.roomNo,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                                $sql="select user.name,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
                                 while($row=mysqli_fetch_assoc($result)){
                                 $name =  $row['name'];
-                                $RoomNo = $row['roomNo'];
+                                $RoomNo = $row['room_no'];
                                 $admit_date = $row['admit_date'];
                                 $admit_time = $row['admit_time'];
                                 $drug_allergies = $row['drug_allergies'];
@@ -127,7 +127,7 @@ if(isset($_POST['submit'])){
                 </div>
                 <div class="form-group">
                     <label>Room No</label>
-                    <input type="text" class="form-control" placeholder="Enter room No" name="roomNo" >
+                    <input type="text" class="form-control" placeholder="Enter room No" name="room_no" >
                 </div>
                 <div class="form-group">
                     <label>Admit date</label>

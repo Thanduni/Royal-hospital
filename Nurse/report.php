@@ -56,14 +56,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                         </thead>
                         <tbody>
                             <?php
-                                $sql="select patient.patientID,user.name,inpatient.roomNo from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                                $sql="select patient.patientID,user.name,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
                                     while($row=mysqli_fetch_assoc($result)){
                                      $patientID = $row['patientID'];
                                         $name =  $row['name'];
-                                        $RoomNo = $row['roomNo'];
+                                        $RoomNo = $row['room_no'];
                                         echo '<tr>
                                         <td>'.$patientID.'</td>
                                         <td>'.$name.'</td>
