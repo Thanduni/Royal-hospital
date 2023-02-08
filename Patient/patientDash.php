@@ -33,7 +33,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         
-        ?>
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
         <div class="userContents"  id="center">
             <div class="title">
@@ -84,6 +83,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div> 
             </a> 
             </div>
+
+            
+
             
             <div class="wrapper">
             <div class="table">
@@ -93,47 +95,18 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="cell">Venue</div>
                     <div class="cell">Doctor</div>
                 </div>
-                    <?php
-                    if (isset($_POST["submit"]) or isset($_SESSION['mailaddress'])) {
-
-                        $date = $_POST['date'];
-                        $department = $_POST['department'];
-                        $doctor = $_POST['doctor'];
-                        $msg = $_POST['msg'];
-
-                        $query = "SELECT appointmentID FROM appointment WHERE date = '$date' and patientID is NULL";
-                        // die($query);
-                        $result = mysqli_query($con, $query);
-                        $row1 = mysqli_fetch_array(mysqli_query($con, $query));
-
-                        $nic = $_SESSION['nic'];
-                        $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
-                        $result_pid = mysqli_query($con, $pid_query);
-                        $pid = mysqli_fetch_array($result_pid);
-                        $appID = $row1[0];
-
-                        if ($row1) {
-                            $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid[0] WHERE appointmentID = $appID";
-                            mysqli_query($con, $sql);
-                        } else {
-                            echo '<script>alert("NO More Apointments!");</script>;';
-                        }
                     
+                    
+<?php
 
-                        $query = "SELECT date,time,venue,doctorID FROM appointment WHERE patientID = $pid[0]";
+        $patientIdQuery = "select patientID from patient where nic = '" . $_SESSION['nic'] . "'";
+        $result = mysqli_query($con, $patientIdQuery);
+        $pID = mysqli_fetch_assoc($result)['patientID'];
+
+                        $query = "SELECT appointment.date,appointment.time,appointment.venue,user.name FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
                         // die($query);
                         $result = mysqli_query($con, $query);
-                        while($rows = mysqli_fetch_assoc($result)){
-                            // $dID = $rows['doctorID'];
-                            // $sql = "select nic from doctor where doctorID = $dID";
-                            // $res1 = mysqli_query($con, $sql);
-                            // $row2 = mysqli_fetch_array($res1);
-                            // $dNIC = $row2[0];
-                            // $sql2 = "select name from user where nic = '$dNIC' and userRole = 'Doctor'";
-                            // die($sql);
-                            // $res2 = mysqli_query($con, $sql2);
-                            // $row1 = mysqli_fetch_array($res2);
-                            ?>     
+                        while($rows = mysqli_fetch_assoc($result)){ ?>
                                     <div class="row">
                                         <div class="cell" data-title="Date">
                                             <?php echo $rows['date']; ?>
@@ -145,23 +118,23 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                             <?php echo $rows['venue']; ?>
                                         </div>
                                         <div class="cell" data-title="Doctor">
-                                            <?php echo $rows['doctorID']; ?>
+                                            <?php echo $rows['name']; ?>
                                         </div>
-                                    </div> 
+                                    </div>  
                          <?php
                     }
-                }
                         //  header('location:./patient/patientdash.php?pid='.$pid.''); ?>
                 </div>
             </div>
         </div>
     </div>
 
+
     <div id="login-modal">
         <div class="modal">
             <div class="login-form">
             <h2>Put Your Appointment</h2><br>
-            <form  action="" method="post">
+            <form  action="test.php" method="post">
                 <label for="">Date</label><br><br>
                 <input type="date" name="date" id="date"><br><br>
                 <label for="">Department</label><br><br>

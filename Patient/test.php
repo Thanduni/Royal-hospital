@@ -5,30 +5,26 @@ require_once("../conf/config.php");
 
 if (isset($_POST["submit"])) {
 
-                        $date = $_POST['date'];
-                        $department = $_POST['department'];
-                        $doctor = $_POST['doctor'];
-                        $msg = $_POST['msg'];
-                    
-                        $query = "SELECT * FROM appointment WHERE patientID IS NULL";
-                        $result = mysqli_query($con, $query);
-                        // $select_slot = mysqli_fetch_assoc($result);
-    die(mysqli_num_rows($result));
-                        print_r($select_slot);
-                        $nic = $_SESSION['nic'];
-                        $pid_query = "SELECT patientID FROM patient WHERE nic = '.$nic.'";
-                        $result_pid = mysqli_query($con,$pid_query);
-                        $pid = mysqli_fetch_assoc($result_pid);
+    $date = $_POST['date'];
+    $department = $_POST['department'];
+    $doctor = $_POST['doctor'];
+    $msg = $_POST['msg'];
 
-                        // echo $pid;
-                        if ($select_slot) {
-                            mysqli_query($con, "INSERT INTO `appointment`(`patientID`)
-                            VALUES ('$pid')");
-                            $query = "SELECT date,time,venue,doctor,patientID FROM appointment WHERE patientID = '.$pid.'";
-                            $result = mysqli_query($con, $query);
-                            $rows = mysqli_num_rows($result);
-        for ($j = 0; $j < $rows; ++$j) {
-            $result->data_seek($j);
-            $row = $result->fetch_array(MYSQLI_ASSOC);
-        }
-                    }}?>
+    $query = "SELECT appointmentID FROM appointment WHERE date = '$date' and patientID is NULL";
+    $result = mysqli_query($con, $query);
+    $row1 = mysqli_fetch_array($result);
+
+    $nic = $_SESSION['nic'];
+    $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+    $result_pid = mysqli_query($con, $pid_query);
+    $pid = mysqli_fetch_array($result_pid);
+    $appID = $row1[0];
+
+    if ($row1) {
+        $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid[0] WHERE appointmentID = $appID";
+        $result = mysqli_query($con, $sql);
+    } else {
+        echo '<script>alert("NO More Apointments!");</script>;';
+    }
+    header("location: " . BASEURL . "/Patient/patientDash.php");
+}
