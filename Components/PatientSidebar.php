@@ -30,7 +30,7 @@ require_once("../conf/config.php");
             </a></li>
 
         <li><a id="openform" target="_self"><img class="icons"
-                src=<?php echo BASEURL . '/images/MakeAnAppointments.svg' ?> alt="user" align="middle">
+                src=<?php echo BASEURL . '/images/appointment.svg' ?> alt="user" align="middle">
                 <p>Appointment</p>
             </a></li>
 

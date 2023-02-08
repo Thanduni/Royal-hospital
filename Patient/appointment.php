@@ -17,14 +17,14 @@ if (isset($_POST["submit"])) {
     $nic = $_SESSION['nic'];
     $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
     $result_pid = mysqli_query($con, $pid_query);
-    $pid = mysqli_fetch_array($result_pid);
+    $pid = mysqli_fetch_assoc($result_pid)['patientID'];
     $appID = $row1[0];
 
     if ($row1) {
-        $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid[0] WHERE appointmentID = $appID";
+        $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid WHERE appointmentID = $appID";
         $result = mysqli_query($con, $sql);
     } else {
-        echo '<h3>NO More Apointments!</h3>;';
+        echo '<h3>No More Apointments!</h3>;';
     }
-    header("location: " . BASEURL . "/Patient/patientDash.php");
+    header("location: " . BASEURL ."/Patient/patientDash.php");
 }
