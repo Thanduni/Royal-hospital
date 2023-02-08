@@ -1,38 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="<?php echo BASEURL . '/js/appoinment.js'; ?>"></script>
-    <link rel="stylesheet" href="<? echo BASEURL .'/css/appointment.css';?>">
-    <title>Appointment</title>
-</head>
-<body>
-    <div class="wrapper">
-        <div class="popup-box">
-            <h2>Put Your Appointment</h2>
-            <form action="" method="post">
-                <label for="">Date</label><br><br>
-                <input type="date" name="date" id="date"><br><br>
-                <label for="">Department</label><br><br>
-                <select name="department" id="department">
-                    <option value="">Please A Select Department</option>
-                    <option value="Anesthetics">Anesthetics</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Gastroentology">Gastroentology</option>
-                </select><br><br>
-                <label for="">Doctor</label><br><br>
-                <select name="doctor" id="doctor">
-                    <option value="">Select A Department First</option>
-                </select><br><br>
-                <label for="">Message</label><br><br>
-                <textarea name="msg" id="msg" cols="30" rows="50" placeholder="Your Message To The Doctor"></textarea>
-                <!-- <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn"> -->
-                <button type="submit" name="submit" id="btn" value="submit" onclick="">Submit</button>
-            </form>
-        </div>
-    </div>
-</body>
-</html>
+<?php
+session_start();
+//die( $_SESSION['mailaddress']);
+require_once("../conf/config.php");
+
+if (isset($_POST["submit"])) {
+
+    $date = $_POST['date'];
+    $department = $_POST['department'];
+    $doctor = $_POST['doctor'];
+    $msg = $_POST['msg'];
+
+    $query = "SELECT appointmentID FROM appointment WHERE date = '$date' and patientID is NULL";
+    $result = mysqli_query($con, $query);
+    $row1 = mysqli_fetch_array($result);
+
+    $nic = $_SESSION['nic'];
+    $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+    $result_pid = mysqli_query($con, $pid_query);
+    $pid = mysqli_fetch_array($result_pid);
+    $appID = $row1[0];
+
+    if ($row1) {
+        $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid[0] WHERE appointmentID = $appID";
+        $result = mysqli_query($con, $sql);
+    } else {
+        echo '<script>alert("NO More Apointments!");</script>;';
+    }
+    header("location: " . BASEURL . "/Patient/patientDash.php");
+}
