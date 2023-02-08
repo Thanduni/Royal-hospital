@@ -84,9 +84,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </a> 
             </div>
 
-            
-
-            
             <div class="wrapper">
             <div class="table">
                 <div class="row headerT">
@@ -95,8 +92,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="cell">Venue</div>
                     <div class="cell">Doctor</div>
                 </div>
-                    
-                    
+              
 <?php
 
         $patientIdQuery = "select patientID from patient where nic = '" . $_SESSION['nic'] . "'";
@@ -134,7 +130,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         <div class="modal">
             <div class="login-form">
             <h2>Put Your Appointment</h2><br>
-            <form  action="test.php" method="post">
+            <form  action="appointment.php" method="post"></form>
                 <label for="">Date</label><br><br>
                 <input type="date" name="date" id="date"><br><br>
                 <label for="">Department</label><br><br>
