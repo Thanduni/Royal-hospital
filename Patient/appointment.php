@@ -24,7 +24,7 @@ if (isset($_POST["submit"])) {
         $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid[0] WHERE appointmentID = $appID";
         $result = mysqli_query($con, $sql);
     } else {
-        echo '<script>alert("NO More Apointments!");</script>;';
+        echo '<h3>NO More Apointments!</h3>;';
     }
     header("location: " . BASEURL . "/Patient/patientDash.php");
 }

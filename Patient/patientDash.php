@@ -49,9 +49,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
 
             </ul>
-            <div class="payment">
-                <button><img src="<?php echo BASEURL.'/images/payement.svg' ?>"></img>Online Payment</button>  
-            </div>
+            <!-- <div class="payment">
+                <button>Online Payment</button>  
+            </div> -->
             <div class="cards">
             <a href="">
                 <div class="card">
@@ -79,6 +79,24 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="card-name">Bill Details</div>
                     <div class="icon-box">
                     <i class="fas fa-dollar"></i>
+                </div>
+                </div> 
+            </a> 
+            <a id=openform target="_self" style="cursor:pointer">
+                <div class="card">
+                    <div class="card-content"></div>
+                    <div class="card-name">Appointment</div>
+                    <div class="icon-box">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+                </div> 
+            </a> 
+            <a href="<?php echo BASEURL.'/Patient/payment.php' ?>">
+                <div class="card">
+                    <div class="card-content"></div>
+                    <div class="card-name">Pay Now</div>
+                    <div class="icon-box">
+                    <i class="fas fa-money"></i>
                 </div>
                 </div> 
             </a> 
@@ -119,7 +137,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                     </div>  
                          <?php
                     }
-                        //  header('location:./patient/patientdash.php?pid='.$pid.''); ?>
+                    ?>
                 </div>
             </div>
         </div>
@@ -149,7 +167,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 <!-- <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn"> -->
                
                 <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
-                <button type="submit" name="submit" id="btn" value="submit" onclick="">Submit</button>
+                <button type="submit" name="submit" id="btn" value="submit">Submit</button>
             </form>
             </div>
         </div>
