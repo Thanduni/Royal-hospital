@@ -50,7 +50,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
             </ul>
             <!-- <div class="payment">
-                <button>Online Payment</button>  
+                <button>Online Payment</button>
             </div> -->
             <div class="cards">
             <a href="">
@@ -89,8 +89,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="icon-box">
                     <i class="far fa-calendar-alt"></i>
                 </div>
-                </div> 
-            </a> 
+                </div>
+            </a>
             <a href="<?php echo BASEURL.'/Patient/payment.php' ?>">
                 <div class="card">
                     <div class="card-content"></div>
@@ -98,8 +98,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="icon-box">
                     <i class="fas fa-money"></i>
                 </div>
-                </div> 
-            </a> 
+                </div>
+            </a>
             </div>
 
             <div class="wrapper">
@@ -110,7 +110,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="cell">Venue</div>
                     <div class="cell">Doctor</div>
                 </div>
-              
+
 <?php
 
         $patientIdQuery = "select patientID from patient where nic = '" . $_SESSION['nic'] . "'";
@@ -148,7 +148,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         <div class="modal">
             <div class="login-form">
             <h2>Put Your Appointment</h2><br>
-            <form  action="appointment.php" method="post"></form>
+            <form  action="appointment.php" method="post">
                 <label for="">Date</label><br><br>
                 <input type="date" name="date" id="date"><br><br>
                 <label for="">Department</label><br><br>
