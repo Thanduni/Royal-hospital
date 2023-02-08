@@ -29,9 +29,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
 <body>
     <div class="user">
 
-    <?php include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']);
-
-    ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
     <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
     <div class="userContents"  id="center">
         <div class="title">

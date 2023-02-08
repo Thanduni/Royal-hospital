@@ -26,3 +26,9 @@ if ($_GET['op'] == "deleteReceptionist") {
     $con->query($query);
     header("location: " . BASEURL . "/Admin/adminReceptionistPage.php");
 }
+if ($_GET['op'] == "deleteStorekeeper") {
+    $nic = $_GET['id'];
+    $query = "Delete FROM user where nic=" . $nic;
+    $con->query($query);
+    header("location: " . BASEURL . "/Admin/adminStorekeeperPage.php");
+}

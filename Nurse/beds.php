@@ -56,7 +56,9 @@ if(isset($_POST['addRoom'])){
 
 <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -68,17 +70,17 @@ if(isset($_POST['addRoom'])){
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Room
             </div>
-
+            <button class="button" id="update-room">
+                Update Room
+            </button>
             <div class="main-container">
-                <button class="button" id="update-room">
-                    Update Room
-                </button>
+
                 <button class="button" id="add-room">
                     Add Room
                 </button>

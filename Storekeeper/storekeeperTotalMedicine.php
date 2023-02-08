@@ -2,7 +2,7 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 ?> 
 
 <!doctype html>
@@ -24,7 +24,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 </head>
 <body>
 <div class="user">
-    <?php include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -48,91 +50,64 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
         <!-- content start -->
 
-        <div class="table-box">
-                <table>
-                <tr>
-                <!-- <th>medicine ID</th> -->
-                <th>medicine name</th>
-                <!-- <th>badge no.</th> -->
-                <th>company name</th>
-                <!-- <th>suplier name</th> -->
-                <th>unit type</th>
-                <th>unit cost</th>
-                <!-- <th>qantity</th> -->
-                <!-- <th>manufacture date</th> -->
-                <!-- <th>expire date</th> -->
-                <!-- <th>use state</th> -->
-                
-                </tr>
 
 
+        <div class="wrapper">
+            <div class="table">
+                <div class="row headerT">
+                    <div class="cell">Medicine name</div>
+                    <div class="cell">Company name</div>
+                    <div class="cell">Unit type</div>
+                    <div class="cell">Unit cost</div>
+                </div>
                 <?php
-                    $sql="Select *from `item`";
-                    $allResult=mysqli_query($con,$sql);
-                    $num=mysqli_num_rows($allResult);
-                    
-                    $numberPages=8;
-                    $totalPages=ceil($num/$numberPages);
-                    
+                $sql = "Select *from `item`";
+                $allResult = mysqli_query($con, $sql);
+                $num = mysqli_num_rows($allResult);
 
-                    
-            if(isset($_GET['page'])){
-                $page=$_GET['page'];
-            }
-            else{
-                $page=1;
-            }
-
-            $startinglimit=($page-1)*$numberPages;
-            $sql="Select * from `item` limit ".$startinglimit.','.$numberPages;
-            $result=mysqli_query($con,$sql);
+                $numberPages = 8;
+                $totalPages = ceil($num / $numberPages);
 
 
-                    if($result){
-                        while($row=mysqli_fetch_assoc($result)){
-                            // $itemId = $row['itemID'];
-                            // $badgeNo = $row['badgeNo'];
-                            $medicineName = $row['medicineName'];
-                            $companyName = $row['companyName'];
-                            // $supplierName = $row['supplierName'];
-                            $unitType = $row['unitType'];
-                            $unitCost = $row['unitCost'];
-                            // $qantity = $row['quantity'];
-                            // $manufacturedDate = $row['manufactureDate'];
-                            // $expiredDate = $row['expireDate'];
-                            // $useState = $row['useState'];
 
-                            echo '<tr>
-                            
-                            <td>'.$medicineName.'</td>
-                            <td>'.$companyName.'</td>
-                            
-                            <td>'.$unitType.'</td>
-                            <td>'.$unitCost.'</td>
-                            
-                            
-                            </tr>';
-                        }
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
+
+                $startinglimit = ($page - 1) * $numberPages;
+                $sql = "Select * from `item` limit " . $startinglimit . ',' . $numberPages;
+                $result = mysqli_query($con, $sql);
+
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $item_name = $row['item_name'];
+                        $companyName = $row['companyName'];
+                        $unitType = $row['unitType'];
+                        $unitCost = $row['unit_price'];
+                        ?>
+                        <div class="row">
+
+                            <div class="cell" data-title="Medicine name">
+                                <?php echo $item_name; ?>
+                            </div>
+                            <div class="cell" data-title="Company name">
+                                <?php echo $companyName; ?>
+                            </div>
+                            <div class="cell" data-title="Unit type">
+                                <?php echo $unitType; ?>
+                            </div>
+                            <div class="cell" data-title="Unit cost">
+                                <?php echo $unitCost; ?>
+                            </div>
+
+                        </div>
+                        <?php
                     }
+                }
                 ?>
-
-
-                <!-- <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                
-                </tr> -->
-            
-            </table>
+            </div>
         </div>
 
         <!-- pagination buttons -->

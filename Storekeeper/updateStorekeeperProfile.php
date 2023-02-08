@@ -2,7 +2,7 @@
 session_start();
 //die( $_SESSION['mailaddress']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
     ?>
 
     <!DOCTYPE html>
@@ -14,7 +14,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/updateProfile.css' ?>">
-        <title>Patient update profile - Receptionist</title>
+        <title>Storekeeper update profile - Storekeeper</title>
         <style>
             p.royal {
                 font-size: 20px;
@@ -36,15 +36,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     <div class="user">
         <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="../images/logo5.png" alt="logo">
                 Royal Hospital Management System
             </div>
             <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Patient</li>
+                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Storekeeper</li>
+
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img src="../images/logout.svg">
+
                     </a></li>
             </ul>
             <div class="arrow">
@@ -125,7 +127,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 </td>
                             </tr>
                         </table>
-                        <button name="updateReceptionist" type="submit">Save changes</button>
+                        <button name="updateStorekeeper" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>

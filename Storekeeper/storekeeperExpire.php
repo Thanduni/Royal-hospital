@@ -24,7 +24,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 </head>
 <body>
 <div class="user">
-    <?php include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -48,96 +50,64 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
         <!-- content start -->
 
-        <div class="table-box">
-                <table>
-                <tr>
-                <!-- <th>medicine ID</th> -->
-                <th>badge no.</th>
-                <th>medicine name</th>
-                
-                <!-- <th>company name</th> -->
-                <!-- <th>suplier name</th> -->
-                <!-- <th>unit type</th> -->
-                <!-- <th>unit cost</th> -->
-                <th>qantity</th>
-                <!-- <th>manufacture date</th> -->
-                <th>expired date</th>
-                <!-- <th>use state</th> -->
-                
-                </tr>
-
-
+        <div class="wrapper">
+            <div class="table">
+                <div class="row headerT">
+                    <div class="cell">Batch number</div>
+                    <div class="cell">Medicine name</div>
+                    <div class="cell">Quantity</div>
+                    <div class="cell">Expired date</div>
+                </div>
                 <?php
-                    $sql="Select *from `inventory`";
-                    $allResult=mysqli_query($con,$sql);
-                    $num=mysqli_num_rows($allResult);
-                    
-                    $numberPages=8;
-                    $totalPages=ceil($num/$numberPages);
-                    
+                $sql = "SELECT inventory.badgeNo, item.item_name, inventory.quantity, inventory.expiredDate  from inventory INNER JOIN item on inventory.itemID=item.itemID where expiredDate < CURRENT_DATE;";
+                $allResult = mysqli_query($con, $sql);
+                $num = mysqli_num_rows($allResult);
 
-                    
-            if(isset($_GET['page'])){
-                $page=$_GET['page'];
-            }
-            else{
-                $page=1;
-            }
-
-            $startinglimit=($page-1)*$numberPages;
-            $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
-            $result=mysqli_query($con,$sql);
+                $numberPages = 8;
+                $totalPages = ceil($num / $numberPages);
 
 
-                    if($result){
-                        while($row=mysqli_fetch_assoc($result)){
-                            // $itemId = $row['itemID'];
-                            $badgeNo = $row['badgeNo'];
-                            $medicineName = $row['medicineName'];
-                            // $companyName = $row['companyName'];
-                            // $supplierName = $row['supplierName'];
-                            // $unitType = $row['unitType'];
-                            // $unitCost = $row['unitCost'];
-                            $qantity = $row['quantity'];
-                            // $manufacturedDate = $row['manufactureDate'];
-                            $expiredDate = $row['expiredDate'];
-                            // $useState = $row['useState'];
 
-                            echo '<tr>
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
 
-                            
-                            <td>'.$badgeNo.'</td>
-                            
-                            <td>'.$medicineName.'</td>
-                            
-                            <td>'.$qantity.'</td>
-                            
-                            <td>'.$expiredDate.'</td>
-                            
-                            
-                            </tr>';
-                        }
+                $startinglimit = ($page - 1) * $numberPages;
+                $sql = "SELECT inventory.badgeNo, item.item_name, inventory.quantity, inventory.expiredDate  from inventory INNER JOIN item on inventory.itemID=item.itemID where expiredDate < CURRENT_DATE limit " . $startinglimit . ',' . $numberPages;
+                $result = mysqli_query($con, $sql);
+
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $batchNo = $row['badgeNo'];
+                        $name= $row['item_name'];
+                        $quantity = $row['quantity'];
+                        $expDate = $row['expiredDate'];
+                        ?>
+                        <div class="row">
+
+                            <div class="cell" data-title="Batch number">
+                                <?php echo $batchNo; ?>
+                            </div>
+                            <div class="cell" data-title="Medicine number">
+                                <?php echo $name; ?>
+                            </div>
+                            <div class="cell" data-title="Quantity">
+                                <?php echo $quantity; ?>
+                            </div>
+                            <div class="cell" data-title="Expired date">
+                                <?php echo $expDate; ?>
+                            </div>
+                        </div>
+                        <?php
                     }
+                }
                 ?>
-
-
-                <!-- <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                
-                </tr> -->
-            
-            </table>
+            </div>
         </div>
+
+
 
         <!-- pagination buttons -->
         
