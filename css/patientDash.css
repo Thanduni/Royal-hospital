@@ -340,4 +340,5 @@ form button ,#cancel,#btn {
     margin: 20px;
     border-style: none;
     float: right;
+    cursor: pointer;
 }
