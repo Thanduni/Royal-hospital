@@ -1,0 +1,380 @@
+.main-container {
+    top: 170px;
+    min-width: fit-content;
+    left: 260px;
+    height: 100v;
+}
+.display-container{
+    top: 170px;
+    min-width: fit-content;
+    left: 260px;
+    height: 100v;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.doctor-cards{
+    width: 100%;
+    padding: 35px 20px ;
+    display: flex;
+    flex-direction: row;
+}
+
+.doctor-card {
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    margin: 20px;
+}
+
+.number{
+    font-size: 35px;
+    font-weight: 500;
+    color: #24354E;
+}
+
+.card-name {
+    color: #24354E;
+    font-weight: 600;
+}
+
+.icon-box i {
+    font-size: 45px;
+    color: black;
+}
+.icon-box img {
+    font-size: 45px;
+    color: black;
+}
+h3{
+    margin-left: 20px;
+}
+.popup{
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+.popup-content{
+    height: fit-content;
+    width: 30%;
+    background: #F8F9FF;
+    padding: 30px;
+    border-radius: 5px;
+    position: relative;
+}
+.alert-content{
+    height: fit-content;
+    width: fit-content;
+    background: #F8F9FF;
+    padding: 30px;
+    border-radius: 5px;
+    position: relative;
+}
+.form-group{
+    width: 100%;
+}
+.close{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #fff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.popup-content input{
+    width: 80%;
+    padding: 1em;
+    line-height: 1.4;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+.popup-content label{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.popup-content h1{
+    color: #24354E;
+    margin-bottom: 40px;
+}
+.submit{
+    width: fit-content !important;
+    font-size: medium !important;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+/* Responsive */
+@media(max-width:500px){
+    .table thead{
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+    }
+    .table tr{
+        margin-bottom: 15px;
+    }
+    .table td{
+        text-align: right;
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+    }
+    .table td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+#view-patient-button{
+    background: #24354E;
+    padding: 10px 15px;
+    font-size: 15px;
+    float: left;
+    width: fit-content !important;
+}
+#view-patient-button a{
+    text-decoration: none;
+    color: #fff;
+}
+.table-container h2{
+    float: left;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    margin-left: 30px;
+}
+.patient-details{
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.room-cards{
+    width: 100%;
+    padding: 35px 20px ;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.room {
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.room-no{
+    font-size: 25px;
+    font-weight: 500;
+    color: #24354E;
+}
+
+.room-availability {
+    color: #24354E;
+    font-weight: 600;
+}
+
+
+.table-container{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 33px 30px;
+}
+.table{
+    border-collapse: collapse;
+    background: #F8F9FF;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.table thead{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    background: #24354E;
+}
+.table tr{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table th{
+    font-family: OpenSans-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+}
+.table tbody{
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.table tbody tr{
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    height: 50px;
+}
+.table th{
+    text-align: left;
+    padding: 8px 10px;
+}
+
+.table td{
+    text-align: left;
+    padding: 8px 10px;
+    background: #fff;
+}
+select{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+select option{
+    padding: 5px;
+}
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.patient-detail-container{
+    /* width: fit-content; */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    margin-left: 5%;
+    margin-bottom: 5%;
+    background: #F8F9FF;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* padding: 33px 30px; */
+}
+.doctor-note-container{
+    /* width: fit-content; */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    background: #F8F9FF;
+    margin: 0 30px 10px 30px;
+}
+.prescription-container{
+    display: flex;
+    flex-direction: column;
+    /* width: fit-content; */
+    padding: 20px ;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    background: #F8F9FF;
+    margin: 0 30px;
+}
+.tab-line{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    /* flex-wrap: wrap; */
+    padding: 5px 0;
+    height: fit-content;
+}
+.medicine-button{
+    /* border: 2px solid #24354E; */
+    padding: 5px;
+
+}
+.test-button{
+    /* border: 2px solid #24354E; */
+    margin-left: 5px;
+    padding: 5px;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.row-name{
+    font-size: large;
+    font-weight: 400;
+    padding: 10px;
+    min-width: 200px;
+}
+.row-content{
+    padding: 10px;
+    font-size: large;
+    font-weight: 400;
+    margin-left: 10px;
+}
+.prescription-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+.prescription-group input{
+    padding: 1em;
+    line-height: 1;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+.prescription-group label{
+    margin-top: 20px;
+    margin-right: 20px;
+    font-weight: normal;
+}
+.prescribe-medicine-content{
+    display: none;
+}
+.prescribe-test-content{
+    display: none;
+}
+.medicine-button{
+    border-right: 1px solid gray;
+}
+.medicine-button:hover{
+    border-bottom: 2px solid #24354E;
+    cursor: pointer;
+    
+}
+.test-button:hover{
+    cursor: pointer;
+    border-bottom: 2px solid #24354E;
+}
