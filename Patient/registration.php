@@ -94,27 +94,27 @@ if (!isset($_SESSION['mailaddress'])) {
             <h3>Registration</h3>
             <!-- <?php //echo $error; ?> -->
         </div>
-        <form action=" " method="post">
+        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm"></form>
             <div class="content">
                 <div class="box">
                     <label for="">Name</label><br><br>
-                    <input type="text" name="name" id="name" placeholder="eg:- S.W.A.Siriwardana">
+                    <input type="text" name="name" id="name" placeholder="eg:- S.W.A.Siriwardana"><div id="nameDiv"></div>
                     <br><br>
 
                     <label>NIC(if you have not NIC please enter your guardian's NIC number)</label><br><br>
-                    <input type="text" name="nic" id="nic" placeholder="eg:- 19XXXXXXXXX/99XXXXXXXV"><br><br>
+                    <input type="text" name="nic" id="nic" placeholder="eg:- 19XXXXXXXXX/99XXXXXXXV"><div id="nicDiv"></div><br><br>
 
                     <label>Email</label><br><br>
-                    <input type="email" name="email" id="email" placeholder="eg:- kumarsanga84@gmail.com"><br><br>
+                    <input type="email" name="email" id="email" placeholder="eg:- kumarsanga84@gmail.com"><div id="emailDiv"></div><br><br>
 
                     <label>Password</label><br><br>
-                    <input type="password" name="password" id="password" placeholder="XXXXXXXXXXX"><br><br>
+                    <input type="password" name="password" id="password" placeholder="XXXXXXXXXXX"><div id="passwordDiv"></div><br><br>
 
                     <label for="">Confirm Password</label><br><br>
-                    <input type="password" name="cpassword" id="cpassword" placeholder="XXXXXXXXXXX"><br><br>
+                    <input type="password" name="cpassword" id="cpassword" placeholder="XXXXXXXXXXX"><div id="cpasswordDiv"></div><br><br>
 
                     <label for="">Phone</label><br><br>
-                    <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><br><br>
+                    <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><div id="phoneDiv"></div><br><br>
 
             <label for="">Date of Birth</label><br><br>
             <input type="date" name="dob" id="dob"><br><br>
@@ -178,6 +178,7 @@ if (!isset($_SESSION['mailaddress'])) {
 
         <?php include(BASEURL.'/Components/Footer.php'); ?>
     </section>
+    <script src="<?php echo BASEURL.'/js/registrationFormValidate.js' ?>"></script>
     </body>
     </html>
 
