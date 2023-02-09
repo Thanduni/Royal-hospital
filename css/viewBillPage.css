@@ -182,6 +182,8 @@ table {
 .cell {
     padding: 6px 12px;
     display: table-cell;
+    font-size: 18px;
+    height: 50px;
 }
 
 button#billGen{
@@ -194,6 +196,7 @@ button#billGen{
     .cell {
         padding: 2px 16px;
         display: block;
+        height: auto;
     }
 
     .userContents table {

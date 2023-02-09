@@ -90,13 +90,13 @@ if (!isset($_SESSION['mailaddress'])) {
     <body>
     <section class="header">
         <?php include(BASEURL.'/Components/Navbar.php'); ?>
-        <div class="heading">
-            <h3>Registration</h3>
+<!--        <div class="heading">-->
+            <h2>Registration</h2>
             <!-- <?php //echo $error; ?> -->
-        </div>
+<!--        </div>-->
         <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm"></form>
             <div class="content">
-                <div class="box">
+                <div class="box" style="padding-bottom: 0px">
                     <label for="">Name</label><br><br>
                     <input type="text" name="name" id="name" placeholder="eg:- S.W.A.Siriwardana"><div id="nameDiv"></div>
                     <br><br>
@@ -116,8 +116,8 @@ if (!isset($_SESSION['mailaddress'])) {
                     <label for="">Phone</label><br><br>
                     <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><div id="phoneDiv"></div><br><br>
 
-            <label for="">Date of Birth</label><br><br>
-            <input type="date" name="dob" id="dob"><br><br>
+                    <label for="">Date of Birth</label><br><br>
+                    <input type="date" name="dob" id="dob"><br><br>
 
                     <label for="">Address</label><br><br>
                     <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"><br><br>
@@ -169,9 +169,10 @@ if (!isset($_SESSION['mailaddress'])) {
                     <textarea name="oillness" id="oillness" cols="30" rows="3" placeholder="If you have any other illness please mention"></textarea><br><br>
                     <label for="">Any Medical Comments</label><br><br>
                     <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
+
+                    <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn">
                 </div>
 
-                <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn">
             </div>
 
         </form>

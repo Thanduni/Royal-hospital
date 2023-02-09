@@ -190,12 +190,15 @@ table {
 .cell {
     padding: 6px 12px;
     display: table-cell;
+    font-size: 18px;
+    height: 50px;
 }
 
 @media screen and (max-width: 1229px) {
     .cell {
         padding: 2px 16px;
         display: block;
+        height: auto;
     }
 
     .userContents table {

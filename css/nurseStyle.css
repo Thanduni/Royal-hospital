@@ -60,7 +60,7 @@
     width: 30%;
     /* height: 650px;
     width: 650px; */
-    background: #F8F9FF;
+    background: #FFFFFF;
     padding: 30px;
     border-radius: 5px;
     position: relative;
@@ -241,7 +241,7 @@ h3{
 
 .table{
     border-collapse: collapse;
-    background: #F8F9FF;
+    background: #FFFFFF;
     border-radius: 10px;
     overflow: hidden;
     width: 70%;

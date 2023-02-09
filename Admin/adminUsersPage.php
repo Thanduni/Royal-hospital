@@ -108,13 +108,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <!--                        <div id="UDfunc">-->
                             <div class="row">
                                 <div class="cell" style="100px" data-title="Options">
-                                    <button class="edit" id="<?php echo $row[0] ?>"
+                                    <button class="operation" id="<?php echo $row[0] ?>"
                                             onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
                                                 src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
-                                        Edit
+
                                     </button>
                                     <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
                                     </a>
                                 </div>

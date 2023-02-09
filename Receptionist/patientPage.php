@@ -117,13 +117,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             </ul>
                             <div class="row">
                                 <div class="cell" style="100px" data-title="Options">
-                                    <button class="edit" id="<?php echo $row1['nic'] ?>"
+                                    <button class="operation" id="<?php echo $row1['nic'] ?>"
                                             onclick="displayPatientUpdateForm(<?php echo $row1['nic'] ?>);"><img
                                             src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
-                                        Edit
+
                                     </button>
                                     <a href="<?php echo BASEURL . '/Receptionist/deletePatient.php?id=' . $row1['nic'] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
                                     </a>
                                 </div>

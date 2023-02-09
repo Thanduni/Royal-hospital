@@ -10,6 +10,7 @@ html,
 body {
     height: 100%;
     color: #24354E;
+    background-color: #f8f9ff;
 }
 
 .header {
@@ -291,15 +292,21 @@ form {
     flex-wrap: wrap;
 }
 
+.userContents .operation{
+    width: auto;
+    border-style: none;
+    border-radius: 10px;
+}
+
 form button {
     width: 159px;
-    height: 60px;
+    height: 40px;
     background: #24354E;
     border-style: none;
     border-radius: 50px;
     font-style: normal;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 18px;
     line-height: 37px;
     color: #ADB6CD;
     margin: 10px;
@@ -735,7 +742,7 @@ td > img {
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: white;
+    /*background-color: white;*/
     margin: 20px;
     border-radius: 10px;
 }

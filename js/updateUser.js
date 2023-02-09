@@ -10,7 +10,6 @@ function displayUserUpdateForm(nic) {
 
 
     let tableCon = document.getElementsByClassName(nic + "_tableCon");
-
     document.getElementById("titleOperation").innerHTML = "Update User | NIC : " + nic;
 
     let name = tableCon[0].textContent;
@@ -20,8 +19,10 @@ function displayUserUpdateForm(nic) {
     let gender = tableCon[4].textContent;
     let dob = tableCon[6].textContent;
 
+
     let userForm = document.getElementById('userForm');
     userForm.classList.add("active");
+
 
     let IN_name = document.getElementById("IN_name");
     let IN_address = document.getElementById("IN_address");

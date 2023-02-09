@@ -95,7 +95,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 </div>
                                 <div class="cell" style="100px" data-title="Options">
                                     <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteStorekeeper&id=' . $row[0] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
                                     </a>
                                 </div>
