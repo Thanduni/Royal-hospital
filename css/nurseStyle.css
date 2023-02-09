@@ -167,12 +167,7 @@
     text-decoration: none;
     color: #fff;
 }
-.table-container h2{
-    float: left;
-    margin-top: 30px;
-    margin-bottom: 25px;
-    margin-left: 30px;
-}
+
 .patient-details{
     margin-left: 20px;
     font-size: 20px;
@@ -231,11 +226,19 @@ button a{
     width: 90%;
     /* min-height: 100vh; */
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap;
-    padding: 33px 30px;
+    padding: 0px 30px;
 }
+h3{
+    float: left;
+    width: fit-content;
+    padding: 10px;
+    margin-left: 20px;
+}
+
 .table{
     border-collapse: collapse;
     background: #F8F9FF;

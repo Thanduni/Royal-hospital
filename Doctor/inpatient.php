@@ -81,12 +81,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     $patientID= $row['patientID'];
                                     echo '<tr> 
 
-                                    <td>'."<img src=".$row['profile_image'].'width = 50px height=50px></td>
+                                    
                                     <td>'.$name.'</td>
                                     <td>'.$roomNo.'</td>
-                                    <td> <button class="button" id="view-patient-button"><a href="displayPatient.php?patientid='.$patientID.'&name='.$name.'">
-                                        View </a>
-                                    </button></td>
+                                    <td> <button class="button" id="view-report-button"><a href="patientReport.php?patientid='.$patientID.'&name='.$name.'">
+                                        View Reports </a>
+                                    </button>
+                                    <button class="button">Discharge</button>
+                                    </td>
                                     </tr>';
                                   }
                                 }

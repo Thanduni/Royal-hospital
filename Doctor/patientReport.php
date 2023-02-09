@@ -2,7 +2,7 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     ?>
 
 <?php
@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
 
     if($result){
         
-        header('location:dailyReport.php?patientid='.$patientID.'&name='.$patientName);
+        header('location:patientReport.php?patientid='.$patientID.'&name='.$patientName);
     }else{
         die(mysqli_error($con));
     }
@@ -42,7 +42,7 @@ if(isset($_POST['submit'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
     <style>
         .next {
             position: initial;
@@ -53,17 +53,15 @@ if(isset($_POST['submit'])){
 </head>
 <body>
     <div class="user">
-        <?php
-        $name = urlencode( $_SESSION['name']);
-        include(BASEURL.'/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        <?php include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
                 Royal Hospital Management System
             </div>
             <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="nurse">
-                    Nurse
+                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="doctor">
+                   Doctor
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
@@ -71,24 +69,16 @@ if(isset($_POST['submit'])){
                 </li>
             </ul>
             <div class="arrow">
-                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">daily Report
+                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Reports
             </div>
 
             <div class="main-container">
                 <div class="patient-details">
-                    <div class="patient-name">Patient Name: <?php
-                                                                // $patientName =  $patientName;
-                                                                echo $patientName ?>  </div>
-                    <div class="patient-id">Patient ID: <?php 
-                                                                // $patientID = $patientID;
-                                                                echo $patientID?></div>
+                    <div class="patient-name">Patient Name: <?php echo $patientName ?>  </div>
+                    <div class="patient-id">Patient ID: <?php echo $patientID?></div>
                 </div>
-                <button class="button" id="dailyreportbutton">
-                        New entry
-                </button>
-                <h3>Vital Signs</h3>
                 <div class="table-container">
-                
+                    <h2>Vital Signs</h2>
                     <table class="table">
                         <thead>
                             <th>Date</th>
@@ -131,43 +121,6 @@ if(isset($_POST['submit'])){
             </div>
         </div>
     </div>
- 
-    <div class="popup" id="report-popup">
-        <div class="popup-content">
-        <img src="../images/close.png" alt="close" class="close">
-        <form method="post">
-            <h1>Daily Report</h1>
-            
-            <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>">
-                    <!-- <input type="date" class="form-control" placeholder="" name="date" required> -->
-            </div>
-            <div class="form-group">
-                    <label>Time</label>
-                    <input type="time" id="time" name="time" required>
-                    <!-- <input type="time" class="form-control" placeholder="" name="time" required> -->
-            </div>
-            <div class="form-group">
-                    <label>Pulse</label>
-                    <input type="number" class="form-control" placeholder="" name="pulse">
-            </div>
-            <div class="form-group">
-                    <label>Temperature</label>
-                    <input type="number" class="form-control" placeholder="" name="temperature">
-            </div>
-            <div class="form-group">
-                    <label>Blood Preasure</label>
-                    <input type="number" class="form-control" placeholder="" name="blood_preasure">
-            </div>
-            <div class="form-group">
-                    <label>O2 Saturation</label>
-                    <input type="number" class="form-control" placeholder="" name="o2_saturation">
-            </div>
-            <button type="submit" name ="submit">Submit</button>
-        </form> 
-        </div>
-    </div>
 
 <script>
 
@@ -179,12 +132,6 @@ if(isset($_POST['submit'])){
         minute: '2-digit'
     });
     document.getElementById('time').value = time;
-    document.getElementById("dailyreportbutton").addEventListener("click", function(){
-        document.querySelector(".popup").style.display = "flex";
-    })
-    document.querySelector(".close").addEventListener("click", function(){
-        document.querySelector(".popup").style.display = "none";
-    })
 </script>
 
 </body>

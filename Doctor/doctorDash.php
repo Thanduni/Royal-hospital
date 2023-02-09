@@ -154,8 +154,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     $patientID= $row['patientID'];
                                     echo '<tr> 
 
-                                    <td>'."<img src=".$row['profile_image'].'width = 50px height=50px></td>
-                                    <td>'.$name.'</td>
+                                    <td>'."<img src='".BASEURL."/uploads/".$row['profile_image']."'width = 50px height=50px></td>
+                                    <td>".$name.'</td>
                                     <td>'.$date.'</td>
                                     <td>'.$time.'</td>
                                     <td>'.$message.'</td>
