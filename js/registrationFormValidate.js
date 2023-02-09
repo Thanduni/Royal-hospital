@@ -1,53 +1,16 @@
 let form = document.getElementById("validateForm");
-let warning = document.getElementById("warning");
-let nameDiv = document.getElementById("name");
-let addressDiv = document.getElementById("address");
-let nicDiv = document.getElementById("nic");
-let emailDiv = document.getElementById("email");
-let contactNumDiv = document.getElementById("contactNum");
-let passwordDiv = document.getElementById("password");
-let passwordDiv2 = document.getElementById("cpassword");
+let nameDiv = document.getElementById("nameDiv");
+let nicDiv = document.getElementById("nicDiv");
+let emailDiv = document.getElementById("emailDiv");
+let passwordDiv = document.getElementById("passwordDiv");
+let cpasswordDiv = document.getElementById("cpasswordDiv");
+let phoneDiv = document.getElementById("phoneDiv");
 
-
-// let nic = nicDiv.previousSibling.value;
-// let name = nameDiv.previousSibling.value;
-// let address = addressDiv.previousSibling.value;
-// let email = emailDiv.previousSibling.value;
-// let contactNum = contactNumDiv.previousSibling.value;
-// let password = passwordDiv.previousSibling.value;
-
-let regNic = /^\d{12}[A-Z]?$/;
 let regName = /^[a-zA-Z]{3,}/;
-let regAddress = /^[\W\s\w]{3,},[\s\w]{3,},[\s\w]{3,}\.$/;
+let regNic = /^\d{12}[A-Z]?$/;
 let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-let regContactNum = /^[0-9]{10}$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
-
-
-function validateAddress() {
-    addressDiv.innerHTML = "";
-    let address = addressDiv.previousSibling.value;
-    if (address == "" || !regAddress.test(address)) {
-        addressDiv.classList.remove("hint");
-        addressDiv.classList.add("alert");
-        addressDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter a valid address.</li>\n" +
-            "</ul>"
-    }
-}
-
-addressDiv.previousSibling.addEventListener("blur", validateAddress, false)
-
-addressDiv.previousSibling.addEventListener("focus", function () {
-    addressDiv.classList.remove("alert");
-    addressDiv.classList.add("hint");
-    addressDiv.innerHTML = "<ul>\n" +
-        "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
-        "</ul>";
-    ;
-
-    // alert("Hai");
-}, false)
+let regContactNum = /^[0-9]{10}$/;
 
 function validateName() {
     nameDiv.innerHTML = "";
@@ -57,7 +20,7 @@ function validateName() {
         nameDiv.classList.add("alert");
         nameDiv.innerHTML = "<ul>\n" +
             "    <li>Please enter a valid name.</li>\n" +
-            "</ul>"
+            "</ul>";
     }
 }
 
@@ -74,27 +37,49 @@ nameDiv.previousSibling.addEventListener("focus", function () {
     // alert("Hai");
 }, false)
 
-function validateEmail() {
-    emailDiv.innerHTML = "";
-    var email = emailDiv.previousSibling.value;
-    if (email == "" || !regEmail.test(email)) {
+function validateNIC() {
+    nicDiv.innerHTML = "";
+    let nic = nicDiv.previousSibling.value;
+    if (nic == "" || !regNic.test(nic)) {
+        nicDiv.classList.remove("hint");
+        nicDiv.classList.add("alert");
+        nicDiv.innerHTML = "<ul>\n" +
+            "    <li>Please enter your NIC properly.</li>\n" +
+            "</ul>"
+    }
+}
+
+nicDiv.previousSibling.addEventListener("blur", validateNIC, false)
+
+nicDiv.previousSibling.addEventListener("focus", function () {
+    nicDiv.classList.remove("alert");
+    nicDiv.classList.add("hint");
+    nicDiv.innerHTML = "<ul>\n" +
+        "    <li>NIC should contain only 12 digits or with character at last after the digits.</li>\n" +
+        "</ul>"
+}, false);
+
+function validateEmail(){
+    emailDiv.innerHTML = " ";
+    let email = emailDiv.previousSibling.value;
+    if(email == "" || !regEmail.test(email)){
         emailDiv.classList.remove("hint");
         emailDiv.classList.add("alert");
-        emailDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter a valid email.</li>\n" +
-            "</ul>"
+        emailDiv.innerHTML = "<ul>\n" + 
+        "    <li>Please enter your email properly.</li>\n" +
+        "</ul>"
     }
 }
 
 emailDiv.previousSibling.addEventListener("blur", validateEmail, false)
 
-emailDiv.previousSibling.addEventListener("focus", function () {
+emailDiv.previousSibling.addEventListener("focus",function(){
     emailDiv.classList.remove("alert");
     emailDiv.classList.add("hint");
     emailDiv.innerHTML = "<ul>\n" +
-        "    <li>Enter a valid email address.</li>\n" +
-        "</ul>";
-}, false)
+    "    <li>Please enter valid email.</li>\n" +
+    "</ul>"
+},false)
 
 function validatePassword() {
     passwordDiv.innerHTML = "";
@@ -123,50 +108,57 @@ passwordDiv.previousSibling.addEventListener("focus", function () {
         "</ul>"
 }, false)
 
+function validatecPassword() {
+    cpasswordDiv.innerHTML = "";
+    var password = passwordDiv.previousSibling.value;
+    if (password == "" || !regPassword.test(password)) {
+        cpasswordDiv.classList.remove("hint");
+        cpasswordDiv.classList.add("alert");
+        cpasswordDiv.innerHTML = "<ul>\n" +
+            "    <li>Please enter a valid password.</li>\n" +
+            "</ul>"
+    }
+}
+
+cpasswordDiv.previousSibling.addEventListener("blur", validatecPassword, false)
+
+cpasswordDiv.previousSibling.addEventListener("focus", function () {
+    cpasswordDiv.classList.remove("alert");
+    cpasswordDiv.classList.add("hint");
+    cpasswordDiv.innerHTML = "<ul>\n" +
+        "<li>It contains at least 8 characters and at most 20 characters.</li>\n" +
+        "<li>It contains at least one digit.</li>\n" +
+        "<li>It contains at least one upper case alphabet.</li>\n" +
+        "<li>It contains at least one lower case alphabet.</li>\n" +
+        "<li>It contains at least one special character which includes !@#$%&*()-+=^.</li>\n" +
+        "<li>It doesn’t contain any white space.</li>\n" +
+        "</ul>"
+}, false)
+
 function validateContactNum() {
-    contactNumDiv.innerHTML = "";
-    var contactNum = contactNumDiv.previousSibling.value;
+    phoneDiv.innerHTML = "";
+    var contactNum = phoneDiv.previousSibling.value;
     if (contactNum == "" || !regContactNum.test(contactNum)) {
-        contactNumDiv.classList.remove("hint");
-        contactNumDiv.classList.add("alert");
-        contactNumDiv.innerHTML = "<ul>\n" +
+        phoneDiv.classList.remove("hint");
+        phoneDiv.classList.add("alert");
+        phoneDiv.innerHTML = "<ul>\n" +
             "    <li>Please enter a valid contact number.</li>\n" +
             "</ul>"
     }
 }
 
-contactNumDiv.previousSibling.addEventListener("blur", validateContactNum, false)
+phoneDiv.previousSibling.addEventListener("blur", validateContactNum, false)
 
-contactNumDiv.previousSibling.addEventListener("focus", function () {
-    contactNumDiv.classList.remove("alert");
-    contactNumDiv.classList.add("hint");
-    contactNumDiv.innerHTML = "<ul>\n" +
+phoneDiv.previousSibling.addEventListener("focus", function () {
+    phoneDiv.classList.remove("alert");
+    phoneDiv.classList.add("hint");
+    phoneDiv.innerHTML = "<ul>\n" +
         "    <li>Contact number should contain 10 integers.</li>\n" +
         "</ul>"
     // alert("Hai");
 }, false)
 
-function validateNIC() {
-    nicDiv.innerHTML = "";
-    let nic = nicDiv.previousSibling.value;
-    if (nic == "" || !regNic.test(nic)) {
-        nicDiv.classList.remove("hint");
-        nicDiv.classList.add("alert");
-        nicDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter your NIC properly.</li>\n" +
-            "</ul>"
-    }
-}
 
-nicDiv.previousSibling.addEventListener("blur", validateNIC, false)
-
-nicDiv.previousSibling.addEventListener("focus", function () {
-    nicDiv.classList.remove("alert");
-    nicDiv.classList.add("hint");
-    nicDiv.innerHTML = "<ul>\n" +
-        "    <li>NIC should contain only 12 digits or with character at last after the digits.</li>\n" +
-        "</ul>"
-}, false)
 
 function validateForm() {
     address = addressDiv.previousSibling.value;
