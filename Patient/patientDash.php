@@ -168,7 +168,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </select><br><br>
                 <label for="">Message</label><br><br>
                 <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea><br><br>
-                <!-- <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn"> -->
                
                 <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
                 <button type="submit" name="submit" id="btn" value="submit">Submit</button>

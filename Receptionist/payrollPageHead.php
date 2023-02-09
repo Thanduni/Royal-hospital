@@ -26,13 +26,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
     <div class="user">
         <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>        <div class="userContents" id="center">
+        include(BASEURL.'/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>        <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
                 Royal Hospital Management System
             </div>
             <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">
+                <li class="userType"><img src=<?php echo BASEURL. '/images/userInPage.svg' ?> alt="admin">
                     Receptionist
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
@@ -81,12 +81,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </div>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
+    <?php include(BASEURL. '/Components/Footer.php'); ?>
     </body>
     </html>
 
     <?php
 } else {
-    header("location: " . BASEURL . "/Homepage/login.php");
+    header("location: " .BASEURL . "/Homepage/login.php");
 }
 ?>

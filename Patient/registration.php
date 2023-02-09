@@ -91,7 +91,7 @@ if(isset($_POST["nic"])){
         <h3>Registration</h3>
         <!-- <?php //echo $error; ?> -->
     </div>
-        <form action=" " method="post">
+        <form action=" " method="post" onsubmit="return vadateDoctorForm()" id="validateForm">
         <div class="content">
             <div class="box">
             <label for="">Name</label><br><br>
@@ -111,7 +111,7 @@ if(isset($_POST["nic"])){
             <input type="password" name="cpassword" id="cpassword" placeholder="XXXXXXXXXXX"><br><br>
 
             <label for="">Phone</label><br><br>
-            <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><br><br>
+            <input type="text" name="phone" id="contactNum" placeholder="eg:- 07XXXXXXXX"><br><br>
 
             <label for="">Date of Birth</label><br><br>
             <input type="date" name="dob" id="dob"><br><br>
@@ -128,7 +128,7 @@ if(isset($_POST["nic"])){
             </select><br><br>
 
             <label for="">Emergency Contact Number</label><br><br>
-            <input type="text" name="ecn" id="ecn" placeholder="eg:- 07XXXXXXXX"><br><br>
+            <input type="text" name="ecn" id="contactNum" placeholder="eg:- 07XXXXXXXX"><br><br>
 
             </div>
 

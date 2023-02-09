@@ -125,7 +125,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 </td>
                             </tr>
                         </table>
-                        <button name="updateReceptionist" type="submit">Save changes</button>
+                        <button name="updatePatient" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -157,7 +157,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/validateFormReceptionist.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>></script>
 
     <div id="counter">0</div>
 
