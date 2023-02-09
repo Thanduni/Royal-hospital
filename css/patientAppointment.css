@@ -89,27 +89,14 @@ table {
 
 
 .table {
-   
-    height: 400px;
-    width: 900px;
-    max-height: 600px;
+    margin: 0 0 40px 0;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    height: 500px;
     overflow-y: scroll;
-    box-shadow: 3px 3px 20px 0px #24354e;
-    border-style: none;
-    border-radius: 10px;height: 400px;
-    width: 900px;
-    max-height: 600px;
-    overflow-y: scroll;
-    box-shadow: 3px 3px 20px 0px #24354e;
+    box-shadow: 3px 3px 20px 0px #24354E;
     border-style: none;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-content: flex-start;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-}
-    
 }
 
 @media screen and (max-width: 1229px) {
@@ -124,7 +111,6 @@ table {
     /* padding: 40px; */
     max-width: 1440px;
 }
-
 
 
 @media screen and (max-width: 1229px) {
@@ -168,6 +154,7 @@ table {
 
     .wrapper {
         margin: 0 auto;
+        max-width: 590px;
         min-width: 500px;
     }
 
@@ -189,7 +176,6 @@ table {
 
 .row .cell {
     margin-bottom: 10px;
-    width: 200px;
     word-wrap: break-word;
     vertical-align: middle;
 }
@@ -227,7 +213,7 @@ table {
     .userContents td,
     .userContents th {
         flex: 1 1 150px;
-        border: 1px solid RGB(36, 53, 78, 0.2);
+        /*border: 1px solid RGB(36, 53, 78, 0.2);*/
         height: 65px;
         border-radius: 5px;
         margin: 0px;

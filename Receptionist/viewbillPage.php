@@ -98,7 +98,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 </div>
                                 <div class="cell" style="width:100px" data-title="Profile image">
                                     <?php
-                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/".$row1['profile_image']." alt='Upload Image' width=150px>";
+//                                    die($query1);
+                                    echo "<img class='profilePic' src=".BASEURL . "/uploads/".$row1['profile_image']. " alt='Upload Image' width=150px>";
                                     ?>
                                 </div>
                                 <div class="cell" data-title="Patient type">
