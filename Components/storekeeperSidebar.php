@@ -1,5 +1,6 @@
 <?php
 session_start();
+//die($_SESSION['name']);
 require_once("../conf/config.php");
 ?>
 
@@ -29,22 +30,22 @@ require_once("../conf/config.php");
                 <p>Dashboard</p>
             </a></li>
         <li><a href="<?php echo BASEURL.'/Storekeeper/storekeeperAddMedicine.php'?>" target="_self"><img class="icons"
-                                                                         src=<?php echo BASEURL . '/images/user.svg' ?> alt="user"
+                                                                         src=<?php echo BASEURL . '/images/medicine.svg' ?> alt="user"
                                                                          align="middle">
                 <p>Add Medicine</p>
             </a></li>
         <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddStock.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+                                            src=<?php echo BASEURL . '/images/database.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Add Stock</p>
             </a></li>
         <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperViewStock.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
+                                            src=<?php echo BASEURL . '/images/viewStock.svg' ?> alt="doctor"
                                             align="middle">
                 <p>View Stocks</p>
             </a></li>
-        <li><a href="" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/nurse.svg' ?> alt="nurse"
+        <li><a href="<?php echo BASEURL . '/Storekeeper/updateStorekeeperProfile.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/profile.svg' ?> alt="nurse"
                                             align="middle">
                 <p>Profile</p>
             </a></li>

@@ -2,10 +2,6 @@
 require_once("../conf/config.php");
 session_start();
 
-//$_SESSION['mailaddress'] = "nareash";
-//header("location:adminUsersPage.php");
-//exit(0);
-
 if (isset($_POST['login'])) {
     if (empty($_POST["email"]) || empty($_POST["password"])) {
         header("location:". BASEURL . "/Homepage/login.php?Empty=Please fill in the blanks");
@@ -21,12 +17,12 @@ if (isset($_POST['login'])) {
 
             $query->fetch();
             if (password_verify($pass, $password)) {
-
                 $_SESSION['name'] = $name;
                 $_SESSION['profilePic'] = $profilePic;
                 $_SESSION['mailaddress'] = $_POST["email"];
                 $_SESSION['userRole'] = $userRole;
                 $_SESSION['nic'] = $nic;
+//                die($_SESSION['name']);
                 if ($userRole == "Admin")
                     header("location: " . BASEURL . "/Admin/adminDash.php");
                 else if ($userRole == "Doctor")

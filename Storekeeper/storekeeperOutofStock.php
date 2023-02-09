@@ -24,7 +24,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 </head>
 <body>
 <div class="user">
-    <?php include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -36,7 +38,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             </li>
             <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
-                            src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
             </li>
         </ul>
         <div class="arrow">
@@ -48,88 +50,48 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
         <!-- content start -->
 
-        <div class="table-box">
-                <table>
-                <tr>
-                <!-- <th>medicine ID</th> -->
-                <th>medicine name</th>
-                <!-- <th>badge no.</th> -->
-                <!-- <th>company name</th> -->
-                <!-- <th>suplier name</th> -->
-                <!-- <th>unit type</th> -->
-                <!-- <th>unit cost</th> -->
-                <!-- <th>qantity</th> -->
-                <!-- <th>manufacture date</th> -->
-                <!-- <th>expire date</th> -->
-                <!-- <th>use state</th> -->
-                
-                </tr>
-
-
+        <div class="wrapper">
+            <div class="table">
+                <div class="row headerT">
+                    <div class="cell">Medicine name</div>
+                </div>
                 <?php
-                    $sql="SELECT * FROM `availableitemstock` WHERE fullQuantity=0";
-                    $allResult=mysqli_query($con,$sql);
-                    $num=mysqli_num_rows($allResult);
-                    
-                    $numberPages=8;
-                    $totalPages=ceil($num/$numberPages);
-                    
+                $sql = "select item.item_name from inventory inner join item on inventory.itemID=item.itemID where inventory.expiredDate > CURRENT_DATE group by inventory.itemID having sum(quantity)=0;";
+                $allResult = mysqli_query($con, $sql);
+                $num = mysqli_num_rows($allResult);
 
-                    
-            if(isset($_GET['page'])){
-                $page=$_GET['page'];
-            }
-            else{
-                $page=1;
-            }
-
-            $startinglimit=($page-1)*$numberPages;
-            $sql="SELECT * FROM `availableitemstock` WHERE fullQuantity=0 limit ".$startinglimit.','.$numberPages;
-            $result=mysqli_query($con,$sql);
+                $numberPages = 8;
+                $totalPages = ceil($num / $numberPages);
 
 
-                    if($result){
-                        while($row=mysqli_fetch_assoc($result)){
-                            // $itemId = $row['itemID'];
-                            // $badgeNo = $row['badgeNo'];
-                            $medicineName = $row['medicineName'];
-                            // $companyName = $row['companyName'];
-                            // $supplierName = $row['supplierName'];
-                            // $unitType = $row['unitType'];
-                            // $unitCost = $row['unitCost'];
-                            // $qantity = $row['quantity'];
-                            // $manufacturedDate = $row['manufactureDate'];
-                            // $expiredDate = $row['expireDate'];
-                            // $useState = $row['useState'];
 
-                            echo '<tr>
-                            
-                            <td>'.$medicineName.'</td>
-                            
-                            
-                            </tr>';
-                        }
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
+
+                $startinglimit = ($page - 1) * $numberPages;
+                $sql = "select item.item_name from inventory inner join item on inventory.itemID=item.itemID where inventory.expiredDate > CURRENT_DATE group by inventory.itemID having sum(quantity)=0 limit " . $startinglimit . ',' . $numberPages;
+                $result = mysqli_query($con, $sql);
+
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $item_name = $row['item_name'];
+                        ?>
+                        <div class="row">
+
+                            <div class="cell" data-title="Medicine name">
+                                <?php echo $item_name; ?>
+                            </div>
+                        </div>
+                        <?php
                     }
+                }
                 ?>
-
-
-                <!-- <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                
-                </tr> -->
-            
-            </table>
+            </div>
         </div>
+
 
         <!-- pagination buttons -->
         

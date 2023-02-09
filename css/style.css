@@ -287,6 +287,8 @@ p.slider-description {
 
 form {
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 form button {

@@ -33,7 +33,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 
     <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/NurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="../images/logo5.png" alt="logo">

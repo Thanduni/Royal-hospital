@@ -1,13 +1,12 @@
 .cards{
-    margin-top: 0px;
-    margin-left: 185px;
-    width: 80%;
-    padding: 35px 20px ;
 
-
+    margin-top: -60px;
+    margin-left: 50px;
+    width: 86%;
+    padding: 35px 20px;
     display: flex;
     /* margin: 20px; */
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
     /*margin-top: -300px;*/
     /*margin-left: 70px;*/
@@ -23,15 +22,15 @@
 .card {
     padding: 20px;
     margin: 20px;
-    width: 220px;
+    width: 170px;
     height: 50px;
     display: flex;
-    
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 7px 25px 0 rgb(0 0 0 / 8%);
+    flex-wrap: wrap;
 }
 
 .number{
@@ -325,4 +324,20 @@ form button ,#cancel,#btn {
     text-align: center;
     color: white;
     width: 970px;
+}
+
+.userContents  .payment button{
+    width: 200px;
+    height: 50px;
+    background: #24354E;
+    color: #ADB6CD;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    vertical-align: middle;
+    border-radius: 50px;
+    margin: 20px;
+    border-style: none;
+    float: right;
+    cursor: pointer;
 }

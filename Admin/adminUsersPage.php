@@ -59,6 +59,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 <input type="text" id="myInputRole" onkeyup="filterByRole()" placeholder="Search for user role.." title="Type in a name">
             </div>
 
+            <?php
+            if (@$_GET['msg']) {
+                ?>
+                <div class="alert">
+                    <?php
+                    echo $_GET["msg"];
+                    ?>
+                </div>
+            <?php }?>
             <div class="userClass">
                 <?php
                 $query = "SELECT * FROM user";
@@ -66,6 +75,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
                 ?>
+
 
                 <div class="wrapper">
                     <div class="table">

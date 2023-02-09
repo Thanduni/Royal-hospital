@@ -3,20 +3,6 @@ session_start();
 require_once("../conf/config.php");
 
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
-            
-            if (isset($_POST["submit"])) {
-
-                $date = $_POST['date'];
-                $department = $_POST['department'];
-                $doctor = $_POST['doctor'];
-                $msg = $_POST['msg'];
-            }
-
-                // $dnic = mysqli_fetch_assoc(mysqli_query($con, "SELECT `nic` FROM `user` WHERE user_role = 'doctor' and name = '.$doctor.'"));
-                // $pnic =  mysqli_fetch_assoc(mysqli_query($con,"SELECT `nic` FROM `user` WHERE user_role = 'patient' and patientID = '.$email.'"));
-                // $docid = mysqli_fetch_assoc(mysqli_query($con, "SELECT `doctorID` FROM `doctor` WHERE nic='.$dnic.'"));
-                // $pid =  mysqli_fetch_assoc(mysqli_query($con,"SELECT patientID FROM patient WHERE nic='.$pnic.'"));
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,9 +29,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 <body>
     <div class="user">
 
-        <?php include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']);
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         
-        ?>
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
         <div class="userContents"  id="center">
             <div class="title">
@@ -62,6 +49,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
 
             </ul>
+            <!-- <div class="payment">
+                <button>Online Payment</button>
+            </div> -->
 
             <div class="cards">
             <a href="">
@@ -73,16 +63,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div>
             </a>
-
-            <!-- <a href="">
-                <div class="card">
-                    <div class="card-content"></div>
-                    <div class="card-name">Appointment Confirmation</div>
-                    <div class="icon-box">
-                    <i class="fas fa-book"></i>
-                </div>
-                </div> 
-            </a> -->
 
             <a href="">
                 <div class="card">
@@ -103,78 +83,76 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div> 
             </a> 
+            <a id=open target="_self" style="cursor:pointer">
+                <div class="card">
+                    <div class="card-content"></div>
+                    <div class="card-name">Appointment</div>
+                    <div class="icon-box">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+                </div>
+            </a>
+            <a href="<?php echo BASEURL.'/Patient/payment.php' ?>">
+                <div class="card">
+                    <div class="card-content"></div>
+                    <div class="card-name">Pay Now</div>
+                    <div class="icon-box">
+                    <i class="fas fa-money"></i>
+                </div>
+                </div>
+            </a>
             </div>
-        </div>
-        <div class="wrapper">
+
+            <div class="wrapper">
             <div class="table">
                 <div class="row headerT">
                     <div class="cell">Date</div>
                     <div class="cell">Time</div>
                     <div class="cell">Venue</div>
                     <div class="cell">Doctor</div>
-                    <!-- <div class="cell">Status</div> -->
-                    <?php
+                </div>
 
-                    if (isset($_POST["submit"])) {
+<?php
 
-                        $date = $_POST['date'];
-                        $department = $_POST['department'];
-                        $doctor = $_POST['doctor'];
-                        $msg = $_POST['msg'];
+        $patientIdQuery = "select patientID from patient where nic = '" . $_SESSION['nic'] . "'";
+        $result = mysqli_query($con, $patientIdQuery);
+        $pID = mysqli_fetch_assoc($result)['patientID'];
 
-                        // $dnic = mysqli_fetch_assoc(mysqli_query($con, "SELECT `nic` FROM `user` WHERE user_role = 'doctor' and name = '.$doctor.'"));
-                        // $pnic =  mysqli_fetch_assoc(mysqli_query($con,"SELECT `nic` FROM `user` WHERE user_role = 'patient' and patientID = '.$email.'"));
-                        // $docid = mysqli_fetch_assoc(mysqli_query($con, "SELECT `doctorID` FROM `doctor` WHERE nic='.$dnic.'"));
-                        // $pid =  mysqli_fetch_assoc(mysqli_query($con,"SELECT patientID FROM patient WHERE nic='.$pnic.'"));
-                    
-                        $select_slot = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM appointment WHERE patientID = 'NULL'"));
-                        $nic = $_SESSION['nic'];
-                        $pid_query = "SELECT patientID FROM patient WHERE nic = '.$nic.'";
-                        $result_pid = mysqli_query($con,$pid_query);
-                        $pid = mysqli_fetch_assoc($result_pid);
-                        // echo $pid;
-                        if ($select_slot) {
-                            mysqli_query($con, "INSERT INTO `appointment`(`patientID`)
-                            VALUES ('$pid')");
-                            $query = "SELECT date,time,venue,doctor,patientID FROM appointment WHERE patientID = '.$pid.'";
-                            $result = mysqli_query($con, $query);
-                            $rows = mysqli_num_rows($result);
-                            for($j=0;$j< $rows;++$j){
-                                $result->data_seek($j);
-                                $row = $result->fetch_array(MYSQLI_ASSOC);
+                        $query = "SELECT appointment.date,appointment.time,appointment.venue,user.name FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
+                        // die($query);
+                        $result = mysqli_query($con, $query);
+                        while($rows = mysqli_fetch_assoc($result)){ ?>
+                                    <div class="row">
+                                        <div class="cell" data-title="Date">
+                                            <?php echo $rows['date']; ?>
+                                        </div>
+                                        <div class="cell" data-title="Time">
+                                        <?php echo $rows['time']; ?>
+                                        </div>
+                                        <div class="cell" data-title="Venue">
+                                            <?php echo $rows['venue']; ?>
+                                        </div>
+                                        <div class="cell" data-title="Doctor">
+                                            <?php echo $rows['name']; ?>
+                                        </div>
+                                    </div>  
+                         <?php
+                    }
                     ?>
-                          <ul class="tableCon">
-                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['date'] ?></li>
-                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['time'] ?></li>
-                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['venue'] ?></li>
-                                <li class="<?php echo $row['patientID'] ?>_tableCon"><?php echo $row['doctor'] ?></li>
-                            </ul>
-                            <div class="row">
-                                <div class="cell" data-title="Date">
-                                    <?php echo $row1['date']; ?>
-                                </div>
-                                <div class="cell" data-title="Time">
-                                    <?php echo $row1['time']; ?>
-                                </div>
-                                <div class="cell" data-title="Venue">
-                                    <?php echo $row1['venue']; ?>
-                                </div>
-                                <div class="cell" data-title="Doctor">
-                                    <?php echo $row1['doctor']; ?>
-                                </div>
-                            </div>
-                        <?php }}}
-                        //  header('location:./patient/patientdash.php?pid='.$pid.''); ?>
                 </div>
             </div>
         </div>
     </div>
 
+
     <div id="login-modal">
         <div class="modal">
             <div class="login-form">
             <h2>Put Your Appointment</h2><br>
-            <form  action="" method="post">
+            <form  action="appointment.php" method="post"> 
+
+            <form  action="appointment.php" method="post">
+
                 <label for="">Date</label><br><br>
                 <input type="date" name="date" id="date"><br><br>
                 <label for="">Department</label><br><br>
@@ -190,10 +168,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </select><br><br>
                 <label for="">Message</label><br><br>
                 <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea><br><br>
-                <!-- <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn"> -->
                
                 <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
-                <button type="submit" name="submit" id="btn" value="submit" onclick="">Submit</button>
+                <button type="submit" name="submit" id="btn" value="submit">Submit</button>
             </form>
             </div>
         </div>
@@ -202,6 +179,17 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <script type="text/javascript">
         $(function(){
             $('#openform').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('.cancel-modal').click(function(){
+                $('#login-modal').fadeOut();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#open').click(function(){
                 $('#login-modal').fadeIn().css("display","flex");
             });
             $('.cancel-modal').click(function(){

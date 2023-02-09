@@ -91,6 +91,7 @@ function displayPatientUpdateForm(nic) {
     document.getElementById("nicRow").classList.add("hide");
     document.getElementById("passRow").classList.add("hide");
 
+
     let tableCon = document.getElementsByClassName(nic + "_tableCon");
 
     document.getElementById("titleOperation").innerHTML = "Update User | NIC : " + nic;

@@ -73,7 +73,9 @@ if(isset($_POST['addRoom'])){
 
 <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -91,7 +93,9 @@ if(isset($_POST['addRoom'])){
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Room
             </div>
-
+            <button class="button" id="update-room">
+                Update Room
+            </button>
             <div class="main-container">
                 <h3>Room List</h3>
                 <button class="button" id="update-room">Update Room</button>

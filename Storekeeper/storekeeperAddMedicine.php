@@ -16,8 +16,7 @@ if(isset($_POST['submit'])){
     $unitCost = $_POST['unitCost'];
     
 
-    $sql="insert into `item` (medicineName,companyName,unitType,unitCost) values('$medicineName','$companyName','$unitType','$unitCost')";
-
+    $sql="insert into `item` (item_name,companyName,unitType,unit_price) values('$medicineName','$companyName','$unitType','$unitCost')";
     $result=mysqli_query($con,$sql);
 
 }
@@ -43,7 +42,9 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 <div class="user">
-    <?php include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+    <?php
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
@@ -55,7 +56,7 @@ if(isset($_POST['submit'])){
             </li>
             <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                     <img
-                            src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
             </li>
         </ul>
         <div class="arrow">
@@ -121,13 +122,6 @@ if(isset($_POST['submit'])){
                 </div>
                 
             </div>
-            
-            <!-- <div class="row">
-                <div class="column">
-                    <label for="issue">Describe your issue</label>
-                    <textarea id="issue" placeholder="Describe your issue in detail here" rows="3"></textarea>
-                </div>
-            </div> -->
             <button name="submit">Submit</button>
         </form>
     </div>

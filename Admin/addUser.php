@@ -39,6 +39,15 @@ if (isset($_POST['addUser'])) {
     $dob = $_POST['dob'];
     $profile_image = $new_img_name;
 
+    $query = "select * from user where nic ='".$nic."'";
+    $result = mysqli_query($con, $query);
+    $num_rows = mysqli_num_rows($result);
+
+    if($num_rows > 0){
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?msg=The user is already exist!");
+        exit();
+    }
+
     $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image, DOB) VALUES
                             ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob');";
     $result = mysqli_query($con, $query);
