@@ -85,7 +85,7 @@ if(isset($_POST['addRoom'])){
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
@@ -93,12 +93,9 @@ if(isset($_POST['addRoom'])){
             </div>
 
             <div class="main-container">
-                <button class="button" id="update-room">
-                    Update Room
-                </button>
-                <button class="button" id="add-room">
-                    Add Room
-                </button>
+                <h3>Room List</h3>
+                <button class="button" id="update-room">Update Room</button>
+                <button class="button" id="add-room">Add Room</button>
                 <div class="room-cards">                    
                     <?php foreach ($rows as $row):?>
                     <div class="room">
