@@ -4,7 +4,13 @@ session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
-
+<?php 
+    $query ="SELECT room_no FROM room";
+    $result = $con->query($query);
+    if($result->num_rows> 0){
+      $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+?>
 <?php
 if(isset($_POST['updateRoom'])){
     $room_availability =  $_POST['room_availability'];
@@ -22,10 +28,8 @@ if(isset($_POST['updateRoom'])){
 ?>
 <?php
 if(isset($_POST['addRoom'])){
-    $room_availability =  $_POST['room_availability'];
-    $room_no = $_POST['room_no'];
 
-    $sql = "INSERT INTo room(room_no,room_availability) VALUES('$room_no','$room_availability');";
+    $sql = "INSERT INTo room(room_availability) VALUES('available');";
     $addresult=mysqli_query($con,$sql);
 
     if($addresult){
@@ -35,7 +39,20 @@ if(isset($_POST['addRoom'])){
     }
 }
 ?>
+<?php
+                        $sql = "select room_no,room_availability from `room`";
+                        $result = mysqli_query($con,$sql);
 
+                        while(true){
+                            $row = mysqli_fetch_assoc($result);
+                            $roomNo = isset($cOTLdata['room_no']) ? $row['room_no'] : 0;
+                            $availability = isset($cOTLdata['room_availability']) ? $row['room_availability'] : 0;
+                            if(!$row){
+                                break;
+                            }
+                            $rows[] = $row;
+                        }
+                    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,21 +99,7 @@ if(isset($_POST['addRoom'])){
                 <button class="button" id="add-room">
                     Add Room
                 </button>
-                <div class="room-cards">
-                    <?php
-                        $sql = "select room_no,room_availability from `room`";
-                        $result = mysqli_query($con,$sql);
-
-                        while(true){
-                            $row = mysqli_fetch_assoc($result);
-                            $roomNo = isset($cOTLdata['room_no']) ? $row['room_no'] : 0;
-                            $availability = isset($cOTLdata['room_availability']) ? $row['room_availability'] : 0;
-                            if(!$row){
-                                break;
-                            }
-                            $rows[] = $row;
-                        }
-                    ?>
+                <div class="room-cards">                    
                     <?php foreach ($rows as $row):?>
                     <div class="room">
                         <div class="room-content">
@@ -118,12 +121,15 @@ if(isset($_POST['addRoom'])){
                 <div class="update-rooms">
                     <div class="popup" id="update-room-popup">
                         <div class="popup-content">
-                            <!-- <img src="../images/close.png" alt="close" class="close"> -->
                             <form method="post">
                                 <h1>Update Room</h1>
                                 <div class="form-group">
                                     <label>Room No</label>
-                                    <input type="text" class="form-control" placeholder="Enter name" name="room_no">
+                                    <select name="room_no">
+                                        <?php foreach($rows as $row):?>
+                                        <option><?php print $row['room_no']; ?> </option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Availability</label>
@@ -145,10 +151,9 @@ if(isset($_POST['addRoom'])){
                 <div class="add-rooms">
                     <div class="popup" id="add-room-popup">
                         <div class="popup-content">
-                            <!-- <img src="../images/close.png" alt="close" class="close"> -->
                             <form method="post">
-                                <h1>Add Room</h1>
-                                <div class="form-group">
+                                <h1>Dp you want to add a room?</h1>
+                                <!-- <div class="form-group">
                                     <label>Room No</label>
                                     <input type="text" class="form-control" placeholder="Enter Room No" name="room_no">
                                 </div>
@@ -158,10 +163,10 @@ if(isset($_POST['addRoom'])){
                                         <option value="available">Available</option>
                                         <option value="not_available">not_available</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="button-container">
-                                    <button type="submit" name ="addRoom">Submit</button>
-                                    <button class="close-button" name ="close">Close</button>
+                                    <button type="submit" name ="addRoom">Yes</button>
+                                    <button class="close-button" name ="close">No</button>
                                 </div>
                             </form>
                         </div>

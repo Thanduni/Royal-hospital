@@ -34,5 +34,10 @@ require_once("../conf/config.php");
                 <p>Patients</p>
             </a>
         </li>
+        <li><a href="<?php echo BASEURL . '/Doctor/updateDoctorProfile.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="profile"
+                                            align="middle">
+                <p>Profile</p>
+            </a></li>
     </ul>
 </div>
