@@ -47,7 +47,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 </li>
                 <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
                         <img
-                                src=<?php echo BASEURL . '/images/logout.jpg' ?> alt="logout"></a>
+                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
                 </li>
             </ul>
             <div class="arrow">
@@ -70,20 +70,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         <tbody>
 
                             <?php
-                                $sql="select user.profile_image,user.name,patient.patientID,inpatient.roomNo from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID";
+                                $sql="select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
                                   while($row=mysqli_fetch_assoc($result)){
                                     $profile_image = $row['profile_image'];
                                     $name =  $row['name'];
-                                    $roomNo = $row['roomNo'];
+                                    $room_no = $row['room_no'];
                                     $patientID= $row['patientID'];
                                     echo '<tr> 
 
                                     
                                     <td>'.$name.'</td>
-                                    <td>'.$roomNo.'</td>
+                                    <td>'.$room_no.'</td>
                                     <td> <button class="button" id="view-report-button"><a href="patientReport.php?patientid='.$patientID.'&name='.$name.'">
                                         View Reports </a>
                                     </button>

@@ -93,14 +93,10 @@ if(isset($_POST['addRoom'])){
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Room
             </div>
-            <button class="button" id="update-room">
-                Update Room
-            </button>
             <div class="main-container">
-
-                <button class="button" id="add-room">
-                    Add Room
-                </button>
+                <h3>Room List</h3>
+                <button class="button" id="update-room">Update Room</button>
+                <button class="button" id="add-room">Add Room</button>
                 <div class="room-cards">                    
                     <?php foreach ($rows as $row):?>
                     <div class="room">

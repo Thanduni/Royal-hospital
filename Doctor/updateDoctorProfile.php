@@ -41,7 +41,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             </div>
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="Doctor"> Doctor</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img                                src="../images/logout.jpg">
+                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img src="../images/logout.svg">                              src="../images/logout.jpg">
                     </a></li>
             </ul>
             <div class="arrow">
