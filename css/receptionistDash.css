@@ -1,0 +1,122 @@
+.actorCards{
+    display: flex;
+}
+
+.actorCards ul{
+    position: relative;
+    left: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+    margin: 50px;
+    width: 100%;
+}
+
+.actorCards ul li{
+    box-shadow: 3px 3px 20px 0px #666666;
+    margin: 10px;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.4s;
+    vertical-align: center;
+    font-size: 30px;
+    line-height: 37px;
+    border-style: none;
+    border-radius: 10px;
+    width: 200px;
+    padding: 35px;
+    color: #666666;
+}
+
+.actorCards ul li:hover{
+    transform: scale(0.9, 0.9);
+}
+
+.card-set{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+table th,
+table td{
+    padding: 15px;
+}
+
+.appoitmentNum{
+    min-height: 200px;
+}
+
+.val{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.card{
+    box-shadow: 3px 3px 20px 0px #666666;
+    margin: 10px;
+    text-align: center;
+    font-weight: 300;
+    transition: 0.4s;
+    vertical-align: center;
+    font-size: 15px;
+    line-height: 37px;
+    border-style: none;
+    border-radius: 10px;
+    min-width: 200px;
+    padding: 35px;
+    color: #666666;
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
+}
+
+#second-head{
+    margin: 20px;
+    font-size: 25px;
+    color: #666666;
+}
+
+.tab-cards{
+    background-repeat: no-repeat;
+    background-position: 20px;
+    background-size: contain;
+}
+
+.tab-cards#dashboard{
+    background-image: url("../images/dashboard.svg");
+}
+
+.tab-cards#appointments{
+    background-image: url("../images/appointment.svg");
+}
+
+.tab-cards#patient{
+    background-image: url("../images/patient.svg");
+}
+
+.tab-cards#bills{
+    background-image: url("../images/receptionist.svg");
+}
+
+.tab-cards#profile{
+    background-image: url("../images/user_in_card.svg");
+}
+
+
+@media screen and (min-width: 1686.250px) {
+    .actorCards ul{
+        width: 1400px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .actorCards ul li{
+        width: 300px;
+    }
+
+    .next {
+        height: auto;
+    }
+}
+
