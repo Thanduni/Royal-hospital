@@ -41,7 +41,7 @@ p.addUSer {
 input[type='submit']{
     width: 159px;
     height: 40px;
-    background: #24354E;
+    background: #666666;
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -66,7 +66,7 @@ td:first-child {
 }
 
 .hint {
-    color: #24354E;
+    color: #666666;
     text-align: justify;
     font-weight: bold;
 }
@@ -91,10 +91,9 @@ table {
 .table {
     margin: 0 0 40px 0;
     width: 100%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 500px;
     overflow-y: scroll;
-    box-shadow: 3px 3px 20px 0px #24354E;
     border-style: none;
     border-radius: 10px;
 }
@@ -124,14 +123,14 @@ table {
     background: #f6f6f6;
 }
 
-.row:nth-of-type(odd) {
-    background: #e9e9e9;
-}
+/*.row:nth-of-type(odd) {*/
+/*    background: #e9e9e9;*/
+/*}*/
 
 .row.headerT {
     font-weight: 900;
-    color: #ffffff;
-    background: #24354E;
+    color: #666666;
+    background: #e9e9e9;
 }
 
 @media screen and (max-width: 1229px) {
@@ -228,10 +227,10 @@ table {
 .userContents table {
     display: flex;
     justify-content: center;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* border-style: solid; */
     background-color: #ADB6CD;
-    /*color: #24354E;*/
+    /*color: #666666;*/
     border-radius: 10px;
     font-weight: 400;
     font-size: 15px;

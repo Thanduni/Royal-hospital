@@ -52,7 +52,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             <div class="editRegion">
                 <div class="buttonSet">
                     <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>"><button type="button" id="slider">Homepage</button></a>
-                    <button type="button" id="aboutUs" style="background-color: #AADDDD; color: #24354E" disabled>About us</button>
+                    <button type="button" id="aboutUs" style="background-color: #AADDDD; color: #344168" disabled>About us</button>
                 </div>
                 <div class="editForm">
                     <h2>About us</h2>

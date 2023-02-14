@@ -12,7 +12,7 @@ table {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     height: 500px;
     overflow-y: scroll;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 3px 3px 20px 0px #344168;
     border-style: none;
     border-radius: 10px;
 }
@@ -49,7 +49,7 @@ table {
 .row.headerT {
     font-weight: 900;
     color: #ffffff;
-    background: #24354E;
+    background: #344168;
 }
 
 @media screen and (max-width: 1229px) {
@@ -98,12 +98,12 @@ table {
     vertical-align: middle;
 }
 
-.profilePic {
-    height: 50px;
-    width: 50px;
-    border-style: none;
-    border-radius: 50%;
-}
+/*.profilePic {*/
+/*    height: 50px;*/
+/*    width: 50px;*/
+/*    border-style: none;*/
+/*    border-radius: 50%;*/
+/*}*/
 
 .cell {
     padding: 6px 12px;
@@ -146,10 +146,10 @@ table {
 .userContents table {
     display: flex;
     justify-content: center;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 3px 3px 20px 0px #344168;
     /* border-style: solid; */
     background-color: #ADB6CD;
-    /*color: #24354E;*/
+    /*color: #344168;*/
     border-radius: 10px;
     font-weight: 400;
     font-size: 15px;

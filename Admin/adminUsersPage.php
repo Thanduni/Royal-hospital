@@ -12,6 +12,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+        <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
         <title>Admin dashboard - User</title>
         <style>
@@ -113,6 +115,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                                 src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
 
                                     </button>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#<?php echo $row[0] ?>').click(function(){
+                                                $('#userForm').fadeIn().css("display","flex");
+                                            });
+                                        });
+                                    </script>
                                     <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
                                         <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
@@ -152,12 +161,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                         <?php } ?>
                     </div>
                 </div>
-        </div>
+
+            </div>
     </div>
     <div id="userForm">
         <div id="form">
             <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
                   name="userForm">
+                <div class="banner">
+                    <h1>User</h1>
+                </div>
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Add user</p>
                 <table>
@@ -271,6 +284,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#addButton').click(function(){
+                $('#userForm').fadeIn().css("display","flex");
+            });
+            $('#cancel').click(function(){
+                $('#userForm').fadeOut();
+            });
+        });
+    </script>
 
     <?php
     if (@$_GET['click'] == "addDoctor") {

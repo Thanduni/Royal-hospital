@@ -20,6 +20,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 height: auto;
             }
         </style>
+
         <title>Admin dashboard</title>
     </head>
     <body>
@@ -43,9 +44,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
             </div>
             <p id="second-head">Day analysis</p>
-            <p style="color: #24354E;  margin:20px;"> Date : <?php echo date("d - m - Y") ?>
+            <p style="color: #344168;  margin:20px;"> Date : <?php echo date("d - m - Y") ?>
             </p>
-            <hr style="color: #24354E; margin: 20px;">
+            <hr style="color: #344168; margin: 20px;">
             <div class="card-set">
                 <?php
                 $sql = mysqli_query($con, "select count(*) from appointment where date ='".date("Y-m-d")."'");
@@ -92,7 +93,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             $sql5 = mysqli_query($con, "select count(*) from receptionist;");
             $row5 = mysqli_fetch_array($sql5);
             ?>
-            <hr style="color: #24354E; margin: 20px;">
+            <hr style="color: #344168; margin: 20px;">
             <div class="card-set">
 
                 <div class="card">
@@ -118,7 +119,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
             <aside>
                 <p id="second-head">Tabs in use</p>
-                <hr style="color: #24354E; margin: 20px;">
+                <hr style="color: #344168; margin: 20px;">
                 <div class="actorCards">
                     <ul>
                         <a href="<?php echo BASEURL . '/Admin/adminDash.php' ?>">

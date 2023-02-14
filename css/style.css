@@ -1,5 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
 
+:root{
+    --primary-color:#005be7;
+    --secondary-color: rgba(255,255,255);
+    --page-color:#f6f5f7;
+    --left-sidebar-color:#682CC6;
+    --light-purple-bg:rgba(104, 44, 198, 0.09);
+    --black-text: #000000;
+    --error: #721519;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +19,9 @@
 html,
 body {
     height: 100%;
-    color: #24354E;
-    background-color: #f8f9ff;
+    color: #666666;
+    font-weight: 500;
+    background-color: #f2f8ff;
 }
 
 .header {
@@ -27,7 +38,7 @@ nav {
     z-index: 100;
     justify-content: space-between;
     align-items: center;
-    background-color: #24354E;
+    background-color: #005be7;
 }
 
 nav img {
@@ -109,7 +120,7 @@ p.slider-description {
     color: #F8F9FF;
     border-style: none;
     border-radius: 10px;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     margin: 10px;
 }
@@ -131,7 +142,7 @@ p.slider-description {
     width: 350px;
     height: 350px;
     left: 309px;
-    background: #24354E;
+    background: #666666;
     border: 1px solid #ADB6CD;
 }
 
@@ -163,7 +174,7 @@ p.slider-description {
     line-height: 24px;
     text-align: justify;
     padding: 20px;
-    color: #24354E;
+    color: #666666;
 }
 
 @media (max-width: 1229px) {
@@ -212,7 +223,7 @@ p.slider-description {
 .alreadyLogged button {
     width: max-content;
     height: max-content;
-    color: #24354E;
+    color: #666666;
     background: #ADB6CD;
     font-style: normal;
     font-weight: 400;
@@ -226,7 +237,7 @@ p.slider-description {
 .optionB button:hover {
     transform: scale(1.040);
     /* color: #ADB6CD;
-    background: #24354E;
+    background: #666666;
     border-style: solid;
     border-width: 4px;
     border-color: #ADB6CD; */
@@ -235,7 +246,7 @@ p.slider-description {
 .optionB button:active {
     transform: scale(1.025);
     /* color: #ADB6CD;
-    background: #24354E;
+    background: #666666;
     border-style: solid;
     border-width: 4px;
     border-color: #ADB6CD; */
@@ -255,7 +266,7 @@ p.slider-description {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #24354E; */
+    /* background-color: #666666; */
     height: 100vh;
 }
 
@@ -278,7 +289,7 @@ p.slider-description {
     font-weight: 400;
     font-size: 42px;
     line-height: 51px;
-    color: #24354E;
+    color: #666666;
     text-align: center;
     left: 50%;
     transform: translate(-50%);
@@ -301,7 +312,7 @@ form {
 form button {
     width: 159px;
     height: 40px;
-    background: #24354E;
+    background: #666666;
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -335,7 +346,8 @@ button:active {
     margin-top: 0px;
     transform: translateX(0px);
     transition: width .10s linear;
-    background: linear-gradient(180deg, #24354E 100%, #ffffff 0%);
+    background: linear-gradient(180deg, #ffffff 100%, #ffffff 0%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .sidebarMenuInner {
@@ -369,7 +381,7 @@ button:active {
         margin-top: 0px;
         transform: translateX(0px);
         transition: width .10s linear;
-        background: linear-gradient(180deg, #24354E 100%, #ffffff 0%);
+        background: linear-gradient(180deg, #ffffff 100%, #ffffff 0%);
     }
 
     .sidebarMenuInner {
@@ -378,7 +390,6 @@ button:active {
         margin-top: 125px;
         padding: 0;
     }
-
 
     .sidebarMenuInner li {
         list-style: none;
@@ -398,9 +409,15 @@ button:active {
     right: 29.17%;
     top: 62.5%;
     bottom: 12.5%;
-    border: 2px solid #ADB6CD;
+    border: 2px solid #26272b;
 }
 
+#sidebarMenu:hover {
+    width: 250px;
+    /*height: 100%;*/
+    overflow: visible;
+    transition: width .10s linear;
+}
 
 input[type="checkbox"]:checked ~ #sidebarMenu {
     width: 250px;
@@ -435,7 +452,7 @@ input[type=checkbox] {
     position: absolute;
     height: 3px;
     width: 100%;
-    background-color: #ADB6CD;
+    background-color: #666666;
 }
 
 .horizontal {
@@ -484,24 +501,14 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 .icons {
     height: 20px;
     width: 20px;
-    border-style: solid;
-    border-color: #ADB6CD;
     border-radius: 10px;
     border-width: 1px;
     padding: 5px;
     margin-left: 10px;
+    border-style: solid;
+    border-color: 344168;
 }
 
-.sidebarMenuInner p {
-    display: inline;
-    margin: 15px;
-    color: #ADB6CD;
-    /* border-style: solid; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-}
 
 /*.sidebarMenuInner p::after {*/
 /*    content: '';*/
@@ -542,7 +549,7 @@ a {
     font-size: 42px;
     line-height: 51px;
     text-align: center;
-    color: #24354E;
+    color: #666666;
 }
 
 .title img {
@@ -555,7 +562,7 @@ a {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
-    color: #24354E;
+    color: #666666;
     line-height: 18px;
 }
 
@@ -566,7 +573,7 @@ a {
 }
 
 .userContents ul .logout a {
-    color: #24354E;
+    color: #666666;
 }
 
 .userContents ul .userType {
@@ -584,17 +591,17 @@ a {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    color: #24354E;
+    color: #666666;
 }
 
 .userContents button,
 #form button {
     width: 139px;
     height: 40px;
-    background: #24354E;
-    color: #ADB6CD;
+    background: #e9e9e9;
+    color: #666666;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 15px;
     vertical-align: middle;
     border-radius: 50px;
@@ -607,7 +614,7 @@ a {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #24354E;
+    background-color: #666666;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -615,7 +622,7 @@ a {
     font-weight: 400;
     font-size: 26px;
     line-height: 32px;
-    color: #ADB6CD;
+    color: #26272b;
 }
 
 .midPortion p, h4 {
@@ -631,7 +638,7 @@ a {
 }
 
 .hint{
-    color: #24354E;
+    color: #666666;
     text-align: center;
     font-weight: bold;
 }
@@ -643,16 +650,15 @@ a {
     border-radius: 10px;
     padding: 20px;
     margin: 20px;
-    border-color: #24354E;
+    border-color: #666666;
 }
 
 #userForm {
-    color: #fff;
+    /*color: #fff;*/
     display: none;
     justify-content: center;
-    background-color: #000;
-    opacity: 0.9;
-    box-shadow: -3px 3px 6px #000;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 1em 1em 2em 1em;
     height: 100vh;
     z-index: 100;
@@ -676,7 +682,7 @@ a {
     table-layout: fixed;
     /* display: flex; */
     /* flex-direction: column; */
-    margin: 10px;
+    margin: 0 auto;
     flex-wrap: wrap;
     font-weight: 400;
     font-size: 15px;
@@ -689,7 +695,7 @@ td {
 }
 
 #form {
-    background-color: white;
+    background-color: #efefef;
     display: flex;
     position: fixed;
     max-height: 500px;
@@ -700,7 +706,7 @@ td {
     font-size: 30px;
     line-height: 37px;
     border-radius: 10px;
-    color: #000000;
+    color: #666666;
     /* display: none; */
 }
 
@@ -711,9 +717,9 @@ td {
 #form textarea,
 #form select {
     width: 351px;
-    background: #BDC8E6;
+    background: #fff;
     border: 1px solid rgba(36, 53, 78, 0.5);
-    border-radius: 10px;
+    border-radius: 3px;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -769,7 +775,7 @@ ul {
 }
 
 .footer {
-    background-color: #24354E;
+    background-color: #005be7;
     padding: 43px 0;
 }
 
@@ -779,7 +785,7 @@ ul {
 
 .footer-col h4 {
     font-size: 18px;
-    color: #ADB6CD;
+    color: #26272b;
     text-transform: capitalize;
     margin-bottom: 35px;
     font-weight: 500;
@@ -795,7 +801,7 @@ ul {
     text-align: left;
     font-size: 16px;
     text-transform: capitalize;
-    color: #ADB6CD;
+    color: #26272b;
     text-decoration: none;
     font-weight: 300;
     display: block;
@@ -829,7 +835,7 @@ ul {
     position: absolute;
     left: 0;
     bottom: -10px;
-    background-color: #ADB6CD;
+    background-color: #26272b;
     height: 2px;
     box-sizing: border-box;
     width: 50px;
@@ -844,7 +850,7 @@ ul {
 .footer-col li {
     font-size: 16px;
     text-transform: capitalize;
-    color: #ADB6CD;
+    color: #26272b;
     text-decoration: none;
     font-weight: 300;
     display: block;
@@ -852,7 +858,7 @@ ul {
 }
 
 .footer-col ul li a:hover {
-    color: #ADB6CD;
+    color: #26272b;
     padding-left: 8px;
 }
 
@@ -860,18 +866,18 @@ ul {
     display: inline-block;
     height: 40px;
     width: 40px;
-    background-color: #24354E;
+    background-color: #666666;
     margin: 0 10px 10px 0;
     text-align: center;
     line-height: 40px;
     border-radius: 50%;
-    color: #ADB6CD;
+    color: #26272b;
     transition: all 0.5s ease;
 }
 
 .footer-col .social-links a:hover {
-    color: #ADB6CD;
-    background-color: #24354E;
+    color: #26272b;
+    background-color: #666666;
 }
 
 /*responsive*/
@@ -908,11 +914,11 @@ ul {
     background-color: #F8F9FF;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 10px;
     font-size: 20px;
     line-height: 24px;
-    color: #24354E;
+    color: #666666;
 }
 
 /*input[type="checkbox"]:checked + .welcomeUser p {*/
@@ -923,7 +929,7 @@ ul {
     position: relative;
     top: 50px;
     margin: 10px;
-    color: #ADB6CD;
+    color: #666666;
     height: 38px;
     font-size: x-large;
     overflow: hidden;
@@ -942,7 +948,12 @@ ul {
 input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser img {
     height: 150px;
     width: 150px;
-    overflow: visible;
+    transition: width .10s, height .10s;
+}
+
+#sidebarMenu:hover .welcomeUser img {
+    height: 150px;
+    width: 150px;
     transition: width .10s, height .10s;
 }
 
@@ -951,6 +962,36 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     overflow: visible;
 }
 
+#sidebarMenu:hover .welcomeUser p {
+    height: auto;
+    overflow: visible;
+}
+
+.sidebarMenuInner li:hover{
+    transform: scale(1.040);
+    font-weight: bold;
+}
+
+.sidebarMenuInner li:hover .welcomeUser p{
+    color: #1ebfc2;
+}
+
+
+.sidebarMenuInner p {
+    display: inline;
+    margin: 15px;
+    color: #666666;
+    /* border-style: solid; */
+    font-style: normal;
+    font-weight: 580;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+
+#sidebarMenu li:hover a p{
+    color: #005be7;
+}
 
 @media screen and (max-width: 1229px) {
 
@@ -990,8 +1031,8 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     padding: 10px;
     border-style: none;
     border-radius: 10px;
-    box-shadow: 3px 3px 20px 0px #24354E;
-    color: #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: #666666;
 }
 
 /**/
@@ -1003,7 +1044,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
 }
 
 #myInputName, #myInputRole {
-    background-image: url('../images/search.png');
+    background-image: url('../images/search.svg');
     background-position: 4px 6px;
     background-repeat: no-repeat;
     font-size: 16px;
@@ -1012,3 +1053,66 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     margin: 20px;
     display: inline-block;
 }
+
+
+.butbut{
+    border-style: solid;
+    border-color: #666666;
+}
+
+#sidebarMenu li:hover .butbut{
+    border-style: none;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #005be7;
+}
+
+/* pagination */
+
+
+.pagination-container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.pagination ul {
+    margin: 2em auto;
+
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.page-number {
+    display: inline;
+}
+
+.page-number a {
+    /* margin: 10px; */
+    text-decoration: none;
+    color: black;
+}
+
+
+/* Pagination 2 */
+.pagination-2 .page-number {
+    padding: 8px 16px;
+    background-color: #f3f4f2;
+}
+
+.pagination-2 .page-number:hover {
+    background-color: #d9dcd6;
+}
+
+.pagination-2 .active {
+    margin-left: 5px;
+    border-radius: 4px;
+    background-color: #16425b;
+}
+
+.pagination-2 .active:hover {
+    background-color: #16425b;
+}
+
+.pagination-2 .active a {
+    color: #f3f4f2;
+/*}*/

@@ -28,18 +28,18 @@
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 20px;
 }
 
 .number{
     font-size: 35px;
     font-weight: 500;
-    color: #24354E;
+    color: #666666;
 }
 
 .card-name {
-    color: #24354E;
+    color: #666666;
     font-weight: 600;
 }
 
@@ -113,7 +113,7 @@ h3{
     font-weight: bold;
 }
 .popup-content h1{
-    color: #24354E;
+    color: #666666;
     margin-bottom: 40px;
 }
 .submit{
@@ -154,7 +154,7 @@ h3{
 }
 
 #view-patient-button{
-    background: #24354E;
+    background: #666666;
     padding: 10px 15px;
     font-size: 15px;
     float: left;
@@ -165,7 +165,7 @@ h3{
     color: #fff;
 }
 #view-report-button{
-    background: #24354E;
+    background: #666666;
     padding: 10px 15px;
     font-size: 15px;
     float: left;
@@ -201,17 +201,17 @@ h3{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .room-no{
     font-size: 25px;
     font-weight: 500;
-    color: #24354E;
+    color: #666666;
 }
 
 .room-availability {
-    color: #24354E;
+    color: #666666;
     font-weight: 600;
 }
 
@@ -239,7 +239,7 @@ h3{
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
-    background: #24354E;
+    background: #666666;
     border-radius: 20px;
 }
 .table tr{
@@ -294,7 +294,7 @@ select option{
     /* width: fit-content; */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-left: 5%;
     margin-bottom: 5%;
     background: #F8F9FF;
@@ -307,7 +307,7 @@ select option{
     /* width: fit-content; */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #F8F9FF;
     margin: 0 30px 10px 30px;
 }
@@ -317,7 +317,7 @@ select option{
     /* width: fit-content; */
     padding: 20px ;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #F8F9FF;
     margin: 0 30px;
 }
@@ -330,12 +330,12 @@ select option{
     height: fit-content;
 }
 .medicine-button{
-    /* border: 2px solid #24354E; */
+    /* border: 2px solid #666666; */
     padding: 5px;
 
 }
 .test-button{
-    /* border: 2px solid #24354E; */
+    /* border: 2px solid #666666; */
     margin-left: 5px;
     padding: 5px;
 }
@@ -383,11 +383,11 @@ select option{
     border-right: 1px solid gray;
 }
 .medicine-button:hover{
-    border-bottom: 2px solid #24354E;
+    border-bottom: 2px solid #666666;
     cursor: pointer;
     
 }
 .test-button:hover{
     cursor: pointer;
-    border-bottom: 2px solid #24354E;
+    border-bottom: 2px solid #666666;
 }

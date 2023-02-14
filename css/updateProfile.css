@@ -13,18 +13,18 @@ flex-basis: 78%;
 background-color: white;
 border-style: none;
 border-radius: 10px;
-box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 padding: 20px;
 margin: 20px;
 }
 
 h2{
-color: #24354E;
+color: #666666;
 }
 
 .disable{
 background: #ADB6CD;
-color: #24354E;
+color: #666666;
 }
 
 label{
@@ -57,7 +57,7 @@ border-radius: 5px;
 
 .disable{
 background: #ADB6CD;
-color: #24354E;
+color: #666666;
 }
 
 @media screen and (max-width: 1229px) {
@@ -71,7 +71,7 @@ display: inline;
 }
 }
 
-#profilePic{
+profilePic{
     border-style: none;
     border-radius: 20px;
     height: 125px;

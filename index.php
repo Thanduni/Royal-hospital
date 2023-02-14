@@ -55,7 +55,7 @@ if (!isset($_SESSION['mailaddress'])) {
                     $result->data_seek($j);
                     $row = $result->fetch_array(MYSQLI_NUM);
                     ?>
-                    <div class="slider__contents animate-left"
+                    <div class="slider__contents"
                          style="background: center / cover no-repeat url('<?php echo BASEURL . '/uploads/' . $row[3] ?>'), 0 #616161;"
                          class="slider-title">
                         <p style="color: white" class="slider-title"><?php echo $row[1] ?></p>

@@ -29,18 +29,18 @@
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgb(0 0 0 / 8%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-wrap: wrap;
 }
 
 .number{
     font-size: 35px;
     font-weight: 500;
-    color: #24354E;
+    color: #666666;
 }
 
 .card-name {
-    color: #24354E;
+    color: #666666;
     font-weight: 600;
 }
 
@@ -86,10 +86,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #24354E;
+    background-color: #666666;
     border-radius: 20px;
     color: #fff;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .payment a i{
@@ -109,7 +109,7 @@ a{
     margin-right: 20px;
     margin-top: 40px;
     display: flex;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
 }
 
@@ -125,7 +125,7 @@ a{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card2{
     grid-template-columns: repeat(1,0px);
@@ -139,7 +139,7 @@ a{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card3{
     grid-template-columns: repeat(1,0px);
@@ -153,7 +153,7 @@ a{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .payment .mtable{
@@ -168,7 +168,7 @@ a{
     height: 480px;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card1-content,.card2-content,.card3-content{
@@ -216,7 +216,7 @@ a{
     width: 75%;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* width: 80%;
     left: 240px;
     top: 200px; */
@@ -274,7 +274,7 @@ textarea{
 form button ,#cancel,#btn {
     width: 129px;
     height: 41px;
-    background: #24354E;
+    background: #666666;
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -320,7 +320,7 @@ form button ,#cancel,#btn {
 .table-box table,th,td,tr{
     border: 0.25px solid lightgray;
     border-collapse: collapse;
-    background: #24354E;
+    background: #666666;
     text-align: center;
     color: white;
     width: 970px;
@@ -329,7 +329,7 @@ form button ,#cancel,#btn {
 .userContents  .payment button{
     width: 200px;
     height: 50px;
-    background: #24354E;
+    background: #666666;
     color: #ADB6CD;
     font-style: normal;
     font-weight: 500;

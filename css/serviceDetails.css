@@ -11,7 +11,7 @@
 }
 
 #billInfo li a{
-    color: #24354E;
+    color: #666666;
 }
 
 #billInfo li a:hover{
@@ -46,10 +46,9 @@
 .table {
     margin: 0 0 40px 0;
     width: 100%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 250px;
     overflow-y: scroll;
-    box-shadow: 3px 3px 20px 0px #24354E;
     border-style: none;
     border-radius: 10px;
 }
@@ -79,14 +78,14 @@
     background: #f6f6f6;
 }
 
-.row:nth-of-type(odd) {
-    background: #e9e9e9;
-}
+/*.row:nth-of-type(odd) {*/
+/*    background: #e9e9e9;*/
+/*}*/
 
 .row.headerT {
     font-weight: 900;
-    color: #ffffff;
-    background: #24354E;
+    color: #666666;
+    background: #e9e9e9;
 }
 
 .row .cell {
@@ -117,8 +116,8 @@
     margin: 20px;
     border-style: none;
     border-radius: 10px;
-    box-shadow: 3px 3px 20px 0px #24354E;
-    color: #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: #666666;
     font-weight: bold;
     background-image: url("../images/Bill.jpg");
     background-size: contain;
@@ -129,6 +128,6 @@
 
 #filterInfo{
     border-style: none;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 3px 3px 20px 0px #666666;
     padding: 20px;
 }

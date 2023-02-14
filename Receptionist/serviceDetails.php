@@ -104,7 +104,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <td colspan="2">
                                     <button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit"
                                             id="filterAppointment" name="filterAppointment">
-                                        Filter appointments
+                                        Filter purchases
                                     </button>
                                 </td>
                             </tr>
@@ -131,7 +131,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 </ul>
                 <div class="table-set">
                     <div class="wrapper" id="table-service">
-                        <h3 style="text-align: center;color: #24354E">Service Cost Information</h3>
+                        <h3 style="text-align: center;color: #344168">Service Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>
@@ -205,7 +205,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $rows = $result1->num_rows;
                     ?>
                     <div class="wrapper" id="table-test">
-                        <h3 style="text-align: center;color: #24354E">Test Cost Information</h3>
+                        <h3 style="text-align: center;color: #344168">Test Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>
@@ -280,7 +280,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $rows = $result1->num_rows;
                     ?>
                     <div class="wrapper" id="table-drug">
-                        <h3 style="text-align: center;color: #24354E">Drug Cost Information</h3>
+                        <h3 style="text-align: center;color: #344168">Drug Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>
@@ -386,7 +386,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $rows = $result1->num_rows;
                     ?>
                     <div class="wrapper" id="table-summary">
-                        <h3 style="text-align: center;color: #24354E">Summary Cost Information</h3>
+                        <h3 style="text-align: center;color: #344168">Summary Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>

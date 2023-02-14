@@ -26,7 +26,7 @@ body {
     margin-top: 0px;
     transform: translateX(0px);
     transition: width .10s linear;
-    background: linear-gradient(180deg, #24354E 100%, #ffffff 0%);
+    background: linear-gradient(180deg, #666666 100%, #ffffff 0%);
 }
 
 .sidebarMenuInner {
@@ -61,7 +61,7 @@ body {
         margin-top: 0px;
         transform: translateX(0px);
         transition: width .10s linear;
-        background: linear-gradient(180deg, #24354E 100%, #ffffff 0%);
+        background: linear-gradient(180deg, #666666 100%, #ffffff 0%);
     }
 
     .sidebarMenuInner {
@@ -278,7 +278,7 @@ a {
 }
 
 .footer {
-    background-color: #24354E;
+    background-color: #666666;
     padding: 43px 0;
 }
 
@@ -369,7 +369,7 @@ a {
     display: inline-block;
     height: 40px;
     width: 40px;
-    background-color: #24354E;
+    background-color: #666666;
     margin: 0 10px 10px 0;
     text-align: center;
     line-height: 40px;
@@ -380,7 +380,7 @@ a {
 
 .footer-col .social-links a:hover {
     color: #ADB6CD;
-    background-color: #24354E;
+    background-color: #666666;
 }
 
 /*responsive*/
@@ -418,11 +418,11 @@ a {
     background-color: #F8F9FF;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 10px;
     font-size: 20px;
     line-height: 24px;
-    color: #24354E;
+    color: #666666;
 }
 
 /*input[type="checkbox"]:checked + .welcomeUser p {*/
@@ -478,7 +478,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     .userContents td,
     .userContents th {
         flex: 1 1 150px;
-        border: 0.25px solid #24354E;
+        border: 0.25px solid #666666;
         height: 65px;
         margin: 0px;
     }

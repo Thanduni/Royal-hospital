@@ -175,17 +175,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
         </div>
     </div>
-    
-    <script type="text/javascript">
-        $(function(){
-            $('#openform').click(function(){
-                $('#login-modal').fadeIn().css("display","flex");
-            });
-            $('.cancel-modal').click(function(){
-                $('#login-modal').fadeOut();
-            });
-        });
-    </script>
 
     <script type="text/javascript">
         $(function(){
