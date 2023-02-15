@@ -1,0 +1,39 @@
+.advertise{
+    background: #B5E2FA url(../images/hospital.jpg) center / cover no-repeat;
+    display: flex;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.advertise::before {
+    content: '';
+    position: absolute;
+    top: 130px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgb(14 61 86 / 50%);;
+    height: 409px;
+}
+
+.title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 73px;
+}
+
+@media screen and (max-width: 1229px) {
+    .advertise::before {
+        content: '';
+        position: absolute;
+        top: 140px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color:rgb(14 61 86 / 50%);;
+        height: 400px;
+    }
+}

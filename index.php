@@ -15,6 +15,7 @@ if (!isset($_SESSION['mailaddress'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/index.css' ?>">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
         <!--    <link rel="stylesheet" href="css/navandfooter.css">-->
         <title>Home</title>
         <style>
@@ -56,9 +57,9 @@ if (!isset($_SESSION['mailaddress'])) {
                     $row = $result->fetch_array(MYSQLI_NUM);
                     ?>
                     <div class="slider__contents"
-                         style="background: center / cover no-repeat url('<?php echo BASEURL . '/uploads/' . $row[3] ?>'), 0 #616161;"
+                         style="background: center / cover no-repeat url('<?php echo BASEURL . '/uploads/' . $row[3] ?>'), 0 #B5E2FA; background-attachment: fixed"
                          class="slider-title">
-                        <p style="color: white" class="slider-title"><?php echo $row[1] ?></p>
+                        <p style="color: white; font-family:'Lato'" class="slider-title"><?php echo $row[1] ?></p>
                         <p style="color: white" class="slider-description"><?php echo $row[2] ?></p>
                     </div>
                 <?php } ?>
@@ -69,7 +70,7 @@ if (!isset($_SESSION['mailaddress'])) {
                 <img src="<?php echo BASEURL . '/images/homepageDoctor.jpg' ?>" alt="homepageDoctor">
             </div>
             <div class="hospitalArticle">
-                <p style="font-size:26px;text-align: center">About Bayanno Diagnostic Center</p>
+                <p style="font-size:26px;text-align: center;font-weight: 900; font-family:'Lato'">About Bayanno Diagnostic Center</p>
                 <br>
                 <p>Royal Hospital has been a trusted name in Sri Lankan healthcare
                     for more than seven Decades. Since our foundation in 1946, we have
@@ -95,27 +96,85 @@ if (!isset($_SESSION['mailaddress'])) {
         </div>
         <div class="cards">
             <ul>
-                <li><b>Careers With Us</b>
+                <li id="home1"><b>Careers With Us</b>
                     We’re proud to belong to a pioneer in healthcare that
                     continuously innovates. We welcome passionate individuals
                     who want to be part of our growing legacy.
                 </li>
-                <li><b>Corporate Services</b>
+                <li id="home2"><b>Corporate Services</b>
                     From wellness to preventive care to treatment of
                     illnesses to rehabilitation.
                 </li>
-                <li><b>Health Check ups</b>
+                <li id="home3"><b>Health Check ups</b>
                     Make an appointment with our panel of expert physicians
                     and learn about maintaining a wholesome lifestyle and
                     good health.
                 </li>
-                <li><b>Clinical Laboratory Services</b>
+                <li id="home4"><b>Clinical Laboratory Services</b>
                     Our laboratory network spreading across 86 branches
                     comprises of 06 medical centres, 08 main laboratories,
                     18 mini labs and 54 collection centres islandwide.
                 </li>
             </ul>
+
+            <!--        </div>-->
+<!---->
+<!--        <div>-->
+
         </div>
+
+        <p style="font-size:26px; color: var(--para-color); text-align: center;font-weight: 900; font-family:'Lato'">Our Departments</p>
+        <section class="hero-section">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card__background" style="background-image: url(images/gas.jpg);    box-shadow: 8px 8px 22px var(--dec-color-3), -8px -8px 22px var(--dec-color-3);"></div>
+                    <div class="card__content">
+                        <h3 class="card__heading">Gastroenterology</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__background" style="background-image: url(images/neurology.jpg);    box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);"></div>
+                    <div class="card__content">neurology.jpg
+                        <h3 class="card__heading">Neurology</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__background" style="background-image: url(images/heart.jpg);    box-shadow: 8px 8px 22px var(--dec-color-4), -8px -8px 22px var(--dec-color-4);"></div>
+                    <div class="card__content">
+                        <h3 class="card__heading">Cardiology</h3>
+                    </div>
+                </div>
+                    <div>
+        </section>
+
+        <p style="font-size:26px; color: var(--para-color);text-align: center;font-weight: 900; font-family:'Lato'">Our Doctors</p>
+
+        <?php
+        $query = "SELECT * FROM user inner join doctor on user.nic=doctor.nic";
+        $result = $con->query($query);
+        if (!$result) die("Database access failed: " . $con->error);
+        $rows = $result->num_rows;
+        ?>
+
+        <section class="hero-section">
+            <div class="card-grid">
+    <?php
+    for ($j = 0; $j < $rows; ++$j) {
+        $result->data_seek($j);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        ?>
+                <div class="card" onmouseover="displayDocButton(<?php echo $row['doctorID']; ?>)" onmouseout="hideDocButton(<?php echo $row['doctorID']; ?>)">
+                    <div class="card__background doctor" style="background-image: url(uploads/<?php echo $row['profile_image'] ?>); box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);"></div>
+                    <div class="card__content">
+                        <p class="card__category"><?php echo $row['department'] ?></p>
+                        <h3 class="card__heading"><?php echo $row['name'] ?></h3>
+                        <button id="doctor_<?php echo $row['doctorID']; ?>" class="hide custom-btn">View details</button>
+                    </div>
+                </div>
+        <?php } ?>
+                    <div>
+        </section>
+
 
         <?php include(BASEURL . '/Components/Footer.php'); ?>
 
@@ -132,6 +191,19 @@ if (!isset($_SESSION['mailaddress'])) {
 
     </section>
 
+    <script>
+        function displayDocButton(id){
+            let button = document.getElementById("doctor_"+id);
+            button.classList.remove('hide');
+            button.classList.add('active');
+        }
+
+        function hideDocButton(id){
+            let button = document.getElementById("doctor_"+id);
+            button.classList.remove('active');
+            button.classList.add('hide');
+        }
+    </script>
 
     </body>
 
