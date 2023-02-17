@@ -7,7 +7,7 @@
 }
 
 #billInfo li a{
-    color: #666666;
+    color: var(--para-color);
 }
 
 #billInfo{
@@ -22,7 +22,7 @@
 /*Table*/
 
 .tableLabel{
-    background-color: #666666;
+    background-color: var(--para-color);
     font-weight: 900;
     color: #ffffff;
 }
@@ -46,7 +46,7 @@ tr{
     border-style: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    color: #666666;
+    color: var(--para-color);
     font-weight: bold;
     background-image: url("../images/Bill.jpg");
     background-size: contain;

@@ -26,7 +26,7 @@ nav {
     z-index: 100;
     justify-content: space-between;
     align-items: center;
-    background-color: #666666;
+    background-color: var(--para-color);
 }
 
 nav img {
@@ -159,7 +159,7 @@ p.slider-description {
     width: 350px;
     height: 350px;
     left: 309px;
-    background: #666666;
+    background: var(--para-color);
     border: 1px solid #ADB6CD;
 }
 
@@ -192,7 +192,7 @@ p.slider-description {
     line-height: 24px;
     text-align: justify;
     padding: 20px;
-    color: #666666;
+    color: var(--para-color);
 }
 
 @media (max-width: 1229px) {
@@ -242,7 +242,7 @@ p.slider-description {
 .alreadyLogged button {
     width: max-content;
     height: max-content;
-    color: #666666;
+    color: var(--para-color);
     background: #AADDDD;
     font-style: normal;
     font-weight: 400;
@@ -256,7 +256,7 @@ p.slider-description {
 .optionB button:hover {
     transform: scale(1.040);
     /* color: #AADDDD;
-    background: #666666;
+    background: var(--para-color);
     border-style: solid;
     border-width: 4px;
     border-color: #AADDDD; */
@@ -265,7 +265,7 @@ p.slider-description {
 .optionB button:active {
     transform: scale(1.025);
     /* color: #AADDDD;
-    background: #666666;
+    background: var(--para-color);
     border-style: solid;
     border-width: 4px;
     border-color: #AADDDD; */
@@ -285,7 +285,7 @@ p.slider-description {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #666666; */
+    /* background-color: var(--para-color); */
     height: 100vh;
 }
 
@@ -308,7 +308,7 @@ p.slider-description {
     font-weight: 400;
     font-size: 42px;
     line-height: 51px;
-    color: #666666;
+    color: var(--para-color);
     text-align: center;
     left: 50%;
     transform: translate(-50%);
@@ -326,7 +326,7 @@ p.slider-description {
     padding: 10px;
     margin: 10px;
     font-style: normal;
-    color: #666666;
+    color: var(--para-color);
     font-weight: 400;
     font-size: 30px;
     line-height: 37px;
@@ -354,7 +354,7 @@ form {
 form button {
     width: 159px;
     height: 60px;
-    background: #666666;
+    background: var(--para-color);
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -388,7 +388,7 @@ button:active {
     margin-top: 0px;
     transform: translateX(0px);
     transition: width .10s linear;
-    background: linear-gradient(180deg, #666666 100%, #ffffff 0%);
+    background: linear-gradient(180deg, var(--para-color) 100%, #ffffff 0%);
 }
 
 .sidebarMenuInner {
@@ -423,7 +423,7 @@ button:active {
         margin-top: 0px;
         transform: translateX(0px);
         transition: width .10s linear;
-        background: linear-gradient(180deg, #666666 100%, #ffffff 0%);
+        background: linear-gradient(180deg, var(--para-color) 100%, #ffffff 0%);
     }
 
     .sidebarMenuInner {
@@ -643,7 +643,7 @@ a {
 #form button {
     width: 139px;
     height: 40px;
-    background: #666666;
+    background: var(--para-color);
     color: #ADB6CD;
     font-style: normal;
     font-weight: 400;
@@ -659,7 +659,7 @@ a {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #666666;
+    background-color: var(--para-color);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -690,7 +690,7 @@ a {
     border-radius: 10px;
     padding: 20px;
     margin: 20px;
-    border-color: #666666;
+    border-color: var(--para-color);
 }
 
 .userContents table {
@@ -699,7 +699,7 @@ a {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* border-style: solid; */
     background-color: #AADDDD;
-    /*color: #666666;*/
+    /*color: var(--para-color);*/
     border-radius: 10px;
     font-weight: 400;
     font-size: 15px;
@@ -844,12 +844,17 @@ td > img {
     flex-wrap: wrap;
 }
 
+.row:hover{
+    transform: scale(1.041);
+    background-color: var(--hover-color);
+}
+
 ul {
     list-style: none;
 }
 
 .footer {
-    background-color: #666666;
+    background-color: var(--para-color);
     padding: 43px 0;
 }
 
@@ -940,7 +945,7 @@ ul {
     display: inline-block;
     height: 40px;
     width: 40px;
-    background-color: #666666;
+    background-color: var(--para-color);
     margin: 0 10px 10px 0;
     text-align: center;
     line-height: 40px;
@@ -951,7 +956,7 @@ ul {
 
 .footer-col .social-links a:hover {
     color: #ADB6CD;
-    background-color: #666666;
+    background-color: var(--para-color);
 }
 
 /*responsive*/
@@ -984,7 +989,7 @@ ul {
     .userContents td,
     .userContents th {
         flex: 1 1 150px;
-        border: 0.25px solid #666666;
+        border: 0.25px solid var(--para-color);
         height: 65px;
         margin: 0px;
     }

@@ -39,7 +39,7 @@ label {
 .group input:valid~label {
     top: -20px;
     font-size: 20px;
-    color: #666666;
+    color: var(--para-color);
 }
 
 
@@ -58,7 +58,7 @@ label {
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: #666666;
+    background: var(--para-color);
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;

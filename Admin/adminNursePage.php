@@ -52,7 +52,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Nurse
             </div>
             <p>
-                <button type="button" id="addButton" onclick="displayNurseAddForm()">+Add nurse</button>
+                <button type="button" id="addButton" class="custom-btn" onclick="displayNurseAddForm()">+Add nurse</button>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             </p>
 
@@ -64,6 +64,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
+
+                $numberPages = 3;
+                $totalPages = ceil($rows / $numberPages);
+
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
+
+                $startinglimit = ($page - 1) * $numberPages;
+                $query = "SELECT user.nic, nurse.nurseID, user.name, user.profile_image FROM nurse inner join user where nurse.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
+                $result = $con->query($query);
                 ?>
                 <div class="wrapper">
                     <div class="table">
@@ -113,6 +126,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     </div>
                 </div>
             </div>
+            <div class="pagination-container">
+                <div class="pagination">
+                    <ul class="pagination-2">
+
+                        <?php
+                        for($btn=1;$btn<=$totalPages;$btn++){
+                            echo '<a href="adminNursePage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
+                        }
+
+                        ?>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div id="userForm">
@@ -143,7 +169,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </form>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/validateRecepStoreNurse.js' ?>></script>

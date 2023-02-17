@@ -15,6 +15,7 @@ table {
     box-shadow: 3px 3px 20px 0px #344168;
     border-style: none;
     border-radius: 10px;
+    overflow: visible;
 }
 
 @media screen and (max-width: 1229px) {
@@ -34,12 +35,18 @@ table {
 @media screen and (max-width: 1229px) {
     .table {
         display: block;
+        overflow-y: scroll;
     }
 }
 
 .row {
     display: table-row;
     background: #f6f6f6;
+}
+
+.row:hover{
+    transform: scale(1.041);
+    background-color: var(--hover-color);
 }
 
 .row:nth-of-type(odd) {
@@ -81,6 +88,11 @@ table {
         display: block;
     }
 
+    .row:hover{
+        transform: scale(1.041);
+        background-color: var(--hover-color);
+    }
+
     .row.headerT {
         padding: 0;
         height: 6px !important;
@@ -96,6 +108,7 @@ table {
     margin-bottom: 10px;
     word-wrap: break-word;
     vertical-align: middle;
+    border-radius: 10px;
 }
 
 /*.profilePic {*/

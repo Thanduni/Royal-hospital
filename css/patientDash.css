@@ -36,11 +36,11 @@
 .number{
     font-size: 35px;
     font-weight: 500;
-    color: #666666;
+    color: var(--para-color);
 }
 
 .card-name {
-    color: #666666;
+    color: var(--para-color);
     font-weight: 600;
 }
 
@@ -86,7 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #666666;
+    background-color: var(--para-color);
     border-radius: 20px;
     color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -274,7 +274,7 @@ textarea{
 form button ,#cancel,#btn {
     width: 129px;
     height: 41px;
-    background: #666666;
+    background: var(--para-color);
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -320,7 +320,7 @@ form button ,#cancel,#btn {
 .table-box table,th,td,tr{
     border: 0.25px solid lightgray;
     border-collapse: collapse;
-    background: #666666;
+    background: var(--para-color);
     text-align: center;
     color: white;
     width: 970px;
@@ -329,7 +329,7 @@ form button ,#cancel,#btn {
 .userContents  .payment button{
     width: 200px;
     height: 50px;
-    background: #666666;
+    background: var(--para-color);
     color: #ADB6CD;
     font-style: normal;
     font-weight: 500;

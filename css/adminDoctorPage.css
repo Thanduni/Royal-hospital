@@ -41,7 +41,7 @@ p.addUSer {
 input[type='submit']{
     width: 159px;
     height: 40px;
-    background: #666666;
+    background: var(--para-color);
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -66,7 +66,7 @@ td:first-child {
 }
 
 .hint {
-    color: #666666;
+    color: var(--para-color);
     text-align: justify;
     font-weight: bold;
 }
@@ -94,6 +94,8 @@ table {
     height: 500px;
     border-style: none;
     border-radius: 10px;
+    overflow: visible;
+
 }
 
 @media screen and (max-width: 1229px) {
@@ -114,6 +116,7 @@ table {
 @media screen and (max-width: 1229px) {
     .table {
         display: block;
+        overflow-y: scroll;
     }
 }
 
@@ -122,13 +125,18 @@ table {
     background: #f6f6f6;
 }
 
+.row:hover{
+    transform: scale(1.041);
+    background-color: var(--hover-color);
+}
+
 /*.row:nth-of-type(odd) {*/
 /*    background: #e9e9e9;*/
 /*}*/
 
 .row.headerT {
     font-weight: 900;
-    color: #666666;
+    color: var(--para-color);
     background: #e9e9e9;
 }
 
@@ -160,6 +168,11 @@ table {
         display: block;
     }
 
+    .row:hover{
+        transform: scale(1.041);
+        background-color: var(--hover-color);
+    }
+
     .row.headerT {
         padding: 0;
         height: 6px !important;
@@ -175,6 +188,7 @@ table {
     margin-bottom: 10px;
     word-wrap: break-word;
     vertical-align: middle;
+    border-radius: 10px;
 }
 
 .profilePic {
@@ -228,7 +242,7 @@ table {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* border-style: solid; */
     background-color: #ADB6CD;
-    /*color: #666666;*/
+    /*color: var(--para-color);*/
     border-radius: 10px;
     font-weight: 400;
     font-size: 15px;

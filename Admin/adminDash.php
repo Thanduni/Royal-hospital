@@ -27,6 +27,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     <div class="user">
         <?php include(BASEURL . '/Components/AdminSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
+            <?php include(BASEURL . '/Components/nursetopbar.php');?>
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
                 Royal Hospital Management System
@@ -47,74 +48,80 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             <p style="color: #344168;  margin:20px;"> Date : <?php echo date("d - m - Y") ?>
             </p>
             <hr style="color: #344168; margin: 20px;">
-            <div class="card-set">
-                <?php
-                $sql = mysqli_query($con, "select count(*) from appointment where date ='".date("Y-m-d")."'");
-                $row = mysqli_fetch_array($sql);
-                ?>
-                <div class="card" style="max-height: 75px;">
-                    Number of appointments
-                    <p class="val"><?php echo $row['count(*)'] ?></p>
-                </div>
-                <?php
-                $query = "SELECT COUNT(appointment.appointmentID), user.name FROM appointment INNER JOIN doctor ON 
-                            appointment.doctorID = doctor.doctorID INNER JOIN user ON doctor.nic = user.nic where patientID IS NOT NULL AND date ='".date("Y-m-d")."' GROUP BY user.name;";
-                $result = ($con->query($query));
-                $row = $result->fetch_all(MYSQLI_ASSOC);
-                ?>
-                <div class="card table">
-                    <table>
-                        <tr>
-                            <th>Doctor name</th>
-                            <th>Number of appointments</th>
-                        </tr>
+            <div class="userDetails">
+                <div class="card-set">
+                    <?php
+                    $sql = mysqli_query($con, "select count(*) from appointment where date ='".date("Y-m-d")."'");
+                    $row = mysqli_fetch_array($sql);
+                    ?>
+                    <div>
+                        <div class="card" style="max-height: 75px;">
+                            Number of appointments
+                            <p class="val"><?php echo $row['count(*)'] ?></p>
+                        </div>
                         <?php
-                        if (!empty($row))
-                            foreach ($row as $rows) {
-                                ?>
+                        $query = "SELECT COUNT(appointment.appointmentID), user.name FROM appointment INNER JOIN doctor ON 
+                            appointment.doctorID = doctor.doctorID INNER JOIN user ON doctor.nic = user.nic where patientID IS NOT NULL AND date ='".date("Y-m-d")."' GROUP BY user.name;";
+                        $result = ($con->query($query));
+                        $row = $result->fetch_all(MYSQLI_ASSOC);
+                        ?>
+                        <div class="card table">
+                            <table>
                                 <tr>
-                                    <td><?php echo $rows['COUNT(appointment.appointmentID)'] ?></td>
-                                    <td><?php echo $rows['name'] ?></td>
+                                    <th>Doctor name</th>
+                                    <th>Number of appointments</th>
                                 </tr>
-                            <?php } ?>
-                    </table>
-                </div>
-            </div>
-            <p id="second-head">Whole system analysis</p>
-            <?php
-            $sql1 = mysqli_query($con, "select count(*) from user;");
-            $row1 = mysqli_fetch_array($sql1);
-            $sql2 = mysqli_query($con, "select count(*) from storekeeper;");
-            $row2 = mysqli_fetch_array($sql2);
-            $sql3 = mysqli_query($con, "select count(*) from patient;");
-            $row3 = mysqli_fetch_array($sql3);
-            $sql4 = mysqli_query($con, "select count(*) from doctor;");
-            $row4 = mysqli_fetch_array($sql4);
-            $sql5 = mysqli_query($con, "select count(*) from receptionist;");
-            $row5 = mysqli_fetch_array($sql5);
-            ?>
-            <hr style="color: #344168; margin: 20px;">
-            <div class="card-set">
+                                <?php
+                                if (!empty($row))
+                                    foreach ($row as $rows) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $rows['COUNT(appointment.appointmentID)'] ?></td>
+                                            <td><?php echo $rows['name'] ?></td>
+                                        </tr>
+                                    <?php } ?>
+                            </table>
+                        </div>
+                    </div>
 
-                <div class="card">
-                    Number of total users
-                    <p class="val"><?php echo $row1['count(*)'] ?></p>
-                </div>
-                <div class="card">
-                    Number of doctors
-                    <p class="val"><?php echo $row2['count(*)'] ?></p>
-                </div>
-                <div class="card">
-                    Number of nurses
-                    <p class="val"><?php echo $row3['count(*)'] ?></p>
-                </div>
-                <div class="card">
-                    Number of receptionists
-                    <p class="val"><?php echo $row4['count(*)'] ?></p>
-                </div>
-                <div class="card">
-                    Number of storekeepers
-                    <p class="val"><?php echo $row5['count(*)'] ?></p>
+                    <!--                <p id="second-head">Whole system analysis</p>-->
+                    <?php
+                    $sql1 = mysqli_query($con, "select count(*) from user;");
+                    $row1 = mysqli_fetch_array($sql1);
+                    $sql2 = mysqli_query($con, "select count(*) from storekeeper;");
+                    $row2 = mysqli_fetch_array($sql2);
+                    $sql3 = mysqli_query($con, "select count(*) from patient;");
+                    $row3 = mysqli_fetch_array($sql3);
+                    $sql4 = mysqli_query($con, "select count(*) from doctor;");
+                    $row4 = mysqli_fetch_array($sql4);
+                    $sql5 = mysqli_query($con, "select count(*) from receptionist;");
+                    $row5 = mysqli_fetch_array($sql5);
+                    ?>
+                    <div class="card-set">
+
+                        <div class="card">
+                            Number of total users
+                            <p class="val"><?php echo $row1['count(*)'] ?></p>
+                        </div>
+                        <div class="card">
+                            Number of doctors
+                            <p class="val"><?php echo $row2['count(*)'] ?></p>
+                        </div>
+                        <div class="card">
+                            Number of nurses
+                            <p class="val"><?php echo $row3['count(*)'] ?></p>
+                        </div>
+                    </div>
+                    <div class="card-set">
+                        <div class="card">
+                            Number of receptionists
+                            <p class="val"><?php echo $row4['count(*)'] ?></p>
+                        </div>
+                        <div class="card">
+                            Number of storekeepers
+                            <p class="val"><?php echo $row5['count(*)'] ?></p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <aside>
@@ -146,7 +153,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     </body>
     </html>

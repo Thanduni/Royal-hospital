@@ -53,12 +53,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
             <p>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
-                <button type="button" id="addButton" onclick="displayUserAddForm()">+Add user</button>
+                <button type="button" id="addButton" class="custom-btn" class="custom-btn" onclick="displayUserAddForm()">+Add user</button>
             </p>
 
             <div class="filter">
-                <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
-                <input type="text" id="myInputRole" onkeyup="filterByRole()" placeholder="Search for user role.." title="Type in a name">
+                <input type="text" id="myInputName" onkeyup="filterByNameUsers()" placeholder="Search for names.." title="Type in a name">
+                <input type="text" id="myInputRole" onkeyup="filterByRoleUsers()" placeholder="Search for user role.." title="Type in a name">
             </div>
 
             <?php
@@ -76,13 +76,25 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
+
+                $numberPages = 3;
+                $totalPages = ceil($rows / $numberPages);
+
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
+
+                $startinglimit = ($page - 1) * $numberPages;
+                $query = "SELECT * FROM user limit " . $startinglimit . ',' . $numberPages;
+                $result = $con->query($query);
                 ?>
 
 
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
-                            <div class="cell">Options</div>
                             <div class="cell">NIC</div>
                             <div class="cell">Name</div>
                             <div class="cell">Profile image</div>
@@ -92,11 +104,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <div class="cell">Contact number</div>
                             <div class="cell">Date of Birth</div>
                             <div class="cell">Gender</div>
+                            <div class="cell">Options</div>
+
                         </div>
                         <?php
-                        for ($j = 0; $j < $rows; ++$j) {
-                            $result->data_seek($j);
-                            $row = $result->fetch_array(MYSQLI_NUM);
+                        if ($result) {
+                            while ($row = mysqli_fetch_array($result)) {
                             ?>
                             <ul class="tableCon">
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[1] ?></li>
@@ -109,24 +122,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             </ul>
                             <!--                        <div id="UDfunc">-->
                             <div class="row">
-                                <div class="cell" style="100px" data-title="Options">
-                                    <button class="operation" id="<?php echo $row[0] ?>"
-                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
-                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
 
-                                    </button>
-                                    <script type="text/javascript">
-                                        $(function(){
-                                            $('#<?php echo $row[0] ?>').click(function(){
-                                                $('#userForm').fadeIn().css("display","flex");
-                                            });
-                                        });
-                                    </script>
-                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
-                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
-                                        </button>
-                                    </a>
-                                </div>
                                 <div class="cell" data-title="NIC">
                                     <?php echo $row[0]; ?>
                                 </div>
@@ -156,14 +152,45 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 <div class="cell" data-title="Gender">
                                     <?php echo $row[5]; ?>
                                 </div>
+                                <div class="cell" style="100px" data-title="Options">
+                                    <button class="operation" id="<?php echo $row[0] ?>"
+                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
+                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
+
+                                    </button>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#<?php echo $row[0] ?>').click(function(){
+                                                $('#userForm').fadeIn().css("display","flex");
+                                            });
+                                        });
+                                    </script>
+                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
 
-                        <?php } ?>
+                        <?php } }?>
                     </div>
                 </div>
-
-            </div>
+                <!-- pagination buttons -->
     </div>
+            <div class="pagination-container">
+                <div class="pagination">
+                    <ul class="pagination-2">
+
+                        <?php
+                        for($btn=1;$btn<=$totalPages;$btn++){
+                            echo '<a href="adminUsersPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
+                        }
+
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
     <div id="userForm">
         <div id="form">
             <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
@@ -280,7 +307,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         </div>
     </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>

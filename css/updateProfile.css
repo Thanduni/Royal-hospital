@@ -19,12 +19,12 @@ margin: 20px;
 }
 
 h2{
-color: #666666;
+color: var(--para-color);
 }
 
 .disable{
 background: #ADB6CD;
-color: #666666;
+color: var(--para-color);
 }
 
 label{
@@ -57,7 +57,7 @@ border-radius: 5px;
 
 .disable{
 background: #ADB6CD;
-color: #666666;
+color: var(--para-color);
 }
 
 @media screen and (max-width: 1229px) {
