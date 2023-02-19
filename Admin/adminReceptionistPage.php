@@ -64,18 +64,18 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
 
-                $numberPages = 3;
-                $totalPages = ceil($rows / $numberPages);
-
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    $page = 1;
-                }
-
-                $startinglimit = ($page - 1) * $numberPages;
-                $query = "SELECT user.nic, receptionist.receptionistID, user.name, user.profile_image FROM receptionist inner join user where receptionist.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
-                $result = $con->query($query);
+//                $numberPages = 3;
+//                $totalPages = ceil($rows / $numberPages);
+//
+//                if (isset($_GET['page'])) {
+//                    $page = $_GET['page'];
+//                } else {
+//                    $page = 1;
+//                }
+//
+//                $startinglimit = ($page - 1) * $numberPages;
+//                $query = "SELECT user.nic, receptionist.receptionistID, user.name, user.profile_image FROM receptionist inner join user where receptionist.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
+//                $result = $con->query($query);
                 ?>
                 <div class="wrapper">
                     <div class="table">
@@ -125,19 +125,19 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                 </div>
 
             </div>
-            <div class="pagination-container">
-                <div class="pagination">
-                    <ul class="pagination-2">
-
-                        <?php
-                        for($btn=1;$btn<=$totalPages;$btn++){
-                            echo '<a href="adminReceptionistPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
-                        }
-
-                        ?>
-                    </ul>
-                </div>
-            </div>
+<!--            <div class="pagination-container">-->
+<!--                <div class="pagination">-->
+<!--                    <ul class="pagination-2">-->
+<!---->
+<!--                        --><?php
+//                        for($btn=1;$btn<=$totalPages;$btn++){
+//                            echo '<a href="adminReceptionistPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
+//                        }
+//
+//                        ?>
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <div id="userForm">

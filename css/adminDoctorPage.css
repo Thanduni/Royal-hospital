@@ -122,11 +122,12 @@ table {
 
 .row {
     display: table-row;
+    transition: 0.4s;
     background: #f6f6f6;
 }
 
 .row:hover{
-    transform: scale(1.041);
+    transform: scale(0.97, 0.97);
     background-color: var(--hover-color);
 }
 
@@ -166,11 +167,6 @@ table {
     .row {
         padding: 14px 0 7px;
         display: block;
-    }
-
-    .row:hover{
-        transform: scale(1.041);
-        background-color: var(--hover-color);
     }
 
     .row.headerT {

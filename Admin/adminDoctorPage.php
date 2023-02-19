@@ -66,18 +66,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
 
-                $numberPages = 3;
-                $totalPages = ceil($rows / $numberPages);
-
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    $page = 1;
-                }
-
-                $startinglimit = ($page - 1) * $numberPages;
-                $query = "SELECT user.nic, doctor.doctorID, user.name, doctor.department, user.profile_image FROM doctor inner join user where doctor.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
-                $result = $con->query($query);
+//                $numberPages = 3;
+//                $totalPages = ceil($rows / $numberPages);
+//
+//                if (isset($_GET['page'])) {
+//                    $page = $_GET['page'];
+//                } else {
+//                    $page = 1;
+//                }
+//
+//                $startinglimit = ($page - 1) * $numberPages;
+//                $query = "SELECT user.nic, doctor.doctorID, user.name, doctor.department, user.profile_image FROM doctor inner join user where doctor.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
+//                $result = $con->query($query);
                 ?>
                 <div class="wrapper">
                     <div class="table">
@@ -140,19 +140,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 </div>
 
             </div>
-            <div class="pagination-container">
-                <div class="pagination">
-                    <ul class="pagination-2">
-
-                        <?php
-                        for($btn=1;$btn<=$totalPages;$btn++){
-                            echo '<a href="adminDoctorPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
-                        }
-
-                        ?>
-                    </ul>
-                </div>
-            </div>
+<!--            <div class="pagination-container">-->
+<!--                <div class="pagination">-->
+<!--                    <ul class="pagination-2">-->
+<!---->
+<!--                        --><?php
+//                        for($btn=1;$btn<=$totalPages;$btn++){
+//                            echo '<a href="adminDoctorPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
+//                        }
+//
+//                        ?>
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         </div>
     </div>
@@ -178,7 +178,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <label for="department">Department:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="department" id="IN_department" required><div class="alert" id="depName"></div>
+                            <select name="department" id="IN_department">
+                                <option value="">Please A Select Department</option>
+                                <option value="Anesthetics">Anesthetics</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Gastroentology">Gastroentology</option>
+                            </select><br><br>
                         </td>
                     </tr>
                     </tr>
@@ -195,6 +200,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/validateDoctor.js' ?>></script>
+
+    <?php
+    if (@$_GET['task'] == "insertDoctor") {
+        $nic = $_GET['nic'];
+        echo
+        "<script>
+                $('#userForm').fadeIn().css('display','flex');
+                displayDoctorAddForm();
+                document.getElementById('IN_nic').value = ". $nic. ";
+            </script>";
+        } ?>
     <script type="text/javascript">
         $(function(){
             $('#addButton').click(function(){
@@ -205,16 +221,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             });
         });
     </script>
-    <?php
-    if (@$_GET['task'] == "insertDoctor") {
-        $nic = $_GET['nic'];
-        echo
-        "<script>
-                displayDoctorAddForm();
-                document.getElementById('IN_nic').value = ". $nic. ";
-            </script>";
-        } ?>
-
     </body>
     </html>
     <?php

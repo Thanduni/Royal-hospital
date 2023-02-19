@@ -12,7 +12,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/patientPage.css' ?>">
         <title>Receptionist patient page - Patient</title>
         <style>
             p.royal {
@@ -333,15 +333,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         <tr>
                             <td></td>
                             <td colspan="2">
-                                <button type="submit" id="submit" name="addUser">Apply</button>
-                                <button name="cancel" id="cancel">Cancel</button>
+                                <button class="custom-btn" type="submit" id="submit" name="addUser">Apply</button>
+                                <button class="custom-btn" name="cancel" id="cancel">Cancel</button>
                             </td>
                         </tr>
                     </table>
                 </form>
             </div>
         </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidatePatientAddForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>

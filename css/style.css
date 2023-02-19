@@ -59,7 +59,7 @@ nav a {
     display: inline;
     text-decoration: none;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 25px;
     line-height: 30px;
     color: var(--secondary-color);
@@ -82,7 +82,7 @@ nav a {
     color: var(--secondary-color);
     text-decoration: none;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 20px;
     line-height: 24px;
 }
@@ -115,7 +115,7 @@ p.slider-title {
 
 p.slider-description {
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 40px;
     line-height: 49px;
 }
@@ -181,7 +181,7 @@ p.slider-description {
 .articleHome .hospitalArticle p {
     flex: 1;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 20px;
     line-height: 24px;
     text-align: justify;
@@ -225,7 +225,7 @@ p.slider-description {
     transform: translate(0%, -50%);
     vertical-align: middle;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 25px;
     line-height: 39px;
     text-align: center;
@@ -239,7 +239,7 @@ p.slider-description {
     color: var(--para-color);
     background: #ADB6CD;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 25px;
     line-height: 39px;
     padding: 10px;
@@ -299,7 +299,7 @@ p.slider-description {
 
 .page .p1 p {
     position: relative;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 42px;
     line-height: 51px;
     color: var(--para-color);
@@ -329,7 +329,7 @@ form button {
     border-style: none;
     border-radius: 50px;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 18px;
     line-height: 37px;
     color: #ADB6CD;
@@ -558,7 +558,7 @@ a {
 .title {
     position: relative;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 42px;
     line-height: 51px;
     text-align: center;
@@ -573,7 +573,7 @@ a {
 
 .userContents ul {
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 15px;
     color: var(--para-color);
     line-height: 18px;
@@ -632,7 +632,7 @@ a {
     align-items: center;
     text-align: center;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 26px;
     line-height: 32px;
     border-top-right-radius: 50%;
@@ -699,7 +699,7 @@ a {
     /* flex-direction: column; */
     margin: 0 auto;
     flex-wrap: wrap;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 15px;
     line-height: 18px;
 }
@@ -736,11 +736,11 @@ td {
     border: 1px solid rgba(36, 53, 78, 0.5);
     border-radius: 3px;
     font-style: normal;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 15px;
     line-height: 37px;
     /* identical to box height */
-    color: #000000;
+    color: var(--para-color);
 }
 
 #form select {
@@ -819,7 +819,7 @@ ul {
     text-transform: capitalize;
     color: var(--secondary-color);
     text-decoration: none;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-size: 20px;
     line-height: 24px;
     display: block;
@@ -1005,7 +1005,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
 
 .sidebarMenuInner p {
     display: inline;
-    margin: 15px;
+    margin: 10px;
     color: var(--primary-color);
     /* border-style: solid; */
     font-style: normal;

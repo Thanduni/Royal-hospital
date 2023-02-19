@@ -84,7 +84,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             <div class="row">
                                 <div class="cell" style="100px" data-title="Options">
                                     <a href="<?php echo BASEURL . '/Receptionist/serviceDetails.php?id=' . $row2['patientID'] ?>">
-                                        <button id="billGen"><img
+                                        <button class="custom-btn" id="billGen"><img
                                                     src="<?php echo BASEURL . '/images/bill.svg' ?>" alt=" Edit">
                                             Generate bill
                                         </button>
@@ -112,7 +112,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </div>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidatePatientAddForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>

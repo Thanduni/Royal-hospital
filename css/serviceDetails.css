@@ -51,7 +51,6 @@
     overflow-y: scroll;
     border-style: none;
     border-radius: 10px;
-    overflow: visible;
 }
 
 
@@ -71,7 +70,6 @@
 @media screen and (max-width: 1229px) {
     .table {
         display: block;
-        overflow-y: scroll;
     }
 }
 
@@ -132,10 +130,12 @@
     background-repeat: no-repeat;
     background-position: right;
     padding-right: 200px;
+    background-color: var(--secondary-color);
 }
 
 #filterInfo{
     border-style: none;
     box-shadow: 3px 3px 20px 0px var(--para-color);
     padding: 20px;
+    background-color: var(--secondary-color);
 }

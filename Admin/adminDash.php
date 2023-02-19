@@ -13,6 +13,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminDash.css' ?>">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
             .next {
@@ -97,31 +98,35 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     $sql5 = mysqli_query($con, "select count(*) from receptionist;");
                     $row5 = mysqli_fetch_array($sql5);
                     ?>
-                    <div class="card-set">
+                    <div>
+                        <div class="card-set">
+                            <div class="card">
+                                Number of total users
+                                <p class="val"><?php echo $row1['count(*)'] ?></p>
+                            </div>
+                        </div>
+                        <div class="card-set">
+                            <div class="card">
+                                Number of doctors
+                                <p class="val"><?php echo $row2['count(*)'] ?></p>
+                            </div>
+                            <div class="card">
+                                Number of nurses
+                                <p class="val"><?php echo $row3['count(*)'] ?></p>
+                            </div>
+                        </div>
+                        <div class="card-set">
+                            <div class="card">
+                                Number of receptionists
+                                <p class="val"><?php echo $row4['count(*)'] ?></p>
+                            </div>
+                            <div class="card">
+                                Number of storekeepers
+                                <p class="val"><?php echo $row5['count(*)'] ?></p>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="card">
-                            Number of total users
-                            <p class="val"><?php echo $row1['count(*)'] ?></p>
-                        </div>
-                        <div class="card">
-                            Number of doctors
-                            <p class="val"><?php echo $row2['count(*)'] ?></p>
-                        </div>
-                        <div class="card">
-                            Number of nurses
-                            <p class="val"><?php echo $row3['count(*)'] ?></p>
-                        </div>
-                    </div>
-                    <div class="card-set">
-                        <div class="card">
-                            Number of receptionists
-                            <p class="val"><?php echo $row4['count(*)'] ?></p>
-                        </div>
-                        <div class="card">
-                            Number of storekeepers
-                            <p class="val"><?php echo $row5['count(*)'] ?></p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <aside>

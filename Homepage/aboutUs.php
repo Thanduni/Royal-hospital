@@ -109,8 +109,8 @@ if (!isset($_SESSION['mailaddress'])) {
 
             .display-bottommiddle {
                 position:absolute;
-                left:21%;
-                bottom:0px;
+                left:20%;
+                bottom:75px;
                 transform:translate(-50%,0%);
                 -ms-transform:translate(-50%,0%)
             }
@@ -142,7 +142,7 @@ if (!isset($_SESSION['mailaddress'])) {
                 .display-bottommiddle {
                     position:absolute;
                     left:50%;
-                    bottom:-70px;
+                    bottom:10px;
                     transform:translate(-50%,0%);
                     -ms-transform:translate(-50%,0%)
                 }

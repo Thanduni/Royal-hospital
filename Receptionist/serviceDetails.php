@@ -102,7 +102,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit"
+                                    <button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" class="custom-btn"
                                             id="filterAppointment" name="filterAppointment">
                                         Filter purchases
                                     </button>
@@ -131,7 +131,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 </ul>
                 <div class="table-set">
                     <div class="wrapper" id="table-service">
-                        <h3 style="text-align: center;color: #344168">Service Cost Information</h3>
+                        <h3 style="text-align: center;color: var(--para-color); font-weight: 750">Service Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>
@@ -444,12 +444,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <p>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             <form action="invoice.php?query=<?php echo $query1 ?>&id=<?php echo $_GET['id'] ?>" method="post">
-                <button type="submit" name="createBill">+Create Bill</button>
+                <button class="custom-btn" type="submit" name="createBill">+Create Bill</button>
             </form>
             </p>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
     <!--    <script src="--><?php //echo BASEURL . '/js/filterCostInfo.js' ?><!--"></script>-->
     </body>
     </html>

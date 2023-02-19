@@ -13,8 +13,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/style.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="<?php echo BASEURL . '/js/appoinment.js'; ?>"></script>
-    <link rel="stylesheet" href="<? echo BASEURL .'/css/appoinment.css';?>">
+    <script src="<?php echo BASEURL. '/js/getDocDetails.js'; ?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="<?php echo BASEURL .'/css/appoinment.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,6 +24,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <style>
         body{
             background-color: #f9f8ff;
+        }
+        .field{
+            margin: 20px;
         }
     </style>
 </head>
@@ -49,9 +53,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
 
             </ul>
-            <!-- <div class="payment">
-                <button>Online Payment</button>
-            </div> -->
 
             <div class="cards">
             <a href="">
@@ -110,6 +111,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="cell">Time</div>
                     <div class="cell">Venue</div>
                     <div class="cell">Doctor</div>
+                    <div class="cell">Options</div>
                 </div>
 
 <?php
@@ -118,8 +120,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $result = mysqli_query($con, $patientIdQuery);
         $pID = mysqli_fetch_assoc($result)['patientID'];
 
-                        $query = "SELECT appointment.date,appointment.time,appointment.venue,user.name FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
-                        // die($query);
+                        $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, appointment.venue, user.name, appointment.doctorID, appointment.appointmentID 
+                            FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
                         $result = mysqli_query($con, $query);
                         while($rows = mysqli_fetch_assoc($result)){ ?>
                                     <div class="row">
@@ -135,7 +137,20 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                         <div class="cell" data-title="Doctor">
                                             <?php echo $rows['name']; ?>
                                         </div>
-                                    </div>  
+                                        <div class="cell" style="100px" data-title="Options">
+                                            <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
+                                                <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                            <ul class="tableCon">
+                                <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['date'] ?></li>
+                                <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['department'] ?></li>
+                                <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['name'] ?></li>
+                                <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['time'] ?></li>
+                                <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['message'] ?></li>
+                            </ul>
                          <?php
                     }
                     ?>
@@ -149,26 +164,42 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         <div class="modal">
             <div class="login-form">
             <h2>Put Your Appointment</h2><br>
-            <form  action="appointment.php" method="post"> 
+            <form id="addForm"  action="appointment.php" method="post">
 
-            <form  action="appointment.php" method="post">
+                <div class="field">
+                    <label for="">Date</label><br>
+                    <input type="date" name="date" id="date">
+                </div>
 
-                <label for="">Date</label><br><br>
-                <input type="date" name="date" id="date"><br><br>
-                <label for="">Department</label><br><br>
-                <select name="department" id="department">
-                    <option value="">Please A Select Department</option>
-                    <option value="Anesthetics">Anesthetics</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Gastroentology">Gastroentology</option>
-                </select><br><br>
-                <label for="">Doctor</label><br><br>
-                <select name="doctor" id="doctor">
-                    <option value="">Select A Department First</option>
-                </select><br><br>
-                <label for="">Message</label><br><br>
-                <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea><br><br>
-               
+                <div class="field">
+                    <label for="">Department</label><br>
+                    <select name="department" id="department">
+                        <option value="">Please A Select Department</option>
+                        <option value="Anesthetics">Anesthetics</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Gastroentology">Gastroentology</option>
+                    </select>
+                </div>
+
+                <div class="field" id="doctorRow">
+                    <label  for="">Doctor</label><br>
+                    <select name="doctor" id="doctor">
+                        <option value="">Select a doctor</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="">Time</label><br>
+                    <select name="time" id="time">
+                        <option value="">Please select a time slot</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="">Message</label><br>
+                    <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea>
+                </div>
+
                 <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
                 <button type="submit" name="submit" id="btn" value="submit">Submit</button>
             </form>
@@ -176,6 +207,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         </div>
     </div>
 
+    <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
     <script type="text/javascript">
         $(function(){
             $('#open').click(function(){
@@ -186,7 +218,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             });
         });
     </script>
-    <?php include(BASEURL.'/Components/Footer.php'); ?>
 </body>
 </html>
 

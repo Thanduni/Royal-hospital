@@ -24,6 +24,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
                 font-size: 30px;
             }
 
+            .userContents td{
+                font-size: 18px;
+            }
+
             .next {
                 position: initial;
                 height: auto;
