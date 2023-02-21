@@ -105,10 +105,19 @@ table {
     }
 }
 
-.wrapper {
+.wrapper_p {
     margin: 0 auto;
     /* padding: 40px; */
     max-width: 1440px;
+    margin: 0 auto;
+    /* padding: 40px; */
+    max-width: 1440px;
+    /* margin-top: -556px; */
+    position: absolute;
+    justify-content: center;
+    margin-left: 24%;
+    margin-top: 18%;
+
 }
 
 
@@ -153,11 +162,11 @@ table {
         display: block;
     }
 
-    .wrapper button {
+    .wrapper_p button {
         float: none;
     }
 
-    .wrapper {
+    .wrapper_p {
         margin: 0 auto;
         max-width: 590px;
         min-width: 500px;

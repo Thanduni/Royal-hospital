@@ -22,6 +22,8 @@ if (isset($_POST['login'])) {
                 $_SESSION['mailaddress'] = $_POST["email"];
                 $_SESSION['userRole'] = $userRole;
                 $_SESSION['nic'] = $nic;
+
+                
 //                die($_SESSION['name']);
                 if ($userRole == "Admin")
                     header("location: " . BASEURL . "/Admin/adminDash.php");

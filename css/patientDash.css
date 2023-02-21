@@ -1,13 +1,14 @@
 .cards{
-
-    margin-top: -60px;
-    margin-left: 50px;
-    width: 86%;
-    padding: 35px 20px;
-    display: flex;
-    /* margin: 20px; */
     flex-wrap: wrap;
-
+    height: 11%;
+    margin-top: -18px;
+    margin-left: 50px;
+    justify-content: center;
+    width: 94%;
+    padding: 35px 5px;
+    box-sizing: unset;
+    display: flex;
+    background-color: #ffffff;
     /*margin-top: -300px;*/
     /*margin-left: 70px;*/
     /*width: 80%;*/
@@ -340,4 +341,102 @@ form button ,#cancel,#btn {
     border-style: none;
     float: right;
     cursor: pointer;
+}
+
+.pcontent{
+    padding: 30px 20px;
+    padding: 40px 10px;
+    margin-top: 18px;
+    display: flex;
+    margin-left: 50px;
+    float: left;
+    height: 490px;
+    width: 20%;
+    background-color: #fff;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    /* position: absolute; */
+    justify-content: center;
+}
+
+.pcontent .pulse{
+    text-align: left;
+    /* margin-top: 20px; */
+    padding: 10px 10px;
+    width: 220px;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.pcontent .weight{
+    text-align: left;
+    /* margin-top: 20px; */
+    padding: 10px 10px;
+    width: 220px;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.pcontent .height{
+    text-align: left;
+    padding: 10px 10px;
+    width: 220px;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.pcontent .h-icon img{
+    text-align: right;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    size: 75px;
+    font-size: 75px;
+    flex-wrap: wrap;
+}
+
+
+.pcontent .w-icon img{
+    
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    size: 75px;
+    font-size: 75px;
+    flex-wrap: wrap;
+}
+
+
+.pcontent .p-icon img{
+    text-align: right;
+    width: 25%;
+    display:flex;
+    justify-content: center;
+    size: 75px;
+    font-size: 75px;
+    flex-wrap: wrap;
+    text-align: -webkit-auto;
+}
+
+.pcontent .w-icon,.p-icon,.h-icon, .ce a{
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+    color: cadetblue;
+}
+
+.pcontent .val{
+    font-size: x-large;
+    width: 2px;
+    height: auto;
 }

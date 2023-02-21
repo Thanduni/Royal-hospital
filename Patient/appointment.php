@@ -19,6 +19,8 @@ if (isset($_POST["submit"])) {
     $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
     $result_pid = mysqli_query($con, $pid_query);
     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+
+    $_SESSION['patientID'] = $pid;
 //    $appID = $row1[0];
 //
 //    if ($row1) {

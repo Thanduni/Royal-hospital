@@ -34,6 +34,27 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <div class="user">
 
         <?php
+        $nic = $_SESSION['nic'];
+        $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+        $result_pid = mysqli_query($con, $pid_query);
+        $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+        
+        $result_h = "select height from patient where patientID =  $pid";
+        $result_w = "select weight from patient where patientID =  $pid";
+        $result_b = "select blood from patient where patientID =  $pid";
+        // die($result);
+        $h = mysqli_fetch_assoc( mysqli_query($con,$result_h))['height'];
+        $w = mysqli_fetch_assoc( mysqli_query($con,$result_w))['weight'];
+        $b = mysqli_fetch_assoc( mysqli_query($con,$result_b))['blood'];
+       
+        $GLOBALS['height'] = $GLOBALS['h'];
+        $GLOBALS['weight'] = $GLOBALS['w'];
+        $GLOBALS['blood'] = $GLOBALS['b'];
+        
+        // mysqli_fetch_assoc( mysqli_query($con,$result))['height'];
+        // mysqli_fetch_assoc( mysqli_query($con,$result))['height'];
+        
+
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         
@@ -55,10 +76,11 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </ul>
 
             <div class="cards">
+                <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
             <a href="">
                 <div class="card">
                     <div class="card-content"></div>
-                    <div class="card-name">Download Summary</div>
+                    <div class="card-name">Summary</div>
                     <div class="icon-box">
                     <i class="fas fa-file-text"></i>
                 </div>
@@ -103,8 +125,30 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
             </a>
             </div>
+            <div class="pcontent">
+                <div class="height">
+                    <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt="">
+                    <div class="ce"><a>Height</a></div>
+                    <div class="val"><?php echo  $height; ?> </div>
+                </div>
+                </div>
+                <div class="weight">
+                    <div class="w-icon"><img src="<?php echo BASEURL.'/images/weight.avif';?>" alt="">
+                    <div class="ce"><a>Weight</a> </div>
+                    <div class="val"><?php echo  $weight; ?> </div>
+                </div>
+                </div>
+                <div class="pulse">
+                    <div class="p-icon"><img src="<?php echo BASEURL.'/images/pulse.avif';?>" alt="">
+                    <div class="ce"><a>Blood</a> </div>
+                    <div class="val"><?php echo  $blood; ?> </div>
+                </div>
+                </div>
+            </div>
+            
 
-            <div class="wrapper">
+            <div class="wrapper_p">
+            <div class="table_header"><h3 style="color: var(--primary-color);">Confirmed Appointments</h3></div></br>
             <div class="table">
                 <div class="row headerT">
                     <div class="cell">Date</div>
