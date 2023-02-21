@@ -47,22 +47,9 @@ if(isset($_POST['submit'])){
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="nurse">
-                    Nurse
-                </li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
-                </li>
-            </ul>
-            <div class="arrow">
-                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Patient
-            </div>
+            <?php
+          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
+          ?>
 
             <div class="main-container">
 
@@ -131,11 +118,11 @@ if(isset($_POST['submit'])){
                 </div>
                 <div class="form-group">
                     <label>Admit date</label>
-                    <input type="date" name ="admit_date"value ="<?php echo date('Y-m-d') ?>">
+                    <input type="date" min=date("Y/m/d") name ="admit_date"value ="<?php echo date('Y-m-d') ?>">
                 </div>
                 <div class="form-group">
                     <label>Admit time</label>
-                    <input type="time" id="time" name="admit_time" required>
+                    <input type="time" id="time" name="admit_time" min="" required>
                 </div>
                 <button class="submit" type="submit" name ="submit">Submit</button>
             </form>
