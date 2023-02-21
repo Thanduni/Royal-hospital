@@ -47,7 +47,7 @@
 
 .icon-box i {
     font-size: 45px;
-    color: black;
+    color: var(--primary-color);
 }
 .icon-box img {
     font-size: 45px;
@@ -397,7 +397,7 @@ form button ,#cancel,#btn {
 
 .pcontent .h-icon img{
     text-align: right;
-    width: 25%;
+    width: 46%;
     display: flex;
     justify-content: center;
     size: 75px;
@@ -408,7 +408,7 @@ form button ,#cancel,#btn {
 
 .pcontent .w-icon img{
     
-    width: 25%;
+    width: 46%;
     display: flex;
     justify-content: center;
     size: 75px;
@@ -419,7 +419,7 @@ form button ,#cancel,#btn {
 
 .pcontent .p-icon img{
     text-align: right;
-    width: 25%;
+    width: 46%;
     display:flex;
     justify-content: center;
     size: 75px;
@@ -436,7 +436,16 @@ form button ,#cancel,#btn {
 }
 
 .pcontent .val{
-    font-size: x-large;
-    width: 2px;
-    height: auto;
+    font-size: 32px;
+    width: 0px;
+    /* height: 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-end;
+    float: left;
+    text-align: left;
+    /* padding: 34px; */
+    padding: 50px;
 }
