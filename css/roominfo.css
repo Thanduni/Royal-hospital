@@ -1,0 +1,57 @@
+.roomCard{
+    /* height: 100px; */
+    background: #FFF;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 5%;
+    padding: 5%;
+}
+.picture{
+    display: flex;
+    border-radius: 10px;
+    padding: 20px 0;
+    /* border: 1px solid black; */
+    width: 50%;
+    justify-content: center;
+
+}
+.picture img{
+    width: 80%;
+    padding: 10px;
+
+
+}
+.info{
+    width: 50%;
+    margin-left: 20px;
+}
+.room-no{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+.room-details{
+    line-height: 2;
+    padding: 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+}
+.patient-row{
+    display: flex;
+    flex-direction: row;
+
+}
+.patient-row .name{
+    width: 50%;
+}
+.patient-row .value{
+    padding-left: 10px;
+}
