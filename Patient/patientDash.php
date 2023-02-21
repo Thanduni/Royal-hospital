@@ -127,21 +127,21 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
             <div class="pcontent">
                 <div class="height">
+                    <div class="val"><?php echo  $height; ?> </div>
                     <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt="">
                     <div class="ce"><a>Height</a></div>
-                    <div class="val"><?php echo  $height; ?> </div>
                 </div>
                 </div>
                 <div class="weight">
+                    <div class="val"><?php echo  $weight; ?> </div>
                     <div class="w-icon"><img src="<?php echo BASEURL.'/images/weight.avif';?>" alt="">
                     <div class="ce"><a>Weight</a> </div>
-                    <div class="val"><?php echo  $weight; ?> </div>
                 </div>
                 </div>
                 <div class="pulse">
+                    <div class="val"><?php echo  $blood; ?> </div>
                     <div class="p-icon"><img src="<?php echo BASEURL.'/images/pulse.avif';?>" alt="">
                     <div class="ce"><a>Blood</a> </div>
-                    <div class="val"><?php echo  $blood; ?> </div>
                 </div>
                 </div>
             </div>
