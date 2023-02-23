@@ -126,6 +126,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </a>
             </div>
             <div class="pcontent">
+            <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div></br>
                 <div class="height">
                     <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt=""> 
                     <div class="ce"><a>Height</a></div>
@@ -148,7 +149,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             
 
             <div class="wrapper_p">
-            <div class="table_header"><h3 style="color: var(--primary-color);">Confirmed Appointments</h3></div></br>
+            <div class="table_header"><h3 style="color: var(--primary-color);margin-left:125px;">Confirmed Appointments</h3></div></br>
             <div class="table">
                 <div class="row headerT">
                     <div class="cell">Date</div>
@@ -181,7 +182,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                         <div class="cell" data-title="Doctor">
                                             <?php echo $rows['name']; ?>
                                         </div>
-                                        <div class="cell" style="100px" data-title="Options">
+                                        <div class="cell" style="" data-title="Options">
                                             <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
                                                 <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                                 </button>
