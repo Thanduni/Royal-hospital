@@ -57,7 +57,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
             <div class="main-container">
               <h3>Patient List</h3>
-              <div class="table-container">
+                <div class="table-container">
                     <table class="table">
 
                         <thead>
@@ -70,7 +70,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         <tbody>
 
                             <?php
-                                $sql="select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID";
+                                $sql="select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID where DoctorID=$doctorID";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
@@ -87,7 +87,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td> <button class="button" id="view-report-button"><a href="patientReport.php?patientid='.$patientID.'&name='.$name.'">
                                         View Reports </a>
                                     </button>
-                                    <button class="button">Discharge</button>
+                                    <button type="submit" name="discharge" class="button">Discharge</button>
                                     </td>
                                     </tr>';
                                   }
@@ -99,7 +99,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             </div>
         </div>
     </div>
-    
+<?php
+if(isset($_POST['discharge'])){
+
+    $sql = "DELETE from inpatient WHERE patientID = $patientID;";
+    // $sql = "INSERT INTo room(room_availability) VALUES('available');";
+    $addresult=mysqli_query($con,$sql);
+
+    if($addresult){
+        header('location:inpatient.php');
+    }else{
+        die(mysqli_error($con));
+    }
+}
+?>   
     
 </body>
 </html>

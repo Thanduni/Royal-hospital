@@ -35,24 +35,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 <body>
     <div class="user">
-    <?php include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+      
+    <?php 
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="doctor">
-                    Doctor
-                </li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
-                </li>
-            </ul>
-            <div class="arrow">
-                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
-            </div>
+            <?php
+              include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
+            ?>
 
 
             <div class="main-container">
@@ -129,14 +119,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
               <div class="table-container">
                     <table class="table">
 
-                        <!-- <thead>
+                        <thead>
                           <th>Profile Picture</th>    
                           <th>Name</th>
                           <th>Date</th>
                           <th>Time</th>
                           <th>Message</th>
                           <th>Option</th>
-                        </thead> -->
+                        </thead>
 
                         <tbody>
 
