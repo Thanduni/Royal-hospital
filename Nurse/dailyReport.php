@@ -6,6 +6,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     ?>
 
 <?php
+$mindate = date("Y-m-d");
+$mintime = date("h:i");
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
     $patientName = $_GET['name'];
@@ -57,22 +59,9 @@ if(isset($_POST['submit'])){
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="nurse">
-                    Nurse
-                </li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
-                </li>
-            </ul>
-            <div class="arrow">
-                <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">daily Report
-            </div>
+            <?php
+            include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
+            ?>
 
             <div class="main-container">
                 <div class="patient-details">
@@ -140,12 +129,16 @@ if(isset($_POST['submit'])){
             
             <div class="form-group">
                     <label>Date</label>
-                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>">
+                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>" min="<?php echo $mindate?>">
                     <!-- <input type="date" class="form-control" placeholder="" name="date" required> -->
             </div>
             <div class="form-group">
                     <label>Time</label>
-                    <input type="time" id="time" name="time" required>
+                    <input type="time" id="time" name="time" value="<?php
+                     
+                    date_default_timezone_set("Asia/Colombo");
+                    echo date("h:i:sa");
+                    ?>" required min="<?php echo $mintime?>">
                     <!-- <input type="time" class="form-control" placeholder="" name="time" required> -->
             </div>
             <div class="form-group">

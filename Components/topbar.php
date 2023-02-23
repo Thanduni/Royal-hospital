@@ -7,10 +7,8 @@ require_once("../conf/config.php");
       <div class="profile" onclick="menuToggle()";>
         <?php
           $profilePic = $_GET['profilePic'];
-          echo
-          "<p align='middle'>"
         ?>
-          <img class='profilePic' align='middle' src=<?php echo BASEURL . '/uploads/' . $profilePic ?>
+          <img class='profilePic' src=<?php echo BASEURL . '/uploads/' . $profilePic ?>
           alt='Upload Image'>
       </div>
       <div class="menu">
