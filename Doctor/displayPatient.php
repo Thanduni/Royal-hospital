@@ -109,9 +109,6 @@ if($result){
                             </div>
                         </div>
                     </div>
-                    <div class="admit-patient">
-                        Admit This Patient
-                    </div>
                 </div>
 
                 <div class="doctor-action">

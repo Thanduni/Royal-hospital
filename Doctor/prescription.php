@@ -32,6 +32,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         <div class="test-button" id="test-button">Prescribe Test</div>
                     </div>
                     <div class="prescribe-medicine-content">
+                        <!-- <form action="post">
+                            <div class="form-group">
+                                
+                            </div>
+                        </form> -->
                         <form action="post">
                             <div class="prescription-group">
                                 <label>Drug Name </label>
