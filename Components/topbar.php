@@ -14,9 +14,9 @@ require_once("../conf/config.php");
       <div class="menu">
           <h3><?php echo $_GET['name']; ?><br><span>User role</span></h3>
           <ul class="topbarul">
-              <li><img src="../images/user.svg" alt="profile image"><a href="#">My Profile</a></li>
+              <li><img src="../images/user.png" alt="profile image"><a href="#">My Profile</a></li>
               <li><img src="../images/edit.svg" alt="profile image"><a href="#">Edit Profile</a></li>
-              <li><img src="../images/logout.svg" alt="profile image"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout</a></li>
+              <li><img src="../images/logout.png" alt="profile image"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout</a></li>
           </ul>
       </div>
   </div>
