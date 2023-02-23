@@ -14,7 +14,7 @@ body {
 .alreadyLogged button {
     width: max-content;
     height: max-content;
-    color: #24354E;
+    color: var(--para-color);
     background: #AADDDD;
     font-style: normal;
     font-weight: 400;
@@ -33,5 +33,5 @@ body {
     border-radius: 10px;
     padding: 20px;
     margin: 220px auto;
-    border-color: #24354E;
+    border-color: var(--para-color);
 }

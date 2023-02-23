@@ -51,8 +51,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
             <div class="editRegion">
                 <div class="buttonSet">
-                    <button type="button" id="slider" style="background-color: #AADDDD; color: #24354E" disabled>Homepage</button>
-                    <a href="<?php echo BASEURL . '/Admin/noticeboardAboutUsEdit.php' ?>"><button type="button" id="aboutUs">About us</button></a>
+                    <button type="button" id="slider" style="background-color: var(--hover-color); color: var(--primary-color)" class="custom-btn" disabled>Homepage</button>
+                    <a href="<?php echo BASEURL . '/Admin/noticeboardAboutUsEdit.php' ?>"><button type="button" class="custom-btn" id="aboutUs">About us</button></a>
                 </div>
                 <div class="editForm">
                     <h2>Main slider</h2>
@@ -113,7 +113,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <tr>
                                 <td colspan="1"></td>
                                 <td align="right">
-                                    <button name="homepageInfo" type="submit">Save changes</button>
+                                    <button name="homepageInfo" class="custom-btn" type="submit">Save changes</button>
                                 </td>
                             </tr>
                         </table>
@@ -123,7 +123,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
 

@@ -10,7 +10,6 @@ function displayUserUpdateForm(nic) {
 
 
     let tableCon = document.getElementsByClassName(nic + "_tableCon");
-
     document.getElementById("titleOperation").innerHTML = "Update User | NIC : " + nic;
 
     let name = tableCon[0].textContent;
@@ -20,8 +19,10 @@ function displayUserUpdateForm(nic) {
     let gender = tableCon[4].textContent;
     let dob = tableCon[6].textContent;
 
+
     let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
+    // userForm.classList.add("active");
+
 
     let IN_name = document.getElementById("IN_name");
     let IN_address = document.getElementById("IN_address");
@@ -45,11 +46,11 @@ function displayUserUpdateForm(nic) {
 
 
 
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function() {
-        userForm.classList.remove("active");
-        // document.getElementById("passToJS").innerHTML = "";
-    }, false);
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function() {
+    //     userForm.classList.remove("active");
+    //     // document.getElementById("passToJS").innerHTML = "";
+    // }, false);
 }
 
 // update.addEventListener("click", displayUserForm, false);
@@ -69,7 +70,7 @@ function displayDoctorUpdateForm(nic) {
 
 
     let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
+    // userForm.classList.add("active");
 
     let IN_department = document.getElementById("IN_department");
 
@@ -77,11 +78,11 @@ function displayDoctorUpdateForm(nic) {
     form.scrollIntoView();
 
 
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function() {
-        userForm.classList.remove("active");
-        // document.getElementById("passToJS").innerHTML = "";
-    }, false);
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function() {
+    //     userForm.classList.remove("active");
+    //     // document.getElementById("passToJS").innerHTML = "";
+    // }, false);
 }
 
 function displayPatientUpdateForm(nic) {
@@ -111,7 +112,7 @@ function displayPatientUpdateForm(nic) {
     let emergency_contact = tableCon[12].textContent;
 
     let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
+    // userForm.classList.add("active");
 
     let IN_name = document.getElementById("IN_name");
     let IN_address = document.getElementById("IN_address");
@@ -149,9 +150,9 @@ function displayPatientUpdateForm(nic) {
 
 
 
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function() {
-        userForm.classList.remove("active");
-        // document.getElementById("passToJS").innerHTML = "";
-    }, false);
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function() {
+    //     userForm.classList.remove("active");
+    //     // document.getElementById("passToJS").innerHTML = "";
+    // }, false);
 }

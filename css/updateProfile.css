@@ -13,31 +13,33 @@ flex-basis: 78%;
 background-color: white;
 border-style: none;
 border-radius: 10px;
-box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 padding: 20px;
 margin: 20px;
 }
 
 h2{
-color: #24354E;
+color: var(--para-color);
 }
 
 .disable{
 background: #ADB6CD;
-color: #24354E;
+color: var(--para-color);
 }
 
 label{
-font-size: 20px;
+font-size: 18px;
 }
 
 input[type='text'],
 input[type="password"],
-input[type="date"]
+input[type="date"],
+input[type="time"],
+input[type="number"]
 {
 width: 100%;
-font-size: 20px;
-background: #D9D9D9;
+font-size: 18px;
+background: var(--form-back);
 border: 1px solid rgba(36, 53, 78, 0.5);
 border-radius: 5px;
 height: 36px;
@@ -49,15 +51,15 @@ width: 100%;
 
 textarea{
 width: 100%;
-font-size: 20px;
-background: #D9D9D9;
+font-size: 18px;
+background: var(--form-back);
 border: 1px solid rgba(36, 53, 78, 0.5);
 border-radius: 5px;
 }
 
 .disable{
 background: #ADB6CD;
-color: #24354E;
+color: var(--para-color);
 }
 
 @media screen and (max-width: 1229px) {
@@ -71,7 +73,7 @@ display: inline;
 }
 }
 
-#profilePic{
+profilePic{
     border-style: none;
     border-radius: 20px;
     height: 125px;
@@ -88,8 +90,8 @@ display: inline;
 
 .userContents table {
 width: 100%;
-font-weight: 400;
-font-size: 15px;
+/*font-weight: 400;*/
+font-size: 18px;
 line-height: 18px;
 padding: 20px;
 margin: 20px;

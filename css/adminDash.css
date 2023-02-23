@@ -14,7 +14,7 @@
 }
 
 .actorCards ul li{
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 10px;
     font-weight: 600;
     text-align: center;
@@ -26,7 +26,7 @@
     border-radius: 10px;
     width: 200px;
     padding: 35px;
-    color: #24354E;
+    color: var(--para-color);
 }
 
 .actorCards ul li:hover{
@@ -36,7 +36,7 @@
 .card-set{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 table th,
@@ -54,7 +54,7 @@ table td{
 }
 
 .card{
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 10px;
     text-align: center;
     font-weight: 300;
@@ -66,15 +66,21 @@ table td{
     border-radius: 10px;
     min-width: 200px;
     padding: 35px;
-    color: #24354E;
+    color: var(--para-color);
     border-style: solid;
     border-width: 0px 0px 0px 5px;
+    border-color: var(--primary-color);
+}
+
+.tab-cards:hover, .card:hover{
+    transform: scale(1.041);
+    box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);
 }
 
 #second-head{
     margin: 20px;
     font-size: 25px;
-    color: #24354E;
+    color: var(--para-color);
 }
 
 .tab-cards{
@@ -84,27 +90,27 @@ table td{
 }
 
 .tab-cards#dashboard{
-    background-image: url("../images/dashboard.svg");
+    background-image: url("../images/dashboardDef.svg");
 }
 
 .tab-cards#user{
-    background-image: url("../images/user_in_card.svg");
+    background-image: url("../images/userDef.svg");
 }
 
 .tab-cards#doctor{
-    background-image: url("../images/doctor.svg");
+    background-image: url("../images/doctorDef.svg");
 }
 
 .tab-cards#nurse{
-    background-image: url("../images/nurse.svg");
+    background-image: url("../images/nurseDef.svg");
 }
 
 .tab-cards#receptionist{
-    background-image: url("../images/receptionist.svg");
+    background-image: url("../images/receptionistDef.svg");
 }
 
 .tab-cards#notice{
-    background-image: url("../images/user_in_card.svg");
+    background-image: url("../images/noticeboardDef.svg");
 }
 
 

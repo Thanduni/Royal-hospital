@@ -50,14 +50,14 @@ function displayUserAddForm(userRole = []) {
 
     document.getElementById("titleOperation").innerHTML = "Add User";
 
-    let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
-    form.scrollIntoView();
-
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function () {
-        userForm.classList.remove("active");
-    }, false);
+    // let userForm = document.getElementById('userForm');
+    // userForm.classList.add("active");
+    // form.scrollIntoView();
+    //
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function () {
+    //     userForm.classList.remove("active");
+    // }, false);
 }
 
 function displayDoctorAddForm() {
@@ -67,14 +67,14 @@ function displayDoctorAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Doctor";
 
-    let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
-    form.scrollIntoView();
-
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function () {
-        userForm.classList.remove("active");
-    }, false);
+    // let userForm = document.getElementById('userForm');
+    // userForm.classList.add("active");
+    // form.scrollIntoView();
+    //
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function () {
+    //     userForm.classList.remove("active");
+    // }, false);
 }
 
 function displayNurseAddForm() {
@@ -84,14 +84,14 @@ function displayNurseAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Nurse";
 
-    let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
-    form.scrollIntoView();
-
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function () {
-        userForm.classList.remove("active");
-    }, false);
+    // let userForm = document.getElementById('userForm');
+    // userForm.classList.add("active");
+    // form.scrollIntoView();
+    //
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function () {
+    //     userForm.classList.remove("active");
+    // }, false);
 }
 
 function displayReceptionistAddForm() {
@@ -101,14 +101,14 @@ function displayReceptionistAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Receptionist";
 
-    let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
-    form.scrollIntoView();
-
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function () {
-        userForm.classList.remove("active");
-    }, false);
+    // let userForm = document.getElementById('userForm');
+    // userForm.classList.add("active");
+    // form.scrollIntoView();
+    //
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function () {
+    //     userForm.classList.remove("active");
+    // }, false);
 }
 
 function displayStorekeeperAddForm() {
@@ -118,13 +118,13 @@ function displayStorekeeperAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Storekeeper";
 
-    let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
-    form.scrollIntoView();
-
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function () {
-        userForm.classList.remove("active");
-    }, false);
+    // let userForm = document.getElementById('userForm');
+    // userForm.classList.add("active");
+    // form.scrollIntoView();
+    //
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function () {
+    //     userForm.classList.remove("active");
+    // }, false);
 }
 // add.addEventListener("click", displayUserAddForm, false);

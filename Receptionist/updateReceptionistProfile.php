@@ -126,7 +126,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 </td>
                             </tr>
                         </table>
-                        <button name="updateReceptionist" type="submit">Save changes</button>
+                        <button class="custom-btn" name="updateReceptionist" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -150,13 +150,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <td colspan="2"><input type="password" name="confirmPassword" required><div class="alert password"></div></td>
                             </tr>
                         </table>
-                        <button name="changePassword" type="submit">Save changes</button>
+                        <button class="custom-btn" name="changePassword" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/validateFormReceptionist.js' ?>></script>
 

@@ -4,7 +4,6 @@ session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     ?>
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -12,6 +11,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+        <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
         <title>Admin dashboard - User</title>
         <style>
@@ -51,12 +52,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
             <p>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
-                <button type="button" id="addButton" onclick="displayUserAddForm()">+Add user</button>
+                <button type="button" id="addButton" class="custom-btn" class="custom-btn" onclick="displayUserAddForm()">+Add user</button>
             </p>
 
             <div class="filter">
-                <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
-                <input type="text" id="myInputRole" onkeyup="filterByRole()" placeholder="Search for user role.." title="Type in a name">
+                <input type="text" id="myInputName" onkeyup="filterByNameUsers()" placeholder="Search for names.." title="Type in a name">
+                <input type="text" id="myInputRole" onkeyup="filterByRoleUsers()" placeholder="Search for user role.." title="Type in a name">
             </div>
 
             <?php
@@ -74,13 +75,25 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
+
+//                $numberPages = 3;
+//                $totalPages = ceil($rows / $numberPages);
+//
+//                if (isset($_GET['page'])) {
+//                    $page = $_GET['page'];
+//                } else {
+//                    $page = 1;
+//                }
+//
+//                $startinglimit = ($page - 1) * $numberPages;
+//                $query = "SELECT * FROM user limit " . $startinglimit . ',' . $numberPages;
+//                $result = $con->query($query);
                 ?>
 
 
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
-                            <div class="cell">Options</div>
                             <div class="cell">NIC</div>
                             <div class="cell">Name</div>
                             <div class="cell">Profile image</div>
@@ -90,11 +103,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <div class="cell">Contact number</div>
                             <div class="cell">Date of Birth</div>
                             <div class="cell">Gender</div>
+                            <div class="cell">Options</div>
+
                         </div>
                         <?php
-                        for ($j = 0; $j < $rows; ++$j) {
-                            $result->data_seek($j);
-                            $row = $result->fetch_array(MYSQLI_NUM);
+                        if ($result) {
+                            while ($row = mysqli_fetch_array($result)) {
                             ?>
                             <ul class="tableCon">
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[1] ?></li>
@@ -107,17 +121,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             </ul>
                             <!--                        <div id="UDfunc">-->
                             <div class="row">
-                                <div class="cell" style="100px" data-title="Options">
-                                    <button class="edit" id="<?php echo $row[0] ?>"
-                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
-                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
-                                        Edit
-                                    </button>
-                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
-                                        </button>
-                                    </a>
-                                </div>
+
                                 <div class="cell" data-title="NIC">
                                     <?php echo $row[0]; ?>
                                 </div>
@@ -147,17 +151,51 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 <div class="cell" data-title="Gender">
                                     <?php echo $row[5]; ?>
                                 </div>
+                                <div class="cell" style="100px" data-title="Options">
+                                    <button class="operation" id="<?php echo $row[0] ?>"
+                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
+                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
+                                    </button>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#<?php echo $row[0] ?>').click(function(){
+                                                $('#userForm').fadeIn().css("display","flex");
+                                            });
+                                        });
+                                    </script>
+                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
 
-                        <?php } ?>
+                        <?php } }?>
                     </div>
                 </div>
-        </div>
+                <!-- pagination buttons -->
     </div>
+<!--            <div class="pagination-container">-->
+<!--                <div class="pagination">-->
+<!--                    <ul class="pagination-2">-->
+<!---->
+<!--                        --><?php
+//                        for($btn=1;$btn<=$totalPages;$btn++){
+//                            echo '<a href="adminUsersPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
+//                        }
+//
+//                        ?>
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
     <div id="userForm">
         <div id="form">
             <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
                   name="userForm">
+                <div class="banner">
+                    <h1>User</h1>
+                </div>
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Add user</p>
                 <table>
@@ -267,10 +305,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         </div>
     </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#addButton').click(function(){
+                $('#userForm').fadeIn().css("display","flex");
+            });
+            $('#cancel').click(function(){
+                $('#userForm').fadeOut();
+            });
+        });
+    </script>
 
     <?php
     if (@$_GET['click'] == "addDoctor") {
@@ -323,4 +370,4 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 } else {
     header("location: " . BASEURL . "/Homepage/login.php");
 }
-?>
+?>admin

@@ -58,7 +58,7 @@ if (!isset($_SESSION['mailaddress'])) {
                             <span class="bar"></span>
                             <label>Password</label>
                         </div>
-                        <button name="login">Login</button>
+                        <button name="login" class="custom-btn" style="color: var(--primary-color)">Login</button>
                     </form>
                 </div>
             </div>
@@ -93,17 +93,17 @@ if (!isset($_SESSION['mailaddress'])) {
             button {
                 font-size: 20px;
                 margin: 10px;
-                color: #24354E;
+                color: #344168;
             }
 
             h1 {
                 margin: 10px;
-                color: #24354E;
+                color: #344168;
             }
 
             a {
                 text-decoration: none;
-                color: #24354E;
+                color: #344168;
             }
 
             button {

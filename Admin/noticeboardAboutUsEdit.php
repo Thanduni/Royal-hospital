@@ -51,8 +51,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
             <div class="editRegion">
                 <div class="buttonSet">
-                    <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>"><button type="button" id="slider">Homepage</button></a>
-                    <button type="button" id="aboutUs" style="background-color: #AADDDD; color: #24354E" disabled>About us</button>
+                    <a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>"><button type="button" class="custom-btn" id="slider">Homepage</button></a>
+                    <button type="button" id="aboutUs" style="background-color: var(--hover-color); color: var(--primary-color)" class="custom-btn" disabled>About us</button>
                 </div>
                 <div class="editForm">
                     <h2>About us</h2>
@@ -84,14 +84,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             $row = $result->fetch_array(MYSQLI_NUM);
                                 ?>
                             <textarea name="aboutUs" cols="30" rows="20" style="margin-top: 25px;" required><?php echo $row[0] ?></textarea>
-                                    <button name="aboutUsInfo" type="submit">Save changes</button>
+                                    <button name="aboutUsInfo" class="custom-btn" type="submit">Save changes</button>
                     </form>
 
                 </div>
             </div>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
 

@@ -12,7 +12,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-        <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/patientPage.css' ?>">
         <title>Receptionist patient page - Patient</title>
         <style>
             p.royal {
@@ -54,7 +54,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </div>
             <p>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
-                <button type="button" id="addButton" onclick="displayPatientAddForm()">+Add patient</button>
+                <button type="button" id="addButton" class="custom-btn" onclick="displayPatientAddForm()">+Add patient</button>
             </p>
 
             <div class="filter">
@@ -117,13 +117,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             </ul>
                             <div class="row">
                                 <div class="cell" style="100px" data-title="Options">
-                                    <button class="edit" id="<?php echo $row1['nic'] ?>"
+                                    <button class="operation" id="<?php echo $row1['nic'] ?>"
                                             onclick="displayPatientUpdateForm(<?php echo $row1['nic'] ?>);"><img
                                             src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
-                                        Edit
+
                                     </button>
                                     <a href="<?php echo BASEURL . '/Receptionist/deletePatient.php?id=' . $row1['nic'] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
                                     </a>
                                 </div>
@@ -333,15 +333,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         <tr>
                             <td></td>
                             <td colspan="2">
-                                <button type="submit" id="submit" name="addUser">Apply</button>
-                                <button name="cancel" id="cancel">Cancel</button>
+                                <button class="custom-btn" type="submit" id="submit" name="addUser">Apply</button>
+                                <button class="custom-btn" name="cancel" id="cancel">Cancel</button>
                             </td>
                         </tr>
                     </table>
                 </form>
             </div>
         </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/ValidatePatientAddForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>

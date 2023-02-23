@@ -1,0 +1,85 @@
+.advertise{
+    background: #B5E2FA url(../images/hospital.jpg) center / cover no-repeat;
+    display: flex;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.advertise::before {
+    content: '';
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgb(14 61 86 / 50%);;
+    height: 401px;
+}
+
+.title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 73px;
+}
+
+.aboutUs{
+    display: flex;
+    margin: 20px 140px 20px 140px;
+    align-items: center;
+}
+
+.aboutUs p{
+    height: auto;
+    margin: 20px;
+    padding: 10px;
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: var(--para-color);
+}
+
+.mySlides{
+    height: 250px;
+    width: auto;
+    margin: 30px;
+    border-radius: 10px;
+}
+
+.aboutUsImg{
+    display: inline;
+}
+
+@media screen and (max-width: 1229px) {
+    .advertise::before {
+        content: '';
+        position: absolute;
+        top: 159px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color:rgb(14 61 86 / 50%);;
+        height: 400px;
+    }
+
+    .aboutUsImg img{
+        width: 500px;
+        height: auto;
+        border-radius: 10px;
+        margin: 30px 0 30px 0;
+    }
+
+    .aboutUs{
+        display: flex;
+        margin: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aboutUs p{
+        margin: auto 0;
+    }
+}
+

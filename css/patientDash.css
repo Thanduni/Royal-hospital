@@ -1,13 +1,14 @@
 .cards{
-
-    margin-top: -60px;
-    margin-left: 50px;
-    width: 86%;
-    padding: 35px 20px;
-    display: flex;
-    /* margin: 20px; */
     flex-wrap: wrap;
-
+    height: 11%;
+    margin-top: -18px;
+    margin-left: 50px;
+    justify-content: center;
+    width: 94%;
+    padding: 35px 5px;
+    box-sizing: unset;
+    display: flex;
+    background-color: #ffffff;
     /*margin-top: -300px;*/
     /*margin-left: 70px;*/
     /*width: 80%;*/
@@ -29,24 +30,24 @@
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgb(0 0 0 / 8%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-wrap: wrap;
 }
 
 .number{
     font-size: 35px;
     font-weight: 500;
-    color: #24354E;
+    color: var(--para-color);
 }
 
 .card-name {
-    color: #24354E;
+    color: var(--para-color);
     font-weight: 600;
 }
 
 .icon-box i {
     font-size: 45px;
-    color: black;
+    color: var(--primary-color);
 }
 .icon-box img {
     font-size: 45px;
@@ -86,10 +87,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #24354E;
+    background-color: var(--para-color);
     border-radius: 20px;
     color: #fff;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .payment a i{
@@ -109,7 +110,7 @@ a{
     margin-right: 20px;
     margin-top: 40px;
     display: flex;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
 }
 
@@ -125,7 +126,7 @@ a{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card2{
     grid-template-columns: repeat(1,0px);
@@ -139,7 +140,7 @@ a{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card3{
     grid-template-columns: repeat(1,0px);
@@ -153,7 +154,7 @@ a{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .payment .mtable{
@@ -168,7 +169,7 @@ a{
     height: 480px;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card1-content,.card2-content,.card3-content{
@@ -216,7 +217,7 @@ a{
     width: 75%;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* width: 80%;
     left: 240px;
     top: 200px; */
@@ -274,7 +275,7 @@ textarea{
 form button ,#cancel,#btn {
     width: 129px;
     height: 41px;
-    background: #24354E;
+    background: var(--para-color);
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -320,7 +321,7 @@ form button ,#cancel,#btn {
 .table-box table,th,td,tr{
     border: 0.25px solid lightgray;
     border-collapse: collapse;
-    background: #24354E;
+    background: var(--para-color);
     text-align: center;
     color: white;
     width: 970px;
@@ -329,7 +330,7 @@ form button ,#cancel,#btn {
 .userContents  .payment button{
     width: 200px;
     height: 50px;
-    background: #24354E;
+    background: var(--para-color);
     color: #ADB6CD;
     font-style: normal;
     font-weight: 500;
@@ -340,4 +341,111 @@ form button ,#cancel,#btn {
     border-style: none;
     float: right;
     cursor: pointer;
+}
+
+.pcontent{
+    padding: 30px 20px;
+    padding: 40px 10px;
+    margin-top: 18px;
+    display: flex;
+    margin-left: 50px;
+    float: left;
+    height: 490px;
+    width: 20%;
+    background-color: #fff;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    /* position: absolute; */
+    justify-content: center;
+}
+
+.pcontent .pulse{
+    text-align: left;
+    /* margin-top: 20px; */
+    padding: 10px 10px;
+    width: 220px;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.pcontent .weight{
+    text-align: left;
+    /* margin-top: 20px; */
+    padding: 10px 10px;
+    width: 220px;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.pcontent .height{
+    text-align: left;
+    padding: 10px 10px;
+    width: 220px;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.pcontent .h-icon img{
+    text-align: right;
+    width: 46%;
+    display: flex;
+    justify-content: center;
+    size: 75px;
+    font-size: 75px;
+    flex-wrap: wrap;
+}
+
+
+.pcontent .w-icon img{
+    
+    width: 46%;
+    display: flex;
+    justify-content: center;
+    size: 75px;
+    font-size: 75px;
+    flex-wrap: wrap;
+}
+
+
+.pcontent .p-icon img{
+    text-align: right;
+    width: 46%;
+    display:flex;
+    justify-content: center;
+    size: 75px;
+    font-size: 75px;
+    flex-wrap: wrap;
+    text-align: -webkit-auto;
+}
+
+.pcontent .w-icon,.p-icon,.h-icon, .ce a{
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+    color: cadetblue;
+}
+
+.pcontent .val{
+    font-size: 32px;
+    width: 0px;
+    /* height: 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-end;
+    float: left;
+    text-align: left;
+    /* padding: 34px; */
+    padding: 50px;
 }

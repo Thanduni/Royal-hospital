@@ -45,7 +45,7 @@ p.addUSer {
 input[type='submit']{
     width: 159px;
     height: 40px;
-    background: #24354E;
+    background: var(--para-color);
     border-style: none;
     border-radius: 50px;
     font-style: normal;
@@ -70,7 +70,7 @@ td:first-child {
 }
 
 .hint {
-    color: #24354E;
+    color: var(--para-color);
     text-align: justify;
     font-weight: bold;
 }
@@ -95,12 +95,12 @@ table {
 .table {
     margin: 0 0 40px 0;
     width: 100%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 500px;
-    overflow-y: scroll;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    /*overflow-y: scroll;*/
     border-style: none;
     border-radius: 10px;
+    overflow: visible;
 }
 
 @media screen and (max-width: 1229px) {
@@ -121,22 +121,28 @@ table {
 @media screen and (max-width: 1229px) {
     .table {
         display: block;
+        overflow-y: scroll;
     }
 }
 
 .row {
     display: table-row;
+    transition: 0.4s;
     background: #f6f6f6;
 }
 
-.row:nth-of-type(odd) {
-    background: #e9e9e9;
+.row:hover{
+    transform: scale(0.97, 0.97);
+    background-color: var(--hover-color);
 }
+/*.row:nth-of-type(odd) {*/
+/*    background: #e9e9e9;*/
+/*}*/
 
 .row.headerT {
     font-weight: 900;
-    color: #ffffff;
-    background: #24354E;
+    color: var(--para-color);
+    background: #e9e9e9;
 }
 
 @media screen and (max-width: 1229px) {
@@ -182,6 +188,7 @@ table {
     margin-bottom: 10px;
     word-wrap: break-word;
     vertical-align: middle;
+    border-radius: 10px;
 }
 
 .profilePic {
@@ -194,12 +201,15 @@ table {
 .cell {
     padding: 6px 12px;
     display: table-cell;
+    font-size: 18px;
+    height: 50px;
 }
 
 @media screen and (max-width: 1229px) {
     .cell {
         padding: 2px 16px;
         display: block;
+        height: auto;
     }
 
     .userContents table {
@@ -229,10 +239,10 @@ table {
 .userContents table {
     display: flex;
     justify-content: center;
-    box-shadow: 3px 3px 20px 0px #24354E;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* border-style: solid; */
     background-color: #ADB6CD;
-    /*color: #24354E;*/
+    /*color: var(--para-color);*/
     border-radius: 10px;
     font-weight: 400;
     font-size: 15px;

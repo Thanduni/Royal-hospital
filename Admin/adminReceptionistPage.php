@@ -12,6 +12,7 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminReceptionistPage.css' ?>">
         <title>Admin dashboard - Receptionist</title>
@@ -50,7 +51,7 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Receptionist
             </div>
             <p>
-                <button type="button" id="addButton" onclick="displayReceptionistAddForm()">+Add receptionist</button>
+                <button type="button" id="addButton" class="custom-btn" onclick="displayReceptionistAddForm()">+Add receptionist</button>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
             </p>
 
@@ -62,6 +63,19 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
+
+//                $numberPages = 3;
+//                $totalPages = ceil($rows / $numberPages);
+//
+//                if (isset($_GET['page'])) {
+//                    $page = $_GET['page'];
+//                } else {
+//                    $page = 1;
+//                }
+//
+//                $startinglimit = ($page - 1) * $numberPages;
+//                $query = "SELECT user.nic, receptionist.receptionistID, user.name, user.profile_image FROM receptionist inner join user where receptionist.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
+//                $result = $con->query($query);
                 ?>
                 <div class="wrapper">
                     <div class="table">
@@ -95,7 +109,7 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                                 </div>
                                 <div class="cell" style="100px" data-title="Options">
                                     <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteReceptionist&id=' . $row[0] ?>">
-                                        <button><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">Delete
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
                                     </a>
                                 </div>
@@ -111,6 +125,19 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                 </div>
 
             </div>
+<!--            <div class="pagination-container">-->
+<!--                <div class="pagination">-->
+<!--                    <ul class="pagination-2">-->
+<!---->
+<!--                        --><?php
+//                        for($btn=1;$btn<=$totalPages;$btn++){
+//                            echo '<a href="adminReceptionistPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
+//                        }
+//
+//                        ?>
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <div id="userForm">
@@ -141,11 +168,19 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
             </form>
         </div>
     </div>
-    <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/validateRecepStoreNurse.js' ?>></script>
-
+    <script type="text/javascript">
+        $(function(){
+            $('#addButton').click(function(){
+                $('#userForm').fadeIn().css("display","flex");
+            });
+            $('#cancel').click(function(){
+                $('#userForm').fadeOut();
+            });
+        });
+    </script>
     </body>
 
     </html>

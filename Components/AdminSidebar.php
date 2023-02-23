@@ -23,40 +23,51 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Admin/adminDash.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+        <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Admin/adminDash.php' ?>" target="_self"><img id="dashboard" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Admin/adminUsersPage.php'?>" target="_self"><img class="icons"
-                                                                         src=<?php echo BASEURL . '/images/user.svg' ?> alt="user"
+        <li onmouseover="changeImage('user.svg', 'user')" onmouseout="restoreImage('userDef.svg', 'user')"><a href="<?php echo BASEURL.'/Admin/adminUsersPage.php'?>" target="_self"><img id="user" class="icons butbut"
+                                                                         src=<?php echo BASEURL . '/images/userDef.svg' ?> alt="user"
                                                                          align="middle">
                 <p>User</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor"
+        <li onmouseover="changeImage('doctor.svg', 'doctor')" onmouseout="restoreImage('doctorDef.svg', 'doctor')"><a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>" target="_self"><img id="doctor" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/doctorDef.svg' ?> alt="doctor"
                                             align="middle">
                 <p>Doctor</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/nurse.svg' ?> alt="nurse"
+        <li onmouseover="changeImage('nurse.svg', 'nurse')" onmouseout="restoreImage('nurseDef.svg', 'nurse')"><a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>" target="_self"><img id="nurse" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/nurseDef.svg' ?> alt="nurse"
                                             align="middle">
                 <p>Nurse</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Admin/adminReceptionistPage.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="Receptionist"
+        <li onmouseover="changeImage('receptionist.svg', 'receptionist')" onmouseout="restoreImage('receptionistDef.svg', 'receptionist')"><a href="<?php echo BASEURL . '/Admin/adminReceptionistPage.php' ?>" target="_self"><img id="receptionist" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/receptionistDef.svg' ?> alt="Receptionist"
                                             align="middle">
                 <p>Receptionist</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Admin/adminStorekeeperPage.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/database.svg' ?> alt="Store keeper"
+        <li onmouseover="changeImage('database.svg', 'database')" onmouseout="restoreImage('databaseDef.svg', 'database')"><a href="<?php echo BASEURL . '/Admin/adminStorekeeperPage.php' ?>" target="_self"><img id="database" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/databaseDef.svg' ?> alt="Storekeeper"
                                             align="middle">
                 <p>Store keeper</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/noticeboard.svg' ?> alt="noticeboard"
+        <li onmouseover="changeImage('noticeboard.svg', 'notice')" onmouseout="restoreImage('noticeboardDef.svg', 'notice')"><a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>" target="_self"><img id="notice" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>
             </a></li>
     </ul>
 </div>
+<script>
+    function changeImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+
+    function restoreImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+</script>

@@ -11,7 +11,7 @@ require_once("../conf/config.php");
                     <p class="slogen">Modern medicine is a negation of health. It isn’t organised to serve human
                         health, but only itself, as
                         an institution. It makes more people sick than it heals.</p>
-                    <hr style="background-color: #ADB6CD">
+                    <hr style="border-top: 1px #26272b;">
                     <p class="txt"><i class="fa fa-copyright" aria-hidden="true"></i> 2021 All Rights Reserved</p>
                 </div>
                 <div class="footer-col" id="three">
