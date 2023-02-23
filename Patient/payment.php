@@ -2,29 +2,32 @@
 session_start();
 require_once("../conf/config.php");
 
-if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
-    if(isset($_POST['submit'])){
-        $merchant_id = $_POST['merchant_id'];
-        $order_id = $_POST['order_id'];
-        $amount = $_POST['amount'];
-        $currency = $_POST['currency'];
-        $merchant_secret = "MzcyNTg5MzM2MzU0MjIyMTk3MDQyMjIwMDg1Mjk0MTgzODk4MDk4";
-        
-        $GLOBAL['hash'] = strtoupper(
-        md5(
-            $merchant_id . 
-            $order_id . 
-            number_format($amount, 2, '.', '') . 
-            $currency .  
-            strtoupper(md5($merchant_secret)) 
-        ) 
-    );
+// if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     
-}
+//         // $merchant_id = $_POST['merchant_id'];
+//         // $order_id = $_POST['order_id'];
+//         // $amount = $_POST['amount'];
+//         // $currency = $_POST['currency'];
+//         // $merchant_secret = "MzcyNTg5MzM2MzU0MjIyMTk3MDQyMjIwMDg1Mjk0MTgzODk4MDk4";
+
+//         $merchant_id = "1222208";
+//         $order_id = "ItemNo12345";
+//         $amount = "1000";
+//         $currency = "LKR";
+//         $merchant_secret = "MzcyNTg5MzM2MzU0MjIyMTk3MDQyMjIwMDg1Mjk0MTgzODk4MDk4";
+        
+//         $hash = strtoupper(
+//         md5(
+//             $merchant_id . 
+//             $order_id . 
+//             number_format($amount, 2, '.', '') . 
+//             $currency .  
+//             strtoupper(md5($merchant_secret)) 
+//         ) 
+//     );
+
+// $GLOBALS['hash_val'] = $hash;
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,10 +55,27 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <input type="text" name="address" value="No.1, Galle Road">
     <input type="text" name="city" value="Colombo">
     <input type="hidden" name="country" value="Sri Lanka">
-    <input type="hidden" name="hash" value="<?php $hash ?>">    <!-- Replace with generated hash -->
+    <input type="hidden" name="hash" value="<?php 
+        $merchant_id = "1222208";
+        $order_id = "ItemNo12345";
+        $amount = "1000";
+        $currency = "LKR";
+        $merchant_secret = "MzcyNTg5MzM2MzU0MjIyMTk3MDQyMjIwMDg1Mjk0MTgzODk4MDk4";
+        
+        $hash = strtoupper(
+        md5(
+            $merchant_id . 
+            $order_id . 
+            number_format($amount, 2, '.', '') . 
+            $currency .  
+            strtoupper(md5($merchant_secret)) 
+        ) 
+    );  
+    $GLOBALS['hash_val'] = $hash;
+    echo $hash_val ?>">    <!-- Replace with generated hash -->
     <input name="submit" type="submit" value="Buy Now">   
 </form> 
 </body>
 </html>
 
-<?php } ?>
+<!-- <?php  ?> -->

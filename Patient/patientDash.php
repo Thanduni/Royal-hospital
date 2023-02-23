@@ -18,6 +18,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <link rel="stylesheet" href="<?php echo BASEURL .'/css/appoinment.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>Patient Dashboard</title>
@@ -50,10 +51,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $GLOBALS['height'] = $GLOBALS['h'];
         $GLOBALS['weight'] = $GLOBALS['w'];
         $GLOBALS['blood'] = $GLOBALS['b'];
-        
-        // mysqli_fetch_assoc( mysqli_query($con,$result))['height'];
-        // mysqli_fetch_assoc( mysqli_query($con,$result))['height'];
-        
 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
@@ -201,6 +198,20 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     ?>
                 </div>
             </div>
+            <!-- <div id="calendar" class="calendar">
+                <div class="calendar-title">
+                    <div class="calendar-title-text"></div>
+                    <div class="calendar-button-group">
+                    <button id="prevMonth">&lt;</button>
+                    <button id="today">Today</button>
+                    <button id="nextMonth">&gt;</button>
+                    </div>
+                </div>
+                <div class="calendar-day-name"></div>
+                <div class="calendar-dates"></div>
+            </div> -->
+            <script src="<?php echo BASEURL.'/js/calendar.js'; ?>"></script>
+            <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div><canvas id="myChart"></canvas></div>  
         </div>
     </div>
 
@@ -251,7 +262,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
         </div>
     </div>
-
+    <script src="<?php echo BASEURL.'/js/patientTemp.js'; ?>"></script>
     <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
     <script type="text/javascript">
         $(function(){
