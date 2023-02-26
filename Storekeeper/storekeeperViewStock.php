@@ -62,6 +62,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                     <div class="cell">Manufacture date</div>
                     <div class="cell">Expire date</div>
                     <div class="cell">Use state</div>
+                    <!-- <div class="cell">Options</div> -->
                 </div>
                 <?php
                 $sql = "select item.item_name, inventory.badgeNo, item.companyName, item.unitType, item.unit_price, inventory.quantity, inventory.manufacturedDate, inventory.expiredDate from item inner join inventory on item.itemID=inventory.itemID;";
@@ -127,6 +128,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             <div class="cell" data-title="Use state">
                                 <?php echo $useState; ?>
                             </div>
+                            
                         </div>
                         <?php
                     }
