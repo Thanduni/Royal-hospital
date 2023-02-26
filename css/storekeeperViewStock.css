@@ -1,8 +1,14 @@
-/*.pad{*/
-/*    height: 50px;*/
-/*    width: 100%;*/
-/*}*/
+/* .pad{
+   height: 50px;
+   
 
+} */
+
+.corner-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 100px;
+}
 /*.table-box{*/
 /*  height: 90vh;*/
 /*  width: 100%;*/
