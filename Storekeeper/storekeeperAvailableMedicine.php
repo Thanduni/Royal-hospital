@@ -62,7 +62,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                 $allResult = mysqli_query($con, $sql);
                 $num = mysqli_num_rows($allResult);
 
-                $numberPages = 8;
+                $numberPages = 7;
                 $totalPages = ceil($num / $numberPages);
 
 

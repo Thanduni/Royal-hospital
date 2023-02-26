@@ -59,13 +59,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     <div class="cell">Company name</div>
                     <div class="cell">Unit type</div>
                     <div class="cell">Unit cost</div>
+                    <div class="cell">Options</div>
                 </div>
                 <?php
                 $sql = "Select *from `item`";
                 $allResult = mysqli_query($con, $sql);
                 $num = mysqli_num_rows($allResult);
 
-                $numberPages = 8;
+                $numberPages = 7;
                 $totalPages = ceil($num / $numberPages);
 
 
@@ -79,9 +80,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                 $startinglimit = ($page - 1) * $numberPages;
                 $sql = "Select * from `item` limit " . $startinglimit . ',' . $numberPages;
                 $result = mysqli_query($con, $sql);
+                
 
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $itemID=$row['itemID'];
                         $item_name = $row['item_name'];
                         $companyName = $row['companyName'];
                         $unitType = $row['unitType'];
@@ -100,6 +103,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             </div>
                             <div class="cell" data-title="Unit cost">
                                 <?php echo $unitCost; ?>
+                            </div>
+                            <div class="cell" data-title="Options">
+                                <a href="storekeeperUpdateMedicine.php?updateid=<?php echo $row['itemID']; ?>">Update</a>
+                                <a href="storekeeperDeleteMedicine.php?deleteid=<?php echo $row['itemID']; ?>">Delete</a>
                             </div>
 
                         </div>

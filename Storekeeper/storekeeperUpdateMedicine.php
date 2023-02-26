@@ -3,20 +3,22 @@ session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
+
+
 ?> 
 
 <?php
 
-if(isset($_POST['submit'])){
+if(isset($_POST['update'])){
 
-    $itemId = $_POST['itemID'];
+    // $itemId = $_POST['itemID'];
     $medicineName = $_POST['medicineName'];
     $companyName = $_POST['companyName'];
     $unitType = $_POST['unitType'];
     $unitCost = $_POST['unitCost'];
     
 
-    $sql="insert into `item` (item_name,companyName,unitType,unit_price) values('$medicineName','$companyName','$unitType','$unitCost')";
+    $sql="update into `item` (item_name,companyName,unitType,unit_price) values('$medicineName','$companyName','$unitType','$unitCost')";
     $result=mysqli_query($con,$sql);
 
 }
@@ -38,7 +40,7 @@ if(isset($_POST['submit'])){
             height: auto;
         }
     </style>
-    <title>Storekeeper Add Medicine</title>
+    <title>Storekeeper Update Medicine</title>
 </head>
 <body>
 <div class="user">
@@ -60,7 +62,7 @@ if(isset($_POST['submit'])){
             </li>
         </ul>
         <div class="arrow">
-            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Add Medicine
+            <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Update Medicine
         </div>
 
         <!-- <div class="pad">
@@ -75,7 +77,7 @@ if(isset($_POST['submit'])){
 
 
         <div class="form-box">
-        <h1>ADD MEDICINE</h1>
+        <h1>UPDATE MEDICINE</h1>
         
         <form method="post">
             
@@ -122,7 +124,7 @@ if(isset($_POST['submit'])){
                 </div>
                 
             </div>
-            <button name="submit">Submit</button>
+            <button name="update">Update</button>
         </form>
     </div>
             
