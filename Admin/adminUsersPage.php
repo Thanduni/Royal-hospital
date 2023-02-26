@@ -13,6 +13,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
         <title>Admin dashboard - User</title>
         <style>
@@ -37,16 +39,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     <div class="user">
         <?php include(BASEURL . '/Components/AdminSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="../images/logo5.png" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img                          src="../images/logout.svg">
-                    </a></li>
-            </ul>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/adminTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
+<!--            <div class="title">-->
+<!--                <img src="../images/logo5.png" alt="logo">-->
+<!--                Royal Hospital Management System-->
+<!--            </div>-->
+<!--            <ul>-->
+<!--                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>-->
+<!--                <li class="logout"><a href="--><?php //echo BASEURL . '/Homepage/logout.php?logout' ?><!--">Logout-->
+<!--                        <img                          src="../images/logout.svg">-->
+<!--                    </a></li>-->
+<!--            </ul>-->
             <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">User
             </div>

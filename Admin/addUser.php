@@ -52,6 +52,15 @@ if (isset($_POST['addUser'])) {
                             ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob');";
     $result = mysqli_query($con, $query);
 
+    $nic_query = "SELECT nic FROM user WHERE user_role = 'Receptionist' or user_role = 'Admin'";
+    $result_nic = mysqli_query($con, $nic_query);
+
+    while($nic = mysqli_fetch_assoc($result_nic)['nic']){
+        $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
+              VALUES ('$nic','$userRole $name has been registered to the system.','CURRENT_TIMESTAMP')";
+        $result = mysqli_query($con, $query);
+    }
+
     if ($userRole == "Nurse"){
         $query = "INSERT INTO nurse(nic) VALUES ('$nic');";
         $result = mysqli_query($con, $query);

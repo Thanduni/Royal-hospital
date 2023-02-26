@@ -23,6 +23,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     </script>
+    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <style>
         .next {
             position: initial;
@@ -37,19 +38,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     <div class="user">
     <?php include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="doctor">
-                    Doctor
-                </li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
-                </li>
-            </ul>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Patients
             </div>

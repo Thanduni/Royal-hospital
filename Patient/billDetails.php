@@ -34,33 +34,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
     <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
     <div class="userContents"  id="center">
-        <div class="title">
-            <img src="<?php echo BASEURL.'/images/logo5.png' ?>" alt="logo">
-            Royal Hospital Management System
-            
-        </div>
-        <ul>
-            <li class="userType"><img src="<?php echo BASEURL.'/images/userInPage.svg' ?>" alt="">
-            Patient
-            </li>
-
-            <li class="logout"><a href="<?php echo BASEURL.'/Homepage/logout.php?logout&url= http:/localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout
-                <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
-
-        </ul>
-
-    
-
-
-
-
-
-
-
-
-
-
-
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+        ?>
         <div id="login-modal">
         <div class="modal">
             <div class="login-form">

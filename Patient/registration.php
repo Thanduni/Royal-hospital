@@ -38,6 +38,8 @@ if(isset($_POST["nic"])){
         die("Fail");
     $rows = $result->num_rows;
 
+
+
     // die($rows);
     // $res = mysqli_query($con, $select);
 
@@ -52,6 +54,7 @@ if(isset($_POST["nic"])){
             $error[] = 'passoword not matched';
         }
         else{
+
             $query1 = "INSERT INTO `user`(`nic`, `name`, `address`, `email`, `contact_num`, `gender`, `password`, `user_role`, `profile_image`, `DOB`) VALUES 
             ('$nic','$name','$address','$email','$phone','$gender','$hash','Patient','','$dob')";
             
@@ -60,6 +63,21 @@ if(isset($_POST["nic"])){
            
             $result1 = mysqli_query($con,$query1);
             $result2 = mysqli_query($con,$query2);
+
+            $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+            $result_pid = mysqli_query($con, $pid_query);
+            $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+
+            $nic_query = "SELECT nic FROM user WHERE user_role = 'Receptionist' or user_role = 'Admin'";
+            $result_nic = mysqli_query($con, $nic_query);
+
+            while($nic = mysqli_fetch_assoc($result_nic)['nic']){
+                $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
+              VALUES ('$nic','Patient $name has been registered to the system.','CURRENT_TIMESTAMP')";
+                $result = mysqli_query($con, $query);
+            }
+
+
             
             if($query1 & $query2){echo "Query is successful";}
 

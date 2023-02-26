@@ -36,7 +36,7 @@
 .card-set{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 table th,
@@ -130,3 +130,14 @@ table td{
     }
 }
 
+.divider{
+    background-color: var(--secondary-color);
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cardIcon{
+    height: 50px;
+    width: auto;
+}

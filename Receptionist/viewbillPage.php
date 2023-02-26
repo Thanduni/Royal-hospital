@@ -18,7 +18,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             p.royal {
                 font-size: 20px;
             }
-
+            .sidebarMenuInner p{
+                font-size: 13px;
+            }
             p.addUSer {
                 font-size: 30px;
             }
@@ -38,16 +40,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="../images/logo5.png" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin">Receptionist</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img src="../images/logout.svg">
-                    </a></li>
-            </ul>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/receptionistTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Bills
             </div>

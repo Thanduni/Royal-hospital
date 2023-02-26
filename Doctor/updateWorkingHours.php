@@ -15,10 +15,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/updateProfile.css' ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <title>Doctor update working hours - Doctor</title>
         <style>
             p.royal {
                 font-size: 20px;
+            }
+
+            #form button {
+                margin: 20px;
             }
 
             .userContents td {
@@ -33,6 +38,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 width: 200px;
             }
 
+            input[type="time"] {
+                margin: 15px;
+            }
+
             p.addUSer {
                 font-size: 30px;
             }
@@ -41,9 +50,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 position: initial;
                 height: auto;
             }
-            td{
+
+            td {
                 text-align: center;
             }
+
             .banner {
                 position: relative;
                 height: 200px;
@@ -54,8 +65,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 align-items: center;
                 text-align: center;
                 color: white;
-                text-shadow:0 0 1em var(--para-color), 0 0 var(--para-color);
+                text-shadow: 0 0 1em var(--para-color), 0 0 var(--para-color);
             }
+
             .banner::after {
                 content: "";
                 background-color: rgba(0, 0, 0, 0.2);
@@ -64,6 +76,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 height: 100%;
             }
 
+            .newSlots {
+                display: flex;
+                justify-content: space-around;
+            }
         </style>
         <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
     </head>
@@ -72,21 +88,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     <div class="user">
         <?php
         $name = urlencode($_SESSION['name']);
-        include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="../images/logo5.png" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Storekeeper</li>
-
-                <li class="logout"><a
-                            href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080' . $_SERVER['REQUEST_URI'] ?>">Logout
-                        <img src="../images/logout.svg">
-
-                    </a></li>
-            </ul>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole'] . "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Profile
             </div>
@@ -95,9 +102,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     <h2>Edit working hours</h2>
                     <table>
                         <tr>
-                        <th>Day</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
+                            <th>Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
                         </tr>
                         <?php
                         $query = "SELECT * FROM doctor_working_hours join doctor on doctor_working_hours.doctorID=doctor.doctorID 
@@ -113,18 +120,29 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                    <?php
-                    if ($result) {
-                        while ($row = mysqli_fetch_array($result)) {
-                        ?>
+                        <?php
+                        if ($result) {
+                            while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                <tr>
+                                    <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
+                                    <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
+                                </tr>
+                            <?php }
+                        } ?>
                         <tr>
-                            <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
-                            <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
-                        </tr>
-                    <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" id="Monday" onclick="edit('Monday')"
+                                        style="float: right">Edit schedule
+                                </button>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#Monday').click(function () {
+                                            $('#userForm').fadeIn().css("display", "flex");
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
 
@@ -151,10 +169,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                                 </tr>
-                            <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <?php }
+                        } ?>
+                        <tr>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" id="Tuesday" onclick="edit('Tuesday')"
+                                        style="float: right">Edit schedule
+                                </button>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#Tuesday').click(function () {
+                                            $('#userForm').fadeIn().css("display", "flex");
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
 
@@ -181,10 +210,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                                 </tr>
-                            <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <?php }
+                        } ?>
+                        <tr>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" id="Wednesday" onclick="edit('Wednesday')"
+                                        style="float: right">Edit schedule
+                                </button>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#Wednesday').click(function () {
+                                            $('#userForm').fadeIn().css("display", "flex");
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
 
@@ -211,10 +251,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                                 </tr>
-                            <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <?php }
+                        } ?>
+                        <tr>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" id="Thursday" onclick="edit('Thursday')"
+                                        style="float: right">Edit schedule
+                                </button>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#Thursday').click(function () {
+                                            $('#userForm').fadeIn().css("display", "flex");
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
 
@@ -241,10 +292,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                                 </tr>
-                            <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <?php }
+                        } ?>
+                        <tr>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" id="Friday" onclick="edit('Friday')"
+                                        style="float: right">Edit schedule
+                                </button>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#Friday').click(function () {
+                                            $('#userForm').fadeIn().css("display", "flex");
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
 
@@ -271,10 +333,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                                 </tr>
-                            <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <?php }
+                        } ?>
+                        <tr>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" id="Saturday" onclick="edit('Saturday')"
+                                        style="float: right">Edit schedule
+                                </button>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#Saturday').click(function () {
+                                            $('#userForm').fadeIn().css("display", "flex");
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
 
@@ -301,14 +374,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                                 </tr>
-                            <?php } }?>
-                        <tr >
-                            <td  style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"  colspan="3">
-                                <button type="button" class="custom-btn" style="float: right">Edit schedule</button>
+                            <?php }
+                        } ?>
+                        <tr>
+                            <td style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: var(--para-color)"
+                                colspan="3">
+                                <button type="button" class="custom-btn" value="Monday" id="Sunday" onclick="edit('Sunday')"
+                                        style="float: right">Edit schedule
+                                </button>
                                 <script type="text/javascript">
-                                    $(function(){
-                                        $('#<?php echo $rows['appointmentID'] ?>').click(function(){
-                                            $('#login-modal').fadeIn().css("display","flex");
+                                    $(function () {
+                                        $('#Sunday').click(function (e) {
+                                            $('#userForm').fadeIn().css("display", "flex");
                                         });
                                     });
                                 </script>
@@ -322,29 +399,40 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" enctype="multipart/form-data" id="addForm"
+            <form method="post" enctype="multipart/form-data" onsubmit="return checkValidation()" id="time-slot-form"
                   name="userForm">
                 <div class="banner">
                     <h1>User</h1>
                 </div>
                 <p class="royal">Royal Hospital Management System </p>
-                <p class="addUser" id="titleOperation">Add user</p>
-
+                <p class="addUser" id="titleOperation">Set working schedule</p>
+                <div class="newSlots">
+                    <label for="start-time">Start Time:</label>
+                    <label for="end-time">End Time:</label>
+                </div>
+                <div class="newSlots">
+                    <input type="time" name="start-time[]" class="start-time" required>
+                    <input type="time" name="end-time[]" class="end-time" required>
+                </div>
+                <div id="time-durations"></div>
+                <div class="newSlots">
+                    <button type="button" class="custom-btn" id="add-time-slot-btn">Add Time Slot</button>
+                </div>
+                <div class="newSlots">
+                    <button type="submit" name="submit" class="custom-btn" id="">Submit</button>
+                    <button name="cancel" id="cancel" class="custom-btn">Cancel</button>
+                </div>
             </form>
         </div>
     </div>
     <script src=<?php echo BASEURL . '/js/doctorWorkinghours.js' ?>></script>
     <script type="text/javascript">
-        $(function(){
-            $('#open').click(function(){
-                $('#login-modal').fadeIn().css("display","flex");
-            });
-            $('.cancel-modal').click(function(){
-                $('#login-modal').fadeOut();
+        $(function () {
+            $('#cancel').click(function () {
+                $('#userForm').fadeOut();
             });
         });
     </script>
-    <div id="counter">0</div>
 
     </body>
 

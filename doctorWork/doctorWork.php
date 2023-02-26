@@ -27,6 +27,6 @@ require_once("../conf/config.php");
 
     <button type="submit">Submit</button>
 </form>
-<script src="doctorWork.js"></script>
+<script src="../js/doctorWork.js"></script>
 </body>
 </html>
