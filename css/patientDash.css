@@ -23,8 +23,10 @@
 .card {
     padding: 20px;
     margin: 20px;
-    width: 170px;
-    height: 50px;
+    width: 170px ;
+    height: 50px ;
+    transition: width 0.1s;
+    transition: height 0.1s;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -32,6 +34,14 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     flex-wrap: wrap;
+}
+
+.card:hover{
+    border-color:var(--primary-color);
+    border-style: groove;
+    background-color: #f6f6f6;
+    width: 160px;
+    height: 45px;
 }
 
 .number{
@@ -99,7 +109,7 @@
 }
 
 a{
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
 .tcontent{

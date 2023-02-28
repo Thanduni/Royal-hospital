@@ -112,7 +112,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div>
             </a>
-            <a href="<?php echo BASEURL.'/Patient/payment.php' ?>">
+            <a href="<?php echo BASEURL.'/Patient/stripe/checkout.html' ?>">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Pay Now</div>
@@ -198,18 +198,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     ?>
                 </div>
             </div>
-            <!-- <div id="calendar" class="calendar">
-                <div class="calendar-title">
-                    <div class="calendar-title-text"></div>
-                    <div class="calendar-button-group">
-                    <button id="prevMonth">&lt;</button>
-                    <button id="today">Today</button>
-                    <button id="nextMonth">&gt;</button>
-                    </div>
-                </div>
-                <div class="calendar-day-name"></div>
-                <div class="calendar-dates"></div>
-            </div> -->
+            
             <script src="<?php echo BASEURL.'/js/calendar.js'; ?>"></script>
             <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div><canvas id="myChart"></canvas></div>  
         </div>
