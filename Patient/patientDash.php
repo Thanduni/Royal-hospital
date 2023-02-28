@@ -88,11 +88,13 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
-        <div class="userContents"  id="center">
-            <?php
+
+        <!-- <?php
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
-            ?>
+            ?> -->
+        <div class="userContents"  id="center">
+            
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
@@ -144,6 +146,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
             </a>
     </div>
+            <div class="mcontent">
                 <div class="pcontent">
                     <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div></br>
                     <div class="height">
@@ -165,8 +168,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         <div class="val"><?php echo  $blood; ?></div>
                     </div>
                 </div>
-
-                <div class="wrapper_p">
+                    <div class="wrapper_p">
                     <div class="table_header"><h3 style="color: var(--primary-color);margin-left:125px;">Confirmed Appointments</h3></div></br>
                     <div class="table">
                         <div class="row headerT">
@@ -222,22 +224,11 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                          <?php
                     }
                     ?>
-                </div>
-            </div>
-            <!-- <div id="calendar" class="calendar">
-                <div class="calendar-title">
-                    <div class="calendar-title-text"></div>
-                    <div class="calendar-button-group">
-                    <button id="prevMonth">&lt;</button>
-                    <button id="today">Today</button>
-                    <button id="nextMonth">&gt;</button>
                     </div>
                 </div>
-                <div class="calendar-day-name"></div>
-                <div class="calendar-dates"></div>
-            </div> -->
-            <script src="<?php echo BASEURL.'/js/calendar.js'; ?>"></script>
-            <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div><canvas id="myChart"></canvas></div>  
+                <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div>
+                <canvas id="myChart"></canvas></div>  
+            </div>
         </div>
     </div>
 
