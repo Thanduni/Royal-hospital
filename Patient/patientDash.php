@@ -143,8 +143,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div>
             </a>
-            </div>
-            <div>
+    </div>
                 <div class="pcontent">
                     <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div></br>
                     <div class="height">
