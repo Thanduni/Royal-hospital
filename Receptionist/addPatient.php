@@ -60,6 +60,19 @@ if (isset($_POST['addUser'])) {
             ('$nic', '$weight', '$receptionistID', '$patientType', '$height', '$illness', '$drugAllergies', '$medHisCom', '$curUsingMed', '$emerCon');";
     $result = mysqli_query($con, $query);
 
+//    $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+//    $result_pid = mysqli_query($con, $pid_query);
+//    $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+
+    $nic_query = "SELECT nic FROM user WHERE user_role = 'Receptionist' or user_role = 'Admin'";
+    $result_nic = mysqli_query($con, $nic_query);
+
+    while($nic = mysqli_fetch_assoc($result_nic)['nic']){
+        $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
+              VALUES ('$nic','Patient $name has been registered to the system.','CURRENT_TIMESTAMP')";
+        $result = mysqli_query($con, $query);
+    }
+
     header("location:" . BASEURL . "/Receptionist/patientPage.php");
 } else if (isset($_POST['cancel'])) {
     header("location:" . BASEURL . "/Receptionist/patientPage.php");

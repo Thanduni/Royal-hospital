@@ -28,7 +28,7 @@ require_once("../conf/config.php");
                                                                                                        align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li onmouseover="changeImage('appointment.svg', 'appointment')" onmouseout="restoreImage('appointmentDef.svg', 'appointment')"><a href="" target="_self"><img class="icons butbut" id="appointment"
+        <li onmouseover="changeImage('appointment.svg', 'appointment')" onmouseout="restoreImage('appointmentDef.svg', 'appointment')"><a href="<?php echo BASEURL . '/Receptionist/makeAppointment.php' ?>" target="_self"><img class="icons butbut" id="appointment"
                                            src=<?php echo BASEURL . '/images/appointmentDef.svg' ?> alt="Appointment"
                                            align="middle">
                 <p>Appointments</p>

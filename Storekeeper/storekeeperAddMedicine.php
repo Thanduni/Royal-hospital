@@ -9,7 +9,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 if(isset($_POST['submit'])){
 
-    // $itemId = $_POST['itemID'];
+    $itemId = $_POST['itemID'];
     $medicineName = $_POST['medicineName'];
     $companyName = $_POST['companyName'];
     $unitType = $_POST['unitType'];

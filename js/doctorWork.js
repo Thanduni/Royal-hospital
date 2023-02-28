@@ -1,7 +1,7 @@
-function addTion() {
+function addTimeDuration() {
     // get the total duration of all time durations
     let totalDuration = getTotalDuration();
-
+    alert(totalDuration);
     // check if the total duration is less than 5 hours
     if (totalDuration < 5) {
         // create a new div element for the time duration
@@ -58,7 +58,6 @@ function checkTotHrs(){
         let inputs = document.getElementsByName("duration");
 
         let lastNode = inputs[inputs.length - 1];
-        alert(lastNode);
         lastNode.value = 5 - (totalDuration - lastNode.value);
     }
 

@@ -1,12 +1,17 @@
 .actorCards{
     display: flex;
+    background-color: var(--secondary-color);
+    width: fit-content;
+    margin: 20px;
+    border-radius: 10px;
+    border-style: none;
 }
 
 .actorCards ul{
     position: relative;
     left: 20px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-content: center;
     flex-wrap: wrap;
     margin: 50px;
@@ -20,11 +25,11 @@
     text-align: center;
     transition: 0.4s;
     vertical-align: center;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 37px;
     border-style: none;
     border-radius: 10px;
-    width: 200px;
+    width: 230px;
     padding: 35px;
     color: var(--para-color);
 }
@@ -81,26 +86,39 @@ table td{
     background-repeat: no-repeat;
     background-position: 20px;
     background-size: contain;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
+.tab-cards:hover, .card:hover{
+    transform: scale(1.041);
+    box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);
+}
 .tab-cards#dashboard{
-    background-image: url("../images/dashboard.svg");
+    /*background-image: url("../images/dashboardDef.svg");*/
 }
 
 .tab-cards#appointments{
-    background-image: url("../images/appointment.svg");
+    /*background-image: url("../images/appointmentDef.svg");*/
 }
 
 .tab-cards#patient{
-    background-image: url("../images/patient.svg");
+    /*background-image: url("../images/patientDef.svg");*/
 }
 
 .tab-cards#bills{
-    background-image: url("../images/receptionist.svg");
+    /*background-image: url("../images/receptionistDef.svg");*/
 }
 
 .tab-cards#profile{
-    background-image: url("../images/user_in_card.svg");
+    /*background-image: url("../images/noticeboardDef.svg");*/
+}
+
+.cardIcon{
+    height: 50px;
+    width: auto;
 }
 
 
@@ -112,7 +130,7 @@ table td{
     }
 
     .actorCards ul li{
-        width: 300px;
+        width: 230px;
     }
 
     .next {
@@ -120,3 +138,32 @@ table td{
     }
 }
 
+.costInfo{
+    width: fit-content;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-style: none;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    justify-content: space-evenly;
+    transition: 0.4s;
+}
+
+.costInfo:hover{
+    transform: scale(1.041);
+    box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);
+}
+
+.costInfo div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.costInfo #id1, .costInfo #id2{
+    margin: 20px;
+}

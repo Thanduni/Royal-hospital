@@ -134,7 +134,7 @@ if (!isset($_SESSION['mailaddress'])) {
                 </div>
                 <div class="card">
                     <div class="card__background" style="background-image: url(images/neurology.jpg);    box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);"></div>
-                    <div class="card__content">neurology.jpg
+                    <div class="card__content">
                         <h3 class="card__heading">Neurology</h3>
                     </div>
                 </div>

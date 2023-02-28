@@ -44,8 +44,11 @@ require_once("../conf/config.php");
                                             src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="profile"
                                             align="middle">
                 <p>Profile</p>
-            </a>
-        </li>
-        
+            </a></li>
+        <li><a href="<?php echo BASEURL . '/Doctor/updateWorkingHours.php' ?>" target="_self"><img class="icons"
+                                                                                                    src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="profile"
+                                                                                                    align="middle">
+                <p>Working hours</p>
+            </a></li>
     </ul>
 </div>

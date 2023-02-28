@@ -1,6 +1,5 @@
 <?php
 session_start();
-//die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     ?>
@@ -14,6 +13,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminDash.css' ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
             .next {
@@ -26,37 +26,29 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     </head>
     <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/AdminSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php include(BASEURL . '/Components/AdminSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name'] ) ?>
         <div class="userContents" id="center">
-            <?php include(BASEURL . '/Components/nursetopbar.php');?>
-            <div class="title">
-                <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">
-                    Admin
-                </li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img
-                                src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
-                </li>
-            </ul>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/adminTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="arrow">
                 <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
             </div>
             <p id="second-head">Day analysis</p>
             <p style="color: #344168;  margin:20px;"> Date : <?php echo date("d - m - Y") ?>
             </p>
-            <hr style="color: #344168; margin: 20px;">
             <div class="userDetails">
                 <div class="card-set">
                     <?php
                     $sql = mysqli_query($con, "select count(*) from appointment where date ='".date("Y-m-d")."'");
                     $row = mysqli_fetch_array($sql);
                     ?>
-                    <div>
+                    <div class="divider">
                         <div class="card" style="max-height: 75px;">
+                            <div>
+                                <img class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/medical-appointment.png"?>" alt="">
+                            </div>
                             Number of appointments
                             <p class="val"><?php echo $row['count(*)'] ?></p>
                         </div>
@@ -98,30 +90,38 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     $sql5 = mysqli_query($con, "select count(*) from receptionist;");
                     $row5 = mysqli_fetch_array($sql5);
                     ?>
-                    <div>
+                    <div class="divider">
                         <div class="card-set">
                             <div class="card">
+                                <div>
+                                </div>
                                 Number of total users
+                                <img style="margin: 10px" class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/userCard.png"?>" alt="">
+
                                 <p class="val"><?php echo $row1['count(*)'] ?></p>
                             </div>
                         </div>
                         <div class="card-set">
                             <div class="card">
                                 Number of doctors
+                                <img style="margin: 10px" class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/doctorCard.png"?>" alt="">
                                 <p class="val"><?php echo $row2['count(*)'] ?></p>
                             </div>
                             <div class="card">
                                 Number of nurses
+                                <img style="margin: 10px" class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/nurseCard.png"?>" alt="">
                                 <p class="val"><?php echo $row3['count(*)'] ?></p>
                             </div>
                         </div>
                         <div class="card-set">
                             <div class="card">
                                 Number of receptionists
+                                <img style="margin: 10px" class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/receptionistCard.png"?>" alt="">
                                 <p class="val"><?php echo $row4['count(*)'] ?></p>
                             </div>
                             <div class="card">
                                 Number of storekeepers
+                                <img style="margin: 10px" class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/storekeeperCard.png"?>" alt="">
                                 <p class="val"><?php echo $row5['count(*)'] ?></p>
                             </div>
                         </div>
@@ -131,12 +131,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
             <aside>
                 <p id="second-head">Tabs in use</p>
-                <hr style="color: #344168; margin: 20px;">
                 <div class="actorCards">
                     <ul>
-                        <a href="<?php echo BASEURL . '/Admin/adminDash.php' ?>">
-                            <li class="tab-cards" id="dashboard">Dashboard</li>
-                        </a>
                         <a href="<?php echo BASEURL . '/Admin/adminUsersPage.php' ?>">
                             <li class="tab-cards" id="user">User</li>
                         </a>

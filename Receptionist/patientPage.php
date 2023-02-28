@@ -13,6 +13,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/patientPage.css' ?>">
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <title>Receptionist patient page - Patient</title>
         <style>
             p.royal {
@@ -27,6 +28,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 position: initial;
                 height: auto;
             }
+            .sidebarMenuInner p{
+                font-size: 13px;
+            }
         </style>
         <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
 
@@ -39,19 +43,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="../images/logo5.png" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="admin">Receptionist</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                        <img src="../images/logout.svg">
-                    </a></li>
-            </ul>
-            <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Patient
-            </div>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/receptionistTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <p>
                 <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
                 <button type="button" id="addButton" class="custom-btn" onclick="displayPatientAddForm()">+Add patient</button>
