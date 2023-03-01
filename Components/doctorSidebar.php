@@ -22,8 +22,8 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Doctor/doctorDash.php' ?>" target="_self"><img id="dashboard" class="icons butbut"
-                                            src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
+        <li><a href="<?php echo BASEURL . '/Doctor/doctorDash.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a>
@@ -40,9 +40,8 @@ require_once("../conf/config.php");
                 <p>Schedule</p>
             </a>
         </li>
-
-        <li onmouseover="changeImage('user.svg', 'user')" onmouseout="restoreImage('userDef.svg', 'user')"><a href="<?php echo BASEURL.'/Doctor/updateDoctorProfile.php'?>" target="_self"><img id="user" class="icons butbut"
-                                            src=<?php echo BASEURL . '/images/userDef.svg' ?> alt="profile"
+        <li><a href="<?php echo BASEURL . '/Doctor/updateDoctorProfile.php' ?>" target="_self"><img class="icons"
+                                            src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="profile"
                                             align="middle">
                 <p>Profile</p>
             </a></li>
