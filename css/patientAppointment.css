@@ -109,6 +109,7 @@ table {
     /* padding: 40px; */
     max-width: 1440px;
     padding: 15px 35px;
+    flex: 3;
     /* padding: 40px; */
     /* margin-top: -556px; */
     /*position: absolute;*/
@@ -166,8 +167,8 @@ table {
 
     .wrapper_p {
         margin: 0 auto;
-        max-width: 590px;
-        min-width: 500px;
+        /*max-width: 590px;*/
+        /*min-width: 500px;*/
     }
 
     .row {

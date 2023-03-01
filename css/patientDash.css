@@ -357,23 +357,25 @@ form button ,#cancel,#btn {
     flex-wrap: wrap;
     justify-content: flex-start;
     box-sizing: unset;
+    margin: 50px 20px 50px 50px;
     position: relative;
 }
 
 .pcontent{
     padding: 20px 20px;
-    margin-top: 18px;
+    /*margin-top: 18px;*/
     display: flex;
-    margin-left: 50px;
+    /*margin-left: 50px;*/
     float: left;
     height: 523px;
     width: 18%;
+    flex: 1;
     background-color: #fff;
     box-sizing: border-box;
     position: relative;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: center;
     flex-direction: column;
 }
 
@@ -472,6 +474,7 @@ form button ,#cancel,#btn {
     display: flex;
     /* position: absolute; */
     width: 370px;
+    flex: 1;
     height: 232px;
     margin: 50px 0px;
     background-color: white;
