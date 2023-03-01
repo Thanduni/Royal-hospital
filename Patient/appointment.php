@@ -11,9 +11,9 @@ if (isset($_POST["submit"])) {
     $time = $_POST['time'];
     $msg = $_POST['msg'];
 
-//    $query = "SELECT appointmentID FROM appointment WHERE date = '$date' and patientID is NULL";
-//    $result = mysqli_query($con, $query);
-//    $row1 = mysqli_fetch_array($result);
+    $docNIC_query = "SELECT nic FROM doctor WHERE doctorID = '$doctor'";
+    $result_docNIC = mysqli_query($con, $docNIC_query);
+    $docNIC = mysqli_fetch_assoc($result_docNIC)['nic'];
 
     $nic = $_SESSION['nic'];
     $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
@@ -21,19 +21,14 @@ if (isset($_POST["submit"])) {
     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
     $_SESSION['patientID'] = $pid;
-//    $appID = $row1[0];
-//
-//    if ($row1) {
-//        $sql = "UPDATE `appointment` SET `date`='$date',`patientID`= $pid WHERE appointmentID = $appID";
-//        $result = mysqli_query($con, $sql);
-//    } else {
-//        echo '<h3>No More Apointments!</h3>;';
-//    }
 
     $query = "INSERT INTO `appointment`(`date`, `time`, `venue`, `doctorID`, `patientID`, `message`, `status`) 
     VALUES ('$date','$time','[value-4]','$doctor','$pid','$msg','Confirmed')";
     $result = mysqli_query($con, $query);
-//    $row1 = mysqli_fetch_array($result);
+
+    $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
+              VALUES ('$docNIC','An appointment booked by patient No $pid',CURRENT_TIMESTAMP)";
+    $result = mysqli_query($con, $query);
 
     header("location: " . BASEURL ."/Patient/patientDash.php");
 }else{

@@ -1,15 +1,21 @@
 .actorCards{
     display: flex;
+    flex-wrap: wrap;
+    flex: 1;
 }
 
 .actorCards ul{
     position: relative;
-    left: 20px;
     display: flex;
+    background-color: var(--secondary-color);
+    border-style: none;
+    border-radius: 10px;
     justify-content: space-evenly;
     align-content: center;
     flex-wrap: wrap;
-    margin: 50px;
+    /*margin: 50px;*/
+    padding: 20px;
+    margin: 20px;
     width: 100%;
 }
 
@@ -36,7 +42,7 @@
 .card-set{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 table th,
@@ -64,7 +70,7 @@ table td{
     line-height: 37px;
     border-style: none;
     border-radius: 10px;
-    min-width: 200px;
+    min-width: 280px;
     padding: 35px;
     color: var(--para-color);
     border-style: solid;
@@ -89,36 +95,58 @@ table td{
     background-size: contain;
 }
 
-.tab-cards#dashboard{
-    background-image: url("../images/dashboardDef.svg");
+.dividerA{
+    background-color: var(--secondary-color);
+    flex: 1;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-.tab-cards#user{
-    background-image: url("../images/userDef.svg");
+.dividerB{
+    background-color: var(--secondary-color);
+    flex: 2;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-.tab-cards#doctor{
-    background-image: url("../images/doctorDef.svg");
+.cardIcon{
+    height: 50px;
+    width: auto;
+}
+.graph {
+    flex: 1;
+    background-color: var(--secondary-color);
+    border-style: none;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    /*height: 100px;*/
+    /*width: 100px;*/
 }
 
-.tab-cards#nurse{
-    background-image: url("../images/nurseDef.svg");
+.BundleCard{
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.tab-cards#receptionist{
-    background-image: url("../images/receptionistDef.svg");
+#myChart{
+    width: 1229px;
+    height: auto;
 }
 
-.tab-cards#notice{
-    background-image: url("../images/noticeboardDef.svg");
-}
-
-
-@media screen and (min-width: 1686.250px) {
+@media screen and (max-width: 1229px) {
     .actorCards ul{
         width: 1400px;
         left: 50%;
         transform: translate(-50%);
+    }
+
+    .BundleCard{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
     }
 
     .actorCards ul li{

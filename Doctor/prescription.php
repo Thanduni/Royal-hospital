@@ -52,6 +52,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
+
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/prescription.css' ?>">
     <title>Prescription</title>
 </head>
@@ -62,7 +63,6 @@ if (isset($_POST['submit'])) {
         include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
         <?php include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);?>
-
                 <div class="prescription-container">
                 <script src="<?php echo BASEURL . '/js/prescription.js' ?>"></script>
                 <script src="<?php echo BASEURL . '/js/searchDrugName.js' ?>"></script>

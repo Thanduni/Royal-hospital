@@ -1112,6 +1112,17 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     display: flex;
 }
 
+.btn-3 {
+    background: rgb(0,172,238);
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+
+}
+
 .custom-btn{
     width: 130px;
     height: 40px;
@@ -1127,16 +1138,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     4px 4px 5px 0px rgba(0,0,0,.1);
     outline: none;
 }
-.btn-3 {
-    background: rgb(0,172,238);
-    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-    width: 130px;
-    height: 40px;
-    line-height: 42px;
-    padding: 0;
-    border: none;
 
-}
 .custom-btn span {
     position: relative;
     display: block;
@@ -1331,6 +1333,22 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     visibility: hidden;
     opacity: 0;
 }
+.action .notification{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    right: 10px;
+    /* padding: 10px 20px; */
+    background: #fff;
+    width: 400px;
+    box-sizing: 0 7px 25px rgba(0,0,0,0.2);
+    border-radius: 15px;
+    transition: 0.2s;
+    visibility: hidden;
+    opacity: 0;
+}
 .action .menu.active{
     top: 80px;
     right: 10px;
@@ -1338,7 +1356,16 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     opacity: 1;
     z-index: 2;
 }
-.action .menu::before{
+
+.action .notification.active{
+    top: 80px;
+    right: 88px;
+    visibility: visible;
+    opacity: 1;
+    z-index: 2;
+}
+
+.action .menu::before, .action .notification::before{
     content: '';
     position: absolute;
     top: -5px;
@@ -1363,7 +1390,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     color: #cecece;
     font-weight: 400;
 }
-.action .menu ul{
+.action .menu ul, .action .notification ul{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -1376,28 +1403,54 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     display: flex;
     align-items: center;
 }
-.action .menu ul li img{
+.action .notification ul li{
+    list-style: none;
+    padding:  10px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.action .menu ul li img, .action .notification ul li img{
     max-width: 20px;
     margin-right: 10px;
     opacity: 0.5;
     transition: 0.5s;
+
 }
-.action .menu ul li:hover img{
+.action .menu ul li:hover img, .action .notification ul li:hover img{
     opacity: 1;
 }
-.action .menu ul li a{
+.action .menu ul li a, .action .notification ul li a{
     display: inline-block;
     text-decoration: none;
     color: #555;
-    font-weight: 500;
+    font-weight: 900;
     transition: 0.5s;
 }
-.action .menu ul li:hover a{
+.action .menu ul li:hover a, .action .notification ul li:hover a{
     font-weight: 800;
-    color: #3C77C6;
+    color: var(--primary-color);
 }
 /* #topbarul{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 } */
+
+.badge {
+    display: inline-block;
+    position: relative;
+    top:-10px;
+    left: -10px;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: #fff;
+}

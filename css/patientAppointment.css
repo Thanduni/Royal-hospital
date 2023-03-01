@@ -89,7 +89,7 @@ table {
 
 
 .table {
-    margin: 0 0 40px 0;
+    margin: 0 0 0px 0;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 500px;
@@ -106,17 +106,15 @@ table {
 }
 
 .wrapper_p {
-    margin: 0 auto;
     /* padding: 40px; */
     max-width: 1440px;
-    margin: 0 auto;
+    padding: 15px 35px;
     /* padding: 40px; */
-    max-width: 1440px;
     /* margin-top: -556px; */
-    position: absolute;
+    /*position: absolute;*/
     justify-content: center;
-    margin-left: 24%;
-    margin-top: 19%;
+    /*margin-left: 24%;*/
+    /*margin-top: 19%;*/
 
 }
 

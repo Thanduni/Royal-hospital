@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("../conf/config.php");
-
+$_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 ?>
 <!DOCTYPE html>
@@ -18,6 +18,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <link rel="stylesheet" href="<?php echo BASEURL .'/css/appoinment.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>Patient Dashboard</title>
@@ -50,30 +52,49 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $GLOBALS['height'] = $GLOBALS['h'];
         $GLOBALS['weight'] = $GLOBALS['w'];
         $GLOBALS['blood'] = $GLOBALS['b'];
-        
-        // mysqli_fetch_assoc( mysqli_query($con,$result))['height'];
-        // mysqli_fetch_assoc( mysqli_query($con,$result))['height'];
-        
+
+        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid'";
+        $result_app = mysqli_query($con, $app_sql);
+
+
+        while($row = mysqli_fetch_assoc($result_app)) {
+            $docName_sql = "select * from doctor inner join user on doctor.nic = user.nic where doctor.doctorID = '" . $row['doctorID'] . "'";
+            $docName = mysqli_fetch_assoc(mysqli_query($con, $docName_sql))['name'];
+            $appTime = $row['time'];
+
+            $current_date = date('Y-m-d');
+//            if (!isset($_SESSION['query_executed_date']) || $_SESSION['query_executed_date'] != $current_date) {
+//                $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`)
+//              VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.','CURRENT_TIMESTAMP')";
+//                $result = mysqli_query($con, $query);
+//                $_SESSION['appID'] = $current_date;
+//            }
+            $flag = 0;
+            for ($i = 0; $i < count($_SESSION['appID_array']); $i++) {
+                if ($row['appointmentID'] == $_SESSION['appID_array'][$i])
+                    $flag = 1;
+            }
+            if ($flag == 0) {
+                $_SESSION['appID_array'][] = $row['appointmentID'];
+                if (!isset($_SESSION['query_executed_date']) || $_SESSION['query_executed_date'] != $current_date) {
+                    $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`)
+                          VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.',CURRENT_TIMESTAMP)";
+                    $result = mysqli_query($con, $query);
+                }
+            }
+        }
 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
+
+
         <div class="userContents"  id="center">
-            <div class="title">
-                <img src="<?php echo BASEURL.'/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
-                
-            </div>
-            <ul>
-                <li class="userType"><img src="<?php echo BASEURL.'/images/userInPage.svg' ?>" alt="">
-                Patient
-                </li>
-
-                <li class="logout"><a href="<?php echo BASEURL.'/Homepage/logout.php?logout&url= http:/localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout
-                    <img src="<?php echo BASEURL.'/images/logout.svg' ?>" alt="logout"></a> 
-
-            </ul>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
@@ -115,7 +136,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div>
             </a>
-            <a href="<?php echo BASEURL.'/Patient/payment.php' ?>">
+            <a href="<?php echo BASEURL.'/Patient/stripe/checkout.html' ?>">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Pay Now</div>
@@ -124,70 +145,75 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div>
             </a>
-            </div>
-            <div class="pcontent">
-                <div class="height">
-                    <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt=""> 
-                    <div class="ce"><a>Height</a></div>
+    </div>
+            <div class="mcontent">
+                <div class="pcontent">
+                    <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div></br>
+                    <div class="height">
+                        <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt="">
+                            <div class="ce"><a>Height</a></div>
+                        </div>
+                        <div class="val"><?php echo $height;echo 'cm'; ?></div>
+                    </div>
+                    <div class="weight">
+                        <div class="w-icon"><img src="<?php echo BASEURL.'/images/weight.avif';?>" alt="">
+                            <div class="ce"><a>Weight</a></div>
+                        </div>
+                        <div class="val"><?php echo  $weight;echo 'kg'; ?></div>
+                    </div>
+                    <div class="pulse">
+                        <div class="p-icon"><img src="<?php echo BASEURL.'/images/blood.png';?>" alt="">
+                            <div class="ce"><a>Blood</a> </div>
+                        </div>
+                        <div class="val"><?php echo  $blood; ?></div>
+                    </div>
                 </div>
-                <div class="val"><?php echo $height;echo 'cm'; ?></div>
-                </div>
-                <div class="weight">
-                    <div class="w-icon"><img src="<?php echo BASEURL.'/images/weight.avif';?>" alt="">
-                    <div class="ce"><a>Weight</a></div>
-                </div>
-                <div class="val"><?php echo  $weight;echo 'kg'; ?></div>
-                </div>
-                <div class="pulse">
-                    <div class="p-icon"><img src="<?php echo BASEURL.'/images/blood.png';?>" alt="">
-                    <div class="ce"><a>Blood</a> </div>
-                </div>
-                <div class="val"><?php echo  $blood; ?></div>
-                </div>
-            </div>
-            
+                    <div class="wrapper_p">
+                    <div class="table_header"><h3 style="color: var(--primary-color);margin-left:125px;">Confirmed Appointments</h3></div></br>
+                    <div class="table">
+                        <div class="row headerT">
+                            <div class="cell">Date</div>
+                            <div class="cell">Time</div>
+                            <div class="cell">Venue</div>
+                            <div class="cell">Doctor</div>
+                            <div class="cell">Message</div>
+                            <div class="cell">Options</div>
+                        </div>
 
-            <div class="wrapper_p">
-            <div class="table_header"><h3 style="color: var(--primary-color);">Confirmed Appointments</h3></div></br>
-            <div class="table">
-                <div class="row headerT">
-                    <div class="cell">Date</div>
-                    <div class="cell">Time</div>
-                    <div class="cell">Venue</div>
-                    <div class="cell">Doctor</div>
-                    <div class="cell">Options</div>
-                </div>
+                        <?php
 
-<?php
-
-        $patientIdQuery = "select patientID from patient where nic = '" . $_SESSION['nic'] . "'";
-        $result = mysqli_query($con, $patientIdQuery);
-        $pID = mysqli_fetch_assoc($result)['patientID'];
+                        $patientIdQuery = "select patientID from patient where nic = '" . $_SESSION['nic'] . "'";
+                        $result = mysqli_query($con, $patientIdQuery);
+                        $pID = mysqli_fetch_assoc($result)['patientID'];
 
                         $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, appointment.venue, user.name, appointment.doctorID, appointment.appointmentID 
                             FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
+//                        die($query);
                         $result = mysqli_query($con, $query);
                         while($rows = mysqli_fetch_assoc($result)){ ?>
-                                    <div class="row">
-                                        <div class="cell" data-title="Date">
-                                            <?php echo $rows['date']; ?>
-                                        </div>
-                                        <div class="cell" data-title="Time">
-                                        <?php echo $rows['time']; ?>
-                                        </div>
-                                        <div class="cell" data-title="Venue">
-                                            <?php echo $rows['venue']; ?>
-                                        </div>
-                                        <div class="cell" data-title="Doctor">
-                                            <?php echo $rows['name']; ?>
-                                        </div>
-                                        <div class="cell" style="100px" data-title="Options">
-                                            <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
-                                                <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="cell" data-title="Date">
+                                    <?php echo $rows['date']; ?>
+                                </div>
+                                <div class="cell" data-title="Time">
+                                    <?php echo $rows['time']; ?>
+                                </div>
+                                <div class="cell" data-title="Venue">
+                                    <?php echo $rows['venue']; ?>
+                                </div>
+                                <div class="cell" data-title="Doctor">
+                                    <?php echo $rows['name']; ?>
+                                </div>
+                                <div class="cell" data-title="Message">
+                                    <?php echo $rows['message']; ?>
+                                </div>
+                                <div class="cell" style="" data-title="Options">
+                                    <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                             <ul class="tableCon">
                                 <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['date'] ?></li>
                                 <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['department'] ?></li>
@@ -198,7 +224,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                          <?php
                     }
                     ?>
+                    </div>
                 </div>
+                <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div>
+                <canvas id="myChart"></canvas></div>  
             </div>
         </div>
     </div>
@@ -250,7 +279,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
         </div>
     </div>
-
+    <script src="<?php echo BASEURL.'/js/patientTemp.js'; ?>"></script>
     <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
     <script type="text/javascript">
         $(function(){
