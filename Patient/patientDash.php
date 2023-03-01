@@ -78,7 +78,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 $_SESSION['appID_array'][] = $row['appointmentID'];
                 if (!isset($_SESSION['query_executed_date']) || $_SESSION['query_executed_date'] != $current_date) {
                     $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`)
-                          VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.','CURRENT_TIMESTAMP')";
+                          VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.',CURRENT_TIMESTAMP)";
                     $result = mysqli_query($con, $query);
                 }
             }
@@ -89,12 +89,12 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
 
-        <!-- <?php
+
+        <div class="userContents"  id="center">
+            <?php
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
-            ?> -->
-        <div class="userContents"  id="center">
-            
+            ?>
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>

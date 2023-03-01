@@ -5,7 +5,7 @@ require_once("../conf/config.php");
 <div class="topbar">
     <div class="action" style="display: flex;">
         <?php
-        $query = "select * from notification where nic = '" . $_GET['nic'] . "' and Status = '0'";
+        $query = "select *, DATE(timestamp) as date, TIME(timestamp) as time from notification where nic = '" . $_GET['nic'] . "' and Status = '0'";
         $result = mysqli_query($con, $query);
         ?>
         <div style="margin: 20px" onclick="notificationToggle()">
@@ -30,6 +30,10 @@ require_once("../conf/config.php");
                         <li>
                             <?php echo $row['Message']?>
                             <div style="margin: 5px">
+                                <div style="text-align: left">
+                                    <p style="float: left"><?php echo $row['date'] ?></p>
+                                    <p><?php echo $row['time'] ?></p>
+                                </div>
                                 <a style="float: right" href="<?php echo BASEURL . '/Receptionist/markRead.php?notID='.$row['notificationID']?>">
                                     Mark as read
                                 </a>

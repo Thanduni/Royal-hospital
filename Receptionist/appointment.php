@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
 //        die($pid_query);
 
     $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
-              VALUES ('$docNIC','An appointment booked by patient No $pid','CURRENT_TIMESTAMP')";
+              VALUES ('$docNIC','An appointment booked by patient No $pid',CURRENT_TIMESTAMP)";
     $result = mysqli_query($con, $query);
 
     header("location: " . BASEURL ."/Receptionist/receptionistDash.php");

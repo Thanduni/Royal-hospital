@@ -1,13 +1,38 @@
-.actorCards{
+.actorCards {
     display: flex;
     background-color: var(--secondary-color);
-    width: fit-content;
+    /*width: fit-content;*/
     margin: 20px;
     border-radius: 10px;
     border-style: none;
 }
 
-.actorCards ul{
+.divider {
+    background-color: var(--secondary-color);
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    padding: 20px;
+    flex: 1;
+}
+
+#myChart{
+    width: 1229px;
+    height: auto;
+}
+
+.graph {
+    flex: 1;
+    background-color: var(--secondary-color);
+    border-style: none;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.actorCards ul {
     position: relative;
     left: 20px;
     display: flex;
@@ -18,7 +43,7 @@
     width: 100%;
 }
 
-.actorCards ul li{
+.actorCards ul li {
     box-shadow: 3px 3px 20px 0px var(--para-color);
     margin: 10px;
     font-weight: 600;
@@ -34,31 +59,31 @@
     color: var(--para-color);
 }
 
-.actorCards ul li:hover{
+.actorCards ul li:hover {
     transform: scale(0.9, 0.9);
 }
 
-.card-set{
+.card-set {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 table th,
-table td{
+table td {
     padding: 15px;
 }
 
-.appoitmentNum{
+.appoitmentNum {
     min-height: 200px;
 }
 
-.val{
+.val {
     font-weight: bold;
     font-size: 30px;
 }
 
-.card{
+.card {
     box-shadow: 3px 3px 20px 0px var(--para-color);
     margin: 10px;
     text-align: center;
@@ -69,20 +94,20 @@ table td{
     line-height: 37px;
     border-style: none;
     border-radius: 10px;
-    min-width: 200px;
+    min-width: 280px;
     padding: 35px;
     color: var(--para-color);
     border-style: solid;
     border-width: 0px 0px 0px 5px;
 }
 
-#second-head{
+#second-head {
     margin: 20px;
     font-size: 25px;
     color: var(--para-color);
 }
 
-.tab-cards{
+.tab-cards {
     background-repeat: no-repeat;
     background-position: 20px;
     background-size: contain;
@@ -92,44 +117,25 @@ table td{
     align-items: center;
 }
 
-.tab-cards:hover, .card:hover{
+.tab-cards:hover, .card:hover {
     transform: scale(1.041);
     box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);
 }
-.tab-cards#dashboard{
-    /*background-image: url("../images/dashboardDef.svg");*/
-}
 
-.tab-cards#appointments{
-    /*background-image: url("../images/appointmentDef.svg");*/
-}
-
-.tab-cards#patient{
-    /*background-image: url("../images/patientDef.svg");*/
-}
-
-.tab-cards#bills{
-    /*background-image: url("../images/receptionistDef.svg");*/
-}
-
-.tab-cards#profile{
-    /*background-image: url("../images/noticeboardDef.svg");*/
-}
-
-.cardIcon{
+.cardIcon {
     height: 50px;
     width: auto;
 }
 
 
 @media screen and (min-width: 1686.250px) {
-    .actorCards ul{
+    .actorCards ul {
         width: 1400px;
         left: 50%;
         transform: translate(-50%);
     }
 
-    .actorCards ul li{
+    .actorCards ul li {
         width: 230px;
     }
 
@@ -138,9 +144,10 @@ table td{
     }
 }
 
-.costInfo{
-    width: fit-content;
+.costInfo {
+    /*width: fit-content;*/
     margin: 20px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -151,12 +158,13 @@ table td{
     transition: 0.4s;
 }
 
-.costInfo:hover{
+.costInfo:hover {
     transform: scale(1.041);
     box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);
 }
 
-.costInfo div{
+
+.costInfo div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -164,6 +172,11 @@ table td{
     font-size: 20px;
 }
 
-.costInfo #id1, .costInfo #id2{
+.costInfo #id1, .costInfo #id2 {
     margin: 20px;
 }
+
+.BundleCard{
+    flex: 1;
+}
+

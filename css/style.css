@@ -1409,7 +1409,7 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     border-top: 1px solid rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
 }
 .action .menu ul li img, .action .notification ul li img{
     max-width: 20px;

@@ -57,7 +57,7 @@ if (isset($_POST['addUser'])) {
 
     while($nic = mysqli_fetch_assoc($result_nic)['nic']){
         $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
-              VALUES ('$nic','$userRole $name has been registered to the system.','CURRENT_TIMESTAMP')";
+              VALUES ('$nic','$userRole $name has been registered to the system.',CURRENT_TIMESTAMP)";
         $result = mysqli_query($con, $query);
     }
 

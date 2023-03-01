@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
     $result = mysqli_query($con, $query);
 
     $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
-              VALUES ('$docNIC','An appointment booked by patient No $pid','CURRENT_TIMESTAMP')";
+              VALUES ('$docNIC','An appointment booked by patient No $pid',CURRENT_TIMESTAMP)";
     $result = mysqli_query($con, $query);
 
     header("location: " . BASEURL ."/Patient/patientDash.php");

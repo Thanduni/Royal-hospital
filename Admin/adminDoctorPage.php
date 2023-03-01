@@ -41,7 +41,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         <div class="userContents" id="center">
             <?php
             $name = urlencode( $_SESSION['name']);
-            include(BASEURL.'/Components/adminTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']);
+            include(BASEURL.'/Components/adminTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
 <!--            <div class="title">-->
 <!--                <img src="../images/logo5.png" alt="logo">-->
