@@ -91,10 +91,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
 
         <div class="userContents"  id="center">
-            <?php
+            <!-- <?php
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
-            ?>
+            ?> -->
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
