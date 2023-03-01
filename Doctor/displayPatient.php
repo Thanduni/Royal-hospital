@@ -113,6 +113,7 @@ if($result){
 
                 <div class="doctor-action">
                     <a href="prescription.php">
+                    <a href="prescription.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
@@ -137,76 +138,6 @@ if($result){
                         </div>
                     </div>
                 </div>
-                
-
-                <!-- <div class="doctor-note-container">
-                    <h3>Doctor note</h3>
-                    <form method="post">
-                        <div class="prescription-group">
-                            <label>Date</label>
-                            <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>" min="<?php echo $mindate?>">
-                        </div>
-                        <div class="prescription-group">
-                            <label>Time</label>
-                            <input type="time" id="time" name="time" value="<?php
-                            date_default_timezone_set("Asia/Colombo");
-                            echo date("h:i:sa");
-                            ?>" required min="<?php echo $mintime?>">
-                        </div>
-                        <div class="prescription-group">
-                            <label>Investigation </label>
-                            <input type="text" class="form-control" placeholder="Investigation" name="Investigation">
-                        </div>
-                        <div class="prescription-group">
-                            <label>Impression </label>
-                            <input type="text" class="form-control" placeholder="Impression" name="Impression">
-                        </div>
-                        <button type="submit" name ="submitdoctonote">Submit</button>
-                    </form>
-                    <button class="button" id="admit-button">
-                        Admit patient
-                    </button>
-                </div>
-                <div class="prescription-container">
-                    <div class="tab-line">
-                        <div class="medicine-button" id="medicine-button">Prescribe Medicine</div>
-                        <div class="test-button" id="test-button">Prescribe Test</div>
-                    </div>
-                    <div class="prescribe-medicine-content">
-                        <form action="post">
-                            <div class="prescription-group">
-                                <label>Drug Name </label>
-                                <input type="text" class="form-control" placeholder="Drug Name" name="drugname">
-                            </div>
-                            <div class="prescription-group">
-                                <label>Quantity</label>
-                                <input type="number" class="form-control" placeholder="Quantity" name="quantity">
-                            </div>
-                            <div class="prescription-group">
-                                <label>No of days</label>
-                                <input type="number" class="form-control" placeholder="No-of-days" name="no-of-days">
-                            </div>
-                            <div class="prescription-group">
-                                <label>Frequency</label>
-                                <input type="number" class="form-control" placeholder="Frequency" name="frequency">
-                            </div>
-                            <div class="prescription-group">
-                                <label>Instructions</label>
-                                <input type="text" class="form-control" placeholder="Instructions" name="instructions">
-                            </div>
-                            <button type="submit" name ="submit-drug-prescription">Submit</button>
-                        </form>
-                    </div>
-                    <div class="prescribe-test-content">
-                        <form action="post">
-                            <div class="prescription-group">
-                                <label>Test Name </label>
-                                <input type="text" class="form-control" placeholder="Test Name" name="Test Name">
-                            </div>
-                            <button type="submit" name ="submit-test-prescription">Submit</button>
-                        </form>
-                    </div>
-                </div> -->
 
                 <div class="Admit-patient-alert">
                     <div class="popup" id="Admit-patient-popup">
