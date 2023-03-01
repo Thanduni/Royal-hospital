@@ -1,4 +1,3 @@
-
 <?php 
 session_start();
 require_once("/xampp/htdocs/Royalhospital/conf/config.php");
@@ -8,7 +7,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Patient Summary</title>
+    <title>Buy cool new product</title>
     
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/style.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">

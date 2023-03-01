@@ -206,6 +206,7 @@ table {
     display: table-cell;
     font-size: 18px;
     height: 50px;
+    width: 112px;
 }
 
 @media screen and (max-width: 1229px) {

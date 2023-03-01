@@ -1,7 +1,7 @@
 .cards{
     flex-wrap: wrap;
     height: 11%;
-    margin-top: -18px;
+    margin-top: -0px;
     margin-left: 50px;
     justify-content: center;
     width: 94%;
@@ -357,12 +357,12 @@ form button ,#cancel,#btn {
     flex-wrap: wrap;
     justify-content: flex-start;
     box-sizing: unset;
-    margin: 50px 20px 50px 50px;
+    margin: 20px 20px 50px 50px;
     position: relative;
 }
 
 .pcontent{
-    padding: 20px 20px;
+    padding: 10px 10px;
     /*margin-top: 18px;*/
     display: flex;
     /*margin-left: 50px;*/

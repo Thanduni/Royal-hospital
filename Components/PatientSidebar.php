@@ -29,17 +29,17 @@ require_once("../conf/config.php");
                 <p>Dashboard</p>
             </a></li>
 
-        <li><a id="openform" target="_self"><img class="icons"
+        <li><a id="open-" target="_self"><img class="icons"
                 src=<?php echo BASEURL . '/images/appointment.svg' ?> alt="user" align="middle">
                 <p>Appointment</p>
             </a></li>
 
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php' ?>" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL.'/Patient/prescription.php' ?>" target="_self"><img class="icons"
                 src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor" align="middle">
-                <p>Patient Reports</p>
+                <p>Prescription</p>
             </a></li>
 
-        <li><a href="" target="_self"><img class="icons"
+        <li><a href="<?php echo BASEURL.'/patient/stripe/checkout.php'?>" target="_self"><img class="icons"
                  src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="nurse" align="middle">
                 <p>Payment</p>
             </a></li>
