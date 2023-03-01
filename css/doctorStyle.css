@@ -31,7 +31,7 @@
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 20px;
 }
 
@@ -204,7 +204,7 @@ h3{
     justify-content: space-between;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .room-no{
@@ -355,6 +355,41 @@ select option{
     font-weight: 500;
     color: #24354E;
 }
+.doctor-note-container{
+    width: 70%;
+    margin-bottom: 5%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    background: #FFF;
+}
+.prescription-container{
+    width: 80%;
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px ;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    background: #FFF;
+}
+.tab-line{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+    padding: 5px 0;
+    height: fit-content;
+}
+.medicine-button{
+    /* border: 2px solid var(--para-color); */
+    padding: 5px;
+
+}
+.test-button{
+    /* border: 2px solid var(--para-color); */
+    margin-left: 5px;
+    padding: 5px;
+}
 .row{
     display: flex;
     flex-direction: row;
@@ -370,4 +405,42 @@ select option{
     font-size: medium;
     font-weight: 500;
     width: 50%;
+}
+.prescription-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+.prescription-group input{
+    padding: 1em;
+    line-height: 1;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+.prescription-group label{
+    margin-top: 20px;
+    margin-right: 20px;
+    font-weight: normal;
+}
+.prescribe-medicine-content{
+    display: flex;
+}
+.prescribe-test-content{
+    display: none;
+}
+.medicine-button{
+    border-right: 1px solid gray;
+}
+.medicine-button:hover{
+    border-bottom: 2px solid var(--para-color);
+    cursor: pointer;
+    
+}
+.test-button:hover{
+    cursor: pointer;
+}
+.container{
+    border-bottom: 2px solid var(--para-color);
 }
