@@ -29,9 +29,11 @@ if(isset($_POST['submit'])){
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .next {
@@ -53,7 +55,7 @@ if(isset($_POST['submit'])){
         include(BASEURL.'/Components/storekeeperTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
         ?>
         <div class="arrow">
-            <img src="../images/arrow-right-circle.svg" alt="arrow">User
+            <img src="../images/arrow-right-circle.svg" alt="arrow">Medicine
         </div>
         <p>
             <script src="<?php echo BASEURL . '/js/addUser.js' ?>"></script>
@@ -120,8 +122,8 @@ if(isset($_POST['submit'])){
                                 </div>
                                 <div class="cell" style="100px" data-title="Options">
                                     <button class="operation" id="<?php echo $row[0] ?>"
-                                            onclick="displayUserUpdateForm(<?php echo $row[0] ?>);"><img
-                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
+                                            onclick="displayMedicineUpdateForm(<?php echo $row[0] ?>);">
+                                        <img src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
                                     </button>
                                     <script type="text/javascript">
                                         $(function(){
@@ -165,12 +167,20 @@ if(isset($_POST['submit'])){
                             <input type="text" name="medicineName" id="IN_medicineName"><div class="alert" id="nic"></div>
                         </td>
                     </tr>
+                    <tr id="nicRow">
+                        <td>
+                            <label>Company Name</label>
+                        </td>
+                        <td colspan="2">
+                            <input name="companyName" type="text" id="IN_companyName">
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label for="Unit Type">Unit Type:</label>
                         </td>
                         <td colspan="2">
-                            <select name="unitType" id="">
+                            <select name="unitType" id="IN_unitType">
                                 <option value="">Select type</option>
                                 <option value="cards">cards</option>
                                 <option value="bottles">bottles</option>
@@ -185,13 +195,13 @@ if(isset($_POST['submit'])){
                             <label for="Unit Cost">Unit Cost:</label>
                         </td>
                         <td colspan="2">
-                            <input name="unitCost" type="text" id="contact" placeholder="Enter Unit Cost here">                        </td>
+                            <input name="IN_unitCost" type="text" id="IN_unitCost" placeholder="Enter Unit Cost here">                        </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td colspan="2">
-                            <button name="submit">Submit</button>
-                            <button name="cancel" id="cancel">Cancel</button>
+                            <button class="custom-btn" name="submit">Submit</button>
+                            <button class="custom-btn" name="cancel" id="cancel">Cancel</button>
                         </td>
                     </tr>
                 </table>
@@ -203,6 +213,7 @@ if(isset($_POST['submit'])){
         <!-- content start -->
 
 <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+<script src=<?php echo BASEURL . '/js/updateMedicine.js' ?>></script>
 <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
 <script type="text/javascript">
     $(function(){

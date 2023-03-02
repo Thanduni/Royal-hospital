@@ -24,31 +24,37 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperDash.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+        <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Storekeeper/storekeeperDash.php' ?>" target="_self"><img id="dashboard" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Storekeeper/storekeeperAddMedicine.php'?>" target="_self"><img class="icons"
-                                                                         src=<?php echo BASEURL . '/images/medicine.svg' ?> alt="user"
+        <li onmouseover="changeImage('medicine.svg', 'medicine')" onmouseout="restoreImage('medicineDef.svg', 'medicine')"><a href="<?php echo BASEURL.'/Storekeeper/storekeeperAddMedicine.php'?>" target="_self"><img id="medicine" class="icons butbut"
+                                                                         src=<?php echo BASEURL . '/images/medicineDef.svg' ?> alt="user"
                                                                          align="middle">
                 <p>Add Medicine</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddStock.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/database.svg' ?> alt="dashboard"
+        <li onmouseover="changeImage('database.svg', 'database')" onmouseout="restoreImage('databaseDef.svg', 'database')"><a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddStock.php' ?>" target="_self"><img id="database" class="icons butbut"
+                                            src=<?php echo BASEURL . '/images/databaseDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Add Stock</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Storekeeper/storekeeperViewStock.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/viewStock.svg' ?> alt="doctor"
-                                            align="middle">
-                <p>View Stocks</p>
-            </a></li>
-        <li><a href="<?php echo BASEURL . '/Storekeeper/updateStorekeeperProfile.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/profile.svg' ?> alt="nurse"
+        <li onmouseover="changeImage('profile.svg', 'profile')" onmouseout="restoreImage('profileDef.svg', 'profile')"><a href="<?php echo BASEURL . '/Storekeeper/updateStorekeeperProfile.php' ?>" target="_self"><img id="profile" class="butbut icons"
+                                            src=<?php echo BASEURL . '/images/profileDef.svg' ?> alt="nurse"
                                             align="middle">
                 <p>Profile</p>
             </a></li>
         
     </ul>
 </div>
+<script>
+    function changeImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+
+    function restoreImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+</script>

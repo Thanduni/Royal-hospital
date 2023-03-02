@@ -11,6 +11,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperDash.css' ?>">
+    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
@@ -27,19 +28,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
     $name = urlencode( $_SESSION['name']);
     include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
     <div class="userContents" id="center">
-        <div class="title">
-            <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-            Royal Hospital Management System
-        </div>
-        <ul>
-            <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="Storekeeper">
-                Storekeeper
-            </li>
-            <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout
-                    <img
-                            src=<?php echo BASEURL . '/images/logout.svg' ?> alt="logout"></a>
-            </li>
-        </ul>
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/storekeeperTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+        ?>
         <div class="arrow">
             <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
         </div>
