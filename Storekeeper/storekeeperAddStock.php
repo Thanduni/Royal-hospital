@@ -32,6 +32,7 @@ if(isset($_POST['submit'])){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .next {
@@ -155,7 +156,6 @@ if(isset($_POST['submit'])){
 
 
         <!-- content start -->
-        <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
 </div>
 </body>

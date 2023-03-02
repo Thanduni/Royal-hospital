@@ -1,6 +1,7 @@
 <?php 
 session_start();
-require_once("/xampp/htdocs/Royalhospital/conf/config.php");
+//require_once("/xampp/htdocs/Royalhospital/conf/config.php");
+require_once("../../conf/config.php");
 $_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 ?>

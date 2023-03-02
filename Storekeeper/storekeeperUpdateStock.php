@@ -30,7 +30,6 @@ if(isset($_POST['update'])){
 
     header("Location: storekeeperTotalMedicine.php");
     exit();
-
 }
 
 ?>
@@ -42,6 +41,7 @@ if(isset($_POST['update'])){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>

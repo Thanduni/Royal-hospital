@@ -351,18 +351,7 @@ button:active {
     height: 100%;
 }
 
-#sidebarMenu {
-    /*height: 100%;*/
-    position: relative;
-    left: 0;
-    width: 60px;
-    overflow: hidden;
-    margin-top: 0px;
-    transform: translateX(0px);
-    transition: width .10s linear;
-    background: linear-gradient(180deg, #ffffff 100%, #ffffff 0%);
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-}
+
 
 .sidebarMenuInner {
     position: relative;
@@ -431,6 +420,19 @@ button:active {
     /*height: 100%;*/
     overflow: visible;
     transition: width .10s linear;
+}
+
+#sidebarMenu {
+    /*height: 100%;*/
+    position: relative;
+    left: 0;
+    width: 60px;
+    overflow: hidden;
+    margin-top: 0px;
+    transform: translateX(0px);
+    transition: width .10s linear;
+    background: linear-gradient(180deg, #ffffff 100%, #ffffff 0%);
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
 }
 
 input[type="checkbox"]:checked ~ #sidebarMenu {
@@ -939,6 +941,7 @@ ul {
     font-size: 20px;
     line-height: 24px;
     color: var(--para-color);
+    transition: 0.4s;
 }
 
 .cards ul li:hover {
@@ -1454,3 +1457,23 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
     background-color: var(--primary-color);
     color: #fff;
 }
+
+.displayInfo{
+    position: fixed;
+    right: -400px;
+    z-index: 120;
+    background-color: var(--secondary-color);
+    height: 100%;
+    width: 400px;
+    transition: transform 0.5s ease-out;
+    box-shadow: 0 7px 25px 0 rgb(0 0 0 / 8%);
+}
+
+.displayInfo.show{
+    transform: translateX(-400px);
+}
+
+.displayInfo.showNothing{
+    transform: translateX(0px);
+}
+
