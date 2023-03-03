@@ -55,45 +55,35 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             <div class="table">
                 <div class="row headerT">
                     <div class="cell">Medicine name</div>
-                    <div class="cell">Quantity available</div>
+                    <div class="cell">Company name</div>
                     <div class="cell">Unit type</div>
+                    <div class="cell">Unit cost</div>
+                    <div class="cell">Items available</div>
                 </div>
                 <?php
-                $sql = "select item.item_name, sum(inventory.quantity) as quantity, item.unitType from item inner join inventory on item.itemID=inventory.itemID where inventory.expiredDate > CURRENT_DATE and inventory.quantity > 0 GROUP BY inventory.itemID;";
-                $allResult = mysqli_query($con, $sql);
-                $num = mysqli_num_rows($allResult);
-
-                $numberPages = 7;
-                $totalPages = ceil($num / $numberPages);
-
-
-
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    $page = 1;
-                }
-
-                $startinglimit = ($page - 1) * $numberPages;
-                $sql = "select item.item_name, sum(inventory.quantity) as quantity, item.unitType from item inner join inventory on item.itemID=inventory.itemID where inventory.expiredDate > CURRENT_DATE and inventory.quantity > 0 GROUP BY inventory.itemID limit " . $startinglimit . ',' . $numberPages;
+                $sql = "SELECT q.item_name, q.companyName, q.unitType, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE > p.expiredDate GROUP BY p.itemID;";
                 $result = mysqli_query($con, $sql);
+                $num = mysqli_num_rows($result);
 
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $item_name = $row['item_name'];
-                        $quantity = $row['quantity'];
+                        $companyName = $row['companyName'];
                         $unitType = $row['unitType'];
+                        $unitCost = $row['unit_price'];
                         ?>
                         <div class="row">
-
                             <div class="cell" data-title="Medicine name">
                                 <?php echo $item_name; ?>
                             </div>
-                            <div class="cell" data-title="Quantity available">
-                                <?php echo $quantity; ?>
+                            <div class="cell" data-title="Company name">
+                                <?php echo $companyName; ?>
                             </div>
                             <div class="cell" data-title="Unit type">
                                 <?php echo $unitType; ?>
+                            </div>
+                            <div class="cell" data-title="Unit cost">
+                                <?php echo $unitCost; ?>
                             </div>
                         </div>
                         <?php
@@ -101,6 +91,37 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                 }
                 ?>
             </div>
+            <?php
+            $sql = "SELECT q.item_name, q.companyName, q.unitType, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE < p.expiredDate GROUP BY p.itemID;";
+            $result = mysqli_query($con, $sql);
+            $num = mysqli_num_rows($result);
+
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $item_name = $row['item_name'];
+                    $companyName = $row['companyName'];
+                    $unitType = $row['unitType'];
+                    $unitCost = $row['unit_price'];
+                    ?>
+                    <div class="row">
+                        <div class="cell" data-title="Medicine name">
+                            <?php echo $item_name; ?>
+                        </div>
+                        <div class="cell" data-title="Company name">
+                            <?php echo $companyName; ?>
+                        </div>
+                        <div class="cell" data-title="Unit type">
+                            <?php echo $unitType; ?>
+                        </div>
+                        <div class="cell" data-title="Unit cost">
+                            <?php echo $unitCost; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+        </div>
         </div>
 
         <!-- pagination buttons -->

@@ -58,23 +58,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 </div>
                 <?php
                 $sql = "select item.item_name from inventory inner join item on inventory.itemID=item.itemID where inventory.expiredDate > CURRENT_DATE group by inventory.itemID having sum(quantity)=0;";
-                $allResult = mysqli_query($con, $sql);
-                $num = mysqli_num_rows($allResult);
-
-                $numberPages = 8;
-                $totalPages = ceil($num / $numberPages);
-
-
-
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    $page = 1;
-                }
-
-                $startinglimit = ($page - 1) * $numberPages;
-                $sql = "select item.item_name from inventory inner join item on inventory.itemID=item.itemID where inventory.expiredDate > CURRENT_DATE group by inventory.itemID having sum(quantity)=0 limit " . $startinglimit . ',' . $numberPages;
                 $result = mysqli_query($con, $sql);
+                $num = mysqli_num_rows($result);
 
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -93,35 +78,6 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             </div>
         </div>
 
-
-        <!-- pagination buttons -->
-        
-
-        <div class="pagination-container">
-        <div class="pagination">
-          <ul class="pagination-2">
-
-          <?php
-            for($btn=1;$btn<=$totalPages;$btn++){
-                echo '<li class="page-number active"><a href="storekeeperOutofStock.php?page='.$btn.'">'.$btn.'</a></li>';
-            }
-
-            // if(isset($_GET['page'])){
-            //     $page=$_GET['page'];
-            // }
-            // else{
-            //     $page=1;
-            // }
-
-            // $startinglimit=($page-1)*$numberPages;
-            // $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
-            // $result=mysqli_query($con,$sql);
-          ?>
-            <!-- <li class="page-number prev"><a href="#">&laquo;</a></li>
-            <li class="page-number"><a href="#">1</a></li>
-            <li class="page-number active"><a href="#">2</a></li>
-            <li class="page-number prev"><a href="#">&raquo;</a></li> -->
-          </ul>
         </div>
         </div>
 

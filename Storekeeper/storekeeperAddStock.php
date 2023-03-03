@@ -153,7 +153,11 @@ if(isset($_POST['submit'])){
                                         <?php echo $expiredDate; ?>
                                     </div>
                                     <div class="cell" data-title="Use state">
-                                        <?php echo $useState; ?>
+                                <?php if(date("Y-m-d") < $expiredDate) {?>
+                                    <div class="inStock">In Stock</div>
+                                <?php } else { ?>
+                                    <div class="expired">Expired</div>
+                                <?php } ?>
                                     </div>
 
                                 </div>

@@ -39,15 +39,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
         <div class="pad">
             
         </div>
-        <!-- content start -->
-
-
-<!--        <div class="content">-->
         <div class="card-list">
             
         <div class="card">
-        <!-- onclick='window.location.replace("google.com")' direct linking part farzan-->
-        <!-- <a href="storekeeperTotalMedicine.php"> -->
             <div class="card-cont">
                 
                 <div class="card-h">
@@ -56,7 +50,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 
                 <div class="card-m">
                     <?php
-                        $sql = "SELECT itemID FROM item ORDER BY itemID";
+                        $sql = "SELECT q.item_name, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE < p.expiredDate GROUP BY p.itemID;";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_num_rows($result);
                         echo '<h1>'.$row.'</h1>';
@@ -65,7 +59,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 
                 <div class="card-b">
                     <a href="storekeeperTotalMedicine.php" target="_self">
-                        <button>More details</button>
+                        <button class="custom-btn">More details</button>
                     </a>
                 </div>
                 
@@ -75,34 +69,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
         </div>
 </a>
         <div class="card">
-            <div class="card-cont">
-                
-                <div class="card-h">
-                    <p>Medicines in stock</p>
-                </div>
-
-                <div class="card-m">
-                <?php
-                        $sql = "select DISTINCT itemID from inventory where expiredDate > CURRENT_DATE and quantity > 0;";
-                        $result = mysqli_query($con,$sql);
-                        $row = mysqli_num_rows($result);
-                        echo '<h1>'.$row.'</h1>';
-                    ?>
-                </div>
-
-                <div class="card-b">
-                    <a href="storekeeperAvailableMedicine.php">
-                        <button>More details</button>
-                    </a>
-                </div>
-                
-            </div>
-
-        </div>
-        <div class="card">
         <!-- <a href="storekeeperOutofStock.php"> -->
             <div class="card-cont">
-                
+
                 <div class="card-h">
                     <p>Out of stock medicine</p>
                 </div>
@@ -119,11 +88,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 
                 <div class="card-b">
                     <a href="storekeeperOutofStock.php">
-                        <button>More details</button>
+                        <button class="custom-btn">More details</button>
                     </a>
                 </div>
-                
-                
+
+
             </div>
 
         </div>
@@ -132,7 +101,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             <div class="card-cont">
                 
                 <div class="card-h">
-                    <p>Expired medicine</p>
+                    <p>Expired stock</p>
                 </div>
 
                 <div class="card-m">
@@ -147,19 +116,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 
                 <div class="card-b">
                     <a href="storekeeperExpire.php">
-                        <button>More details</button>
+                        <button class="custom-btn">More details</button>
                     </a>
                 </div>
-                
-                
             </div>
-
         </div>
-
     </div>
-                
-<!--                </div>-->
-        <!-- content start -->
     </div>
 </div>
 </body>

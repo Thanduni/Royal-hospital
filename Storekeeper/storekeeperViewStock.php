@@ -11,9 +11,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperViewStock.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .next {
@@ -97,11 +97,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         $quantity = $row['quantity'];
                         $manDate = $row['manufacturedDate'];
                         $expiredDate = $row['expiredDate'];
-                        if(date("Y-m-d") < $expiredDate)
-                            $useState = 'Available';
-                        else
-                            $useState = 'Out of stock';
-                        ?>
+
                         <div class="row">
 
                             <div class="cell" data-title="Medicine name">
@@ -129,7 +125,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                                 <?php echo $expiredDate; ?>
                             </div>
                             <div class="cell" data-title="Use state">
-                                <?php echo $useState; ?>
+                                <?php if(date("Y-m-d") < $expiredDate) ?>
+                                <div class="inStock">In Stock</div>
+                                <?php else ?>
+                                <div class="expired">Expired</div>
                             </div>
                             
                         </div>
