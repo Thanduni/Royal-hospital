@@ -55,6 +55,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             <div class="table">
                 <div class="row headerT">
                     <div class="cell">Medicine name</div>
+                    <div class="cell">Options</div>
                 </div>
                 <?php
                 $sql = "select item.item_name from inventory inner join item on inventory.itemID=item.itemID where inventory.expiredDate > CURRENT_DATE group by inventory.itemID having sum(quantity)=0;";
@@ -69,6 +70,9 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
                             <div class="cell" data-title="Medicine name">
                                 <?php echo $item_name; ?>
+                            </div>
+                            <div class="cell" data-title="Options">
+                                <button class="custom-btn">+Add stock</button>
                             </div>
                         </div>
                         <?php

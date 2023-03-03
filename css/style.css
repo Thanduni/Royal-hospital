@@ -709,6 +709,10 @@ a {
     line-height: 18px;
 }
 
+.wrapper{
+    background-color: var(--secondary-color);
+}
+
 #form th,
 td {
     padding: 5px;

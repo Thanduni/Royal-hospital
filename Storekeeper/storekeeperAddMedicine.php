@@ -75,6 +75,7 @@ if(isset($_POST['submit'])){
                 echo $_GET["msg"];
                 ?>
             </div>
+
         <?php }?>
         <div class="userClass">
             <?php
@@ -82,9 +83,7 @@ if(isset($_POST['submit'])){
             $result = mysqli_query($con, $query);
             if (!$result) die("Database access failed: " . $con->error);
             $rows = $result->num_rows;
-
             ?>
-
 
             <div class="wrapper">
                 <div class="table">

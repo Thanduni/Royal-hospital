@@ -179,12 +179,15 @@ table {
 @media screen and (max-width: 1229px) {
     body {
         font-size: 16px;
-        line-height: 22px;
     }
 }
 
 .wrapper {
-    margin: 0 auto;
+    margin: 20px;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-style: none;
+    border-radius: 10px;
     /* padding: 40px; */
     max-width: 1440px;
 }
@@ -235,7 +238,7 @@ table {
     }
 
     .wrapper button {
-        float: none;
+        float: left;
     }
 
     .wrapper {
