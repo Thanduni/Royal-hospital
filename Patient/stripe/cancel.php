@@ -26,7 +26,12 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
   <div class="u">
   <?php
           $name = urlencode( $_SESSION['name']);
+          include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); 
+
+          $name = urlencode( $_SESSION['name']);
           include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+
+         
 
           ?>  
             
