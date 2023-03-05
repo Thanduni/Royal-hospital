@@ -75,7 +75,7 @@ table td{
     color: var(--para-color);
     border-style: solid;
     border-width: 0px 0px 0px 5px;
-    border-color: var(--primary-color);
+    border-color: var(--para-color);
 }
 
 .tab-cards:hover, .card:hover{

@@ -45,7 +45,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <aside>
                 <div class="actorCards">
                     <ul>
-                        <a href="">
+                        <a href="<?php echo BASEURL . '/Receptionist/makeAppointment.php' ?>">
                             <li class="tab-cards" id="appointments">Make Appointment
                                 <div>
                                     <img class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/calenderCard.png"?>" alt="">
@@ -77,39 +77,45 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     </ul>
                 </div>
                 <?php
-                $np_service = mysqli_query($con, "select sum(cost) from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'not paid' 
+                $np_service = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'not paid' 
                                 and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) group by purchases.item_flag having purchases.item_flag = 's';");
-                $np_test = mysqli_query($con, "select sum(cost) from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'not paid'
+                $np_test = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'not paid'
                 and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag having purchases.item_flag = 't';");
-                $np_drug = mysqli_query($con, "select sum(unit_price) from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'not paid' 
+                $np_drug = mysqli_query($con, "select sum(unit_price * quantity) as cost from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'not paid' 
                             and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag HAVING purchases.item_flag = 'd';");
 
                 $np_sum = 0;
+                if(isset(mysqli_fetch_assoc($np_service)['cost']))
+                {
+                    $np_sum += mysqli_fetch_assoc($np_service)['cost'];
+                }
+                if(isset(mysqli_fetch_assoc($np_test)['cost'])){
+                    $np_sum += mysqli_fetch_assoc($np_test)['cost'];
+                }
+                if(isset(mysqli_fetch_assoc($np_drug)['cost'])){
+                    die(print_r(mysqli_fetch_assoc($np_drug)['cost']));
+                    $np_sum += mysqli_fetch_assoc($np_drug)['cost'];
+                }
 
-                if(isset(mysqli_fetch_array($np_service)['sum(service.cost)']))
-                    $np_sum += mysqli_fetch_array($np_service)['sum(service.cost)'];
-                if(isset(mysqli_fetch_array($np_test)['sum(test.cost)']))
-                    $np_sum += mysqli_fetch_array($np_test)['sum(test.cost)'];
-                if(isset(mysqli_fetch_array($np_drug)['sum(item.unit_price)']))
-                    echo(mysqli_fetch_array($np_drug)['sum(item.unit_price)']);
-//                    $np_sum += mysqli_fetch_array($np_drug)['sum(unit_price)'];
 
-
-                $p_service = mysqli_query($con, "select sum(cost) from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'paid' 
+                $p_service = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'paid' 
                                 and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) group by purchases.item_flag having purchases.item_flag = 's';");
-                $p_test = mysqli_query($con, "select sum(cost) from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'paid'
+                $p_test = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'paid'
                 and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag having purchases.item_flag = 't';");
-                $p_drug = mysqli_query($con, "select sum(unit_price) from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'paid' 
+                $p_drug = mysqli_query($con, "select sum(unit_price * quantity) as cost from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'paid' 
                             and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag HAVING purchases.item_flag = 'd';");
 
                 $p_sum = 0;
 
-                if(isset(mysqli_fetch_array($p_service)['sum(cost)']))
-                    $p_sum += mysqli_fetch_array($p_service)['sum(cost)'];
-                if(isset(mysqli_fetch_array($p_test)['sum(test.cost)']))
-                    $p_sum += mysqli_fetch_array($p_test)['sum(test.cost)'];
-                if(isset(mysqli_fetch_array($p_drug)['sum(item.unit_price)']))
-                    $p_sum += mysqli_fetch_array($p_drug)['sum(item.unit_price)'];
+                if(isset(mysqli_fetch_assoc($p_service)['sum(cost)'])){
+                    $p_sum += mysqli_fetch_assoc($p_service)['sum(cost)'];
+                }
+                if(isset(mysqli_fetch_assoc($p_test)['sum(test.cost)'])){
+                    $p_sum += mysqli_fetch_assoc($p_test)['sum(test.cost)'];
+                }
+                if(isset(mysqli_fetch_assoc($p_drug)['sum(item.unit_price)'])){
+                    $p_sum += mysqli_fetch_assoc($p_drug)['sum(item.unit_price)'];
+                }
 
                 ?>
                 <div style="display: flex; flex-wrap: wrap">

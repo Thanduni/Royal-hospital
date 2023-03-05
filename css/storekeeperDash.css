@@ -154,13 +154,11 @@
 
 .actorCards ul {
     position: relative;
-    left: 20px;
     display: flex;
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
-    margin: 50px;
-    width: 100%;
+    margin: 20px;
 }
 
 .actorCards ul li {
@@ -232,7 +230,6 @@ table td {
 
 @media screen and (min-width: 1686.250px) {
     .actorCards ul {
-        width: 1400px;
         left: 50%;
         transform: translate(-50%);
     }

@@ -1,5 +1,6 @@
 function displayMedicineUpdateForm(medID) {
     let form = document.getElementById("addForm");
+    form.action = '/royalhospital/Storekeeper/updateMedicine.php?id=' + medID;
 
     let tableCon = document.getElementsByClassName(medID + "_tableCon");
     document.getElementById("titleOperation").innerHTML = "Update Medicine | Medicine ID : " + medID;
@@ -32,5 +33,16 @@ function displayMedicineUpdateForm(medID) {
     else if(unitType == 'tablets')
         IN_unitType.selectedIndex = 5;
     form.scrollIntoView();
+}
 
+function displayStockForm(itemName){
+    let medicineList = document.getElementsByTagName('option');
+    let selectMedicine = document.getElementsByName('item_name')[0];
+
+    for(let i=0; i<medicineList.length; i++){
+        if(itemName === medicineList[i].value){
+            selectMedicine.selectedIndex = i;
+            break;
+        }
+    }
 }

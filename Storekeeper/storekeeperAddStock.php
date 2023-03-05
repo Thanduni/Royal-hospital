@@ -4,26 +4,6 @@ session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 ?>
-
-<?php
-
-if(isset($_POST['submit'])){
-
-    $medicineName = $_POST['item_name'];
-    $quantity = $_POST['quantity'];
-    $manufacturedDate = $_POST['manufacturedDate'];
-    $expiredDate = $_POST['expiredDate'];
-
-    $itemIDSql = "select itemID from item where item_name='".$medicineName."'";
-    $result=mysqli_query($con,$itemIDSql);
-    $itemID = mysqli_fetch_array($result, MYSQLI_ASSOC)['itemID'];
-
-    $sql="insert into `inventory` (itemID, quantity, manufacturedDate, expiredDate) values ('$itemID','$quantity','$manufacturedDate','$expiredDate')";
-    $result=mysqli_query($con,$sql);
-}
-
-?>
-
     <!doctype html>
     <html lang="en">
     <head>
@@ -171,8 +151,7 @@ if(isset($_POST['submit'])){
         </div>
         <div id="userForm">
             <div id="form">
-                <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
-                      name="userForm">
+                <form method="post" action="<?php echo BASEURL . '/Storekeeper/addStock.php' ?>" enctype="multipart/form-data" id="addForm" name="userForm">
                     <div class="banner">
                         <h1>Stock</h1>
                     </div>
@@ -221,14 +200,6 @@ if(isset($_POST['submit'])){
                             </td>
                             <td colspan="2">
                                 <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="issue">Describe your issue</label>
-                            </td>
-                            <td colspan="2">
-                                <textarea id="issue" placeholder="Describe your issue in detail here" rows="3"></textarea>
                             </td>
                         </tr>
                         <tr>

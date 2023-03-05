@@ -8,8 +8,6 @@ if(isset($_GET['deleteid'])){
 
 $sql="delete from `item` where itemID=$id";
 $result=mysqli_query($con,$sql);
-header("Location: storekeeperTotalMedicine.php");
+header("Location:".BASEURL. "/Storekeeper/storekeeperAddMedicine.php");
 exit();
-
-
 ?>

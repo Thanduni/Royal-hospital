@@ -120,11 +120,8 @@ if(isset($_POST['update'])){
                         <option value="tablets">tablets</option>
 
                     </select>
-                    <!-- <input name="unitType" type="text" id="subject" placeholder="Enter Unit Type here"> -->
                 </div>
-                
-               
-                
+
             </div>
 
             <div class="row">
@@ -139,10 +136,6 @@ if(isset($_POST['update'])){
     </div>
             
         </div>
-        <!-- content start -->
-
-
-        <!-- content start -->
         <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
 </div>

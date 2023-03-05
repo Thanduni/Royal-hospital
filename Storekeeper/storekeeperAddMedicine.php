@@ -5,24 +5,6 @@ require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION['userRole']=="Storekeeper") {
 ?> 
 
-<?php
-
-if(isset($_POST['submit'])){
-
-    $itemId = $_POST['itemID'];
-    $medicineName = $_POST['medicineName'];
-    $companyName = $_POST['companyName'];
-    $unitType = $_POST['unitType'];
-    $unitCost = $_POST['unitCost'];
-    
-
-    $sql="insert into `item` (item_name,companyName,unitType,unit_price) values('$medicineName','$companyName','$unitType','$unitCost')";
-    $result=mysqli_query($con,$sql);
-
-}
-
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -131,7 +113,7 @@ if(isset($_POST['submit'])){
                                             });
                                         });
                                     </script>
-                                    <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=delete&id=' . $row[0] ?>">
+                                    <a href="<?php echo BASEURL . '/Storekeeper/storekeeperDeleteMedicine.php?deleteid=' . $row['itemID'] ?>">
                                         <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
                                     </a>
@@ -147,8 +129,7 @@ if(isset($_POST['submit'])){
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
-                  name="userForm">
+            <form method="post" action="<?php echo BASEURL . '/Storekeeper/addMedicine.php' ?>"  enctype="multipart/form-data" id="addForm" name="userForm">
                 <div class="banner">
                     <h1>Medicine</h1>
                 </div>
@@ -194,7 +175,7 @@ if(isset($_POST['submit'])){
                             <label for="Unit Cost">Unit Cost:</label>
                         </td>
                         <td colspan="2">
-                            <input name="IN_unitCost" type="text" id="IN_unitCost" placeholder="Enter Unit Cost here">                        </td>
+                            <input name="unitCost" type="text" id="IN_unitCost" placeholder="Enter Unit Cost here">                        </td>
                     </tr>
                     <tr>
                         <td></td>

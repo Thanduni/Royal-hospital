@@ -160,7 +160,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                     <?php echo $item_name; ?>
                                 </div>
                                 <div class="cell" data-title="Options">
-                                    <button class="custom-btn" id="<?php echo $item_ID ?>" onclick="displayStockForm(<?php echo $item_ID ?>);">
+                                    <button class="custom-btn" id="<?php echo $item_ID ?>" onclick="displayStockForm('<?php echo $item_name ?>');">
                                         + Add stock
                                     </button>
                                     <script type="text/javascript">
@@ -209,31 +209,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     </div>
 
                 </div>
-                <div class="card">
-                    <!-- <a href="storekeeperExpire.php"> -->
-                    <div class="card-cont">
-
-                        <div class="card-h">
-                            <p>Expired stock</p>
-                        </div>
-
-                        <div class="card-m">
-                            <?php
-                            $sql = "SELECT * from inventory INNER JOIN item on inventory.itemID=item.itemID where expiredDate < CURRENT_DATE GROUP BY inventory.itemID;";
-                            $result = mysqli_query($con,$sql);
-                            $row = mysqli_num_rows($result);
-                            echo '<h1>'.$row.'</h1>';
-                            ?>
-                            <!-- <p>40</p> -->
-                        </div>
-
-                        <div class="card-b">
-                            <a href="storekeeperExpire.php">
-                                <button class="custom-btn">More details</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -266,7 +241,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             while($row=mysqli_fetch_assoc($result)){
                                 $medicineName = $row['item_name'];
                                 ?>
-                                <option value=<?php echo $medicineName ?>><?php echo $medicineName?></option>
+                                <option value='<?php echo $medicineName ?>'><?php echo $medicineName?></option>
                             <?php } ?>
                         </select>
                     </td>
@@ -307,7 +282,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     <td></td>
                     <td colspan="2">
                         <button class="custom-btn" name="submit">Submit</button>
-                        <button class="custom-btn" name="cancel" id="cancel">Cancel</button>
+                        <button class="custom-btn" id="cancel">Cancel</button>
                     </td>
                 </tr>
             </table>
