@@ -220,7 +220,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                 <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['message'] ?></li>
                             </ul>
                          <?php
-                    }
+                        }
                     ?>
                     </div>
                 </div>

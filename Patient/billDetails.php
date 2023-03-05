@@ -38,6 +38,92 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
         ?>
+        <div class="arrow">
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Bills
+        </div>
+
+        <div class="mcontent">
+            <div class="pcontent">
+                <div class="wrapper_p">
+                <div class="table_header"><h3 style="color: var(--primary-color);">Bill Details</h3></div>
+                <div class="table">
+                    <div class="row headerT">
+                        <div class="cell">Option</div>
+                        <div class="cell">Date</div>
+                        <div class="cell">Time</div>
+                        <div class="cell">Total Amount</div>
+                        <div class="cell">Status</div>
+                    </div>
+                    <?php
+                    $nic = $_SESSION['nic'];
+
+                    $query = "select sum(p.quantity * s.cost) from purchases p join service s on p.item = s.serviceID 
+                    join patient k on p.patientID = k.patientID where k.nic = $nic and p.item_flag = 's' and p.paid_status = 'not paid';";
+
+                    $result = mysqli_query($con,$query);
+
+                        while($rows = mysqli_fetch_assoc($result)){?>
+                            <div class="row">
+                            <div class="cell" style="100px" data-title="Options">
+                                    <a href="<?php echo BASEURL . '/Receptionist/serviceDetails.php?id=' . $row2['patientID'] ?>">
+                                        <button class="custom-btn" id="billGen"><img
+                                                    src="<?php echo BASEURL . '/images/bill.svg' ?>" alt=" Edit">
+                                            Generate bill
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="cell" data-title="Date">
+                                    <?php echo $rows['bill_date']; ?>
+                                </div>
+                                <div class="cell" data-title="Bill Time">
+                                    <?php echo $rows['bill_time']; ?>
+                                </div>
+                                <div class="cell" data-title="Status">
+                                    <?php echo $rows['status']; ?>
+                                </div>
+                                <div class="cell" data-title="Total Amount">
+                                    <?php echo $rows['Amount']; ?>
+                                </div>
+                                
+                            </div>
+
+                    <?php
+                    }
+                    ?>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <div id="login-modal">
         <div class="modal">
             <div class="login-form">
@@ -79,20 +165,4 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php } ?>
