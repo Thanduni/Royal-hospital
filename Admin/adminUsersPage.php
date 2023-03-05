@@ -14,7 +14,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/adminUsersPage.css' ?>">
         <title>Admin dashboard - User</title>
         <style>

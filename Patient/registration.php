@@ -108,11 +108,12 @@ if (!isset($_SESSION['mailaddress'])) {
     <body>
     <section class="header">
         <?php include(BASEURL.'/Components/Navbar.php'); ?>
-<!--        <div class="heading">-->
-            <h2>Registration</h2>
-            <!-- <?php //echo $error; ?> -->
-<!--        </div>-->
-        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm"></form>
+        <div class="advertise">
+            <div class="hey">
+                <p style="color: white" class="title">Registration</p>
+            </div>
+        </div>
+        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm">
             <div class="content">
                 <div class="box" style="padding-bottom: 0px">
                     <label for="">Name</label><br><br>
@@ -188,7 +189,10 @@ if (!isset($_SESSION['mailaddress'])) {
                     <label for="">Any Medical Comments</label><br><br>
                     <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
 
-                    <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn">
+                    <br><br>
+                    <div style="margin: 0 auto">
+                        <button style="color: var(--primary-color)" type="submit" name="btn" class="custom-btn">Submit</button>
+                    </div>
                 </div>
 
             </div>
