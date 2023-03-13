@@ -1,0 +1,56 @@
+.admit-patient-container{
+    width: 60%;
+    padding: 10px 20px;
+    margin: 10% auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+.admit-patient-container form {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.form-column{
+    display: flex;
+    flex-direction: row;
+}
+.form-row-name{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    text-align: initial;
+}
+.form-row-name .label{
+    padding: 10px 20px;
+    color: #6096B4;
+}
+.form-row-content{
+    display: flex;
+    flex-direction: column;
+    padding:  10px 20px;
+    text-align: initial;
+}
+.form-row-content .input-feild{
+    padding: 10px 20px;
+    color: black;
+}
+/* .from-row{
+    display: flex;
+    flex-direction: row;
+    padding: 5px 10px;
+}
+.form-row-name{
+    width: 30%;
+    padding: 5px 10px;
+    
+}
+.form-row-content{
+    padding: 5px 10px;
+} */

@@ -2,11 +2,7 @@
 session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
-  $nic = $_SESSION['nic'];
-  $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
-  $get_doctorID = mysqli_query($con,$doctorID_query);
-  $row = mysqli_fetch_assoc($get_doctorID);
-  $doctorID = $row["doctorID"];
+  
 ?>
 <?php
 $mindate = date("Y-m-d");
@@ -104,6 +100,8 @@ if (isset($_POST['submit'])) {
                                     <input type="text" name="impression">
                                 </div>
                             </div>
+
+                            
                             <div class="form-middle">
                                 <table id="prescription-table">
                                     <thead>
@@ -124,11 +122,11 @@ if (isset($_POST['submit'])) {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button type="submit" name="submit">Submit</button>
+                                
                                 </form>
                                 <img src="../images/pluss.png" alt="+" id ="addRowButton" onclick="addRow()">
                             </div>
-                            
+                            <button class="addPrescription-button" type="submit" name="submit">Submit</button>
                             <!-- <form autocomplete="off" action="/prescription.php"><div class="autocomplete">
                             <label for="name"> NAme</label>
                             <input type="text" id="drugName" name="drugName">

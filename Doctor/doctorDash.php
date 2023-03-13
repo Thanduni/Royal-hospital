@@ -41,10 +41,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     $name = urlencode( $_SESSION['name']);
     include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-            <?php
-            $name = urlencode( $_SESSION['name']);
-            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
-            ?>
+        <?php
+          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
+          ?>
 
             <div class="main-container">
               <div class="doctor-cards">
@@ -117,20 +116,58 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
               </div>
 
               <h3>Upcomming Appointments</h3>
+              <!-- <div class="wrapper">
+                <div class="tableWrapper">
+                  <div class="row headerT">
+                    <div class="cell">Profile Picture</div>
+                    <div class="cell">Name</div>
+                    <div class="cell">Date</div>
+                    <div class="cell">Time</div>
+                    <div class="cell">Message</div>
+                    <div class="cell">Option</div>
+                  </div>
+                  <?php
+                    $sql="select user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID from appointment join patient on appointment.patientID=patient.patientID join user on user.nic=patient.nic where doctorID =$doctorID;";
+                    $result=mysqli_query($con,$sql);
+                    if($result){
+                      while($row=mysqli_fetch_assoc($result)){ ?>
+                  <div class="row">
+                    <div class="cell" data-title="profile_image">
+                      <?php
+                        echo "<img src='".BASEURL."/uploads/".$row['profile_image']."'width = 50px height=50px>";
+                      ?>
+                    </div>
+                    <div class="cell" data-title="Name">
+                      <?php echo $row['name']; ?>
+                    </div>
+                    <div class="cell" data-title="Date">
+                      <?php echo $row['date']; ?>
+                    </div>
+                    <div class="cell" data-title="Time">
+                      <?php echo $row['time']; ?>
+                    </div>
+                    <div class="cell" data-title="Message">
+                      <?php echo $row['message']; ?>
+                    </div>
+                    <div class="cell" data-title="Option">
+                      
+                    </div>
+                    <?php }} ?>
+                  </div>
+                </div>
+              </div> -->
+
               <div class="table-container">
                     <table class="table">
-
                         <thead>
-                          <th>Profile Picture</th>    
-                          <th>Name</th>
+                          <th> </th>    
+                          <th>Patient</th>
                           <th>Date</th>
                           <th>Time</th>
                           <th>Message</th>
                           <th>Option</th>
                         </thead>
-
                         <tbody>
-
                             <?php
                                 $sql="select user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID from appointment join patient on appointment.patientID=patient.patientID join user on user.nic=patient.nic where doctorID =$doctorID;";
                                 $result=mysqli_query($con,$sql);
@@ -150,8 +187,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     <td>'.$date.'</td>
                                     <td>'.$time.'</td>
                                     <td>'.$message.'</td>
-                                    <td> <button class="button" id="view-patient-button"><a href="displayPatient.php?patientid='.$patientID.'&name='.$name.'">
-                                        View </a>
+                                    <td><a href="displayPatient.php?patientid='.$patientID.'&name='.$name.'">
+                                      <img src="../images/eye.png "width = 50px height=50px> </a>
                                     </button></td>
                                     </tr>';
                                   }
@@ -159,7 +196,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                             ?>    
                         </tbody>
                     </table>
-                </div>
+              </div>
             </div>
         </div>
     </div>

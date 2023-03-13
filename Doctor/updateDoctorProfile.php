@@ -34,12 +34,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
     <body>
     <div class="user">
-        <?php include(BASEURL . '/Components/DoctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        <?php 
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL . '/Components/DoctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-            <?php
-            $name = urlencode( $_SESSION['name']);
-            include(BASEURL.'/Components/receptionistTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
-            ?>
+        <?php
+          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
+          ?>
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Edit profile</h2>

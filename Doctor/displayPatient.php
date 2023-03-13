@@ -64,10 +64,9 @@ if($result){
         $name = urlencode( $_SESSION['name']);
         include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-            <?php
-            $name = urlencode( $_SESSION['name']);
-            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']);
-            ?>
+        <?php
+          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
+          ?>
 
             <div class="display-container">
                 <div class="patient-detail-container">
@@ -115,7 +114,7 @@ if($result){
 
                 <div class="doctor-action">
                     <a href="prescription.php">
-                    <a href="prescription.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>">
+                    <a href="prescription.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>&doctorID=<?=$doctorID?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
@@ -129,16 +128,18 @@ if($result){
                     </div>
                     </a>
 
+                    <a href="admitpatient.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
-                              Add Doctor Note
+                              Admit Patient
                             </div>
                         </div>
                         <div class="icon-box">
-                            <img src="../images/notes-medical-solid.svg" alt="">
+                            <i class="fa-user-plus"></i>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="Admit-patient-alert">
@@ -154,6 +155,8 @@ if($result){
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
