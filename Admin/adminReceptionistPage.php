@@ -165,8 +165,8 @@ if (isset($_SESSION['mailaddress'])&& $_SESSION['userRole'] == 'Admin') {
                     <tr>
                         <td></td>
                         <td colspan="2">
-                            <button type="submit" id="submit" name="addReceptionist">Apply</button>
-                            <button name="cancel" id="cancel">Cancel</button>
+                            <button type="submit" class="custom-btn" id="submit" name="addReceptionist">Apply</button>
+                            <button name="cancel" class="custom-btn" id="cancel">Cancel</button>
                         </td>
                     </tr>
                 </table>

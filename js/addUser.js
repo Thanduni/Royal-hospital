@@ -25,13 +25,13 @@ function displayPatientAddForm(userRole = []) {
     document.getElementById("titleOperation").innerHTML = "Add Patient";
 
     let userForm = document.getElementById('userForm');
-    userForm.classList.add("active");
+    // userForm.classList.add("active");
     form.scrollIntoView();
 
-    let close = document.getElementById('cancel');
-    close.addEventListener('click', function () {
-        userForm.classList.remove("active");
-    }, false);
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function () {
+    //     userForm.classList.remove("active");
+    // }, false);
 }
 
 function displayUserAddForm(userRole = []) {

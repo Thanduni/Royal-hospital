@@ -66,36 +66,30 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             </div>
 
             <?php
-            if (@$_GET['msg']) {
+            if (@$_GET['warning']) {
                 ?>
                 <div class="alert">
                     <?php
-                    echo $_GET["msg"];
+                    echo $_GET["warning"];
+                    ?>
+                </div>
+            <?php }
+            if (@$_GET['result']) {
+                ?>
+                <div class="success">
+                    <?php
+                    echo $_GET["result"];
                     ?>
                 </div>
             <?php }?>
+
             <div class="userClass">
                 <?php
                 $query = "SELECT * FROM user";
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
-
-//                $numberPages = 3;
-//                $totalPages = ceil($rows / $numberPages);
-//
-//                if (isset($_GET['page'])) {
-//                    $page = $_GET['page'];
-//                } else {
-//                    $page = 1;
-//                }
-//
-//                $startinglimit = ($page - 1) * $numberPages;
-//                $query = "SELECT * FROM user limit " . $startinglimit . ',' . $numberPages;
-//                $result = $con->query($query);
                 ?>
-
-
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
@@ -178,21 +172,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                         <?php } }?>
                     </div>
                 </div>
-                <!-- pagination buttons -->
     </div>
-<!--            <div class="pagination-container">-->
-<!--                <div class="pagination">-->
-<!--                    <ul class="pagination-2">-->
-<!---->
-<!--                        --><?php
-//                        for($btn=1;$btn<=$totalPages;$btn++){
-//                            echo '<a href="adminUsersPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
-//                        }
-//
-//                        ?>
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
     <div id="userForm">
         <div id="form">
@@ -301,8 +281,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     <tr>
                         <td></td>
                         <td colspan="2">
-                            <button type="submit" id="submit" name="addUser">Apply</button>
-                            <button name="cancel" id="cancel">Cancel</button>
+                            <button class="custom-btn" type="submit" id="submit" name="addUser">Apply</button>
+                            <button name="cancel" class="custom-btn" id="cancel">Cancel</button>
                         </td>
                     </tr>
                 </table>
@@ -375,4 +355,4 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 } else {
     header("location: " . BASEURL . "/Homepage/login.php");
 }
-?>admin
+?>

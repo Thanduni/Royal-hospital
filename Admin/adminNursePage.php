@@ -131,19 +131,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     </div>
                 </div>
             </div>
-<!--            <div class="pagination-container">-->
-<!--                <div class="pagination">-->
-<!--                    <ul class="pagination-2">-->
-<!---->
-<!--                        --><?php
-//                        for($btn=1;$btn<=$totalPages;$btn++){
-//                            echo '<a href="adminNursePage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
-//                        }
-//
-//                        ?>
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
     </div>
     <div id="userForm">
@@ -166,8 +153,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     <tr>
                     <td></td>
                     <td colspan="2">
-                        <button type="submit" id="submit" name="addNurse">Apply</button>
-                        <button name="cancel" id="cancel">Cancel</button>
+                        <button class="custom-btn" type="submit" id="submit" name="addNurse">Apply</button>
+                        <button name="cancel" class="custom-btn" id="cancel">Cancel</button>
                     </td>
                     </tr>
                 </table>

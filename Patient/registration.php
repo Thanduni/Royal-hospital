@@ -136,17 +136,15 @@ if (!isset($_SESSION['mailaddress'])) {
                     <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><div id="phoneDiv"></div><br><br>
 
                     <label for="">Date of Birth</label><br><br>
-                    <input type="date" name="dob" id="dob"><br><br>
+                    <input type="date"  max="<?php echo date("2005-m-d") ?>" name="dob" id="dob"><br><br>
 
                     <label for="">Address</label><br><br>
                     <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"><br><br>
 
                     <label for="">Gender</label><br><br>
                     <select name="gender" id="gender">
-                        <option value="">Please A Select</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">Others</option>
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
                     </select><br><br>
 
                     <label for="">Emergency Contact Number</label><br><br>

@@ -24,13 +24,13 @@ require_once("../conf/config.php");
     </div>
     <ul class="sidebarMenuInner">
         <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Patient/patientDash.php' ?>" target="_self"><img id="dashboard" class="butbut icons"
-                src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+                src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
 
         <li onmouseover="changeImage('appointment.svg','appointment')" onmouseout="restoreImage('appointmentDef.svg','appointment')"><a id="open-" target="_self"><img id="appointment" class="butbut icons"
-                src=<?php echo BASEURL . '/images/appointment.svg' ?> alt="user" align="middle">
+                src=<?php echo BASEURL . '/images/appointmentDef.svg' ?> alt="user" align="middle">
                 <p>Appointment</p>
             </a></li>
 
