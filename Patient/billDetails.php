@@ -24,12 +24,39 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
+        .btn1{
+        font-weight: 0;
+        font-size: 16px;
+        color: #fff;
+        background-color:#0066cc;
+        padding: 10px 30px;
+        border: 2px solid #0066cc;
+        box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+        border-radius: 50px;
+        transition : 1000ms;
+        transform: translateY(0);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        }
+
+        .btn1:hover{
+
+        transition : 1000ms;
+        padding: 10px 50px;
+        transform : translateY(-0px);
+        background-color: #fff;
+        color: #0066cc;
+        border: solid 2px #0066cc;
+        }
     </style>
 </head>
 <body>
     <div class="user">
 
     <?php
+    $total = 0;
     $name = urlencode( $_SESSION['name']);
     include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
     <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
@@ -88,7 +115,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     <?php echo $rows['paid_status']; ?>
                                 </div>
                                 <div class="cell" data-title="Bill Time">
-                                    <?php echo $rows['p.quantity*s.cost'].'.00'; ?>
+                                    <?php echo $rows['p.quantity*s.cost'].'.00'; 
+                                    $total = $total + $rows['p.quantity*s.cost'].'.00'?>
                                 </div>
                             </div>
 
@@ -97,6 +125,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     ?>
                 </div>
                 </div>
+                <div class="total">
+                    <h1>Total Cost:<h2>LKR <?php echo$total; ?></h2></h1>
+                    <?php $_SESSION['total'] = $total; ?>
+                    <button class="btn1" onclick="location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>'">Pay Now</button>
+            </div>
             </div>
         </div>
     </div>

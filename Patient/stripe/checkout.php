@@ -4,6 +4,7 @@ session_start();
 require_once("../../conf/config.php");
 $_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
+  $totall = $_SESSION['total'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +49,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
       <div class="product">
         <div class="description">
           <h3>Total Amount</h3>
-          <h5>LKR 20.00</h5>
+          <h5>LKR <?php echo$totall;?></h5>
         </div>
       </div>
       <form action="http://localhost:8080/ROYALHOSPITAL/Patient/stripe/checkout_process.php" method="POST">
