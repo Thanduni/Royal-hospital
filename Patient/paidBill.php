@@ -48,48 +48,43 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 <div class="table_header"><h3 style="color: var(--primary-color);">Bill Details</h3></div>
                 <div class="table">
                     <div class="row headerT">
+                        <div class="cell">Option</div>
                         <div class="cell">Date</div>
-                        <div class="cell">Type</div>
-                        <div class="cell">Name</div>
-                        <div class="cell">Quantity</div>
+                        <div class="cell">Time</div>
+                        <div class="cell">Total Amount</div>
                         <div class="cell">Status</div>
-                        <div class="cell">Cost</div>
                     </div>
                     <?php
                     $nic = $_SESSION['nic'];
-                    $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
-                    $result_pid = mysqli_query($con, $pid_query);
-                    $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-                    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
-                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
-                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
+                    $query = "select b.,b.bill_date,b.bill_time,sum(p.quantity * s.cost) from purchases p join service s on p.item = s.serviceID 
+                    join patient k on p.patientID = k.patientID where k.nic = $nic and p.item_flag = 's' and p.paid_status = 'not paid';";
 
                     $result = mysqli_query($con,$query);
-                    $result1 = mysqli_query($con,$query1);
-                    $result2 = mysqli_query($con,$query2);
 
                         while($rows = mysqli_fetch_assoc($result)){?>
                             <div class="row">
-                            <div class="cell" data-title="Date">
-                                    <?php echo $rows['date']; ?>
+                            <div class="cell" style="100px" data-title="Options">
+                                    <a href="<?php echo BASEURL . '/Receptionist/serviceDetails.php?id=' . $row2['patientID'] ?>">
+                                        <button class="custom-btn" id="billGen"><img
+                                                    src="<?php echo BASEURL . '/images/bill.svg' ?>" alt=" Edit">
+                                            Generate bill
+                                        </button>
+                                    </a>
                                 </div>
                                 <div class="cell" data-title="Date">
-                                    <?php echo $rows['item_flag']; ?>
+                                    <?php echo $rows['bill_date']; ?>
                                 </div>
-                                
+                                <div class="cell" data-title="Bill Time">
+                                    <?php echo $rows['bill_time']; ?>
+                                </div>
                                 <div class="cell" data-title="Status">
-                                    <?php echo $rows['service_name']; ?>
+                                    <?php echo $rows['status']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">
-                                    <?php echo $rows['quantity']; ?>
+                                    <?php echo $rows['Amount']; ?>
                                 </div>
-                                <div class="cell" data-title="Bill Time">
-                                    <?php echo $rows['paid_status']; ?>
-                                </div>
-                                <div class="cell" data-title="Bill Time">
-                                    <?php echo $rows['p.quantity*s.cost'].'.00'; ?>
-                                </div>
+                                
                             </div>
 
                     <?php

@@ -15,8 +15,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
   'line_items' => [[
     'price_data' => [
-      'currency' => 'usd',
-      'unit_amount' => 2000,
+      'currency' => 'lkr',
+      'unit_amount' => 100000,//1000lkr = 100000
       'product_data' => [
         'name' => 'Strubborn Attachments',
         'images' => ["https://i.imagur.com/EMyR2nP.png"],
