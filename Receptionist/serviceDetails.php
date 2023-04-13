@@ -62,54 +62,57 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 $patient = "SELECT user.name, patient.patientID FROM user INNER JOIN patient on user.nic = patient.nic where patient.patientID = '" . $_GET['id'] . "'";
                 $patientResult = $con->query($patient)->fetch_array(MYSQLI_ASSOC);
                 ?>
-                <div class="patientInfo">
-                    <h2>Patient Information</h2><br>
-                    <p>Patient Name :- <?php echo $patientResult['name'] ?></p>
-                    <p>Patient ID :- <?php echo $patientResult['patientID'] ?> </p>
+                <div class="basicInfo">
+                    <div class="patientInfo">
+                        <h2>Patient Information</h2><br>
+                        <p>Patient Name :- <?php echo $patientResult['name'] ?></p>
+                        <p>Patient ID :- <?php echo $patientResult['patientID'] ?> </p>
+                    </div>
+                    <div id="filterInfo">
+                        <h3 style="text-align: center"><u>Filter Cost Information</u></h3>
+                        <table>
+                            <form action="dateFilter.php?id=<?php echo $_GET['id'] ?>" method="post">
+                                <tr>
+                                    <td><label for="Start date">Start date: </label></td>
+                                    <td><input type="date" name="startDate" id="startDate"
+                                               placeholder="Enter the start date"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" id="startDateWarn"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="End date">End date: </label></td>
+                                    <td><input type="date" name="endDate" id="endDate" placeholder="Enter the end date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" id="endDateWarn"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="Not paid">Not paid</label>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" style="display: inline" id="paidStatus" name="paidStatus">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" class="custom-btn"
+                                                id="filterAppointment" name="filterAppointment">
+                                            Filter purchases
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
+                            <tr>
+                                <td colspan="2" id="finalWarning"></td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
                 </div>
-                <div id="filterInfo">
-                    <h3 style="text-align: center"><u>Filter Cost Information</u></h3>
-                    <table>
-                        <form action="dateFilter.php?id=<?php echo $_GET['id'] ?>" method="post">
-                            <tr>
-                                <td><label for="Start date">Start date: </label></td>
-                                <td><input type="date" name="startDate" id="startDate"
-                                           placeholder="Enter the start date"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" id="startDateWarn"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="End date">End date: </label></td>
-                                <td><input type="date" name="endDate" id="endDate" placeholder="Enter the end date">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" id="endDateWarn"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="Not paid">Not paid</label>
-                                </td>
-                                <td>
-                                    <input type="checkbox" style="display: inline" id="paidStatus" name="paidStatus">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <button style="width: auto;height: auto;padding: 10px; margin: 0px" type="submit" class="custom-btn"
-                                            id="filterAppointment" name="filterAppointment">
-                                        Filter purchases
-                                    </button>
-                                </td>
-                            </tr>
-                        </form>
-                        <tr>
-                            <td colspan="2" id="finalWarning"></td>
-                        </tr>
-                    </table>
-                    <br>
-                </div>
+
                 <ul id="billInfo">
                     <li><a
                                 href="#table-service">Service</a>
@@ -200,7 +203,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $rows = $result1->num_rows;
                     ?>
                     <div class="wrapper" id="table-test">
-                        <h3 style="text-align: center;color: #344168">Test Cost Information</h3>
+                        <h3 style="text-align: center;">Test Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>
@@ -275,7 +278,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $rows = $result1->num_rows;
                     ?>
                     <div class="wrapper" id="table-drug">
-                        <h3 style="text-align: center;color: #344168">Drug Cost Information</h3>
+                        <h3 style="text-align: center;">Drug Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>
@@ -381,7 +384,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $rows = $result1->num_rows;
                     ?>
                     <div class="wrapper" id="table-summary">
-                        <h3 style="text-align: center;color: #344168">Summary Cost Information</h3>
+                        <h3 style="text-align: center;">Summary Cost Information</h3>
                         <div class="table">
                             <div class="row headerT">
                                 <div class="cell">Date</div>

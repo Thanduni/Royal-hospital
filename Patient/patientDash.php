@@ -53,30 +53,30 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $GLOBALS['weight'] = $GLOBALS['w'];
         $GLOBALS['blood'] = $GLOBALS['b'];
 
-//        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid'";
-//        $result_app = mysqli_query($con, $app_sql);
-//
-//
-//        while($row = mysqli_fetch_assoc($result_app)) {
-//            $docName_sql = "select * from doctor inner join user on doctor.nic = user.nic where doctor.doctorID = '" . $row['doctorID'] . "'";
-//            $docName = mysqli_fetch_assoc(mysqli_query($con, $docName_sql))['name'];
-//            $appTime = $row['time'];
-//
-//            $current_date = date('Y-m-d');
-//            $flag = 0;
-//            for ($i = 0; $i < count($_SESSION['appID_array']); $i++) {
-//                if ($row['appointmentID'] == $_SESSION['appID_array'][$i])
-//                    $flag = 1;
-//            }
-//            if ($flag == 0) {
-//                $_SESSION['appID_array'][] = $row['appointmentID'];
-//                if (!isset($_SESSION['query_executed_date']) || $_SESSION['query_executed_date'] != $current_date) {
-//                    $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`)
-//                          VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.',CURRENT_TIMESTAMP)";
-//                    $result = mysqli_query($con, $query);
-//                }
-//            }
-//        }
+        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid'";
+        $result_app = mysqli_query($con, $app_sql);
+
+
+        while($row = mysqli_fetch_assoc($result_app)) {
+            $docName_sql = "select * from doctor inner join user on doctor.nic = user.nic where doctor.doctorID = '" . $row['doctorID'] . "'";
+            $docName = mysqli_fetch_assoc(mysqli_query($con, $docName_sql))['name'];
+            $appTime = $row['time'];
+
+            $current_date = date('Y-m-d');
+            $flag = 0;
+            for ($i = 0; $i < count($_SESSION['appID_array']); $i++) {
+                if ($row['appointmentID'] == $_SESSION['appID_array'][$i])
+                    $flag = 1;
+            }
+            if ($flag == 0) {
+                $_SESSION['appID_array'][] = $row['appointmentID'];
+                if (!isset($_SESSION['query_executed_date']) || $_SESSION['query_executed_date'] != $current_date) {
+                    $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`)
+                          VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.',CURRENT_TIMESTAMP)";
+                    $result = mysqli_query($con, $query);
+                }
+            }
+        }
 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>

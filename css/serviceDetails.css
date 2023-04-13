@@ -14,6 +14,19 @@
     color: var(--para-color);
 }
 
+input[type="date"]{
+    width: 120px;
+    background: #fff;
+    border: 1px solid rgba(36, 53, 78, 0.5);
+    border-radius: 3px;
+    font-style: normal;
+    /*font-weight: 400;*/
+    font-size: 15px;
+    line-height: 37px;
+    /* identical to box height */
+    color: var(--para-color);
+}
+
 #billInfo li a:hover{
     transform: scale(1.040);
     color: #ADB6CD;
@@ -51,6 +64,7 @@
     overflow-y: scroll;
     border-style: none;
     border-radius: 10px;
+    background-color: var(--secondary-color);
 }
 
 
@@ -76,10 +90,11 @@
 .row {
     display: table-row;
     background: #f6f6f6;
+    transition: 0.4s;
 }
 
 .row:hover{
-    transform: scale(1.041);
+    transform: scale(0.97, 0.97);
     background-color: var(--hover-color);
 }
 
@@ -122,6 +137,7 @@
     margin: 20px;
     border-style: none;
     border-radius: 10px;
+    height: fit-content;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: var(--para-color);
     font-weight: bold;
@@ -135,7 +151,16 @@
 
 #filterInfo{
     border-style: none;
+    border-radius: 10px;
     box-shadow: 3px 3px 20px 0px var(--para-color);
     padding: 20px;
     background-color: var(--secondary-color);
+}
+
+.basicInfo{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
 }
