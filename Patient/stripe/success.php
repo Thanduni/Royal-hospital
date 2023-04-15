@@ -21,16 +21,25 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <style>
+      body{
+        background-color:#ffffff;
+      }
+    </style>
 </head>
 <body>
-  <div class="u">
   <?php
-          $name = urlencode( $_SESSION['name']);
-          include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); 
-
           $name = urlencode( $_SESSION['name']);
           include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
           
+          $name = urlencode( $_SESSION['name']);
+          include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); 
+          
+          $nic = $_SESSION['nic'];
+          $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+          $result_pid = mysqli_query($con, $pid_query);
+          $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
           $query = "update purchases set paid_status = 'paid' where patientID = $pid;";
           mysqli_query($con,$query);
@@ -41,7 +50,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 Patient
             </li>
             </ul>
-  </div>
         
   <div class="box1">
     <img src="<?php echo BASEURL.'/images/successfull.png'?>" alt="">
