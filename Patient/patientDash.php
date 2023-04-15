@@ -224,8 +224,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     ?>
                     </div>
                 </div>
-                <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div>
-                <canvas id="myChart"></canvas></div>  
             </div>
         </div>
     </div>
@@ -280,7 +278,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
         </div>
     </div>
-    <script src="<?php echo BASEURL.'/js/patientTemp.js'; ?>"></script>
     <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
     
     <script type="text/javascript">

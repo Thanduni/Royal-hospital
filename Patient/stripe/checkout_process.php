@@ -1,6 +1,8 @@
 <?php
 
 include('../stripe/stripe-php/init.php');
+
+session_start();
 // require_once '../vendor/autoload.php';
 require_once '../stripe/secrets.php';
 
@@ -11,12 +13,14 @@ $url =  "http://localhost:8080/ROYALHOSPITAL/Patient/stripe/";
 echo $url;
 $YOUR_DOMAIN = $url;
 
+$totall = $_SESSION['total'];
+$total = 100*$totall;
 $checkout_session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
   'line_items' => [[
     'price_data' => [
       'currency' => 'lkr',
-      'unit_amount' => 100000,//1000lkr = 100000
+      'unit_amount' => $total,//1000lkr = 100000
       'product_data' => [
         'name' => 'Strubborn Attachments',
         'images' => ["https://i.imagur.com/EMyR2nP.png"],

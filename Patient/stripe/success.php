@@ -31,6 +31,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           $name = urlencode( $_SESSION['name']);
           include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
           
+
+          $query = "update purchases set paid_status = 'paid' where patientID = $pid;";
+          mysqli_query($con,$query);
           ?>  
             
             <ul>
