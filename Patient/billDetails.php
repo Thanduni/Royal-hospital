@@ -75,6 +75,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
 
     <?php
     $total = 0;
+    $total1 = 0;
+    $total2 = 0;
+    $npaid = 0;
     $name = urlencode( $_SESSION['name']);
     include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
     <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
@@ -107,16 +110,22 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
                     $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
-                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
-                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
+                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid;";
+                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid;";
 
-                    $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on  p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid';";
-                    $qu2 = "select sum(p.qunatity*s.cost) from purcheses p inner join service s on  p.item = s.serviceID where p.patientID = $pid;"; //test
-                    $qu3 = "select sum(p.qunatity*s.cost) from purcheses p inner join service s on  p.item = s.serviceID where p.patientID = $pid;"; //drug
+                    $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid';";
+                    $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid';"; //test
+                    $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid';"; //drug
 
                     $res1 = mysqli_query($con,$qu1);
+                    $res2 = mysqli_query($con,$qu2);
+                    $res3 = mysqli_query($con,$qu3);
 
-                    $npaid = mysqli_fetch_assoc($res1);
+                    $npaid1 = mysqli_fetch_assoc($res1);
+                    $npaid2 = mysqli_fetch_assoc($res2);
+                    $npaid3 = mysqli_fetch_assoc($res3);
+
+                    $npaid = $npaid1['sum(p.quantity*s.cost)'] + $npaid2['sum(p.quantity*t.cost)'] + $npaid3['sum(p.quantity*i.unit_price)'];
 
                     $result = mysqli_query($con,$query);
                     $result1 = mysqli_query($con,$query1);
@@ -170,14 +179,110 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
 
                     <?php
                     }
+                    while($rows = mysqli_fetch_assoc($result1)){?>
+                            <div class="row">
+                            <div class="cell" data-title="Date">
+                                    <?php echo $rows['date']; ?>
+                                </div>
+                                <div class="cell" data-title="Date">
+                                    <?php 
+                                    if($rows['item_flag'] == 's')
+                                    {
+                                        echo 'Service';
+                                    }
+                                    elseif($rows['item_flag'] == 't')
+                                    {
+                                        echo 'Test';
+                                    }
+                                    elseif($rows['item_flag'] == 'd')
+                                    {
+                                        echo 'Drugs';
+                                    }; ?>
+                                </div>
+                                
+                                <div class="cell" data-title="Status">
+                                    <?php echo $rows['test_name']; ?>
+                                </div>
+                                <div class="cell" data-title="Total Amount">
+                                    <?php echo $rows['quantity']; ?>
+                                </div>
+                                <div class="cell" data-title="Bill Time">
+                                    <?php
+                                    if($rows['paid_status'] == 'paid')
+                                    {
+                                        echo 'Paid';
+                                    }
+                                    elseif($rows['paid_status'] == 'not paid')
+                                    {?>
+                                        <a style="color:red"> <?php echo 'Not Paid'; ?></a>
+                                    <?php
+                                    }
+                                    ; ?>
+                                </div>
+                                <div class="cell" data-title="Bill Time">
+                                    <?php echo $rows['p.quantity*t.cost'].'.00'; 
+                                    $total1 = $total1 + $rows['p.quantity*t.cost'].'.00'?>
+                                </div>
+                            </div>
+
+                    <?php
+                    }
+                    while($rows = mysqli_fetch_assoc($result2)){?>
+                            <div class="row">
+                            <div class="cell" data-title="Date">
+                                    <?php echo $rows['date']; ?>
+                                </div>
+                                <div class="cell" data-title="Date">
+                                    <?php 
+                                    if($rows['item_flag'] == 's')
+                                    {
+                                        echo 'Service';
+                                    }
+                                    elseif($rows['item_flag'] == 't')
+                                    {
+                                        echo 'Test';
+                                    }
+                                    elseif($rows['item_flag'] == 'd')
+                                    {
+                                        echo 'Drugs';
+                                    }; ?>
+                                </div>
+                                
+                                <div class="cell" data-title="Status">
+                                    <?php echo $rows['item_name']; ?>
+                                </div>
+                                <div class="cell" data-title="Total Amount">
+                                    <?php echo $rows['quantity']; ?>
+                                </div>
+                                <div class="cell" data-title="Bill Time">
+                                    <?php
+                                    if($rows['paid_status'] == 'paid')
+                                    {
+                                        echo 'Paid';
+                                    }
+                                    elseif($rows['paid_status'] == 'not paid')
+                                    {?>
+                                        <a style="color:red"> <?php echo 'Not Paid'; ?></a>
+                                    <?php
+                                    }
+                                    ; ?>
+                                </div>
+                                <div class="cell" data-title="Bill Time">
+                                    <?php echo $rows['p.quantity*i.unit_price'].'.00'; 
+                                    $total2 = $total2 + $rows['p.quantity*i.unit_price'].'.00'?>
+                                </div>
+                            </div>
+
+                    <?php
+                    }
                     ?>
                 </div>
                 </div>
                 <div class="total">
-                    <a class="t_cost"><h1>Total Cost:<h2>LKR <?php echo$total; ?></h2></h1></a>
-                    <?php $_SESSION['total'] = $npaid['sum(p.quantity*s.cost)'].'.00'; ?>
+                    <a class="t_cost"><h1>Total Cost:<h2>LKR <?php echo($total+$total1+$total2).'.00'; ?></h2></h1></a>
+                    <?php $_SESSION['total'] = $npaid.'.00'; ?>
                     <div class="card-image"><img src="<?php echo BASEURL.'/images/mastercard.jpg' ?>"></div>
-                    <a class="np_cost"><h1>Total Not Paid Cost:<h2 style="color:red;">LKR <?php echo$npaid['sum(p.quantity*s.cost)'].'.00'; ?></h2></h1></a>
+                    <a class="np_cost"><h1>Total Not Paid Cost:<h2 style="color:red;">LKR <?php echo$npaid.'.00'; ?></h2></h1></a>
                     <button class="btn1" onclick="location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>'">Pay Now</button>
             </div>
             </div>
