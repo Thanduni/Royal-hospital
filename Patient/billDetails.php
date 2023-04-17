@@ -15,7 +15,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="<?php echo BASEURL . '/js/appoinment.js'; ?>"></script>
-    <link rel="stylesheet" href="<? echo BASEURL .'/css/appoinment.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
