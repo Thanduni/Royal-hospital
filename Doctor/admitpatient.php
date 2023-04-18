@@ -2,7 +2,11 @@
 session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
-
+    $nic = $_SESSION['nic'];
+    $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
+    $get_doctorID = mysqli_query($con,$doctorID_query);
+    $row = mysqli_fetch_assoc($get_doctorID);
+    $doctorID = $row["doctorID"];
 ?>
 <?php
 $mindate = date("Y-m-d");
@@ -12,6 +16,30 @@ if(isset($_GET['patientid'])){
     $patientName = $_GET['name'];
     $age = $_GET['age'];
 }
+?>
+<!-- select first available room -->
+<?php
+    $sql = "select room_no from room where room_availability='available';";
+    $result = mysqli_query($con,$sql);
+    if($result){
+        $roomArray = mysqli_fetch_array($result);
+        $room_no = $roomArray[0];
+    }
+?>
+
+<?php
+    if(isset($_POST['submit'])){
+        $sql = "INSERT INTO inpatient(patientID,admit_time,admit_date,room_no,doctorID) VALUES ('$patientID','$mintime','$mindate','$room_no','$doctorID');";
+        // $sql = "UPDATE patient SET patient_type = 'inpatient' WHERE patientID = $patientID;";
+        $result=mysqli_query($con,$sql);
+
+        if($result){
+            // echo '
+            // <script type="text/javascript">
+            // document.getElementById("admit-popup").style.visibility = "visible";
+            // ';
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +66,7 @@ if(isset($_GET['patientid'])){
                                 <div class="label">Patient Name</div>
                                 <div class="label">Patient ID</div>
                                 <div class="label">Age </div>
-                                <div class="label">Gender</div>
+                                <!-- <div class="label">Gender</div> -->
                                 <div class="label">Room No</div>
                                 <div class="label">Admit Date</div>
                                 <div class="label">Admit Time</div>
@@ -47,42 +75,30 @@ if(isset($_GET['patientid'])){
                                 <div class="input-feild"><?php echo $patientName ?></div>
                                 <div class="input-feild"><?php echo $patientID ?></div>
                                 <div class="input-feild"><?php echo $age ?></div>
-                                <div class="input-feild"><?php echo $patientName ?></div>
+                                <!-- <div class="input-feild"><?php echo $patientName ?></div> -->
+                                
+                                <div class="input-feild"><?php echo $room_no ?></div>
+                                <div class="input-feild"><?php echo $mindate ?></div>
+                                <div class="input-feild"><?php echo $mintime ?></div>
                             </div>
                         </div>
-                        <!-- <div class="from-row">
-                            <div class="form-row-name">Name </div>
-                            <div class="form-row-content"><?php echo $patientName ?></div>
-                        </div>
-                        <div class="from-row">
-                            <div class="form-row-name">Patient ID </div>
-                            <div class="form-row-content"><?php echo $patientID ?></div>
-                        </div>
-                        <div class="from-row">
-                            <div class="form-row-name">Age </div>
-                            <div class="form-row-content"><?php echo $age ?></div>
-                        </div>
-                        <div class="from-row">
-                            <div class="form-row-name">Gender </div>
-                            <div class="form-row-content"><?php echo $age ?></div>
-                        </div>
-                        <div class="from-row">
-                            <div class="form-row-name">Room No </div>
-                            <div class="form-row-content"><?php echo $age ?></div>
-                        </div>
-                        <div class="from-row">
-                            <div class="form-row-name">Admit date</div>
-                            <div class="form-row-content"><?php echo $age ?></div>
-                        </div>
-                        <div class="from-row">
-                            <div class="form-row-name">Admit time </div>
-                            <div class="form-row-content"><?php echo $age ?></div>
-                        </div> -->
+                        <button id="admit-btn" type="submit">Admit Patient</button>
                     </form>
                 </div>
         </div>
     </div>
+    <!-- <div class="confirm-popup" id ="admit-popup">
+        <img src="../images/check.png" alt="check">
+        <h2>Admit Successfull!</h2>
+        <p>Your patient has been successfully admitted</p>
+        <button type="button">OK</button>
+    </div> -->
 </body>
+<!-- <script>
+    document.getElementById("admit-btn").addEventListener("click", function(){
+        document.querySelector(".confirm-popup").style.visibility = "visible";
+    })
+</script> -->
 </html>
 <?php
 } else {

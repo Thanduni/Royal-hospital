@@ -24,12 +24,16 @@
 .form-row-name{
     display: flex;
     flex-direction: column;
-    padding: 10px 20px;
+    padding: 10px 0 10px 20px;
     text-align: initial;
 }
 .form-row-name .label{
-    padding: 10px 20px;
+    padding: 1em 0 1em 2em;
     color: #6096B4;
+    /* padding: 1em; */
+    line-height: 1;
+    margin-bottom: 1em;
+    width: 100%;
 }
 .form-row-content{
     display: flex;
@@ -38,8 +42,19 @@
     text-align: initial;
 }
 .form-row-content .input-feild{
+    padding: 1em;
+    line-height: 1;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 1em;
+    width: 100%;
+    border-radius: 5px;
+    /* border: 1px solid gray;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 10px;
     padding: 10px 20px;
-    color: black;
+    color: black; */
 }
 /* .from-row{
     display: flex;
@@ -54,3 +69,39 @@
 .form-row-content{
     padding: 5px 10px;
 } */
+.confirm-popup{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+}
+.confirm-popup img{
+    width: 100px;
+    margin-top: -50%;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+.confirm-popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+.confirm-popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #6fd649;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}

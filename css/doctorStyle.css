@@ -4,6 +4,10 @@
     left: 260px;
     height: 100v;
 }
+.docimage{
+    width: 40px;
+    height: 40px;
+}
 .display-container{
     margin: 60px;
     min-width: fit-content;
