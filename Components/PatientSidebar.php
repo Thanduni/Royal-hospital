@@ -24,7 +24,7 @@ require_once("../conf/config.php");
     </div>
     <ul class="sidebarMenuInner">
         <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Patient/patientDash.php' ?>" target="_self"><img id="dashboard" class="butbut icons"
-                src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
+                src=<?php echo BASEURL.'/images/dashboardDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
@@ -61,11 +61,11 @@ require_once("../conf/config.php");
 <script>
     function changeImage(imgName, id) {
         let image = document.getElementById(id);
-        image.src = '../images/' + imgName;
+        image.src = <?php echo BASEURL.'/images'; ?> + imgName;
     }
 
     function restoreImage(imgName, id) {
         let image = document.getElementById(id);
-        image.src = '../images/' + imgName;
+        image.src = <?php echo BASEURL.'/images'; ?> + imgName;
     }
 </script>

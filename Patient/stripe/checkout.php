@@ -1,6 +1,7 @@
 <?php 
 session_start();
 //require_once("/xampp/htdocs/Royalhospital/conf/config.php");
+
 require_once("../../conf/config.php");
 $_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
@@ -9,7 +10,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Buy cool new product</title>
+    <title>Checkout Bill</title>
     
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/style.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">
@@ -110,7 +111,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     </div>
 
     </div>
-  </div>
+  <!-- </div> -->
   </body>
   <script type="text/javascript">
     var stripe = Stripe("pk_test_51Mee0bK432Tp6pbC39lCcsewe29n4Ld0GeXdL1FxZ1UZaSWIf1HgtW9IVJ83WIG9Ei8QrveHEBgVR2Ly1EVwIkCn00a0NueY3A");
