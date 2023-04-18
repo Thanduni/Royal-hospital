@@ -11,15 +11,14 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 <html>
   <head>
     <title>Checkout Bill</title>
-    
+
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/style.css';?>">
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="<?php echo BASEURL. '/js/getDocDetails.js'; ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="<?php echo BASEURL .'/css/appoinment.css';?>"> -->
-    <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
+     <link rel="stylesheet" href="<?php echo BASEURL .'/css/appointment.css';?>">
+<!--    <link rel="stylesheet" href="--><?php //echo BASEURL.'/css/patientAppointment.css' ?><!--">-->
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
@@ -31,19 +30,23 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
       .not-paid h1{
         display:flex;
       }
-      .userContents .box{
+      .boxPay form{
+          display: flex;
+          align-items: flex-end;
+      }
+      .userContents .boxPay{
         background: #ffffff;
         display: flex;
-        margin: 90px 545px;
+        margin: 0 auto;
         width: 579px;
         height: 432px;
         border-radius: 6px;
         justify-content: space-around;
         flex-wrap: wrap;
-        align-content: stretch;
+        align-items: center;
       }
 
-      .box #checkout-button{
+      .boxPay #checkout-button{
         font-weight: 500;
         font-size: 16px;
         color: #fff;
@@ -61,7 +64,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         float: left;
         }
 
-        .box #checkout-button:hover{
+        .boxPay #checkout-button:hover{
 
         transition : 1000ms;
         padding: 10px 50px;
@@ -95,7 +98,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </li>
             </ul> -->
   
-    <div class="box">
+    <div class="boxPay">
     <img src="<?php echo BASEURL.'/images/p-checkout.avif' ?>" alt="">
 
       <div class="product">
@@ -103,7 +106,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           <div class="not-paid"><h1 style="color:red;">Not Paid</h1>
           <h1 style="color:red;">Balance</h1></div>
           <h3>Total Amount</h3>
-          <h3 style="font-weight:700;">LKR <?php echo$totall;?></h3>
+          <h3 style="font-weight:700;">LKR <?php echo $totall;?></h3>
         </div>
       </div>
       <form action="http://localhost:8080/ROYALHOSPITAL/Patient/stripe/checkout_process.php" method="POST">

@@ -44,8 +44,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             </p>
 
             <div class="filter">
-                <input type="text" id="myInputName" onkeyup="filterByNameUsers()" placeholder="Search for names.." title="Type in a name">
-                <input type="text" id="myInputRole" onkeyup="filterByRoleUsers()" placeholder="Search for user role.." title="Type in a name">
+                <input type="text" id="myInputName" onkeyup="filterByMedicine()" placeholder="Search for names.." title="Type in a name">
+                <div style="position: relative; color: green; top: 8px; margin: 14px;font-weight: 600;"> In Stock </div>
+                <input class="filter" type="checkbox" id="switch" /><label for="switch">Toggle</label>
+                <div style="position: relative;color: red; top: 5px; margin: 14px; font-weight: 600;">Expired</div>
             </div>
 
             <?php
@@ -134,9 +136,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                     </div>
                                     <div class="cell" data-title="Use state">
                                 <?php if(date("Y-m-d") < $expiredDate) {?>
-                                    <div class="inStock">In Stock</div>
+                                    <div class="cell inStock">In Stock</div>
                                 <?php } else { ?>
-                                    <div class="expired">Expired</div>
+                                    <div class="cell expired">Expired</div>
                                 <?php } ?>
                                     </div>
 

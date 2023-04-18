@@ -12,6 +12,7 @@
 
 #billInfo li a{
     color: var(--para-color);
+    transition:0.4s;
 }
 
 input[type="date"]{

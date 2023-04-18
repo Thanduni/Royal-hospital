@@ -68,6 +68,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
         <div class="tableCardPack">
 
             <div class="wrapper">
+                <div class="filter" style="justify-content: center; margin-bottom: 20px; margin-left: 0">
+                    <div style="position: relative; color: green; top: 8px; margin: 14px;font-weight: 600;"> In Stock </div>
+                    <input class="filter" type="checkbox" id="switch" /><label for="switch">Toggle</label>
+                    <div style="position: relative;color: red; top: 5px; margin: 14px; font-weight: 600;">Expired</div>
+                </div>
                 <div class="table">
                     <div class="row headerT">
                         <div class="cell">Medicine name</div>
@@ -96,7 +101,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                     <?php echo $row['SUM(quantity)']; ?>
                                 </div>
                                 <div class="cell" data-title="Use state">
-                                    <div class="expired">Expired</div>
+                                    <div class="expired cell">Expired</div>
                                 </div>
                             </div>
                             <?php
@@ -125,7 +130,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                     <?php echo $row['SUM(quantity)']; ?>
                                 </div>
                                 <div class="cell" data-title="Use state">
-                                    <div class="inStock">In Stock</div>
+                                    <div class="inStock cell">In Stock</div>
                                 </div>
                             </div>
                             <?php
@@ -218,7 +223,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 </div>
 <div id="userForm">
     <div id="form">
-        <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
+        <form method="post" action="<?php echo BASEURL . '/Storekeeper/addStock.php' ?>" enctype="multipart/form-data" id="addForm"
               name="userForm">
             <div class="banner">
                 <h1>Stock</h1>
@@ -271,14 +276,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label for="issue">Describe your issue</label>
-                    </td>
-                    <td colspan="2">
-                        <textarea id="issue" placeholder="Describe your issue in detail here" rows="3"></textarea>
-                    </td>
-                </tr>
-                <tr>
                     <td></td>
                     <td colspan="2">
                         <button class="custom-btn" name="submit">Submit</button>
@@ -291,6 +288,38 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 </div>
 
 <script src=<?php echo BASEURL . '/js/updateMedicine.js' ?>></script>
+<script>
+    let switchButton = document.getElementById("switch");
+
+    switchButton.addEventListener("change", function(){
+        var table, row, cell, i;
+        table = document.getElementsByClassName("table")[0];
+        // alert(table);
+        row = table.getElementsByClassName("row");
+        if(this.checked){
+            // alert("Checked");
+            for (i = 1; i < row.length; i++) {
+                cell = row[i].getElementsByClassName("cell")[2];
+                if(cell.textContent.trim() === "Expired"){
+                    row[i].style.display = "";
+                }
+                else{
+                    row[i].style.display = "none";
+                }
+            }
+        }else{
+            for (i = 1; i < row.length; i++) {
+                cell = row[i].getElementsByClassName("cell")[2];
+                if(cell.textContent.trim() === "In Stock".trim()){
+                    row[i].style.display = "";
+                }
+                else{
+                    row[i].style.display = "none";
+                }
+            }
+        }
+    })
+</script>
 <script type="text/javascript">
     $(function(){
         $('#addButton').click(function(){

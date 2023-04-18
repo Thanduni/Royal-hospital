@@ -194,7 +194,6 @@ if (!isset($_SESSION['mailaddress'])) {
                     <div>
         </section>
 
-
         <?php include(BASEURL . '/Components/Footer.php'); ?>
 
         <script>
@@ -228,8 +227,6 @@ if (!isset($_SESSION['mailaddress'])) {
     </body>
 
     </html>
-
-
     <?php
 } else {
     header("location: " . BASEURL . "/Homepage/login.php");
