@@ -72,11 +72,12 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         }
     </style>
   </head>
-  <body>
+<body>
   <div class="user">
-  <?php
+        <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);  
+        ?>
   <div class="userContents"  id="center">
   <?php
 
@@ -111,7 +112,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     </div>
 
     </div>
-  <!-- </div> -->
+  </div>
   </body>
   <script type="text/javascript">
     var stripe = Stripe("pk_test_51Mee0bK432Tp6pbC39lCcsewe29n4Ld0GeXdL1FxZ1UZaSWIf1HgtW9IVJ83WIG9Ei8QrveHEBgVR2Ly1EVwIkCn00a0NueY3A");
