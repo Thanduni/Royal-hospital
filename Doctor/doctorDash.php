@@ -136,6 +136,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
                             <?php
                                 $sql="select user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID from appointment join patient on appointment.patientID=patient.patientID join user on user.nic=patient.nic where doctorID =$doctorID;";
+                                // $sql="select user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID from appointment join patient on appointment.patientID=patient.patientID join user on user.nic=patient.nic where doctorID =$doctorID AND appointment.date>=CURDATE();";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
