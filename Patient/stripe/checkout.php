@@ -5,7 +5,7 @@ session_start();
 require_once("../../conf/config.php");
 $_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
-  $totall = $_SESSION['total'];
+  // $totall = $_SESSION['total'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,6 +73,11 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         color: #0066cc;
         border: solid 2px #0066cc;
         }
+
+        .boxPay img{
+          width: 290px;
+          height: 300px;
+        }
     </style>
   </head>
 <body>
@@ -86,6 +91,28 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
           $name = urlencode( $_SESSION['name']);
           include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+
+          $nic = $_SESSION['nic'];
+          $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+          $result_pid = mysqli_query($con, $pid_query);
+          $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+
+
+          $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid';";
+          $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid';"; //test
+          $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid';"; //drug
+
+          $res1 = mysqli_query($con,$qu1);
+          $res2 = mysqli_query($con,$qu2);
+          $res3 = mysqli_query($con,$qu3);
+
+          $npaid1 = mysqli_fetch_assoc($res1);
+          $npaid2 = mysqli_fetch_assoc($res2);
+          $npaid3 = mysqli_fetch_assoc($res3);
+
+          $npaid = $npaid1['sum(p.quantity*s.cost)'] + $npaid2['sum(p.quantity*t.cost)'] + $npaid3['sum(p.quantity*i.unit_price)'];
+
+          
 
           ?>  
             
@@ -106,7 +133,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           <div class="not-paid"><h1 style="color:red;">Not Paid</h1>
           <h1 style="color:red;">Balance</h1></div>
           <h3>Total Amount</h3>
-          <h3 style="font-weight:700;">LKR <?php echo $totall;?></h3>
+          <h3 style="font-weight:700;">LKR <?php echo $npaid.'.00';?></h3>
         </div>
       </div>
       <form action="http://localhost:8080/ROYALHOSPITAL/Patient/stripe/checkout_process.php" method="POST">
