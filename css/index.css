@@ -256,3 +256,43 @@
     line-height: 1.4;
     word-spacing: 100vw;
 }
+
+#imgHolder img{
+    height: 250px;
+    width: 250px;
+    border-style: none;
+    border-radius: 50%;
+    margin: 30px;
+}
+
+#imgHolder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+hr{
+    height: 1px;
+    margin: 20px;
+    opacity: 0.2;
+    background-color: var(--para-color);
+}
+
+.displayInfo ul{
+    width: 360px;
+    margin: 0 auto;
+}
+
+.displayInfo ul li{
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
+}
+
+#close{
+    font-size: 30px;
+    position: relative;
+    color: var(--para-color);
+    top: -2px;
+    left: 0px;
+}

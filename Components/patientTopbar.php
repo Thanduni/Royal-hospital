@@ -54,8 +54,8 @@ require_once("../conf/config.php");
         <div class="menu">
             <h3><?php echo $_GET['name']; ?><br><span><?php echo $_GET['userRole'] ?></span></h3>
             <ul class="topbarul">
-                <li><img src="../images/edit.svg" alt="profile image"><a href="#"><a href="<?php echo BASEURL . '/Doctor/updateDoctorProfile.php' ?>">Edit Profile</a></a></li>
-                <li><img src="../images/logout.png" alt="profile image"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout</a></li>
+                <li><img src="<?php echo BASEURL.'/images/edit.svg' ?>" alt="profile image"><a href="#"><a href="<?php echo BASEURL . '/Patient/updatePatientProfile.php' ?>">Edit Profile</a></a></li>
+                <li><img src="<?php echo BASEURL.'/images/logout.png'  ?>" alt="profile image"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout' ?>">Logout</a></li>
             </ul>
         </div>
     </div>

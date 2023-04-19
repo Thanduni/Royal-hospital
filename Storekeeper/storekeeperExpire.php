@@ -11,8 +11,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperViewStock.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperExpire.css' ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .next {
@@ -60,23 +60,8 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                 </div>
                 <?php
                 $sql = "SELECT inventory.badgeNo, item.item_name, inventory.quantity, inventory.expiredDate  from inventory INNER JOIN item on inventory.itemID=item.itemID where expiredDate < CURRENT_DATE;";
-                $allResult = mysqli_query($con, $sql);
-                $num = mysqli_num_rows($allResult);
-
-                $numberPages = 8;
-                $totalPages = ceil($num / $numberPages);
-
-
-
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    $page = 1;
-                }
-
-                $startinglimit = ($page - 1) * $numberPages;
-                $sql = "SELECT inventory.badgeNo, item.item_name, inventory.quantity, inventory.expiredDate  from inventory INNER JOIN item on inventory.itemID=item.itemID where expiredDate < CURRENT_DATE limit " . $startinglimit . ',' . $numberPages;
                 $result = mysqli_query($con, $sql);
+                $num = mysqli_num_rows($result);
 
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -109,40 +94,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 
 
-        <!-- pagination buttons -->
-        
-
-        <div class="pagination-container">
-        <div class="pagination">
-          <ul class="pagination-2">
-
-          <?php
-            for($btn=1;$btn<=$totalPages;$btn++){
-                echo '<li class="page-number active"><a href="storekeeperExpire.php?page='.$btn.'">'.$btn.'</a></li>';
-            }
-
-            // if(isset($_GET['page'])){
-            //     $page=$_GET['page'];
-            // }
-            // else{
-            //     $page=1;
-            // }
-
-            // $startinglimit=($page-1)*$numberPages;
-            // $sql="Select * from `inventory` limit ".$startinglimit.','.$numberPages;
-            // $result=mysqli_query($con,$sql);
-          ?>
-            <!-- <li class="page-number prev"><a href="#">&laquo;</a></li>
-            <li class="page-number"><a href="#">1</a></li>
-            <li class="page-number active"><a href="#">2</a></li>
-            <li class="page-number prev"><a href="#">&raquo;</a></li> -->
-          </ul>
         </div>
         </div>
 
 
-        <!-- content start -->
-        <?php include(BASEURL . '/Components/Footer.php'); ?>
     </div>
 </div>
 </body>

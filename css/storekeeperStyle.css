@@ -1,517 +1,65 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500,80);
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat';
-
-}
-
-html,
-body {
-    height: 100%;
-}
-
-.header {
-    min-height: 100vh;
-    width: 100%;
-}
-
-#sidebarMenu {
-    /*height: 100%;*/
-    position: relative;
-    left: 0;
-    width: 60px;
-    overflow: hidden;
-    margin-top: 0px;
-    transform: translateX(0px);
-    transition: width .10s linear;
-    background: linear-gradient(180deg, var(--para-color) 100%, #ffffff 0%);
-}
-
-.sidebarMenuInner {
-    position: relative;
-    height: 100vh;
-    margin-top: 125px;
-    padding: 0;
-}
-
-
-.sidebarMenuInner li {
-    list-style: none;
-    height: 30px;
-    color: #fff;
-    text-transform: lowercase;
-    padding: 2.5px;
-    cursor: pointer;
-    text-align: left;
-    overflow: hidden;
-    margin: 12px 0;
-}
-
-@media screen and (max-width: 1229px) {
-    #sidebarMenu {
-        /*height: 100%;*/
-        position: relative;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 60px;
-        overflow: hidden;
-        margin-top: 0px;
-        transform: translateX(0px);
-        transition: width .10s linear;
-        background: linear-gradient(180deg, var(--para-color) 100%, #ffffff 0%);
-    }
-
-    .sidebarMenuInner {
-        position: relative;
-        height: 100vh;
-        margin-top: 125px;
-        padding: 0;
-    }
-
-
-    .sidebarMenuInner li {
-        list-style: none;
-        height: 30px;
-        color: #fff;
-        text-transform: lowercase;
-        padding: 2.5px;
-        cursor: pointer;
-        text-align: left;
-        overflow: hidden;
-        margin: 12px 0;
-    }
-}
-
-.vector {
-    position: absolute;
-    left: 29.17%;
-    right: 29.17%;
-    top: 62.5%;
-    bottom: 12.5%;
-    border: 2px solid #ADB6CD;
-}
-
-
-input[type="checkbox"]:checked ~ #sidebarMenu {
-    width: 250px;
-    /*height: 100%;*/
-    overflow: visible;
-    transition: width .10s linear;
-}
-
-input[type=checkbox] {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    display: none;
-}
-
-.sidebarIconToggle {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    cursor: pointer;
-    position: absolute;
-    z-index: 99;
-    height: 100%;
-    width: 100%;
-    top: 15px;
-    left: 15px;
-    height: 22px;
-    width: 22px;
-}
-
-.spinner {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background-color: #ADB6CD;
-}
-
-.horizontal {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    position: relative;
-    float: left;
-    margin-top: 3px;
-}
-
-.diagonal.part-1 {
-    position: relative;
-    transition: all 0.3s;
-    box-sizing: border-box;
-    float: left;
-}
-
-.diagonal.part-2 {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    position: relative;
-    float: left;
-    margin-top: 3px;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    opacity: 0;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    transform: rotate(135deg);
-    margin-top: 8px;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    transform: rotate(-135deg);
-    margin-top: -9px;
-}
-
-.icons {
-    height: 20px;
-    width: 20px;
-    border-style: solid;
-    border-color: #ADB6CD;
+.expired{
+    background-color: red;
+    color: var(--secondary-color);
+    border-style: none;
     border-radius: 10px;
-    border-width: 1px;
-    padding: 5px;
-    margin-left: 10px;
+    padding: 10px;
+    width: fit-content;
 }
 
-.sidebarMenuInner p {
-    display: inline;
-    margin: 15px;
-    color: #ADB6CD;
-    /* border-style: solid; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
+.inStock{
+    background-color: green;
+    color: var(--secondary-color);
+    border-style: none;
+    border-radius: 10px;
+    padding: 10px;
+    width: fit-content;
 }
 
-.sidebarMenuInner p::after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #ADB6CD;
+/* Switch */
+
+.filter input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+.filter label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 55px;
+    height: 24px;
+    background: green;
+    top: 20px;
     display: block;
-    margin: auto;
-    transition: 0.5s;
-}
-
-.sidebarMenuInner p:hover::after {
-    width: 100%;
-}
-
-a {
-    text-decoration: none;
-}
-
-.sidebarMenuInner img {
-    vertical-align: middle;
-}
-
-.user {
-    display: flex;
-}
-
-.userContents {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.title {
-    position: relative;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 42px;
-    line-height: 51px;
-    text-align: center;
-    color: #000000;
-}
-
-.title img {
-    height: 42px;
-    width: 42px;
-}
-
-.userContents ul {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-}
-
-.userContents ul .logout {
-    display: inline;
-    float: right;
-    padding: 10px;
-}
-
-.userContents ul .logout a {
-    color: #000000;
-}
-
-.userContents ul .userType {
-    display: inline;
-    float: left;
-}
-
-.userContents img {
-    padding: 10px;
-    vertical-align: middle;
-}
-
-.arrow {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-}
-
-.footer {
-    background-color: var(--para-color);
-    padding: 43px 0;
-}
-
-.footer-col {
-    padding: 0 15px;
-}
-
-.footer-col h4 {
-    font-size: 18px;
-    color: #ADB6CD;
-    text-transform: capitalize;
-    margin-bottom: 35px;
-    font-weight: 500;
+    border-radius: 100px;
     position: relative;
 }
-
-.footer-col img {
-    width: 60px;
-}
-
-.slogen {
-    padding: 10px 0;
-    text-align: left;
-    font-size: 16px;
-    text-transform: capitalize;
-    color: #ADB6CD;
-    text-decoration: none;
-    font-weight: 300;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-#one {
-    min-width: 50%;
-    max-width: 100%;
-    align-items: flex-start;
-    text-align: left;
-
-}
-
-#two {
-    min-width: 25%;
-    max-width: 100%
-}
-
-#three {
-    min-width: 25%;
-    max-width: 100%
-}
-
-.txt {
-    padding: 50px 0;
-}
-
-.footer-col h4::before {
+.filter label:after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -10px;
-    background-color: #ADB6CD;
-    height: 2px;
-    box-sizing: border-box;
-    width: 50px;
+    top: 5px;
+    left: 5px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
 }
-
-.footer-col ul li:not(:last-child) {
-    margin-bottom: 10px;
+.filter input:checked + label {
+    background: red;
 }
-
-.footer-col ul li a,
-.footer-col p,
-.footer-col li {
-    font-size: 16px;
-    text-transform: capitalize;
-    color: #ADB6CD;
-    text-decoration: none;
-    font-weight: 300;
-    display: block;
-    transition: all 0.3s ease;
+.filter input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
 }
-
-.footer-col ul li a:hover {
-    color: #ADB6CD;
-    padding-left: 8px;
-}
-
-.footer-col .social-links a {
-    display: inline-block;
-    height: 40px;
+.filter label:active:after {
     width: 40px;
-    background-color: var(--para-color);
-    margin: 0 10px 10px 0;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    color: #ADB6CD;
-    transition: all 0.5s ease;
 }
-
-.footer-col .social-links a:hover {
-    color: #ADB6CD;
-    background-color: var(--para-color);
-}
-
-/*responsive*/
-@media (max-width: 767px) {
-    .footer-col {
-        width: 33%;
-        margin-bottom: 30px;
-    }
-}
-
-@media (max-width: 574px) {
-    .footer-col {
-        width: 100%;
-    }
-}
-
-.cards {
-    position: relative;
-    width: 100%;
-    top: 300px;
-}
-
-.cards ul {
+.filter body {
     display: flex;
-    width: 100%;
-    margin: 20px 0px 20px 0px;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.cards ul li {
-    text-align: justify;
-    font-style: normal;
-    width: 25%;
-    border-style: none;
-    background-color: #F8F9FF;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 10px;
-    font-size: 20px;
-    line-height: 24px;
-    color: var(--para-color);
-}
-
-/*input[type="checkbox"]:checked + .welcomeUser p {*/
-/*    displa*/
-/*}*/
-
-.welcomeUser > p {
-    position: relative;
-    top: 50px;
-    margin: 10px;
-    color: #ADB6CD;
-    height: 38px;
-    font-size: x-large;
-    overflow: hidden;
-}
-
-.welcomeUser img {
-    position: relative;
-    border-style: none;
-    vertical-align: middle;
-    /*display: inline;*/
-    height: 35px;
-    width: 35px;
-    border-radius: 100%;
-}
-
-input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser img {
-    height: 150px;
-    width: 150px;
-    overflow: visible;
-    transition: width .10s, height .10s;
-}
-
-input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
-    height: auto;
-    overflow: visible;
-}
-
-
-@media screen and (max-width: 1229px) {
-    .userContents table {
-        margin: 20px;
-    }
-
-    .userContents tr {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0.5em 0;
-        border-style: none;
-    }
-
-    .userContents td,
-    .userContents th {
-        flex: 1 1 150px;
-        border: 0.25px solid var(--para-color);
-        height: 65px;
-        margin: 0px;
-    }
-
-    .midPortion {
-        position: relative;
-        background-size: 100%;
-        height: 300px;
-        top: 500px;
-    }
-
-    .cards ul {
-        display: block;
-        width: 100%;
-        margin: 20px 0px 20px 0px;
-        justify-content: space-around;
-    }
-
-    .cards ul li {
-        width: 94%;
-        margin: 10px;
-    }
-
-    .cards {
-        position: relative;
-        width: 100%;
-        top: 500px;
-    }
-
-    .next {
-        position: relative;
-        /*top: 500px;*/
-        height: auto;
-    }
-}
-
+/* Switch */

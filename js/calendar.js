@@ -1,247 +1,156 @@
-// function generate_year_range(start, end) {
-//     var years = "";
-//     for (var year = start; year <= end; year++) {
-//         years += "<option value='" + year + "'>" + year + "</option>";
-//     }
-//     return years;
-// }
+let appointmentInfo='',
+dateParts = '',
+year = '',
+month = '',
+day = '',
+dateObject = [],
+allClasses = [];
+let card = '';
+let appointmentCard = document.getElementById("appointmentCard");
+const months = ["January", "February", "March", "April", "May", "June", "July",
+  "August", "September", "October", "November", "December"];
+const Weeks = [ "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-// today = new Date();
-// currentMonth = today.getMonth();
-// currentYear = today.getFullYear();
-// selectYear = document.getElementById("year");
-// selectMonth = document.getElementById("month");
+$.ajax({
+  type: "GET",
+  url: "../Doctor/getAppointmentDetails.php",
+  success: function(response) {
+    appointmentInfo = $.parseJSON(response);
+    appointmentInfo.forEach(function (item){
+       dateParts = item.date.split("-");
 
+       year = parseInt(dateParts[0]);
+       month = parseInt(dateParts[1]);
+       day = parseInt(dateParts[2]);
+      dateObject.push({year, 'month': month - 1, day});
+      // yearArr.push(year);
+      // monthArr.push(month);
+      // dateArr.push(date);
+    });
 
-// createYear = generate_year_range(1970, 2050);
-// /** or
-//  * createYear = generate_year_range( 1970, currentYear );
-//  */
+    const daysTag = document.querySelector(".days"),
+        currentDate = document.querySelector(".current-date"),
+        prevNextIcon = document.querySelectorAll(".iconslr span");
 
-// document.getElementById("year").innerHTML = createYear;
+// getting new date, current year and month
+    let date = new Date(),
+        currYear = date.getFullYear(),
+        currMonth = date.getMonth();
 
-// var calendar = document.getElementById("calendar");
-// var lang = calendar.getAttribute('data-lang');
+// storing full name of all months in array
 
-// var months = "";
-// var days = "";
+    let renderCalendar = () => {
+      let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+          lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
+          lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+          lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+      let liTag = "";
 
-// var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+        liTag += `<li class="inactive clickdate" data-today = ${lastDateofLastMonth - i + 1}>${lastDateofLastMonth - i + 1}</li>`;
+      }
+      for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+        // adding active class to li if the current day, month, and year matched
+        let isToday = '';
+        for (let j = 0; j < dateObject.length; j++){
+          isToday = i === dateObject[j].day && currMonth === dateObject[j].month
+          && currYear === dateObject[j].year ? "activeactive" : "";
+          if(isToday === "activeactive"){
+            // console.log(i + " " + currMonth + " " + currYear);
+            break;
+          }
+        }
+        liTag += `<li class="${isToday}" data-today = ${i}>${i}</li>`;
+      }
 
-// var dayDefault = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
+        liTag += `<li class="inactive" data-today = ${i - lastDayofMonth + 1}>${i - lastDayofMonth + 1}</li>`
+      }
+      currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+      daysTag.innerHTML = liTag;
 
-// if (lang == "en") {
-//     months = monthDefault;
-//     days = dayDefault;
-// } else if (lang == "id") {
-//     months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-//     days = ["Ming", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
-// } else if (lang == "fr") {
-//     months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-//     days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-// } else {
-//     months = monthDefault;
-//     days = dayDefault;
-// }
+      let activeDates = document.getElementsByClassName("activeactive");
+      for (let i = 0; i < activeDates.length; i++) {
+        activeDates[i].addEventListener("click", () => {
+          appointmentCard.innerHTML = '';
+          if (!activeDates[i]) {
+            return;
+          }
 
+          for (let j = 0; j < dateObject.length; j++){
+            if(currYear === dateObject[j].year &&
+                currMonth === dateObject[j].month &&
+                parseInt(activeDates[i].textContent) === dateObject[j].day){
+                dateParts = appointmentInfo[j].date.split("-");
 
-// var $dataHead = "<tr>";
-// for (dhead in days) {
-//     $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
-// }
-// $dataHead += "</tr>";
+                year = parseInt(dateParts[0]);
+                month = parseInt(dateParts[1]);
+                day = parseInt(dateParts[2]);
 
-// //alert($dataHead);
-// document.getElementById("thead-month").innerHTML = $dataHead;
+                if(year === dateObject[j].year &&
+                    month-1 === dateObject[j].month &&
+                    day === dateObject[j].day){
 
+                  card = "<div class=\"card-Appointment\">\n" +
+                      "                                <i class=\"fa-solid fa-circle-xmark fa-2xl\" id='close' onclick=\"closeAppointmentCards()\"></i>" +
+                      "                        <table>\n" +
+                      "                            <tr>\n" +
+                      "                                <td>Patient Name:</td>\n" +
+                      "                                <td>" + appointmentInfo[j].name + "</td>\n" +
+                      "                            </tr>\n" +
+                      "                            <tr>\n" +
+                      "                                <td>Date:</td>\n" +
+                      "                                <td>" + appointmentInfo[j].date + "</td>\n" +
+                      "                            </tr>\n" +
+                      "                            <tr>\n" +
+                      "                                <td>Time:</td>\n" +
+                      "                                <td>" + appointmentInfo[j].time + "</td>\n" +
+                      "                            </tr>\n" +
+                      "                        </table>\n" +
+                      "                    </div>";
 
-// monthAndYear = document.getElementById("monthAndYear");
-// showCalendar(currentMonth, currentYear);
+                  appointmentCard.innerHTML+=card;
 
+                }
+            }
+          }
+        });
+      }
 
+    }
 
-// function next() {
-//     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-//     currentMonth = (currentMonth + 1) % 12;
-//     showCalendar(currentMonth, currentYear);
-// }
-
-// function previous() {
-//     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-//     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-//     showCalendar(currentMonth, currentYear);
-// }
-
-// function jump() {
-//     currentYear = parseInt(selectYear.value);
-//     currentMonth = parseInt(selectMonth.value);
-//     showCalendar(currentMonth, currentYear);
-// }
-
-// function showCalendar(month, year) {
-
-//     var firstDay = ( new Date( year, month ) ).getDay();
-
-//     tbl = document.getElementById("calendar-body");
-
-    
-//     tbl.innerHTML = "";
-
-    
-//     monthAndYear.innerHTML = months[month] + " " + year;
-//     selectYear.value = year;
-//     selectMonth.value = month;
-
-//     // creating all cells
-//     var date = 1;
-//     for ( var i = 0; i < 6; i++ ) {
-        
-//         var row = document.createElement("tr");
-
-        
-//         for ( var j = 0; j < 7; j++ ) {
-//             if ( i === 0 && j < firstDay ) {
-//                 cell = document.createElement( "td" );
-//                 cellText = document.createTextNode("");
-//                 cell.appendChild(cellText);
-//                 row.appendChild(cell);
-//             } else if (date > daysInMonth(month, year)) {
-//                 break;
-//             } else {
-//                 cell = document.createElement("td");
-//                 cell.setAttribute("data-date", date);
-//                 cell.setAttribute("data-month", month + 1);
-//                 cell.setAttribute("data-year", year);
-//                 cell.setAttribute("data-month_name", months[month]);
-//                 cell.className = "date-picker";
-//                 cell.innerHTML = "<span>" + date + "</span>";
-
-//                 if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
-//                     cell.className = "date-picker selected";
-//                 }
-//                 row.appendChild(cell);
-//                 date++;
-//             }
+    renderCalendar();
 
 
-//         }
 
-//         tbl.appendChild(row);
-//     }
+    prevNextIcon.forEach(icon => { // getting prev and next icons
+      icon.addEventListener("click", () => { // adding click event on both icons
+        // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+        currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
 
-// }
+        if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+          // creating a new date of current year & month and pass it as date value
+          date = new Date(currYear, currMonth, new Date().getDate());
+          currYear = date.getFullYear(); // updating current year with new date year
+          currMonth = date.getMonth(); // updating current month with new date month
+        } else {
+          date = new Date(); // pass the current date as date value
+        }
+        renderCalendar(); // calling renderCalendar function
+      });
+    });
 
-// function daysInMonth(iMonth, iYear) {
-//     return 32 - new Date(iYear, iMonth, 32).getDate();
-// }
-
-
-let currentDate = dayjs();
-let daysInMonth = dayjs().daysInMonth();
-let firstDayPosition = dayjs().startOf("month").day();
-let monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-let weekNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-let dateElement = document.querySelector("#calendar .calendar-dates");
-let calendarTitle = document.querySelector(".calendar-title-text");
-let nextMonthButton = document.querySelector("#nextMonth");
-let prevMonthButton = document.querySelector("#prevMonth");
-let dayNamesElement = document.querySelector(".calendar-day-name");
-let todayButton = document.querySelector("#today");
-let dateItems = null;
-let newMonth = null;
-
-weekNames.forEach(function (item) {
-  dayNamesElement.innerHTML += `<div>${item}</div>`;
+  },
+  error: function(xhr, status, error) {
+    console.log("Error: " + error);
+  }
 });
 
-function plotDays() {
-  let count = 1;
-  dateElement.innerHTML = "";
+function closeAppointmentCards(){
+  let cardListParent = document.getElementById("appointmentCard");
+  let cardlist = document.getElementsByClassName("card-Appointment");
 
-  let prevMonthLastDate = currentDate.subtract(1, "month").endOf("month").$D;
-  let prevMonthDateArray = [];
-
-  //plot prev month array
-  for (let p = 1; p < firstDayPosition; p++) {
-    prevMonthDateArray.push(prevMonthLastDate--);
-  }
-  prevMonthDateArray.reverse().forEach(function (day) {
-    dateElement.innerHTML += `<button class="calendar-dates-day-empty">${day}</button>`;
-  });
-
-  //plot current month dates
-  for (let i = 0; i < daysInMonth; i++) {
-    dateElement.innerHTML += `<button class="calendar-dates-day">${count++}</button>`;
-  }
-
-  //next month dates
-  let diff =
-    42 - Number(document.querySelector(".calendar-dates").children.length);
-  let nextMonthDates = 1;
-  for (let d = 0; d < diff; d++) {
-    document.querySelector(
-      ".calendar-dates"
-    ).innerHTML += `<button class="calendar-dates-day-empty">${nextMonthDates++}</button>`;
-  }
-
-  //month name and year
-  calendarTitle.innerHTML = `${
-    monthNames[currentDate.month()]
-  } - ${currentDate.year()}`;
-}
-
-//highlight current date
-function highlightCurrentDate() {
-  dateItems = document.querySelectorAll(".calendar-dates-day");
-  if (dateElement && dateItems[currentDate.$D - 1]) {
-    dateItems[currentDate.$D - 1].classList.add("today-date");
+  for(let i=0; i<cardlist.length; i++){
+    cardListParent.removeChild(cardlist[i]);
   }
 }
-
-//next month button event
-nextMonthButton.addEventListener("click", function () {
-  newMonth = currentDate.add(1, "month").startOf("month");
-  setSelectedMonth();
-});
-
-//prev month button event
-prevMonthButton.addEventListener("click", function () {
-  newMonth = currentDate.subtract(1, "month").startOf("month");
-  setSelectedMonth();
-});
-
-//today button event
-todayButton.addEventListener("click", function () {
-  newMonth = dayjs();
-  setSelectedMonth();
-  setTimeout(function () {
-    highlightCurrentDate();
-  }, 50);
-});
-
-//set next and prev month
-function setSelectedMonth() {
-  daysInMonth = newMonth.daysInMonth();
-  firstDayPosition = newMonth.startOf("month").day();
-  currentDate = newMonth;
-  plotDays();
-}
-
-//init
-plotDays();
-setTimeout(function () {
-  highlightCurrentDate();
-}, 50);

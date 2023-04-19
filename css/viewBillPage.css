@@ -88,7 +88,6 @@ table {
     overflow-y: scroll;
     border-style: none;
     border-radius: 10px;
-    overflow: visible;
 }
 
 @media screen and (max-width: 1229px) {
@@ -115,10 +114,11 @@ table {
 .row {
     display: table-row;
     background: #f6f6f6;
+    transition: 0.4s;
 }
 
 .row:hover{
-    transform: scale(1.041);
+    transform: scale(0.97, 0.97);
     background-color: var(--hover-color);
 }
 
