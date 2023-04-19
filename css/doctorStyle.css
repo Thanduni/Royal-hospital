@@ -407,57 +407,6 @@ select option{
     background-color: var(--hover-color);
 }
 
-.row-content{
-    padding: 10px;
-    font-size: medium;
-    font-weight: 500;
-    width: 50%;
-}
-
-
-/* .table {
-    margin: 0 0 40px 0;
-    width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 500px;
-    border-style: none;
-    border-radius: 10px;
-    overflow: visible;
-
-}
-
-@media screen and (max-width: 1229px) {
-    body {
-        font-size: 16px;
-        line-height: 22px;
-    }
-}
-
-.wrapper {
-    margin: 0 auto;
-    max-width: 1440px;
-}
-
-
-
-@media screen and (max-width: 1229px) {
-    .table {
-        display: block;
-        overflow-y: scroll;
-    }
-}
-
-.row {
-    display: table-row;
-    transition: 0.4s;
-    background: #f6f6f6;
-}
-
-.row:hover{
-    transform: scale(0.97, 0.97);
-    background-color: var(--hover-color);
-}
-
 .row.headerT {
     font-weight: 900;
     color: var(--para-color);
