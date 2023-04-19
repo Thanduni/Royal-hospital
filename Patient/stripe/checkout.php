@@ -78,6 +78,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           width: 290px;
           height: 300px;
         }
+
+       .arrow1{
+        margin-bottom: 20px;
+        }
     </style>
   </head>
 <body>
@@ -136,8 +140,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           <h3 style="font-weight:700;">LKR <?php echo $npaid.'.00';?></h3>
         </div>
       </div>
+      
       <form action="http://localhost:8080/ROYALHOSPITAL/Patient/stripe/checkout_process.php" method="POST">
-        <button type="submit" id="checkout-button">Checkout</button>
+        
+        <a class="arrow1">Click to pay now <i class="fa fa-arrow-right" aria-hidden="true"></i></a><button type="submit" id="checkout-button">Checkout</button>
       </form>
     </div>
 
