@@ -2,42 +2,16 @@
 session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
-  
+    $nic = $_SESSION['nic'];
+    $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
+    $get_doctorID = mysqli_query($con,$doctorID_query);
+    $row = mysqli_fetch_assoc($get_doctorID);
+    $doctorID = $row["doctorID"];
+
 ?>
 <?php
-$mindate = date("Y-m-d");
-$mintime = date("h:i");
-if(isset($_GET['patientid'])){
-    $patientID = $_GET['patientid'];
-    $patientName = $_GET['name'];
-    $age = $_GET['age'];
-}
-?>
-
-<!-- Writing data into database -->
-<?php 
-if (isset($_POST['submit'])) {
-    $drugName = $_POST['drugName'];
-    $dosage = $_POST['dosage'];
-    $days = $_POST['days'];
-    $frequency = $_POST['frequency'];
-
-    $drug_prescription = "INSERT into prescribed_drugs(drug_name,patientID,days,quantity,frequency) values('$drugName','$patientID','$days','$dosage','$frequency');";
-    $drug_prescription_write =mysqli_query($con,$drug_prescription);
-
-    // if($result){
-
-    // }
-}
-?>
-<?php
-if (isset($_POST['submit'])) {
-    $date = $_POST['date'];
-    $investigation = $_POST['investigation'];
-    $impression = $_POST['impression'];
-
-    $prescription = "INSERT into prescription(date,patientID,doctorID,investigation,impression) values('$date','$patientID','$doctorID','$investigation','$impression');";
-    $prescription_write = mysqli_query($con,$prescription);
+if(isset($_GET['last_id'])){
+    $last_id = $_GET['last_id'];
 }
 ?>
 <!DOCTYPE html>
@@ -60,79 +34,79 @@ if (isset($_POST['submit'])) {
         <div class="userContents" id="center">
         <?php include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);?>
                 <div class="prescription-container">
-                <script src="<?php echo BASEURL . '/js/prescription.js' ?>"></script>
-                <script src="<?php echo BASEURL . '/js/searchDrugName.js' ?>"></script>
+
                     <div class="tab-line">
                         <div class="medicine-button" id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
                         <div class="test-button" id="test-button" onclick="testPrescription()">Prescribe Test</div>
                     </div>
-                    <div class="prescribe-medicine-content">
-                        <form method="post">
-                            <div class="first-row">
-                                <div class="form-group">
-                                    <label>Name: </label>
-                                    <input type="text" value="<?php echo $patientName?>">
-                                </div>
-                                <div class="form-group">
-                                    <label>Patient ID: </label>
-                                    <input type="text" value ="<?php echo $patientID?>">
-                                </div>
-                                
-                                
-                            </div>
-                            <div class="second-row">
-                                <div class="form-group">
-                                    <label>Age: </label>
-                                    <input type="text" value="<?php echo $age?>">
-                                </div>
-                                <div class="form-group">
-                                    <label>Date: </label>
-                                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>" min="<?php echo $mindate?>">
-                                </div>
-                            </div> 
-                            <div class="third-row">
-                                <div class="form-group">
-                                    <label>Investigation: </label>
-                                    <input type="text" name="investigation" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Impression: </label>
-                                    <input type="text" name="impression">
-                                </div>
-                            </div>
 
-                            
-                            <div class="form-middle">
+                    <div class="prescribe-medicine-content">
+                        <form action="#" class="insert-form" id="insert_form" method="post">
+                            <div class="input-feild">
                                 <table id="prescription-table">
-                                    <thead>
+                                    <tr>
                                         <th>Drug Name</th>
                                         <th>Dosage (per day)</th>
                                         <th>Frequency (per day)</th>
                                         <th>No of days</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <!-- <td><form autocomplete="off" action="/prescription.php"><div class="autocomplete"><input type="text" id="drugName" name="drugName"></div></form></td> -->
-                                            <!-- <ul class="list"></ul> -->
-                                            
-                                            <td><input type="text" name="drugName"></td>
-                                            <td><input type="number" name="dosage"></td>
-                                            <td><input type="number" name="days"></td>
-                                            <td><input type="number" name="frequency"></td>
-                                        </tr>
-                                    </tbody>
+                                    </tr>
+                                    <div class="show-medicine">
+                                        <?php
+                                        if(isset($_POST['save'])){
+                                            $drugName = $_POST['drugName'];
+                                            $dosage = $_POST['dosage'];
+                                            $days = $_POST['days'];
+                                            $frequency = $_POST['frequency'];
+                            
+                                            foreach ($drugName as $key => $value){
+                                             $save = "INSERT INTO prescribed_drugs(drug_name,days,quantity,frequency,prescriptionID) VALUES ('".$value."','".$dosage[$key]."','".$days[$key]."','".$frequency[$key]."','".$last_id."');";
+                            
+                                             $query = mysqli_query($con,$save);
+                                            }
+                                        }
+
+                                        ?>
+                                    <tr>
+                                        <td><input type="text" name="drugName[]"></td>
+                                        <td><input type="number" name="dosage[]"></td>
+                                        <td><input type="number" name="days[]"></td>
+                                        <td><input type="number" name="frequency[]"></td>
+                                        <td><input type="button" name="addd" class="add" value="Add"></td>
+                                    </tr>
+                                    </div>
+                                    <input type="submit" class="btn-success" name="save" id="save" value="save data">
                                 </table>
-                                
-                                </form>
-                                <img src="../images/pluss.png" alt="+" id ="addRowButton" onclick="addRow()">
-                            </div>
-                            <button class="addPrescription-button" type="submit" name="submit">Submit</button>
-                            <!-- <form autocomplete="off" action="/prescription.php"><div class="autocomplete">
-                            <label for="name"> NAme</label>
-                            <input type="text" id="drugName" name="drugName">
-                            </div></form> -->
+                            </div>  
+                        </form> 
+                        
+                        <div class="show-prescription">
+                            <table class="table">
+                                <thead>
+                                    <th>Drug Name</th>
+                                    <th>Dosage (per day)</th>
+                                    <th>Frequency (per day)</th>
+                                    <th>No of days</th>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                $select = "SELECT * from prescribed_drugs where prescriptionID =$last_id";
+                                $result = mysqli_query($con,$select);
+                            
+                                while($row= mysqli_fetch_array($result)){?>
+                                <tr>
+                                    <td><?php echo $row['drug_name'] ?></td>
+                                    <td><?php echo $row['quantity'] ?></td>
+                                    <td><?php echo $row['frequency'] ?></td>
+                                    <td><?php echo $row['days'] ?></td>
+                                </tr>
+                                <?php
+                                } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="prescribe-test-content">
+
+                    <!-- <div class="prescribe-test-content">
                         <form action="post">
                             <div class="prescription-group">
                                 <label>Test Name </label>
@@ -140,11 +114,57 @@ if (isset($_POST['submit'])) {
                             </div>
                             <button type="submit" name ="submit-test-prescription">Submit</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        // to add rows
+        $(document).ready(function(){
+            $(".add").click(function(e){    //pass parameter e
+                e.preventDefault();         //stop page refresh
+                $("#prescription-table").append(`<tr>
+                    <td><input type="text" name="drugName[]"></td>
+                    <td><input type="number" name="dosage[]"></td>
+                    <td><input type="number" name="days[]"></td>
+                    <td><input type="number" name="frequency[]"></td>
+                    <td><input type="button" name="remove" class="remove" value="Remove"></td>
+                    </tr>`);
+            });
+
+            //remove rows
+            $(document).on('click', '.remove', function(e){
+                e.preventDefault();
+                let = row_med = $(this).parent().parent();  //select parent of parent of remove btn.. which is <tr>
+                $(row_med).remove();
+            });
+
+            //ajax request to save all medicines
+            // $("#insert_form").submit(function(e){
+            //     e.preventDefault();
+            //     $("#save").val('Saving...');
+            //     $.ajax({
+            //         url: 'action.php?',
+            //         method: 'post',
+            //         data: $(this).serialize(),
+            //         success: function(response){
+            //             console.log(response);
+            //             // $("#save").val('Save Data');
+            //             // $("#insert_form")[0].reset();
+            //         }
+            //     });
+            // });
+
+        });
+    </script>
 <script>
+
+// <form autocomplete="off" action="/prescription.php"><div class="autocomplete">
+//                             <label for="name"> NAme</label>
+//                             <input type="text" id="drugName" name="drugName">
+//                             </div></form>
 //     var DrugNames = ["Panadol","Anastrozol","AndroGel","Annovera","Erleada"];
 
 

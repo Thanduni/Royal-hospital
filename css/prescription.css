@@ -138,6 +138,18 @@
     border-style: none;
     width: 100%;
 }
+.show-prescription {
+    width: 80%;
+    margin: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 33px 30px;
+}
+.show-prescription table td{
+    text-align: left;
+    padding: 8px 10px;
+    background: #fff;
+}
 .prescribe-test-content{
     display: none;
 }
