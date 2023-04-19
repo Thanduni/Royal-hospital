@@ -174,11 +174,12 @@ if(isset($_POST['submit-doctor-note'])) {
                     </div>
                     </a>
 
+
                     <!-- <a href="doctornote.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>&doctorID=<?=$doctorID?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
-                              Add Doctor Note
+                              Admit Patient
                             </div>
                         </div>
                         <div class="icon-box">
@@ -216,6 +217,7 @@ if(isset($_POST['submit-doctor-note'])) {
                         </div>
                     </div>
                 </div> -->
+
 
 
             </div>
