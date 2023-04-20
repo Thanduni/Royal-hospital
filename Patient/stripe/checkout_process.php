@@ -1,6 +1,8 @@
 <?php
 
 include('../stripe/stripe-php/init.php');
+
+session_start();
 // require_once '../vendor/autoload.php';
 require_once '../stripe/secrets.php';
 
@@ -11,15 +13,17 @@ $url =  "http://localhost:8080/ROYALHOSPITAL/Patient/stripe/";
 echo $url;
 $YOUR_DOMAIN = $url;
 
+$totall = $_SESSION['total'];
+$total = 100*$totall;
 $checkout_session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
   'line_items' => [[
     'price_data' => [
-      'currency' => 'usd',
-      'unit_amount' => 2000,
+      'currency' => 'lkr',
+      'unit_amount' => $total,//1000lkr = 100000
       'product_data' => [
-        'name' => 'Strubborn Attachments',
-        'images' => ["https://i.imagur.com/EMyR2nP.png"],
+        'name' => 'Bill Payment',
+        'images' => ["https://image.isu.pub/191130173733-5a8475ac3d94714cf55d7a05296b3d63/jpg/page_1.jpg"],
       ],
     ],
     # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
@@ -27,8 +31,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
     'quantity' => 1,
   ]],
   'mode' => 'payment',
-  'success_url' => $YOUR_DOMAIN . '/success.html',
-  'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+  'success_url' => $YOUR_DOMAIN . '/success.php',
+  'cancel_url' => $YOUR_DOMAIN . '/cancel.php',
 ]);
 
 header("HTTP/1.1 303 See Other");

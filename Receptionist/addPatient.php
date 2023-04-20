@@ -24,7 +24,7 @@ if (isset($_POST['addUser'])) {
             move_uploaded_file($tmp_name, $img_upload_path);
         } else {
             $em = "You can't upload files of this type";
-            header("location:" . BASEURL . "/Admin/adminUsersPage.php?error = $em");
+            header("location:" . BASEURL . "/Receptionist/patientPage.php?error = $em");
         }
     }
 
@@ -52,6 +52,24 @@ if (isset($_POST['addUser'])) {
     $curUsingMed = $_POST['curUsingMed'];
     $emerCon = $_POST['emerCon'];
 
+    $countUserNIC = "SELECT * FROM user WHERE nic = '$nic' ;";
+    $resultCountUserNIC = mysqli_query($con, $countUserNIC);
+    $num_rows_user_nic = mysqli_num_rows($resultCountUserNIC);
+
+    if($num_rows_user_nic > 0){
+        header("location:" . BASEURL . "/Receptionist/patientPage.php?warning=The Username exists try another NIC.");
+        exit();
+    }
+
+    $countUserEmail = "SELECT * FROM user WHERE email = '$email' ;";
+    $resultCountUserEmail = mysqli_query($con, $countUserEmail);
+    $num_rows_user_email = mysqli_num_rows($resultCountUserEmail);
+
+    if($num_rows_user_email > 0){
+        header("location:" . BASEURL . "/Receptionist/patientPage.php?warning=The Email exists try another Email.");
+        exit();
+    }
+
     $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image, DOB) VALUES
                             ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob');";
     $result = mysqli_query($con, $query);
@@ -59,10 +77,6 @@ if (isset($_POST['addUser'])) {
     $query = "INSERT INTO `patient`(`nic`, `weight`, `receptionistID`, `patient_type`, `height`, `illness`, `drug_allergies`, `medical_history_comments`, `currently_using_medicine`, `emergency_contact`) VALUES
             ('$nic', '$weight', '$receptionistID', '$patientType', '$height', '$illness', '$drugAllergies', '$medHisCom', '$curUsingMed', '$emerCon');";
     $result = mysqli_query($con, $query);
-
-//    $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
-//    $result_pid = mysqli_query($con, $pid_query);
-//    $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
     $nic_query = "SELECT nic FROM user WHERE user_role = 'Receptionist' or user_role = 'Admin'";
     $result_nic = mysqli_query($con, $nic_query);

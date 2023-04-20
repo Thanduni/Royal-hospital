@@ -108,11 +108,12 @@ if (!isset($_SESSION['mailaddress'])) {
     <body>
     <section class="header">
         <?php include(BASEURL.'/Components/Navbar.php'); ?>
-<!--        <div class="heading">-->
-            <h2>Registration</h2>
-            <!-- <?php //echo $error; ?> -->
-<!--        </div>-->
-        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm"></form>
+        <div class="advertise">
+            <div class="hey">
+                <p style="color: white" class="title">Registration</p>
+            </div>
+        </div>
+        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm">
             <div class="content">
                 <div class="box" style="padding-bottom: 0px">
                     <label for="">Name</label><br><br>
@@ -135,17 +136,15 @@ if (!isset($_SESSION['mailaddress'])) {
                     <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><div id="phoneDiv"></div><br><br>
 
                     <label for="">Date of Birth</label><br><br>
-                    <input type="date" name="dob" id="dob"><br><br>
+                    <input type="date"  max="<?php echo date("2005-m-d") ?>" name="dob" id="dob"><br><br>
 
                     <label for="">Address</label><br><br>
                     <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"><br><br>
 
                     <label for="">Gender</label><br><br>
                     <select name="gender" id="gender">
-                        <option value="">Please A Select</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">Others</option>
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
                     </select><br><br>
 
                     <label for="">Emergency Contact Number</label><br><br>
@@ -188,7 +187,10 @@ if (!isset($_SESSION['mailaddress'])) {
                     <label for="">Any Medical Comments</label><br><br>
                     <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
 
-                    <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn">
+                    <br><br>
+                    <div style="margin: 0 auto">
+                        <button style="color: var(--primary-color)" type="submit" name="btn" class="custom-btn">Submit</button>
+                    </div>
                 </div>
 
             </div>

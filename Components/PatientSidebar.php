@@ -23,39 +23,49 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Patient/patientDash.php' ?>" target="_self"><img class="icons"
-                src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
+        <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Patient/patientDash.php' ?>" target="_self"><img id="dashboard" class="butbut icons"
+                src=<?php echo BASEURL.'/images/dashboardDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Dashboard</p>
             </a></li>
 
-        <li><a id="openform" target="_self"><img class="icons"
-                src=<?php echo BASEURL . '/images/appointment.svg' ?> alt="user" align="middle">
+        <li onmouseover="changeImage('appointment.svg','appointment')" onmouseout="restoreImage('appointmentDef.svg','appointment')"><a id="open-" target="_self"><img id="appointment" class="butbut icons"
+                src=<?php echo BASEURL . '/images/appointmentDef.svg' ?> alt="user" align="middle">
                 <p>Appointment</p>
             </a></li>
 
-        <li><a href="<?php echo BASEURL.'/Patient/appointment.php' ?>" target="_self"><img class="icons"
-                src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="doctor" align="middle">
-                <p>Patient Reports</p>
+        <li onmouseover="changeImage('prescription.svg', 'prescription')" onmouseout="restoreImage('prescriptionDef.svg', 'prescription')"><a href="<?php echo BASEURL.'/Patient/prescription.php' ?>" target="_self"><img id="prescription" class="butbut icons"
+                src=<?php echo BASEURL . '/images/prescriptionDef.svg' ?> alt="doctor" align="middle">
+                <p>Prescription</p>
             </a></li>
 
-        <li><a href="" target="_self"><img class="icons"
-                 src=<?php echo BASEURL . '/images/receptionist.svg' ?> alt="nurse" align="middle">
+        <li onmouseover="changeImage('payment.svg', 'payment')" onmouseout="restoreImage('paymentDef.svg', 'payment')"><a  href="<?php echo BASEURL.'/patient/stripe/checkout.php'?>" target="_self"><img id="payment" class="butbut icons"
+                 src=<?php echo BASEURL . '/images/paymentDef.svg' ?> alt="nurse" align="middle">
                 <p>Payment</p>
             </a></li>
         
-        <li><a href="" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/noticeboard.svg' ?> alt="noticeboard"
+        <li onmouseover="changeImage('noticeboard.svg', 'noticeboard')" onmouseout="restoreImage('noticeboardDef.svg', 'noticeboard')"><a id="notice" href="" target="_self"><img id="noticeboard" class="butbut icons"
+                                            src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>
             </a></li>
 
-        <li><a href="<?php echo BASEURL . '/Patient/updatePatientProfile.php' ?>" target="_self"><img
-                        class="icons"
-                        src=<?php echo BASEURL . '/images/profile.svg' ?> alt="Profile"
+        <li onmouseover="changeImage('profile.svg','profile')" onmouseout="restoreImage('profileDef.svg','profile')"><a  href="<?php echo BASEURL . '/Patient/updatePatientProfile.php' ?>" target="_self"><img id="profile" class="butbut icons"
+                        src=<?php echo BASEURL . '/images/profileDef.svg' ?> alt="Profile"
                         align="middle">
                 <p>Profile</p>
             </a></li>
     </ul>
 </div>
 
+<script>
+    function changeImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = <?php echo BASEURL.'/images'; ?> + imgName;
+    }
+
+    function restoreImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = <?php echo BASEURL.'/images'; ?> + imgName;
+    }
+</script>

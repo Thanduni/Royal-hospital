@@ -12,7 +12,7 @@ require_once("../conf/config.php");
         <ul>
             <li><a href="<?php echo BASEURL.'/index.php'?>"> Home </a></li>
             <li><a href="<?php echo BASEURL.'/Homepage/aboutUs.php'?>"> About us </a></li>
-            <li><a href=""> Appointment </a></li>
+            <li><a href="<?php echo BASEURL.'/Homepage/homepageAppointment.php'?>"> Appointment </a></li>
             <li><a href="<?php echo BASEURL.'/Patient/registration.php' ?>"> Register patient </a></li>
             <li><a href="<?php echo BASEURL.'/Homepage/login.php'?>"> Login </a></li>
         </ul>

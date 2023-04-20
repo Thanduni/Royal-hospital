@@ -13,6 +13,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/patientPage.css' ?>">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <title>Receptionist patient page - Patient</title>
         <style>
@@ -53,8 +54,26 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </p>
 
             <div class="filter">
-                <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+                <input type="text" id="myInputName" onkeyup="filterByNamePatient()" placeholder="Search for names.." title="Type in a name">
             </div>
+
+            <?php
+            if (@$_GET['warning']) {
+                ?>
+                <div class="alert">
+                    <?php
+                    echo $_GET["warning"];
+                    ?>
+                </div>
+            <?php }
+            if (@$_GET['result']) {
+                ?>
+                <div class="success">
+                    <?php
+                    echo $_GET["result"];
+                    ?>
+                </div>
+            <?php }?>
 
             <div class="userClass">
                 <?php
@@ -67,7 +86,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <div class="wrapper">
                     <div class="table">
                         <div class="row headerT">
-                            <div class="cell">Options</div>
                             <div class="cell">NIC</div>
                             <div class="cell">Name</div>
                             <div class="cell">Patient ID</div>
@@ -76,15 +94,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             <div class="cell">Email</div>
                             <div class="cell">Contact Number</div>
                             <div class="cell">Gender</div>
-                            <div class="cell">Date of Birth</div>
-                            <div class="cell">Weight(in kgs)</div>
-                            <div class="cell">Receptionist ID of who adds tha patient</div>
-                            <div class="cell">Height(in cm)</div>
-                            <div class="cell">Illness</div>
-                            <div class="cell">Drug allergies</div>
-                            <div class="cell">Medical history comments</div>
-                            <div class="cell">Currently using Medicine</div>
-                            <div class="cell">Emergency contact </div>
+                            <div class="cell">Options</div>
+                            <div class="cell"></div>
                         </div>
                         <?php
                         for ($j = 0; $j < $rows; ++$j) {
@@ -94,7 +105,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             $result2 = $con->query($query2);
                             $result2->data_seek(0);
                             $row2 = $result2->fetch_array(MYSQLI_ASSOC);
-                        ?>
+                            ?>
                             <ul class="tableCon">
                                 <li class="<?php echo $row1['nic'] ?>_tableCon"><?php echo $row1['name'] ?></li>
                                 <li class="<?php echo $row1['nic'] ?>_tableCon"><?php echo $row1['address'] ?></li>
@@ -111,17 +122,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <li class="<?php echo $row1['nic'] ?>_tableCon"><?php echo $row2['emergency_contact'] ?></li>
                             </ul>
                             <div class="row">
-                                <div class="cell" style="100px" data-title="Options">
-                                    <button class="operation" id="<?php echo $row1['nic'] ?>"
-                                            onclick="displayPatientUpdateForm(<?php echo $row1['nic'] ?>);"><img
-                                            src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
-
-                                    </button>
-                                    <a href="<?php echo BASEURL . '/Receptionist/deletePatient.php?id=' . $row1['nic'] ?>">
-                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
-                                        </button>
-                                    </a>
-                                </div>
                                 <div class="cell" data-title="NIC">
                                     <?php echo $row1['nic']; ?>
                                 </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 </div>
                                 <div class="cell" style="width:100px" data-title="Profile image">
                                     <?php
-                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/".$row1['profile_image']." alt='Upload Image' width=150px>";
+                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/".$row1['profile_image']."' alt='Upload Image' width=150px>";
                                     ?>
                                 </div>
                                 <div class="cell" data-title="Address">
@@ -148,41 +148,43 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <div class="cell" data-title="Gender">
                                     <?php echo $row1['gender']; ?>
                                 </div>
-                                <div class="cell" data-title="Date of Birth">
-                                    <?php echo $row1['DOB']; ?>
+                                <div class="cell" style="100px" data-title="Options">
+                                    <button class="operation" id="<?php echo $row1['nic'] ?>"
+                                            onclick="displayPatientUpdateForm(<?php echo $row1['nic'] ?>);"><img
+                                                src="<?php echo BASEURL . '/images/edit.svg' ?>" alt=" Edit">
+                                    </button>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#<?php echo $row1['nic'] ?>').click(function(){
+                                                $('#userForm').fadeIn().css("display","flex");
+                                            });
+                                        });
+                                    </script>
+                                    <a href="<?php echo BASEURL . '/Receptionist/deletePatient.php?id=' . $row1['nic'] ?>">
+                                        <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
+                                        </button>
+                                    </a>
                                 </div>
-                                <div class="cell" data-title="Weight(in kgs)">
-                                    <?php echo $row2['weight']; ?>
-                                </div>
-                                <div class="cell" data-title="Receptionist ID of who adds tha patient">
-                                    <?php echo $row2['receptionistID']; ?>
-                                </div>
-                                <div class="cell" data-title="Height(in cms)">
-                                    <?php echo $row2['height']; ?>
-                                </div>
-                                <div class="cell" data-title="Illness">
-                                    <?php echo $row2['illness']; ?>
-                                </div>
-                                <div class="cell" data-title="Drug allergies">
-                                    <?php echo $row2['drug_allergies']; ?>
-                                </div>
-                                <div class="cell" data-title="Medical history comments">
-                                    <?php echo $row2['medical_history_comments']; ?>
-                                </div>
-                                <div class="cell" data-title="Currently using Medicine">
-                                    <?php echo $row2['currently_using_medicine']; ?>
-                                </div>
-                                <div class="cell" data-title="Emergency contact">
-                                    <?php echo $row2['emergency_contact']; ?>
+<!--                                <div><button id="exit">Exit</button>        </div>-->
+                                <div class="cell" data-title="">
+                                    <button type="button" id="patientInfo_<?php echo $row1['nic'] ?>" class="custom-btn" onclick="patientDisplay('<?php echo $row1['nic']; ?>');" >More details</button>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#patientInfo_<?php echo $row1['nic'] ?>').click(function(){
+                                                $('#moreDetailsTable').fadeIn().css("display","flex");
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         <?php } ?>
                     </div>
+                </div>
             </div>
         </div>
-        </div>
     </div>
-        <div id="userForm">
+
+    <div id="userForm">
             <div id="form">
                 <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
                       name="userForm">
@@ -337,11 +339,25 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             </div>
         </div>
 
+    <div id="moreDetailsTable">
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#addButton').click(function(){
+                $('#userForm').fadeIn().css("display","flex");
+            });
+            $('#cancel').click(function(){
+                $('#userForm').fadeOut();
+            });
+
+        });
+    </script>
+    <script src=<?php echo BASEURL . '/js/patientDisplay.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/ValidatePatientAddForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
 
     </body>
-
     </html>
     <?php
 } else {

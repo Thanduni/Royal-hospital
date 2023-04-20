@@ -63,12 +63,6 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             $appTime = $row['time'];
 
             $current_date = date('Y-m-d');
-//            if (!isset($_SESSION['query_executed_date']) || $_SESSION['query_executed_date'] != $current_date) {
-//                $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`)
-//              VALUES ('$nic','Today you have an appointment with the doctor $docName at $appTime.','CURRENT_TIMESTAMP')";
-//                $result = mysqli_query($con, $query);
-//                $_SESSION['appID'] = $current_date;
-//            }
             $flag = 0;
             for ($i = 0; $i < count($_SESSION['appID_array']); $i++) {
                 if ($row['appointmentID'] == $_SESSION['appID_array'][$i])
@@ -89,12 +83,16 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
 
-
         <div class="userContents"  id="center">
             <?php
-            $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
+            
+            <ul>
+                <li class="userType"><img src="<?php echo BASEURL.'/images/userInPage.svg' ?>" alt="">
+                Patient
+            </li>
+            </ul>
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
@@ -127,7 +125,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div> 
             </a> 
-            <a id=open target="_self" style="cursor:pointer">
+            <a id="open" target="_self" style="cursor:pointer">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Appointment</div>
@@ -136,7 +134,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div>
             </a>
-            <a href="<?php echo BASEURL.'/Patient/stripe/checkout.html' ?>">
+            <a href="<?php echo BASEURL.'/Patient/stripe/checkout.php' ?>">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Pay Now</div>
@@ -148,7 +146,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     </div>
             <div class="mcontent">
                 <div class="pcontent">
-                    <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div></br>
+                    <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div>
                     <div class="height">
                         <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt="">
                             <div class="ce"><a>Height</a></div>
@@ -188,7 +186,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
                         $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, appointment.venue, user.name, appointment.doctorID, appointment.appointmentID 
                             FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
-//                        die($query);
+
                         $result = mysqli_query($con, $query);
                         while($rows = mysqli_fetch_assoc($result)){ ?>
                             <div class="row">
@@ -222,12 +220,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                 <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['message'] ?></li>
                             </ul>
                          <?php
-                    }
+                        }
                     ?>
                     </div>
                 </div>
-                <div class="chart"> <div class="table_header"><h3 style="color: var(--primary-color);margin-right:150px;">Your Temperature</h3></div>
-                <canvas id="myChart"></canvas></div>  
             </div>
         </div>
     </div>
@@ -241,9 +237,12 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
                 <div class="field">
                     <label for="">Date</label><br>
-                    <input type="date" name="date" id="date">
+                    <input type="date" name="date" id="current-date" placeholder="">
                 </div>
-
+                <script>
+                    var today = new Date().toISOString().substr(0, 10);
+                    document.getElementById("current-date").value = today;
+                </script>
                 <div class="field">
                     <label for="">Department</label><br>
                     <select name="department" id="department">
@@ -279,17 +278,22 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </div>
         </div>
     </div>
-    <script src="<?php echo BASEURL.'/js/patientTemp.js'; ?>"></script>
     <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
+    
     <script type="text/javascript">
         $(function(){
             $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
                 $('#login-modal').fadeIn().css("display","flex");
             });
             $('.cancel-modal').click(function(){
                 $('#login-modal').fadeOut();
             });
         });
+
+        
     </script>
 </body>
 </html>

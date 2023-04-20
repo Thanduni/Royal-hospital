@@ -66,8 +66,6 @@ function displayDoctorUpdateForm(nic) {
 
     let department = tableCon[0].textContent;
 
-    // alert(tableCon[0].textContent);
-
 
     let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");

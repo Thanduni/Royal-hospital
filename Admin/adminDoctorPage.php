@@ -1,6 +1,5 @@
 <?php
 session_start();
-//die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     ?>
@@ -43,17 +42,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/adminTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
-<!--            <div class="title">-->
-<!--                <img src="../images/logo5.png" alt="logo">-->
-<!--                Royal Hospital Management System-->
-<!--            </div>-->
-<!--            <ul>-->
-<!--                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>-->
-<!--                <li class="logout"><a href="--><?php //echo BASEURL . '/Homepage/logout.php?logout' ?><!--">Logout-->
-<!--                        <img-->
-<!--                                src="../images/logout.svg">-->
-<!--                    </a></li>-->
-<!--            </ul>-->
             <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Doctor
             </div>
@@ -70,19 +58,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
-
-//                $numberPages = 3;
-//                $totalPages = ceil($rows / $numberPages);
-//
-//                if (isset($_GET['page'])) {
-//                    $page = $_GET['page'];
-//                } else {
-//                    $page = 1;
-//                }
-//
-//                $startinglimit = ($page - 1) * $numberPages;
-//                $query = "SELECT user.nic, doctor.doctorID, user.name, doctor.department, user.profile_image FROM doctor inner join user where doctor.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
-//                $result = $con->query($query);
                 ?>
                 <div class="wrapper">
                     <div class="table">
@@ -145,25 +120,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 </div>
 
             </div>
-<!--            <div class="pagination-container">-->
-<!--                <div class="pagination">-->
-<!--                    <ul class="pagination-2">-->
-<!---->
-<!--                        --><?php
-//                        for($btn=1;$btn<=$totalPages;$btn++){
-//                            echo '<a href="adminDoctorPage.php?page='.$btn.'"><li class="page-number active">'.$btn.'</li></a>';
-//                        }
-//
-//                        ?>
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
+
         </div>
         </div>
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" onsubmit="return validateDoctorForm()" enctype="multipart/form-data" id="addForm" name="userForm">
+            <form method="post" onsubmit="return validateNurseReceptionistStorekeeperForm()" enctype="multipart/form-data" id="addForm" name="userForm">
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Add user</p>
                 <table>
@@ -194,8 +157,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                     </tr>
                         <td></td>
                         <td colspan="2">
-                            <button type="submit" id="submit" name="addDoctor">Apply</button>
-                            <button name="cancel" id="cancel">Cancel</button>
+                            <button class="custom-btn" type="submit" id="submit" name="addDoctor">Apply</button>
+                            <button name="cancel" class="custom-btn" id="cancel">Cancel</button>
                         </td>
                     </tr>
                 </table>
@@ -204,7 +167,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
     </div>
 
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
-    <script src=<?php echo BASEURL . '/js/validateDoctor.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateRecepStoreNurse.js' ?>></script>
 
     <?php
     if (@$_GET['task'] == "insertDoctor") {

@@ -216,8 +216,6 @@ if(isset($_POST['submit-doctor-note'])) {
                         </div>
                     </div>
                 </div> -->
-
-
             </div>
         </div>
     </div>

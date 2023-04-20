@@ -39,12 +39,25 @@ if (isset($_POST['addUser'])) {
     $dob = $_POST['dob'];
     $profile_image = $new_img_name;
 
-    $query = "select * from user where nic ='".$nic."'";
-    $result = mysqli_query($con, $query);
-    $num_rows = mysqli_num_rows($result);
+//    $query = "select * from user where nic ='".$nic."'";
+//    $result = mysqli_query($con, $query);
+//    $num_rows = mysqli_num_rows($result);
 
-    if($num_rows > 0){
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php?msg=The user is already exist!");
+    $countUserNIC = "SELECT * FROM user WHERE nic = '$nic' ;";
+    $resultCountUserNIC = mysqli_query($con, $countUserNIC);
+    $num_rows_user_nic = mysqli_num_rows($resultCountUserNIC);
+
+    if($num_rows_user_nic > 0){
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?warning=The Username exists try another NIC.");
+        exit();
+    }
+
+    $countUserEmail = "SELECT * FROM user WHERE email = '$email' ;";
+    $resultCountUserEmail = mysqli_query($con, $countUserEmail);
+    $num_rows_user_email = mysqli_num_rows($resultCountUserEmail);
+
+    if($num_rows_user_email > 0){
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?warning=The Email exists try another Email.");
         exit();
     }
 
@@ -55,32 +68,33 @@ if (isset($_POST['addUser'])) {
     $nic_query = "SELECT nic FROM user WHERE user_role = 'Receptionist' or user_role = 'Admin'";
     $result_nic = mysqli_query($con, $nic_query);
 
-    while($nic = mysqli_fetch_assoc($result_nic)['nic']){
+    while($nicRow = mysqli_fetch_assoc($result_nic)){
+        $nicRowMember = $nicRow['nic'];
         $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
-              VALUES ('$nic','$userRole $name has been registered to the system.',CURRENT_TIMESTAMP)";
+              VALUES ('$nicRowMember','$userRole $name has been registered to the system.',CURRENT_TIMESTAMP)";
         $result = mysqli_query($con, $query);
     }
 
     if ($userRole == "Nurse"){
         $query = "INSERT INTO nurse(nic) VALUES ('$nic');";
         $result = mysqli_query($con, $query);
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php");
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user nurse added to the system successfully.");
         exit();
     }
     else if($userRole == "Receptionist"){
         $query = "INSERT INTO receptionist(nic) VALUES ('$nic');";
         $result = mysqli_query($con, $query);
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php");
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user receptionist added to the system successfully.");
         exit();
     }
     else if ($userRole == "Storekeeper"){
         $query = "INSERT INTO storekeeper(nic) VALUES ('$nic');";
         $result = mysqli_query($con, $query);
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php");
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user Receptionist added to the system successfully.");
         exit();
     }
     else if($userRole == "Doctor"){
-        header("location:" . BASEURL . "/Admin/adminDoctorPage.php?task=insertDoctor&nic=".$nic);
+        header("location:" . BASEURL . "/Admin/adminDoctorPage.php?task=insertDoctor&nic=$nic");
         exit();
     }
 

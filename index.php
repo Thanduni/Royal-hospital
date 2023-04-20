@@ -15,6 +15,9 @@ if (!isset($_SESSION['mailaddress'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/index.css' ?>">
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
         <!--    <link rel="stylesheet" href="css/navandfooter.css">-->
         <title>Home</title>
@@ -40,6 +43,22 @@ if (!isset($_SESSION['mailaddress'])) {
 
     <body>
     <section class="header">
+        <div class="displayInfo">
+<!--            <div>-->
+<!--                <i id="close" class="fa-solid fa-rectangle-xmark" onclick="hideDetails()"></i>-->
+<!--            </div>-->
+<!--            <div id="imgHolder">-->
+<!--                <img src="uploads/art-hauntington-jzY0KRJopEI-unsplash.jpg">-->
+<!--                <text style="font-weight: 600; font-size: 25px">Raman</text>-->
+<!--            </div>-->
+<!--            <hr style="width: 80%;">-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <strong>Phone:</strong>-->
+<!--                    <span>077 848 9936</span>-->
+<!--                </li>-->
+<!--            </ul>-->
+        </div>
         <?php include(BASEURL . '/Components/Navbar.php'); ?>
         <div class="slider">
             <input type="radio" name="slider" title="slide1" checked="checked" class="slider__nav"/>
@@ -127,19 +146,19 @@ if (!isset($_SESSION['mailaddress'])) {
         <section class="hero-section">
             <div class="card-grid">
                 <div class="card">
-                    <div class="card__background" style="background-image: url(images/gas.jpg);    box-shadow: 8px 8px 22px var(--dec-color-3), -8px -8px 22px var(--dec-color-3);"></div>
+                    <div class="card__background" style="background-image: url(images/gas.jpg);    box-shadow: 8px 8px 22px var(--primary-color), -8px -8px 22px var(--primary-color);"></div>
                     <div class="card__content">
                         <h3 class="card__heading">Gastroenterology</h3>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card__background" style="background-image: url(images/neurology.jpg);    box-shadow: 8px 8px 22px var(--dec-color-1), -8px -8px 22px var(--dec-color-1);"></div>
+                    <div class="card__background" style="background-image: url(images/neurology.jpg);    box-shadow: 8px 8px 22px var(--primary-color), -8px -8px 22px var(--primary-color);"></div>
                     <div class="card__content">
                         <h3 class="card__heading">Neurology</h3>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card__background" style="background-image: url(images/heart.jpg);    box-shadow: 8px 8px 22px var(--dec-color-4), -8px -8px 22px var(--dec-color-4);"></div>
+                    <div class="card__background" style="background-image: url(images/heart.jpg);    box-shadow: 8px 8px 22px var(--primary-color), -8px -8px 22px var(--primary-color);"></div>
                     <div class="card__content">
                         <h3 class="card__heading">Cardiology</h3>
                     </div>
@@ -168,13 +187,12 @@ if (!isset($_SESSION['mailaddress'])) {
                     <div class="card__content">
                         <p class="card__category"><?php echo $row['department'] ?></p>
                         <h3 class="card__heading"><?php echo $row['name'] ?></h3>
-                        <button id="doctor_<?php echo $row['doctorID']; ?>" class="hide custom-btn">View details</button>
+                        <button id="doctor_<?php echo $row['doctorID']; ?>" class="hide doctorInfo custom-btn" onclick="displayDetails(<?php echo $row['nic'] ?>)">View details</button>
                     </div>
                 </div>
         <?php } ?>
                     <div>
         </section>
-
 
         <?php include(BASEURL . '/Components/Footer.php'); ?>
 
@@ -205,11 +223,10 @@ if (!isset($_SESSION['mailaddress'])) {
         }
     </script>
 
+    <script src="<?php echo BASEURL . '/js/docInfo.js' ?>"></script>
     </body>
 
     </html>
-
-
     <?php
 } else {
     header("location: " . BASEURL . "/Homepage/login.php");

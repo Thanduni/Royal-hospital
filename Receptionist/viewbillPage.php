@@ -48,7 +48,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Bills
             </div>
             <div class="filter">
-                <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+                <input type="text" id="myInputName" onkeyup="filterByNamePatient()" placeholder="Search for names.." title="Type in a name">
             </div>
 
             <div class="userClass">

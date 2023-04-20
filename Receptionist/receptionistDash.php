@@ -45,7 +45,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <aside>
                 <div class="actorCards">
                     <ul>
-                        <a href="">
+                        <a href="<?php echo BASEURL . '/Receptionist/makeAppointment.php' ?>">
                             <li class="tab-cards" id="appointments">Make Appointment
                                 <div>
                                     <img class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/calenderCard.png"?>" alt="">
@@ -77,61 +77,80 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     </ul>
                 </div>
                 <?php
-                $np_service = mysqli_query($con, "select sum(cost) from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'not paid' 
+                $np_service = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'not paid' 
                                 and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) group by purchases.item_flag having purchases.item_flag = 's';");
-                $np_test = mysqli_query($con, "select sum(cost) from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'not paid'
-                and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag having purchases.item_flag = 't';");
-                $np_drug = mysqli_query($con, "select sum(unit_price) from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'not paid' 
-                            and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag HAVING purchases.item_flag = 'd';");
+                $np_test = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'not paid'
+                                and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag having purchases.item_flag = 't';");
+                $np_drug = mysqli_query($con, "select sum(unit_price * quantity) as cost from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'not paid' 
+                                and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag HAVING purchases.item_flag = 'd';");
 
                 $np_sum = 0;
+                $np_serviceRow = mysqli_fetch_assoc($np_service);
+                $np_testRow = mysqli_fetch_assoc($np_test);
+                $np_drugRow = mysqli_fetch_assoc($np_drug);
+                if(isset($np_serviceRow['cost']))
+                {
+                    $np_sum += intval($np_serviceRow['cost']);
+                }
+                if(isset($np_testRow['cost'])){
+                    $np_sum += intval($np_testRow['cost']);
+                }
+                if(isset($np_drugRow['cost'])){
+                    $np_sum += intval($np_drugRow['cost']);
+                }
 
-                if(isset(mysqli_fetch_array($np_service)['sum(service.cost)']))
-                    $np_sum += mysqli_fetch_array($np_service)['sum(service.cost)'];
-                if(isset(mysqli_fetch_array($np_test)['sum(test.cost)']))
-                    $np_sum += mysqli_fetch_array($np_test)['sum(test.cost)'];
-                if(isset(mysqli_fetch_array($np_drug)['sum(item.unit_price)']))
-                    echo(mysqli_fetch_array($np_drug)['sum(item.unit_price)']);
-//                    $np_sum += mysqli_fetch_array($np_drug)['sum(unit_price)'];
-
-
-                $p_service = mysqli_query($con, "select sum(cost) from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'paid' 
+                $p_service = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join service on purchases.item = service.serviceID where purchases.paid_status = 'paid' 
                                 and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) group by purchases.item_flag having purchases.item_flag = 's';");
-                $p_test = mysqli_query($con, "select sum(cost) from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'paid'
-                and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag having purchases.item_flag = 't';");
-                $p_drug = mysqli_query($con, "select sum(unit_price) from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'paid' 
-                            and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag HAVING purchases.item_flag = 'd';");
+                $p_test = mysqli_query($con, "select sum(cost * quantity) as cost from purchases inner join test on purchases.item = test.testID where purchases.paid_status = 'paid'
+                                and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag having purchases.item_flag = 't';");
+                $p_drug = mysqli_query($con, "select sum(unit_price * quantity) as cost from purchases inner join item on purchases.item = item.itemID where purchases.paid_status = 'paid' 
+                                and MONTH(purchases.date) = MONTH(NOW()) and YEAR(purchases.date) = YEAR(NOW()) GROUP BY purchases.item_flag HAVING purchases.item_flag = 'd';");
 
                 $p_sum = 0;
+                $p_serviceRow = mysqli_fetch_assoc($p_service);
+                $p_testRow = mysqli_fetch_assoc($p_test);
+                $p_drugRow = mysqli_fetch_assoc($p_drug);
 
-                if(isset(mysqli_fetch_array($p_service)['sum(cost)']))
-                    $p_sum += mysqli_fetch_array($p_service)['sum(cost)'];
-                if(isset(mysqli_fetch_array($p_test)['sum(test.cost)']))
-                    $p_sum += mysqli_fetch_array($p_test)['sum(test.cost)'];
-                if(isset(mysqli_fetch_array($p_drug)['sum(item.unit_price)']))
-                    $p_sum += mysqli_fetch_array($p_drug)['sum(item.unit_price)'];
+                if(isset($p_serviceRow['cost'])){
+                    $p_sum += intval($p_serviceRow['cost']);
+                }
+                if(isset($p_testRow['cost'])){
+                    $p_sum += intval($p_testRow['cost']);
+                }
+                if(isset($p_drugRow['cost'])){
+                    $p_sum += intval($p_drugRow['cost']);
+                }
 
                 ?>
                 <div style="display: flex; flex-wrap: wrap">
                     <div class="BundleCard">
                         <div class="costInfo">
-                            <div>
+                            <div class="first">
                                 <div id="id1">
                                     <img class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/profit.png"?>" alt="">
                                 </div>
-                                <div id="id2">
-                                    Income<?php echo "hey".$np_sum."hey"?>
-                                </div>
-                            </div>
-                            <div>
                                 <div id="id1">
                                     <img class="cardIcon" style="float: right" src="<?php echo BASEURL."/images/loss.png"?>" alt="">
+                                </div>
+                            </div>
+                            <div class="second">
+                                <div id="id2">
+                                    Income
                                 </div>
                                 <div id="id2">
                                     Pending payment
                                 </div>
                             </div>
+                            <div class="third">
+                                <div>
+                                    <?php echo "Rs.".$p_sum?>
+                                </div>
+                                <div>
+                                    <?php echo "Rs.".$np_sum?>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="graph">
                             <canvas id="myChart"></canvas>
                         </div>
