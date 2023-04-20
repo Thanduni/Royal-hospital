@@ -10,8 +10,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 ?>
 <?php
-if(isset($_GET['last_id'])){
-    $last_id = $_GET['last_id'];
+if(isset($_GET['prescriptionID'])){
+    $prescriptionID = $_GET['prescriptionID'];
 }
 ?>
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ if(isset($_GET['last_id'])){
                                             $frequency = $_POST['frequency'];
                             
                                             foreach ($drugName as $key => $value){
-                                             $save = "INSERT INTO prescribed_drugs(drug_name,days,quantity,frequency,prescriptionID) VALUES ('".$value."','".$dosage[$key]."','".$days[$key]."','".$frequency[$key]."','".$last_id."');";
+                                             $save = "INSERT INTO prescribed_drugs(drug_name,days,quantity,frequency,prescriptionID) VALUES ('".$value."','".$dosage[$key]."','".$days[$key]."','".$frequency[$key]."','".$prescriptionID."');";
                             
                                              $query = mysqli_query($con,$save);
                                             }
@@ -89,7 +89,7 @@ if(isset($_GET['last_id'])){
                                 </thead>
                                 <tbody>
                                 <?php 
-                                $select = "SELECT * from prescribed_drugs where prescriptionID =$last_id";
+                                $select = "SELECT * from prescribed_drugs where prescriptionID =$prescriptionID";
                                 $result = mysqli_query($con,$select);
                             
                                 while($row= mysqli_fetch_array($result)){?>
