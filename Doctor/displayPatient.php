@@ -54,8 +54,8 @@ if(isset($_POST['submit-doctor-note'])) {
 
     $prescription = "INSERT into prescription(date,age,patientID,doctorID,investigation,impression) values('$date','$age','$patientID','$doctorID','$investigation','$impression');";    
     if(mysqli_query($con,$prescription)){
-        $last_id = mysqli_insert_id($con);
-        printf("new record added had id %d ", $last_id);
+        $prescriptionID = mysqli_insert_id($con);
+        printf("new record added had id %d ", $prescriptionID);
     }else{
         echo "Error";
     }
@@ -161,7 +161,7 @@ if(isset($_POST['submit-doctor-note'])) {
 
 
                 <div class="doctor-action">
-                    <a href="prescription.php?patientid=<?=$patientID?>&name=<?=$patientName?>&last_id=<?=$last_id?>&doctorID=<?=$doctorID?>">
+                    <a href="prescription.php?patientid=<?=$patientID?>&prescriptionID=<?=$prescriptionID?>&doctorID=<?=$doctorID?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
