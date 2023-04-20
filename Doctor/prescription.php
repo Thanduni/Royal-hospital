@@ -13,6 +13,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 if(isset($_GET['prescriptionID'])){
     $prescriptionID = $_GET['prescriptionID'];
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,8 +76,8 @@ if(isset($_GET['prescriptionID'])){
                                         <td><input type="button" name="addd" class="add" value="Add"></td>
                                     </tr>
                                     </div>
-                                    <input type="submit" class="btn-success" name="save" id="save" value="save data">
                                 </table>
+                                <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
                         
@@ -86,6 +88,8 @@ if(isset($_GET['prescriptionID'])){
                                     <th>Dosage (per day)</th>
                                     <th>Frequency (per day)</th>
                                     <th>No of days</th>
+                                    <th>Edit</th>
+                                    <th>Remove</th>
                                 </thead>
                                 <tbody>
                                 <?php 
@@ -98,6 +102,8 @@ if(isset($_GET['prescriptionID'])){
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td><?php echo $row['frequency'] ?></td>
                                     <td><?php echo $row['days'] ?></td>
+                                    <td><input type="button" name="edit" class="edit-prescription" value="Edit"></td>
+                                    <td><input type="button" name="remove" class="remove-prescription" value="Remove"></td>
                                 </tr>
                                 <?php
                                 } ?>
@@ -141,21 +147,7 @@ if(isset($_GET['prescriptionID'])){
                 $(row_med).remove();
             });
 
-            //ajax request to save all medicines
-            // $("#insert_form").submit(function(e){
-            //     e.preventDefault();
-            //     $("#save").val('Saving...');
-            //     $.ajax({
-            //         url: 'action.php?',
-            //         method: 'post',
-            //         data: $(this).serialize(),
-            //         success: function(response){
-            //             console.log(response);
-            //             // $("#save").val('Save Data');
-            //             // $("#insert_form")[0].reset();
-            //         }
-            //     });
-            // });
+
 
         });
     </script>
