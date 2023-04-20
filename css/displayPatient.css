@@ -19,34 +19,32 @@
 }} */
 .patient-detail-container{
     width: 100%;
-    padding: 30px 30px 30px;
+    padding: 50px 50px 0 50px;
     border-radius: 10px;
     /* box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08); */
-    /* background: #FFF; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: fit-content;
-    /* margin-bottom: 5%; */
 }
 .patient-detail-container .left-container{
-    width: 35%;
+    width: 30%;
     background: #24354E;
     color: #fff;
+    padding: 30px 30px 30px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin: 20px 0 20px 20px;
 }
 .patient-detail-container .right-container{
     width: 55%;
+    margin: 20px 0;
     background: #fff;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08); 
 }
 
-.patient-detail-container .left-container {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    padding: 20px;
-}
 .patient-detail-container .left-container .patient-image{
     text-align: center;
     padding-bottom: 20px;
@@ -81,12 +79,10 @@
 .patient-detail-container .right-container .form-group{
     text-align: left;
     padding: 1rem;
-    margin-bottom: 1rem;
     width: -webkit-fill-available !important;
 }
 .patient-detail-container .right-container label{
     display: inline-block;
-    margin-bottom: 0.5rem;
     color: #000;
     text-transform: uppercase;
     font-size: 15px;
@@ -143,9 +139,10 @@
 
 .doctor-action{
     width: 20%;
-    padding: 20px;
+    padding:0 20px;
     display: flex;
     flex-direction: row;
+    margin: 0 20px;
 }
 .doctor-action .add-doctor-note{
     padding: 20px;
