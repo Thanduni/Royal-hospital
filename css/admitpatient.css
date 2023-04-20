@@ -1,74 +1,72 @@
+.display-container{
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+    display: block;
+}
 .admit-patient-container{
-    width: 60%;
-    padding: 10px 20px;
-    margin: 10% auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
+    width: 100%;
+    padding: 50px 50px 0 50px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: center;
+}
+.admit-patient-container .admit-patient-detail{
+    width: 55%;
+    margin: 20px 0;
+    background: #fff;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
     box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    padding: 0 30px; 
 }
-.admit-patient-container form {
-    display: flex;
-    text-align: center;
+.admit-patient-container .admit-patient-detail h2{
+    padding: 20px;
+    font-size: 20px;
+}
+.admit-patient-container .admit-patient-detail form{
+    padding: 0 20px;
+}
+.admit-patient-container .admit-patient-detail .form-group{
+    text-align: left;
+    padding: 1rem;
+    width: -webkit-fill-available !important;
+}
+.admit-patient-container .admit-patient-detail .form-group label{
+    display: inline-block;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+}
+.admit-patient-container .admit-patient-detail .form-group input{
+    background: #fff;
+    color: rgba(0,0,0,0.8);
+    border-radius: 2px;
+    font-weight: 400;
+    line-height: 1.8;
+    border: none;
+    display: block;
+    width: -webkit-fill-available;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 10px;
+}
+.popup{
+    background: rgba(0, 0, 0, 0.6);
     width: 100%;
-    flex-direction: column;
-    align-content: center;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    /* display: none; */
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
-.form-column{
-    display: flex;
-    flex-direction: row;
-}
-.form-row-name{
-    display: flex;
-    flex-direction: column;
-    padding: 10px 0 10px 20px;
-    text-align: initial;
-}
-.form-row-name .label{
-    padding: 1em 0 1em 2em;
-    color: #6096B4;
-    /* padding: 1em; */
-    line-height: 1;
-    margin-bottom: 1em;
-    width: 100%;
-}
-.form-row-content{
-    display: flex;
-    flex-direction: column;
-    padding:  10px 20px;
-    text-align: initial;
-}
-.form-row-content .input-feild{
-    padding: 1em;
-    line-height: 1;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    margin-bottom: 1em;
-    width: 100%;
-    border-radius: 5px;
-    /* border: 1px solid gray;
-    border-radius: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    color: black; */
-}
-/* .from-row{
-    display: flex;
-    flex-direction: row;
-    padding: 5px 10px;
-}
-.form-row-name{
-    width: 30%;
-    padding: 5px 10px;
-    
-}
-.form-row-content{
-    padding: 5px 10px;
-} */
 .confirm-popup{
     width: 400px;
     background: #fff;
@@ -80,21 +78,22 @@
     text-align: center;
     padding: 0 30px 30px;
     color: #333;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 .confirm-popup img{
     width: 100px;
-    margin-top: -50%;
+    margin-top: -50px;
     border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 .confirm-popup h2{
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 500;
     margin: 30px 0 10px;
 }
 .confirm-popup button{
-    width: 100%;
+    width: 35%;
     margin-top: 50px;
     padding: 10px 0;
     background: #6fd649;
@@ -104,4 +103,6 @@
     font-size: 18px;
     border-radius: 4px;
     cursor: pointer;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    float: none;
 }

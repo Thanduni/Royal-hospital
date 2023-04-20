@@ -102,8 +102,8 @@ if(isset($_GET['prescriptionID'])){
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td><?php echo $row['frequency'] ?></td>
                                     <td><?php echo $row['days'] ?></td>
-                                    <td><input type="button" name="edit" class="edit-prescription" value="Edit"></td>
-                                    <td><input type="button" name="remove" class="remove-prescription" value="Remove"></td>
+                                    <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td>
+                                    <td><a href=""><input type="button" name="remove" class="remove-prescription" value="Remove"></a></td>
                                 </tr>
                                 <?php
                                 } ?>

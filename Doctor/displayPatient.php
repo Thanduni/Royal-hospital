@@ -47,7 +47,6 @@ if($result){
 
 if(isset($_POST['submit-doctor-note'])) {
     $date = $_POST['date'];
-    $age = $_POST['age'];
     $investigation = $_POST['investigation'];
     $impression = $_POST['impression'];
     $patientID = $_POST['patientID'];
@@ -136,10 +135,6 @@ if(isset($_POST['submit-doctor-note'])) {
                                     <input type="text" name="patientID" value ="<?php echo $patientID?>">
                                 </div>
                                 <div class="form-group">
-                                    <label>Age: </label>
-                                    <input type="text" name="age" value="<?php echo $age?>">
-                                </div>
-                                <div class="form-group">
                                     <label for="">Date</label>
                                     <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>" min="<?php echo $mindate?>">
                                 </div>
@@ -149,16 +144,14 @@ if(isset($_POST['submit-doctor-note'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="">Impression</label>
-                                    <!-- <input type="text" name="impression" placeholder="Impression" id=""> -->
-                                    <textarea name="impression" id="" cols="30" rows="4" placeholder="Impression"></textarea>
+                                    <input type="text" name="impression" placeholder="Impression" id="">
+                                    <!-- <textarea name="impression" id="" cols="30" rows="4" placeholder="Impression"></textarea> -->
                                 </div>
                                 <button class="addPrescription-button" type="submit" name="submit-doctor-note">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="doctor-action">
                     <a href="prescription.php?patientid=<?=$patientID?>&prescriptionID=<?=$prescriptionID?>&doctorID=<?=$doctorID?>">
@@ -187,7 +180,7 @@ if(isset($_POST['submit-doctor-note'])) {
                     </div>
                     </a> -->
 
-                    <a href="admitpatient.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>">
+                    <a href="admitpatient.php?patientid=<?=$patientID?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
