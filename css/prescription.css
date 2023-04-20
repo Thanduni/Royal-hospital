@@ -43,9 +43,39 @@
 .prescription-group input{
     padding: 1em;
     line-height: 1;
-    background-color: #fff;
     border: 1px solid #e5e5e5;
     border-radius: 3px;
+}
+/* input[type=button]{
+    padding: 1em;
+    line-height: 1;
+    border-radius: 3px;
+    color: #fff;
+} */
+.add{
+    background: #00A2ED;
+    color: #FFF;
+    cursor: pointer;
+}
+.save-prescription{
+    background: #28a745;
+    color: #FFF;
+    cursor: pointer;
+}
+.remove{
+    background: #dc3545;
+    color: #fff;
+    cursor: pointer;
+}
+.edit-prescription{
+    background: #ffc107;
+    color: #fff;
+    cursor: pointer;
+}
+.remove-prescription{
+    background:#6c757d ;
+    color: #fff;
+    cursor: pointer
 }
 .prescription-group label{
     margin-top: 20px;
@@ -118,7 +148,6 @@
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     line-height: 1;
-    background-color: #fff;
 }
 
 .prescribe-medicine-content .form-middle table{
@@ -145,10 +174,27 @@
     flex-wrap: wrap;
     padding: 0 33px 30px;
 }
-.show-prescription table td{
+.show-prescription table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.show-prescription table th{
+    font-size: medium;
+    color: #000;
+    padding: 8px;
     text-align: left;
-    padding: 8px 10px;
-    background: #fff;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.show-prescription table td{
+    padding: 8px ;
+    text-align: left;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .prescribe-test-content{
     display: none;
