@@ -61,8 +61,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    visibility: hidden;
-    /* display: none; */
+    display: none;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -105,4 +104,8 @@
     cursor: pointer;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     float: none;
+}
+.admit-patient-container .admit-patient-detail .form-row{
+    display: flex;
+    flex-direction: row;
 }

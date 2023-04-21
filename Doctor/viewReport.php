@@ -10,13 +10,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
   $doctorID = $row["doctorID"];
     ?>
 
+<?php
+if(isset($_GET['patientid'])){
+    $patientID = $_GET['patientid'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/inpatient.css' ?>">
@@ -33,8 +37,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     </style>   
     <title>inpatients</title> 
 </head>
-
-
 <body>
     <div class="user">
     <?php 
@@ -46,32 +48,27 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
           ?>
             <div class="display-container">
                 <div class="show-inpatients">
-                    <h3>Patient List</h3>
+                    <h3>Daily Reports</h3>
                     <table class="table">
                         <thead>
-                          <!-- <th>Profile Picture</th>     -->
-                          <th>Patient</th>
-                          <th>Room No</th>
-                          <th>Option</th>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Temperature</th>
+                          <th>Blood Preasure</th>
+                          <th>O2 Saturation</th>
                         </thead>
                         <tbody>
                             <?php 
-                                $select = "select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID where doctorID=$doctorID";
+                                $select = "SELECT daily_report.*, inpatient.admit_date from daily_report join inpatient on inpatient.patientID=daily_report.patientID WHERE date between inpatient.admit_date and CURDATE();";
                                 $result = mysqli_query($con,$select);
                             
                                 while($row= mysqli_fetch_array($result)){?>
                                 <tr>
-                                    <td><div class="left-cell">
-                                            <?php echo "<img src='".BASEURL."/uploads/".$row['profile_image']."'width = 40px height=40px>";?>
-                                        </div>
-                                        <div class="right-cell">
-                                            <div class="up-cell"><?php echo $row['name'] ?></div>
-                                            <div class="down-cell">id :<?php echo $row['patientID'] ?></div>
-                                        </div>
-                                    </td>
-                                    <td><?php echo $row['room_no'] ?></td>
-                                    <td><a href="viewReport.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-reports" class="view-reports" value="View Reports"></a>
-                                    <a href="discharge.php?patientid=<?=$row['patientID']?>"><input type="button" name="discharge" class="discharge" value="Discharge"></a></td>
+                                    <td><?php echo $row['date'] ?></td>
+                                    <td><?php echo $row['time'] ?></td>
+                                    <td><?php echo $row['temperature'] ?></td>
+                                    <td><?php echo $row['blood_preasure'] ?></td>
+                                    <td><?php echo $row['o2_saturation'] ?></td>
                                 </tr>
                                 <?php
                                 } ?>
@@ -80,22 +77,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 </div>
             </div>
         </div>
-    </div>
-<?php
-if(isset($_POST['discharge'])){
-
-    $sql = "DELETE from inpatient WHERE patientID = $patientID;";
-    // $sql = "INSERT INTo room(room_availability) VALUES('available');";
-    $addresult=mysqli_query($con,$sql);
-
-    if($addresult){
-        header('location:inpatient.php');
-    }else{
-        die(mysqli_error($con));
-    }
-}
-?>   
-    
+    </div>  
 </body>
 </html>
 <?php
