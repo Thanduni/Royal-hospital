@@ -1,0 +1,67 @@
+.show-inpatients {
+    width: 80%;
+    margin: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
+.show-inpatients h3{
+    padding: 20px;
+
+}
+.show-inpatients table{
+    border-collapse: collapse;
+    width: 90%;
+    box-shadow: none;
+    border-radius: 0;
+}
+.show-inpatients table img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.show-inpatients table th{
+    font-size: medium;
+    color: #000;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.show-inpatients table td{
+    padding: 0 8px ;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.show-inpatients table td:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* text-align: center; */
+}
+.right-cell {
+    padding: 17px 0;
+}
+.show-inpatients input{
+    padding: 1em;
+    line-height: 1;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+.show-inpatients .view-reports{
+    background: #ffc107;
+    color: #fff;
+    cursor: pointer;
+}
+.show-inpatients .discharge{
+    background: #00A2ED;
+    color: #fff;
+    cursor: pointer;
+}
