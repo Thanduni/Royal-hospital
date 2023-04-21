@@ -54,7 +54,7 @@ if(isset($_POST['submit-doctor-note'])) {
     $prescription = "INSERT into prescription(date,age,patientID,doctorID,investigation,impression) values('$date','$age','$patientID','$doctorID','$investigation','$impression');";    
     if(mysqli_query($con,$prescription)){
         $prescriptionID = mysqli_insert_id($con);
-        printf("new record added had id %d ", $prescriptionID);
+        // printf("new record added had id %d ", $prescriptionID);
     }else{
         echo "Error";
     }
@@ -132,11 +132,11 @@ if(isset($_POST['submit-doctor-note'])) {
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="">Patient ID</label>
-                                    <input type="text" name="patientID" value ="<?php echo $patientID?>">
+                                    <input type="text" name="patientID" value ="<?php echo $patientID?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Date</label>
-                                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>" min="<?php echo $mindate?>">
+                                    <input type="date" name="date" value ="<?php echo date('Y-m-d') ?>" min="<?php echo $mindate?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Investigation</label>
@@ -167,19 +167,6 @@ if(isset($_POST['submit-doctor-note'])) {
                     </div>
                     </a>
 
-                    <!-- <a href="doctornote.php?patientid=<?=$patientID?>&name=<?=$patientName?>&age=<?=$age?>&doctorID=<?=$doctorID?>">
-                    <div class="doctor-card">
-                        <div class="card-content">
-                            <div class="card-name">
-                              Add Doctor Note
-                            </div>
-                        </div>
-                        <div class="icon-box">
-                            <i class="fa fa-pencil-square"></i>
-                        </div>
-                    </div>
-                    </a> -->
-
                     <a href="admitpatient.php?patientid=<?=$patientID?>">
                     <div class="doctor-card">
                         <div class="card-content">
@@ -194,62 +181,9 @@ if(isset($_POST['submit-doctor-note'])) {
                     </a>
                 </div>
 
-                
-
-                <!-- <div class="Admit-patient-alert">
-                    <div class="popup" id="Admit-patient-popup">
-                        <div class="alert-content">
-                            <form method="post">
-                                <h4>Do you want to admit this patient?</h4>
-                                <div class="button-container">
-                                    <button type="submit" name ="updateRoom">Yes</button>
-                                    <button class="close-button" name ="close">No</button>
-                                </div>  
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
-<?php
-if(isset($_POST['submit-drug-prescription'])){
-    $drugname =  $_POST['drugname'];
-    $quantity = $_POST['quantity'];
-    $no_of_days = $_POST['no_of_days'];
-    $frequency = $_POST['frequency'];
-    $instructions = $_POST['instructions'];
-
-    $sql="INSERT INTO prescribed_drugs(drug_name,days,quantity,frequency) values('$drugname','$no_of_days','$quantity','$frequency');";
-    $result=mysqli_query($con,$sql);
-
-    // if($result){
-        
-    //     header('location:dailyReport.php?patientid='.$patientID.'&name='.$patientName);
-    // }else{
-    //     die(mysqli_error($con));
-    // }
-}
-?>
-<?php
-if(isset($_POST['submitdoctornote'])){
-    $date =  $_POST['date'];
-    $time = $_POST['time'];
-    $Investigation = $_POST['Investigation'];
-    $Impression = $_POST['Impression'];
-
-    $sql="INSERT INTO prescription(date,time,investigation,Impression,patientID,doctorID) values('$date','$time','$Investigation','$Impression','$patientID','$doctorID');";
-    $result=mysqli_query($con,$sql);
-
-    // if($result){
-        
-    //     header('location:dailyReport.php?patientid='.$patientID.'&name='.$patientName);
-    // }else{
-    //     die(mysqli_error($con));
-    // }
-}
-?>
-    
 </body>
 </html>
 <?php

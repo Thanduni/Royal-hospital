@@ -50,12 +50,16 @@ if($get_details){
         $admit_patient = "INSERT INTO inpatient(patientID,nic,admit_time,admit_date,room_no,doctorID) VALUES ('$patientID','$patientnic','$mintime','$mindate','$room_no','$doctorID');";
         $get_result=mysqli_query($con,$admit_patient);
 
-        if($get_result){
-            echo '
-            <script type="text/javascript">
-            document.getElementById("popup").style.visibility = "visible";
+        if($get_result){ ?>
+            <script>
+                document.getElementById("popup").style.display = "flex";
             </script>
-            ';
+        <?php
+            // echo '
+            // <script type="text/javascript">
+            // document.getElementById("popup").style.visibility = "visible";
+            // </script>
+            // ';
         }
     }
 ?>
@@ -71,12 +75,12 @@ if($get_details){
     <title>Admission</title>
 </head>
 <body>
-<div class="user">
+    <div class="user">
         <?php 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
         <div class="userContents" id="center">
-        <?php include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);?>
+            <?php include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);?>
             <div class="display-container">
                 <div class="admit-patient-container">
                     <div class="admit-patient-detail">
@@ -84,31 +88,33 @@ if($get_details){
                         <form method="post">
                             <div class="form-group">
                                 <label for="">Patient Name</label>
-                                <input type="text" name="patientName" value ="<?php echo $patientName ?>">
+                                <input type="text" name="patientName" value ="<?php echo $patientName ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Patient ID</label>
-                                <input type="text" name="patientID" value ="<?php echo $patientID?>">
+                                <input type="text" name="patientID" value ="<?php echo $patientID?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Age</label>
-                                <input type="text" name="age" value ="<?php echo $age?>">
+                                <input type="number" name="age" value ="<?php echo $age?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Room No</label>
-                                <input type="text" name="roomNo" value ="<?php echo $room_no?>">
+                                <input type="number" name="roomNo" value ="<?php echo $room_no?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Admit Date</label>
-                                <input type="text" name="admitDate" value ="<?php echo $mindate?>">
+                                <input type="date" name="admitDate" value ="<?php echo $mindate?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Admit Time</label>
-                                <input type="text" name="admitTime" value ="<?php echo $mintime?>">
+                                <input type="time" name="admitTime" value ="<?php echo $mintime?>" readonly>
                             </div>
-                        <button id="admit-btn" class="admit-patient-btn" type="submit" name="admit-patient">Admit Patient</button>
+                            <button id="admit-btn" class="admit-patient-btn" type="submit" name="admit-patient">Admit Patient</button>
                         </form>
+                    </div>
                 </div>
+            </div>
         </div>
     </div>
     <div class="popup" id="popup">
@@ -119,13 +125,13 @@ if($get_details){
             <button type="button" class="close-confirm-popup">OK</button>
         </div>
     </div>
-</body>
-<script>
+
+    <script>
     document.querySelector(".close-confirm-popup").addEventListener("click", function(){
                 document.querySelector(".popup").style.display = "none";
             })
-</script>
-
+    </script>
+</body>
 </html>
 <?php
 } else {
