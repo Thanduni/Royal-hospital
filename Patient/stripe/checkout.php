@@ -115,9 +115,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           $npaid3 = mysqli_fetch_assoc($res3);
 
           $npaid = $npaid1['sum(p.quantity*s.cost)'] + $npaid2['sum(p.quantity*t.cost)'] + $npaid3['sum(p.quantity*i.unit_price)'];
-
-          
-
+          $_SESSION['total'] = $npaid;
           ?>  
             
             <div class="arrow">
