@@ -60,7 +60,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             <div class="p-content">
             <div class="wrapper_p">
                 <div class="table_header"><h3 style="color: var(--primary-color);">Prescriptions</h3></div>
-                <div class="table">
+                <div class="table1">
                     <div class="row headerT">
                         <div class="cell">Date</div>
                         <div class="cell" style="width:300px;">Doctor Name</div>

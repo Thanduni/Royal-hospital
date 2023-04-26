@@ -276,6 +276,7 @@ table {
 
 .m-content {
     display: flex;
+    flex:2;
     box-sizing: unset;
     width: 905px;
     margin: 20px 20px 50px 50px;
@@ -292,6 +293,7 @@ table {
     /* width: 1060px;
     height: 730px; */
     margin-left: 20px;
+    flex:1;
     /* background-color: #fff; */
 
 }
