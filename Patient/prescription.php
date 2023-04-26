@@ -60,7 +60,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             <div class="p-content">
             <div class="wrapper_p">
                 <div class="table_header"><h3 style="color: var(--primary-color);">Prescriptions</h3></div>
-                <div class="table1">
+                <div class="table">
                     <div class="row headerT">
                         <div class="cell">Date</div>
                         <div class="cell" style="width:300px;">Doctor Name</div>
@@ -99,7 +99,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             </div>
 
             <div class="p-img">
-                    <img style="max-width: 412px;height:608px;" src="<?php echo BASEURL.'/images/prescription.png'?>" alt="">
+                    <img style="max-width: 700px;height:608px;position:absolute;" src="<?php echo BASEURL.'/images/prescription.png'?>" alt="">
             </div>
         </div>
 
