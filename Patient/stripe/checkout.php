@@ -128,7 +128,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
             </ul> -->
   
     <div class="boxPay">
-    <img src="<?php echo BASEURL.'/images/p-checkout.avif' ?>" alt="">
+    <img src="<?php echo BASEURL.'/images/p-checkout.png' ?>" alt="">
 
       <div class="product">
         <div class="description">

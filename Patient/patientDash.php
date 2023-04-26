@@ -96,7 +96,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
-            <a href="">
+            <a href="<?php echo BASEURL.'/Patient/summaryreport.php' ?>">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Summary</div>
@@ -106,7 +106,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
             </a>
 
-            <a href="">
+            <a href="<?php echo BASEURL.'/Patient/dailyreport.php' ?>">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Daily Reports</div>
@@ -125,7 +125,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 </div>
                 </div> 
             </a> 
-            <a id="open" target="_self" style="cursor:pointer">
+            <a  id="open" target="_self" style="cursor:pointer">
                 <div class="card">
                     <div class="card-content"></div>
                     <div class="card-name">Appointment</div>
@@ -148,13 +148,13 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 <div class="pcontent">
                     <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div>
                     <div class="height">
-                        <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.avif';?>" alt="">
+                        <div class="h-icon"><img src="<?php echo BASEURL.'/images/height.png';?>" alt="">
                             <div class="ce"><a>Height</a></div>
                         </div>
                         <div class="val"><?php echo $height;echo 'cm'; ?></div>
                     </div>
                     <div class="weight">
-                        <div class="w-icon"><img src="<?php echo BASEURL.'/images/weight.avif';?>" alt="">
+                        <div class="w-icon"><img src="<?php echo BASEURL.'/images/weight.png';?>" alt="">
                             <div class="ce"><a>Weight</a></div>
                         </div>
                         <div class="val"><?php echo  $weight;echo 'kg'; ?></div>

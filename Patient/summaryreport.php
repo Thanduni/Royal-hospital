@@ -18,20 +18,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Bill Details</title>
+    <title>Patient's Summary</title>
     <style>
         body{
             background-color: #f9f8ff;
-        }
-        
-        .table1 {
-            margin: 10px 0 0px 0;
-            width: 100%;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            height: 500px;
-            overflow-y: scroll;
-            border-style: none;
-            border-radius: 10px;
         }
         
     </style>
@@ -40,10 +30,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     <div class="user">
 
     <?php
-    $total = 0;
-    $total1 = 0;
-    $total2 = 0;
-    $npaid = 0;
     $name = urlencode( $_SESSION['name']);
     include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
     <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
@@ -54,17 +40,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
         ?>
         <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Prescriptions
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Summary
         </div>
         <div class="m-content">
             <div class="p-content">
             <div class="wrapper_p">
-                <div class="table_header"><h3 style="color: var(--primary-color);">Prescriptions</h3></div>
-                <div class="table1">
+                <div class="table_header"><h3 style="color: var(--primary-color);">Patient's Summary</h3></div>
+                <div class="table">
                     <div class="row headerT">
+                        <div class="cell" ">Nurse Name</div>
                         <div class="cell">Date</div>
-                        <div class="cell" style="width:300px;">Doctor Name</div>
-                        <div class="cell" style="width:300px;">Preview & Download</div>
+                        <div class="cell">Time</div>
+                        <div class="cell">Pulse</div>
+                        <div class="cell" style="width:180px;">Temperature</div>
+                        <div class="cell" style="width:180px;">Blood Preasure</div>
+                        <div class="cell" style="width:180px;">O2 Saturation</div>
                     </div>
                     <?php 
                         $nic = $_SESSION['nic'];
@@ -72,34 +62,42 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         $result_pid = mysqli_query($con, $pid_query);
                         $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-                        $query = "select p.date,u.name,p.prescriptionID,p.patientID,p.doctorID from prescription p inner join doctor d on p.doctorID = d.doctorID inner join user u on d.nic=u.nic where p.patientID = $pid";
+                        $query ="select * from daily_report where patientID = $pid";
                         $res = mysqli_query($con,$query);
 
                         while($rows = mysqli_fetch_assoc($res)){ ?>
                         <div class="row">
+                            <div class="cell" data-title="name">
+                                    <?php echo $rows['nurseID']; ?>
+                            </div>
                             <div class="cell" data-title="Date">
                                     <?php echo $rows['date']; ?>
                             </div>
-                            <div class="cell" data-title="Date">
-                                    <?php echo $rows['name']; ?>
+                            <div class="cell" data-title="time">
+                                    <?php echo $rows['time']; ?>
+                            </div>
+                            <div class="cell" data-title="text">
+                                    <?php echo $rows['pulse']; ?>
+                            </div>
+                            <div class="cell" data-title="text">
+                                    <?php echo $rows['temperature']; ?>
+                            </div>
+                            <div class="cell" data-title="text">
+                                    <?php echo $rows['blood_preasure']; ?>
+                            </div>
+                            <div class="cell" data-title="text">
+                                    <?php echo $rows['o2_saturation']; ?>
+                            </div>
 
-                            </div>
-                            <div class="cell" data-title="Option">
-                                <a href="<?php echo BASEURL.'/Patient/pdf/downloadprescription.php?id='.$rows['prescriptionID'].'&name='.$rows['doctorID']?>">
-                                <img style="width:250px;height:60px;position: relative;bottom: 0px;bottom: 0px;padding: 0px;" src=<?php echo BASEURL.'/images/download-pdf.png';?> alt="download">
-                            </a>    
-                            </div>
+  
                         </div>
+                    
                         <?php
                         
                         }
                     ?>
             </div>
             </div>
-            </div>
-
-            <div class="p-img">
-                    <img style="max-width: 412px;height:608px;" src="<?php echo BASEURL.'/images/prescription.jpg'?>" alt="">
             </div>
         </div>
 
