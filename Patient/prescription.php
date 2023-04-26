@@ -23,50 +23,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
-        .total .btn1{
-        font-weight: 0;
-        font-size: 16px;
-        color: #fff;
-        background-color:#0066cc;
-        padding: 10px 30px;
-        border: 2px solid #0066cc;
-        box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-        border-radius: 50px;
-        transition : 1000ms;
-        transform: translateY(0);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-        float: left;
+        
+        .table1 {
+            margin: 10px 0 0px 0;
+            width: 100%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            height: 500px;
+            overflow-y: scroll;
+            border-style: none;
+            border-radius: 10px;
         }
-
-        .total .btn1:hover{
-
-        transition : 1000ms;
-        padding: 10px 50px;
-        transform : translateY(-0px);
-        background-color: #fff;
-        color: #0066cc;
-        border: solid 2px #0066cc;
-        }
-
-        .np_cost{
-            display: grid;
-            justify-content: start;
-            margin-top: 20px;
-        }
-
-        .t_cost{
-            display: grid;
-            justify-content: start;
-            margin-top: 100px;
-        }
-
-        .total .card-image img{
-            width:300px;
-            height: 200px;
-        }
+        
     </style>
 </head>
 <body>
@@ -88,6 +55,54 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         ?>
         <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Prescriptions
+        </div>
+        <div class="m-content">
+            <div class="p-content">
+            <div class="wrapper_p">
+                <div class="table_header"><h3 style="color: var(--primary-color);">Prescriptions</h3></div>
+                <div class="table1">
+                    <div class="row headerT">
+                        <div class="cell">Date</div>
+                        <div class="cell" style="width:300px;">Doctor Name</div>
+                        <div class="cell" style="width:300px;">Preview & Download</div>
+                    </div>
+                    <?php 
+                        $nic = $_SESSION['nic'];
+                        $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
+                        $result_pid = mysqli_query($con, $pid_query);
+                        $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+
+                        $query = "select p.date,u.name,p.prescriptionID from prescription p inner join doctor d on p.doctorID = d.doctorID inner join user u on d.nic=u.nic where p.patientID = $pid";
+                        $res = mysqli_query($con,$query);
+
+                        while($rows = mysqli_fetch_assoc($res)){ ?>
+                        <div class="row">
+                            <div class="cell" data-title="Date">
+                                    <?php echo $rows['date']; ?>
+                            </div>
+                            <div class="cell" data-title="Date">
+                                    <?php echo $rows['name']; ?>
+                            </div>
+                            <div class="cell" data-title="Option">
+                                <a href="<?php BASEURL.'/Patient/downloadprescription.php?id='.$rows['prescriptionID']?>">
+                                <img style="width:250px;height:60px;position: relative;bottom: 0px;bottom: 0px;padding: 0px;" src=<?php echo BASEURL.'/images/download-pdf.png';?> alt="download">
+                            </a>    
+                            </div>
+
+
+
+                        
+                        </div>
+                        <?php
+                        }
+                    ?>
+            </div>
+            </div>
+            </div>
+
+            <div class="p-img">
+
+            </div>
         </div>
 
         
