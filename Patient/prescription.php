@@ -99,7 +99,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             </div>
 
             <div class="p-img">
-                    <img style="max-width: 412px;height:608px;" src="<?php echo BASEURL.'/images/prescription.jpg'?>" alt="">
+                    <img style="max-width: 412px;height:608px;" src="<?php echo BASEURL.'/images/prescription.png'?>" alt="">
             </div>
         </div>
 
