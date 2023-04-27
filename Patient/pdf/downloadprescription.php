@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("/xampp/htdocs/Royalhospital/conf/config.php");
+require_once("../../conf/config.php");
 require("fpdf.php");
 
 $pdf = new FPDF();
