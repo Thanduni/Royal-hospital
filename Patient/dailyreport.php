@@ -23,7 +23,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
-        
+        .m-content {
+            display: flex;
+            flex: 2;
+            box-sizing: unset;
+            width: 1285px;
+            margin: 20px 20px 50px 50px;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -48,7 +55,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 <div class="table_header"><h3 style="color: var(--primary-color);">Daily Reports</h3></div>
                 <div class="table">
                     <div class="row headerT">
-                        <div class="cell" ">Nurse Name</div>
+                        <div class="cell" style="width:180px;"></div>Nurse Name</div>
                         <div class="cell">Date</div>
                         <div class="cell">Time</div>
                         <div class="cell">Pulse</div>
