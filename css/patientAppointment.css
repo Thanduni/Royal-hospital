@@ -205,7 +205,7 @@ table {
     display: table-cell;
     font-size: 18px;
     height: 50px;
-    width: 112px;
+    width: 123px;
 }
 
 @media screen and (max-width: 1229px) {
@@ -272,4 +272,28 @@ table {
     padding: 0.25em;
     border-style: solid;
     border-color: #000000;
+}
+
+.m-content {
+    display: flex;
+    flex:2;
+    box-sizing: unset;
+    width: 905px;
+    margin: 20px 20px 50px 50px;
+    position: relative;
+}
+
+.m-content .p-content{
+    width: 1500px;
+    height: 630px;
+    background-color: #fff;
+}
+
+.m-content .p-img{
+    /* width: 1060px;
+    height: 730px; */
+    margin-left: 20px;
+    flex:1;
+    /* background-color: #fff; */
+
 }

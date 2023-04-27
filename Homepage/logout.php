@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
     else if ($_SESSION['userRole'] == "Doctor")
         header("location: " . BASEURL . "/Doctor/doctorDash.php");
     else if ($_SESSION['userRole'] == "Nurse")
-        header("location: " . BASEURL . "/Nurse/nurseDash.php");
+        header("location: " . BASEURL . "/Nurse/nursedashboard.php");
     else if ($_SESSION['userRole'] == "Receptionist")
         header("location: " . BASEURL . "/Receptionist/receptionistDash.php");
     else if ($_SESSION['userRole'] == "Patient")

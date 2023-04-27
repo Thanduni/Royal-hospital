@@ -357,7 +357,7 @@ form button ,#cancel,#btn {
     flex-wrap: wrap;
     justify-content: flex-start;
     box-sizing: unset;
-    width: 1245px;
+    width: 1280px;
     margin: 20px 20px 50px 50px;
     position: relative;
 }

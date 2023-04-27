@@ -48,6 +48,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
             <!-- <div class="main-container"> -->
+
               <div class="doctor-cards">
                 <div class="doctor-card">
                 <div class="card-content">
