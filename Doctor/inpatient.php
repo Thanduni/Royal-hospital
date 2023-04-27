@@ -37,13 +37,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 <body>
     <div class="user">
-    <?php 
-    $name = urlencode( $_SESSION['name']);
-    include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
-        <div class="userContents" id="center">
         <?php
-          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
-          ?>
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        <div class="userContents" id="center">
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="display-container">
                 <div class="show-inpatients">
                     <h3>Patient List</h3>
@@ -80,21 +81,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 </div>
             </div>
         </div>
-    </div>
-<?php
-if(isset($_POST['discharge'])){
-
-    $sql = "DELETE from inpatient WHERE patientID = $patientID;";
-    // $sql = "INSERT INTo room(room_availability) VALUES('available');";
-    $addresult=mysqli_query($con,$sql);
-
-    if($addresult){
-        header('location:inpatient.php');
-    }else{
-        die(mysqli_error($con));
-    }
-}
-?>   
+    </div> 
     
 </body>
 </html>

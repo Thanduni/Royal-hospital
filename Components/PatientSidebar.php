@@ -57,15 +57,14 @@ require_once("../conf/config.php");
             </a></li>
     </ul>
 </div>
-
 <script>
     function changeImage(imgName, id) {
         let image = document.getElementById(id);
-        image.src = <?php echo BASEURL.'/images'; ?> + imgName;
+        image.src = '../images/' + imgName;
     }
 
     function restoreImage(imgName, id) {
         let image = document.getElementById(id);
-        image.src = <?php echo BASEURL.'/images'; ?> + imgName;
+        image.src = '../images/' + imgName;
     }
 </script>

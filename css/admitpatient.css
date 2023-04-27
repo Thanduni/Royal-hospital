@@ -3,6 +3,8 @@
     padding: 0 15px;
     margin: 0 auto;
     display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .admit-patient-container{
     width: 100%;
@@ -27,6 +29,14 @@
     padding: 20px;
     font-size: 20px;
 }
+.success-message{
+    padding: 1rem;
+    color: #084298;
+    background-color: #cfe2ff;
+    border-color: #b6d4fe;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
 .admit-patient-container .admit-patient-detail form{
     padding: 0 20px;
 }
@@ -48,6 +58,7 @@
     border-radius: 2px;
     font-weight: 400;
     line-height: 1.8;
+    font-size: medium;
     border: none;
     display: block;
     width: -webkit-fill-available;
