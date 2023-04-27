@@ -60,11 +60,11 @@ require_once("../conf/config.php");
 <script>
     function changeImage(imgName, id) {
         let image = document.getElementById(id);
-        image.src = '../images/' + imgName;
+        image.src = '<?php echo BASEURL.'/images/'?>' + imgName;
     }
 
     function restoreImage(imgName, id) {
         let image = document.getElementById(id);
-        image.src = '../images/' + imgName;
+        image.src = '<?php echo BASEURL.'/images/'?>' + imgName;
     }
 </script>
