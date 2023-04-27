@@ -26,15 +26,26 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
       body{
         background-color:#ffffff;
       }
+
+      .userContents .receipt{
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+      }
     </style>
 </head>
 <body>
-  <?php
+<div class="user">
+
+    <?php
+          $name = urlencode( $_SESSION['name']);
+          include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);   
+    ?>
+          <div class="userContents"  id="center">
+    <?php
           $name = urlencode( $_SESSION['name']);
           include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
-          
-          $name = urlencode( $_SESSION['name']);
-          include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); 
+
           
           $nic = $_SESSION['nic'];
           $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
@@ -62,6 +73,15 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     </div>
     </div>
   </div>
+  <div class="receipt">
+    <h2>download Receipt  -><a href="<?php echo BASEURL.'/Patient/pdf/receipt.php?id='.$pid?>">
+    <img style="width:250px;height:60px;position:relative;" src=<?php echo BASEURL.'/images/download-pdf.png';?> alt="download">
+  </a></h2>
+      
+  </div>
+
+    </div>
+</div>
 </body>
 </html>
 <?php 

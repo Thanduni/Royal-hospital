@@ -95,11 +95,11 @@ $pdf->Cell(140,10,"$freq",1,1);
 $pdf->Cell(50,10,"Test_Name:",1,0);
 $pdf->Cell(140,10,"$testname",1,1);
 
-$pdf->Cell(50,10,"Investigation:",1,0);
-$pdf->Cell(140,10,"$investigation",1,1);
+// $pdf->Cell(50,10,"Investigation:",1,0);
+// $pdf->Cell(140,10,"$investigation",1,1);
 
-$pdf->Cell(50,10,"Impression:",1,0);
-$pdf->Cell(140,10,"$impression",1,1);
+// $pdf->Cell(50,10,"Impression:",1,0);
+// $pdf->Cell(140,10,"$impression",1,1);
 
 $pdf->Output();
 
