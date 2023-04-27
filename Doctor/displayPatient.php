@@ -54,7 +54,6 @@ if(isset($_POST['submit-doctor-note'])) {
     $prescription = "INSERT into prescription(date,age,patientID,doctorID,investigation,impression) values('$date','$age','$patientID','$doctorID','$investigation','$impression');";    
     if(mysqli_query($con,$prescription)){
         $prescriptionID = mysqli_insert_id($con);
-        // printf("new record added had id %d ", $prescriptionID);
     }else{
         echo "Error";
     }
@@ -88,13 +87,14 @@ if(isset($_POST['submit-doctor-note'])) {
 
 <body>
     <div class="user">
-        <?php 
-        $name = urlencode( $_SESSION['name']);
-        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
-        <div class="userContents" id="center">
         <?php
-          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
-          ?>
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        <div class="userContents" id="center">
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
 
             <div class="display-container">
                 <div class="patient-detail-container">
@@ -175,7 +175,7 @@ if(isset($_POST['submit-doctor-note'])) {
                             </div>
                         </div>
                         <div class="icon-box">
-                            <i class="fa-user-plus"></i>
+                            <i class="fa fa-user-plus"></i>
                         </div>
                     </div>
                     </a>
