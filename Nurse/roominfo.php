@@ -81,7 +81,7 @@ if(isset($_POST['updateRoom'])){
                             }
                             ?>
 
-                            <!-- get docotr details -->
+                            <!-- get doctor details -->
                             <?php
                             $sql = "select name from user inner join doctor on doctor.nic= user.nic where doctorID=$doctorID;";
                             $result = mysqli_query($con,$sql);
@@ -104,7 +104,6 @@ if(isset($_POST['updateRoom'])){
                             <div class="name">Admit Date</div>:<div class="value"> <?php echo $admit_date?></div></div>
                             <?php }
                             ?>
-                            
                         </div>
                         <!-- <button class="button" id="update-room">Update Room</button> -->
                     </div>
@@ -125,8 +124,6 @@ if(isset($_POST['updateRoom'])){
         document.querySelector("#update-room-popup").style.display = "none";
     })
 </script>
-
-                
 
 </html>
 <?php

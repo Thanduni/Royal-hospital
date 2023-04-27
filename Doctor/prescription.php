@@ -30,9 +30,9 @@ if(isset($_GET['prescriptionID'])){
 </head>
 <body>
     <div class="user">
-        <?php 
+        <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
         <?php include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);?>
                 <div class="prescription-container">

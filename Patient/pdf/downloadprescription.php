@@ -43,7 +43,11 @@ if($test_flag){
     $q1 = "select test_name from prescribed_tests where prescriptionID = $prescriptionID";
     $rest1 = mysqli_query($con,$q1);
 
-    $testname = mysqli_fetch_assoc($rest1)['test_name'];
+    $testname = array();
+
+    while($testNameRow = mysqli_fetch_assoc($rest1)){
+        array_push($testname, $testNameRow['test_name']);
+    }
 }
 else{
     $testname = '-';
@@ -53,11 +57,17 @@ if($drug_flag){
     $q2 = "select * from prescribed_drugs where prescriptionID = $prescriptionID";
     $rest2 = mysqli_query($con,$q2);
 
-    $rowres = mysqli_fetch_assoc($rest2);
-    $drugname = $rowres['drug_name'];
-    $days = $rowres['days'];
-    $freq = $rowres['frequency'];
-    $quantity = $rowres['quantity'];
+    $drugname = array();
+    $days = array();
+    $freq = array();
+    $quantity = array();
+
+    while($rowres = mysqli_fetch_assoc($rest2)){
+        array_push($drugname, $rowres['drug_name']);
+        array_push($days, $rowres['days']);
+        array_push($freq, $rowres['frequency']);
+        array_push($quantity, $rowres['quantity']);
+    }
 }
 else{
     $drugname = '-';
@@ -80,20 +90,24 @@ $pdf->Cell(140,10,"$age",1,1);
 $pdf->Cell(50,10,"Gender:",1,0);
 $pdf->Cell(140,10,"$gender",1,1);
 
-$pdf->Cell(50,10,"Drug_Names:",1,0);
-$pdf->Cell(140,10,"$drugname",1,1);
+$pdf->Cell(47.5,10,"Drug_Names:",1,0);
+$pdf->Cell(47.5,10,"Days:",1,0);
+$pdf->Cell(47.5,10,"Quantity:",1,0);
+$pdf->Cell(47.5,10,"Frequency:",1,1);
 
-$pdf->Cell(50,10,"Days:",1,0);
-$pdf->Cell(140,10,"$days",1,1);
 
-$pdf->Cell(50,10,"Quantity:",1,0);
-$pdf->Cell(140,10,"$quantity",1,1);
+for($i=0; $i<count($drugname); $i++){
+    $pdf->Cell(47.5,10,"$drugname[$i]",1,0);
+    $pdf->Cell(47.5,10,"$days[$i]",1,0);
+    $pdf->Cell(47.5,10,"$quantity[$i]",1,0);
+    $pdf->Cell(47.5,10,"$freq[$i]",1,1);
+}
 
-$pdf->Cell(50,10,"Frequency:",1,0);
-$pdf->Cell(140,10,"$freq",1,1);
+$pdf->Cell(190,10,"Test_Name:",1,1);
 
-$pdf->Cell(50,10,"Test_Name:",1,0);
-$pdf->Cell(140,10,"$testname",1,1);
+for($i=0; $i<count($testname); $i++){
+        $pdf->Cell(190,10,"$testname[$i]",1,1, 'C');
+}
 
 $pdf->Cell(50,10,"Investigation:",1,0);
 $pdf->Cell(140,10,"$investigation",1,1);
