@@ -3,9 +3,10 @@
     margin: 40px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     padding: 30px;
     background: #fff;
-    text-align: center;
+    text-align: left;
 }
 .show-inpatients h3{
     padding: 20px;
@@ -46,8 +47,8 @@
     justify-content: center;
     /* text-align: center; */
 }
-.right-cell {
-    padding: 17px 0;
+.show-inpatients .right-cell {
+    padding: 17px 0 !important;
 }
 .show-inpatients input{
     padding: 1em;
@@ -58,6 +59,7 @@
 .show-inpatients .view-reports{
     background: #ffc107;
     color: #fff;
+    font-weight: 500;
     cursor: pointer;
 }
 .show-inpatients .discharge{

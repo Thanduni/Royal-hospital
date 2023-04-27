@@ -19,7 +19,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             p.royal {
                 font-size: 20px;
             }
-
+            .sidebarMenuInner p{
+                font-size: 13px;
+            }
             p.addUSer {
                 font-size: 30px;
             }
@@ -34,13 +36,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
     <body>
     <div class="user">
-        <?php
+    <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
-        <div class="userContents" id="center">
-        <?php
-          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
-          ?>
+        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>        <div class="userContents" id="center">
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Edit profile</h2>
@@ -147,7 +149,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
         </div>
     </div>
 
-    <script src=<?php echo BASEURL . '/js/validateDoctor.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateFormReceptionist.js' ?>></script>
     </body>
 
     </html>

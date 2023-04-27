@@ -58,7 +58,7 @@
     color: black;
 }
 h3{
-    margin-left: 20px;
+    margin: 20px;
 }
 .popup{
     background: rgba(0, 0, 0, 0.6);
@@ -183,9 +183,7 @@ h3{
 }
 .table-container h2{
     float: left;
-    margin-top: 30px;
-    margin-bottom: 25px;
-    margin-left: 30px;
+    margin:30px 0 25px 30px ;
 }
 .patient-details{
     margin-left: 20px;
@@ -227,7 +225,6 @@ h3{
     width: 90%;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
     padding: 0 33px 30px;
 }
@@ -261,11 +258,10 @@ h3{
 }
 .table th{
     font-family: var(--primary-font);
-    /* font-family: OpenSans-Regular; */
-    font-size: 18px;
-    color: #00A2ED;
-    line-height: 1.2;
+    color: #000;
     font-weight: unset;
+    text-align: left;
+    padding: 15px 10px;
 }
 .table tbody{
     display: table-row-group;
@@ -282,15 +278,24 @@ h3{
     font-weight: unset;
     height: 50px;
 }
-.table th{
-    text-align: left;
-    padding: 20px 10px;
-}
-
 .table td{
     text-align: left;
     padding: 8px 10px;
     background: #fff;
+}
+.table td:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.table td:first-child .right-cell{
+    padding:8px;
+}
+.table td img{
+    border-radius: 50%;
+}
+.view-btn-image{
+    width: 40px;
 }
 select{
     padding: 10px;

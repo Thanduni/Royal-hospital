@@ -11,8 +11,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 <?php
 //get date and time
 date_default_timezone_set('Asia/Colombo');
-$mindate = date("Y-m-d");
-$mintime = date("h:i");
+$current_date = date("Y-m-d");
+$current_time = date("h:i");
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 }
@@ -30,14 +30,53 @@ if($get_details){
         $patientnic = $row['nic'];
     }
 }
-
-$admit_details = "SELECT * from inpatient WHERE patientID = $patientID;";
+//get patient admit details from the database
+$admit_details = "SELECT  DATE_FORMAT(admit_time, '%h:%i') as admit_time, admit_date,patientID,room_no from inpatient WHERE patientID = $patientID;";
 $get_admit_details = mysqli_query($con,$admit_details);
 if($get_admit_details){
     $admit_row = mysqli_fetch_assoc($get_admit_details);
     $admitTime = $admit_row['admit_time'];
     $admitDate = $admit_row['admit_date'];
     $room_no = $admit_row['room_no'];
+}
+
+//calculate number of days patient was admitted.
+$start_date = new DateTime($admitDate);         //create DateTime objects 
+$end_date = new DateTime($current_date);
+
+$interval = date_diff($start_date,$end_date);   //will return a dateInterval object
+$admitted_days = $interval->days;
+
+//discharge patient
+if(isset($_POST['discharge-patient'])){
+    //start a new transaction
+    mysqli_begin_transaction($con);
+
+    try{
+        //execute queries
+        mysqli_query($con, "DELETE from inpatient WHERE patientID= $patientID");
+        mysqli_query($con, "UPDATE room SET room_availability='available' WHERE room_no = $room_no ;");
+        mysqli_query($con, "INSERT into purchases(patientID,date,quantity,paid_status,item,item_flag) VALUES ('$patientID','$current_date','$admitted_days','not paid','2','s');");
+
+        //commit transaction
+        mysqli_commit($con);
+        //show success message using javascript
+        echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {          
+            var successMessage = document.querySelector(".admit-patient-container .admit-patient-detail .admit-patient-success-message");
+            if(successMessage) {
+                successMessage.style.display = "block";
+            } else {
+                console.error("Error: Could not find success message element.");
+            }
+        });
+      </script>';
+    }catch(Exception $e){
+        //rollback if any query failed
+        mysqli_rollback($con);
+        echo "An error occurred";
+    }
+    
 }
 ?>
 
@@ -54,15 +93,21 @@ if($get_admit_details){
 </head>
 <body>
     <div class="user">
-        <?php 
+        <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $_SESSION['name']); ?>
+        include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <?php include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);?>
+            <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="display-container">
                 <div class="admit-patient-container">
                     <div class="admit-patient-detail">
                         <h2>Patient Discharge Details</h2>
+                        <div class="success-message admit-patient-success-message" id="success-message" style="display:none;">
+                            <p>Discharge Patient Successfully</p>
+                        </div>
                         <form method="post">
                             <div class="form-row">
                                 <div class="form-group">
@@ -87,14 +132,13 @@ if($get_admit_details){
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="">Discharge Date</label>
-                                    <input type="date" name="admitDate" value ="<?php echo $mindate?>" readonly>
+                                    <input type="date" name="admitDate" value ="<?php echo $current_date?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Discharge Time</label>
-                                    <input type="time" name="admitTime" value ="<?php echo $mintime?>" readonly>
+                                    <input type="time" name="admitTime" value ="<?php echo $current_time?>" readonly>
                                 </div>
                             </div>
-                                <p>This part is yet to made. <br> Generate Medical and how to discharge</p>
                             <button id="discharge-btn" class="discharge-patient-btn" type="submit" name="discharge-patient">Discharge Patient</button>
                         </form>
                     </div>
