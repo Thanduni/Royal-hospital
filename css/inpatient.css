@@ -63,6 +63,11 @@
     cursor: pointer;
 }
 .show-inpatients .discharge{
+    background: #dc3545;
+    color: #fff;
+    cursor: pointer;
+}
+.show-inpatients .prescription-btn{
     background: #00A2ED;
     color: #fff;
     cursor: pointer;

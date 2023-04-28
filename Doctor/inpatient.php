@@ -50,7 +50,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     <h3>Patient List</h3>
                     <table class="table">
                         <thead>
-                          <!-- <th>Profile Picture</th>     -->
                           <th>Patient</th>
                           <th>Room No</th>
                           <th>Option</th>
@@ -72,6 +71,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     </td>
                                     <td><?php echo $row['room_no'] ?></td>
                                     <td><a href="viewReport.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-reports" class="view-reports" value="View Reports"></a>
+                                    <a href="prescription.php?patientid=<?=$row['patientID']?>"><input type="button" name="prescription" class="prescription-btn" value="Prescribe"></a>
                                     <a href="discharge.php?patientid=<?=$row['patientID']?>"><input type="button" name="discharge" class="discharge" value="Discharge"></a></td>
                                 </tr>
                                 <?php

@@ -10,8 +10,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 ?>
 <?php
-if(isset($_GET['prescriptionID'])){
-    $prescriptionID = $_GET['prescriptionID'];
+if(isset($_GET['patientid'])){
+    $patientID = $_GET['patientid'];
+
+    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
+    $prescID_query = mysqli_query($con,$get_prescID);
+    if(mysqli_num_rows($prescID_query) > 0) {
+        $get_row = mysqli_fetch_assoc($prescID_query);
+        $prescriptionID = $get_row['MAX(prescriptionID)'];
+    } else {
+        echo "NO ID returned";
+    }
 }
 ?>
 

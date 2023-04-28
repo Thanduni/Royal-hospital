@@ -39,16 +39,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 <body>
     <div class="user">
+      
     <?php
         $name = urlencode( $_SESSION['name']);
         include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
-    <div class="userContents" id="center">
+        <div class="userContents" id="center">
             <?php
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
-            <!-- <div class="main-container"> -->
 
+            <div class="main-container">
               <div class="doctor-cards">
                 <div class="doctor-card">
                 <div class="card-content">
@@ -117,7 +118,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     <i class="fas fa-bed"></i>
                 </div>
                 </div>
-              <!-- </div> -->
+              </div>
 
               <h3>Upcomming Appointments</h3>
               <div class="table-container">
