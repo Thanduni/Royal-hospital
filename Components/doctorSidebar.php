@@ -22,33 +22,38 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Doctor/doctorDash.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
-                                            align="middle">
+        <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Doctor/doctorDash.php' ?>" target="_self"><img class="icons butbut" id="dashboard"
+                                                                                                                                                                                                                          src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
+                                                                                                                                                                                                                          align="middle">
                 <p>Dashboard</p>
-            </a>
-        </li>
-        <li><a href="<?php echo BASEURL . '/Doctor/inpatient.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/addpatient.png' ?> alt="Patient"
-                                            align="middle">
-                <p>Patients</p>
-            </a>
-        </li>
-        <li><a href="<?php echo BASEURL . '/Doctor/workingHours.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/calender.png' ?> alt="schedule"
-                                            align="middle">
-                <p>Schedule</p>
-            </a>
-        </li>
-        <li><a href="<?php echo BASEURL . '/Doctor/updateDoctorProfile.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="profile"
-                                            align="middle">
-                <p>Profile</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Doctor/updateWorkingHours.php' ?>" target="_self"><img class="icons"
-                                                                                                    src=<?php echo BASEURL . '/images/doctor.svg' ?> alt="profile"
-                                                                                                    align="middle">
-                <p>Working hours</p>
+        <li onmouseover="changeImage('patient.svg', 'patient')" onmouseout="restoreImage('patientDef.svg', 'patient')"><a href="<?php echo BASEURL . '/Doctor/inpatient.php' ?>" target="_self"><img class="icons butbut" id="patient"
+                                                                                                                                                                                                              src=<?php echo BASEURL . '/images/patientDef.svg' ?> alt="patient"
+                                                                                                                                                                                                              align="middle">
+                <p>Patients</p>
+            </a></li>
+        <li onmouseover="changeImage('calender.svg', 'calender')" onmouseout="restoreImage('calenderDef.svg', 'calender')"><a href="<?php echo BASEURL . '/Doctor/updateWorkingHours.php' ?>" target="_self"><img id="calender"
+                                                                                                                                                                                                               class="icons butbut"
+                                                                                                                                                                                                               src=<?php echo BASEURL . '/images/calenderDef.svg' ?> alt="Profile"
+                                                                                                                                                                                                               align="middle">
+                <p>Schedule</p>
+            </a></li>
+        <li onmouseover="changeImage('profile.svg', 'profile')" onmouseout="restoreImage('profileDef.svg', 'profile')"><a href="<?php echo BASEURL . '/Doctor/updateDoctorProfile.php' ?>"
+        target="_self"><img id="profile"
+        class="icons butbut" src=<?php echo BASEURL . '/images/profileDef.svg' ?> alt="Profile" align="middle">
+                <p>Profile</p>
             </a></li>
     </ul>
 </div>
+
+<script>
+    function changeImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+
+    function restoreImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+</script>

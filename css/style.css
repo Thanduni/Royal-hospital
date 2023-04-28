@@ -5,7 +5,7 @@
     --primary-color:#3C77C6;
     --secondary-color: #fff;
     --para-color: #1b1b29;
-    --form-back: #efefef;
+    --form-back: #ffffff;
     --page-color:#f6f5f7;
     --hover-color: #D6EEEE;
     --primary-font: 'Montserrat';
@@ -718,7 +718,7 @@ td {
 }
 
 #form {
-    background-color: #efefef;
+    background-color: #ffffff;
     display: flex;
     position: fixed;
     max-height: 500px;

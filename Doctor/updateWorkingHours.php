@@ -95,8 +95,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole'] . "&nic=" . $_SESSION['nic']);
             ?>
             <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Profile
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Edit schedule
             </div>
+            <h3>Update Schedule</h3>
+            <?php
+
+            echo date("Y/m/d");
+            date_default_timezone_set("Asia/Colombo");
+            echo date("h:i:sa");
+            ?>
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Edit working hours</h2>
