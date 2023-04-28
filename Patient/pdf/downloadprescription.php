@@ -17,15 +17,14 @@ $nic = $_SESSION['nic'];
 $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
 $result_pid = mysqli_query($con, $pid_query);
 $pid = mysqli_fetch_assoc($result_pid)['patientID'];
-
 $query = "select * from prescription where patientID = $pid";
 $res = mysqli_query($con,$query);
 
 $query1 = "select p.date,u.name,p.prescriptionID from prescription p inner join doctor d on p.doctorID = d.doctorID inner join user u on d.nic=u.nic where p.patientID = $pid";
 $res1 = mysqli_query($con,$query1);
 
-$query2 = "select u.name from user u inner join doctor d on u.nic=d.nic where d.doctorID = $doctorID";
-$res2 = mysqli_query($con,$query1);
+$query2 = "select u.name from user u inner join patient p on u.nic = p.nic inner join prescription r on p.patientID=r.patientID where p.patientID = $pid";
+$res2 = mysqli_query($con,$query2);
 
 // $prescriptionID =  mysqli_fetch_assoc($res)['prescriptionID'];
 $rowResult = mysqli_fetch_assoc($res);

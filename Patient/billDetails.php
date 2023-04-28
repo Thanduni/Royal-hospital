@@ -328,15 +328,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 $('#login-modal').fadeOut();
             });
         });
+        
         function func(){
-            if(document.getElementById("pay").innerHTML == 'LKR 0.00'){
+            if(document.getElementById("pay").innerHTML == 'LKR 0.00')
+            {
             document.getElementById("pay-btn").addEventListener("click", function(event){
             event.preventDefault()
             });
-        }
-        else{
-            location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>';
-        }
+            }
+            else{
+                location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>';
+            }
         }
     </script>
 </body>

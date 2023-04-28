@@ -55,7 +55,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 <div class="table_header"><h3 style="color: var(--primary-color);">Daily Reports</h3></div>
                 <div class="table">
                     <div class="row headerT">
-                        <div class="cell" style="width:180px;"></div>Nurse Name</div>
+                        <div class="cell" style="width:180px;">Nurse Name</div>
                         <div class="cell">Date</div>
                         <div class="cell">Time</div>
                         <div class="cell">Pulse</div>
@@ -69,13 +69,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         $result_pid = mysqli_query($con, $pid_query);
                         $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-                        $query ="select * from daily_report where patientID = $pid";
-                        $res = mysqli_query($con,$query);
+                        $query1 = "select p.name,r.date,r.time,r.pulse,r.temperature,r.blood_preasure,r.o2_saturation from user p inner join nurse n on p.nic = n.nic inner join daily_report r on n.NurseID = r.nurseID where r.patientID = $pid";
+                        $res = mysqli_query($con,$query1);
 
                         while($rows = mysqli_fetch_assoc($res)){ ?>
                         <div class="row">
                             <div class="cell" data-title="name">
-                                    <?php echo $rows['nurseID']; ?>
+                                    <?php echo $rows['name']; ?>
                             </div>
                             <div class="cell" data-title="Date">
                                     <?php echo $rows['date']; ?>
@@ -84,16 +84,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     <?php echo $rows['time']; ?>
                             </div>
                             <div class="cell" data-title="text">
-                                    <?php echo $rows['pulse']; ?>
+                                    <?php echo $rows['pulse'].'bpm'; ?>
                             </div>
                             <div class="cell" data-title="text">
-                                    <?php echo $rows['temperature']; ?>
+                                    <?php echo $rows['temperature'].'°C'; ?>
                             </div>
                             <div class="cell" data-title="text">
-                                    <?php echo $rows['blood_preasure']; ?>
+                                    <?php echo $rows['blood_preasure'].'mmHg'; ?>
                             </div>
                             <div class="cell" data-title="text">
-                                    <?php echo $rows['o2_saturation']; ?>
+                                    <?php echo $rows['o2_saturation'].'%'; ?>
                             </div>
 
   
