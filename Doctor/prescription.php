@@ -72,7 +72,7 @@ if(isset($_GET['patientid'])){
                                             $frequency = $_POST['frequency'];
 
                                             //to prevent SQL injection 
-                                            $save = "INSERT INTO prescribed_drugs(drug_name, days, quantity, frequency, prescriptionID) VALUES (?, ?, ?, ?, ?);";   // ? is used as placeholders to represent the value we want to insert
+                                            $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID) VALUES (?, ?, ?, ?, ?);";   // ? is used as placeholders to represent the value we want to insert
                                             $stmt = mysqli_prepare($con, $save);        //prepare the statement
 
                                             //bind the variables to the statement usding mysqli_stmt_bind_param()
@@ -91,8 +91,8 @@ if(isset($_GET['patientid'])){
                                     <tr>
                                         <td><input type="text" name="drugName[]"></td>
                                         <td><input type="number" name="dosage[]"></td>
-                                        <td><input type="number" name="days[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
+                                        <td><input type="number" name="days[]"></td>
                                         <td><input type="button" name="addd" class="add" value="Add"></td>
                                     </tr>
                                     </div>
@@ -125,7 +125,7 @@ if(isset($_GET['patientid'])){
                                     <td><?php echo $row['days'] ?></td>
                                     <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
                                     <td>
-                                        <a href="deletePrescription.php?drugName=<?php echo $row['drug_name'];?>&presID=<?php echo $row['prescriptionID'] ?>">
+                                        <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
                                         <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
                                     </td>
                                     
