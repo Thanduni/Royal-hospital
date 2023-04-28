@@ -19,7 +19,17 @@ if(isset($_GET['patientid'])){
         $get_row = mysqli_fetch_assoc($prescID_query);
         $prescriptionID = $get_row['MAX(prescriptionID)'];
     } else {
-        echo "NO ID returned";
+        //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
+        echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {          
+            var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+            if(errorMessage) {
+                errorMessage.style.display = "block";
+            } else {
+                console.error("Error: Could not find error message element.");
+            }
+        });
+      </script>';
     }
 }
 ?>
@@ -52,6 +62,9 @@ if(isset($_GET['patientid'])){
                         <div class="test-button" id="test-button" onclick="testPrescription()">Prescribe Test</div>
                     </div>
 
+                    <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
+                        <p>Please enter a doctor Note first</p>
+                    </div>
                     <div class="prescribe-medicine-content">
                         <form action="#" class="insert-form" id="insert_form" method="post">
                             <div class="input-feild">
@@ -75,15 +88,27 @@ if(isset($_GET['patientid'])){
                                             $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID) VALUES (?, ?, ?, ?, ?);";   // ? is used as placeholders to represent the value we want to insert
                                             $stmt = mysqli_prepare($con, $save);        //prepare the statement
 
-                                            //bind the variables to the statement usding mysqli_stmt_bind_param()
-                                            // 'sssss' indicate the type of variables we are binding (all strings)
-                                            foreach ($drugName as $key => $value) {
-                                                mysqli_stmt_bind_param($stmt, "sssss", $value, $dosage[$key], $days[$key], $frequency[$key], $prescriptionID);
-                                                mysqli_stmt_execute($stmt);     //actualy execute the the statement
+                                            if(isset($prescriptionID)){
+                                                //bind the variables to the statement usding mysqli_stmt_bind_param()
+                                                // 'sssss' indicate the type of variables we are binding (all strings)
+                                                foreach ($drugName as $key => $value) {
+                                                    mysqli_stmt_bind_param($stmt, "sssss", $value, $dosage[$key], $days[$key], $frequency[$key], $prescriptionID);
+                                                    mysqli_stmt_execute($stmt);     //actualy execute the the statement
+                                                }
+                                                mysqli_stmt_close($stmt);           //close the statement
+                                            } else{
+                                                echo '<script>
+                                                        document.addEventListener("DOMContentLoaded", function() {          
+                                                            var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+                                                            if(errorMessage) {
+                                                                errorMessage.style.display = "block";
+                                                            } else {
+                                                                console.error("Error: Could not find error message element.");
+                                                            }
+                                                        });
+                                                      </script>';
                                             }
-                                            mysqli_stmt_close($stmt);           //close the statement
-                            
-                                            
+  
                                         }
 
                                         ?>
