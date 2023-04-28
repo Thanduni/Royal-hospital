@@ -283,8 +283,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     <a class="t_cost"><h1>Total Cost:<h2>LKR <?php echo($total+$total1+$total2).'.00'; ?></h2></h1></a>
                     <?php $_SESSION['total'] = $npaid.'.00'; ?>
                     <div class="card-image"><img src="<?php echo BASEURL.'/images/mastercard.jpg' ?>"></div>
-                    <a class="np_cost"><h1>Total Not Paid Cost:<h2 style="color:red;">LKR <?php echo$npaid.'.00'; ?></h2></h1></a>
-                    <button class="btn1" onclick="location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>'">Pay Now</button>
+                    <a class="np_cost"><h1>Total Not Paid Cost:<h2 id="pay" style="color:red;">LKR <?php echo$npaid.'.00'; ?></h2></h1></a>
+                    <button id="pay-btn" class="btn1" onclick="func()">Pay Now</button>
             </div>
             </div>
         </div>
@@ -328,6 +328,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 $('#login-modal').fadeOut();
             });
         });
+        function func(){
+            if(document.getElementById("pay").innerHTML == 'LKR 0.00'){
+            document.getElementById("pay-btn").addEventListener("click", function(event){
+            event.preventDefault()
+            });
+        }
+        else{
+            location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>';
+        }
+        }
     </script>
 </body>
 </html>

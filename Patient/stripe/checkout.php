@@ -116,6 +116,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
           $npaid = $npaid1['sum(p.quantity*s.cost)'] + $npaid2['sum(p.quantity*t.cost)'] + $npaid3['sum(p.quantity*i.unit_price)'];
           $_SESSION['total'] = $npaid;
+          $_SESSION['row1'] = $npaid1;
+          $_SESSION['row2'] = $npaid2;
+          $_SESSION['row3'] = $npaid3;
           ?>  
             
             <div class="arrow">

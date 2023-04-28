@@ -17,9 +17,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     $result_pid = mysqli_query($con, $pid_query);
     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'paid';";
-    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid and p.paid_status = 'paid';";
-    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid and p.paid_status = 'paid';";
+    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
+    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
+    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
 
     $result = mysqli_query($con,$query);
     $result1 = mysqli_query($con,$query1);
@@ -28,6 +28,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     $total = 0;
     $total1 = 0;
     $total2 = 0;
+    
 
     $pdf->SetTextColor(0,0,255);
     $pdf->Cell(190,10,"Royal Hospital Patient's Payment Confirmation Receipt",0,1,'C');
