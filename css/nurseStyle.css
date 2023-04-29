@@ -4,11 +4,17 @@
     left: 260px;
     height: 100vh;
 }
-.nurse-cards{
-    width: 100%;
-    /* padding: 35px 20px ; */
+.prescribe-medicine-content{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+}
+.nurse-cards{
+    /* width: 100%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 30px;
 }
 
 .nurse-card {
@@ -223,20 +229,15 @@ button a{
 
 
 .table-container{
-    width: 90%;
-    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0px 30px;
+    padding: 30px;
 }
-h3{
-    float: left;
-    width: fit-content;
-    padding: 10px;
-    margin-left: 20px;
+.table-container h2{
+    padding: 20px 10px;
 }
 
 .table{
@@ -245,53 +246,73 @@ h3{
     border-radius: 10px;
     overflow: hidden;
     width: 70%;
-    margin: 0 auto;
+    margin: 30px auto;
     position: relative;
     align-items: center;
     justify-content: center;
-    overflow: visible;
 }
 .table thead{
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
-    background: var(--para-color);
+    background: #fff;
+    border-radius: 20px;
+    padding: 0 20px;
+    border-bottom: #A7BBC7;
 }
 .table tr{
     display: table-row;
     vertical-align: inherit;
     border-color: inherit;
+    border-top: 1px solid rgba(0,0,0,0.08);
 }
 .table th{
-    font-family: OpenSans-Regular;
-    font-size: 18px;
-    color: #fff;
-    line-height: 1.2;
+    font-family: var(--primary-font);
+    color: #000;
     font-weight: unset;
+    text-align: left;
+    padding: 15px 10px;
 }
 .table tbody{
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
+    overflow-y: hidden;
 }
 .table tbody tr{
-    font-family: OpenSans-Regular;
+    font-family: var(--primary-font);
     font-size: 15px;
     color: gray;
     line-height: 1.2;
     font-weight: unset;
     height: 50px;
 }
-.table th{
-    text-align: left;
-    padding: 8px 10px;
-}
-
 .table td{
     text-align: left;
     padding: 8px 10px;
     background: #fff;
 }
+.table td:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.table td:first-child .right-cell{
+    padding:8px;
+}
+.table td img{
+    border-radius: 50%;
+}
+.view-prescription{
+    background: #00A2ED;
+    color: #FFF;
+    cursor: pointer;
+    padding: 1em;
+    border-radius: 3px;
+    line-height: 1;
+    border: 1px solid #e5e5e5;
+}
+
 select{
     padding: 10px;
     margin-bottom: 10px;
@@ -303,4 +324,7 @@ select option{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+#nurse-view-prescription{
+    margin-top: 10%;
 }
