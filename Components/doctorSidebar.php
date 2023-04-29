@@ -32,8 +32,7 @@ require_once("../conf/config.php");
                                                                                                                                                                                                               align="middle">
                 <p>Patients</p>
             </a></li>
-        <li onmouseover="changeImage('calender.svg', 'calender')" onmouseout="restoreImage('calenderDef.svg', 'calender')"><a href="<?php echo BASEURL . '/Doctor/updateWorkingHours.php' ?>" target="_self"><img id="calender"
-                                                                                                                                                                                                               class="icons butbut"
+        <li onmouseover="changeImage('calender.svg', 'calender')" onmouseout="restoreImage('calenderDef.svg', 'calender')"><a href="<?php echo BASEURL . '/Doctor/updateWorkingHours.php' ?>" target="_self"><img class="icons butbut" id="calender"
                                                                                                                                                                                                                src=<?php echo BASEURL . '/images/calenderDef.svg' ?> alt="Profile"
                                                                                                                                                                                                                align="middle">
                 <p>Schedule</p>

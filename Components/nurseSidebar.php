@@ -22,30 +22,42 @@ require_once("../conf/config.php");
         ?>
     </div>
     <ul class="sidebarMenuInner">
-        <li><a href="<?php echo BASEURL . '/Nurse/nursedashboard.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/dashboard.svg' ?> alt="dashboard"
-                                            align="middle">
+        <li onmouseover="changeImage('dashboard.svg', 'dashboard')" onmouseout="restoreImage('dashboardDef.svg', 'dashboard')"><a href="<?php echo BASEURL . '/Nurse/nursedashboard.php' ?>" target="_self"><img class="icons butbut" id="dashboard"
+                                                                                                                                                                                                              src=<?php echo BASEURL . '/images/dashboardDef.svg' ?> alt="dashboard"
+                                                                                                                                                                                                              align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li><a href="<?php echo BASEURL.'/Nurse/display.php'?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/addpatient.png' ?> alt="patient"
-                                            align="middle">
+        <li onmouseover="changeImage('patient.svg', 'patient')" onmouseout="restoreImage('patientDef.svg', 'patient')"><a href="<?php echo BASEURL.'/Nurse/display.php'?>" target="_self"><img class="icons butbut" id="patient"
+                                                                                                                                                                                                     src=<?php echo BASEURL . '/images/patientDef.svg' ?> alt="patient"
+                                                                                                                                                                                                     align="middle">
                 <p>Patient</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Nurse/beds.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/bed.png' ?> alt="bedr"
-                                            align="middle">
+        <li onmouseover="changeImage('room.svg', 'room')" onmouseout="restoreImage('roomDef.svg', 'room')"><a href="<?php echo BASEURL . '/Nurse/beds.php' ?>" target="_self"><img class="icons butbut" id="room"
+                                                                                                                                                                                               src=<?php echo BASEURL . '/images/roomDef.svg' ?> alt="room"
+                                                                                                                                                                                               align="middle">
                 <p>Rooms</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Nurse/report.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/dailyreport.png' ?> alt="report"
-                                            align="middle">
+        <li onmouseover="changeImage('report.svg', 'report')" onmouseout="restoreImage('reportDef.svg', 'report')"><a href="<?php echo BASEURL . '/Nurse/report.php' ?>" target="_self"><img class="icons butbut" id="report"
+                                                                                                                                                                                   src=<?php echo BASEURL . '/images/reportDef.svg' ?> alt="report"
+                                                                                                                                                                                   align="middle">
                 <p>Report</p>
             </a></li>
-        <li><a href="<?php echo BASEURL . '/Nurse/updateNurseProfile.php' ?>" target="_self"><img class="icons"
-                                            src=<?php echo BASEURL . '/images/nurseProfile.png' ?> alt="profile"
-                                            align="middle">
+        <li onmouseover="changeImage('profile.svg', 'profile')" onmouseout="restoreImage('profileDef.svg', 'profile')"><a href="<?php echo BASEURL . '/Nurse/updateNurseProfile.php' ?>"
+                                                                                                                          target="_self"><img id="profile"
+                                                                                                                                              class="icons butbut" src=<?php echo BASEURL . '/images/profileDef.svg' ?> alt="Profile" align="middle">
                 <p>Profile</p>
             </a></li>
     </ul>
 </div>
+
+<script>
+    function changeImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+
+    function restoreImage(imgName, id) {
+        let image = document.getElementById(id);
+        image.src = '../images/' + imgName;
+    }
+</script>
