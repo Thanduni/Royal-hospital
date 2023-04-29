@@ -10,28 +10,53 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 ?>
 <?php
+function displayErrorMessage() {
+    echo '<script>
+      document.addEventListener("DOMContentLoaded", function() {          
+        var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+        if(errorMessage) {
+          errorMessage.style.display = "block";
+        } else {
+          console.error("Error: Could not find error message element.");
+        }
+      });
+    </script>';
+}
+  
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 
     $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
     $prescID_query = mysqli_query($con,$get_prescID);
-    if(mysqli_num_rows($prescID_query) > 0) {
-        $get_row = mysqli_fetch_assoc($prescID_query);
-        $prescriptionID = $get_row['MAX(prescriptionID)'];
-    } else {
-        //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {          
-            var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
-            if(errorMessage) {
-                errorMessage.style.display = "block";
-            } else {
-                console.error("Error: Could not find error message element.");
-            }
-        });
-      </script>';
+    // Fetch the result of the query (query can return a row with NULL)
+    $row = mysqli_fetch_array($prescID_query);
+
+    // Check if the value is not null
+    if (isset($row[0])){
+        $prescriptionID = $row[0];
+    }else{
+        displayErrorMessage();
     }
+    // if(mysqli_num_rows($prescID_query) > 0 && mysqli_num_rows($prescID_query)!=NULL) {
+    //     $get_row = mysqli_fetch_assoc($prescID_query);
+    //     $prescriptionID = $get_row['MAX(prescriptionID)'];
+    //     echo $prescriptionID;
+    // } 
+    // else {
+    //     //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
+    //     echo '<script>
+    //     document.addEventListener("DOMContentLoaded", function() {          
+    //         var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+    //         if(errorMessage) {
+    //             errorMessage.style.display = "block";
+    //         } else {
+    //             console.error("Error: Could not find error message element.");
+    //         }
+    //     });
+    //   </script>';
+    // }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -128,10 +153,11 @@ if(isset($_GET['patientid'])){
                                 </thead>
                                 <tbody>
                                 <?php 
-                                $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
-                                $result = mysqli_query($con,$select);
+                                if(isset($prescriptionID)){
+                                    $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
+                                    $result = mysqli_query($con,$select);
                             
-                                while($row= mysqli_fetch_array($result)){?>
+                                    while($row= mysqli_fetch_array($result)){?>
                                 <tr><td><?php  echo $prescriptionID ?></td>
                                     <td><?php echo $row['drug_name'] ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
@@ -145,6 +171,9 @@ if(isset($_GET['patientid'])){
                                     
                                 </tr>
                                 <?php
+                                    }
+                                }else{
+                                    displayErrorMessage();
                                 } ?>
                                 </tbody>
                             </table>
