@@ -158,7 +158,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                       <td><?php echo $time ?></td>
                                       <td><?php echo $message ?></td>
                                     
-                                    <td><a href="displayPatient.php?patientid=<?=$patientID?>&name=<?=$name?>">
+                                    <td><a href="displayPatient.php?patientid=<?=$patientID?>">
                                       <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
                                     </button></td>
                                     </tr>
