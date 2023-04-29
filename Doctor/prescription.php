@@ -15,7 +15,7 @@ function displayErrorMessage() {
       document.addEventListener("DOMContentLoaded", function() {          
         var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
         if(errorMessage) {
-          errorMessage.style.display = "block";
+          errorMessage.style.display = "flex";
         } else {
           console.error("Error: Could not find error message element.");
         }
@@ -37,24 +37,7 @@ if(isset($_GET['patientid'])){
     }else{
         displayErrorMessage();
     }
-    // if(mysqli_num_rows($prescID_query) > 0 && mysqli_num_rows($prescID_query)!=NULL) {
-    //     $get_row = mysqli_fetch_assoc($prescID_query);
-    //     $prescriptionID = $get_row['MAX(prescriptionID)'];
-    //     echo $prescriptionID;
-    // } 
-    // else {
-    //     //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
-    //     echo '<script>
-    //     document.addEventListener("DOMContentLoaded", function() {          
-    //         var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
-    //         if(errorMessage) {
-    //             errorMessage.style.display = "block";
-    //         } else {
-    //             console.error("Error: Could not find error message element.");
-    //         }
-    //     });
-    //   </script>';
-    // }
+    
 }
 
 ?>
@@ -89,6 +72,7 @@ if(isset($_GET['patientid'])){
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
                         <p>Please enter a doctor Note first</p>
+                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note" name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content">
                         <form action="#" class="insert-form" id="insert_form" method="post">

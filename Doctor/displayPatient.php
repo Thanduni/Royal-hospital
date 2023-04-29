@@ -15,11 +15,10 @@ $mintime = date("h:i:sa");
 
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
-    $patientName = $_GET['name'];
 }
 
 
-$sql = "SELECT user.profile_image,
+$sql = "SELECT user.profile_image,user.name,
  patient.weight,
  patient.height, 
  patient.illness, 
@@ -35,6 +34,7 @@ $result=mysqli_query($con,$sql);
 if($result){
     while($row = mysqli_fetch_assoc($result)){
         $profile_image = $row['profile_image'];
+        $patientName = $row['name'];
         $age = $row['age'];
         $weight = $row['weight'];
         $height = $row['height'];
