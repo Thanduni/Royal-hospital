@@ -17,7 +17,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     $result_pid = mysqli_query($con, $pid_query);
     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
+    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost,p.purchaseID from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
     $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
     $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid and p.paid_status1 = 'Not Paid';";
 
@@ -29,9 +29,20 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     $total1 = 0;
     $total2 = 0;
     
+    $rowsR = mysqli_fetch_array($result);
+    $ResceiptID = $rowsR['purchaseID'];
 
     $pdf->SetTextColor(0,0,255);
-    $pdf->Cell(190,10,"Royal Hospital Patient's Payment Confirmation Receipt",0,1,'C');
+    $pdf->SetFont("Arial","B",20);
+    $pdf->Cell(190,10,"Royal Hospital Patient's Payment Receipt",0,1,'C');
+    $pdf->SetFont("Arial","B",15);
+    $pdf->Cell(190,7,"41 Station Road,",0,1,'C');
+    $pdf->Cell(190,7,"LEICESTER LE26 4FY",0,1,'C');
+    $pdf->Cell(190,7,"Telephone:0713701041",0,1,'C');
+    $pdf->Cell(190,10,"Email:royalhospital@gmail.com",0,1,'C');
+
+    $pdf->Cell(190,10,"Receipt ID:$ResceiptID",0,1,'C');
+
     $pdf->SetTextColor(0,0,0);
     $pdf->Cell(38,10,"Date",1,0,'C');
     $pdf->Cell(38,10,"Type",1,0,'C');
@@ -52,7 +63,7 @@ while($rows1 = mysqli_fetch_array($result)){
     {
         $item ='Drugs';
     }
-        
+   
     $pdf->Cell(38,10,$rows1['date'],1,0);
     $pdf->Cell(38,10,$item,1,0);
     $pdf->Cell(58,10,$rows1['service_name'],1,0);
