@@ -237,11 +237,11 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
                 <div class="field">
                     <label for="">Date</label><br>
-                    <input type="date" name="date" id="current-date" placeholder="">
+                    <input type="date" name="date" id="date" placeholder="" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>">
                 </div>
                 <script>
                     var today = new Date().toISOString().substr(0, 10);
-                    document.getElementById("current-date").value = today;
+                    document.getElementById("date").value = today;
                 </script>
                 <div class="field">
                     <label for="">Department</label><br>

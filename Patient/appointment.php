@@ -26,8 +26,8 @@ if (isset($_POST["submit"])) {
     VALUES ('$date','$time','[value-4]','$doctor','$pid','$msg','Confirmed')";
     $result = mysqli_query($con, $query);
 
-    $query = "INSERT INTO `purchases`(`patientID`, `date`, `quantity`, `paid_status`, `item`, `item_flag`) 
-    VALUES ('$pid' ,'$date',1,'not paid', 3, 's'), ('$pid', '$date',1,'not paid', 4, 's')";
+    $query = "INSERT INTO `purchases`(`patientID`, `date`, `quantity`, `paid_status`, `paid_status1`, `item`, `item_flag`) 
+    VALUES ('$pid' ,'$date',1,'not paid', 'Not paid', 3, 's'), ('$pid', '$date',1, 'not paid', 'Not paid', 4, 's')";
     $result = mysqli_query($con, $query);
 
     $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 
