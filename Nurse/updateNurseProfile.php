@@ -33,22 +33,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 
     <body>
     <div class="user">
-        <?php
+    <?php
         $name = urlencode( $_SESSION['name']);
-        include(BASEURL.'/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
-        <div class="userContents" id="center">
-            <div class="title">
-                <img src="../images/logo5.png" alt="logo">
-                Royal Hospital Management System
-            </div>
-            <ul>
-                <li class="userType"><img src="../images/userInPage.svg" alt="nurse"> Nurse</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img src="../images/logout.svg">
-                    </a></li>
-            </ul>
-            <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Profile
-            </div>
+        include(BASEURL . '/Components/nurseSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+        <div class="userContents">
+        <?php
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/nursetopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
+            
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Edit profile</h2>
