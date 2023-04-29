@@ -85,7 +85,7 @@ if(isset($_GET['patientid'])){
                                             $frequency = $_POST['frequency'];
 
                                             //to prevent SQL injection 
-                                            $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID) VALUES (?, ?, ?, ?, ?);";   // ? is used as placeholders to represent the value we want to insert
+                                            $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID,date) VALUES (?, ?, ?, ?, ?,CURDATE());";   // ? is used as placeholders to represent the value we want to insert
                                             $stmt = mysqli_prepare($con, $save);        //prepare the statement
 
                                             if(isset($prescriptionID)){
@@ -96,18 +96,7 @@ if(isset($_GET['patientid'])){
                                                     mysqli_stmt_execute($stmt);     //actualy execute the the statement
                                                 }
                                                 mysqli_stmt_close($stmt);           //close the statement
-                                            } else{
-                                                echo '<script>
-                                                        document.addEventListener("DOMContentLoaded", function() {          
-                                                            var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
-                                                            if(errorMessage) {
-                                                                errorMessage.style.display = "block";
-                                                            } else {
-                                                                console.error("Error: Could not find error message element.");
-                                                            }
-                                                        });
-                                                      </script>';
-                                            }
+                                            } 
   
                                         }
 

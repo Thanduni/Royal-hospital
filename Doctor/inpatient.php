@@ -52,6 +52,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         <thead>
                           <th>Patient</th>
                           <th>Room No</th>
+                          <th>Investigation</th>
                           <th>Option</th>
                         </thead>
                         <tbody>
@@ -59,7 +60,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 $select = "select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID where doctorID=$doctorID";
                                 $result = mysqli_query($con,$select);
                             
-                                while($row= mysqli_fetch_array($result)){?>
+                                while($row= mysqli_fetch_array($result)){
+                                    $patientID = $row['patientID'];
+                                    ?>
                                 <tr>
                                     <td><div class="left-cell">
                                             <?php echo "<img src='".BASEURL."/uploads/".$row['profile_image']."'width = 40px height=40px>";?>
@@ -70,6 +73,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         </div>
                                     </td>
                                     <td><?php echo $row['room_no'] ?></td>
+                                    <td><?php 
+                                        $get_investigation = "SELECT investigation, impression FROM prescription WHERE patientID = $patientID  AND date = (
+                                          SELECT MAX(date) FROM prescription WHERE patientID = $patientID )";
+                                        $investigation_query = mysqli_query($con,$get_investigation);
+                                    ?></td>
                                     <td><a href="viewReport.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-reports" class="view-reports" value="View Reports"></a>
                                     <a href="prescription.php?patientid=<?=$row['patientID']?>"><input type="button" name="prescription" class="prescription-btn" value="Prescribe"></a>
                                     <a href="discharge.php?patientid=<?=$row['patientID']?>"><input type="button" name="discharge" class="discharge" value="Discharge"></a></td>
