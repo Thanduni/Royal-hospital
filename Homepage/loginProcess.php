@@ -10,7 +10,7 @@ if (isset($_POST['login'])) {
         $query->bind_param("s", $_POST["email"]);
         $query->execute();
         $query->store_result();
-        $query->bind_result($nic, $name, $email, $password, $userRole, $profilePic, $verify);
+        $query->bind_result($nic, $name, $email, $password, $userRole, $profilePic);
 
         if ($query->num_rows == 1) {
             $pass = $_POST['password'];
