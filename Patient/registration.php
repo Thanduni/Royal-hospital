@@ -90,14 +90,14 @@ if(isset($_POST["nic"])){
 
             $mail -> isSMTP();
             $mail -> Host = "smtp.gmail.com";
-            $mail -> Port = 465;
+            $mail -> Port = 25;
             $mail -> SMTPAuth = true;
             $mail -> SMTPSecure = 'tls';
 
             $mail -> Username = 'hospitalroyal56@gmail.com';
-            $mail -> Password = 'Royal__123';
+            $mail -> Password = 'usygevftzbeyiqea';
 
-            $mail -> setFrom("nareash20010150@gmail.com", 'OTP Verification');
+            $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
             $mail -> addAddress($email);
 
             $mail -> isHTML(true);
@@ -105,26 +105,26 @@ if(isset($_POST["nic"])){
             $mail -> Body = "<p>Dear user, </p> <h3>Your verify OTP code is $otp <br></h3>
                     <br><br>
                     <p>With regrads,</p>
-                    <b>Programming with Lam</b>";
+                    <b>Royal hospital.</b>";
 
             if(!$mail -> send()){
-                die("Success");
-//                ?>
-<!--                <script>-->
-<!--                    alert("--><?php //echo "Register Failed, Invalid Email "?>//");
-//                </script>
-<!--                --><?php
+                                die("Fail");
+                ?>
+                <script>
+                   alert("<?php echo "Register Failed, Invalid Email "?>");
+                </script>
+                <?php
             }else{
-                die("Fail");
-//                ?>
-<!--                <script>-->
-<!--                    alert("--><?php //echo "Register Successfully, OTP sent to " . $email ?>//");
-//                    window.location.replace('verification.php');
-//                </script>
-//                <?php
+                    die("Success");
+                ?>
+                <script>
+                    alert("<?php echo "Register Successfully, OTP sent to " . $email ?>");
+                   // window.location.replace('verification.php');
+                </script>
+                <?php
             }
             $mail->smtpClose();
-            header("location:".BASEURL."/Homepage/login.php");
+            header("location:".BASEURL."/Homepage/verify.php");
         }
     }
 } 
