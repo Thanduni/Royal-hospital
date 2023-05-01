@@ -102,9 +102,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
 
-          $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid';";
-          $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid';"; //test
-          $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid';"; //drug
+          $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 's';";
+          $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 't';"; //test
+          $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 'd';"; //drug
 
           $res1 = mysqli_query($con,$qu1);
           $res2 = mysqli_query($con,$qu2);

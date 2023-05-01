@@ -1,3 +1,4 @@
+alert("Hai");
 $(document).ready(function() {
     $('#department').change(function() {
         let depName = $(this).val();

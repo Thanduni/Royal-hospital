@@ -31,6 +31,16 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
     margin-bottom: 0.5rem;
+    justify-content: space-between;
+}
+.error-message .add-note{
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: #f8d7da;
+    border: #dc3545;
+    color: #dc3545;
+    font-weight: 600;
+    cursor: pointer;
 }
 .medicine-button{
     /* border: 2px solid var(--para-color); */

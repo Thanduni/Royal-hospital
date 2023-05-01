@@ -10,28 +10,36 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 ?>
 <?php
+function displayErrorMessage() {
+    echo '<script>
+      document.addEventListener("DOMContentLoaded", function() {          
+        var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+        if(errorMessage) {
+          errorMessage.style.display = "flex";
+        } else {
+          console.error("Error: Could not find error message element.");
+        }
+      });
+    </script>';
+}
+  
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 
     $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
     $prescID_query = mysqli_query($con,$get_prescID);
-    if(mysqli_num_rows($prescID_query) > 0) {
-        $get_row = mysqli_fetch_assoc($prescID_query);
-        $prescriptionID = $get_row['MAX(prescriptionID)'];
-    } else {
-        //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {          
-            var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
-            if(errorMessage) {
-                errorMessage.style.display = "block";
-            } else {
-                console.error("Error: Could not find error message element.");
-            }
-        });
-      </script>';
+    // Fetch the result of the query (query can return a row with NULL)
+    $row = mysqli_fetch_array($prescID_query);
+
+    // Check if the value is not null
+    if (isset($row[0])){
+        $prescriptionID = $row[0];
+    }else{
+        displayErrorMessage();
     }
+    
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -64,9 +72,10 @@ if(isset($_GET['patientid'])){
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
                         <p>Please enter a doctor Note first</p>
+                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note" name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content">
-                        <form action="#" class="insert-form" id="insert_form" method="post">
+                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post">
                             <div class="input-feild">
                                 <table id="prescription-table">
                                     <tr>
@@ -76,32 +85,28 @@ if(isset($_GET['patientid'])){
                                         <th>No of days</th>
                                     </tr>
                                     <div class="show-medicine">
-                                        
-                                        <?php
-                                        if(isset($_POST['save'])){
-                                            $drugName = $_POST['drugName'];
-                                            $dosage = $_POST['dosage'];
-                                            $days = $_POST['days'];
-                                            $frequency = $_POST['frequency'];
+                                        <!-- <?php
+                                    if(isset($_POST['save'])){
+                                        $drugName = $_POST['drugName'];
+                                        $dosage = $_POST['dosage'];
+                                        $days = $_POST['days'];
+                                        $frequency = $_POST['frequency'];
 
-                                            //to prevent SQL injection 
-                                            $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID,date) VALUES (?, ?, ?, ?, ?,CURDATE());";   // ? is used as placeholders to represent the value we want to insert
-                                            $stmt = mysqli_prepare($con, $save);        //prepare the statement
+                                        //to prevent SQL injection 
+                                        $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID,date) VALUES (?, ?, ?, ?, ?,CURDATE());";   // ? is used as placeholders to represent the value we want to insert
+                                        $stmt = mysqli_prepare($con, $save);        //prepare the statement
 
-                                            if(isset($prescriptionID)){
-                                                //bind the variables to the statement usding mysqli_stmt_bind_param()
-                                                // 'sssss' indicate the type of variables we are binding (all strings)
-                                                foreach ($drugName as $key => $value) {
-                                                    mysqli_stmt_bind_param($stmt, "sssss", $value, $dosage[$key], $days[$key], $frequency[$key], $prescriptionID);
-                                                    mysqli_stmt_execute($stmt);     //actualy execute the the statement
-                                                }
-                                                mysqli_stmt_close($stmt);           //close the statement
-                                            } 
-  
-                                        }
-
-                                        ?>
-
+                                        if(isset($prescriptionID)){
+                                            //bind the variables to the statement usding mysqli_stmt_bind_param()
+                                            // 'sssss' indicate the type of variables we are binding (all strings)
+                                            foreach ($drugName as $key => $value) {
+                                                mysqli_stmt_bind_param($stmt, "sssss", $value, $dosage[$key], $days[$key], $frequency[$key], $prescriptionID);
+                                                mysqli_stmt_execute($stmt);     //actualy execute the the statement
+                                            }
+                                            mysqli_stmt_close($stmt);           //close the statement
+                                        } 
+    
+                                    } ?> -->
                                     <tr>
                                         <td><input type="text" name="drugName[]"></td>
                                         <td><input type="number" name="dosage[]"></td>
@@ -128,10 +133,11 @@ if(isset($_GET['patientid'])){
                                 </thead>
                                 <tbody>
                                 <?php 
-                                $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
-                                $result = mysqli_query($con,$select);
+                                if(isset($prescriptionID)){
+                                    $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
+                                    $result = mysqli_query($con,$select);
                             
-                                while($row= mysqli_fetch_array($result)){?>
+                                    while($row= mysqli_fetch_array($result)){?>
                                 <tr><td><?php  echo $prescriptionID ?></td>
                                     <td><?php echo $row['drug_name'] ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
@@ -145,6 +151,9 @@ if(isset($_GET['patientid'])){
                                     
                                 </tr>
                                 <?php
+                                    }
+                                }else{
+                                    displayErrorMessage();
                                 } ?>
                                 </tbody>
                             </table>
