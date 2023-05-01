@@ -108,23 +108,12 @@ if(isset($_POST["nic"])){
                     <b>Royal hospital.</b>";
 
             if(!$mail -> send()){
-                                die("Fail");
-                ?>
-                <script>
-                   alert("<?php echo "Register Failed, Invalid Email "?>");
-                </script>
-                <?php
-            }else{
-                    die("Success");
-                ?>
-                <script>
-                    alert("<?php echo "Register Successfully, OTP sent to " . $email ?>");
-                   // window.location.replace('verification.php');
-                </script>
-                <?php
+                $error = 'Invalid email try another email address.';
+                header("location:".BASEURL."/Patient/registration.php?error=".$error);
+                exit();
             }
             $mail->smtpClose();
-            header("location:".BASEURL."/Homepage/verify.php");
+            header("location:".BASEURL."/Homepage/login.php?success=You have registered successfully. Login to verify.");
         }
     }
 } 

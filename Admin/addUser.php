@@ -1,5 +1,8 @@
 <?php
 session_start();
+require "../phpmailer/src/Exception.php";
+require "../phpmailer/src/PHPMailer.php";
+require "../phpmailer/src/SMTP.php";
 require_once("../conf/config.php");
 
 if (isset($_POST['addUser'])) {
@@ -39,10 +42,6 @@ if (isset($_POST['addUser'])) {
     $dob = $_POST['dob'];
     $profile_image = $new_img_name;
 
-//    $query = "select * from user where nic ='".$nic."'";
-//    $result = mysqli_query($con, $query);
-//    $num_rows = mysqli_num_rows($result);
-
     $countUserNIC = "SELECT * FROM user WHERE nic = '$nic' ;";
     $resultCountUserNIC = mysqli_query($con, $countUserNIC);
     $num_rows_user_nic = mysqli_num_rows($resultCountUserNIC);
@@ -61,8 +60,35 @@ if (isset($_POST['addUser'])) {
         exit();
     }
 
-    $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image, DOB) VALUES
-                            ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob');";
+    $mail = new PHPMailer(true);
+
+    $mail -> isSMTP();
+    $mail -> Host = "smtp.gmail.com";
+    $mail -> Port = 25;
+    $mail -> SMTPAuth = true;
+    $mail -> SMTPSecure = 'tls';
+
+    $mail -> Username = 'hospitalroyal56@gmail.com';
+    $mail -> Password = 'usygevftzbeyiqea';
+
+    $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
+    $mail -> addAddress($email);
+
+    $mail -> isHTML(true);
+    $mail -> Subject = "Your verify code";
+    $mail -> Body = "<p>Dear user, </p> <h3>Your password is ".$_POST['password']."<br></h3>
+                    <br><br>
+                    <p>With regrads,</p>
+                    <b>Royal hospital.</b>";
+
+    if(!$mail -> send()){
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?warning=Invalid Email. Try another Email.");
+        exit();
+    }
+    $mail->smtpClose();
+
+    $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image, DOB, otp, verify) VALUES
+                            ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob',0 , '1');";
     $result = mysqli_query($con, $query);
 
     $nic_query = "SELECT nic FROM user WHERE user_role = 'Receptionist' or user_role = 'Admin'";

@@ -70,6 +70,33 @@ if (isset($_POST['addUser'])) {
         exit();
     }
 
+    $mail = new PHPMailer(true);
+
+    $mail -> isSMTP();
+    $mail -> Host = "smtp.gmail.com";
+    $mail -> Port = 25;
+    $mail -> SMTPAuth = true;
+    $mail -> SMTPSecure = 'tls';
+
+    $mail -> Username = 'hospitalroyal56@gmail.com';
+    $mail -> Password = 'usygevftzbeyiqea';
+
+    $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
+    $mail -> addAddress($email);
+
+    $mail -> isHTML(true);
+    $mail -> Subject = "Your verify code";
+    $mail -> Body = "<p>Dear user, </p> <h3>Your password is ".$_POST['password']."<br></h3>
+                    <br><br>
+                    <p>With regrads,</p>
+                    <b>Royal hospital.</b>";
+
+    if(!$mail -> send()){
+        header("location:" . BASEURL . "/Receptionist/patientPage.php?warning=Invalid Email. Try another Email.");
+        exit();
+    }
+    $mail->smtpClose();
+
     $query = "INSERT INTO user(nic, name, address, email, contact_num, gender, password, user_role, profile_image, DOB) VALUES
                             ('$nic', '$name', '$address', '$email', '$contactNum', '$gender', '$password', '$userRole', '$profile_image', '$dob');";
     $result = mysqli_query($con, $query);

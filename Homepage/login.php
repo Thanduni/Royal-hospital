@@ -43,6 +43,14 @@ if (!isset($_SESSION['mailaddress'])) {
                             ?>
                         </div>
                         <?php
+                    } else if (@$_GET['success'] == true) {
+                        ?>
+                        <div class="success">
+                            <?php
+                            echo $_GET["success"];
+                            ?>
+                        </div>
+                        <?php
                     }
                     ?>
                     <form action="<?php echo BASEURL . '/Homepage/loginProcess.php' ?>" method="post">
