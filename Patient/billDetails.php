@@ -23,22 +23,28 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
+
+        @media only screen and (max-width: 1430px) {
+            body {
+                background-color: #f9f8ff;
+            }
+        }
         .total .btn1{
-        font-weight: 0;
-        font-size: 16px;
-        color: #fff;
-        background-color:#0066cc;
-        padding: 10px 30px;
-        border: 2px solid #0066cc;
-        box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-        border-radius: 50px;
-        transition : 1000ms;
-        transform: translateY(0);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-        float: left;
+            font-weight: 0;
+            font-size: 16px;
+            color: #fff;
+            background-color:#0066cc;
+            padding: 10px 30px;
+            border: 2px solid #0066cc;
+            box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+            border-radius: 50px;
+            transition : 1000ms;
+            transform: translateY(0);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            cursor: pointer;
+            float: left;
         }
 
         .total .btn1:hover{
@@ -66,6 +72,34 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         .total .card-image img{
             width:300px;
             height: 200px;
+        }
+
+        .mcontent{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            box-sizing: unset;
+            width: 1430px;
+            margin: 20px 20px 50px 50px;
+            position: relative;
+        }
+
+        .pcontent {
+            padding: 10px 10px;
+            /* margin-top: 18px; */
+            display: flex;
+            /* margin-left: 50px; */
+            float: left;
+            height: 620px;
+            width: 18%;
+            flex: 1;
+            background-color: #fff;
+            box-sizing: border-box;
+            position: relative;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-content: center;
+            flex-direction: column;
         }
     </style>
 </head>

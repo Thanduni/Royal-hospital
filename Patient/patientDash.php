@@ -30,6 +30,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         .field{
             margin: 20px;
         }
+
+    
     </style>
 </head>
 <body>
@@ -53,9 +55,13 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $GLOBALS['weight'] = $GLOBALS['w'];
         $GLOBALS['blood'] = $GLOBALS['b'];
 
-        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid'";
+        date_default_timezone_set('Asia/Calcutta');
+        
+        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid' ORDER BY `appointment`.`date` DESC";
         $result_app = mysqli_query($con, $app_sql);
 
+        date_default_timezone_set('Asia/Calcutta');
+        $current_time = date("H:i:s"); 
 
         while($row = mysqli_fetch_assoc($result_app)) {
             $docName_sql = "select * from doctor inner join user on doctor.nic = user.nic where doctor.doctorID = '" . $row['doctorID'] . "'";
@@ -190,10 +196,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         $result = mysqli_query($con, $query);
                         while($rows = mysqli_fetch_assoc($result)){ ?>
                             <div class="row">
-                                <div class="cell" data-title="Date">
+                                <div id ="current_date" class="cell" data-title="Date">
                                     <?php echo $rows['date']; ?>
                                 </div>
-                                <div class="cell" data-title="Time">
+                                <div id="current_time" class="cell" data-title="Time">
                                     <?php echo $rows['time']; ?>
                                 </div>
                                 <div class="cell" data-title="Venue">
@@ -203,7 +209,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                     <?php echo $rows['name']; ?>
                                 </div>
                                 <div class="cell" data-title="Message">
-                                    <?php echo $rows['message']; ?>
+                                    <?php echo $rows['message'];?>
                                 </div>
                                 <div class="cell" style="" data-title="Options">
                                     <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
@@ -292,7 +298,13 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 $('#login-modal').fadeOut();
             });
         });
-
+        var c_time = new Date().toLocaleTimeString();
+        var c_date = new Date().toLocaleDateString();
+        
+        if(c_time > document.getElementById("current_time").innerHTML && document.getElementById("current_date").innerHTML < c_date)
+        {
+            document.getElementsByClassName("row").style.background = "#00FF00";
+        }
         
     </script>
 </body>

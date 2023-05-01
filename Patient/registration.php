@@ -185,7 +185,7 @@ if (!isset($_SESSION['mailaddress'])) {
                     <label for="">Other Illness</label><br><br>
                     <textarea name="oillness" id="oillness" cols="30" rows="3" placeholder="If you have any other illness please mention"></textarea><br><br>
                     <label for="">Any Medical Comments</label><br><br>
-                    <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
+                    <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any comment regarding medical please mention"></textarea><br><br>
 
                     <br><br>
                     <div style="margin: 0 auto">
