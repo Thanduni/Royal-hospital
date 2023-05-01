@@ -15,6 +15,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
+        <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
             .next {
@@ -61,7 +62,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             <?php }?>
             <div class="userClass">
                 <?php
-                $query = "select item.item_name, inventory.badgeNo, item.companyName, item.unitType, item.unit_price, inventory.quantity, 
+                $query = "select item.item_name, inventory.badgeNo, item.companyName, item.unitType, item.unit_price, inventory.unit_quantity, inventory.quantity, 
                           inventory.manufacturedDate, inventory.expiredDate from item inner join inventory on item.itemID=inventory.itemID;";
                 $result = mysqli_query($con, $query);
                 if (!$result) die("Database access failed: " . $con->error);
@@ -79,6 +80,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             <div class="cell">Unit type</div>
                             <div class="cell">Unit cost</div>
                             <div class="cell">Quantity</div>
+                            <div class="cell">Unit quantity</div>
                             <div class="cell">Manufactured date</div>
                             <div class="cell">Expired date</div>
                             <div class="cell">Use state</div>
@@ -103,6 +105,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                 $quantity = $row['quantity'];
                                 $manDate = $row['manufacturedDate'];
                                 $expiredDate = $row['expiredDate'];
+                                $unitQuantity = $row['unit_quantity'];
                                 if(date("Y-m-d") < $expiredDate)
                                 $useState = 'Available';
                                 else
@@ -127,6 +130,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                     </div>
                                     <div class="cell" data-title="Quantity">
                                         <?php echo $quantity; ?>
+                                    </div>
+                                    <div class="cell" data-title="Unit quantity">
+                                        <?php echo $unitQuantity; ?>
                                     </div>
                                     <div class="cell" data-title="Manufacture date">
                                         <?php echo $manDate; ?>
@@ -168,14 +174,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                 <label for="medicineName">Medicine name:</label>
                             </td>
                             <td colspan="2">
-                                <select name="item_name" id="">
+                                <select name="item_name" id="" required>
                                     <?php
                                     $sql="Select * from `item`";
                                     $result=mysqli_query($con,$sql);
                                     while($row=mysqli_fetch_assoc($result)){
                                         $medicineName = $row['item_name'];
+                                        $medicineID = $row['itemID'];
                                         ?>
-                                        <option value=<?php echo $medicineName ?>><?php echo $medicineName?></option>
+                                        <option value=<?php echo $medicineID ?>><?php echo $medicineName?></option>
                                     <?php } ?>
                                 </select>
                             </td>
@@ -185,7 +192,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                 <label>Quantity</label>
                             </td>
                             <td colspan="2">
-                                <input name="quantity" type="number" id="contact" placeholder="Enter Quantity here">
+                                <input name="quantity" type="number" min="1" id="contact" placeholder="Enter Quantity here" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Unit quantity">Unit Quantity:</label>
+                            </td>
+                            <td colspan="2">
+                                <input name="unitQuantity" type="number" min="1" id="unitQuantity" placeholder="Enter the unit quantity here" required>
                             </td>
                         </tr>
                         <tr>
@@ -193,7 +208,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                 <label for="Manufactured date">Manufactured date:</label>
                             </td>
                             <td colspan="2">
-                                <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>">
+                                <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>" required>
                             </td>
                         </tr>
                         <tr>
@@ -201,7 +216,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                 <label>Expired date</label>
                             </td>
                             <td colspan="2">
-                                <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
+                                <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>" required>
                             </td>
                         </tr>
                         <tr>
@@ -219,9 +234,40 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
     </div>
     <!-- content start -->
 
+    <script>
+        let switchButton = document.getElementById("switch");
+
+        switchButton.addEventListener("change", function(){
+            var table, row, cell, i;
+            table = document.getElementsByClassName("table")[0];
+            // alert(table);
+            row = table.getElementsByClassName("row");
+            if(this.checked){
+                // alert("Checked");
+                for (i = 1; i < row.length; i++) {
+                    cell = row[i].getElementsByClassName("cell")[9];
+                    if(cell.textContent.trim() === "Expired"){
+                        row[i].style.display = "";
+                    }
+                    else{
+                        row[i].style.display = "none";
+                    }
+                }
+            }else{
+                for (i = 1; i < row.length; i++) {
+                    cell = row[i].getElementsByClassName("cell")[9];
+                    if(cell.textContent.trim() === "In Stock".trim()){
+                        row[i].style.display = "";
+                    }
+                    else{
+                        row[i].style.display = "none";
+                    }
+                }
+            }
+        })
+    </script>
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/updateMedicine.js' ?>></script>
-    <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
     <script type="text/javascript">
         $(function(){
             $('#addButton').click(function(){
@@ -232,6 +278,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             });
         });
     </script>
+
     <!-- content start -->
     </body>
     </html>

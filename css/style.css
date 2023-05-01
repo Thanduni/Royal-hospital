@@ -1479,4 +1479,3 @@ input[type="checkbox"]:checked ~ #sidebarMenu .welcomeUser p {
 .displayInfo.showNothing{
     transform: translateX(0px);
 }
-

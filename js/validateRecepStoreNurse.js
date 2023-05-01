@@ -41,4 +41,21 @@ function validateNurseReceptionistStorekeeperForm(){
     }
 }
 
+function validateNurseReceptionistStorekeeperForm(){
+    let nic = nicDiv.previousSibling.value;
+
+    if(regNic.test(nic))
+        return true;
+    else{
+        nicDiv.classList.remove("hint");
+        nicDiv.classList.add("alert");
+        nicDiv.innerHTML = "<ul>\n" +
+            "    <li>Please enter your email properly.</li>\n" +
+            "</ul>";
+
+        form.scrollIntoView();
+        return false;
+    }
+}
+
 

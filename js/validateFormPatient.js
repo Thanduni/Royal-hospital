@@ -217,3 +217,44 @@ function validatePasswordForm() {
         }
     }
 }
+
+
+function validateUpdateForm() {
+    if (regEmail.test(email) &&
+        regContactNum.test(contactNum) &&
+        regAddress.test(address) &&
+        regName.test(name)) {
+        return true;}
+    else{
+        if(!regEmail.test(email)){
+            email.classList.remove("hint");
+            email.classList.add("alert");
+            email.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid email.</li>\n" +
+                "</ul>"
+        }
+        if(!regContactNum.test(contactNum)){
+            contactNum.classList.remove("hint");
+            contactNum.classList.add("alert");
+            contactNum.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid contact number.</li>\n" +
+                "</ul>"
+        }
+        if(!regName.test(name)){
+            name.classList.remove("hint");
+            name.classList.add("alert");
+            name.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid name.</li>\n" +
+                "</ul>"
+        }
+        if(!regAddress.test(address)){
+            address.classList.remove("hint");
+            address.classList.add("alert");
+            address.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid name.</li>\n" +
+                "</ul>"
+        }
+        form.scrollIntoView();
+        return false;
+    }
+}

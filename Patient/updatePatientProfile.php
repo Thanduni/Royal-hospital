@@ -73,7 +73,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateNurseReceptionistStorekeeperForm()"  method="post" enctype="multipart/form-data">
                         <?php
                         $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
                         $row = mysqli_fetch_array($result);

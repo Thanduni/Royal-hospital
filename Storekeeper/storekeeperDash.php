@@ -239,14 +239,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label for="medicineName">Medicine name:</label>
                     </td>
                     <td colspan="2">
-                        <select name="item_name" id="">
+                        <select name="item_name" id="" required>
                             <?php
                             $sql="Select * from `item`";
                             $result=mysqli_query($con,$sql);
                             while($row=mysqli_fetch_assoc($result)){
                                 $medicineName = $row['item_name'];
+                                $medicineID = $row['itemID'];
                                 ?>
-                                <option value='<?php echo $medicineName ?>'><?php echo $medicineName?></option>
+                                <option value='<?php echo $medicineID ?>'><?php echo $medicineName?></option>
                             <?php } ?>
                         </select>
                     </td>
@@ -256,7 +257,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label>Quantity</label>
                     </td>
                     <td colspan="2">
-                        <input name="quantity" type="number" id="contact" placeholder="Enter Quantity here">
+                        <input name="quantity" type="number" min="1" id="contact" placeholder="Enter Quantity here" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Unit quantity">Unit Quantity:</label>
+                    </td>
+                    <td colspan="2">
+                        <input name="unit quantity" type="number" min="1" id="unitQuantity" placeholder="Enter the unit quantity here" required>
                     </td>
                 </tr>
                 <tr>
@@ -264,7 +273,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label for="Manufactured date">Manufactured date:</label>
                     </td>
                     <td colspan="2">
-                        <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>">
+                        <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>" required>
                     </td>
                 </tr>
                 <tr>
@@ -272,7 +281,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label>Expired date</label>
                     </td>
                     <td colspan="2">
-                        <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
+                        <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>" required>
                     </td>
                 </tr>
                 <tr>

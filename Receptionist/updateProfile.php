@@ -41,7 +41,7 @@ if (isset($_POST['updateReceptionist'])) {
     if(($email != $_SESSION['mailaddress'] && $row[0]>0))
         header("location:" . BASEURL . "/Receptionist/updateReceptionistProfile.php?wrongResult=The email address already exists!");
 
-    $query = "UPDATE user SET name='$name', address='$address', email='$email', contact_num='$contactNum', gender='$gender', profile_image='$profile_image' WHERE email = '" . $_SESSION['mailaddress'] . "'";
+    $query = "UPDATE user SET name='$name' ,DOB='$dob' ,address='$address', email='$email', contact_num='$contactNum', gender='$gender', profile_image='$profile_image' WHERE email = '" . $_SESSION['mailaddress'] . "'";
     $result = mysqli_query($con, $query);
     $_SESSION['mailaddress'] = $email;
     $_SESSION['name'] = $name;

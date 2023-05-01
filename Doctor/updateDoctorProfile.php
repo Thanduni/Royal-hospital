@@ -66,7 +66,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()" method="post" enctype="multipart/form-data">
                         <?php
                         $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
                         $row = mysqli_fetch_array($result);
@@ -126,7 +126,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 <div class="editForm">
                     <h2>Change password</h2>
 
-                    <form action="updateProfile.php" onsubmit="validatePasswordForm()" method="post">
+                    <form action="updateProfile.php" onsubmit="return validatePasswordForm()" method="post">
 
                         <table>
                             <tr>
