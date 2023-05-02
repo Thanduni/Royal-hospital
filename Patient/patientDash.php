@@ -56,7 +56,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $GLOBALS['blood'] = $GLOBALS['b'];
 
         date_default_timezone_set('Asia/Calcutta');
-        
+
         $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid' ORDER BY `appointment`.`date` DESC";
         $result_app = mysqli_query($con, $app_sql);
 
@@ -193,11 +193,23 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, appointment.venue, user.name, appointment.doctorID, appointment.appointmentID 
                             FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
 
+                        $date_arr = array();
+                        $time_arr = array();
                         $result = mysqli_query($con, $query);
-                        while($rows = mysqli_fetch_assoc($result)){ ?>
-                            <div class="row">
+                        while($rows = mysqli_fetch_assoc($result)){ 
+                            array_push($date_arr,$rows['date']);
+                            array_push($time_arr,$rows['time']);
+
+                            $date_a = json_encode($date_arr);
+                            $time_a = json_encode($time_arr);
+
+                            
+
+                            ?>
+                            <div id="row" class="row">
                                 <div id ="current_date" class="cell" data-title="Date">
-                                    <?php echo $rows['date']; ?>
+                                    <?php echo $rows['date'];
+                                     ?>
                                 </div>
                                 <div id="current_time" class="cell" data-title="Time">
                                     <?php echo $rows['time']; ?>
@@ -300,11 +312,21 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         });
         var c_time = new Date().toLocaleTimeString();
         var c_date = new Date().toLocaleDateString();
+
+        var arr_d = JSON.parse(<?php echo $date_a; ?>);
+        var arr_t = JSON.parse(<?php echo $time_a; ?>);
         
-        if(c_time > document.getElementById("current_time").innerHTML && document.getElementById("current_date").innerHTML < c_date)
+        console.log(arr_d.length)
+
+        for(i = 0 ; i < arr_d.length ; i++)
         {
-            document.getElementsByClassName("row").style.background = "#00FF00";
+            if(c_time > document.getElementsByClassName("cell")[i].innerHTML && document.getElementsByClassName("cell")[i].innerHTML < c_date)
+        {
+            
+            document.getElementsByClassName("row")[i].style.background = "#00FF00";
         }
+        }
+        
         
     </script>
 </body>

@@ -143,13 +143,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     $result_pid = mysqli_query($con, $pid_query);
                     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-                    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
-                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid;";
-                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid;";
+                    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.item_flag = 's';";
+                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid and p.item_flag = 't';";
+                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid and p.item_flag = 'd';";
 
-                    $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid';";
-                    $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid';"; //test
-                    $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid';"; //drug
+                    $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 's';";
+                    $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 't';"; //test
+                    $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 'd';"; //drug
 
                     $res1 = mysqli_query($con,$qu1);
                     $res2 = mysqli_query($con,$qu2);
@@ -187,7 +187,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     }; ?>
                                 </div>
                                 
-                                <div class="cell" data-title="Status">
+                                <div class="cell" style="width:250px;" data-title="Status">
                                     <?php echo $rows['service_name']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">
@@ -235,7 +235,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     }; ?>
                                 </div>
                                 
-                                <div class="cell" data-title="Status">
+                                <div class="cell" style="width:250px;" data-title="Status">
                                     <?php echo $rows['test_name']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">
@@ -283,7 +283,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     }; ?>
                                 </div>
                                 
-                                <div class="cell" data-title="Status">
+                                <div class="cell" style="width:250px;" data-title="Status">
                                     <?php echo $rows['item_name']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">

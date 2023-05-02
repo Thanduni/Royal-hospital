@@ -28,7 +28,7 @@
     color: var(--para-color);
     border-style: solid;
     border-width: 0px 0px 0px 5px;
-    border-color: var(--para-color);
+    border-color: var(--primary-color);;
 }
 
 .card:hover{
@@ -394,12 +394,20 @@ form button ,#cancel,#btn {
     padding: 10px 10px;
     width: 220px;
     height: 90px;
+    transition: .04s;
     border-radius: 10px;
     background-color: #fff;
     display: flex;
     justify-content: start;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    
 }
+
+.pcontent .weight:hover{
+    border-color: var(--primary-color);
+
+}
+
 .pcontent .height{
     text-align: left;
     padding: 10px 10px;

@@ -922,7 +922,7 @@ ul {
 
 .cards {
     position: relative;
-    width: 100%;
+     /* width: 100%; */
 }
 
 .cards ul {
