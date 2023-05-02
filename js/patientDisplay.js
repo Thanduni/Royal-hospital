@@ -52,8 +52,8 @@ function patientDisplay(nic){
                 response.weight +
                 "                        </div>\n" +
                 "                    <div class=\"cell_MD_head\">Receptionist ID of who adds tha patient</div>\n" +
-                "                        <div class=\"cell_MD\" data-title=\"Receptionist ID of who adds tha patient\">\n" +
-                "'" + response.receptionistID + "'" +
+                "                        <div class=\"cell_MD\" data-title=\"Receptionist ID of who adds tha patient\">\n"
+                + response.receptionistID +
                 "                        </div>\n" +
                 "                    <div class=\"cell_MD_head\">Height(in cm)</div>\n" +
                 "                        <div class=\"cell_MD\" data-title=\"Height(in cms)\">\n" +

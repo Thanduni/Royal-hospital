@@ -2,6 +2,10 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
+
+$deleteAppointmentQuery = "DELETE from appointment where `date`<CURRENT_DATE OR (`date`=CURRENT_DATE && `time`<CURRENT_TIME)";
+$deleteAppointmentResult = mysqli_query($con, $deleteAppointmentQuery);
+
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') {
     ?>
 
@@ -95,7 +99,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <?php echo $rows['message']; ?>
                             </div>
                             <div class="cell" style="" data-title="Options">
-                                <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
+                                <a href="<?php echo BASEURL . '/Receptionist/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
                                     <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                     </button>
                                 </a>

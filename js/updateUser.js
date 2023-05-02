@@ -93,7 +93,7 @@ function displayPatientUpdateForm(nic) {
 
     let tableCon = document.getElementsByClassName(nic + "_tableCon");
 
-    document.getElementById("titleOperation").innerHTML = "Update User | NIC : " + nic;
+    document.getElementById("titleOperation").innerHTML = "Update Patient | NIC : " + nic;
 
     let name = tableCon[0].textContent;
     let address = tableCon[1].textContent;

@@ -5,4 +5,4 @@ require_once("../conf/config.php");
     $query = "Delete FROM appointment where appointmentID=" . $appointmentID;
     $con->query($query);
 
-    header("location: " . BASEURL . "/Patient/patientDash.php");
+    header("location: " . BASEURL . "/Receptionist/makeAppointment.php");
