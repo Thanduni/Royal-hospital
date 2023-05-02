@@ -75,7 +75,7 @@ if(isset($_GET['patientid'])){
                         <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note" name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content">
-                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post">
+                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" >
                             <div class="input-feild">
                                 <table id="prescription-table">
                                     <tr>
@@ -85,30 +85,8 @@ if(isset($_GET['patientid'])){
                                         <th>No of days</th>
                                     </tr>
                                     <div class="show-medicine">
-                                        <!-- <?php
-                                    if(isset($_POST['save'])){
-                                        $drugName = $_POST['drugName'];
-                                        $dosage = $_POST['dosage'];
-                                        $days = $_POST['days'];
-                                        $frequency = $_POST['frequency'];
-
-                                        //to prevent SQL injection 
-                                        $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID,date) VALUES (?, ?, ?, ?, ?,CURDATE());";   // ? is used as placeholders to represent the value we want to insert
-                                        $stmt = mysqli_prepare($con, $save);        //prepare the statement
-
-                                        if(isset($prescriptionID)){
-                                            //bind the variables to the statement usding mysqli_stmt_bind_param()
-                                            // 'sssss' indicate the type of variables we are binding (all strings)
-                                            foreach ($drugName as $key => $value) {
-                                                mysqli_stmt_bind_param($stmt, "sssss", $value, $dosage[$key], $days[$key], $frequency[$key], $prescriptionID);
-                                                mysqli_stmt_execute($stmt);     //actualy execute the the statement
-                                            }
-                                            mysqli_stmt_close($stmt);           //close the statement
-                                        } 
-    
-                                    } ?> -->
                                     <tr>
-                                        <td><input type="text" name="drugName[]"></td>
+                                        <td><input type="text" name="drugName[]" class="autoComplete-input" ></td>
                                         <td><input type="number" name="dosage[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
                                         <td><input type="number" name="days[]"></td>
@@ -119,6 +97,7 @@ if(isset($_GET['patientid'])){
                                 <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
+                        <!-- <script src="medicine.js"></script> -->
                         
                         <div class="show-prescription">
                             <table class="table">

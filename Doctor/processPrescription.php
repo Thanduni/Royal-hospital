@@ -40,6 +40,7 @@ if(isset($_GET['patientid'])){
 
                 // $required_quantity = $dosage[$key] * $days[$key] * $frequency[$key];
                 $required_quantity = $dosage * $days * $frequency;
+                $make_bill_quantity = $required_quantity;
                 echo "required quantity = " . $required_quantity. "<br>";
 
                 //this code will run until required quantity becomes 0
@@ -81,7 +82,9 @@ if(isset($_GET['patientid'])){
                     $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency,prescriptionID,date) VALUES ('$value', '$dosage', '$days', '$frequency', '$prescriptionID', CURDATE());";
                     $stmt = mysqli_query($con, $save);
                     if($stmt){
-                        echo "Prescription Added <br>";
+                        $insert_purches = "INSERT into purchases(patientID,date,quantity,item,item_flag) VALUES('$patientID',CURDATE(),'$make_bill_quantity','$itemID','d');";
+                        $insert_purches_query = mysqli_query($con,$insert_purches);
+                        if($insert_purches_query){echo "Prescription Added, entered to purchases <br>";}
                     }
                 }
             }
