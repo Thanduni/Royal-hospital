@@ -1,9 +1,13 @@
 <?php
+
 session_start();
 require "../phpmailer/src/Exception.php";
 require "../phpmailer/src/PHPMailer.php";
 require "../phpmailer/src/SMTP.php";
 require_once("../conf/config.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if (isset($_POST['addUser'])) {
     echo "<pre>";
@@ -60,7 +64,7 @@ if (isset($_POST['addUser'])) {
         exit();
     }
 
-    $mail = new PHPMailer(true);
+    $mail = new PHPMailer();
 
     $mail -> isSMTP();
     $mail -> Host = "smtp.gmail.com";
@@ -75,7 +79,7 @@ if (isset($_POST['addUser'])) {
     $mail -> addAddress($email);
 
     $mail -> isHTML(true);
-    $mail -> Subject = "Your verify code";
+    $mail -> Subject = "Your password";
     $mail -> Body = "<p>Dear user, </p> <h3>Your password is ".$_POST['password']."<br></h3>
                     <br><br>
                     <p>With regrads,</p>

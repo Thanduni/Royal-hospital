@@ -73,7 +73,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         <div class="cell">Item name</div>
                         <div class="cell">Company Name</div>
                         <div class="cell">Unit price</div>
-                        <div class="cell">Unit type</div>
+                        <div class="cell">Unit Quantity</div>
                         <div class="cell">Options</div>
 
                     </div>
@@ -95,10 +95,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                                 <div class="cell" data-title="Company Name">
                                     <?php echo $row[2]; ?>
                                 </div>
-                                <div class="cell" data-title="Unit price">
+                                <div class="cell" data-title="Unit Price">
                                     <?php echo $row[3]; ?>
                                 </div>
-                                <div class="cell" data-title="Unit type">
+                                <div class="cell" data-title="Unit Quantity">
                                     <?php echo $row[4]; ?>
                                 </div>
                                 <div class="cell" style="100px" data-title="Options">
@@ -157,25 +157,19 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                     </tr>
                     <tr>
                         <td>
-                            <label for="Unit Type">Unit Type:</label>
+                            <label for="Unit Cost">Unit Cost:</label>
                         </td>
                         <td colspan="2">
-                            <select name="unitType" id="IN_unitType">
-                                <option value="">Select type</option>
-                                <option value="cards">cards</option>
-                                <option value="bottles">bottles</option>
-                                <option value="pills">pills</option>
-                                <option value="injections">injections</option>
-                                <option value="tablets">tablets</option>
-                            </select>
+                            <input name="unitCost" type="text" id="IN_unitCost" placeholder="Enter Unit Cost here">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="Unit Cost">Unit Cost:</label>
+                            <label for="Unit Quantity">Unit Quantity:</label>
                         </td>
                         <td colspan="2">
-                            <input name="unitCost" type="text" id="IN_unitCost" placeholder="Enter Unit Cost here">                        </td>
+                            <input name="unitQuantity" type="text" id="IN_unitQuantity" placeholder="Enter Unit Quantity here">
+                        </td>
                     </tr>
                     <tr>
                         <td></td>

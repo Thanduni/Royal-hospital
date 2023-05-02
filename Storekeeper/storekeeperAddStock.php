@@ -62,7 +62,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             <?php }?>
             <div class="userClass">
                 <?php
-                $query = "select item.item_name, inventory.badgeNo, item.companyName, item.unitType, item.unit_price, inventory.unit_quantity, inventory.quantity, 
+                $query = "select item.item_name, inventory.badgeNo, item.companyName, item.unit_price, item.unit_quantity, inventory.quantity, 
                           inventory.manufacturedDate, inventory.expiredDate from item inner join inventory on item.itemID=inventory.itemID;";
                 $result = mysqli_query($con, $query);
                 if (!$result) die("Database access failed: " . $con->error);
@@ -77,7 +77,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             <div class="cell">Medicine name</div>
                             <div class="cell">Badge number</div>
                             <div class="cell">Company name</div>
-                            <div class="cell">Unit type</div>
                             <div class="cell">Unit cost</div>
                             <div class="cell">Quantity</div>
                             <div class="cell">Unit quantity</div>
@@ -89,18 +88,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
-                                <ul class="tableCon">
-                                    <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[1] ?></li>
-                                    <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[2] ?></li>
-                                    <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
-                                    <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[4] ?></li>
-                                </ul>
-                                <!--                        <div id="UDfunc">-->
                                         <?php
                                 $item_name = $row['item_name'];
                                 $batchNo = $row['badgeNo'];
                                 $companyName = $row['companyName'];
-                                $unitType = $row['unitType'];
                                 $unitCost = $row['unit_price'];
                                 $quantity = $row['quantity'];
                                 $manDate = $row['manufacturedDate'];
@@ -120,10 +111,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                                         <?php echo $batchNo; ?>
                                     </div>
                                     <div class="cell" data-title="Company name">
-                                        <?php echo $unitType; ?>
-                                    </div>
-                                    <div class="cell" data-title="Unit type">
-                                        <?php echo $unitCost; ?>
+                                        <?php echo $companyName; ?>
                                     </div>
                                     <div class="cell" data-title="Unit cost">
                                         <?php echo $unitCost; ?>
@@ -193,14 +181,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             </td>
                             <td colspan="2">
                                 <input name="quantity" type="number" min="1" id="contact" placeholder="Enter Quantity here" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="Unit quantity">Unit Quantity:</label>
-                            </td>
-                            <td colspan="2">
-                                <input name="unitQuantity" type="number" min="1" id="unitQuantity" placeholder="Enter the unit quantity here" required>
                             </td>
                         </tr>
                         <tr>

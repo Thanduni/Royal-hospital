@@ -101,7 +101,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         for ($j = 0; $j < $rows; ++$j) {
                             $result1->data_seek($j);
                             $row1 = $result1->fetch_array(MYSQLI_ASSOC);
-                            $query2 = "SELECT * FROM patient where nic = '".$row1['nic']."'";
+                            $query2 = "SELECT * FROM patient where nic='".$row1['nic']."'";
                             $result2 = $con->query($query2);
                             $result2->data_seek(0);
                             $row2 = $result2->fetch_array(MYSQLI_ASSOC);
