@@ -70,18 +70,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
 
-//                $numberPages = 3;
-//                $totalPages = ceil($rows / $numberPages);
-//
-//                if (isset($_GET['page'])) {
-//                    $page = $_GET['page'];
-//                } else {
-//                    $page = 1;
-//                }
-//
-//                $startinglimit = ($page - 1) * $numberPages;
-//                $query = "SELECT user.nic, nurse.nurseID, user.name, user.profile_image FROM nurse inner join user where nurse.nic=user.nic limit " . $startinglimit . ',' . $numberPages;
-//                $result = $con->query($query);
                 ?>
                 <div class="wrapper">
                     <div class="table">
