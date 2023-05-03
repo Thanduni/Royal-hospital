@@ -23,16 +23,16 @@ if (isset($_GET['pdID'])) {
         mysqli_stmt_close($stmt);
 
         //get itemID
-        $itemID_query = "SELECT itemID from item WHERE item_name = '$drugName'";
+        $itemID_query = "SELECT itemID,unit_quantity from item WHERE item_name = '$drugName'";
         $get_itemID = mysqli_query($con,$itemID_query);
         $item_row = mysqli_fetch_assoc($get_itemID);
         $itemID = $item_row['itemID'];
+        $unit_quantity = $item_row['unit_quantity'];
 
         //get unit quantity
-        $get_unit_quantity = "SELECT unit_quantity,badgeNo from inventory WHERE itemID = $itemID AND expiredDate >= CURDATE() ORDER BY expiredDate ASC limit 1";
+        $get_unit_quantity = "SELECT badgeNo from inventory WHERE itemID = $itemID AND expiredDate >= CURDATE() ORDER BY expiredDate ASC limit 1";
         $get_unit_quantity_query = mysqli_query($con,$get_unit_quantity);
         $get_results = mysqli_fetch_assoc($get_unit_quantity_query);
-        $unit_quantity = $get_results['unit_quantity'];
         $badgeNo = $get_results['badgeNo'];
 
         $quantity = $Prescibed_quantity/$unit_quantity;
