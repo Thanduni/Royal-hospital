@@ -207,11 +207,11 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
                             ?>
                             <div id="row" class="row">
-                                <div id ="current_date" class="cell" data-title="Date">
+                                <div id ="current_date" class="cell date" data-title="Date">
                                     <?php echo $rows['date'];
                                      ?>
                                 </div>
-                                <div id="current_time" class="cell" data-title="Time">
+                                <div id="current_time" class="cell time" data-title="Time">
                                     <?php echo $rows['time']; ?>
                                 </div>
                                 <div class="cell" data-title="Venue">
@@ -313,14 +313,14 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         var c_time = new Date().toLocaleTimeString();
         var c_date = new Date().toLocaleDateString();
 
-        var arr_d = JSON.parse(<?php echo $date_a; ?>);
-        var arr_t = JSON.parse(<?php echo $time_a; ?>);
+        var arr_d = (<?php echo $date_a; ?>);
+        var arr_t = (<?php echo $time_a; ?>);
         
         console.log(arr_d.length)
 
         for(i = 0 ; i < arr_d.length ; i++)
         {
-            if(c_time > document.getElementsByClassName("cell")[i].innerHTML && document.getElementsByClassName("cell")[i].innerHTML < c_date)
+            if(c_time > document.getElementsByClassName("row")[i+1].getElementsByClassName("cell").innerHTML && document.getElementsByClassName("cell")[i].innerHTML < c_date)
         {
             
             document.getElementsByClassName("row")[i].style.background = "#00FF00";
