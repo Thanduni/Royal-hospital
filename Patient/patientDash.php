@@ -313,8 +313,8 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         // var c_time = new Date().toLocaleTimeString();
         // var c_date = new Date().toLocaleDateString();
 
-        // var arr_d = JSON.parse(<?php echo $date_a; ?>);
-        // var arr_t = JSON.parse(<?php echo $time_a; ?>);
+        // var arr_d = JSON.parse(<?php //echo $date_a; ?>);
+        // var arr_t = JSON.parse(<?php //echo $time_a; ?>);
 
 
         // console.log(arr_d.length)
