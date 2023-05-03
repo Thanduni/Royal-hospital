@@ -32,7 +32,7 @@ if(isset($_GET['patientid'])){
                 $itemID = $item_row['itemID'];
 
                 //check if there is enough quantity in inventory
-                $check_inventory = "SELECT inventory.badgeNo,inventory.quantity*item.unit_quantity as quantity,unit_quantity FROM inventory join item on inventory.itemID=item.itemID WHERE item.itemID = 3 AND inventory.expiredDate >= CURDATE() ORDER BY expiredDate ASC;";
+                $check_inventory = "SELECT inventory.badgeNo,inventory.quantity*item.unit_quantity as quantity,unit_quantity FROM inventory join item on inventory.itemID=item.itemID WHERE item.itemID = ? AND inventory.expiredDate >= CURDATE() ORDER BY expiredDate ASC;";
                 $check_inventory_query = mysqli_prepare($con, $check_inventory);
                 mysqli_stmt_bind_param($check_inventory_query, "i", $itemID);
                 mysqli_stmt_execute($check_inventory_query);
