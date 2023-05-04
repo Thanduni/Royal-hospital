@@ -25,15 +25,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         }
 
         .s-content table{
+            float: left;
             background-color: #ffffff;
             padding:30px 30px;
             margin:50px 50px;
             width:auto;
             border-radius: 10px;
-            border-color: black;
+            /* border-color: black; */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
         .s-content table tr{
+            
             background-color: #ffffff;
             height: 65px;
             font-size: 20px;
@@ -43,6 +46,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             border-color: black;
         }
         .s-content table tr td{
+            float: left;
             background-color: #ffffff;
             color: black;
             /* padding:30px 30px; */
@@ -51,6 +55,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             border-radius: 10px;
             border-color: none;
             
+        }
+
+        .s-content table tr label{
+            color:var(--primary-color);
+            font-size: 22px;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -81,8 +91,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             $res3 = mysqli_query($con,"select nic from doctor where doctorID=$docid");
             $docnic = mysqli_fetch_assoc($res3)['nic'];
 
-            $query = "select i.admit_date,i.admit_duration,u.name,p.investigation,p.Impression from inpatient i inner join prescription p on i.patientID=p.patientID
-             inner join patient t on p.patientID=t.patientID inner join user u on t.nic=u.nic where i.patientID=$pid and u.nic=$docnic and i.doctorID=$docid";
+            $query = "select i.admit_date,i.admit_duration,i.doctorID,p.investigation,p.Impression from inpatient i inner join prescription p on i.patientID=p.patientID
+             inner join patient t on p.patientID=t.patientID where i.patientID=$pid and i.doctorID=$docid";
 
             $result = mysqli_query($con,$query);
 
@@ -91,20 +101,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             <div class="s-content">
                 <table>
                     <tr>
-                        <td><label for="">Date:</label></td>
-                        <td><a href=""><?php echo $rows['admit_date'].$rows['admit_duration']; ?></a></td>
+                        <td><label>Date:</label></td>
+                        <td><a><?php echo $rows['admit_date'].$rows['admit_duration']; ?></a></td>
                     </tr>
                     <tr>
-                        <td><label for="">Doctor Name:</label></td>
-                        <td><a href=""><?php echo $rows['name']; ?></a></td>
+                        <td><label>Doctor Name:</label></td>
+                        <td><a><?php echo $rows['doctorID']; ?></a></td>
                     </tr>
                     <tr>
                         <td><label for="">Impression:</label></td>
-                        <td><a href=""><?php echo $rows['Impression']; ?></a></td>
+                        <td><a><?php echo $rows['Impression']; ?></a></td>
                     </tr>
                     <tr>
                         <td><label for="">Investigation:</label></td>
-                        <td><a href=""><?php echo $rows['Investigation']; ?></a></td>
+                        <td><a><?php echo $rows['investigation']; ?></a></td>
                     </tr>
                 </table>
 
