@@ -62,13 +62,15 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
         date_default_timezone_set('Asia/Calcutta');
         $current_time = date("H:i:s");
+        $current_date = date('Y-m-d');
+    
 
         while($row = mysqli_fetch_assoc($result_app)) {
             $docName_sql = "select * from doctor inner join user on doctor.nic = user.nic where doctor.doctorID = '" . $row['doctorID'] . "'";
             $docName = mysqli_fetch_assoc(mysqli_query($con, $docName_sql))['name'];
             $appTime = $row['time'];
 
-            $current_date = date('Y-m-d');
+            
             $flag = 0;
             for ($i = 0; $i < count($_SESSION['appID_array']); $i++) {
                 if ($row['appointmentID'] == $_SESSION['appID_array'][$i])
@@ -191,8 +193,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         $pID = mysqli_fetch_assoc($result)['patientID'];
 
                         $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, appointment.venue, user.name, appointment.doctorID, appointment.appointmentID 
-                            FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
+                            FROM appointment inner join doctor on appointment.doctorID=doctor.doctorID inner join user on user.nic=doctor.nic WHERE patientID = $pID ";
 
+                        $appointment_delete = mysqli_query($con,"delete from appointment where patientID = $pID and date < '$current_date' or (date = '$current_date' && time < '$current_time')");
+                    
                         $date_arr = array();
                         $time_arr = array();
                         $result = mysqli_query($con, $query);
