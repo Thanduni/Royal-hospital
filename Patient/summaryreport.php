@@ -23,7 +23,35 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
-        
+
+        .s-content table{
+            background-color: #ffffff;
+            padding:30px 30px;
+            margin:50px 50px;
+            width:auto;
+            border-radius: 10px;
+            border-color: black;
+        }
+
+        .s-content table tr{
+            background-color: #ffffff;
+            height: 65px;
+            font-size: 20px;
+            font-weight: 500;
+            width: auto;
+            border-radius: 10px;
+            border-color: black;
+        }
+        .s-content table tr td{
+            background-color: #ffffff;
+            color: black;
+            /* padding:30px 30px; */
+            /* margin:30px 30px; */
+            width:auto;
+            border-radius: 10px;
+            border-color: none;
+            
+        }
     </style>
 </head>
 <body>
@@ -42,66 +70,47 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Summary
         </div>
-        <div class="m-content">
-            <div class="p-content">
-            <div class="wrapper_p">
-                <div class="table_header"><h3 style="color: var(--primary-color);">Patient's Summary</h3></div>
-                <div class="table">
-                    <div class="row headerT">
-                        <div class="cell" ">Nurse Name</div>
-                        <div class="cell">Date</div>
-                        <div class="cell">Time</div>
-                        <div class="cell">Pulse</div>
-                        <div class="cell" style="width:180px;">Temperature</div>
-                        <div class="cell" style="width:180px;">Blood Preasure</div>
-                        <div class="cell" style="width:180px;">O2 Saturation</div>
-                    </div>
-                    <?php 
-                        $nic = $_SESSION['nic'];
-                        $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
-                        $result_pid = mysqli_query($con, $pid_query);
-                        $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+        <?php 
+            $nic = $_SESSION['nic'];
+            $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
+            $pid = mysqli_fetch_assoc($res1)['patientID'];
 
-                        $query ="select * from daily_report where patientID = $pid";
-                        $res = mysqli_query($con,$query);
+            $res2 = mysqli_query($con,"select doctorID from prescription where patientID = $pid");
+            $docid = mysqli_fetch_assoc($res2)['doctorID'];
 
-                        while($rows = mysqli_fetch_assoc($res)){ ?>
-                        <div class="row">
-                            <div class="cell" data-title="name">
-                                    <?php echo $rows['nurseID']; ?>
-                            </div>
-                            <div class="cell" data-title="Date">
-                                    <?php echo $rows['date']; ?>
-                            </div>
-                            <div class="cell" data-title="time">
-                                    <?php echo $rows['time']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['pulse']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['temperature']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['blood_preasure']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['o2_saturation']; ?>
-                            </div>
+            $res3 = mysqli_query($con,"select nic from doctor where doctorID=$docid");
+            $docnic = mysqli_fetch_assoc($res3)['nic'];
 
-  
-                        </div>
-                    
-                        <?php
-                        
-                        }
-                    ?>
-            </div>
-            </div>
-            </div>
-        </div>
+            $query = "select i.admit_date,i.admit_duration,u.name,p.investigation,p.Impression from inpatient i inner join prescription p on i.patientID=p.patientID
+             inner join patient t on p.patientID=t.patientID inner join user u on t.nic=u.nic where i.patientID=$pid and u.nic=$docnic and i.doctorID=$docid";
 
-        
+            $result = mysqli_query($con,$query);
+
+            while($rows = mysqli_fetch_assoc($result)){
+        ?>
+            <div class="s-content">
+                <table>
+                    <tr>
+                        <td><label for="">Date:</label></td>
+                        <td><a href=""><?php echo $rows['admit_date'].$rows['admit_duration']; ?></a></td>
+                    </tr>
+                    <tr>
+                        <td><label for="">Doctor Name:</label></td>
+                        <td><a href=""><?php echo $rows['name']; ?></a></td>
+                    </tr>
+                    <tr>
+                        <td><label for="">Impression:</label></td>
+                        <td><a href=""><?php echo $rows['Impression']; ?></a></td>
+                    </tr>
+                    <tr>
+                        <td><label for="">Investigation:</label></td>
+                        <td><a href=""><?php echo $rows['Investigation']; ?></a></td>
+                    </tr>
+                </table>
+
+            <?php
+                }
+            ?>
         
     </div>
 </div>       
