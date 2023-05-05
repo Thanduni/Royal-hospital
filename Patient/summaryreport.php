@@ -86,10 +86,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             $pid = mysqli_fetch_assoc($res1)['patientID'];
 
             $res2 = mysqli_query($con,"select doctorID from prescription where patientID = $pid");
-            $docid = mysqli_fetch_assoc($res2)['doctorID'];
+            $d_arr = array();
+            $d_arr = mysqli_fetch_array($res2);
 
-            $res3 = mysqli_query($con,"select nic from doctor where doctorID=$docid");
-            $docnic = mysqli_fetch_assoc($res3)['nic'];
+            $docnic = array();
+
+            for($i = 0; $i < sizeof($d_arr); $i++)
+            {
+                $res3 = mysqli_query($con,"select nic from doctor where doctorID=$d_arr[$i]");
+                $docnic[$i] = mysqli_fetch_assoc($res3)['nic'];
+            } 
+            
 
             $query = "select i.admit_date,i.admit_duration,i.doctorID,p.investigation,p.Impression from inpatient i inner join prescription p on i.patientID=p.patientID
              inner join patient t on p.patientID=t.patientID where i.patientID=$pid and i.doctorID=$docid";
@@ -102,19 +109,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 <table>
                     <tr>
                         <td><label>Date:</label></td>
-                        <td><a><?php echo $rows['admit_date'].$rows['admit_duration']; ?></a></td>
+                        <td><p><?php echo $rows['admit_date'].$rows['admit_duration']; ?></p></td>
                     </tr>
                     <tr>
                         <td><label>Doctor Name:</label></td>
-                        <td><a><?php echo $rows['doctorID']; ?></a></td>
+                        <td><p><?php echo mysqli_fetch_assoc(mysqli_query($con,"select name from user where nic=$docnic "))['name']; ?></p></td>
                     </tr>
                     <tr>
                         <td><label for="">Impression:</label></td>
-                        <td><a><?php echo $rows['Impression']; ?></a></td>
+                        <td><p><?php echo $rows['Impression']; ?></p></td>
                     </tr>
                     <tr>
                         <td><label for="">Investigation:</label></td>
-                        <td><a><?php echo $rows['investigation']; ?></a></td>
+                        <td><p><?php echo $rows['investigation']; ?></p></td>
                     </tr>
                 </table>
 
