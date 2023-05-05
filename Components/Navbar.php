@@ -3,7 +3,7 @@ require_once("../conf/config.php");
 ?>
 
 <nav>
-    <a href="<?php echo BASEURL.'/Homepage'?>">
+    <a href="<?php echo BASEURL.'/index.php'?>">
         <p><img src=<?php echo BASEURL.'/images/logo5.png' ?> alt="logo" align="middle">
             Royal Hospital Management System
         </p>

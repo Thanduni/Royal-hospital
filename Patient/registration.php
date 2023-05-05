@@ -7,7 +7,7 @@ require_once("../conf/config.php");
 
 //static $patientCount = 0;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exceptionsdasd;
+use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST["nic"])){
     $name = $_POST['name'];

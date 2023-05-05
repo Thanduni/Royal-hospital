@@ -2,7 +2,6 @@
 require_once("../conf/config.php");
 session_start();
 if (!isset($_SESSION['mailaddress'])) {
-    
     ?>
 
     <!DOCTYPE html>
@@ -65,7 +64,11 @@ if (!isset($_SESSION['mailaddress'])) {
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Password</label>
+                            <div style="text-align: left; margin: 10px;">
+                                <a style="color: var(--primary-color)" href="<?php echo BASEURL . '/Homepage/forgotPassword.php' ?>">Forgot password?</a>
+                            </div>
                         </div>
+
                         <button name="login" class="custom-btn" style="color: var(--primary-color)">Login</button>
                     </form>
                 </div>

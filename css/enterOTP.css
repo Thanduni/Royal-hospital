@@ -19,7 +19,8 @@
     justify-content: center;
 }
 
-h2,p{
+.verifyDesign h2,
+.verifyDesign p{
     position: relative;
     text-align: center;
     color: white;
@@ -34,7 +35,7 @@ h2{
     margin: 10px;
 }
 
-img{
+.verifyDesign img{
     position: relative;
     top: 227px;
     left: 70px;
@@ -50,7 +51,7 @@ img{
 }
 
 @media screen and (max-width: 1229px) {
-    img{
+    .verifyDesign img{
         position: relative;
         top: 254px;
         left: -31px;

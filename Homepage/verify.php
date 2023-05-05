@@ -32,12 +32,17 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['verify'] == 0){
         <div class="form">
             <h1>Verify your Account</h1>
             <form action="<?php echo BASEURL . '/Homepage/verificationComplete.php' ?>" method="post">
-                <input type="number" name="otp" placeholder="OTP code"><br>
                 <div class="alert" id="warning">
                     <?php
                     if(@$_GET['error'])
                         echo $_GET['error'];
                     ?>
+                </div>
+                <div class="group">
+                    <input type="number" name="otp">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>OTP code</label>
                 </div>
                 <button type="submit" name="verify" class="custom-btn">
                         Verify
