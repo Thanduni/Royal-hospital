@@ -21,8 +21,8 @@ if (isset($_POST['submit'])) {
 
     $pid = mysqli_fetch_assoc(mysqli_query($con, "select patientID from patient where nic = '$nic'"))['patientID'];
 
-    $query = "INSERT INTO `appointment`(`date`, `time`, `venue`, `doctorID`, `patientID`, `message`, `status`) 
-              VALUES ('$date','$time','[value-4]','$doctor','$pid','$msg','Confirmed')";
+    $query = "INSERT INTO `appointment`(`date`, `time`, `doctorID`, `patientID`, `message`, `status`) 
+              VALUES ('$date','$time','$doctor','$pid','$msg','Confirmed')";
     $appointmentResult = mysqli_query($con, $query);
 
     $appIdQuery = "SELECT LAST_INSERT_ID()";

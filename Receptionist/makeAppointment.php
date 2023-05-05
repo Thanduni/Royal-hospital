@@ -59,14 +59,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         <div class="cell">Patient Name</div>
                         <div class="cell">Date</div>
                         <div class="cell">Time</div>
-                        <div class="cell">Venue</div>
                         <div class="cell">Message</div>
                         <div class="cell">Options</div>
                     </div>
 
                     <?php
 
-                    $query = "SELECT `appointmentID`,`date`,`time`,`venue`,`doctorID`,`patientID`,`message`,`status` FROM `appointment` 
+                    $query = "SELECT `appointmentID`,`date`,`time`,`doctorID`,`patientID`,`message`,`status` FROM `appointment` 
                               ORDER BY appointmentID;";
                     $result = mysqli_query($con, $query);
                     while($rows = mysqli_fetch_assoc($result)){
@@ -91,9 +90,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             </div>
                             <div class="cell" data-title="Time">
                                 <?php echo $rows['time']; ?>
-                            </div>
-                            <div class="cell" data-title="Venue">
-                                <?php echo $rows['venue']; ?>
                             </div>
                             <div class="cell" data-title="Message">
                                 <?php echo $rows['message']; ?>

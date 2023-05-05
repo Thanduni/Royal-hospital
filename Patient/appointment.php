@@ -22,8 +22,8 @@ if (isset($_POST["submit"])) {
 
     $_SESSION['patientID'] = $pid;
 
-    $query = "INSERT INTO `appointment`(`date`, `time`, `venue`, `doctorID`, `patientID`, `message`, `status`) 
-    VALUES ('$date','$time','[value-4]','$doctor','$pid','$msg','Confirmed')";
+    $query = "INSERT INTO `appointment`(`date`, `time`, `doctorID`, `patientID`, `message`, `status`) 
+    VALUES ('$date','$time','$doctor','$pid','$msg','Confirmed')";
     $result = mysqli_query($con, $query);
 
     $appIdQuery = "SELECT LAST_INSERT_ID()";

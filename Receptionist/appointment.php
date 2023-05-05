@@ -21,8 +21,8 @@ if (isset($_POST["submit"])) {
     $result_recID = mysqli_query($con, $recID_query);
     $recID = mysqli_fetch_assoc($result_recID)['receptionistID'];
 
-    $query = "INSERT INTO `appointment`(`date`, `time`, `venue`, `doctorID`, `patientID`, `message`, `status`, `receptionistID`) 
-    VALUES ('$date','$time','[value-4]','$doctor','$pid','$msg','Confirmed', '$recID')";
+    $query = "INSERT INTO `appointment`(`date`, `time`, `doctorID`, `patientID`, `message`, `status`, `receptionistID`) 
+    VALUES ('$date','$time','$doctor','$pid','$msg','Confirmed', '$recID')";
     $result = mysqli_query($con, $query);
 
     $appIdQuery = "SELECT LAST_INSERT_ID()";
