@@ -355,7 +355,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     
     <script type="text/javascript">
         $(function(){
-            $('#openform').click(function(){
+            $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
                 $('#login-modal').fadeIn().css("display","flex");
             });
             $('.cancel-modal').click(function(){

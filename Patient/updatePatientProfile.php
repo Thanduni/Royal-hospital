@@ -184,7 +184,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>>
+    
+    $(function(){
+            $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('.cancel-modal').click(function(){
+                $('#login-modal').fadeOut();
+            });
+        });
+        
+    </script>
 
     <div id="counter">0</div>
 
