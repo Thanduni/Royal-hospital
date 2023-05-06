@@ -75,7 +75,7 @@ if(isset($_GET['patientid'])){
                         <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note" name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content">
-                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" >
+                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
                             <div class="input-feild">
                                 <table id="prescription-table">
                                     <tr>
@@ -86,7 +86,9 @@ if(isset($_GET['patientid'])){
                                     </tr>
                                     <div class="show-medicine">
                                     <tr>
-                                        <td><input type="text" name="drugName[]" class="autoComplete-input" ></td>
+                                        <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" >
+                                        </div>
+                                        </td>
                                         <td><input type="number" name="dosage[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
                                         <td><input type="number" name="days[]"></td>
@@ -97,7 +99,7 @@ if(isset($_GET['patientid'])){
                                 <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
-                        <!-- <script src="medicine.js"></script> -->
+                        <script src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
                         
                         <div class="show-prescription">
                             <table class="table">
@@ -159,7 +161,7 @@ if(isset($_GET['patientid'])){
             $(".add").click(function(e){    //pass parameter e
                 e.preventDefault();         //stop page refresh
                 $("#prescription-table").append(`<tr>
-                    <td><input type="text" name="drugName[]"></td>
+                    <td><input type="text" name="drugName[]" class="autoComplete-input"></td>
                     <td><input type="number" name="dosage[]"></td>
                     <td><input type="number" name="days[]"></td>
                     <td><input type="number" name="frequency[]"></td>
@@ -175,20 +177,6 @@ if(isset($_GET['patientid'])){
             });
         });
     </script>
-
-<?php
-    if(isset($_POST['remove'])){
-        $id = $_POST['id'];
-        $drug_name = $_POST['drug'];
-
-        $delete_row = "DELETE from prescribed_drugs WHERE prescriptionID = $id AND drug_name = '$drug_name';";
-        $delete_query = mysqli_query($con,$delete_row);
-
-        if($delete_query){
-            echo "Row deleted Successfully";
-        }
-    }
-?>
 </body>
 </html>
 <?php
