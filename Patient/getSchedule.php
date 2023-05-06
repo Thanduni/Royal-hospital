@@ -34,11 +34,12 @@ while ($row = $result->fetch_assoc()) {
     $currentTime = strtotime($currentDateTime ->format('H:i:s'));
     $currentDate = $currentDateTime -> format('Y-m-d');
 
-    if($date = $currentDate){
+//    echo json_encode(array('status' => strcmp($date, $currentDate)));
+
+    if(strcmp($date, $currentDate) == 0){
         while ($current < $end) {
             if( strtotime($current->format('H:i:s')) > $currentTime){
                 $docSchedule[] = $current->format('h:i A');
-//                echo($current->format('h:i A'));
             }
             $current->add($interval);
         }
