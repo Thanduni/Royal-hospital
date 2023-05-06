@@ -211,7 +211,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <textarea type="text" name="address" id="IN_address" rows=3 required></textarea><div class="alert" id="address"></div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="emailRow">
                         <td>
                             <label for="email">Email:</label>
                         </td>

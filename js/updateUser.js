@@ -6,6 +6,7 @@ function displayUserUpdateForm(nic) {
     form.action = '/royalhospital/Admin/updateUser.php?id=' + nic;
     document.getElementById("nicRow").classList.add("hide");
     document.getElementById("passRow").classList.add("hide");
+    document.getElementById("emailRow").classList.add("hide");
     document.getElementById("userRoleRow").classList.add("hide");
 
 
@@ -88,6 +89,7 @@ function displayPatientUpdateForm(nic) {
 
     form.action = '/royalhospital/Receptionist/updatePatient.php?id=' + nic;
     document.getElementById("nicRow").classList.add("hide");
+    document.getElementById("emailRow").classList.add("hide");
     document.getElementById("passRow").classList.add("hide");
 
 

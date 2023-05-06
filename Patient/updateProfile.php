@@ -30,7 +30,6 @@ if (isset($_POST['updatePatient'])) {
 
     $name = $_POST['name'];
     $address = $_POST['address'];
-    $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $dob = $_POST['dob'];
     $gender = $_POST['gender'];
@@ -41,8 +40,6 @@ if (isset($_POST['updatePatient'])) {
     $drug_al = $_POST['Drug_al'];
     $profile_image = $new_img_name;
 
-    
-
     $q = mysqli_query($con,"select patientID from patient where nic='".$_SESSION['nic']."'");
     $pid = mysqli_fetch_assoc($q)['patientID'];
 
@@ -52,14 +49,13 @@ if (isset($_POST['updatePatient'])) {
     if(($email != $_SESSION['mailaddress'] && $row[0]>0))
         header("location:" . BASEURL . "/Patient/updatePatientProfile.php?wrongResult=The email address already exists!");
 
-    $query1 = "UPDATE user u inner join patient p SET u.name='$name', u.address='$address', u.email='$email', u.contact_num='$contactNum', u.gender='$gender', u.profile_image='$profile_image',p.height = '$height',p.weight='$weight',p.blood='$blood',p.illness='$illness',p.drug_allergies='$drug_al' WHERE u.email = '" . $_SESSION['mailaddress'] . "' and p.patientID=$pid";
+    $query1 = "UPDATE user u inner join patient p SET u.dob='$dob', u.name='$name', u.address='$address', u.contact_num='$contactNum', u.gender='$gender', u.profile_image='$profile_image',p.height = '$height',p.weight='$weight',p.blood='$blood',p.illness='$illness',p.drug_allergies='$drug_al' WHERE u.email = '" . $_SESSION['mailaddress'] . "' and p.patientID=$pid";
     $result = mysqli_query($con, $query1);
 
     if ($result)
         header("location:" . BASEURL . "/Patient/updatePatientProfile.php?correctResult=The patient profile is updated successfully!");
     // $res = mysqli_query($con,"update patient set height = $height,weight=$weight,blood=$blood,illness=$illness,drug_allergies=$drug_al where patientId = $pid;");
 
-    $_SESSION['mailaddress'] = $email;
     $_SESSION['name'] = $name;
     $_SESSION['profilePic'] = $profile_image;
     
