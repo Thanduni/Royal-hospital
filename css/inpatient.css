@@ -8,6 +8,17 @@
     background: #fff;
     text-align: left;
 }
+.doctor-searchBar{
+    background-image: url(../images/search.svg);
+    background-position: 4px 6px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px !important;
+    border: 1px solid #ddd;
+    border-radius: 50px !important;
+    margin: 10px;
+    display: inline-block;
+}
 .show-inpatients h3{
     padding: 20px;
 
@@ -17,6 +28,18 @@
     width: 90%;
     box-shadow: none;
     border-radius: 0;
+    margin: 10px;
+}
+.show-inpatients table thead{
+    background: #e9e9e9;
+    display: table-header-group;
+    vertical-align: middle;
+    padding: 0 20px;
+    border: #A7BBC7;
+}
+.show-inpatients tr:hover{
+    transform: scale(0.97, 0.97);
+    background-color: var(--hover-color);
 }
 .show-inpatients table img{
     width: 55px;
@@ -24,8 +47,9 @@
     border-radius: 50%;
 }
 .show-inpatients table th{
-    font-size: medium;
+    font-family: var(--primary-font);
     color: #000;
+    font-weight: unset;
     padding: 8px;
     text-align: center;
     border: 1px solid #ddd;
