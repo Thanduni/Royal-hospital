@@ -68,7 +68,6 @@ if(isset($_POST['submit-doctor-note'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/displayPatient.css' ?>">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
