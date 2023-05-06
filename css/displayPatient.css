@@ -4,19 +4,45 @@
     margin: 0 auto;
     display: block;
 }
-/* @media(min-width:992px){
-.display-container{
-    max-width: 960px;
-}}
-@media(min-width:768px){
-    .display-container{
-        max-width: 720px;
-    }
+.doctor-cards{
+    width: 100%;
+    padding: 35px 20px ;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
-@media(min-width:576px){
-.display-container{
-    max-width: 540px;
-}} */
+
+.doctor-card {
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    margin: 0px 20px 20px 20px;
+}
+
+.number{
+    font-size: 35px;
+    font-weight: 500;
+    color: var(--para-color);
+}
+
+.card-name {
+    color: var(--para-color);
+    font-weight: 600;
+}
+
+.icon-box i {
+    font-size: 45px;
+    color: black;
+}
+.icon-box img {
+    font-size: 45px;
+    color: black;
+}
 .patient-detail-container{
     width: 100%;
     padding: 50px 50px 0 50px;

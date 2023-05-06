@@ -53,26 +53,24 @@ if(isset($_POST['submit'])){
             ?>
 
             <div class="main-container">
+                <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
+                <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
 
                 <button class="button" id="admission-button">
                     New Admission
                 </button>
 
-                <div class="table-container">
-                    <table class="table">
-
-                        <thead>    
-                            <th>Name</th>
-                            <th>Room No</th>
-                            <th>Admit date</th>
-                            <th>Admit time</th>
-                            <th>Drug allergies</th>
-                            <th>Emergency No</th>
-                        </thead>
-
-                        <tbody>
-
-                            <?php
+                <div class="wrapper">
+                    <div class="table">
+                        <div class="row headerT">
+                            <div class="cell">Name</div>
+                            <div class="cell">Room No</div>
+                            <div class="cell">Admit Date</div>
+                            <div class="cell">Admit Time</div>
+                            <div class="cell">Drug Allergies</div>
+                            <div class="cell">Emergancy No</div>
+                        </div>
+                        <?php
                                 $sql="select user.name,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
                                 $result=mysqli_query($con,$sql);
 
@@ -83,21 +81,19 @@ if(isset($_POST['submit'])){
                                 $admit_date = $row['admit_date'];
                                 $admit_time = $row['admit_time'];
                                 $drug_allergies = $row['drug_allergies'];
-                                $emergency_contact = $row['emergency_contact'];
-                                echo '<tr> 
-
-                                <td>'.$name.'</td>
-                                <td>'.$RoomNo.'</td>
-                                <td>'.$admit_date.'</td>
-                                <td>'.$admit_time.'</td>
-                                <td>'.$drug_allergies.'</td>
-                                <td>'.$emergency_contact.'</td>
-                                </tr>';
-                                }
+                                $emergency_contact = $row['emergency_contact']; ?>
+                        <div class="row">
+                            <div class="cell"><?php echo $name?></div>
+                            <div class="cell"><?php echo $RoomNo?></div>
+                            <div class="cell"><?php echo $admit_date?></div>
+                            <div class="cell"><?php echo $admit_time?></div>
+                            <div class="cell"><?php echo $drug_allergies?></div>
+                            <div class="cell"><?php echo $emergency_contact?></div>
+                        </div>
+                             <?php   }
                                 }
                             ?>    
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
 

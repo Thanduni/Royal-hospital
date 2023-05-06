@@ -88,58 +88,52 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
               </div>
               </div>
 
-              <div class="table-container">
-                <!-- <h2>Patient List</h2> -->
-                  <table class="table">
-                    <thead>    
-                        <th>Patient</th>
-                        <th>Room No</th>
-                        <th>Admit date</th>
-                        <th>Admit time</th>
-                        <th>Drug allergies</th>
-                        <th>Emergency No</th>
-                        <th>Option</th>
-                    </thead>
-                    <tbody>
-                      <?php
-                        $sql="select user.profile_image,user.name,inpatient.patientID,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
-                        $result=mysqli_query($con,$sql);
+              <div class="wrapper">
+                    <div class="table">
+                        <div class="row headerT">
+                            <div class="cell">Patient</div>
+                            <div class="cell">Room No</div>
+                            <div class="cell">Admit Date</div>
+                            <div class="cell">Admit Time</div>
+                            <div class="cell">Drug Allergies</div>
+                            <div class="cell">Emergancy No</div>
+                        </div>
+                        <?php
+                                $sql="select user.profile_image,user.name,inpatient.patientID,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                                $result=mysqli_query($con,$sql);
 
-                        if($result){
-                          while($row=mysqli_fetch_assoc($result)){
-                            $profile_image = $row['profile_image'];
-                            $name =  $row['name'];
-                            $patientID= $row['patientID'];
-                            $RoomNo = $row['room_no'];
-                            $admit_date = $row['admit_date'];
-                            $admit_time = $row['admit_time'];
-                            $drug_allergies = $row['drug_allergies'];
-                            $emergency_contact = $row['emergency_contact'];?>
-                      <tr> 
-                        <td><div class="left-cell">
-                            <?php echo "<img src='".BASEURL."/uploads/".$profile_image."'width = 40px height=40px>";?>
+                                if($result){
+                                while($row=mysqli_fetch_assoc($result)){
+                                  $profile_image = $row['profile_image'];
+                                  $patientID= $row['patientID'];
+                                $name =  $row['name'];
+                                $RoomNo = $row['room_no'];
+                                $admit_date = $row['admit_date'];
+                                $admit_time = $row['admit_time'];
+                                $drug_allergies = $row['drug_allergies'];
+                                $emergency_contact = $row['emergency_contact']; ?>
+                        <div class="row">
+                            <div class="cell" id="patient-info-cell">
+                              <div class="left-cell">
+                              <?php echo "<img src='".BASEURL."/uploads/".$profile_image."'width = 40px height=40px>";?>
+                              </div>
+                              <div class="right-cell">
+                                <div class="up-cell"><?php echo $name ?></div>
+                                <div class="down-cell">id :<?php echo $patientID ?></div>
+                              </div>
                             </div>
-                            <div class="right-cell">
-                              <div class="up-cell"><?php echo $name ?></div>
-                              <div class="down-cell">id :<?php echo $patientID ?></div>
-                            </div>
-                        </td>
-                        <td><?php echo $RoomNo ?></td>
-                        <td><?php echo $admit_date ?></td>
-                        <td><?php echo $admit_time ?></td>
-                        <td><?php echo $drug_allergies ?></td>
-                        <td><?php echo $emergency_contact ?></td>
-                        <td><a href="viewPrescription.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-prescription" class="view-prescription" value="View Prescription"></a></td>
-                      </tr>
-                      <?php
-                            }
-                        }
-                        ?>    
-                    </tbody>
-                  </table>
-              </div>
-
-              
+                            <div class="cell"><?php echo $RoomNo?></div>
+                            <div class="cell"><?php echo $admit_date?></div>
+                            <div class="cell"><?php echo $admit_time?></div>
+                            <div class="cell"><?php echo $drug_allergies?></div>
+                            <div class="cell"><?php echo $emergency_contact?></div>
+                        </div>
+                             <?php   }
+                                }
+                            ?>    
+                    </div>
+                </div>
+                           
             </div>
         </div>
     </div>

@@ -246,16 +246,24 @@ h3{
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
-    background: #fff;
+    background: #e9e9e9;
     border-radius: 20px;
     padding: 0 20px;
     border-bottom: #A7BBC7;
 }
 .table tr{
     display: table-row;
+    transition: 0.4s;
+    background: #f6f6f6;
     vertical-align: inherit;
     border-color: inherit;
     border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+
+.table tr:hover{
+    transform: scale(0.97, 0.97);
+    background-color: var(--hover-color);
 }
 .table th{
     font-family: var(--primary-font);
