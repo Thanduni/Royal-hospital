@@ -1,6 +1,6 @@
+let form = document.getElementsByTagName("form")[0];
 let nameDiv = document.getElementById("name");
 let addressDiv = document.getElementById("address");
-let emailDiv = document.getElementById("email");
 let contactNumDiv = document.getElementById("contactNum");
 let pass1 = document.getElementsByClassName("password")[0];
 let pass2 = document.getElementsByClassName("password")[1];
@@ -60,28 +60,6 @@ nameDiv.previousSibling.addEventListener("focus", function () {
     ;
 
     // alert("Hai");
-}, false)
-
-function validateEmail() {
-    emailDiv.innerHTML = "";
-    var email = emailDiv.previousSibling.value;
-    if (email == "" || !regEmail.test(email)) {
-        emailDiv.classList.remove("hint");
-        emailDiv.classList.add("alert");
-        emailDiv.innerHTML = "<ul class='inputMsg'>\n" +
-            "    <li>Please enter a valid email.</li>\n" +
-            "</ul>"
-    }
-}
-
-emailDiv.previousSibling.addEventListener("blur", validateEmail, false)
-
-emailDiv.previousSibling.addEventListener("focus", function () {
-    emailDiv.classList.remove("alert");
-    emailDiv.classList.add("hint");
-    emailDiv.innerHTML = "<ul class='inputMsg'>\n" +
-        "    <li>Enter a valid email address.</li>\n" +
-        "</ul>";
 }, false)
 
 function validateContactNum() {
@@ -220,19 +198,11 @@ function validatePasswordForm() {
 
 
 function validateUpdateForm() {
-    if (regEmail.test(email) &&
-        regContactNum.test(contactNum) &&
+    if (regContactNum.test(contactNum) &&
         regAddress.test(address) &&
         regName.test(name)) {
         return true;}
     else{
-        if(!regEmail.test(email)){
-            email.classList.remove("hint");
-            email.classList.add("alert");
-            email.innerHTML = "<ul class='inputMsg'>\n" +
-                "    <li>Please enter a valid email.</li>\n" +
-                "</ul>"
-        }
         if(!regContactNum.test(contactNum)){
             contactNum.classList.remove("hint");
             contactNum.classList.add("alert");

@@ -47,6 +47,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             ?>
             <div class="display-container">
                 <div class="show-inpatients">
+                <input type="text" class="doctor-searchBar" id="myInput" placeholder="Search for Names...">
+                <script src=<?php echo BASEURL . '/js/filterTable.js' ?>></script>
                     <h3>Patient List</h3>
                     <table class="table">
                         <thead>

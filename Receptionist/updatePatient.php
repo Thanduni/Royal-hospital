@@ -33,7 +33,6 @@ if (isset($_POST['addUser'])) {
     $nic = $_GET['id'];
     $name = $_POST['name'];
     $address = $_POST['address'];
-    $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $gender = $_POST['gender'];
     $userRole = 'Patient';
@@ -50,22 +49,22 @@ if (isset($_POST['addUser'])) {
     $medHisCom = $_POST['medHisCom'];
     $curUsingMed = $_POST['curUsingMed'];
     $emerCon = $_POST['emerCon'];
+    $email = $_SESSION['mailaddress'];
 
-    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image', DOB = '$dob' WHERE nic = '$nic';";
+    $query = "UPDATE user SET name = '$name', address = '$address', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image', DOB = '$dob' WHERE email = '$email';";
     $result = mysqli_query($con, $query);
 
 
-//    $query = "UPDATE `patient` SET `weight` = '$weight', `patient_type` = '$patientType', `height` = '$height', `illness` = '$illness', `drug_allergies` = '$drugAllergies', `medical_history_comments`, = '$medHisCom', `currently_using_medicine` = '$curUsingMed', `emergency_contact`= '$emerCon' WHERE nic = '$nic';";
+    $patientIdQuery = "Select patientID from patient where nic='$nic'";
+    $patientID = mysqli_fetch_assoc(mysqli_query($con, $patientIdQuery))['patientID'];
+
     $query = "UPDATE `patient` SET`weight`='$weight',`receptionistID`='$receptionistID',`patient_type`='Outpatient',`height`='$height',`illness`='$illness'
-    ,`drug_allergies`='$drugAllergies',`medical_history_comments`='$medHisCom',`currently_using_medicine`='$curUsingMed',`emergency_contact`='$emerCon' WHERE `nic`='$nic'";
+    ,`drug_allergies`='$drugAllergies',`medical_history_comments`='$medHisCom',`currently_using_medicine`='$curUsingMed',`emergency_contact`='$emerCon' WHERE `patientID`='$patientID'";
     $result = mysqli_query($con, $query);
-
-
 
     if($nic == $_SESSION['nic']){
         $_SESSION['name'] = $name;
         $_SESSION['profilePic'] = $profile_image;
-        $_SESSION['mailaddress'] = $email;
     }
 
     header("location:" . BASEURL . "/Receptionist/patientPage.php");

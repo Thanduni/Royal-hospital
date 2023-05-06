@@ -1,5 +1,4 @@
 let nicDiv = document.getElementById("nic");
-
 let regNic = /^\d{12}[A-Z]?$/;
 
 function validateNIC() {

@@ -11,7 +11,6 @@ if (isset($_POST['updateDoctor'])) {
     $img_size = $_FILES['profile_image']['size'];
     $tmp_name = $_FILES['profile_image']['tmp_name'];
     $error = $_FILES['profile_image']['error'];
-
     if ($error === 0) {
         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
         $img_ex_lc = strtolower($img_ex);
@@ -30,7 +29,6 @@ if (isset($_POST['updateDoctor'])) {
 
     $name = $_POST['name'];
     $address = $_POST['address'];
-    $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $dob = $_POST['dob'];
     $gender = $_POST['gender'];
@@ -38,12 +36,9 @@ if (isset($_POST['updateDoctor'])) {
 
     $query = mysqli_query($con, "SELECT COUNT(*) FROM user WHERE email = '".$_SESSION['mailaddress']."'");
     $row = mysqli_fetch_array($query);
-    if(($email != $_SESSION['mailaddress'] && $row[0]>0))
-        header("location:" . BASEURL . "/Doctor/updateDoctorProfile.php?wrongResult=The email address already exists!");
 
-    $query = "UPDATE user SET name='$name', address='$address', email='$email', contact_num='$contactNum', gender='$gender', profile_image='$profile_image' WHERE email = '" . $_SESSION['mailaddress'] . "'";
+    $query = "UPDATE user SET name='$name', dob='$dob', address='$address', contact_num='$contactNum', gender='$gender', profile_image='$profile_image' WHERE email = '" . $_SESSION['mailaddress'] . "'";
     $result = mysqli_query($con, $query);
-    $_SESSION['mailaddress'] = $email;
     $_SESSION['name'] = $name;
     $_SESSION['profilePic'] = $profile_image;
     if ($result)

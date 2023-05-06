@@ -52,6 +52,20 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     </div>
     </div>
   </div>
+
+  <script>
+    $(function(){
+            $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('.cancel-modal').click(function(){
+                $('#login-modal').fadeOut();
+            });
+        });
+  </script>
 </body>
 </html>
 <?php 
