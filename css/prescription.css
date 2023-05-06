@@ -59,7 +59,7 @@
     justify-content: space-between;
     padding: 5px;
 }
-.prescription-group input{
+.prescription-group input, input{
     padding: 1em;
     line-height: 1;
     border: 1px solid #e5e5e5;
@@ -71,11 +71,12 @@
     border-radius: 3px;
     color: #fff;
 } */
-.add{
+.add,.add-test{
     background: #00A2ED;
     color: #FFF;
     cursor: pointer;
 }
+
 .save-prescription{
     background: #28a745;
     color: #FFF;
@@ -186,18 +187,18 @@
     border-style: none;
     width: 100%;
 }
-.show-prescription {
+.show-prescription,.show-test-prescription {
     width: 80%;
     margin: 40px 20px;
     display: flex;
     flex-wrap: wrap;
     padding: 0 33px 30px;
 }
-.show-prescription table{
+.show-prescription table,.show-test-prescription table{
     border-collapse: collapse;
     width: 100%;
 }
-.show-prescription table th{
+.show-prescription table th,.show-test-prescription table th{
     font-size: medium;
     color: #000;
     padding: 8px;
@@ -207,13 +208,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.show-prescription table td{
+.show-prescription table td,.show-test-prescription table td{
     padding: 8px ;
     text-align: left;
     border: 1px solid #ddd;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.show-prescription table td,.show-test-prescription table td:first-child{
+    display: table-cell;
 }
 .prescribe-test-content{
     display: none;
