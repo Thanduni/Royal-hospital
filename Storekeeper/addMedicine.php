@@ -1,5 +1,5 @@
 <?php
-
+//add medicine page
 require_once("../conf/config.php");
 
 if(isset($_POST['submit'])){
