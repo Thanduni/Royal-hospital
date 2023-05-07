@@ -195,6 +195,7 @@
     border-style: none;
     width: 100%;
 }
+
 .show-prescription,.show-test-prescription {
     width: 80%;
     margin: 40px 20px;
@@ -314,7 +315,7 @@
     /* to get the button right beside input element */
     position: absolute;
     z-index: 2;
-    width: 100%;
+    /* width: 100%; */
 }
 /* .autocomplete-list li{
     border-top: unset !important;
