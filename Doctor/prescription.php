@@ -9,11 +9,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     $row = mysqli_fetch_assoc($get_doctorID);
     $doctorID = $row["doctorID"];
 
-?>
-<?php
+    ?>
+    <?php
 
-function displayErrorMessage() {
-    echo '<script>
+    function displayErrorMessage() {
+        echo '<script>
       document.addEventListener("DOMContentLoaded", function() {          
         var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
         if(errorMessage) {
@@ -23,9 +23,9 @@ function displayErrorMessage() {
         }
       });
     </script>';
-}
-function outOFStock() {
-    echo '<script>
+    }
+    function outOFStock() {
+        echo '<script>
         document.addEventListener("DOMContentLoaded", function() {
             const errorMessage = document.getElementById("success-message");
             if (errorMessage) {
@@ -44,53 +44,53 @@ function outOFStock() {
             }
         }
     </script>';
-}
-
-
-if(isset($_GET['errorCode'])){
-    outOFStock();
-
-}
-if(isset($_GET['patientid'])){
-    $patientID = $_GET['patientid'];
-
-    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
-    $prescID_query = mysqli_query($con,$get_prescID);
-    // Fetch the result of the query (query can return a row with NULL)
-    $row = mysqli_fetch_array($prescID_query);
-
-    // Check if the value is not null
-    if (isset($row[0])){
-        $prescriptionID = $row[0];
-    }else{
-        //get out patient prescriptionID
-        $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
-        $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
-        $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
-        if(isset($presID_row[0])){
-            $prescriptionID = $presID_row[0];
-        }
-        else{
-            displayErrorMessage();
-        }
     }
-    
-}
 
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/prescription.css' ?>">
-    <title>Prescription</title>
-</head>
-<body>
+    if(isset($_GET['errorCode'])){
+        outOFStock();
+
+    }
+    if(isset($_GET['patientid'])){
+        $patientID = $_GET['patientid'];
+
+        $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
+        $prescID_query = mysqli_query($con,$get_prescID);
+        // Fetch the result of the query (query can return a row with NULL)
+        $row = mysqli_fetch_array($prescID_query);
+
+        // Check if the value is not null
+        if (isset($row[0])){
+            $prescriptionID = $row[0];
+        }else{
+            //get out patient prescriptionID
+            $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
+            $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
+            $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
+            if(isset($presID_row[0])){
+                $prescriptionID = $presID_row[0];
+            }
+            else{
+                displayErrorMessage();
+            }
+        }
+
+    }
+
+    ?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/prescription.css' ?>">
+        <title>Prescription</title>
+    </head>
+    <body>
     <div class="user">
         <?php
         $name = urlencode( $_SESSION['name']);
@@ -100,41 +100,41 @@ if(isset($_GET['patientid'])){
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
-                <div class="prescription-container">
+            <div class="prescription-container">
 
-                    <div class="tab-line">
-                        <div class="medicine-button custom-btn" id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <div class="test-button custom-btn" id="test-button" onclick="testPrescription()">Prescribe Test</div>
-                    </div>
-                    <script>
-                        function drugPrescription(){
-                            document.getElementById("prescribe-medicine-content").style.display="block";
-                            document.getElementById("prescribe-test-content").style.display="none";
-                        }
-                        function testPrescription(){
-                            document.getElementById("prescribe-test-content").style.display="block";
-                            document.getElementById("prescribe-medicine-content").style.display="none";
-                        }
-                    </script>
+                <div class="tab-line">
+                    <div class="medicine-button custom-btn" id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                    <div class="test-button custom-btn" id="test-button" onclick="testPrescription()">Prescribe Test</div>
+                </div>
+                <script>
+                    function drugPrescription(){
+                        document.getElementById("prescribe-medicine-content").style.display="block";
+                        document.getElementById("prescribe-test-content").style.display="none";
+                    }
+                    function testPrescription(){
+                        document.getElementById("prescribe-test-content").style.display="block";
+                        document.getElementById("prescribe-medicine-content").style.display="none";
+                    }
+                </script>
 
-                    <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
-                        <p>Please enter a doctor Note first</p>
-                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note custom-btn" name="add-note"></a>
-                    </div>
-                    <div class="prescribe-medicine-content" id="prescribe-medicine-content">
-                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
-                            <div class="input-feild">
-                                <table id="prescription-table">
-                                    <tr>
-                                        <th>Drug Name</th>
-                                        <th>Dosage</th>
-                                        <th>Frequency (per day)</th>
-                                        <th>No of days</th>
-                                    </tr>
-                                    <div class="show-medicine">
+                <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
+                    <p>Please enter a doctor Note first</p>
+                    <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note custom-btn" name="add-note"></a>
+                </div>
+                <div class="prescribe-medicine-content" id="prescribe-medicine-content">
+                    <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                        <div class="input-feild">
+                            <table id="prescription-table">
+                                <tr>
+                                    <th>Drug Name</th>
+                                    <th>Dosage</th>
+                                    <th>Frequency (per day)</th>
+                                    <th>No of days</th>
+                                </tr>
+                                <div class="show-medicine">
                                     <tr>
                                         <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
-                                        </div>
+                                            </div>
                                         </td>
 
                                         <td><input type="number" name="dosage[]"></td>
@@ -143,95 +143,95 @@ if(isset($_GET['patientid'])){
                                         <td><input type="button" name="addd" class="add custom-btn" value="Add"></td>
 
                                     </tr>
-                                    </div>
-                                </table>
-                                <input type="submit" class="save-prescription" name="save" id="save" value="save data">
-                            </div>  
-                        </form> 
-                        <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
-                        
-                        <div class="show-prescription">
-                            <table class="table">
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Drug Name</th>
-                                    <th>Dosage (per day)</th>
-                                    <th>Frequency (per day)</th>
-                                    <th>No of days</th>
-                                    <!-- <th>Edit</th> -->
-                                    <th>Remove</th>
-                                </thead>
-                                <tbody>
-                                <?php 
-                                if(isset($prescriptionID)){
-                                    $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
-                                    $result = mysqli_query($con,$select);
-                            
-                                    while($row= mysqli_fetch_array($result)){?>
-                                <tr><td><?php  echo $prescriptionID ?></td>
-                                    <td><?php echo $row['drug_name'] ?></td>
-                                    <td><?php echo $row['quantity'] ?></td>
-                                    <td><?php echo $row['frequency'] ?></td>
-                                    <td><?php echo $row['days'] ?></td>
-                                    <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
-                                    <td>
-                                        <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
-                                        <input type="button" name="remove" class="remove-prescription custom-btn" value="Remove"></a>
-                                    </td>
-                                    
-                                </tr>
-                                <?php
-                                    }
-                                }else{
-                                    displayErrorMessage();
-                                } ?>
-                                </tbody>
+                                </div>
                             </table>
+                            <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                         </div>
-                    </div>
+                    </form>
+                    <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
 
-                    <div class="prescribe-test-content" id="prescribe-test-content">
-                        <form action="processTestPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" method="post">
-                            <table class="prescription-test-table">
-                                <thead>
-                                    <th>Test Name</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="text"  name="Testname[]"></td>
-                                        <td><input type="button" name="addd" class="add-test custom-btn" value="Add"></td>
+                    <div class="show-prescription">
+                        <table class="table">
+                            <thead>
+                            <th>ID</th>
+                            <th>Drug Name</th>
+                            <th>Dosage (per day)</th>
+                            <th>Frequency (per day)</th>
+                            <th>No of days</th>
+                            <!-- <th>Edit</th> -->
+                            <th>Remove</th>
+                            </thead>
+                            <tbody>
+                            <?php
+                            if(isset($prescriptionID)){
+                                $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
+                                $result = mysqli_query($con,$select);
+
+                                while($row= mysqli_fetch_array($result)){?>
+                                    <tr><td><?php  echo $prescriptionID ?></td>
+                                        <td><?php echo $row['drug_name'] ?></td>
+                                        <td><?php echo $row['quantity'] ?></td>
+                                        <td><?php echo $row['frequency'] ?></td>
+                                        <td><?php echo $row['days'] ?></td>
+                                        <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
+                                        <td>
+                                            <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
+                                                <input type="button" name="remove" class="remove-prescription custom-btn" value="Remove"></a>
+                                        </td>
+
                                     </tr>
-                                </tbody>
-                            </table>
-                            <input type="submit" value="Save" name="Save-test" class="save-prescription" id="save-test">
-                        </form>
-                        <div class="show-test-prescription">
-                            <table class="table">
-                                <thead>
-                                    <th>Date</th>
-                                    <th>Test Name</th>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                        if(isset($prescriptionID)){
-                                            $select_test = "SELECT * from prescribed_tests where prescriptionID ='$prescriptionID';";
-                                            $select_query = mysqli_query($con,$select_test);
-
-                                            while($test_row =mysqli_fetch_array($select_query)){?>
-                                            <tr>
-                                                <td><?php echo $test_row['date']?></td>
-                                                <td><?php echo $test_row['test_name']?></td>
-                                            </tr>
-                                            <?php
-                                            }
-                                        }
-                                        ?>
-                                    <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <?php
+                                }
+                            }else{
+                                displayErrorMessage();
+                            } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+                <div class="prescribe-test-content" id="prescribe-test-content">
+                    <form action="processTestPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" method="post">
+                        <table class="prescription-test-table">
+                            <thead>
+                            <th>Test Name</th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="text"  name="Testname[]"></td>
+                                <td><input type="button" name="addd" class="add-test custom-btn" value="Add"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <input type="submit" value="Save" name="Save-test" class="save-prescription" id="save-test">
+                    </form>
+                    <div class="show-test-prescription">
+                        <table class="table">
+                            <thead>
+                            <th>Date</th>
+                            <th>Test Name</th>
+                            </thead>
+                            <tbody>
+                            <?php
+                            if(isset($prescriptionID)){
+                                $select_test = "SELECT * from prescribed_tests where prescriptionID ='$prescriptionID';";
+                                $select_query = mysqli_query($con,$select_test);
+
+                                while($test_row =mysqli_fetch_array($select_query)){?>
+                                    <tr>
+                                        <td><?php echo $test_row['date']?></td>
+                                        <td><?php echo $test_row['test_name']?></td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -250,8 +250,8 @@ if(isset($_GET['patientid'])){
                     <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
                     </tr>`);
 
-                    addAutoCompleteDropdownToInputs();
-                    
+                addAutoCompleteDropdownToInputs();
+
 
             });
             //remove rows
@@ -279,11 +279,11 @@ if(isset($_GET['patientid'])){
                 $(row_med).remove();
             });
         });
-        
+
     </script>
-</body>
-</html>
-<?php
+    </body>
+    </html>
+    <?php
 } else {
     header("location: " . BASEURL . "/Homepage/login.php");
 }
