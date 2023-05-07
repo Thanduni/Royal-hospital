@@ -22,6 +22,44 @@ function displayErrorMessage() {
       });
     </script>';
 }
+function outOFStock() {
+    echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const errorMessage = document.getElementById("success-message");
+            if (errorMessage) {
+                errorMessage.innerHTML = \'<p>Medicine out of Stock</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
+                errorMessage.style.display = "flex";
+            } else {
+                console.error("Error: Could not find error message element.");
+            }
+        });
+        function closeErrorMessage() {
+            const errorMessage = document.getElementById("success-message");
+            if (errorMessage) {
+                errorMessage.style.display = "none";
+            }
+        }
+    </script>';
+}
+function infufficient() {
+    echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const errorMessage = document.getElementById("success-message");
+            if (errorMessage) {
+                errorMessage.innerHTML = \'<p>Insufficient quantity</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
+                errorMessage.style.display = "flex";
+            } else {
+                console.error("Error: Could not find error message element.");
+            }
+        });
+        function closeErrorMessage() {
+            const errorMessage = document.getElementById("success-message");
+            if (errorMessage) {
+                errorMessage.style.display = "none";
+            }
+        }
+    </script>';
+}
   
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];

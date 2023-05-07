@@ -97,6 +97,14 @@
     color: #fff;
     cursor: pointer
 }
+.close-button{
+    padding: 0.5em;
+    border: 1px solid #dc3545 !important;
+    background: #f1aeb5 !important;
+    color: #dc3545 !important;
+    cursor: pointer;
+    font-weight: 600;
+}
 .prescription-group label{
     margin-top: 20px;
     margin-right: 20px;
@@ -239,7 +247,6 @@
 #addRowButton{
     margin-left: 15px;
 }
-
 .autocomplete {
     /*the container must be positioned relative:*/
     position: relative;
