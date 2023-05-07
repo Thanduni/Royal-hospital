@@ -146,7 +146,7 @@ if(isset($_POST['submit-doctor-note'])) {
                                     <input type="text" name="impression" placeholder="Impression" id="">
                                     <!-- <textarea name="impression" id="" cols="30" rows="4" placeholder="Impression"></textarea> -->
                                 </div>
-                                <button class="addPrescription-button" type="submit" name="submit-doctor-note">Submit</button>
+                                <button class="addPrescription-button custom-btn" type="submit" name="submit-doctor-note">Submit</button>
                             </form>
                         </div>
                     </div>

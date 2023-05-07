@@ -93,7 +93,7 @@ if(mysqli_query($con,$prescription)){
                                     <input type="text" name="impression">
                                 </div>
                             </div>
-                            <button class="addPrescription-button" type="submit" name="submit">Submit</button>
+                            <button class="addPrescription-button custom-btn" type="submit" name="submit">Submit</button>
                         </form>
                     </div>
                 </div>

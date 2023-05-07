@@ -74,7 +74,7 @@ if(isset($_GET['patientid'])){
                                     <td><?php echo $row['days'] ?></td>
                                     <td>
                                         <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
-                                        <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
+                                        <input type="button" name="remove" class="remove-prescription custom-btn" value="Remove"></a>
                                     </td>
                                     
                                 </tr>

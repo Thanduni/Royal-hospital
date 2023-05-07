@@ -114,7 +114,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 </td>
                             </tr>
                         </table>
-                        <button name="updateDoctor" type="submit">Save changes</button>
+                        <button name="updateDoctor" class="custom-btn" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -138,7 +138,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 <td colspan="2"><input type="password" name="confirmPassword" required><div class="alert password"></div></td>
                             </tr>
                         </table>
-                        <button name="changePassword" type="submit">Save changes</button>
+                        <button name="changePassword" class="custom-btn" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>

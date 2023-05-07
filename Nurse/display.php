@@ -56,7 +56,7 @@ if(isset($_POST['submit'])){
                 <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
                 <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
 
-                <button class="button" id="admission-button">
+                <button class="button" id="admission-button" class="custom-btn">
                     New Admission
                 </button>
 
@@ -121,7 +121,7 @@ if(isset($_POST['submit'])){
                     <label>Admit time</label>
                     <input type="time" id="time" name="admit_time" min="" required>
                 </div>
-                <button class="submit" type="submit" name ="submit">Submit</button>
+                <button class="submit custom-btn" type="submit" name ="submit">Submit</button>
             </form>
         </div>
     </div>

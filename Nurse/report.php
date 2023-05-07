@@ -57,7 +57,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                                         <td>'.$patientID.'</td>
                                         <td>'.$name.'</td>
                                         <td>'.$RoomNo.'</td>
-                                        <td> <button class="button" id="report-button"><a href="dailyReport.php?patientid='.$patientID.'&name='.$name.'">
+                                        <td> <button class="button custom-btn" id="report-button"><a href="dailyReport.php?patientid='.$patientID.'&name='.$name.'">
                                         View </a>
                                     </button></td>
 

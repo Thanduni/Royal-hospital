@@ -123,7 +123,7 @@ if($get_details){
                                 <label for="">Admit Time</label>
                                 <input type="time" name="admitTime" value ="<?php echo $mintime?>" readonly>
                             </div>
-                            <button id="admit-btn" class="admit-patient-btn" type="submit" name="admit-patient">Admit Patient</button>
+                            <button id="admit-btn" class="admit-patient-btn custom-btn" type="submit" name="admit-patient">Admit Patient</button>
                         </form>
                     </div>
                 </div>
@@ -135,7 +135,7 @@ if($get_details){
             <img src="../images/check.png" alt="check">
             <h2>Admit Successfull!</h2>
             <p>Your patient has been successfully admitted</p>
-            <button type="button" class="close-confirm-popup">OK</button>
+            <button type="button" class="close-confirm-popup custom-btn">OK</button>
         </div>
     </div>
 

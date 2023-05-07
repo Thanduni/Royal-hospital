@@ -27,7 +27,7 @@ function outOFStock() {
         document.addEventListener("DOMContentLoaded", function() {
             const errorMessage = document.getElementById("success-message");
             if (errorMessage) {
-                errorMessage.innerHTML = \'<p>Medicine out of Stock</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
+                errorMessage.innerHTML = \'<p>Medicine out of Stock</p><input type="button" class="close-button custom-btn" value="Close" onclick="closeErrorMessage()">\';
                 errorMessage.style.display = "flex";
             } else {
                 console.error("Error: Could not find error message element.");
@@ -46,7 +46,7 @@ function infufficient() {
         document.addEventListener("DOMContentLoaded", function() {
             const errorMessage = document.getElementById("success-message");
             if (errorMessage) {
-                errorMessage.innerHTML = \'<p>Insufficient quantity</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
+                errorMessage.innerHTML = \'<p>Insufficient quantity</p><input type="button" class="close-button custom-btn" value="Close" onclick="closeErrorMessage()">\';
                 errorMessage.style.display = "flex";
             } else {
                 console.error("Error: Could not find error message element.");
@@ -104,8 +104,8 @@ if(isset($_GET['patientid'])){
                 <div class="prescription-container">
 
                     <div class="tab-line">
-                        <div class="medicine-button" id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <div class="test-button" id="test-button" onclick="testPrescription()">Prescribe Test</div>
+                        <div class="medicine-button custom-btn" id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                        <div class="test-button custom-btn" id="test-button" onclick="testPrescription()">Prescribe Test</div>
                     </div>
                     <script>
                         function drugPrescription(){
@@ -120,7 +120,7 @@ if(isset($_GET['patientid'])){
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
                         <p>Please enter a doctor Note first</p>
-                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note" name="add-note"></a>
+                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note custom-btn" name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content" id="prescribe-medicine-content">
                         <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
@@ -140,7 +140,7 @@ if(isset($_GET['patientid'])){
                                         <td><input type="number" name="dosage[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
                                         <td><input type="number" name="days[]"></td>
-                                        <td><input type="button" name="addd" class="add" value="Add"></td>
+                                        <td><input type="button" name="addd" class="add custom-btn" value="Add"></td>
                                     </tr>
                                     </div>
                                 </table>
@@ -175,7 +175,7 @@ if(isset($_GET['patientid'])){
                                     <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
                                     <td>
                                         <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
-                                        <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
+                                        <input type="button" name="remove" class="remove-prescription custom-btn" value="Remove"></a>
                                     </td>
                                     
                                 </tr>
@@ -198,7 +198,7 @@ if(isset($_GET['patientid'])){
                                 <tbody>
                                     <tr>
                                         <td><input type="text"  name="Testname[]"></td>
-                                        <td><input type="button" name="addd" class="add-test" value="Add"></td>
+                                        <td><input type="button" name="addd" class="add-test custom-btn" value="Add"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -245,7 +245,7 @@ if(isset($_GET['patientid'])){
                     <td><input type="number" name="dosage[]"></td>
                     <td><input type="number" name="days[]"></td>
                     <td><input type="number" name="frequency[]"></td>
-                    <td><input type="button" name="remove" class="remove" value="Remove"></td>
+                    <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
                     </tr>`);
             });
 
@@ -263,7 +263,7 @@ if(isset($_GET['patientid'])){
                 e.preventDefault();         //stop page refresh
                 $(".prescription-test-table").append(`<tr>
                     <td><input type="text"  name="Testname[]"></td>
-                    <td><input type="button" name="remove" class="remove" value="Remove"></td>
+                    <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
                 </tr>`);
             });
 

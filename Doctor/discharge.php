@@ -139,7 +139,7 @@ if(isset($_POST['discharge-patient'])){
                                     <input type="time" name="admitTime" value ="<?php echo $current_time?>" readonly>
                                 </div>
                             </div>
-                            <button id="discharge-btn" class="discharge-patient-btn" type="submit" name="discharge-patient">Discharge Patient</button>
+                            <button id="discharge-btn" class="discharge-patient-btn custom-btn" type="submit" name="discharge-patient">Discharge Patient</button>
                         </form>
                     </div>
                 </div>
