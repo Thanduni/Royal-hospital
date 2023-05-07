@@ -80,9 +80,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                           SELECT MAX(date) FROM prescription WHERE patientID = $patientID )";
                                         $investigation_query = mysqli_query($con,$get_investigation);
                                     ?></td>
-                                    <td><a href="viewReport.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-reports" class="view-reports custom-btn" value="View Reports"></a>
-                                    <a href="prescription.php?patientid=<?=$row['patientID']?>"><input type="button" name="prescription" class="prescription-btn custom-btn" value="Prescribe"></a>
-                                    <a href="discharge.php?patientid=<?=$row['patientID']?>"><input type="button" name="discharge" class="discharge custom-btn" value="Discharge"></a></td>
+                                    <td><a href="viewReport.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-reports" class="view-reports" value="View Reports"></a>
+                                    <a href="prescription.php?patientid=<?=$row['patientID']?>"><input type="button" name="prescription" class="prescription-btn" value="Prescribe"></a>
+                                    <a href="discharge.php?patientid=<?=$row['patientID']?>"><input type="button" name="discharge" class="discharge" value="Discharge"></a></td>
                                 </tr>
                                 <?php
                                 } ?>

@@ -31,7 +31,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             if (errorMessage) {
 
                 errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
-
                 errorMessage.style.display = "flex";
             } else {
                 console.error("Error: Could not find error message element.");
@@ -41,6 +40,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             const errorMessage = document.getElementById("success-message");
             if (errorMessage) {
                 errorMessage.style.display = "none";
+                header("Location: prescription.php?patientid=".$patientID);
             }
         }
     </script>';
@@ -102,36 +102,38 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             ?>
             <div class="prescription-container">
 
-                <div class="tab-line">
-                    <div class="medicine-button custom-btn" id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                    <div class="test-button custom-btn" id="test-button" onclick="testPrescription()">Prescribe Test</div>
-                </div>
-                <script>
-                    function drugPrescription(){
-                        document.getElementById("prescribe-medicine-content").style.display="block";
-                        document.getElementById("prescribe-test-content").style.display="none";
-                    }
-                    function testPrescription(){
-                        document.getElementById("prescribe-test-content").style.display="block";
-                        document.getElementById("prescribe-medicine-content").style.display="none";
-                    }
-                </script>
 
-                <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
-                    <p>Please enter a doctor Note first</p>
-                    <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note custom-btn" name="add-note"></a>
-                </div>
-                <div class="prescribe-medicine-content" id="prescribe-medicine-content">
-                    <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
-                        <div class="input-feild">
-                            <table id="prescription-table">
-                                <tr>
-                                    <th>Drug Name</th>
-                                    <th>Dosage</th>
-                                    <th>Frequency (per day)</th>
-                                    <th>No of days</th>
-                                </tr>
-                                <div class="show-medicine">
+                    <div class="tab-line">
+                        <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                        <div class="test-button" id="test-button" onclick="testPrescription()">Prescribe Test</div>
+                    </div>
+                    <script>
+                        function drugPrescription(){
+                            document.getElementById("prescribe-medicine-content").style.display="block";
+                            document.getElementById("prescribe-test-content").style.display="none";
+                        }
+                        function testPrescription(){
+                            document.getElementById("prescribe-test-content").style.display="block";
+                            document.getElementById("prescribe-medicine-content").style.display="none";
+                        }
+                    </script>
+
+                    <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
+                        <p>Please enter a doctor Note first</p>
+                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
+                    </div>
+                    <div class="prescribe-medicine-content" id="prescribe-medicine-content">
+                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                            <div class="input-feild">
+                                <table id="prescription-table">
+                                    <tr>
+                                        <th>Drug Name</th>
+                                        <th>Dosage</th>
+                                        <th>Frequency (per day)</th>
+                                        <th>No of days</th>
+                                    </tr>
+                                    <div class="show-medicine">
+
                                     <tr>
                                         <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
                                             </div>
@@ -140,10 +142,54 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         <td><input type="number" name="dosage[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
                                         <td><input type="number" name="days[]"></td>
-                                        <td><input type="button" name="addd" class="add custom-btn" value="Add"></td>
+                                        <td><input type="button" name="addd" class="add" value="Add"></td>
 
                                     </tr>
-                                </div>
+
+                                    </div>
+                                </table>
+                                <input type="submit" class="save-prescription" name="save" id="save" value="save data">
+                            </div>  
+                        </form> 
+                        <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
+                        
+                        <div class="show-prescription">
+                            <table class="table">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Drug Name</th>
+                                    <th>Dosage (per day)</th>
+                                    <th>Frequency (per day)</th>
+                                    <th>No of days</th>
+                                    <!-- <th>Edit</th> -->
+                                    <th>Remove</th>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                if(isset($prescriptionID)){
+                                    $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
+                                    $result = mysqli_query($con,$select);
+                            
+                                    while($row= mysqli_fetch_array($result)){?>
+                                <tr><td><?php  echo $prescriptionID ?></td>
+                                    <td><?php echo $row['drug_name'] ?></td>
+                                    <td><?php echo $row['quantity'] ?></td>
+                                    <td><?php echo $row['frequency'] ?></td>
+                                    <td><?php echo $row['days'] ?></td>
+                                    <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
+                                    <td>
+                                        <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
+                                        <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
+                                    </td>
+                                    
+                                </tr>
+                                <?php
+                                    }
+                                }else{
+                                    displayErrorMessage();
+                                } ?>
+                                </tbody>
+
                             </table>
                             <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                         </div>
@@ -219,8 +265,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
                                 while($test_row =mysqli_fetch_array($select_query)){?>
                                     <tr>
+
                                         <td><?php echo $test_row['date']?></td>
                                         <td><?php echo $test_row['test_name']?></td>
+
                                     </tr>
                                     <?php
                                 }
@@ -247,7 +295,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     <td><input type="number" name="dosage[]"></td>
                     <td><input type="number" name="days[]"></td>
                     <td><input type="number" name="frequency[]"></td>
-                    <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
+                    <td><input type="button" name="remove" class="remove" value="Remove"></td>
                     </tr>`);
 
                 addAutoCompleteDropdownToInputs();
@@ -268,7 +316,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 e.preventDefault();         //stop page refresh
                 $(".prescription-test-table").append(`<tr>
                     <td><input type="text"  name="Testname[]"></td>
-                    <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
+                    <td><input type="button" name="remove" class="remove" value="Remove"></td>
                 </tr>`);
             });
 
