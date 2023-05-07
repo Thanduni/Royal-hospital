@@ -3,36 +3,38 @@ session_start();
 require_once("../conf/config.php");
 $_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL.'/css/style.css';?>">
-    <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="<?php echo BASEURL. '/js/getDocDetails.js'; ?>"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="<?php echo BASEURL .'/css/appoinment.css';?>">
-    <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <title>Patient Dashboard</title>
-    <style>
-        body{
-            background-color: #f9f8ff;
-        }
-        .field{
-            margin: 20px;
-        }
-    </style>
-</head>
-<body>
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="<?php echo BASEURL.'/css/style.css';?>">
+        <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientDash.css';?>">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="<?php echo BASEURL. '/js/getDocDetails.js'; ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="<?php echo BASEURL .'/css/appoinment.css';?>">
+        <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <title>Patient Dashboard</title>
+        <style>
+            body{
+                background-color: #f9f8ff;
+            }
+            .field{
+                margin: 20px;
+            }
+
+
+        </style>
+    </head>
+    <body>
     <div class="user">
 
         <?php
@@ -40,7 +42,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
         $result_pid = mysqli_query($con, $pid_query);
         $pid = mysqli_fetch_assoc($result_pid)['patientID'];
-        
+
         $result_h = "select height from patient where patientID =  $pid";
         $result_w = "select weight from patient where patientID =  $pid";
         $result_b = "select blood from patient where patientID =  $pid";
@@ -48,21 +50,27 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
         $h = mysqli_fetch_assoc( mysqli_query($con,$result_h))['height'];
         $w = mysqli_fetch_assoc( mysqli_query($con,$result_w))['weight'];
         $b = mysqli_fetch_assoc( mysqli_query($con,$result_b))['blood'];
-       
+
         $GLOBALS['height'] = $GLOBALS['h'];
         $GLOBALS['weight'] = $GLOBALS['w'];
         $GLOBALS['blood'] = $GLOBALS['b'];
 
-        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid'";
+        date_default_timezone_set('Asia/Calcutta');
+
+        $app_sql = "select * from appointment where date ='".date("Y-m-d")."' and patientID = '$pid' ORDER BY `appointment`.`date` DESC";
         $result_app = mysqli_query($con, $app_sql);
 
+        date_default_timezone_set('Asia/Calcutta');
+        $current_time = date("H:i:s");
+        $current_date = date('Y-m-d');
+    
 
         while($row = mysqli_fetch_assoc($result_app)) {
             $docName_sql = "select * from doctor inner join user on doctor.nic = user.nic where doctor.doctorID = '" . $row['doctorID'] . "'";
             $docName = mysqli_fetch_assoc(mysqli_query($con, $docName_sql))['name'];
             $appTime = $row['time'];
 
-            $current_date = date('Y-m-d');
+            
             $flag = 0;
             for ($i = 0; $i < count($_SESSION['appID_array']); $i++) {
                 if ($row['appointmentID'] == $_SESSION['appID_array'][$i])
@@ -80,70 +88,70 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
-        
+
         <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
 
         <div class="userContents"  id="center">
             <?php
             include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
-            
+
             <ul>
                 <li class="userType"><img src="<?php echo BASEURL.'/images/userInPage.svg' ?>" alt="">
-                Patient
-            </li>
+                    Patient
+                </li>
             </ul>
 
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
-            <a href="<?php echo BASEURL.'/Patient/summaryreport.php' ?>">
-                <div class="card">
-                    <div class="card-content"></div>
-                    <div class="card-name">Summary</div>
-                    <div class="icon-box">
-                    <i class="fas fa-file-text"></i>
-                </div>
-                </div>
-            </a>
+                <a href="<?php echo BASEURL.'/Patient/summaryreport.php' ?>">
+                    <div class="card">
+                        <div class="card-content"></div>
+                        <div class="card-name">Summary</div>
+                        <div class="icon-box">
+                            <i class="fas fa-file-text"></i>
+                        </div>
+                    </div>
+                </a>
 
-            <a href="<?php echo BASEURL.'/Patient/dailyreport.php' ?>">
-                <div class="card">
-                    <div class="card-content"></div>
-                    <div class="card-name">Daily Reports</div>
-                    <div class="icon-box">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                </div> 
-            </a>
+                <a href="<?php echo BASEURL.'/Patient/dailyreport.php' ?>">
+                    <div class="card">
+                        <div class="card-content"></div>
+                        <div class="card-name">Daily Reports</div>
+                        <div class="icon-box">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </a>
 
-            <a href="<?php echo BASEURL.'/Patient/billDetails.php' ?>">
-                <div class="card">
-                    <div class="card-content"></div>
-                    <div class="card-name">Bill Details</div>
-                    <div class="icon-box">
-                    <i class="fas fa-dollar"></i>
-                </div>
-                </div> 
-            </a> 
-            <a  id="open" target="_self" style="cursor:pointer">
-                <div class="card">
-                    <div class="card-content"></div>
-                    <div class="card-name">Appointment</div>
-                    <div class="icon-box">
-                    <i class="far fa-calendar-alt"></i>
-                </div>
-                </div>
-            </a>
-            <a href="<?php echo BASEURL.'/Patient/stripe/checkout.php' ?>">
-                <div class="card">
-                    <div class="card-content"></div>
-                    <div class="card-name">Pay Now</div>
-                    <div class="icon-box">
-                    <i class="fas fa-money"></i>
-                </div>
-                </div>
-            </a>
-    </div>
+                <a href="<?php echo BASEURL.'/Patient/billDetails.php' ?>">
+                    <div class="card">
+                        <div class="card-content"></div>
+                        <div class="card-name">Bill Details</div>
+                        <div class="icon-box">
+                            <i class="fas fa-dollar"></i>
+                        </div>
+                    </div>
+                </a>
+                <a  id="open" target="_self" style="cursor:pointer">
+                    <div class="card">
+                        <div class="card-content"></div>
+                        <div class="card-name">Appointment</div>
+                        <div class="icon-box">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="<?php echo BASEURL.'/Patient/stripe/checkout.php' ?>">
+                    <div class="card">
+                        <div class="card-content"></div>
+                        <div class="card-name">Pay Now</div>
+                        <div class="icon-box">
+                            <i class="fas fa-money"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
             <div class="mcontent">
                 <div class="pcontent">
                     <div class="table_header"><h3 style="color: var(--primary-color);">Common Details</h3></div>
@@ -166,13 +174,12 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         <div class="val"><?php echo  $blood; ?></div>
                     </div>
                 </div>
-                    <div class="wrapper_p">
+                <div class="wrapper_p">
                     <div class="table_header"><h3 style="color: var(--primary-color);margin-left:125px;">Confirmed Appointments</h3></div></br>
                     <div class="table">
                         <div class="row headerT">
                             <div class="cell">Date</div>
                             <div class="cell">Time</div>
-                            <div class="cell">Venue</div>
                             <div class="cell">Doctor</div>
                             <div class="cell">Message</div>
                             <div class="cell">Options</div>
@@ -184,26 +191,37 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         $result = mysqli_query($con, $patientIdQuery);
                         $pID = mysqli_fetch_assoc($result)['patientID'];
 
-                        $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, appointment.venue, user.name, appointment.doctorID, appointment.appointmentID 
-                            FROM appointment join doctor on appointment.doctorID=doctor.doctorID join user on user.nic=doctor.nic WHERE patientID = $pID";
+                        $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, user.name, appointment.doctorID, appointment.appointmentID 
+                            FROM appointment inner join doctor on appointment.doctorID=doctor.doctorID inner join user on user.nic=doctor.nic WHERE patientID = $pID ";
 
+                        $appointment_delete = mysqli_query($con,"delete from appointment where patientID = $pID and date < '$current_date' or (date = '$current_date' && time < '$current_time')");
+                    
+                        $date_arr = array();
+                        $time_arr = array();
                         $result = mysqli_query($con, $query);
-                        while($rows = mysqli_fetch_assoc($result)){ ?>
-                            <div class="row">
-                                <div class="cell" data-title="Date">
-                                    <?php echo $rows['date']; ?>
+                        while($rows = mysqli_fetch_assoc($result)){
+                            array_push($date_arr,$rows['date']);
+                            array_push($time_arr,$rows['time']);
+
+                            $date_a = json_encode($date_arr);
+                            $time_a = json_encode($time_arr);
+
+
+
+                            ?>
+                            <div id="row" class="row">
+                                <div id ="current_date" class="cell date" data-title="Date">
+                                    <?php echo $rows['date'];
+                                    ?>
                                 </div>
-                                <div class="cell" data-title="Time">
+                                <div id="current_time" class="cell time" data-title="Time">
                                     <?php echo $rows['time']; ?>
-                                </div>
-                                <div class="cell" data-title="Venue">
-                                    <?php echo $rows['venue']; ?>
                                 </div>
                                 <div class="cell" data-title="Doctor">
                                     <?php echo $rows['name']; ?>
                                 </div>
                                 <div class="cell" data-title="Message">
-                                    <?php echo $rows['message']; ?>
+                                    <?php echo $rows['message'];?>
                                 </div>
                                 <div class="cell" style="" data-title="Options">
                                     <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
@@ -219,9 +237,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                 <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['time'] ?></li>
                                 <li class="<?php echo $rows['appointmentID'] ?>_tableCon"><?php echo $rows['message'] ?></li>
                             </ul>
-                         <?php
+                            <?php
                         }
-                    ?>
+                        ?>
                     </div>
                 </div>
             </div>
@@ -232,54 +250,54 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     <div id="login-modal">
         <div class="modal">
             <div class="login-form">
-            <h2>Put Your Appointment</h2><br>
-            <form id="addForm"  action="appointment.php" method="post">
+                <h2>Put Your Appointment</h2><br>
+                <form id="addForm"  action="appointment.php" method="post">
 
-                <div class="field">
-                    <label for="">Date</label><br>
-                    <input type="date" name="date" id="date" placeholder="" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>">
-                </div>
-                <script>
-                    var today = new Date().toISOString().substr(0, 10);
-                    document.getElementById("date").value = today;
-                </script>
-                <div class="field">
-                    <label for="">Department</label><br>
-                    <select name="department" id="department">
-                        <option value="">Please A Select Department</option>
-                        <option value="Anesthetics">Anesthetics</option>
-                        <option value="Cardiology">Cardiology</option>
-                        <option value="Gastroentology">Gastroentology</option>
-                    </select>
-                </div>
+                    <div class="field">
+                        <label for="">Date</label><br>
+                        <input type="date" name="date" id="date" placeholder="" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>">
+                    </div>
+                    <script>
+                        var today = new Date().toISOString().substr(0, 10);
+                        document.getElementById("date").value = today;
+                    </script>
+                    <div class="field">
+                        <label for="">Department</label><br>
+                        <select name="department" id="department">
+                            <option value="">Please A Select Department</option>
+                            <option value="Anesthetics">Anesthetics</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Gastroentology">Gastroentology</option>
+                        </select>
+                    </div>
 
-                <div class="field" id="doctorRow">
-                    <label  for="">Doctor</label><br>
-                    <select name="doctor" id="doctor">
-                        <option value="">Select a doctor</option>
-                    </select>
-                </div>
+                    <div class="field" id="doctorRow">
+                        <label  for="">Doctor</label><br>
+                        <select name="doctor" id="doctor">
+                            <option value="">Select a doctor</option>
+                        </select>
+                    </div>
 
-                <div class="field">
-                    <label for="">Time</label><br>
-                    <select name="time" id="time">
-                        <option value="">Please select a time slot</option>
-                    </select>
-                </div>
+                    <div class="field">
+                        <label for="">Time</label><br>
+                        <select name="time" id="time">
+                            <option value="">Please select a time slot</option>
+                        </select>
+                    </div>
 
-                <div class="field">
-                    <label for="">Message</label><br>
-                    <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea>
-                </div>
+                    <div class="field">
+                        <label for="">Message</label><br>
+                        <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea>
+                    </div>
 
-                <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
-                <button type="submit" name="submit" id="btn" value="submit">Submit</button>
-            </form>
+                    <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
+                    <button type="submit" name="submit" id="btn" value="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
     <script src="<?php echo BASEURL . '/js/updateUser.js' ?>"></script>
-    
+
     <script type="text/javascript">
         $(function(){
             $('#open').click(function(){
@@ -292,13 +310,33 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 $('#login-modal').fadeOut();
             });
         });
+        // var c_time = new Date().toLocaleTimeString();
+        // var c_date = new Date().toLocaleDateString();
 
+        // var arr_d = JSON.parse(<?php //echo $date_a; ?>);
+        // var arr_t = JSON.parse(<?php //echo $time_a; ?>);
+
+
+        // console.log(arr_d.length)
+
+        // for(i = 0 ; i < arr_d.length ; i++)
+        // {
+
+        //     if(c_time > document.getElementsByClassName("row")[i+1].getElementsByClassName("cell").innerHTML && document.getElementsByClassName("cell")[i].innerHTML < c_date)
+        // {
+            
+        //     document.getElementsByClassName("row")[i].style.background = "#00FF00";
+        // }
+        // }
+        
         
     </script>
 </body>
 </html>
+    </body>
+    </html>
 
-<?php
+    <?php
 }else{
     header('location:../Homepage/login.php');
 }

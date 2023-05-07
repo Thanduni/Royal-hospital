@@ -80,7 +80,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <div class="cell">Use state</div>
                     </div>
                     <?php
-                    $sql = "SELECT q.itemID, q.item_name, q.companyName, q.unitType, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE > p.expiredDate GROUP BY p.itemID;";
+                    $sql = "SELECT q.itemID, q.item_name, q.companyName, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE > p.expiredDate GROUP BY p.itemID;";
                     $result = mysqli_query($con, $sql);
                     $num = mysqli_num_rows($result);
 
@@ -89,7 +89,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             $item_ID = $row['itemID'];
                             $item_name = $row['item_name'];
                             $companyName = $row['companyName'];
-                            $unitType = $row['unitType'];
                             $unitCost = $row['unit_price'];
                             ?>
                             <div class="row">
@@ -109,7 +108,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     }
                     ?>
                     <?php
-                    $sql = "SELECT q.itemID, q.item_name, q.companyName, q.unitType, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE < p.expiredDate GROUP BY p.itemID;";
+                    $sql = "SELECT q.itemID, q.item_name, q.companyName, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE < p.expiredDate GROUP BY p.itemID;";
                     $result = mysqli_query($con, $sql);
                     $num = mysqli_num_rows($result);
 
@@ -118,7 +117,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             $item_ID = $row['itemID'];
                             $item_name = $row['item_name'];
                             $companyName = $row['companyName'];
-                            $unitType = $row['unitType'];
                             $unitCost = $row['unit_price'];
                             ?>
                             <div class="row">
@@ -156,7 +154,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             $item_ID = $row['itemID'];
                             $item_name = $row['item_name'];
                             $companyName = $row['companyName'];
-                            $unitType = $row['unitType'];
                             $unitCost = $row['unit_price'];
                             ?>
                             <div class="row">
@@ -239,14 +236,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label for="medicineName">Medicine name:</label>
                     </td>
                     <td colspan="2">
-                        <select name="item_name" id="">
+                        <select name="item_name" id="" required>
                             <?php
                             $sql="Select * from `item`";
                             $result=mysqli_query($con,$sql);
                             while($row=mysqli_fetch_assoc($result)){
                                 $medicineName = $row['item_name'];
+                                $medicineID = $row['itemID'];
                                 ?>
-                                <option value='<?php echo $medicineName ?>'><?php echo $medicineName?></option>
+                                <option value='<?php echo $medicineID ?>'><?php echo $medicineName?></option>
                             <?php } ?>
                         </select>
                     </td>
@@ -256,7 +254,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label>Quantity</label>
                     </td>
                     <td colspan="2">
-                        <input name="quantity" type="number" id="contact" placeholder="Enter Quantity here">
+                        <input name="quantity" type="number" min="1" id="contact" placeholder="Enter Quantity here" required>
                     </td>
                 </tr>
                 <tr>
@@ -264,7 +262,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label for="Manufactured date">Manufactured date:</label>
                     </td>
                     <td colspan="2">
-                        <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>">
+                        <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>" required>
                     </td>
                 </tr>
                 <tr>
@@ -272,7 +270,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <label>Expired date</label>
                     </td>
                     <td colspan="2">
-                        <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
+                        <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>" required>
                     </td>
                 </tr>
                 <tr>

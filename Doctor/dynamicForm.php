@@ -27,7 +27,7 @@
                         <td><input type="text" name="txtEmail[]" required=""></td>
                         <td><input type="text" name="txtPhone[]" required=""></td>
                         <td><input type="text" name="txtAddress[]" required=""></td>
-                        <td><input type="button" name="addd" class="add" value="Add"></td>
+                        <td><input type="button" name="addd" class="add custom-btn" value="Add"></td>
                     </tr>
                     </div>
                     <input type="submit" class="btn-success" name="save" id="save" value="save data">
@@ -48,7 +48,7 @@
                         <td><input type="text" name="txtEmail[]" required=""></td>
                         <td><input type="text" name="txtPhone[]" required=""></td>
                         <td><input type="text" name="txtAddress[]" required=""></td>
-                        <td><input type="button" name="remove" class="remove" value="Remove"></td>
+                        <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
                     </tr>`);
             });
 

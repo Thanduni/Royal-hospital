@@ -73,7 +73,7 @@ if(isset($_POST['submit'])){
                                                                 // $patientID = $patientID;
                                                                 echo $patientID?></div>
                 </div>
-                <button class="button" id="dailyreportbutton">
+                <button class="button custom-btn" id="dailyreportbutton">
                         New entry
                 </button>
                 <h3>Vital Signs</h3>
@@ -158,7 +158,7 @@ if(isset($_POST['submit'])){
                     <label>O2 Saturation</label>
                     <input type="number" class="form-control" placeholder="" name="o2_saturation">
             </div>
-            <button type="submit" name ="submit">Submit</button>
+            <button type="submit" class="custom-btn" name ="submit">Submit</button>
         </form> 
         </div>
     </div>

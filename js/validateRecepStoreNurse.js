@@ -1,5 +1,4 @@
 let nicDiv = document.getElementById("nic");
-
 let regNic = /^\d{12}[A-Z]?$/;
 
 function validateNIC() {
@@ -25,19 +24,24 @@ nicDiv.previousSibling.addEventListener("focus", function () {
 }, false)
 
 function validateNurseReceptionistStorekeeperForm(){
-    let nic = nicDiv.previousSibling.value;
-
-    if(regNic.test(nic))
+    if (document.getElementById("nicRow").classList[0] === "hide"){
         return true;
+    }
     else{
-        nicDiv.classList.remove("hint");
-        nicDiv.classList.add("alert");
-        nicDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter your email properly.</li>\n" +
-            "</ul>";
+        let nic = nicDiv.previousSibling.value;
 
-        form.scrollIntoView();
-        return false;
+        if(regNic.test(nic))
+            return true;
+        else{
+            nicDiv.classList.remove("hint");
+            nicDiv.classList.add("alert");
+            nicDiv.innerHTML = "<ul>\n" +
+                "    <li>Please enter your NIC properly.</li>\n" +
+                "</ul>";
+
+            form.scrollIntoView();
+            return false;
+        }
     }
 }
 

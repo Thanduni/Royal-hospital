@@ -172,7 +172,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     ?>
                     <div class="divider">
                         <div class="card-set">
-                            <a href="<?php echo BASEURL . '/Admin/adminUsersPage.php' ?>">
                                 <div class="card">
                                     Number of total users
                                     <img style="margin: 10px" class="cardIcon" style="float: right"
@@ -180,23 +179,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
 
                                     <p class="val"><?php echo $row1['count(*)'] ?></p>
                                 </div>
-                            </a>
-                            <a href="<?php echo BASEURL . '/Admin/adminDoctorPage.php' ?>">
                                 <div class="card">
                                     Number of doctors
                                     <img style="margin: 10px" class="cardIcon" style="float: right"
                                          src="<?php echo BASEURL . "/images/doctorCard.png" ?>" alt="">
                                     <p class="val"><?php echo $row4['count(*)'] ?></p>
                                 </div>
-                            </a>
-                            <a href="<?php echo BASEURL . '/Admin/adminNursePage.php' ?>">
                                 <div class="card">
                                     Number of nurses
                                     <img style="margin: 10px" class="cardIcon" style="float: right"
                                          src="<?php echo BASEURL . "/images/nurseCard.png" ?>" alt="">
                                     <p class="val"><?php echo $row6['count(*)'] ?></p>
                                 </div>
-                            </a>
                             <div class="card">
                                 Number of Patients
                                 <img style="margin: 10px" class="cardIcon" style="float: right"
@@ -205,22 +199,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             </div>
                             <!--                        </div>-->
                             <!--                        <div class="card-set">-->
-                            <a href="<?php echo BASEURL . '/Admin/adminReceptionistPage.php' ?>">
                                 <div class="card">
                                     Number of receptionists
                                     <img style="margin: 10px" class="cardIcon" style="float: right"
                                          src="<?php echo BASEURL . "/images/receptionistCard.png" ?>" alt="">
                                     <p class="val"><?php echo $row5['count(*)'] ?></p>
                                 </div>
-                            </a>
-                            <a href="<?php echo BASEURL . '/Admin/adminStorekeeperPage.php' ?>">
                                 <div class="card">
                                     Number of storekeepers
                                     <img style="margin: 10px" class="cardIcon" style="float: right"
                                          src="<?php echo BASEURL . "/images/storekeeperCard.png" ?>" alt="">
                                     <p class="val"><?php echo $row2['count(*)'] ?></p>
                                 </div>
-                            </a>
                         </div>
                     </div>
                 </div>

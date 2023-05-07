@@ -23,22 +23,28 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
+
+        @media only screen and (max-width: 1430px) {
+            body {
+                background-color: #f9f8ff;
+            }
+        }
         .total .btn1{
-        font-weight: 0;
-        font-size: 16px;
-        color: #fff;
-        background-color:#0066cc;
-        padding: 10px 30px;
-        border: 2px solid #0066cc;
-        box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-        border-radius: 50px;
-        transition : 1000ms;
-        transform: translateY(0);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-        float: left;
+            font-weight: 0;
+            font-size: 16px;
+            color: #fff;
+            background-color:#0066cc;
+            padding: 10px 30px;
+            border: 2px solid #0066cc;
+            box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+            border-radius: 50px;
+            transition : 1000ms;
+            transform: translateY(0);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            cursor: pointer;
+            float: left;
         }
 
         .total .btn1:hover{
@@ -66,6 +72,34 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         .total .card-image img{
             width:300px;
             height: 200px;
+        }
+
+        .mcontent{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            box-sizing: unset;
+            width: 1430px;
+            margin: 20px 20px 50px 50px;
+            position: relative;
+        }
+
+        .pcontent {
+            padding: 10px 10px;
+            /* margin-top: 18px; */
+            display: flex;
+            /* margin-left: 50px; */
+            float: left;
+            height: 620px;
+            width: 18%;
+            flex: 1;
+            background-color: #fff;
+            box-sizing: border-box;
+            position: relative;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-content: center;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -109,13 +143,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     $result_pid = mysqli_query($con, $pid_query);
                     $pid = mysqli_fetch_assoc($result_pid)['patientID'];
 
-                    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid;";
-                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid;";
-                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid;";
+                    $query = "select p.date,p.paid_status,p.quantity,p.item_flag,s.service_name,p.quantity*s.cost from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.item_flag = 's';";
+                    $query1 = "select p.date,p.paid_status,p.quantity,p.item_flag,t.test_name,p.quantity*t.cost from purchases p inner join test t on p.item = t.testID where p.patientID = $pid and p.item_flag = 't';";
+                    $query2 = "select p.date,p.paid_status,p.quantity,p.item_flag,i.item_name,p.quantity*i.unit_price from purchases p inner join item i on p.item = i.itemID where p.patientID = $pid and p.item_flag = 'd';";
 
-                    $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid';";
-                    $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid';"; //test
-                    $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid';"; //drug
+                    $qu1 = "select sum(p.quantity*s.cost) from purchases p inner join service s on p.item = s.serviceID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 's';";
+                    $qu2 = "select sum(p.quantity*t.cost) from purchases p inner join test t on  p.item = t.testID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 't';"; //test
+                    $qu3 = "select sum(p.quantity*i.unit_price) from purchases p inner join item i on  p.item = i.itemID where p.patientID = $pid and p.paid_status = 'not paid' and p.item_flag = 'd';"; //drug
 
                     $res1 = mysqli_query($con,$qu1);
                     $res2 = mysqli_query($con,$qu2);
@@ -153,7 +187,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     }; ?>
                                 </div>
                                 
-                                <div class="cell" data-title="Status">
+                                <div class="cell" style="width:250px;" data-title="Status">
                                     <?php echo $rows['service_name']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">
@@ -201,7 +235,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     }; ?>
                                 </div>
                                 
-                                <div class="cell" data-title="Status">
+                                <div class="cell" style="width:250px;" data-title="Status">
                                     <?php echo $rows['test_name']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">
@@ -249,7 +283,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     }; ?>
                                 </div>
                                 
-                                <div class="cell" data-title="Status">
+                                <div class="cell" style="width:250px;" data-title="Status">
                                     <?php echo $rows['item_name']; ?>
                                 </div>
                                 <div class="cell" data-title="Total Amount">
@@ -321,7 +355,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     
     <script type="text/javascript">
         $(function(){
-            $('#openform').click(function(){
+            $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
                 $('#login-modal').fadeIn().css("display","flex");
             });
             $('.cancel-modal').click(function(){

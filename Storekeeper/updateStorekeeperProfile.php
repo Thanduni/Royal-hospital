@@ -73,7 +73,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()" method="post" enctype="multipart/form-data">
                         <?php
                         $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
                         $row = mysqli_fetch_array($result);
@@ -82,10 +82,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
                             <tr>
                                 <td><label for="Name">Name: </label></td>
                                 <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
@@ -133,7 +129,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
                 <div class="editForm">
                     <h2>Change password</h2>
 
-                    <form action="updateProfile.php" onsubmit="validatePasswordForm()" method="post">
+                    <form action="updateProfile.php" onsubmit="return validatePasswordForm()" method="post">
 
                         <table>
                             <tr>

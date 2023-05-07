@@ -65,7 +65,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()" method="post" enctype="multipart/form-data">
                         <?php
                         $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
                         $row = mysqli_fetch_array($result);
@@ -74,10 +74,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                             <tr>
                                 <td><label for="Name">Name: </label></td>
                                 <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
@@ -90,7 +86,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                             </tr>
                             <tr>
                                 <td><label for="dob">Date of birth: </label></td>
-                                <td colspan="2"><input type="date" name="dob" max="<?php echo date("Y-m-d") ?>" required></td>
+                                <td colspan="2"><input type="date" name="dob" max="<?php echo date("2005-m-d")?>" required></td>
                                 <script>document.getElementsByName('dob')[0].value="<?php echo $row['DOB'] ?>";</script>
                             </tr>
                             <tr>
@@ -117,7 +113,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                                 </td>
                             </tr>
                         </table>
-                        <button name="updateNurse" type="submit">Save changes</button>
+                        <button name="updateNurse" class="custom-btn" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -125,7 +121,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 <div class="editForm">
                     <h2>Change password</h2>
 
-                    <form action="updateProfile.php" onsubmit="validatePasswordForm()" method="post">
+                    <form action="updateProfile.php" onsubmit="return validatePasswordForm()" method="post">
 
                         <table>
                             <tr>
@@ -141,7 +137,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                                 <td colspan="2"><input type="password" name="confirmPassword" required><div class="alert password"></div></td>
                             </tr>
                         </table>
-                        <button name="changePassword" type="submit">Save changes</button>
+                        <button name="changePassword" class="custom-btn" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>

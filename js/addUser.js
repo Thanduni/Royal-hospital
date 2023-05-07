@@ -24,6 +24,7 @@ function displayPatientAddForm(userRole = []) {
 
     document.getElementById("titleOperation").innerHTML = "Add Patient";
 
+
     let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");
     form.scrollIntoView();
@@ -50,6 +51,8 @@ function displayUserAddForm(userRole = []) {
 
     document.getElementById("titleOperation").innerHTML = "Add User";
 
+
+    $('#userForm').fadeIn().css("display","flex");
     // let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");
     // form.scrollIntoView();
@@ -67,6 +70,8 @@ function displayDoctorAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Doctor";
 
+
+    $('#userForm').fadeIn().css("display","flex");
     // let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");
     // form.scrollIntoView();
@@ -84,6 +89,8 @@ function displayNurseAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Nurse";
 
+
+    $('#userForm').fadeIn().css("display","flex");
     // let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");
     // form.scrollIntoView();
@@ -101,6 +108,8 @@ function displayReceptionistAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Receptionist";
 
+
+    $('#userForm').fadeIn().css("display","flex");
     // let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");
     // form.scrollIntoView();
@@ -118,6 +127,8 @@ function displayStorekeeperAddForm() {
 
     document.getElementById("titleOperation").innerHTML = "Add Storekeeper";
 
+
+    $('#userForm').fadeIn().css("display","flex");
     // let userForm = document.getElementById('userForm');
     // userForm.classList.add("active");
     // form.scrollIntoView();

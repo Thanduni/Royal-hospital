@@ -1,10 +1,14 @@
 <?php
 // connect to the database
 require_once("../conf/config.php");
+date_default_timezone_set('Asia/Colombo');
 
 // get the selected doctor
 $doctorID= $_POST['doctorID'];
 $date = $_POST['date'];
+//$doctorID= '22';
+//$date = '2023-05-06';
+
 $dayOfWeek = date('l', strtotime($date));
 
 // query the database for the departments for the selected doctor
@@ -16,6 +20,8 @@ $docSchedule = array();
 while ($row = $result->fetch_assoc()) {
     $start_time = $row['start_time'];
     $end_time = $row['end_time'];
+//    $start_time = '12:00:00';
+//    $end_time = '15:00:00';
 
     $start = new DateTime($start_time);
     $end = new DateTime($end_time);
@@ -23,9 +29,25 @@ while ($row = $result->fetch_assoc()) {
     $interval = new DateInterval('PT15M');
 
     $current = clone $start;
-    while ($current < $end) {
-        $docSchedule[] = $current->format('h:i A');
-        $current->add($interval);
+
+    $currentDateTime = new DateTime();
+    $currentTime = strtotime($currentDateTime ->format('H:i:s'));
+    $currentDate = $currentDateTime -> format('Y-m-d');
+
+//    echo json_encode(array('status' => strcmp($date, $currentDate)));
+
+    if(strcmp($date, $currentDate) == 0){
+        while ($current < $end) {
+            if( strtotime($current->format('H:i:s')) > $currentTime){
+                $docSchedule[] = $current->format('h:i A');
+            }
+            $current->add($interval);
+        }
+    } else {
+        while ($current < $end) {
+            $docSchedule[] = $current->format('h:i A');
+            $current->add($interval);
+        }
     }
 }
 

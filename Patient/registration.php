@@ -1,10 +1,13 @@
 <?php
 session_start();
-
+require "../phpmailer/src/Exception.php";
+require "../phpmailer/src/PHPMailer.php";
+require "../phpmailer/src/SMTP.php";
 require_once("../conf/config.php");
 
 //static $patientCount = 0;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST["nic"])){
     $name = $_POST['name'];
@@ -30,38 +33,43 @@ if(isset($_POST["nic"])){
     }
     $ill .= $oillness.".";
 
-    $select = "SELECT * FROM `user` where email='.$email.' and nic='.$nic.' and user_role ='Patient'";
+    $select1 = "SELECT * FROM `user` where name='".$name."' and nic='".$nic."' and user_role ='Patient'";
+    $select2 = "SELECT * FROM `user` where email='".$email."' and user_role ='Patient'";
 
-    $result = $con->query($select);
+    $result1 = $con->query($select1);
+    $result2 = $con->query($select2);
     // echo "$result";
-    if (!$result)
-        die("Fail");
-    $rows = $result->num_rows;
 
+    $rows1 = $result1->num_rows;
+    $rows2 = $result2->num_rows;
 
-
-    // die($rows);
-    // $res = mysqli_query($con, $select);
-
-
-
-    if($rows > 0){
-        $error[] = 'user already exist!';
+    if($rows1 > 0){
+        $error = 'User already exists. Try another name or NIC.';
+        header("location:".BASEURL."/Patient/registration.php?error=".$error);
+        exit();
+    } else if($rows2 > 0){
+        $error = 'Try another Email.';
+        header("location:".BASEURL."/Patient/registration.php?error=".$error);
+        exit();
     }
     else{
         if($password != $cpassword)
         {
-            $error[] = 'passoword not matched';
+            $error = 'Passwords are not matched';
+            header("location:".BASEURL."/Patient/registration.php?error=".$error);
+            exit();
         }
         else{
 
-            $query1 = "INSERT INTO `user`(`nic`, `name`, `address`, `email`, `contact_num`, `gender`, `password`, `user_role`, `profile_image`, `DOB`) VALUES 
-            ('$nic','$name','$address','$email','$phone','$gender','$hash','Patient','','$dob')";
-            
+            $otp = rand(100000, 999999);
+
+
+            $query1 = "INSERT INTO `user`(`nic`, `name`, `address`, `email`, `contact_num`, `gender`, `password`, `user_role`, `profile_image`, `DOB`, `verify`, `otp`) VALUES 
+            ('$nic','$name','$address','$email','$phone','$gender','$hash','Patient','','$dob', '0', '$otp')";
+            $result1 = mysqli_query($con,$query1);
+
             $query2 = "INSERT INTO `patient`(`nic`, `patient_type`, `illness`, `drug_allergies`, `medical_history_comments`, `currently_using_medicine`, `emergency_contact`) VALUES 
             ('$nic','outpatient','$ill','$allergies','$comments','$cmed','$ecn')";
-           
-            $result1 = mysqli_query($con,$query1);
             $result2 = mysqli_query($con,$query2);
 
             $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
@@ -77,12 +85,34 @@ if(isset($_POST["nic"])){
                 $result = mysqli_query($con, $query);
             }
 
+            $mail = new PHPMailer(true);
 
-            
-            if($query1 & $query2){echo "Query is successful";}
+            $mail -> isSMTP();
+            $mail -> Host = "smtp.gmail.com";
+            $mail -> Port = 25;
+            $mail -> SMTPAuth = true;
+            $mail -> SMTPSecure = 'tls';
 
-            echo '<script>alert("Registration Successful!")</script>';
-            header("location:".BASEURL."/Homepage/login.php");
+            $mail -> Username = 'hospitalroyal56@gmail.com';
+            $mail -> Password = 'usygevftzbeyiqea';
+
+            $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
+            $mail -> addAddress($email);
+
+            $mail -> isHTML(true);
+            $mail -> Subject = "Your verify code";
+            $mail -> Body = "<p>Dear user, </p> <h3>Your verify OTP code is $otp <br></h3>
+                    <br><br>
+                    <p>With regrads,</p>
+                    <b>Royal hospital.</b>";
+
+            if(!$mail -> send()){
+                $error = 'Invalid email try another email address.';
+                header("location:".BASEURL."/Patient/registration.php?error=".$error);
+                exit();
+            }
+            $mail->smtpClose();
+            header("location:".BASEURL."/Homepage/login.php?success=You have registered successfully. Login to verify.");
         }
     }
 } 
@@ -113,43 +143,51 @@ if (!isset($_SESSION['mailaddress'])) {
                 <p style="color: white" class="title">Registration</p>
             </div>
         </div>
+    <?php
+    if (@$_GET['error'] == true) {
+        ?>
+        <div class="alert" style="margin: 20px">
+            <?php
+            echo $_GET["error"];
+            ?>
+        </div>
+        <?php } ?>
         <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm">
             <div class="content">
                 <div class="box" style="padding-bottom: 0px">
                     <label for="">Name</label><br><br>
-                    <input type="text" name="name" id="name" placeholder="eg:- S.W.A.Siriwardana"><div id="nameDiv"></div>
+                    <input type="text" name="name" id="name" placeholder="eg:- S.W.A.Siriwardana"required><div id="nameDiv"></div>
                     <br><br>
 
                     <label>NIC(if you have not NIC please enter your guardian's NIC number)</label><br><br>
-                    <input type="text" name="nic" id="nic" placeholder="eg:- 19XXXXXXXXX/99XXXXXXXV"><div id="nicDiv"></div><br><br>
+                    <input type="text" name="nic" id="nic" placeholder="eg:- 19XXXXXXXXX/99XXXXXXXV"required><div id="nicDiv"></div><br><br>
 
                     <label>Email</label><br><br>
-                    <input type="email" name="email" id="email" placeholder="eg:- kumarsanga84@gmail.com"><div id="emailDiv"></div><br><br>
+                    <input type="email" name="email" id="email" placeholder="eg:- kumarsanga84@gmail.com"required><div id="emailDiv"></div><br><br>
 
                     <label>Password</label><br><br>
-                    <input type="password" name="password" id="password" placeholder="XXXXXXXXXXX"><div id="passwordDiv"></div><br><br>
+                    <input type="password" name="password" id="password" placeholder="XXXXXXXXXXX"required><div id="passwordDiv"></div><br><br>
 
                     <label for="">Confirm Password</label><br><br>
-                    <input type="password" name="cpassword" id="cpassword" placeholder="XXXXXXXXXXX"><div id="cpasswordDiv"></div><br><br>
+                    <input type="password" name="cpassword" id="cpassword" placeholder="XXXXXXXXXXX"required><div id="cpasswordDiv"></div><br><br>
 
                     <label for="">Phone</label><br><br>
-                    <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><div id="phoneDiv"></div><br><br>
+                    <input type="text" name="phone" id="phone" placeholder="eg:- 07XXXXXXXX"><div id="phoneDiv"required></div><br><br>
 
                     <label for="">Date of Birth</label><br><br>
-                    <input type="date"  max="<?php echo date("2005-m-d") ?>" name="dob" id="dob"><br><br>
+                    <input type="date"  max="<?php echo date("2005-m-d") ?>" name="dob" id="dob"required><br><br>
 
                     <label for="">Address</label><br><br>
-                    <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"><br><br>
+                    <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"required><br><br>
 
                     <label for="">Gender</label><br><br>
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender"required>
                         <option value="m">Male</option>
                         <option value="f">Female</option>
                     </select><br><br>
 
                     <label for="">Emergency Contact Number</label><br><br>
-                    <input type="text" name="ecn" id="ecn" placeholder="eg:- 07XXXXXXXX"><br><br>
-
+                    <input type="text" name="ecn" id="ecn" placeholder="eg:- 07XXXXXXXX"required><br><br>
                 </div>
 
                 <div class="box">
@@ -167,7 +205,6 @@ if (!isset($_SESSION['mailaddress'])) {
                             <label><input type="checkbox" name="illness[]" id="illness" value="Dysentery">&numsp;Dysentery</label>
                             <label><input type="checkbox" name="illness[]" id="illness" value="Giardiasis">&numsp;Giardiasis</label>
                             <label><input type="checkbox" name="illness[]" id="illness" value="Blood pressure">&numsp;Blood pressure</label>
-
                         </div>
                         <div class="ill">
                             <label><input type="checkbox" name="illness[]" id="illness" value="Cholesterol">&numsp;Cholesterol</label>
@@ -179,13 +216,12 @@ if (!isset($_SESSION['mailaddress'])) {
                             <label><input type="checkbox" name="illness[]" id="illness" value="Hyperlipidemia">&numsp;Hyperlipidemia</label>
 
                         </div>
-
                     </div>
 
                     <label for="">Other Illness</label><br><br>
                     <textarea name="oillness" id="oillness" cols="30" rows="3" placeholder="If you have any other illness please mention"></textarea><br><br>
                     <label for="">Any Medical Comments</label><br><br>
-                    <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any drug allergies please mention"></textarea><br><br>
+                    <textarea name="comments" id="comments" cols="30" rows="3" placeholder="If you have any comment regarding medical please mention"></textarea><br><br>
 
                     <br><br>
                     <div style="margin: 0 auto">

@@ -2,6 +2,10 @@
 session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
+
+$deleteAppointmentQuery = "DELETE from appointment where `date`<CURRENT_DATE OR (`date`=CURRENT_DATE && `time`<CURRENT_TIME)";
+$deleteAppointmentResult = mysqli_query($con, $deleteAppointmentQuery);
+
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') {
     ?>
 
@@ -55,14 +59,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         <div class="cell">Patient Name</div>
                         <div class="cell">Date</div>
                         <div class="cell">Time</div>
-                        <div class="cell">Venue</div>
                         <div class="cell">Message</div>
                         <div class="cell">Options</div>
                     </div>
 
                     <?php
 
-                    $query = "SELECT `appointmentID`,`date`,`time`,`venue`,`doctorID`,`patientID`,`message`,`status` FROM `appointment` 
+                    $query = "SELECT `appointmentID`,`date`,`time`,`doctorID`,`patientID`,`message`,`status` FROM `appointment` 
                               ORDER BY appointmentID;";
                     $result = mysqli_query($con, $query);
                     while($rows = mysqli_fetch_assoc($result)){
@@ -88,14 +91,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             <div class="cell" data-title="Time">
                                 <?php echo $rows['time']; ?>
                             </div>
-                            <div class="cell" data-title="Venue">
-                                <?php echo $rows['venue']; ?>
-                            </div>
                             <div class="cell" data-title="Message">
                                 <?php echo $rows['message']; ?>
                             </div>
                             <div class="cell" style="" data-title="Options">
-                                <a href="<?php echo BASEURL . '/Patient/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
+                                <a href="<?php echo BASEURL . '/Receptionist/deleteAppointment.php?id=' . $rows['appointmentID'] ?>">
                                     <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                     </button>
                                 </a>
@@ -125,7 +125,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="">Date</label><br>
                             </td>
                             <td colspan="2">
-                                <input type="date" name="date" id="date" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>">
+                                <input type="date" name="date" id="date" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>" required>
                             </td>
                         </tr>
                         <tr>
@@ -133,7 +133,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="">Department</label><br>
                             </td>
                             <td colspan="2">
-                                <select name="department" id="department">
+                                <select name="department" id="department" required>
                                     <option value="">Please A Select Department</option>
                                     <option value="Anesthetics">Anesthetics</option>
                                     <option value="Cardiology">Cardiology</option>
@@ -146,7 +146,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label  for="">Doctor</label><br>
                             </td>
                             <td colspan="2">
-                                <select name="doctor" id="doctor">
+                                <select name="doctor" id="doctor" required>
                                     <option value="">Select a doctor</option>
                                 </select>
                             </td>
@@ -156,7 +156,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label>Patient</label>
                             </td>
                             <td colspan="2">
-                                <select name="patient" id="">
+                                <select name="patient" id="" required>
                                     <?php
                                     $sql="Select * from `patient` inner join user on user.nic = patient.nic";
                                     $result=mysqli_query($con,$sql);
@@ -174,7 +174,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="">Time</label><br>
                             </td>
                             <td colspan="2">
-                                <select name="time" id="time">
+                                <select name="time" id="time" required>
                                     <option value="">Please select a time slot</option>
                                 </select>                            </td>
                         </tr>

@@ -1,6 +1,6 @@
+let form = document.getElementsByTagName("form")[0];
 let nameDiv = document.getElementById("name");
 let addressDiv = document.getElementById("address");
-let emailDiv = document.getElementById("email");
 let contactNumDiv = document.getElementById("contactNum");
 let pass1 = document.getElementsByClassName("password")[0];
 let pass2 = document.getElementsByClassName("password")[1];
@@ -62,27 +62,6 @@ nameDiv.previousSibling.addEventListener("focus", function () {
     // alert("Hai");
 }, false)
 
-function validateEmail() {
-    emailDiv.innerHTML = "";
-    var email = emailDiv.previousSibling.value;
-    if (email == "" || !regEmail.test(email)) {
-        emailDiv.classList.remove("hint");
-        emailDiv.classList.add("alert");
-        emailDiv.innerHTML = "<ul class='inputMsg'>\n" +
-            "    <li>Please enter a valid email.</li>\n" +
-            "</ul>"
-    }
-}
-
-emailDiv.previousSibling.addEventListener("blur", validateEmail, false)
-
-emailDiv.previousSibling.addEventListener("focus", function () {
-    emailDiv.classList.remove("alert");
-    emailDiv.classList.add("hint");
-    emailDiv.innerHTML = "<ul class='inputMsg'>\n" +
-        "    <li>Enter a valid email address.</li>\n" +
-        "</ul>";
-}, false)
 
 function validateContactNum() {
     contactNumDiv.innerHTML = "";
@@ -189,31 +168,75 @@ pass3.previousSibling.addEventListener("focus", function () {
 }, false)
 
 function validatePasswordForm() {
-    if (regPassword.test(pass1) &&
-        regPassword.test(pass2) &&
-        regPassword.test(pass3)) {
+    let password1 = pass1.previousSibling.value;
+    let password2 = pass2.previousSibling.value;
+    let password3 = pass3.previousSibling.value;
+
+    if (regPassword.test(password1) &&
+        regPassword.test(password2) &&
+        regPassword.test(password3)) {
         return true;}
     else{
-        if(!regPassword.test(pass1)){
+        if(!regPassword.test(password1)){
             pass1.classList.remove("hint");
             pass1.classList.add("alert");
             pass1.innerHTML = "<ul class='inputMsg'>\n" +
                 "    <li>Please enter a valid password.</li>\n" +
                 "</ul>"
         }
-        if(!regPassword.test(pass2)){
-            pass1.classList.remove("hint");
-            pass1.classList.add("alert");
-            pass1.innerHTML = "<ul class='inputMsg'>\n" +
+        if(!regPassword.test(password2)){
+            pass2.classList.remove("hint");
+            pass2.classList.add("alert");
+            pass2.innerHTML = "<ul class='inputMsg'>\n" +
                 "    <li>Please enter a valid password.</li>\n" +
                 "</ul>"
         }
-        if(!regPassword.test(pass3)){
-            pass1.classList.remove("hint");
-            pass1.classList.add("alert");
-            pass1.innerHTML = "<ul class='inputMsg'>\n" +
+        if(!regPassword.test(password3)){
+            pass3.classList.remove("hint");
+            pass3.classList.add("alert");
+            pass3.innerHTML = "<ul class='inputMsg'>\n" +
                 "    <li>Please enter a valid password.</li>\n" +
                 "</ul>"
         }
+    }
+}
+
+function validateUpdateForm() {
+    let address = addressDiv.previousSibling.value;
+    let contactNum = contactNumDiv.previousSibling.value;
+    let name = nameDiv.previousSibling.value;
+
+    if (regContactNum.test(contactNum) &&
+        regAddress.test(address) &&
+        regName.test(name)) {
+        return true;}
+    else{
+        if(!regContactNum.test(contactNum)){
+            contactNumDiv.classList.remove("hint");
+            contactNumDiv.classList.add("alert");
+            contactNumDiv.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid contact number.</li>\n" +
+                "</ul>"
+        }
+
+        if(!regName.test(name)){
+            nameDiv.classList.remove("hint");
+            nameDiv.classList.add("alert");
+            nameDiv.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid name.</li>\n" +
+                "</ul>"
+        }
+
+        if(!regAddress.test(address)){
+            addressDiv.classList.remove("hint");
+            addressDiv.classList.add("alert");
+            addressDiv.innerHTML = "<ul class='inputMsg'>\n" +
+                "    <li>Please enter a valid name.</li>\n" +
+                "</ul>"
+        }
+
+
+        form.scrollIntoView();
+        return false;
     }
 }

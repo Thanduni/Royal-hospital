@@ -73,19 +73,22 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()"  method="post" enctype="multipart/form-data">
                         <?php
+                        $nic =$_SESSION['nic'];
+                        $q1 = "select * from patient where nic = $nic";
+                        $res = mysqli_query($con,$q1);
+                        $row1 = mysqli_fetch_array($res);
+                        $pid = $row1['patientID'];
+
                         $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
+
                         $row = mysqli_fetch_array($result);
                         ?>
                         <table>
                             <tr>
                                 <td><label for="Name">Name: </label></td>
                                 <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
@@ -117,6 +120,26 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     else
                                         document.getElementById('F_gender').checked = true;
                                 </script>
+                            </tr>
+                            <tr>
+                                <td><label for="height">Height: </label></td>
+                                <td colspan="2"><input type="text" name="height" value="<?php echo $row1['height'] ?>" required><div class="alert" id="height"></div></td>
+                            </tr>
+                            <tr>
+                                <td><label for="weight">Weight: </label></td>
+                                <td colspan="2"><input type="text" name="weight" value="<?php echo $row1['weight'] ?>" required><div class="alert" id="weight"></div></td>
+                            </tr>
+                            <tr>
+                                <td><label for="blood">Blood: </label></td>
+                                <td colspan="2"><input type="text" name="blood" value="<?php echo $row1['blood'] ?>" required><div class="alert" id="blood"></div></td>
+                            </tr>
+                            <tr>
+                                <td><label for="illness">Illness: </label></td>
+                                <td colspan="2"><input type="text" name="illness" value="<?php echo $row1['illness'] ?>" required><div class="alert" id="illness"></div></td>
+                            </tr>
+                            <tr>
+                                <td><label for="Drug_al">Drug Allergies: </label></td>
+                                <td colspan="2"><input type="text" name="Drug_al" value="<?php echo $row1['drug_allergies'] ?>" required><div class="alert" id="Drug_al"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="profilePic">Profile Image: </label></td>
@@ -157,7 +180,23 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     </div>
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
-    <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>></script>
+    <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>>
+    //<script src=<?php //echo BASEURL . '/js/validateFormReceptionist.js' ?>
+
+    
+    $(function(){
+            $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('.cancel-modal').click(function(){
+                $('#login-modal').fadeOut();
+            });
+        });
+        
+    </script>
 
     <div id="counter">0</div>
 

@@ -1,5 +1,9 @@
-alert("Hai");
 $(document).ready(function() {
+    $('#date').change(function() {
+        $('#doctor').prop('selectedIndex', 0);
+        $('#department').prop('selectedIndex', 0);
+    });
+
     $('#department').change(function() {
         let depName = $(this).val();
         if (depName !== '') {
@@ -24,18 +28,17 @@ $(document).ready(function() {
             $('#department').html('<option value="">Select a department</option>');
         }
     });
-});
 
-$(document).ready(function() {
     $('#doctor').change(function() {
         let doctorID = $(this).val();
         let date = $('#date').val();
+        // console.log(date);
         if (doctorID !== '') {
             $.ajax({
                 url: '../Patient/getSchedule.php',
                 type: 'POST',
                 data: {doctorID: doctorID,
-                       date: date},
+                    date: date},
                 dataType: 'json',
                 success: function(response) {
 // update the department select element with the departments returned by the PHP file
@@ -47,6 +50,7 @@ $(document).ready(function() {
                         $('#time').append('<option value="' + response[data] + '">' + response[data] + '</option>');
                         // console.log(response[data])
                     });
+                    // console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.log('Error: ' + xhr.responseText);
@@ -57,4 +61,9 @@ $(document).ready(function() {
             $('#time').html('<option value="">Select a time slot</option>');
         }
     });
+
+
 });
+
+
+

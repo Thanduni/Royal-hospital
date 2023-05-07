@@ -70,7 +70,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()" method="post" enctype="multipart/form-data">
                         <?php
                         $result = mysqli_query($con, "select * from user where email = '" . $_SESSION['mailaddress'] . "'");
                         $row = mysqli_fetch_array($result);
@@ -81,17 +81,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
                             </tr>
                             <tr>
-                                <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
-                            </tr>
-                            <tr>
                                 <td><label for="address">Address: </label></td>
                                 <td colspan="2"><textarea name="address" cols="30"
                                                           rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="address"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="contactnum">Contact number: </label></td>
-                                <td colspan="2"><input type="text" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
+                                <td colspan="2"><input type="number" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="dob">Date of birth: </label></td>
@@ -130,7 +126,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <div class="editForm">
                     <h2>Change password</h2>
 
-                    <form action="updateProfile.php" onsubmit="validatePasswordForm()" method="post">
+                    <form action="updateProfile.php" onsubmit="return validatePasswordForm()" method="post">
 
                         <table>
                             <tr>

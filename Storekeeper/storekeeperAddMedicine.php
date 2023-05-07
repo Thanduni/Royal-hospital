@@ -45,8 +45,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </p>
 
         <div class="filter">
-            <input type="text" id="myInputName" onkeyup="filterByNameUsers()" placeholder="Search for names.." title="Type in a name">
-            <input type="text" id="myInputRole" onkeyup="filterByRoleUsers()" placeholder="Search for user role.." title="Type in a name">
+            <input type="text" id="myInputName" onkeyup="filterByNameMedicine()" placeholder="Search for names.." title="Type in a name">
         </div>
 
         <?php
@@ -73,7 +72,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         <div class="cell">Item name</div>
                         <div class="cell">Company Name</div>
                         <div class="cell">Unit price</div>
-                        <div class="cell">Unit type</div>
+                        <div class="cell">Unit Quantity</div>
                         <div class="cell">Options</div>
 
                     </div>
@@ -87,7 +86,6 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
                                 <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[4] ?></li>
                             </ul>
-                            <!--                        <div id="UDfunc">-->
                             <div class="row">
                                 <div class="cell" data-title="Item name">
                                     <?php echo $row[1]; ?>
@@ -95,10 +93,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                                 <div class="cell" data-title="Company Name">
                                     <?php echo $row[2]; ?>
                                 </div>
-                                <div class="cell" data-title="Unit price">
+                                <div class="cell" data-title="Unit Price">
                                     <?php echo $row[3]; ?>
                                 </div>
-                                <div class="cell" data-title="Unit type">
+                                <div class="cell" data-title="Unit Quantity">
                                     <?php echo $row[4]; ?>
                                 </div>
                                 <div class="cell" style="100px" data-title="Options">
@@ -129,7 +127,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     </div>
     <div id="userForm">
         <div id="form">
-            <form method="post" action="<?php echo BASEURL . '/Storekeeper/addMedicine.php' ?>"  enctype="multipart/form-data" id="addForm" name="userForm">
+            <form method="post" action="<?php echo BASEURL . '/Storekeeper/addMedicine.php' ?>" onsubmit="return validateForm()"  enctype="multipart/form-data" id="addForm" name="userForm">
                 <div class="banner">
                     <h1>Medicine</h1>
                 </div>
@@ -144,7 +142,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             <label for="medicineName">Medicine name:</label>
                         </td>
                         <td colspan="2">
-                            <input type="text" name="medicineName" id="IN_medicineName"><div class="alert" id="nic"></div>
+                            <input type="text" name="medicineName" id="IN_medicineName" required><div class="alert" id="medicineName"></div>
                         </td>
                     </tr>
                     <tr id="nicRow">
@@ -152,22 +150,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             <label>Company Name</label>
                         </td>
                         <td colspan="2">
-                            <input name="companyName" type="text" id="IN_companyName">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="Unit Type">Unit Type:</label>
-                        </td>
-                        <td colspan="2">
-                            <select name="unitType" id="IN_unitType">
-                                <option value="">Select type</option>
-                                <option value="cards">cards</option>
-                                <option value="bottles">bottles</option>
-                                <option value="pills">pills</option>
-                                <option value="injections">injections</option>
-                                <option value="tablets">tablets</option>
-                            </select>
+                            <input name="companyName" type="text" id="IN_companyName" required><div class="alert" id="company"></div>
                         </td>
                     </tr>
                     <tr>
@@ -175,7 +158,16 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                             <label for="Unit Cost">Unit Cost:</label>
                         </td>
                         <td colspan="2">
-                            <input name="unitCost" type="text" id="IN_unitCost" placeholder="Enter Unit Cost here">                        </td>
+                            <input name="unitCost" min="0.01" step="0.01" type="number" id="IN_unitCost" placeholder="Enter Unit Cost here" required><div class="alert" id="cost"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="Unit Quantity">Unit Quantity:</label>
+                        </td>
+                        <td colspan="2">
+                            <input name="unitQuantity" min="1" type="number" id="IN_unitQuantity" placeholder="Enter Unit Quantity here" required><div class="alert" id="quantity"></div>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -192,7 +184,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </div>
         <!-- content start -->
 
-<script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
+<script src=<?php echo BASEURL . '/js/validateStorekeeper.js' ?>></script>
 <script src=<?php echo BASEURL . '/js/updateMedicine.js' ?>></script>
 <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
 <script type="text/javascript">

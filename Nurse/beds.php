@@ -71,7 +71,7 @@ while(true){
 
             <div class="main-container">
                 <h3>Room List</h3>
-                <button class="button" id="add-room">Add Room</button>
+                <button class="button custom-btn" id="add-room">Add Room</button>
                 <div class="room-cards">                    
                     <?php foreach ($rows as $row):?>
                         <?php $room_no = $row['room_no'];
@@ -121,8 +121,8 @@ while(true){
                             <form method="post">
                                 <h1>Dp you want to add a room?</h1>
                                 <div class="button-container">
-                                    <button type="submit" name ="addRoom">Yes</button>
-                                    <button class="close-button" name ="close">No</button>
+                                    <button type="submit" name ="addRoom" class="custom-btn">Yes</button>
+                                    <button class="close-button custom-btn"  name ="close">No</button>
                                 </div>
                             </form>
                         </div>

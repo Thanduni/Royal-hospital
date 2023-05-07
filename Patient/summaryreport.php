@@ -23,7 +23,45 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         body{
             background-color: #f9f8ff;
         }
-        
+
+        .s-content table{
+            float: left;
+            background-color: #ffffff;
+            padding:30px 30px;
+            margin:50px 50px;
+            width:auto;
+            border-radius: 10px;
+            /* border-color: black; */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .s-content table tr{
+            
+            background-color: #ffffff;
+            height: 65px;
+            font-size: 20px;
+            font-weight: 500;
+            width: auto;
+            border-radius: 10px;
+            border-color: black;
+        }
+        .s-content table tr td{
+            float: left;
+            background-color: #ffffff;
+            color: black;
+            /* padding:30px 30px; */
+            /* margin:30px 30px; */
+            width:auto;
+            border-radius: 10px;
+            border-color: none;
+            
+        }
+
+        .s-content table tr label{
+            color:var(--primary-color);
+            font-size: 22px;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -42,66 +80,63 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Summary
         </div>
-        <div class="m-content">
-            <div class="p-content">
-            <div class="wrapper_p">
-                <div class="table_header"><h3 style="color: var(--primary-color);">Patient's Summary</h3></div>
-                <div class="table">
-                    <div class="row headerT">
-                        <div class="cell" ">Nurse Name</div>
-                        <div class="cell">Date</div>
-                        <div class="cell">Time</div>
-                        <div class="cell">Pulse</div>
-                        <div class="cell" style="width:180px;">Temperature</div>
-                        <div class="cell" style="width:180px;">Blood Preasure</div>
-                        <div class="cell" style="width:180px;">O2 Saturation</div>
-                    </div>
-                    <?php 
-                        $nic = $_SESSION['nic'];
-                        $pid_query = "SELECT patientID FROM patient WHERE nic = '$nic'";
-                        $result_pid = mysqli_query($con, $pid_query);
-                        $pid = mysqli_fetch_assoc($result_pid)['patientID'];
+        <?php 
+            $nic = $_SESSION['nic'];
+            $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
+            $pid = mysqli_fetch_assoc($res1)['patientID'];
 
-                        $query ="select * from daily_report where patientID = $pid";
-                        $res = mysqli_query($con,$query);
+            $res2 = mysqli_query($con,"select doctorID from prescription where patientID = $pid");
+            $d_arr = array();
+            
 
-                        while($rows = mysqli_fetch_assoc($res)){ ?>
-                        <div class="row">
-                            <div class="cell" data-title="name">
-                                    <?php echo $rows['nurseID']; ?>
-                            </div>
-                            <div class="cell" data-title="Date">
-                                    <?php echo $rows['date']; ?>
-                            </div>
-                            <div class="cell" data-title="time">
-                                    <?php echo $rows['time']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['pulse']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['temperature']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['blood_preasure']; ?>
-                            </div>
-                            <div class="cell" data-title="text">
-                                    <?php echo $rows['o2_saturation']; ?>
-                            </div>
+            while($d_push = mysqli_fetch_array($res2))
+            {
+                array_push($d_arr,$d_push['doctorID']);
+            }
+            
+            // for($i = 0; $i < count($d_arr); $i++)
+            // {
+            //     echo $d_arr[$i]."<br>";
+            // } 
+            $docnic = array();
+            
+            
+            for($i = 0; $i < count($d_arr); $i++)
+            {
+                $res3 = mysqli_query($con,"select nic from doctor where doctorID=$d_arr[$i]");
+                $docnic[$i] = mysqli_fetch_assoc($res3)['nic'];
 
-  
-                        </div>
-                    
-                        <?php
-                        
-                        }
-                    ?>
-            </div>
-            </div>
-            </div>
-        </div>
+                $query = "select i.admit_date,i.admit_duration,u.name,p.investigation,p.Impression from inpatient i inner join patient t on i.patientID=t.patientID
+                 inner join prescription p on t.patientID=p.patientID inner join doctor d on d.doctorID=p.doctorID inner join user u on u.nic=d.nic where i.patientID=$pid and i.doctorID=$d_arr[$i] and u.nic=$docnic[$i]";
 
-        
+
+                 $result = mysqli_query($con,$query);
+
+                 while($rows = mysqli_fetch_assoc($result)){
+             ?>
+                 <div class="s-content">
+                     <table>
+                         <tr>
+                             <td><label>Date:</label></td>
+                             <td><p><?php echo $rows['admit_date'].$rows['admit_duration']; ?></p></td>
+                         </tr>
+                         <tr>
+                             <td><label>Doctor Name:</label></td>
+                             <td><p><?php $rows['name']; ?></p></td>
+                         </tr>
+                         <tr>
+                             <td><label for="">Impression:</label></td>
+                             <td><p><?php echo $rows['Impression']; ?></p></td>
+                         </tr>
+                         <tr>
+                             <td><label for="">Investigation:</label></td>
+                             <td><p><?php echo $rows['investigation']; ?></p></td>
+                         </tr>
+                     </table>
+            <?php
+                }
+            }
+            ?>
         
     </div>
 </div>       
@@ -135,8 +170,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     </div>
     
     <script type="text/javascript">
+        // $(function(){
+        //     $('#openform').click(function(){
+        //         $('#login-modal').fadeIn().css("display","flex");
+        //     });
+        //     $('.cancel-modal').click(function(){
+        //         $('#login-modal').fadeOut();
+        //     });
+        // });
+
         $(function(){
-            $('#openform').click(function(){
+            $('#open').click(function(){
+                $('#login-modal').fadeIn().css("display","flex");
+            });
+            $('#open-').click(function(){
                 $('#login-modal').fadeIn().css("display","flex");
             });
             $('.cancel-modal').click(function(){
