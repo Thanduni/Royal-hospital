@@ -3,7 +3,7 @@ let medicineNames=['Acetaminophen','Adderall','Amitriptyline','Amlodipine','Amox
 'Brilinta','Bunavail','Buprenorphine','Cephalexin','Ciprofloxacin','Citalopram','Clindamycin','Clonazepam','Cyclobenzaprine','Cymbalta',
 'Doxycycline','Dupixent','Entresto','Entyvio','Farxiga','Fentanyl Patch','Gabapentin','Gilenya','Humira','Hydrochlorothiazide','Hydroxychloroquine','Ibuprofen','Imbruvica','Invokana','Januvia','Jardiance','Kevzara','Lexapro','Lisinopril',
 'Lofexidine','Loratadine','Lyrica','Melatonin','Meloxicam','Metformin','Methadone','Methotrexate','Metoprolol','Naloxone','Naltrexone','Naproxen',
-'Narcan','Nurtec','Omeprazole','Onpattro','Otezla','Ozempic','Parasitamol','Pantoprazole','Plan B','Prednisone','Probuphine',
+'Narcan','Nurtec','Omeprazole','Onpattro','Otezla','Ozempic','Panadol','Parasitamol','Pantoprazole','Plan B','Prednisone','Probuphine',
 'Rybelsus','secukinumab','Sublocade','Tramadol','Trazodone','Viagra','Wegovy','Wellbutrin','Xanax','Zubsolv'];
 
 // async function getMedicineData(){
