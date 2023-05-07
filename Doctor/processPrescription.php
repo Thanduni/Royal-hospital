@@ -20,7 +20,7 @@ if(isset($_GET['patientid'])){
             echo $frequency."<br>";
              
             //check if drug is available in hospital
-            $get_item = "SELECT itemID,unit_price,unitType from item WHERE item_name =?";
+            $get_item = "SELECT itemID,unit_price from item WHERE item_name =?";
             $get_item_query = mysqli_prepare($con, $get_item);
             mysqli_stmt_bind_param($get_item_query, "s", $value);
             mysqli_stmt_execute($get_item_query);
