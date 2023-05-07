@@ -1,5 +1,6 @@
 <?php
 require_once("../conf/config.php");
+require_once "prescription.php";
 
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
@@ -74,6 +75,7 @@ if(isset($_GET['patientid'])){
 
                 if($required_quantity > 0){
                     // drug is out of stock
+                    outOFStock();
                     echo "Sorry, " . $value . " is out of stock.";
                 }
                 else {
@@ -89,6 +91,7 @@ if(isset($_GET['patientid'])){
                 }
             }
             else{
+                outOFStock();
                 echo $value. " is not available";
             }
         }
