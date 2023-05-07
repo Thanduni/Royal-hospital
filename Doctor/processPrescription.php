@@ -1,6 +1,6 @@
 <?php
 require_once("../conf/config.php");
-require_once "prescription.php";
+// include "prescription.php";
 
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
@@ -75,7 +75,8 @@ if(isset($_GET['patientid'])){
 
                 if($required_quantity > 0){
                     // drug is out of stock
-                    outOFStock();
+                    // unavailable();
+                    header("Location: prescription.php?errorCode=RH0001&patientid=".$patientID);
                     echo "Sorry, " . $value . " is out of stock.";
                 }
                 else {
@@ -86,17 +87,20 @@ if(isset($_GET['patientid'])){
                     if($stmt){
                         $insert_purches = "INSERT into purchases(patientID,date,quantity,item,item_flag) VALUES('$patientID',CURDATE(),'$make_bill_quantity','$itemID','d');";
                         $insert_purches_query = mysqli_query($con,$insert_purches);
-                        if($insert_purches_query){echo "Prescription Added, entered to purchases <br>";}
-                    }
+                        if($insert_purches_query){
+                            echo "Prescription Added, entered to purchases <br>";
+                            header("Location: prescription.php?patientid=".$patientID);
+                        }
+                    } 
                 }
             }
             else{
-                outOFStock();
+                // outOFStock();
+                header("Location: prescription.php?errorCode=RH0001&patientid=".$patientID);
                 echo $value. " is not available";
             }
         }
     }
-    header("Location: prescription.php?patientid=".$patientID);
 }
                
 

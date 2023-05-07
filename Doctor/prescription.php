@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../conf/config.php");
+
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     $nic = $_SESSION['nic'];
     $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
@@ -10,6 +11,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
 ?>
 <?php
+
 function displayErrorMessage() {
     echo '<script>
       document.addEventListener("DOMContentLoaded", function() {          
@@ -27,7 +29,9 @@ function outOFStock() {
         document.addEventListener("DOMContentLoaded", function() {
             const errorMessage = document.getElementById("success-message");
             if (errorMessage) {
-                errorMessage.innerHTML = \'<p>Medicine out of Stock</p><input type="button" class="close-button custom-btn" value="Close" onclick="closeErrorMessage()">\';
+
+                errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
+
                 errorMessage.style.display = "flex";
             } else {
                 console.error("Error: Could not find error message element.");
@@ -41,26 +45,12 @@ function outOFStock() {
         }
     </script>';
 }
-function infufficient() {
-    echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-                errorMessage.innerHTML = \'<p>Insufficient quantity</p><input type="button" class="close-button custom-btn" value="Close" onclick="closeErrorMessage()">\';
-                errorMessage.style.display = "flex";
-            } else {
-                console.error("Error: Could not find error message element.");
-            }
-        });
-        function closeErrorMessage() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-                errorMessage.style.display = "none";
-            }
-        }
-    </script>';
+
+
+if(isset($_GET['errorCode'])){
+    outOFStock();
+
 }
-  
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 
@@ -73,7 +63,16 @@ if(isset($_GET['patientid'])){
     if (isset($row[0])){
         $prescriptionID = $row[0];
     }else{
-        displayErrorMessage();
+        //get out patient prescriptionID
+        $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
+        $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
+        $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
+        if(isset($presID_row[0])){
+            $prescriptionID = $presID_row[0];
+        }
+        else{
+            displayErrorMessage();
+        }
     }
     
 }
@@ -128,26 +127,28 @@ if(isset($_GET['patientid'])){
                                 <table id="prescription-table">
                                     <tr>
                                         <th>Drug Name</th>
-                                        <th>Dosage (per day)</th>
+                                        <th>Dosage</th>
                                         <th>Frequency (per day)</th>
                                         <th>No of days</th>
                                     </tr>
                                     <div class="show-medicine">
                                     <tr>
-                                        <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" >
+                                        <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
                                         </div>
                                         </td>
+
                                         <td><input type="number" name="dosage[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
                                         <td><input type="number" name="days[]"></td>
                                         <td><input type="button" name="addd" class="add custom-btn" value="Add"></td>
+
                                     </tr>
                                     </div>
                                 </table>
                                 <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
-                        <script src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
+                        <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
                         
                         <div class="show-prescription">
                             <table class="table">
@@ -235,6 +236,7 @@ if(isset($_GET['patientid'])){
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="../js/medicine.js"></script>
     <script>
         // to add rows
         $(document).ready(function(){
@@ -247,8 +249,11 @@ if(isset($_GET['patientid'])){
                     <td><input type="number" name="frequency[]"></td>
                     <td><input type="button" name="remove" class="remove custom-btn" value="Remove"></td>
                     </tr>`);
-            });
 
+                    addAutoCompleteDropdownToInputs();
+                    
+
+            });
             //remove rows
             $(document).on('click', '.remove', function(e){
                 e.preventDefault();
