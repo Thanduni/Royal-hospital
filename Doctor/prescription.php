@@ -138,14 +138,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
                                             </div>
                                         </td>
-
                                         <td><input type="number" name="dosage[]"></td>
                                         <td><input type="number" name="frequency[]"></td>
                                         <td><input type="number" name="days[]"></td>
                                         <td><input type="button" name="addd" class="add" value="Add"></td>
-
                                     </tr>
-
                                     </div>
                                 </table>
                                 <input type="submit" class="save-prescription" name="save" id="save" value="save data">
@@ -191,49 +188,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 </tbody>
 
                             </table>
-                            <input type="submit" class="save-prescription" name="save" id="save" value="save data">
+                            
                         </div>
                     </form>
                     <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
-
-                    <div class="show-prescription">
-                        <table class="table">
-                            <thead>
-                            <th>ID</th>
-                            <th>Drug Name</th>
-                            <th>Dosage (per day)</th>
-                            <th>Frequency (per day)</th>
-                            <th>No of days</th>
-                            <!-- <th>Edit</th> -->
-                            <th>Remove</th>
-                            </thead>
-                            <tbody>
-                            <?php
-                            if(isset($prescriptionID)){
-                                $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
-                                $result = mysqli_query($con,$select);
-
-                                while($row= mysqli_fetch_array($result)){?>
-                                    <tr><td><?php  echo $prescriptionID ?></td>
-                                        <td><?php echo $row['drug_name'] ?></td>
-                                        <td><?php echo $row['quantity'] ?></td>
-                                        <td><?php echo $row['frequency'] ?></td>
-                                        <td><?php echo $row['days'] ?></td>
-                                        <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
-                                        <td>
-                                            <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
-                                                <input type="button" name="remove" class="remove-prescription custom-btn" value="Remove"></a>
-                                        </td>
-
-                                    </tr>
-                                    <?php
-                                }
-                            }else{
-                                displayErrorMessage();
-                            } ?>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
 
                 <div class="prescribe-test-content" id="prescribe-test-content">
