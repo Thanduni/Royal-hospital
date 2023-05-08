@@ -187,7 +187,7 @@ if (!isset($_SESSION['mailaddress'])) {
                     </select><br><br>
 
                     <label for="">Emergency Contact Number</label><br><br>
-                    <input type="text" name="ecn" id="ecn" placeholder="eg:- 07XXXXXXXX"required><br><br>
+                    <input type="text" name="ecn" id="ecn" placeholder="eg:- 07XXXXXXXX"><div id="EphoneDiv" required></div><br><br>
                 </div>
 
                 <div class="box">

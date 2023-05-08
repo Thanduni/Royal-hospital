@@ -5,6 +5,8 @@ let emailDiv = document.getElementById("emailDiv");
 let passwordDiv = document.getElementById("passwordDiv");
 let cpasswordDiv = document.getElementById("cpasswordDiv");
 let phoneDiv = document.getElementById("phoneDiv");
+let EphoneDiv = document.getElementById("EphoneDiv");
+
 
 let regName = /^[a-zA-Z]{3,}/;
 let regNic = /^\d{12}[A-Z]?$/;
@@ -153,6 +155,30 @@ phoneDiv.previousSibling.addEventListener("focus", function () {
     phoneDiv.classList.remove("alert");
     phoneDiv.classList.add("hint");
     phoneDiv.innerHTML = "<ul>\n" +
+        "    <li>Contact number should contain 10 integers.</li>\n" +
+        "</ul>"
+    // alert("Hai");
+}, false)
+
+
+function validateEContactNum() {
+    EphoneDiv.innerHTML = "";
+    var contactNum1 = EphoneDiv.previousSibling.value;
+    if (contactNum1 == "" || !regContactNum.test(contactNum1)) {
+        EphoneDiv.classList.remove("hint");
+        EphoneDiv.classList.add("alert");
+        EphoneDiv.innerHTML = "<ul>\n" +
+            "    <li>Please enter a valid contact number.</li>\n" +
+            "</ul>"
+    }
+}
+
+EphoneDiv.previousSibling.addEventListener("blur", validateEContactNum, false)
+
+EphoneDiv.previousSibling.addEventListener("focus", function () {
+    EphoneDiv.classList.remove("alert");
+    EphoneDiv.classList.add("hint");
+    EphoneDiv.innerHTML = "<ul>\n" +
         "    <li>Contact number should contain 10 integers.</li>\n" +
         "</ul>"
     // alert("Hai");

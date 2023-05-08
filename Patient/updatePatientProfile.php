@@ -38,14 +38,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
-            <div class="title">
-                <img src="../images/logo5.png" alt="logo">
-                Royal Hospital Management System
-            </div>
+        <?php
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+        ?>
             <ul>
                 <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Patient</li>
-                <li class="logout"><a href="<?php echo BASEURL . '/Homepage/logout.php?logout& url = http://localhost:8080'.$_SERVER['REQUEST_URI'] ?>">Logout <img src="../images/logout.svg">
-                    </a></li>
             </ul>
             <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Profile
@@ -135,8 +133,38 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                             </tr>
                             <tr>
                                 <td><label for="blood">Blood: </label></td>
-                                <td colspan="2"><input type="text" name="blood" value="<?php echo $row1['blood'] ?>" required><div class="alert" id="blood"></div></td>
+                                <td colspan="2">
+                            <select style="width: 250px;height:40px;float:left;border-radius:5px;font-size:18px;" type="text" id="blood_type" name="blood" value="<?php echo $row1['blood'] ?>" required>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                                <div class="alert" id="blood"></div></td>
                             </tr>
+                            <script>
+                                document.getElementById("blood_type")[7].setAttribute('selected','selected');
+                                if('<?php echo $row1['bood']?>' == 'A+')
+                                    document.getElementById("blood_type")[0].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'A-')
+                                    document.getElementById("blood_type")[1].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'B+')
+                                    document.getElementById("blood_type")[2].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'B-')
+                                    document.getElementById("blood_type")[3].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'AB+')
+                                    document.getElementById("blood_type")[4].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'AB-')
+                                    document.getElementById("blood_type")[5].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'O+')
+                                    document.getElementById("blood_type")[6].setAttribute('selected','selected');
+                                else if('<?php echo $row1['bood']?>' == 'O-')
+                                    document.getElementById("blood_type")[7].setAttribute('selected','selected');
+                            </script>
                             <tr>
                                 <td><label for="illness">Illness: </label></td>
                                 <td colspan="2"><input type="text" name="illness" value="<?php echo $row1['illness'] ?>" required><div class="alert" id="illness"></div></td>
@@ -152,7 +180,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 </td>
                             </tr>
                         </table>
-                        <button name="updatePatient" type="submit">Save changes</button>
+                        <button name="updatePatient" type="submit" onclick="get()">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -197,7 +225,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 $('#login-modal').fadeOut();
             });
         });
-        
+
     </script>
 
     <div id="counter">0</div>
