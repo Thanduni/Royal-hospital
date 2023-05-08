@@ -71,7 +71,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" onsubmit="return validateNurseReceptionistStorekeeperForm()"  method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()"  method="post" enctype="multipart/form-data">
                         <?php
                         $nic =$_SESSION['nic'];
                         $q1 = "select * from patient where nic = $nic";
@@ -87,10 +87,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                             <tr>
                                 <td><label for="Name">Name: </label></td>
                                 <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
@@ -213,6 +209,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>>
+    //<script src=<?php //echo BASEURL . '/js/validateFormReceptionist.js' ?>
+
     
     $(function(){
             $('#open').click(function(){

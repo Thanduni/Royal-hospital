@@ -32,20 +32,18 @@ if (isset($_POST['addUser'])) {
     $nic = $_GET['id'];
     $name = $_POST['name'];
     $address = $_POST['address'];
-    $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $profile_image = $new_img_name;
 
-    $query = "UPDATE user SET name = '$name', address = '$address', email = '$email', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image', DOB = '$dob' WHERE
+    $query = "UPDATE user SET name = '$name', address = '$address', contact_num = '$contactNum', gender = '$gender', profile_image = '$profile_image', DOB = '$dob' WHERE
                 nic = '$nic';";
     $result = mysqli_query($con, $query);
 
     if($nic == $_SESSION['nic']){
         $_SESSION['name'] = $name;
         $_SESSION['profilePic'] = $profile_image;
-        $_SESSION['mailaddress'] = $email;
     }
 
     header("location:". BASEURL . "/Admin/adminUsersPage.php");

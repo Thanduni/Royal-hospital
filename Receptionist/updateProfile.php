@@ -30,7 +30,6 @@ if (isset($_POST['updateReceptionist'])) {
 
     $name = $_POST['name'];
     $address = $_POST['address'];
-    $email = $_POST['email'];
     $contactNum = $_POST['contactNum'];
     $dob = $_POST['dob'];
     $gender = $_POST['gender'];
@@ -38,12 +37,9 @@ if (isset($_POST['updateReceptionist'])) {
 
     $query = mysqli_query($con, "SELECT COUNT(*) FROM user WHERE email = '".$_SESSION['mailaddress']."'");
     $row = mysqli_fetch_array($query);
-    if(($email != $_SESSION['mailaddress'] && $row[0]>0))
-        header("location:" . BASEURL . "/Receptionist/updateReceptionistProfile.php?wrongResult=The email address already exists!");
 
-    $query = "UPDATE user SET name='$name' ,DOB='$dob' ,address='$address', email='$email', contact_num='$contactNum', gender='$gender', profile_image='$profile_image' WHERE email = '" . $_SESSION['mailaddress'] . "'";
+    $query = "UPDATE user SET name='$name' ,DOB='$dob' ,address='$address', contact_num='$contactNum', gender='$gender', profile_image='$profile_image' WHERE email = '" . $_SESSION['mailaddress'] . "'";
     $result = mysqli_query($con, $query);
-    $_SESSION['mailaddress'] = $email;
     $_SESSION['name'] = $name;
     $_SESSION['profilePic'] = $profile_image;
     if ($result)

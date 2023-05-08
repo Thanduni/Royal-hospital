@@ -74,6 +74,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 <i class="fas fa-user-injured"></i>
                             </div>
                         </div>
+                        <a href="inpatient.php">
                         <div class="doctor-card">
                             <div class="card-content">
                                 <div class="number">
@@ -97,6 +98,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 <i class="fas fa-user-injured"></i>
                             </div>
                         </div>
+                        </a>
                         <div class="doctor-card">
                             <div class="card-content">
                                 <div class="number">

@@ -36,6 +36,25 @@ function filterByNameUsers() {
     }
 }
 
+function filterByNameMedicine() {
+    var input, filter, table, row, cell, i, txtValue;
+    input = document.getElementById("myInputName");
+    filter = input.value.toUpperCase();
+    table = document.getElementsByClassName("table")[0];
+    row = table.getElementsByClassName("row");
+    for (i = 1; i < row.length; i++) {
+        cell = row[i].getElementsByClassName("cell")[0];
+        if (cell) {
+            txtValue = cell.textContent || cell.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                row[i].style.display = "";
+            } else {
+                row[i].style.display = "none";
+            }
+        }
+    }
+}
+
 function filterByRole() {
     var input, filter, table, row, cell, i, txtValue;
     input = document.getElementById("myInputRole");

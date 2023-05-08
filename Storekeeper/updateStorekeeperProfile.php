@@ -84,10 +84,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
                                 <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
                             </tr>
                             <tr>
-                                <td><label for="email">Email: </label></td>
-                                <td colspan="2"><input type="text" name="email" value="<?php echo $row['email'] ?>" required><div class="alert" id="email"></div></td>
-                            </tr>
-                            <tr>
                                 <td><label for="address">Address: </label></td>
                                 <td colspan="2"><textarea name="address" cols="30"
                                                           rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="address"></div></td>

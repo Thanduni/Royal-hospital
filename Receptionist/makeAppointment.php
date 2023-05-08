@@ -125,7 +125,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="">Date</label><br>
                             </td>
                             <td colspan="2">
-                                <input type="date" name="date" id="date" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>">
+                                <input type="date" name="date" id="date" min = "<?php echo date('Y-m-d') ?>" max = "<?php echo date('Y-m-d', strtotime('+1 week')) ?>" required>
                             </td>
                         </tr>
                         <tr>
@@ -133,7 +133,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="">Department</label><br>
                             </td>
                             <td colspan="2">
-                                <select name="department" id="department">
+                                <select name="department" id="department" required>
                                     <option value="">Please A Select Department</option>
                                     <option value="Anesthetics">Anesthetics</option>
                                     <option value="Cardiology">Cardiology</option>
@@ -146,7 +146,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label  for="">Doctor</label><br>
                             </td>
                             <td colspan="2">
-                                <select name="doctor" id="doctor">
+                                <select name="doctor" id="doctor" required>
                                     <option value="">Select a doctor</option>
                                 </select>
                             </td>
@@ -156,7 +156,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label>Patient</label>
                             </td>
                             <td colspan="2">
-                                <select name="patient" id="">
+                                <select name="patient" id="" required>
                                     <?php
                                     $sql="Select * from `patient` inner join user on user.nic = patient.nic";
                                     $result=mysqli_query($con,$sql);
@@ -174,7 +174,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="">Time</label><br>
                             </td>
                             <td colspan="2">
-                                <select name="time" id="time">
+                                <select name="time" id="time" required>
                                     <option value="">Please select a time slot</option>
                                 </select>                            </td>
                         </tr>
