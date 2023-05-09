@@ -1,50 +1,23 @@
 <?php
 session_start();
 require_once("../conf/config.php");
-if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
-    $nic = $_SESSION['nic'];
-    //to prevent sql injections
-    $doctorID_query = "SELECT doctorID FROM doctor JOIN user ON user.nic = doctor.nic WHERE user.nic = ?";
-    $stmt = mysqli_prepare($con, $doctorID_query);
-    mysqli_stmt_bind_param($stmt, "i", $nic);
-    mysqli_stmt_execute($stmt);
-    $get_doctorID = mysqli_stmt_get_result($stmt);    
-    $row = mysqli_fetch_assoc($get_doctorID);
-    if ($row) {
-      $doctorID = $row["doctorID"];
-    }
-
-?>
-
-<?php
-//get current date and time
-$mindate = date("Y-m-d");
-$mintime = date("h:i:sa");
-//get patientID from url
-if(isset($_GET['patientid'])){
-    $patientID = $_GET['patientid'];
-}
-
-// adding doctor note
-if(isset($_POST['submit-doctor-note'])) {
-    $date = $_POST['date'];
-    $investigation = $_POST['investigation'];
-    $impression = $_POST['impression'];
-    $patientID = $_POST['patientID'];
-
-    $prescription = "INSERT into prescription(date,age,patientID,doctorID,investigation,impression) values('$date','$age','$patientID','$doctorID','$investigation','$impression');";    
-    if(mysqli_query($con,$prescription)){
-        //get the autogenerate id from query
-        $prescriptionID = mysqli_insert_id($con);
-        header("Location: viewPrescription.php?id=".$prescriptionID);
-        exit();
+if(isset($_GET['id'])) {
+    $prescriptionID = $_GET['id'];
+    $prescription_query = "SELECT patientID,date,investigation,impression FROM prescription WHERE prescriptionID = $prescriptionID";
+    $result = mysqli_query($con, $prescription_query);
+    $row = mysqli_fetch_assoc($result);
+    //display the prescription details
+    $patientID = $row['patientID'];
+    $date = $row['date'];
+    $investigation = $row['investigation'];
+    if(isset($row["impression"])){
+        $impression = $row["impression"];
     }else{
         echo "Error";
     }
-}
+    
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,7 +102,7 @@ if(isset($_POST['submit-doctor-note'])) {
                             ?>
                         
                     </div>
-                    <!-- add doctor note -->
+                    <!-- display doctor note -->
                     <div class="right-container">
                         <div class="doctor-note">
                             <h2>Doctor Note</h2>
@@ -144,19 +117,38 @@ if(isset($_POST['submit-doctor-note'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="">Investigation</label>
-                                    <input type="text" name="investigation" placeholder="Investigation" id="">
+                                    <input type="text" name="investigation" value="<?php echo $investigation?>" id="">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Impression</label>
-                                    <input type="text" name="impression" placeholder="Impression" id="">
+                                    <input type="text" name="impression" value="<?php echo $impression?>" id="">
                                     <!-- <textarea name="impression" id="" cols="30" rows="4" placeholder="Impression"></textarea> -->
                                 </div>
-                                <!-- <button class="addPrescription-button custom-btn" type="submit" name="edit-doctor-note">Edit</button> -->
-                                <button class="addPrescription-button custom-btn" type="submit" name="submit-doctor-note">Submit</button>
+                                <input type="hidden" name="prescriptionID" value="<?php echo $prescriptionID ?>">
+                                <button class="addPrescription-button custom-btn" type="submit" name="edit-doctor-note">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
+                <?php
+                if(isset($_POST['edit-doctor-note'])) {
+                    $date = $_POST['date'];
+                    $investigation = $_POST['investigation'];
+                    $impression = $_POST['impression'];
+                    $patientID = $_POST['patientID'];
+                    $prescriptionID = $_POST['prescriptionID'];
+                
+                    $update_prescription_query = "UPDATE prescription SET date = '$date', investigation = '$investigation', impression = '$impression' WHERE prescriptionID = $prescriptionID";
+                    
+                    if(mysqli_query($con, $update_prescription_query)){
+                        echo "Prescription updated successfully";
+                    }else{
+                        echo "Error updating prescription: " . mysqli_error($con);
+                    }
+                }
+                
+
+                ?>
 
                 <div class="doctor-action">
                     <a href="opd-prescription.php?patientid=<?=$patientID?>">
