@@ -153,7 +153,7 @@ if(isset($_POST['submit-doctor-note'])) {
                 </div>
 
                 <div class="doctor-action">
-                    <a href="prescription.php?patientid=<?=$patientID?>">
+                    <a href="opd-prescription.php?patientid=<?=$patientID?>">
                     <div class="doctor-card">
                         <div class="card-content">
                             <div class="card-name">
