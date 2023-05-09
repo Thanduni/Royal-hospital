@@ -219,7 +219,25 @@ h3{
     color: var(--para-color);
     font-weight: 600;
 }
-
+.error-message{
+    padding: 1rem;
+    color: #2c0b0e;
+    background-color: #f1aeb5;
+    border-color: #f1aeb5;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    justify-content: space-between;
+}
+.error-message .add-note{
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: #f8d7da;
+    border: #dc3545;
+    color: #dc3545;
+    font-weight: 600;
+    cursor: pointer;
+}
 
 .table-container{
     margin: 20px;
@@ -231,7 +249,7 @@ h3{
 }
 .table{
     border-collapse: collapse;
-    /* background: #F8F9FF; */
+    background: #FFFFFF;
     border-radius: 10px;
     overflow: hidden;
     width: 70%;
@@ -305,6 +323,16 @@ h3{
 }
 .view-btn-image{
     width: 40px;
+}
+td .mark-complete {
+    padding: 0.5em;
+    line-height: 1;
+    font-weight: 600;
+    border-radius: 3px;
+    border: 1px solid var(--primary-color);;
+    background: var(--primary-color);;
+    color: #FFF;
+    cursor: pointer;
 }
 select{
     padding: 10px;
