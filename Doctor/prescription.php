@@ -11,7 +11,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 
     ?>
     <?php
-
+//get date and time
+date_default_timezone_set('Asia/Colombo');
+$current_date = date("Y-m-d");
+$current_time = date("h:i");
     function displayErrorMessage() {
         echo '<script>
       document.addEventListener("DOMContentLoaded", function() {          
@@ -24,41 +27,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
       });
     </script>';
     }
-    function outOFStock() {
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
 
-                errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
-                errorMessage.style.display = "flex";
-            } else {
-                console.error("Error: Could not find error message element.");
-            }
-        });
-        function closeErrorMessage() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-                errorMessage.style.display = "none";
-                header("Location: prescription.php?patientid=".$patientID);
-            }
-        }
-    </script>';
-    }
-
-
-    if(isset($_GET['errorCode'])){
-        outOFStock();
-
-    }
     if(isset($_GET['patientid'])){
         $patientID = $_GET['patientid'];
 
-        $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
-        $prescID_query = mysqli_query($con,$get_prescID);
+        // $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")";
+        // $prescID_query = mysqli_query($con,$get_prescID);
+        $prescID_query = mysqli_query($con,"SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")");
         // Fetch the result of the query (query can return a row with NULL)
         $row = mysqli_fetch_array($prescID_query);
-
         // Check if the value is not null
         if (isset($row[0])){
             $prescriptionID = $row[0];
@@ -76,7 +53,49 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
         }
 
     }
+    // echo $patientID;
+    // function changeURL(){
+    //     // Remove errorCode from URL and keep patientid
+    //     $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    //     $parts = parse_url($url);
+    //     parse_str($parts['query'], $params);
+    //     unset($params['errorCode']);
+    //     $new_query_string = http_build_query($params);
+    //     $new_url = $parts['path'] . "?" . $new_query_string . "&patientid=" . $patientID;
+    //     header("Location: " . $new_url);
+    //     exit();
+    //    }
+    function outOFStock() {
+        echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const errorMessage = document.getElementById("success-message");
+            if (errorMessage) {
 
+                errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
+                errorMessage.style.display = "flex";
+            } else {
+                console.error("Error: Could not find error message element.");
+            }
+        });
+        function closeErrorMessage() {
+            const errorMessage = document.getElementById("success-message");
+            if (errorMessage) {
+                errorMessage.style.display = "none";
+            }
+        }
+    </script>';
+    }
+
+
+    if(isset($_GET['errorCode'])){
+        outOFStock();
+        echo '<script>
+        setTimeout(function(){
+            window.location.href = "prescription.php?patientid='.$patientID.'";
+        }, 5000);
+    </script>';
+    }
+    
     ?>
 
     <!DOCTYPE html>
@@ -138,9 +157,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
                                             </div>
                                         </td>
-                                        <td><input type="number" name="dosage[]"></td>
-                                        <td><input type="number" name="frequency[]"></td>
-                                        <td><input type="number" name="days[]"></td>
+                                        <td><input type="number" name="dosage[]" required min=0></td>
+                                        <td><input type="number" name="frequency[]" required min=0></td>
+                                        <td><input type="number" name="days[]" required min=0></td>
                                         <td><input type="button" name="addd" class="add" value="Add"></td>
                                     </tr>
                                     </div>
@@ -153,12 +172,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         <div class="show-prescription">
                             <table class="table">
                                 <thead>
+                                    <th>Date</th>
                                     <th>ID</th>
                                     <th>Drug Name</th>
                                     <th>Dosage (per day)</th>
                                     <th>Frequency (per day)</th>
                                     <th>No of days</th>
-                                    <!-- <th>Edit</th> -->
                                     <th>Remove</th>
                                 </thead>
                                 <tbody>
@@ -168,7 +187,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     $result = mysqli_query($con,$select);
                             
                                     while($row= mysqli_fetch_array($result)){?>
-                                <tr><td><?php  echo $prescriptionID ?></td>
+                                <tr>
+                                    <td><?php echo $current_date?></td>
+                                    <td><?php echo $prescriptionID ?></td>
                                     <td><?php echo $row['drug_name'] ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td><?php echo $row['frequency'] ?></td>
@@ -202,7 +223,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                             </thead>
                             <tbody>
                             <tr>
-                                <td><input type="text"  name="Testname[]"></td>
+                                <td><input type="text"  name="Testname[]" required></td>
                                 <td><input type="button" name="addd" class="add-test custom-btn" value="Add"></td>
                             </tr>
                             </tbody>
