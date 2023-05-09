@@ -50,10 +50,13 @@ if($get_details){
         $admit_patient = "INSERT INTO inpatient(patientID,nic,admit_time,admit_date,room_no,doctorID) VALUES ('$patientID','$patientnic','$mintime','$mindate','$room_no','$doctorID');";
         $get_result=mysqli_query($con,$admit_patient);
 
+        $update_status = "UPDATE patient SET patient_type ='inpatient' WHERE patientID = $patientID;";
+        $update_status_query = mysqli_query($con,$update_status);
+
         $update_bed = "UPDATE room SET room_availability = 'not_available' WHERE room_no= $room_no;";
         $update_bed_query = mysqli_query($con,$update_bed);
 
-        if($get_result && $update_bed_query){ 
+        if($get_result && $update_bed_query && $update_status_query){ 
             //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
             echo '<script>
             document.addEventListener("DOMContentLoaded", function() {          

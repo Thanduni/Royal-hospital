@@ -39,13 +39,22 @@ if($get_admit_details){
     $admitDate = $admit_row['admit_date'];
     $room_no = $admit_row['room_no'];
 }
+//create string with date and time
+$admit_dateTime_string = $admitDate.''.$admitTime;
+$current_datetime_string = $current_date. ''. $current_time;
 
-//calculate number of days patient was admitted.
-$start_date = new DateTime($admitDate);         //create DateTime objects 
-$end_date = new DateTime($current_date);
+$start_date = new DateTime($admit_dateTime_string);         //create DateTime objects 
+$end_date = new DateTime($current_datetime_string);
 
 $interval = date_diff($start_date,$end_date);   //will return a dateInterval object
 $admitted_days = $interval->days;
+if($admitted_days==0){
+    $hours = $interval->h;
+    if($hours>=1){
+        $admitted_days =1;
+    }
+}
+
 
 //discharge patient
 if(isset($_POST['discharge-patient'])){
@@ -56,6 +65,7 @@ if(isset($_POST['discharge-patient'])){
         //execute queries
         mysqli_query($con, "DELETE from inpatient WHERE patientID= $patientID");
         mysqli_query($con, "UPDATE room SET room_availability='available' WHERE room_no = $room_no ;");
+        mysqli_query($con, "UPDATE patient SET patient_type='outpatient' WHERE patientID = $patientID ;");
         mysqli_query($con, "INSERT into purchases(patientID,date,quantity,paid_status,paid_status1,item,item_flag) VALUES ('$patientID','$current_date','$admitted_days','not paid','not paid','2','s');");
 
         //commit transaction

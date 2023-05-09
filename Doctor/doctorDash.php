@@ -9,7 +9,24 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
   $row = mysqli_fetch_assoc($get_doctorID);
   $doctorID = $row["doctorID"];
     ?>
+<?php
+// function displayErrorMessage() {
+//     echo '<script>
+//   document.addEventListener("DOMContentLoaded", function() {          
+//     var errorMessage = document.getElementById("success-message");
+//     if(errorMessage) {
+//       errorMessage.style.display = "flex";
+//     } else {
+//       console.error("Error: Could not find error message element.");
+//     }
+//   });
+// </script>';
+// }
+// if(isset($_GET['errorCode'])){
+//     displayErrorMessage();
 
+// }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,11 +69,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             <div class="doctorDashInfo">
                 <div class="main-container">
                     <div class="doctor-cards">
+                        <a href="appointment.php">
                         <div class="doctor-card">
                             <div class="card-content">
                                 <div class="number">
                                     <?php
-                                    $appointment_query = "select * from appointment where doctorID= $doctorID;";
+                                    $appointment_query = "SELECT * from appointment where doctorID= $doctorID AND date=CURDATE();";
                                     $appointment_query_run = mysqli_query($con,$appointment_query);
                                     if($appointment_count =mysqli_num_rows($appointment_query_run)){
                                         echo $appointment_count;
@@ -74,6 +92,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 <i class="fas fa-user-injured"></i>
                             </div>
                         </div>
+                        </a>
                         <a href="inpatient.php">
                         <div class="doctor-card">
                             <div class="card-content">
@@ -123,6 +142,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         </div>
                     </div>
 
+                    <!-- <div class="error-message " id="success-message" style="display:none;">
+                        <p>You have not add a prescription. Do you want to add one?</p>
+                        <a href="prescription.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
+                        <a href=""><input type="button" value="No" class="add-note " name="no"></a>
+                    </div> -->
+
                     <h3>Upcomming Appointments</h3>
                     <div class="table-container">
                         <table class="table">
@@ -131,12 +156,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Message</th>
-                            <th>Option</th>
+                            <th colspan="2">Option</th>
                             </thead>
                             <tbody>
                             <?php
-                            $sql="select user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID from appointment join patient on appointment.patientID=patient.patientID join user on user.nic=patient.nic where doctorID =$doctorID; ";
-                            // $sql="select user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID from appointment join patient on appointment.patientID=patient.patientID join user on user.nic=patient.nic where doctorID =$doctorID AND appointment.date = CURDATE(); ";
+                            $sql="SELECT user.profile_image,user.name,appointment.appointmentID,appointment.date,appointment.time,appointment.message,appointment.patientID,prescription.prescriptionID FROM appointment JOIN patient ON appointment.patientID=patient.patientID JOIN user ON user.nic=patient.nic LEFT JOIN prescription ON appointment.patientID = prescription.patientID WHERE appointment.doctorID =$doctorID AND appointment.status='confirmed' AND appointment.date=CURDATE();";
+                            // SELECT user.profile_image,user.name,appointment.date,appointment.time,appointment.message,appointment.patientID,prescription.prescriptionID FROM appointment JOIN patient ON appointment.patientID=patient.patientID JOIN user ON user.nic=patient.nic LEFT JOIN prescription ON appointment.patientID = prescription.patientID WHERE appointment.doctorID =$doctorID AND appointment.date = CURDATE()"; ";
 
                             $result=mysqli_query($con,$sql);
 
@@ -147,7 +172,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     $date = $row['date'];
                                     $time = $row['time'];
                                     $message = $row['message'];
-                                    $patientID= $row['patientID']; ?>
+                                    $patientID= $row['patientID']; 
+                                    $appointmentID = $row['appointmentID'];?>
                                     <tr>
                                         <td><div class="left-cell">
                                                 <?php echo "<img src='".BASEURL."/uploads/".$profile_image."'width = 40px height=40px>";?>
@@ -164,6 +190,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         <td><a href="displayPatient.php?patientid=<?=$patientID?>">
                                                 <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
                                             </button></td>
+                                        <?php
+                                        if($row['prescriptionID'] != null) {
+                                            // Show the "mark as complete" button
+                                            ?>
+                                            <td><a href="completeAppointment.php?patientid=<?=$patientID?>&appointmentid=<?=$appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
+                                        <?php }
+                                         else {
+                                            ?>
+                                            <!-- <td><a href=""><input type="button" name="Start" class="mark-complete" value="Start"></a></td> -->
+                                        <?php 
+                                        }
+                                        ?>
+                                       
                                     </tr>
                                     <?php
                                 }

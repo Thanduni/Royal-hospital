@@ -9,96 +9,58 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     $row = mysqli_fetch_assoc($get_doctorID);
     $doctorID = $row["doctorID"];
 
-    ?>
-    <?php
-//get date and time
-date_default_timezone_set('Asia/Colombo');
-$current_date = date("Y-m-d");
-$current_time = date("h:i");
-    function displayErrorMessage() {
-        echo '<script>
-      document.addEventListener("DOMContentLoaded", function() {          
-        var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
-        if(errorMessage) {
-          errorMessage.style.display = "flex";
-        } else {
-          console.error("Error: Could not find error message element.");
+?>
+
+<?php
+
+function displayErrorMessage() {
+    echo '<script>
+  document.addEventListener("DOMContentLoaded", function() {          
+    var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+    if(errorMessage) {
+      errorMessage.style.display = "flex";
+    } else {
+      console.error("Error: Could not find error message element.");
+    }
+  });
+</script>';
+}
+
+if(isset($_GET['patientid'])){
+    $patientID = $_GET['patientid'];
+
+    //if a inpatient re direct to prescription.php
+    $check_patientType = "SELECT * from inpatient WHERE patientID = $patientID;";
+    $check_query = mysqli_query($con,$check_patientType);
+    if(mysqli_num_rows($check_query)>0){
+        header("Location: prescription.php?patientid=".$patientID);
+    }
+
+    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
+    $prescID_query = mysqli_query($con,$get_prescID);
+    // Fetch the result of the query (query can return a row with NULL)
+    $row = mysqli_fetch_array($prescID_query);
+
+    // Check if the value is not null
+    if (isset($row[0])){
+        $prescriptionID = $row[0];
+    }else{
+        //get out patient prescriptionID
+        $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
+        $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
+        $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
+        if(isset($presID_row[0])){
+            $prescriptionID = $presID_row[0];
         }
-      });
-    </script>';
-    }
-
-    if(isset($_GET['patientid'])){
-        $patientID = $_GET['patientid'];
-
-        // $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")";
-        // $prescID_query = mysqli_query($con,$get_prescID);
-        $prescID_query = mysqli_query($con,"SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")");
-        // Fetch the result of the query (query can return a row with NULL)
-        $row = mysqli_fetch_array($prescID_query);
-        // Check if the value is not null
-        if (isset($row[0])){
-            $prescriptionID = $row[0];
-        }else{
-            //get out patient prescriptionID
-            $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
-            $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
-            $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
-            if(isset($presID_row[0])){
-                $prescriptionID = $presID_row[0];
-            }
-            else{
-                displayErrorMessage();
-            }
+        else{
+            displayErrorMessage();
         }
-
-    }
-    // echo $patientID;
-    // function changeURL(){
-    //     // Remove errorCode from URL and keep patientid
-    //     $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    //     $parts = parse_url($url);
-    //     parse_str($parts['query'], $params);
-    //     unset($params['errorCode']);
-    //     $new_query_string = http_build_query($params);
-    //     $new_url = $parts['path'] . "?" . $new_query_string . "&patientid=" . $patientID;
-    //     header("Location: " . $new_url);
-    //     exit();
-    //    }
-    function outOFStock() {
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-
-                errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
-                errorMessage.style.display = "flex";
-            } else {
-                console.error("Error: Could not find error message element.");
-            }
-        });
-        function closeErrorMessage() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-                errorMessage.style.display = "none";
-            }
-        }
-    </script>';
     }
 
+}
+?>
 
-    if(isset($_GET['errorCode'])){
-        outOFStock();
-        echo '<script>
-        setTimeout(function(){
-            window.location.href = "prescription.php?patientid='.$patientID.'";
-        }, 5000);
-    </script>';
-    }
-    
-    ?>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -142,7 +104,7 @@ $current_time = date("h:i");
                         <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content" id="prescribe-medicine-content">
-                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                        <form action="processOPDPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
                             <div class="input-feild">
                                 <table id="prescription-table">
                                     <tr>
@@ -172,12 +134,12 @@ $current_time = date("h:i");
                         <div class="show-prescription">
                             <table class="table">
                                 <thead>
-                                    <th>Date</th>
                                     <th>ID</th>
                                     <th>Drug Name</th>
                                     <th>Dosage (per day)</th>
                                     <th>Frequency (per day)</th>
                                     <th>No of days</th>
+                                    <!-- <th>Edit</th> -->
                                     <th>Remove</th>
                                 </thead>
                                 <tbody>
@@ -187,16 +149,14 @@ $current_time = date("h:i");
                                     $result = mysqli_query($con,$select);
                             
                                     while($row= mysqli_fetch_array($result)){?>
-                                <tr>
-                                    <td><?php echo $current_date?></td>
-                                    <td><?php echo $prescriptionID ?></td>
+                                <tr><td><?php  echo $prescriptionID ?></td>
                                     <td><?php echo $row['drug_name'] ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td><?php echo $row['frequency'] ?></td>
                                     <td><?php echo $row['days'] ?></td>
                                     <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
                                     <td>
-                                        <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
+                                        <a href="deleteOPDPrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
                                         <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
                                     </td>
                                     
