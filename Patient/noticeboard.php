@@ -41,7 +41,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         .s-content .n-content textarea{
             overflow-y: hidden;
             width: 98.5%;
-            height:600px;
+            height:530px;
             font-size: 18px;
             
         }
