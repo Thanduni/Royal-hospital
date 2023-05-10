@@ -148,7 +148,7 @@ $current_time = date("h:i");
                                         </td>
                                         <td><input type="number" name="dosage[]" required min=0></td>
                                         <td><input type="number" name="frequency[]" required min=0></td>
-                                        <td><input type="number" name="days[]" required min=0></td>
+                                        <td><input type="number" name="days[]" required value=1></td>
                                         <td><input type="button" name="addd" class="add" value="Add"></td>
                                     </tr>
                                     </div>
