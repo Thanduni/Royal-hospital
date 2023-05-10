@@ -60,7 +60,20 @@
     color: #000 !important;
     box-shadow: none !important;
 }
-
+.back-button-div{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.back-button-div img{
+    width: 30px;
+    height: 30px;
+}
+.back-button-div .button-name{
+    color: #000;
+    float: right;
+    padding: 13px 0;
+}
 .prescription-group{
     display: flex;
     flex-direction: row;
@@ -205,11 +218,11 @@
 }
 
 .show-prescription,.show-test-prescription {
-    width: 80%;
-    margin: 40px 20px;
+    width: 100%;
+    margin: 40px 0;
     display: flex;
     flex-wrap: wrap;
-    padding: 0 33px 30px;
+    padding: 0 0 30px;
 }
 .show-prescription table,.show-test-prescription table{
     border-collapse: collapse;
@@ -237,7 +250,8 @@
     display: table-cell;
 }
 .prescribe-test-content{
-    display: none;
+    display: flex;
+    flex-direction: column;
 }
 .medicine-button{
     border-right: 1px solid gray;

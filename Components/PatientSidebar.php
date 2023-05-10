@@ -44,7 +44,7 @@ require_once("../conf/config.php");
                 <p>Payment</p>
             </a></li>
         
-        <li onmouseover="changeImage('noticeboard.svg', 'noticeboard')" onmouseout="restoreImage('noticeboardDef.svg', 'noticeboard')"><a id="notice" href="" target="_self"><img id="noticeboard" class="butbut icons"
+        <li onmouseover="changeImage('noticeboard.svg', 'noticeboard')" onmouseout="restoreImage('noticeboardDef.svg', 'noticeboard')"><a id="notice" href="<?php echo BASEURL.'/Patient/noticeboard.php'?>" target="_self"><img id="noticeboard" class="butbut icons"
                                             src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>

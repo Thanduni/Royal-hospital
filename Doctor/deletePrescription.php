@@ -51,3 +51,14 @@ if (isset($_GET['pdID'])) {
         echo "Error: " . $e->getMessage();
     }
 }
+
+else if(isset($_GET['ptID'])){
+    $ptID = $_GET['ptID'];
+    $patientID = $_GET['patientID'];
+
+    $delete_test = "DELETE from prescribed_tests WHERE ptID = $ptID";
+    $delete_test_query = mysqli_query($con,$delete_test);
+    if($delete_test_query){
+        header("Location: prescriptionTest.php?patientid=".$patientID);
+    }
+}
