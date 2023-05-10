@@ -75,7 +75,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
              ?>
                  <div class="s-content">
                     <div class="t-content"><h2><u><?php echo $rows['title'];?></u></h2></div>
-                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php $img = $rows['profile_image']; echo $rows['profile_image']; echo BASEURL."/images/$img"?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
+                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php echo BASEURL.'/images/'.$rows['profile_image'] ?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
                     <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
                     
                 </div>
