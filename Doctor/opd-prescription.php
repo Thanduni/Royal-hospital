@@ -36,7 +36,7 @@ if(isset($_GET['patientid'])){
         header("Location: prescription.php?patientid=".$patientID);
     }
 
-    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
+    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND doctorID = $doctorID";
     $prescID_query = mysqli_query($con,$get_prescID);
     // Fetch the result of the query (query can return a row with NULL)
     $row = mysqli_fetch_array($prescID_query);
