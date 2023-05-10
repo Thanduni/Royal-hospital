@@ -38,7 +38,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
-        
+        .s-content .n-content textarea{
+            overflow-y: hidden;
+            width: 98.5%;
+            height:500px;
+            font-size: 18px;
+            
+        }
     </style>
 </head>
 <body>
@@ -69,8 +75,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                  while($rows = mysqli_fetch_assoc($result)){
              ?>
                  <div class="s-content">
-                    <div class="n-header"><b><?php echo ($rows['profile_image'])."  "."by ".$rows['name']." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></b></div><br><br>
-                    <div class="n-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rows['message']; ?></div>
+                    <div class="n-header"><b><img src="<?php $img = $rows['profile_image']; echo $rows['profile_image']; echo BASEURL."/images/$img"?>" > <?php echo "by ".$rows['name']." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></b></div><br><br>
+                    <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
+                    
                 </div>
             <?php
                 }
