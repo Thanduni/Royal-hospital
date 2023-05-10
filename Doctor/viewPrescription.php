@@ -15,9 +15,38 @@ if(isset($_GET['id'])) {
     }else{
         echo "Error";
     }
-    
-
 ?>
+<?php
+                if(isset($_POST['edit-doctor-note'])) {
+                    $date = $_POST['date'];
+                    $investigation = $_POST['investigation'];
+                    $impression = $_POST['impression'];
+                    $patientID = $_POST['patientID'];
+                    $prescriptionID = $_POST['prescriptionID'];
+                
+                    $update_prescription_query = "UPDATE prescription SET date = '$date', investigation = '$investigation', impression = '$impression' WHERE prescriptionID = $prescriptionID";
+                    
+                    if(mysqli_query($con, $update_prescription_query)){
+                        // Fetch the updated prescription details
+                        $prescription_query = "SELECT patientID, date, investigation, impression FROM prescription WHERE prescriptionID = $prescriptionID";
+                        $result = mysqli_query($con, $prescription_query);
+                        $row = mysqli_fetch_assoc($result);
+                        if ($row) {
+                            $patientID = $row['patientID'];
+                            $date = $row['date'];
+                            $investigation = $row['investigation'];
+                            $impression = $row['impression'];
+                        } else {
+                            echo "Error fetching updated prescription details";
+                        }
+                    } else {
+                        echo "Error updating prescription: " . mysqli_error($con);
+                    }
+                    
+                }
+                
+
+                ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,31 +154,13 @@ if(isset($_GET['id'])) {
                                     <!-- <textarea name="impression" id="" cols="30" rows="4" placeholder="Impression"></textarea> -->
                                 </div>
                                 <input type="hidden" name="prescriptionID" value="<?php echo $prescriptionID ?>">
-                                <button class="addPrescription-button custom-btn" type="submit" name="edit-doctor-note">Submit</button>
+                                <button class="addPrescription-button custom-btn" name ="edit-doctor-note" >Save Changes</button>
+                                <button class="addPrescription-button custom-btn" type="submit" name="submit-doctor-note" disabled>Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <?php
-                if(isset($_POST['edit-doctor-note'])) {
-                    $date = $_POST['date'];
-                    $investigation = $_POST['investigation'];
-                    $impression = $_POST['impression'];
-                    $patientID = $_POST['patientID'];
-                    $prescriptionID = $_POST['prescriptionID'];
                 
-                    $update_prescription_query = "UPDATE prescription SET date = '$date', investigation = '$investigation', impression = '$impression' WHERE prescriptionID = $prescriptionID";
-                    
-                    if(mysqli_query($con, $update_prescription_query)){
-                        echo "Prescription updated successfully";
-                    }else{
-                        echo "Error updating prescription: " . mysqli_error($con);
-                    }
-                }
-                
-
-                ?>
-
                 <div class="doctor-action">
                     <a href="opd-prescription.php?patientid=<?=$patientID?>">
                     <div class="doctor-card">
@@ -177,7 +188,6 @@ if(isset($_GET['id'])) {
                     </div>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
