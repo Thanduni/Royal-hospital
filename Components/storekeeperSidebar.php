@@ -1,8 +1,12 @@
+<!-- importing configaration file -->
+
 <?php
 session_start();
 //die($_SESSION['name']);
 require_once("../conf/config.php");
 ?>
+<!-- sidebar start -->
+
 
 <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
 <label for="openSidebarMenu" class="sidebarIconToggle">
