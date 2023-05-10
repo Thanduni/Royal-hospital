@@ -218,11 +218,11 @@
 }
 
 .show-prescription,.show-test-prescription {
-    width: 80%;
-    margin: 40px 20px;
+    width: 100%;
+    margin: 40px 0;
     display: flex;
     flex-wrap: wrap;
-    padding: 0 33px 30px;
+    padding: 0 0 30px;
 }
 .show-prescription table,.show-test-prescription table{
     border-collapse: collapse;
