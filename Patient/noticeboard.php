@@ -55,7 +55,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
         ?>
         <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Summary
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Noticeboard
         </div>
         <?php 
             $nic = $_SESSION['nic'];
