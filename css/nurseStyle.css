@@ -198,10 +198,13 @@ button a{
 } */
 
 .room-cards{
-    width: 100%;
-    padding: 35px 20px ;
+    width: auto;
+    padding: 35px 20px;
     display: flex;
     flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 316px;
+    justify-content: center;
 }
 
 .room {
@@ -369,6 +372,8 @@ select option{
     margin: 0 auto;
     padding: 40px;
     max-width: 1440px;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -460,4 +465,19 @@ select option{
     display: table-cell;
     font-size: 18px;
     height: 50px;
+}
+
+.nurse_heads{
+    margin: 73px 22px 22px 22px;
+    font-size: 37px;
+    padding: 50px 22px 50px 22px;
+    text-align: center;
+    font-weight: 1600000;
+    width: auto;
+    /* border-style: solid; */
+    background-color: #fff;
+    border-radius: 10px;
+    border-width: 3px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }

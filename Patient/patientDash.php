@@ -194,7 +194,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         $query = "SELECT appointment.date, appointment.message, doctor.department, appointment.time, user.name, appointment.doctorID, appointment.appointmentID 
                             FROM appointment inner join doctor on appointment.doctorID=doctor.doctorID inner join user on user.nic=doctor.nic WHERE patientID = $pID ";
 
-                        $appointment_delete = mysqli_query($con,"delete from appointment where patientID = $pID and date < '$current_date' or (date = '$current_date' && time < '$current_time')");
+                        $appointment_delete = mysqli_query($con,"DELETE from appointment where `status`='Complete'");
                     
                         $date_arr = array();
                         $time_arr = array();

@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
     $otpUser = mysqli_fetch_assoc(mysqli_query($con, $otpQuery))['otp'];
 
     if($otp == $otpUser){
-        header("location:" . BASEURL . "/Homepage/changePassword.php?email=".$email);
+        header("location:" . BASEURL . "/Homepage/changePassword.php?email=".$email."&otp=verified");
     }else{
         header("location:" . BASEURL . "/Homepage/enterOTP.php?error=Incorrect OTP. Try again.&email=".$email);
     }
