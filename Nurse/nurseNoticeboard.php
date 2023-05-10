@@ -18,7 +18,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Patient's Summary</title>
+    <title>Patient's Npticeboard</title>
     <style>
         body{
             background-color: #f9f8ff;
@@ -26,12 +26,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 
         .s-content{
             overflow-y: hidden;
-            max-width: 1800px;
-            /* float: left; */
+            max-width: 1000px;
+            float: left;
             background-color: #ffffff;
             padding:30px 30px;
             margin:50px 50px;
-            width:95%;
+            width:80%;
             border-color: #000100;
             border-radius: rgba(0,0,0,0);
             /* border-color: black; */
@@ -41,7 +41,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
         .s-content .n-content textarea{
             overflow-y: hidden;
             width: 98.5%;
-            height:500px;
+            height:600px;
             font-size: 18px;
             
         }
@@ -76,7 +76,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
              ?>
                  <div class="s-content">
                     <div class="t-content"><h2><u><?php echo $rows['title'];?></u></h2></div>
-                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php $img = $rows['profile_image']; echo $rows['profile_image']; echo BASEURL."/images/$img"?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
+                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php echo BASEURL.'/images/'.$rows['profile_image'] ?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
                     <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
                     
                 </div>
