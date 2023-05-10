@@ -86,18 +86,8 @@ if(isset($_GET['patientid'])){
 
                     <div class="tab-line">
                         <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <div class="test-button" id="test-button" onclick="testPrescription()">Prescribe Test</div>
+                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a>
                     </div>
-                    <script>
-                        function drugPrescription(){
-                            document.getElementById("prescribe-medicine-content").style.display="block";
-                            document.getElementById("prescribe-test-content").style.display="none";
-                        }
-                        function testPrescription(){
-                            document.getElementById("prescribe-test-content").style.display="block";
-                            document.getElementById("prescribe-medicine-content").style.display="none";
-                        }
-                    </script>
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
                         <p>Please enter a doctor Note first</p>
@@ -174,50 +164,6 @@ if(isset($_GET['patientid'])){
                     </form>
                     <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
                 </div>
-
-                <div class="prescribe-test-content" id="prescribe-test-content">
-                    <form action="processTestPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" method="post">
-                        <table class="prescription-test-table">
-                            <thead>
-                            <th>Test Name</th>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><input type="text"  name="Testname[]" required></td>
-                                <td><input type="button" name="addd" class="add-test custom-btn" value="Add"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <input type="submit" value="Save" name="Save-test" class="save-prescription" id="save-test">
-                    </form>
-                    <div class="show-test-prescription">
-                        <table class="table">
-                            <thead>
-                            <th>Date</th>
-                            <th>Test Name</th>
-                            </thead>
-                            <tbody>
-                            <?php
-                            if(isset($prescriptionID)){
-                                $select_test = "SELECT * from prescribed_tests where prescriptionID ='$prescriptionID';";
-                                $select_query = mysqli_query($con,$select_test);
-
-                                while($test_row =mysqli_fetch_array($select_query)){?>
-                                    <tr>
-
-                                        <td><?php echo $test_row['date']?></td>
-                                        <td><?php echo $test_row['test_name']?></td>
-
-                                    </tr>
-                                    <?php
-                                }
-                            }
-                            ?>
-                            <tr></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -241,24 +187,6 @@ if(isset($_GET['patientid'])){
 
 
             });
-            //remove rows
-            $(document).on('click', '.remove', function(e){
-                e.preventDefault();
-                let = row_med = $(this).parent().parent();  //select parent of parent of remove btn.. which is <tr>
-                $(row_med).remove();
-            });
-        });
-
-        // to add rows
-        $(document).ready(function(){
-            $(".add-test").click(function(e){    //pass parameter e
-                e.preventDefault();         //stop page refresh
-                $(".prescription-test-table").append(`<tr>
-                    <td><input type="text"  name="Testname[]"></td>
-                    <td><input type="button" name="remove" class="remove" value="Remove"></td>
-                </tr>`);
-            });
-
             //remove rows
             $(document).on('click', '.remove', function(e){
                 e.preventDefault();

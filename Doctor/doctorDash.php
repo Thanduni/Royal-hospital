@@ -173,6 +173,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                             </button></td>
                                             <?php }
                                          else {?>
+                                         <!-- direct to display patient with form -->
                                             <td><a href="displayPatient.php?patientid=<?=$patientID?>">
                                                 <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
                                             </button></td>
