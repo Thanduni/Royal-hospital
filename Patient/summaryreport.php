@@ -31,7 +31,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             background-color: #ffffff;
             padding:30px 30px;
             margin:50px 50px;
-            width:auto;
+            width:93%;
             border-radius: 10px;
             /* border-color: black; */
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
