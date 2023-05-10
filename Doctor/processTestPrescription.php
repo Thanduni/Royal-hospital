@@ -1,11 +1,9 @@
 <?php
 require_once("../conf/config.php");
-
+//get parameters from url
 if(isset($_GET['patientid']) && isset($_GET['prescriptionid'])){
     $patientID = $_GET['patientid'];
     $prescriptionID = $_GET['prescriptionid'];
-    echo "<br>".$patientID."<br>";
-    echo "<br>".$prescriptionID."<br>";
 
     if(isset($_POST['Save-test'])){
         //looping tests 
@@ -22,7 +20,7 @@ if(isset($_GET['patientid']) && isset($_GET['prescriptionid'])){
             }
         }
     }
-    header("Location: prescription.php?patientid=".$patientID);
+    header("Location: prescriptionTest.php?patientid=".$patientID);
 } else {
     echo "Error: Required parameters not set.";
 }

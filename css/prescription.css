@@ -60,7 +60,20 @@
     color: #000 !important;
     box-shadow: none !important;
 }
-
+.back-button-div{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.back-button-div img{
+    width: 30px;
+    height: 30px;
+}
+.back-button-div .button-name{
+    color: #000;
+    float: right;
+    padding: 13px 0;
+}
 .prescription-group{
     display: flex;
     flex-direction: row;
@@ -237,7 +250,8 @@
     display: table-cell;
 }
 .prescribe-test-content{
-    display: none;
+    display: flex;
+    flex-direction: column;
 }
 .medicine-button{
     border-right: 1px solid gray;
