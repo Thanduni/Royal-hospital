@@ -2,7 +2,7 @@
 session_start();
 require_once("../conf/config.php");
 
-if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
+if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Storekeeper') {
 
 ?>
 <!DOCTYPE html>
@@ -61,14 +61,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
         ?>
         <div class="arrow">
-                <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Noticeboard
+                <img src="../images/arrow-right-circle.svg" alt="arrow">Storekeeper's Noticeboard
         </div>
         <?php 
             $nic = $_SESSION['nic'];
             $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
             $pid = mysqli_fetch_assoc($res1)['patientID'];
 
-                $query = "select a.announcementID,a.title,a.nic,u.name,u.profile_image,a.message,a.date,a.time from announcement a inner join announcementreaders r on a.announcementID=r.announcementID inner join user u on u.nic=a.nic where r.user_role='Patient';";
+                $query = "select a.announcementID,a.title,a.nic,u.name,u.profile_image,a.message,a.date,a.time from announcement a inner join announcementreaders r on a.announcementID=r.announcementID inner join user u on u.nic=a.nic where r.user_role='Storekeeper';";
                 $result = mysqli_query($con,$query);
            
 
@@ -85,48 +85,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             ?>
         
     
-</div>      
-        <div id="login-modal">
-        <div class="modal">
-            <div class="login-form">
-            <h2>Put Your Appointment</h2><br>
-            <form  action="" method="post">
-                <label for="">Date</label><br><br>
-                <input type="date" name="date" id="date"><br><br>
-                <label for="">Department</label><br><br>
-                <select name="department" id="department">
-                    <option value="">Please A Select Department</option>
-                    <option value="Anesthetics">Anesthetics</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Gastroentology">Gastroentology</option>
-                </select><br><br>
-                <label for="">Doctor</label><br><br>
-                <select name="doctor" id="doctor">
-                    <option value="">Select A Department First</option>
-                </select><br><br>
-                <label for="">Message</label><br><br>
-                <textarea name="msg" id="msg" cols="30" rows="3" placeholder="Your Message To The Doctor"></textarea><br><br>
-                <!-- <br><br><input type="submit" value="Submit" id="btn" name="btn" class="btn"> -->
-               
-                <button type="submit" name="cancel" id="cancel" value="cancel" class="cancel-modal">Cancel</button>
-                <button type="submit" name="submit" id="btn" value="submit" onclick="">Submit</button>
-            </form>
-            </div>
-        </div>
-    </div>
-    
-    <script type="text/javascript">
-        $(function(){
-            $('#open').click(function(){
-                $('#login-modal').fadeIn().css("display","flex");
-            });
-            $('#open-').click(function(){
-                $('#login-modal').fadeIn().css("display","flex");
-            });
-            $('.cancel-modal').click(function(){
-                $('#login-modal').fadeOut();
-            });
-        });
     </script>
 </body>
 </html>
