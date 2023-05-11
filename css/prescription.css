@@ -86,6 +86,15 @@
     border: 1px solid #e5e5e5;
     border-radius: 3px;
 }
+.redirect-button{
+    padding: 0.5em;
+    border: 1px solid #dc3545 !important;
+    background: #f1aeb5 !important;
+    color: #dc3545 !important;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 10px;
+}
 /* input[type=button]{
     padding: 1em;
     line-height: 1;
