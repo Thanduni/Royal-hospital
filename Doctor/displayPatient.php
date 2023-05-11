@@ -34,6 +34,8 @@ if(isset($_POST['submit-doctor-note'])) {
 
     $prescription = "INSERT into prescription(date,age,patientID,doctorID,investigation,impression) values('$date','$age','$patientID','$doctorID','$investigation','$impression');";    
     if(mysqli_query($con,$prescription)){
+        // Set doctorBusy to true (doctor is attending a patient)
+        $_SESSION['doctor_busy'] = true;
         //get the autogenerate id from query
         $prescriptionID = mysqli_insert_id($con);
         header("Location: viewPrescription.php?id=".$prescriptionID);
