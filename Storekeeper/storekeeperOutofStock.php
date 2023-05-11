@@ -79,7 +79,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             <div class="banner">
                 <h1>Stock</h1>
             </div>
-            <p class="royal">Royal Hospital Management System </p>
+            <p class="royal">Royal Hospital </p>
             <p class="addUser" id="titleOperation">Add stock</p>
             <table>
                 <tr colspan="3">

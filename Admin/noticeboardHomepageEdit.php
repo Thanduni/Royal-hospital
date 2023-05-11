@@ -43,7 +43,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
             ?>
 <!--            <div class="title">-->
 <!--                <img src="../images/logo5.png" alt="logo">-->
-<!--                Royal Hospital Management System-->
+<!--                Royal Hospital-->
 <!--            </div>-->
 <!--            <ul>-->
 <!--                <li class="userType"><img src="../images/userInPage.svg" alt="admin"> Admin</li>-->

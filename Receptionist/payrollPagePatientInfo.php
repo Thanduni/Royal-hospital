@@ -29,7 +29,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
         include(BASEURL . '/Components/ReceptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>        <div class="userContents" id="center">
             <div class="title">
                 <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-                Royal Hospital Management System
+                Royal Hospital
             </div>
             <ul>
                 <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="admin">

@@ -34,11 +34,9 @@ if (isset($_POST["submit"])) {
     VALUES ('$date','$time','$doctor','$pid','$msg','Confirmed')";
     $result = mysqli_query($con, $query);
 
-    $appIdQuery = "SELECT LAST_INSERT_ID()";
-    $appID = mysqli_fetch_assoc(mysqli_query($con, $appIdQuery))['LAST_INSERT_ID()'];
 
-    $query = "INSERT INTO `purchases`(`patientID`, `date`, `quantity`, `paid_status`, `paid_status1`, `item`, `item_flag`, `appointmentID`) 
-    VALUES ('$pid' ,'$date',1,'not paid', 'Not paid', 3, 's', NULL), ('$pid', '$date',1, 'not paid', 'Not paid', 4, 's', '$appID')";
+    $query = "INSERT INTO `purchases`(`patientID`, `date`, `quantity`, `paid_status`, `paid_status1`, `item`, `item_flag`) 
+    VALUES ('$pid', '$date',1, 'not paid', 'Not paid', 4, 's')";
     $result = mysqli_query($con, $query);
 
     $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 

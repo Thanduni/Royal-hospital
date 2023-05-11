@@ -23,7 +23,7 @@ if (!isset($_SESSION['mailaddress'])) {
             <div class="p1">
                 <div class="loginContents">
                     <p><img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo" align="middle"><br>
-                        Royal Hospital Management System
+                        Royal Hospital
                     </p>
                     <?php
                     if (@$_GET['Empty'] == true) {

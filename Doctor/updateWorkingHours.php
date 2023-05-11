@@ -460,7 +460,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 <div class="banner">
                     <h1 id="titleWeek"></h1>
                 </div>
-                <p class="royal">Royal Hospital Management System </p>
+                <p class="royal">Royal Hospital </p>
                 <p class="addUser" id="titleOperation">Set working schedule</p>
                 <div class="newSlots">
                     <label for="start-time">Start Time:</label>

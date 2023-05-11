@@ -189,7 +189,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <div id="form">
                 <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
                       name="userForm">
-                    <p class="royal">Royal Hospital Management System </p>
+                    <p class="royal">Royal Hospital </p>
                     <p class="addUser" id="titleOperation">Add user</p>
                     <table>
                         <tr colspan="3">
