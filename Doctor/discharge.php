@@ -54,7 +54,18 @@ if($admitted_days==0){
         $admitted_days =1;
     }
 }
-
+function displaySuccess(){
+    echo '<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var successMessage = document.querySelector(".admit-patient-container .admit-patient-detail .success-message");
+        if (successMessage) {
+            successMessage.style.display = "flex";
+        } else {
+            console.error("Error: Could not find success message element.");
+        }
+    });
+    </script>';
+}
 
 //discharge patient
 if(isset($_POST['discharge-patient'])){
@@ -72,16 +83,10 @@ if(isset($_POST['discharge-patient'])){
         //commit transaction
         mysqli_commit($con);
         //show success message using javascript
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {          
-            var successMessage = document.querySelector(".admit-patient-container .admit-patient-detail .admit-patient-success-message");
-            if(successMessage) {
-                successMessage.style.display = "block";
-            } else {
-                console.error("Error: Could not find success message element.");
-            }
-        });
-      </script>';
+        displaySuccess();
+
+    // header("Location: discharge.php?patientid=".$patientID);
+    // exit;
     }catch(Exception $e){
         //rollback if any query failed
         mysqli_rollback($con);
@@ -116,8 +121,9 @@ if(isset($_POST['discharge-patient'])){
                 <div class="admit-patient-container">
                     <div class="admit-patient-detail">
                         <h2>Patient Discharge Details</h2>
-                        <div class="success-message admit-patient-success-message" id="success-message" style="display:none;">
-                            <p>Discharge Patient Successfully</p>
+                        <div class="success-message" id="success-message" style="display:none;">
+                            <p>Please enter a doctor Note first</p>
+                            <a href="inpatient.php"><input type="button" value="OK" class="ok-btn " name="ok-btn"></a>
                         </div>
                         <form method="post">
                             <div class="form-row">
@@ -143,11 +149,11 @@ if(isset($_POST['discharge-patient'])){
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="">Discharge Date</label>
-                                    <input type="date" name="admitDate" value ="<?php echo $current_date?>" readonly>
+                                    <input type="date" name="dischargeDate" value ="<?php echo $current_date?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Discharge Time</label>
-                                    <input type="time" name="admitTime" value ="<?php echo $current_time?>" readonly>
+                                    <input type="time" name="dischargeTime" value ="<?php echo $current_time?>" readonly>
                                 </div>
                             </div>
                             <button id="discharge-btn" class="discharge-patient-btn custom-btn" type="submit" name="discharge-patient">Discharge Patient</button>
