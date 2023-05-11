@@ -1,5 +1,7 @@
 <?php
 session_start();
+// Set doctorBusy to true
+$_SESSION['doctor_busy'] = true;
 require_once("../conf/config.php");
 if(isset($_GET['id'])) {
     $prescriptionID = $_GET['id'];

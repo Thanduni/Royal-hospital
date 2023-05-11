@@ -1,5 +1,7 @@
 <?php
 session_start();
+// Check if the doctor is currently attending a patient
+$doctorBusy = isset($_SESSION['doctor_busy']) ? $_SESSION['doctor_busy'] : false;
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
@@ -26,13 +28,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     </script>
-    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
-    <style>
-        .next {
-            position: initial;
-            height: auto;
-        }
-    </style>   
+    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script> 
     <title>Doctor Dashboard</title> 
 </head>
 
@@ -163,27 +159,33 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         <td><?php echo $date ?></td>
                                         <td><?php echo $time ?></td>
                                         <td><?php echo $message ?></td>
+                                        <style>
+                                          .disabled-link {
+                                            /* opacity: 0.5; */
+                                            /* pointer-events: none; */
+                                          }
+                                        </style>
                                         <?php
-                                        //if a doctor note is added
-                                        if($row['prescriptionID'] != null) {
-                                            // Show the "mark as complete" button
+                                        //if a doctor note is not added
+                                        if($row['prescriptionID'] == null) {
                                             ?>
-                                        <td><a href="viewPrescription.php?id=<?=$row['prescriptionID']?>">
+                                            <td>
+                                                <a href="<?php echo $doctorBusy ? '#' : 'displayPatient.php?patientid=' . $patientID; ?>" class="<?php echo $doctorBusy ? 'disabled-link' : ''; ?>">
+                                                    <img class="view-btn-image" src="../images/eye.png" width="40px" height="40px">
+                                                </a>
+                                            </td>
+                                        <?php 
+                                        }
+                                        else if($row['prescriptionID'] != null) {?>
+                                         <!-- if a doctor note is added direct to viewP-->
+                                         <td><a href="viewPrescription.php?id=<?=$row['prescriptionID']?>">
                                                 <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
-                                            </button></td>
-                                            <?php }
-                                         else {?>
-                                         <!-- direct to display patient with form -->
-                                            <td><a href="displayPatient.php?patientid=<?=$patientID?>">
-                                                <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
-                                            </button></td>
+                                        </td>
+                                            <td><a href="completeAppointment.php?patientid=<?=$patientID?>&appointmentid=<?=$appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
                                             <?php
                                             }
-                                            if($row['prescriptionID'] != null) {?>
-                                            <td><a href="completeAppointment.php?patientid=<?=$patientID?>&appointmentid=<?=$appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
-                                        <?php }
-                                         
-                                        ?>
+                                            ?>
+                                        
                                        
                                     </tr>
                                     <?php

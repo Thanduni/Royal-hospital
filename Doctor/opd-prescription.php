@@ -3,6 +3,8 @@ session_start();
 require_once("../conf/config.php");
 
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
+    // Set doctorBusy to true
+    $_SESSION['doctor_busy'] = true;
     $nic = $_SESSION['nic'];
     $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
     $get_doctorID = mysqli_query($con,$doctorID_query);
@@ -126,7 +128,7 @@ if(isset($_GET['patientid'])){
                                 <thead>
                                     <th>ID</th>
                                     <th>Drug Name</th>
-                                    <th>Dosage (per day)</th>
+                                    <th>Dosage</th>
                                     <th>Frequency (per day)</th>
                                     <th>No of days</th>
                                     <!-- <th>Edit</th> -->
@@ -178,8 +180,8 @@ if(isset($_GET['patientid'])){
                 $("#prescription-table").append(`<tr>
                     <td><input type="text" name="drugName[]" class="autoComplete-input"></td>
                     <td><input type="number" name="dosage[]"></td>
-                    <td><input type="number" name="days[]"></td>
                     <td><input type="number" name="frequency[]"></td>
+                    <td><input type="number" name="days[]"></td>
                     <td><input type="button" name="remove" class="remove" value="Remove"></td>
                     </tr>`);
 
