@@ -18,6 +18,19 @@ if(isset($_GET['patientid'])){
             echo $dosage."<br>";
             echo $days."<br>";
             echo $frequency."<br>";
+
+            // Store drug details in the session variable
+            $drugDetails = array();
+            for ($i = 0; $i < count($drugNames); $i++) {
+                $drugDetail = array(
+                    'drugName' => $drugNames[$i],
+                    'dosage' => $dosages[$i],
+                    'days' => $days[$i],
+                    'frequency' => $frequencies[$i]
+                );
+                $drugDetails[] = $drugDetail;
+            }
+            $_SESSION['drugDetails'] = $drugDetails;
              
             //check if drug is available in hospital
             $get_item = "SELECT itemID,unit_price from item WHERE item_name =?";
@@ -102,7 +115,34 @@ if(isset($_GET['patientid'])){
         }
     }
 }
-               
+
+if (isset($_GET['confirmMessage'])){
+    // Insert prescribed drugs into the prescribed_drugs table
+    foreach ($_POST['drugName'] as $key => $value) {
+        $drugName = $_POST['drugName'][$key];
+        $dosage = $_POST['dosage'][$key];
+        $days = $_POST['days'][$key];
+        $frequency = $_POST['frequency'][$key];
+        echo "<br>".$drugName."<br>";
+            echo $dosage."<br>";
+            echo $days."<br>";
+            echo $frequency."<br>";
+
+        // Insert prescribed drug into database
+        $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency, prescriptionID, date) VALUES ('$value', '$dosage', '$days', '$frequency', '$prescriptionID', CURDATE());";
+        $stmt = mysqli_query($con, $save);
+
+        if ($stmt) {
+            echo "Prescription Added<br>";
+            header("Location: prescription.php?patientid=" . $patientID);
+            exit(); 
+        } else {
+            echo "Error: Failed to add prescription<br>";
+        }
+    }
+    // Redirect back to the prescription page without the error code
+    // Add this line to stop further execution of the script
+}
 
 
 ?>
