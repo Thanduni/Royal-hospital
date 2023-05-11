@@ -22,6 +22,14 @@ if (isset($_POST["submit"])) {
 
     $_SESSION['patientID'] = $pid;
 
+    $appointmentCountPerDayQuery = "select count(*) from appointment where patientID = '$pid' and date='$date';";
+    $appointmentCountPerDay = mysqli_fetch_assoc(mysqli_query($con, $appointmentCountPerDayQuery))['count(*)'];
+
+    if($appointmentCountPerDay == 1){
+        header("location: " . BASEURL ."/Patient/patientDash.php?warning=Already you have an appointment this day. Try another date.");
+        exit();
+    }
+
     $query = "INSERT INTO `appointment`(`date`, `time`, `doctorID`, `patientID`, `message`, `status`) 
     VALUES ('$date','$time','$doctor','$pid','$msg','Confirmed')";
     $result = mysqli_query($con, $query);

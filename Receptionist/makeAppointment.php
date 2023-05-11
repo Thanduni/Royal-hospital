@@ -51,6 +51,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <p>
                 <button id=open type="button" class="custom-btn">+Add appointment</button>
             </p>
+            <div class="alert" id="warning">
+                <?php
+                if(@$_GET['warning'])
+                    echo $_GET['warning'];
+                ?>
+            </div>
             <div class="wrapper_p">
                 <div class="table">
                     <div class="row headerT">

@@ -120,14 +120,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
+                        if($row = mysqli_fetch_array($result)){
                         ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"> <?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>"> Monday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
                         <?php
+                        } else { ?>
+                            <tr>
+                                <td> Monday</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -161,14 +168,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
-                        ?>
+                        if($row = mysqli_fetch_array($result)){
+                            ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"><?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>">Tuesday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                        <?php
+                    <?php
+                    } else { ?>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -202,14 +216,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
-                        ?>
+                        if($row = mysqli_fetch_array($result)){
+                            ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"><?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>">Wednesday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                        <?php
+                    <?php
+                    } else { ?>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -243,14 +264,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
-                        ?>
+                        if($row = mysqli_fetch_array($result)){
+                            ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"><?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>">Thursday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                        <?php
+                    <?php
+                    } else { ?>
+                        <tr>
+                            <td>Thursday</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -284,14 +312,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
-                        ?>
+                        if($row = mysqli_fetch_array($result)){
+                            ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"><?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>">Friday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                        <?php
+                    <?php
+                    } else { ?>
+                        <tr>
+                            <td>Friday</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -325,14 +360,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
-                        ?>
+                        if($row = mysqli_fetch_array($result)){
+                            ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"><?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>">Saturday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                        <?php
+                    <?php
+                    } else { ?>
+                        <tr>
+                            <td>Saturday</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -366,14 +408,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         $result = $con->query($query);
                         if (!$result) die("Database access failed: " . $con->error);
                         $rows = $result->num_rows;
-                        $row = mysqli_fetch_array($result);
-                        ?>
+                        if($row = mysqli_fetch_array($result)){
+                            ?>
                         <tr>
-                            <td rowspan="<?php echo $rows ?>"><?php echo $row['day_of_week']; ?></td>
+                            <td rowspan="<?php echo $rows ?>">Sunday</td>
                             <td><?php echo date('h:i A', strtotime($row['start_time'])) ?></td>
                             <td><?php echo date('h:i A', strtotime($row['end_time'])); ?></td>
                         </tr>
-                        <?php
+                            <?php
+                        } else { ?>
+                            <tr>
+                                <td>Saturday</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        <?php }
                         if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -409,7 +458,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             <form method="post" enctype="multipart/form-data" onsubmit="return checkValidation()" id="time-slot-form"
                   name="userForm">
                 <div class="banner">
-                    <h1>User</h1>
+                    <h1 id="titleWeek"></h1>
                 </div>
                 <p class="royal">Royal Hospital Management System </p>
                 <p class="addUser" id="titleOperation">Set working schedule</p>

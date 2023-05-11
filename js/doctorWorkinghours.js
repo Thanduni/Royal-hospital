@@ -157,12 +157,13 @@ function checkValidation(){
         success: function(response) {
 // update the department select element with the departments returned by the PHP file
             console.log("Status = " + response.status);
+            location.replace('http://localhost:8080/ROYALHOSPITAL/Doctor/updateWorkingHours.php');
         },
         error: function(xhr, status, error) {
             console.log('Error: ' + xhr.responseText);
         }
     });
-
+    return true;
 }
 
 // Add an event listener to the submit button or form
@@ -178,6 +179,7 @@ let form = document.getElementById("time-slot-form");
 function edit(day){
     // e.preventDefault();
     dayOfWeek = day;
+    document.getElementById("titleWeek").textContent = day;
     // form.action = '/royalhospital/doctorWork/fixSchedule.php?day=' + day;
 }
 

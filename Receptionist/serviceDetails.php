@@ -90,7 +90,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="Not paid">Not paid</label>
+                                        <label for="Not paid">Pending</label>
                                     </td>
                                     <td>
                                         <input type="checkbox" style="display: inline" id="paidStatus" name="paidStatus">
@@ -159,7 +159,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -233,7 +235,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -308,7 +312,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -414,7 +420,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>

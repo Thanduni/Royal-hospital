@@ -17,9 +17,20 @@ if (isset($_POST["submit"])) {
     $result_docNIC = mysqli_query($con, $docNIC_query);
     $docNIC = mysqli_fetch_assoc($result_docNIC)['nic'];
 
+    $patientNameQuery = "SELECT name FROM user inner join patient on user.nic=patient.nic WHERE patientID = '$pid'";
+    $patientName = mysqli_fetch_assoc(mysqli_query($con, $patientNameQuery))['name'];
+
     $recID_query = "SELECT receptionistID FROM receptionist WHERE nic = '$nic'";
     $result_recID = mysqli_query($con, $recID_query);
     $recID = mysqli_fetch_assoc($result_recID)['receptionistID'];
+
+    $appointmentCountPerDayQuery = "select count(*) from appointment where patientID = '$pid' and date='$date';";
+    $appointmentCountPerDay = mysqli_fetch_assoc(mysqli_query($con, $appointmentCountPerDayQuery))['count(*)'];
+
+    if($appointmentCountPerDay == 1){
+        header("location: " . BASEURL ."/Homepage/homepageAppointment.php?warning=Already you have an appointment this day. Try another date.");
+        exit();
+    }
 
     $query = "INSERT INTO `appointment`(`date`, `time`, `doctorID`, `patientID`, `message`, `status`, `receptionistID`) 
     VALUES ('$date','$time','$doctor','$pid','$msg','Confirmed', '$recID')";
