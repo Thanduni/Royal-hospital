@@ -104,7 +104,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             // echo $d_arr[1]."<br>";
             // $docnic = array();
 
-                $query = "select i.admit_date,i.admit_time,i.discharge_date,i.admit_duration,u.name,p.investigation,p.Impression from inpatient i inner join patient t on i.patientID=t.patientID
+                $query = "select i.admit_date,i.admit_time,i.admitID,i.discharge_date,i.admit_duration,u.name,p.date,p.investigation,p.Impression from inpatient i inner join patient t on i.patientID=t.patientID
                  inner join prescription p on t.patientID=p.patientID inner join doctor d on d.doctorID=p.doctorID inner join user u on u.nic=d.nic where i.patientID=$pid";
 
                  $result = mysqli_query($con,$query);
@@ -113,14 +113,34 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                  while($rows = mysqli_fetch_assoc($result)){
              ?>
                  <div class="s-content">
+                    <?php if(count($rows['admitID'])){ ?>
+                    <table>
+                            <tr>
+                                <td><label>Admit Date:</label></td>
+                                <td><p><?php echo $rows['admit_date']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td><label>Discharge Date:</label></td>
+                                <td><p><?php echo $rows['discharge_date']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td><label>Doctor Name:</label></td>
+                                <td><p><?php echo $rows['name']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td><label for="">Impression:</label></td>
+                                <td><p><?php echo $rows['Impression']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td><label for="">Investigation:</label></td>
+                                <td><p><?php echo $rows['investigation']; ?></p></td>
+                            </tr>
+                        </table>
+                    <?php } else{?>
                      <table>
                          <tr>
-                             <td><label>Admit Date:</label></td>
-                             <td><p><?php echo $rows['admit_date']; ?></p></td>
-                         </tr>
-                         <tr>
-                             <td><label>Discharge Date:</label></td>
-                             <td><p><?php echo $rows['discharge_date']; ?></p></td>
+                             <td><label>Prescribed Date:</label></td>
+                             <td><p><?php echo $rows['date']; ?></p></td>
                          </tr>
                          <tr>
                              <td><label>Doctor Name:</label></td>
@@ -135,6 +155,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                              <td><p><?php echo $rows['investigation']; ?></p></td>
                          </tr>
                      </table>
+                     <?php }?>
             <?php
                 }
             ?>

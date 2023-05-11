@@ -41,7 +41,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         .s-content .n-content textarea{
             overflow-y: hidden;
             width: 98.5%;
-            height:530px;
+            min-height:300px;
+
             font-size: 18px;
             
         }
@@ -64,9 +65,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Noticeboard
         </div>
         <?php 
-            $nic = $_SESSION['nic'];
-            $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
-            $pid = mysqli_fetch_assoc($res1)['patientID'];
 
                 $query = "select a.announcementID,a.title,a.nic,u.name,u.profile_image,a.message,a.date,a.time from announcement a inner join announcementreaders r on a.announcementID=r.announcementID inner join user u on u.nic=a.nic where r.user_role='Patient';";
                 $result = mysqli_query($con,$query);
@@ -79,8 +77,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     <div class="t-content"><h2><u><?php echo $rows['title'];?></u></h2></div>
                     <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php echo BASEURL.'/images/'.$rows['profile_image'] ?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
                     <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
-                    
                 </div>
+                
             <?php
                 }
             ?>
