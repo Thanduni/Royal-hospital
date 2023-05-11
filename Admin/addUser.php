@@ -127,7 +127,7 @@ if (isset($_POST['addUser'])) {
     else if ($userRole == "Storekeeper"){
         $query = "INSERT INTO storekeeper(nic) VALUES ('$nic');";
         $result = mysqli_query($con, $query);
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user Receptionist added to the system successfully.");
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user storekeeper added to the system successfully.");
         exit();
     }
     else if($userRole == "Doctor"){
