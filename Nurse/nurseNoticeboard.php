@@ -64,9 +64,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Doctor's Noticeboard
         </div>
         <?php 
-            $nic = $_SESSION['nic'];
-            $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
-            $pid = mysqli_fetch_assoc($res1)['patientID'];
 
                 $query = "select a.announcementID,a.title,a.nic,u.name,u.profile_image,a.message,a.date,a.time from announcement a inner join announcementreaders r on a.announcementID=r.announcementID inner join user u on u.nic=a.nic where r.user_role='Nurse';";
                 $result = mysqli_query($con,$query);
