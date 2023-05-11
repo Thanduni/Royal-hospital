@@ -79,7 +79,7 @@ if(isset($_GET['patientid'])){
         ?>
         <div class="prescription-container">
             <div class="back-button-div">
-                <a href="prescription.php?patientid=<?=$patientID ?>">
+                <a href="opd-prescription.php?patientid=<?=$patientID ?>">
             <img src="<?php echo BASEURL . '/images/back-button.png' ?>" alt="">
             <div class="button-name">Medicine Prescription</div class="button-name"></a>
             </div>
