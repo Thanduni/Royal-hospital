@@ -4,7 +4,7 @@ let medicineNames=['Acetaminophen','Adderall','Amitriptyline','Amlodipine','Amox
 'Doxycycline','Dupixent','Entresto','Entyvio','Farxiga','Fentanyl Patch','Gabapentin','Gilenya','Humira','Hydrochlorothiazide','Hydroxychloroquine','Ibuprofen','Imbruvica','Invokana','Januvia','Jardiance','Kevzara','Lexapro','Lisinopril',
 'Lofexidine','Loratadine','Lyrica','Melatonin','Meloxicam','Metformin','Methadone','Methotrexate','Metoprolol','Naloxone','Naltrexone','Naproxen',
 'Narcan','Nurtec','Omeprazole','Onpattro','Otezla','Ozempic','Panadol','Parasitamol','Pantoprazole','Plan B','Prednisone','Probuphine',
-'Rybelsus','secukinumab','Sublocade','Tramadol','Trazodone','Viagra','Wegovy','Wellbutrin','Xanax','Zubsolv'];
+'Rybelsus','secukinumab','Sublocade','Tramadol','Trazodone','Viagra','Wegovy','Wellbutrin','Xanax','Zubsolv','Vitamin A','Vitamin B12','Vitamin B6','Vitamin C','Vitamin D','Vitamin D3','Vitamin E'];
 
 // async function getMedicineData(){
 //     const fdaRes = await fetch("https://api.fda.gov/drug/event.json?count=patient.drug.medicinalproduct.exact");
