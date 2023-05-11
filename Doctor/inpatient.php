@@ -59,7 +59,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                         </thead>
                         <tbody>
                             <?php 
-                                $select = "select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID where doctorID=$doctorID";
+                                $select = "select user.profile_image,user.name,patient.patientID,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on patient.patientID=inpatient.patientID where doctorID=$doctorID and discharge_date is null";
                                 $result = mysqli_query($con,$select);
                             
                                 while($row= mysqli_fetch_array($result)){
