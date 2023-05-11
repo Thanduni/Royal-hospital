@@ -15,6 +15,6 @@ if(isset($_POST['change'])){
         mysqli_query($con, $updateQuery);
         header("location:".BASEURL."/Homepage/login.php?success=Your password changed. Now you can login with your new password.");
     } else {
-        header("location:".BASEURL."/Homepage/changePassword.php?error=The entered passwords are different. Try again.&email=".$email);
+        header("location:".BASEURL."/Homepage/changePassword.php?error=The entered passwords are different. Try again.&email=".$email."&otp=verified");
     }
 }

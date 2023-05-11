@@ -1,8 +1,12 @@
+<!-- importing configaration file -->
+
 <?php
 session_start();
 //die($_SESSION['name']);
 require_once("../conf/config.php");
 ?>
+<!-- sidebar start -->
+
 
 <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
 <label for="openSidebarMenu" class="sidebarIconToggle">
@@ -38,6 +42,11 @@ require_once("../conf/config.php");
                                             src=<?php echo BASEURL . '/images/databaseDef.svg' ?> alt="dashboard"
                                             align="middle">
                 <p>Stock</p>
+            </a></li>
+        <li onmouseover="changeImage('noticeboard.svg', 'noticeboard')" onmouseout="restoreImage('noticeboardDef.svg', 'noticeboard')"><a id="notice" href="<?php echo BASEURL.'/Storekeeper/storekeeperNoticeBoard.php'?>" target="_self"><img id="noticeboard" class="butbut icons"
+                                            src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
+                                            align="middle">
+                <p>Noticeboard</p>
             </a></li>
         <li onmouseover="changeImage('profile.svg', 'profile')" onmouseout="restoreImage('profileDef.svg', 'profile')"><a href="<?php echo BASEURL . '/Storekeeper/updateStorekeeperProfile.php' ?>" target="_self"><img id="profile" class="butbut icons"
                                             src=<?php echo BASEURL . '/images/profileDef.svg' ?> alt="nurse"

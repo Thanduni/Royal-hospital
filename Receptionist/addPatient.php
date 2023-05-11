@@ -76,16 +76,25 @@ if (isset($_POST['addUser'])) {
         exit();
     }
 
-    $mail = new PHPMailer(true);
+//    $mail = new PHPMailer(true);
+//
+//    $mail -> isSMTP();
+//    $mail -> Host = "smtp.gmail.com";
+//    $mail -> Port = 25;
+//    $mail -> SMTPAuth = true;
+//    $mail -> SMTPSecure = 'tls';
+//
+//    $mail -> Username = 'hospitalroyal56@gmail.com';
+//    $mail -> Password = 'sbtozbzdzucvbors';
 
-    $mail -> isSMTP();
-    $mail -> Host = "smtp.gmail.com";
-    $mail -> Port = 25;
-    $mail -> SMTPAuth = true;
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->Host = 'sandbox.smtp.mailtrap.io';
+    $mail->SMTPAuth = true;
+    $mail->Port = 2525;
+    $mail->Username = '1acb7735cb1e05';
+    $mail->Password = 'c54edb01d6f665';
     $mail -> SMTPSecure = 'tls';
-
-    $mail -> Username = 'hospitalroyal56@gmail.com';
-    $mail -> Password = 'usygevftzbeyiqea';
 
     $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
     $mail -> addAddress($email);

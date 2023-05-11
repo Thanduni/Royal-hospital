@@ -5,38 +5,44 @@ $doctorBusy = isset($_SESSION['doctor_busy']) ? $_SESSION['doctor_busy'] : false
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
-  $nic = $_SESSION['nic'];
-  $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
-  $get_doctorID = mysqli_query($con,$doctorID_query);
-  $row = mysqli_fetch_assoc($get_doctorID);
-  $doctorID = $row["doctorID"];
+    $nic = $_SESSION['nic'];
+    $doctorID_query = "select doctorID from doctor join user on user.nic = doctor.nic where user.nic = $nic";
+    $get_doctorID = mysqli_query($con,$doctorID_query);
+    $row = mysqli_fetch_assoc($get_doctorID);
+    $doctorID = $row["doctorID"];
     ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
-    <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script> 
-    <title>Doctor Dashboard</title> 
-</head>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+        <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+        </script>
+        <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
+        <style>
+            .next {
+                position: initial;
+                height: auto;
+            }
+        </style>
+        <title>Doctor Dashboard</title>
+    </head>
 
 
-<body>
+    <body>
     <div class="user">
-      
-    <?php
+
+        <?php
         $name = urlencode( $_SESSION['name']);
         include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
@@ -49,53 +55,53 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 <div class="main-container">
                     <div class="doctor-cards">
                         <a href="appointment.php">
-                        <div class="doctor-card">
-                            <div class="card-content">
-                                <div class="number">
-                                    <?php
-                                    $appointment_query = "SELECT * from appointment where doctorID= $doctorID AND date=CURDATE() AND status='confirmed';";
-                                    $appointment_query_run = mysqli_query($con,$appointment_query);
-                                    if($appointment_count =mysqli_num_rows($appointment_query_run)){
-                                        echo $appointment_count;
-                                    }
-                                    else{
-                                        echo '0';
-                                    }
-                                    ?>
+                            <div class="doctor-card">
+                                <div class="card-content">
+                                    <div class="number">
+                                        <?php
+                                        $appointment_query = "SELECT * from appointment where doctorID= $doctorID AND date=CURDATE() AND status='confirmed';";
+                                        $appointment_query_run = mysqli_query($con,$appointment_query);
+                                        if($appointment_count =mysqli_num_rows($appointment_query_run)){
+                                            echo $appointment_count;
+                                        }
+                                        else{
+                                            echo '0';
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="card-name">
+                                        Appointments
+                                    </div>
                                 </div>
-                                <div class="card-name">
-                                    Appointments
+                                <div class="icon-box">
+                                    <i class="fas fa-user-injured"></i>
                                 </div>
                             </div>
-                            <div class="icon-box">
-                                <i class="fas fa-user-injured"></i>
-                            </div>
-                        </div>
                         </a>
                         <a href="inpatient.php">
-                        <div class="doctor-card">
-                            <div class="card-content">
-                                <div class="number">
-                                    <?php
-                                    // $dash_patient_query = "select * from `user` where user_role = 'Patient';";
-                                    $dash_patient_query = "SELECT * from `inpatient` where doctorID = $doctorID;";
-                                    $dash_patient_query_run = mysqli_query($con,$dash_patient_query);
-                                    if($total_patient = mysqli_num_rows($dash_patient_query_run)){
-                                        echo $total_patient ;
-                                    }
-                                    else{
-                                        echo '0';
-                                    }
-                                    ?>
+                            <div class="doctor-card">
+                                <div class="card-content">
+                                    <div class="number">
+                                        <?php
+                                        // $dash_patient_query = "select * from `user` where user_role = 'Patient';";
+                                        $dash_patient_query = "SELECT * from `inpatient` where doctorID = $doctorID;";
+                                        $dash_patient_query_run = mysqli_query($con,$dash_patient_query);
+                                        if($total_patient = mysqli_num_rows($dash_patient_query_run)){
+                                            echo $total_patient ;
+                                        }
+                                        else{
+                                            echo '0';
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="card-name">
+                                        Total Patients
+                                    </div>
                                 </div>
-                                <div class="card-name">
-                                    Total Patients
+                                <div class="icon-box">
+                                    <i class="fas fa-user-injured"></i>
                                 </div>
                             </div>
-                            <div class="icon-box">
-                                <i class="fas fa-user-injured"></i>
-                            </div>
-                        </div>
                         </a>
                         <div class="doctor-card">
                             <div class="card-content">
@@ -145,7 +151,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                     $date = $row['date'];
                                     $time = $row['time'];
                                     $message = $row['message'];
-                                    $patientID= $row['patientID']; 
+                                    $patientID= $row['patientID'];
                                     $appointmentID = $row['appointmentID'];?>
                                     <tr>
                                         <td><div class="left-cell">
@@ -185,8 +191,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                             <?php
                                             }
                                             ?>
-                                        
-                                       
+                                                                              
                                     </tr>
                                     <?php
                                 }
@@ -229,9 +234,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     </div>
 
     <script src="<?php echo BASEURL . '/js/calendar.js' ?>"></script>
-</body>
-</html>
-<?php
+    </body>
+    </html>
+    <?php
 } else {
     header("location: " . BASEURL . "/Homepage/login.php");
 }

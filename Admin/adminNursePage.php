@@ -114,7 +114,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 </ul>
 
                             </div>
-
                         <?php } ?>
                     </div>
                 </div>

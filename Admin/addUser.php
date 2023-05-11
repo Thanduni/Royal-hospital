@@ -64,16 +64,23 @@ if (isset($_POST['addUser'])) {
         exit();
     }
 
+//    $mail = new PHPMailer();
+//
+//    $mail -> isSMTP();
+//    $mail -> Host = "smtp.gmail.com";
+//    $mail -> Port = 25;
+//    $mail -> SMTPAuth = true;
+//    $mail -> Username = 'hospitalroyal56@gmail.com';
+//    $mail -> Password = 'sbtozbzdzucvbors';
+
     $mail = new PHPMailer();
-
-    $mail -> isSMTP();
-    $mail -> Host = "smtp.gmail.com";
-    $mail -> Port = 25;
-    $mail -> SMTPAuth = true;
+    $mail->isSMTP();
+    $mail->Host = 'sandbox.smtp.mailtrap.io';
+    $mail->SMTPAuth = true;
+    $mail->Port = 2525;
+    $mail->Username = '1acb7735cb1e05';
+    $mail->Password = 'c54edb01d6f665';
     $mail -> SMTPSecure = 'tls';
-
-    $mail -> Username = 'hospitalroyal56@gmail.com';
-    $mail -> Password = 'usygevftzbeyiqea';
 
     $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
     $mail -> addAddress($email);
@@ -120,7 +127,7 @@ if (isset($_POST['addUser'])) {
     else if ($userRole == "Storekeeper"){
         $query = "INSERT INTO storekeeper(nic) VALUES ('$nic');";
         $result = mysqli_query($con, $query);
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user Receptionist added to the system successfully.");
+        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user storekeeper added to the system successfully.");
         exit();
     }
     else if($userRole == "Doctor"){

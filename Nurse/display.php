@@ -53,10 +53,11 @@ if(isset($_POST['submit'])){
             ?>
 
             <div class="main-container">
+                <h3 class="nurse_heads">In-Patients List</h3>
                 <input type="text" id="myInputName" onkeyup="filterByName()" placeholder="Search for names.." title="Type in a name">
                 <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
 
-                <button class="button" id="admission-button" class="custom-btn">
+                <button class="button" id="admission-button">
                     New Admission
                 </button>
 
@@ -121,7 +122,7 @@ if(isset($_POST['submit'])){
                     <label>Admit time</label>
                     <input type="time" id="time" name="admit_time" min="" required>
                 </div>
-                <button class="submit custom-btn" type="submit" name ="submit">Submit</button>
+                <button class="submit" type="submit" name ="submit">Submit</button>
             </form>
         </div>
     </div>

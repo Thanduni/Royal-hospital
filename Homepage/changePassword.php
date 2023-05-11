@@ -3,7 +3,7 @@ session_start();
 //require_once("/xampp/htdocs/Royalhospital/conf/config.php");
 
 require_once("../conf/config.php");
-if(!isset($_SESSION['mailaddress'])){
+if(!isset($_SESSION['mailaddress']) && $_GET['otp'] == 'verified'){
     ?>
 
     <!doctype html>
@@ -23,7 +23,7 @@ if(!isset($_SESSION['mailaddress'])){
         <div class="verifyPart">
             <div class="form">
                 <h1>New password</h1>
-                <form action="<?php echo BASEURL . '/Homepage/processNewPassword.php?email='.$_GET['email'] ?>" method="post">
+                <form action="<?php echo BASEURL . '/Homepage/processNewPassword.php?email='.$_GET['email'] ?>" method="post" onsubmit="return validatePasswordForm()">
                     <div class="alert" id="warning">
                         <?php
                         if(@$_GET['error'])
@@ -31,17 +31,19 @@ if(!isset($_SESSION['mailaddress'])){
                         ?>
                     </div>
                     <div class="group">
-                        <input type="password" name="password">
+                        <input type="password" name="password" id="password1">
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>New password</label>
                     </div>
+                    <div class="alert" style="width: 286px; word-break: break-word; margin-right: 10px" id="password1Div"></div>
                     <div class="group">
-                        <input type="password" name="confirmPassword">
+                        <input type="password" name="confirmPassword"  id="password2">
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Confirm password</label>
                     </div>
+                    <div class="alert" style="width: 286px; word-break: break-word; margin-right: 10px" id="password2Div"></div>
                     <button type="submit" name="change" class="custom-btn">
                         Change
                     </button>
@@ -56,6 +58,7 @@ if(!isset($_SESSION['mailaddress'])){
             <img src="<?php echo BASEURL.'/images/otpDesign.png' ?>" alt="">
         </div>
     </div>
+    <script src=<?php echo BASEURL . '/js/ValidatePassword.js' ?>></script>
     </body>
     </html>
 

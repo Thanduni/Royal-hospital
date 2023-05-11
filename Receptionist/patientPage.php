@@ -261,7 +261,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="Weight">Weight(in kgs):</label>
                             </td>
                             <td colspan="2">
-                                <input type="number" step="0.01" name="weight" min="" max="" id="IN_weight" required><div class="alert" id="weight"></div>
+                                <input type="number" step="0.01" name="weight" min="1" max="" id="IN_weight" required><div class="alert" id="weight"></div>
                             </td>
                         </tr>
                         <tr>
@@ -269,12 +269,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <label for="Height">Height(in cms):</label>
                             </td>
                             <td colspan="2">
-                                <input type="number" name="height" step="0.01" min="" max="" id="IN_height" required><div class="alert" id="height"></div>
+                                <input type="number" name="height" step="0.01"min="1" max="" id="IN_height" required><div class="alert" id="height"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="illness">Drug allergies:</label>
+                                <label for="illness">Illness:</label>
                             </td>
                             <td colspan="2">
                                 <textarea type="text" name="illness" id="IN_illness" rows=3 required></textarea><div class="alert" id="illness"></div>

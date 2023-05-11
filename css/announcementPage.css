@@ -1,0 +1,136 @@
+#aboutUs,#slider{
+    display: block;
+    float: none;
+}
+
+.editRegion{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.editForm{
+    flex-basis: 78%;
+    background-color: white;
+    border-style: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    margin: 20px;
+}
+
+h2{
+    color: var(--para-color);
+}
+
+.disable{
+    background: #ADB6CD;
+    color: var(--para-color);
+}
+
+label{
+    font-size: 20px;
+}
+
+input[type='text'], input[type="password"]{
+    width: 100%;
+    font-size: 20px;
+    background: var(--form-back);
+    border: 1px solid rgba(36, 53, 78, 0.5);
+    border-radius: 5px;
+    height: 36px;
+}
+
+
+
+tbody{
+    width: 100%;
+}
+
+textarea{
+    width: 100%;
+    font-size: 20px;
+    background: var(--form-back);
+    border: 1px solid rgba(36, 53, 78, 0.5);
+    border-radius: 5px;
+}
+
+.disable{
+    background: #ADB6CD;
+    color: var(--para-color);
+}
+
+
+@media screen and (max-width: 1229px) {
+    .editRegion{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #aboutUs,#slider{
+        display: inline;
+    }
+}
+
+
+/*Table*/
+
+.userContents table {
+    width: 100%;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    padding: 20px;
+    margin: 20px;
+    border-spacing: 20px;
+}
+
+.userContents .sliderImg{
+    border-style: none;
+    border-radius: 20px;
+    height: 100px;
+    width: auto;
+}
+
+.col-1{
+    text-align: left;
+}
+
+.userContents th,
+.userContents td {
+    overflow-wrap: break-word;
+    padding: 0.25em;
+    margin: 10px;
+    vertical-align: top;
+}
+
+.userContents tr {
+    padding: 0.25em;
+    border-style: solid;
+    border-color: #000000;
+}
+
+/* Table */
+
+.userRoleSet{
+    display: flex;
+    margin: 20px 50% 20px 20%;
+    flex-wrap: wrap;
+    font-size: 17px;
+    border-style: solid;
+    justify-content: space-around;
+    padding: 20px;
+    border-width: 2px;
+    border-radius: 10px;
+}
+
+.checkBoxOptions{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+form{
+    margin-top: 40px;
+}

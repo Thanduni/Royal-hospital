@@ -3,7 +3,7 @@ session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 
-$deleteAppointmentQuery = "DELETE from appointment where `date`<CURRENT_DATE OR (`date`=CURRENT_DATE && `time`<CURRENT_TIME)";
+$deleteAppointmentQuery = "DELETE from appointment where `status`='Complete'";
 $deleteAppointmentResult = mysqli_query($con, $deleteAppointmentQuery);
 
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') {

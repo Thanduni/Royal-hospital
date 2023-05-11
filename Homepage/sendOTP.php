@@ -21,16 +21,26 @@ if(isset($_POST['continue'])){
         $query1 = "UPDATE USER SET `otp`='$otp' where `email`='$email'";
         $result1 = mysqli_query($con,$query1);
 
+//        $mail = new PHPMailer();
+//
+//        $mail -> isSMTP();
+//        $mail -> Host = "smtp.gmail.com";
+//        $mail -> Port = 25;
+//        $mail -> SMTPAuth = true;
+//        $mail -> SMTPSecure = 'tls';
+//        $mail->SMTPDebug = true;
+//
+//        $mail -> Username = 'hospitalroyal56@gmail.com';
+//        $mail -> Password = 'vahguealdjbaukgd';
+
         $mail = new PHPMailer();
-
-        $mail -> isSMTP();
-        $mail -> Host = "smtp.gmail.com";
-        $mail -> Port = 25;
-        $mail -> SMTPAuth = true;
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '1acb7735cb1e05';
+        $mail->Password = 'c54edb01d6f665';
         $mail -> SMTPSecure = 'tls';
-
-        $mail -> Username = 'hospitalroyal56@gmail.com';
-        $mail -> Password = 'usygevftzbeyiqea';
 
         $mail -> setFrom("hospitalroyal56@gmail.com", 'Royal hospital');
         $mail -> addAddress($email);
@@ -42,7 +52,10 @@ if(isset($_POST['continue'])){
                     <h2>$otp</h2>
                     <b>Royal hospital.</b>";
 
-        $mail -> send();
+        if(!$mail -> send()){
+            die($mail->ErrorInfo);
+        }
+
         $mail->smtpClose();
         header("location:" . BASEURL . "/Homepage/enterOTP.php?email=".$email);
     } else {

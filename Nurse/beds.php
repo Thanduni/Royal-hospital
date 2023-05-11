@@ -70,7 +70,7 @@ while(true){
             ?>
 
             <div class="main-container">
-                <h3>Room List</h3>
+                <h3 class="nurse_heads">Room List</h3>
                 <button class="button custom-btn" id="add-room">Add Room</button>
                 <div class="room-cards">                    
                     <?php foreach ($rows as $row):?>

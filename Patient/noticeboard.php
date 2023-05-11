@@ -38,7 +38,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
-        
+        .s-content .n-content textarea{
+            overflow-y: hidden;
+            width: 98.5%;
+            height:530px;
+            font-size: 18px;
+            
+        }
     </style>
 </head>
 <body>
@@ -62,15 +68,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
             $pid = mysqli_fetch_assoc($res1)['patientID'];
 
-                $query = "select a.announcementID,a.nic,u.name,u.profile_image,a.message,a.date,a.time from announcement a inner join announcementreaders r on a.announcementID=r.announcementID inner join user u on u.nic=a.nic where r.user_role='Patient';";
+                $query = "select a.announcementID,a.title,a.nic,u.name,u.profile_image,a.message,a.date,a.time from announcement a inner join announcementreaders r on a.announcementID=r.announcementID inner join user u on u.nic=a.nic where r.user_role='Patient';";
                 $result = mysqli_query($con,$query);
            
 
                  while($rows = mysqli_fetch_assoc($result)){
+          
              ?>
                  <div class="s-content">
-                    <div class="n-header"><b><?php echo ($rows['profile_image'])."  "."by ".$rows['name']." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></b></div><br><br>
-                    <div class="n-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rows['message']; ?></div>
+                    <div class="t-content"><h2><u><?php echo $rows['title'];?></u></h2></div>
+                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php echo BASEURL.'/images/'.$rows['profile_image'] ?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
+                    <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
+                    
                 </div>
             <?php
                 }

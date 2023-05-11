@@ -51,12 +51,17 @@ require_once("../conf/config.php");
         <li onmouseover="changeImage('database.svg', 'database')" onmouseout="restoreImage('databaseDef.svg', 'database')"><a href="<?php echo BASEURL . '/Admin/adminStorekeeperPage.php' ?>" target="_self"><img id="database" class="icons butbut"
                                             src=<?php echo BASEURL . '/images/databaseDef.svg' ?> alt="Storekeeper"
                                             align="middle">
-                <p>Store keeper</p>
+                <p>Storekeeper</p>
             </a></li>
         <li onmouseover="changeImage('noticeboard.svg', 'notice')" onmouseout="restoreImage('noticeboardDef.svg', 'notice')"><a href="<?php echo BASEURL . '/Admin/noticeboardHomepageEdit.php' ?>" target="_self"><img id="notice" class="icons butbut"
                                             src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
                                             align="middle">
-                <p>Noticeboard</p>
+                <p>Homepage</p>
+            </a></li>
+        <li onmouseover="changeImage('announcement.svg', 'announcement')" onmouseout="restoreImage('announcementDef.svg', 'announcement')"><a href="<?php echo BASEURL . '/Admin/announcementPage.php' ?>" target="_self"><img id="announcement" class="icons butbut"
+                                                                                                                                                                                                                        src=<?php echo BASEURL . '/images/announcementDef.svg' ?> alt="noticeboard"
+                                                                                                                                                                                                                        align="middle">
+                <p>Notices</p>
             </a></li>
     </ul>
 </div>

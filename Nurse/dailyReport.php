@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
                 <button class="button custom-btn" id="dailyreportbutton">
                         New entry
                 </button>
-                <h3>Vital Signs</h3>
+                <h3 class="nurse_heads">Vital Signs</h3>
                 <div class="table-container">
                 
                     <table class="table">

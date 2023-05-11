@@ -33,7 +33,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
             ?>
 
             <div class="main-container">
-                <h3>In-patient List</h3>
+                <h3 class="nurse_heads">In-patient List</h3>
                 <div class="table-container" id="reportContainer">
                     <table class="table">
                         <thead>    

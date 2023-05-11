@@ -1,9 +1,12 @@
- <?php
+<!-- importing configaration file -->
+ 
+<?php
 session_start();
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 ?>
 
+<!-- html heading part -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,22 +27,36 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
     </style>
     <title>Storekeeper Dashboard</title>
 </head>
+
+<!-- html body part -->
+
 <body>
+
 <div class="user">
+
+        <!-- importing storekeeper sidebar -->
     <?php
-    $name = urlencode( $_SESSION['name']);
-    include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);?>
+        $name = urlencode( $_SESSION['name']);
+        include(BASEURL . '/Components/storekeeperSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=".$name);
+    ?>
+
     <div class="userContents" id="center">
+        
+    <!-- importing storkeeper topbar -->
         <?php
         $name = urlencode( $_SESSION['name']);
         include(BASEURL.'/Components/storekeeperTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
         ?>
+
+    <!-- icone and dashbord  -->
         <div class="arrow">
             <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Dashboard
         </div>
-
+        <!-- medicine stock profile user cards -->
         <div class="actorCards">
+
                 <ul>
+                    <!-- medicine card -->
                     <a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddMedicine.php' ?>">
                         <li class="tab-cards" id="bills">
                             Medicine
@@ -48,6 +65,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             </div>
                         </li>
                     </a>
+                    <!-- stock card -->
                     <a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddStock.php' ?>">
                         <li class="tab-cards" id="bills">Stock
                             <div>
@@ -55,6 +73,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                             </div>
                         </li>
                     </a>
+                    <!-- profile card -->
                     <a href="<?php echo BASEURL . '/Storekeeper/updateStorekeeperProfile.php' ?>">
                         <li class="tab-cards" id="profile">Profile
                             <div>
@@ -65,8 +84,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                 </ul>
             </div>
 
+
+            <!-- wrappers and card list components about instock expired filter,
+            add stock shortcut and out of medicine card -->
         <div class="tableCardPack">
 
+        <!-- instock expired filter wrapper -->
             <div class="wrapper">
                 <div class="filter" style="justify-content: center; margin-bottom: 20px; margin-left: 0">
                     <div style="position: relative; color: green; top: 8px; margin: 14px;font-weight: 600;"> In Stock </div>
@@ -137,7 +160,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     ?>
                 </div>
             </div>
-
+                    <!--  add stock shortcut wrapper-->
             <div class="wrapper">
                 <div class="table">
                     <div class="row headerT">
@@ -181,6 +204,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                 </div>
             </div>
 
+
+            <!-- out of stock medicine card -->
             <div class="card-list">
                 </a>
                 <div class="card">
@@ -218,6 +243,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 
     </div>
 </div>
+
+<!-- add stock popup form -->
 <div id="userForm">
     <div id="form">
         <form method="post" action="<?php echo BASEURL . '/Storekeeper/addStock.php' ?>" enctype="multipart/form-data" id="addForm"
