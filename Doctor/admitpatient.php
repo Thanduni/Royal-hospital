@@ -57,17 +57,18 @@ if($get_details){
         $update_bed_query = mysqli_query($con,$update_bed);
 
         if($get_result && $update_bed_query && $update_status_query){ 
+            header("Location: inpatient.php");
             //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
-            echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {          
-                var successMessage = document.querySelector(".admit-patient-container .admit-patient-detail .admit-patient-success-message");
-                if(successMessage) {
-                    successMessage.style.display = "block";
-                } else {
-                    console.error("Error: Could not find success message element.");
-                }
-            });
-          </script>';
+        //     echo '<script>
+        //     document.addEventListener("DOMContentLoaded", function() {          
+        //         var admitForm = document.querySelector(".admit-patient-container .admit-patient-detail .admit-patient-form");
+        //         if(admitForm) {
+        //             admitForm.style.display = "none";
+        //         } else {
+        //             console.error("Error: Could not find success message element.");
+        //         }
+        //     });
+        //   </script>';
         }
     }
 ?>
@@ -98,10 +99,7 @@ if($get_details){
                 <div class="admit-patient-container">
                     <div class="admit-patient-detail ">
                         <h2>Patient Admission Details</h2>
-                        <div class="success-message admit-patient-success-message" id="success-message" style="display:none;">
-                            <p>Admited Patient Successfully</p>
-                        </div>
-                        <form method="post">
+                        <form method="post" class="admit-patient-form">
                             <div class="form-group">
                                 <label for="">Patient Name</label>
                                 <input type="text" name="patientName" value ="<?php echo $patientName ?>" readonly>

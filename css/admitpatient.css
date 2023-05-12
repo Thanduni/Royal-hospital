@@ -20,8 +20,7 @@
     width: 55%;
     margin: 20px 0;
     background: #fff;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-radius: 15px;
     box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
     padding: 0 30px; 
 }
@@ -36,9 +35,19 @@
     border-color: #b6d4fe;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+    justify-content: space-between;
+}
+.success-message .ok-btn{
+    padding: 0.5em;
+    color:#084298 ;
+    background-color: #cfe2ff;
+    border:1px solid #084298 !important;
+    cursor: pointer;
+    font-weight: 600;
 }
 .admit-patient-container .admit-patient-detail form{
     padding: 0 20px;
+    margin-bottom: 45px;
 }
 .admit-patient-container .admit-patient-detail .form-group{
     text-align: left;

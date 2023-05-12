@@ -15,77 +15,116 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
 date_default_timezone_set('Asia/Colombo');
 $current_date = date("Y-m-d");
 $current_time = date("h:i");
-    function displayErrorMessage() {
-        echo '<script>
-      document.addEventListener("DOMContentLoaded", function() {          
-        var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
-        if(errorMessage) {
-          errorMessage.style.display = "flex";
-        } else {
-          console.error("Error: Could not find error message element.");
+
+function displayErrorMessage() {
+    echo '<script>
+  document.addEventListener("DOMContentLoaded", function() {          
+    var errorMessage = document.querySelector(".prescription-container .prescription-container-error-message");
+    if(errorMessage) {
+      errorMessage.style.display = "flex";
+    } else {
+      console.error("Error: Could not find error message element.");
+    }
+  });
+</script>';
+}
+
+if(isset($_GET['patientid'])){
+    $patientID = $_GET['patientid'];
+    // $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")";
+    // $prescID_query = mysqli_query($con,$get_prescID);
+    $prescID_query = mysqli_query($con,"SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")");
+    // Fetch the result of the query (query can return a row with NULL)
+    $row = mysqli_fetch_array($prescID_query);
+    // Check if the value is not null
+    if (isset($row[0])){
+        $prescriptionID = $row[0];
+    }else{
+        //get out patient prescriptionID
+        $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
+        $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
+        $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
+        if(isset($presID_row[0])){
+            $prescriptionID = $presID_row[0];
         }
-      });
-    </script>';
-    }
-
-    if(isset($_GET['patientid'])){
-        $patientID = $_GET['patientid'];
-
-        // $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")";
-        // $prescID_query = mysqli_query($con,$get_prescID);
-        $prescID_query = mysqli_query($con,"SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")");
-        // Fetch the result of the query (query can return a row with NULL)
-        $row = mysqli_fetch_array($prescID_query);
-        // Check if the value is not null
-        if (isset($row[0])){
-            $prescriptionID = $row[0];
-        }else{
-            //get out patient prescriptionID
-            $get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
-            $get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
-            $presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
-            if(isset($presID_row[0])){
-                $prescriptionID = $presID_row[0];
-            }
-            else{
-                displayErrorMessage();
-            }
+        else{
+            displayErrorMessage();
         }
-
     }
+}
 
-    function outOFStock() {
-        echo '<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-
-                errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()">\';
-                errorMessage.style.display = "flex";
-            } else {
-                console.error("Error: Could not find error message element.");
-            }
-        });
-        function closeErrorMessage() {
-            const errorMessage = document.getElementById("success-message");
-            if (errorMessage) {
-                errorMessage.style.display = "none";
-            }
-        }
+function outOFStock($patientID, $prescriptionID, $drugDetails) {
+    echo '<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const errorMessage = document.getElementById("success-message");
+      if (errorMessage) {
+        errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock. Do you still want to add?</p><div><input type="button" class="redirect-button" value="Yes" onclick="redirectToProcessPrescription(' . $patientID . ', ' . $prescriptionID . ', ' . json_encode($drugDetails) . ')"><input type="button" class="close-button" value="No" onclick="closeErrorMessage()"></div>\';
+        errorMessage.style.display = "flex";
+      } else {
+        console.error("Error: Could not find error message element.");
+      }
+    });
+  
+    function closeErrorMessage() {
+      const errorMessage = document.getElementById("success-message");
+      if (errorMessage) {
+        errorMessage.style.display = "none";
+      }
+      refreshURLWithoutErrorCode();
+    }
+  
+    function redirectToProcessPrescription(patientID, prescriptionID, drugDetails) {
+      const confirmValue = "1";
+      const url = "processPrescription.php?patientid=" + patientID + "&prescriptionid=" + prescriptionID + "&confirmMessage=" + confirmValue;
+      const form = document.createElement("form");
+      form.method = "post";
+      form.action = url;
+  
+      // Create hidden input fields for each drug detail
+      for (let i = 0; i < drugDetails.length; i++) {
+        const drugNameInput = document.createElement("input");
+        drugNameInput.type = "hidden";
+        drugNameInput.name = "drugName[]";
+        drugNameInput.value = drugDetails[i].drugName;
+        form.appendChild(drugNameInput);
+  
+        const dosageInput = document.createElement("input");
+        dosageInput.type = "hidden";
+        dosageInput.name = "dosage[]";
+        dosageInput.value = drugDetails[i].dosage;
+        form.appendChild(dosageInput);
+  
+        const daysInput = document.createElement("input");
+        daysInput.type = "hidden";
+        daysInput.name = "days[]";
+        daysInput.value = drugDetails[i].days;
+        form.appendChild(daysInput);
+  
+        const frequencyInput = document.createElement("input");
+        frequencyInput.type = "hidden";
+        frequencyInput.name = "frequency[]";
+        frequencyInput.value = drugDetails[i].frequency;
+        form.appendChild(frequencyInput);
+      }
+  
+      document.body.appendChild(form);
+      form.submit();
+    }
+  
+    function refreshURLWithoutErrorCode() {
+      const url = window.location.href;
+      const updatedURL = url.replace(/([&?])errorCode=[^&]+&?/, "$1").replace(/&$/, "");
+      window.location.href = updatedURL;
+    }
     </script>';
-    }
-
-
-    if(isset($_GET['errorCode'])){
-        outOFStock();
-        echo '<script>
-        setTimeout(function(){
-            window.location.href = "prescription.php?patientid='.$patientID.'";
-        }, 5000);
-    </script>';
-    }
-    
-    ?>
+  }
+  
+  
+  if (isset($_GET['errorCode'])) {
+    outOFStock($patientID, $prescriptionID);
+  }
+  
+?>  
 
     <!DOCTYPE html>
     <html lang="en">
@@ -94,7 +133,6 @@ $current_time = date("h:i");
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
-
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/prescription.css' ?>">
         <title>Prescription</title>
     </head>
@@ -115,16 +153,6 @@ $current_time = date("h:i");
                         <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
                         <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a>
                     </div>
-                    <!-- <script>
-                        function drugPrescription(){
-                            document.getElementById("prescribe-medicine-content").style.display="block";
-                            document.getElementById("prescribe-test-content").style.display="none";
-                        }
-                        function testPrescription(){
-                            document.getElementById("prescribe-test-content").style.display="block";
-                            document.getElementById("prescribe-medicine-content").style.display="none";
-                        }
-                    </script> -->
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
                         <p>Please enter a doctor Note first</p>

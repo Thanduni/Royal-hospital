@@ -60,7 +60,7 @@ if(isset($_POST['update'])){
     <div class="userContents" id="center">
         <div class="title">
             <img src="<?php echo BASEURL . '/images/logo5.png' ?>" alt="logo">
-            Royal Hospital Management System
+            Royal Hospital
         </div>
         <ul>
             <li class="userType"><img src=<?php echo BASEURL . '/images/userInPage.svg' ?> alt="Storekeeper">

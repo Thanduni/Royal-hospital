@@ -101,7 +101,12 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     Patient
                 </li>
             </ul>
-
+            <div class="alert" id="warning">
+                <?php
+                if(@$_GET['warning'])
+                    echo $_GET['warning'];
+                ?>
+            </div>
             <div class="cards">
                 <h3 style="color: var(--primary-color);display: flex;margin-top: -18px;font-size: large;margin-left: -10px;flex-wrap: wrap;width: 0px;height: 10px;">Dashboard</h3>
                 <a href="<?php echo BASEURL.'/Patient/summaryreport.php' ?>">

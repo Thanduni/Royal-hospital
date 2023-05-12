@@ -51,6 +51,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
             <p>
                 <button id=open type="button" class="custom-btn">+Add appointment</button>
             </p>
+            <div class="alert" id="warning">
+                <?php
+                if(@$_GET['warning'])
+                    echo $_GET['warning'];
+                ?>
+            </div>
             <div class="wrapper_p">
                 <div class="table">
                     <div class="row headerT">
@@ -114,7 +120,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     <div class="banner">
                         <h1>Appointment</h1>
                     </div>
-                    <p class="royal">Royal Hospital Management System </p>
+                    <p class="royal">Royal Hospital </p>
                     <p class="addUser" id="titleOperation">Add appointment</p>
                     <table>
                         <tr colspan="3">

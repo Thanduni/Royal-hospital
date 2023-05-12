@@ -135,7 +135,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 
       <div class="product">
         <div class="description">
-          <div class="not-paid"><h1 style="color:red;">Not Paid</h1>
+          <div class="not-paid"><h1 style="color:red;">Pending</h1>
           <h1 style="color:red;">Balance</h1></div>
           <h3>Total Amount</h3>
           <h3 style="font-weight:700;">LKR <?php echo $npaid.'.00';?></h3>

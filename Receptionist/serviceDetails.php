@@ -90,7 +90,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="Not paid">Not paid</label>
+                                        <label for="Not paid">Pending</label>
                                     </td>
                                     <td>
                                         <input type="checkbox" style="display: inline" id="paidStatus" name="paidStatus">
@@ -116,9 +116,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                 <ul id="billInfo">
                     <li><a
                                 href="#table-service">Service</a>
-                    </li>
-                    <li><a
-                                href="#table-test">Test</a>
                     </li>
                     <li><a
                                 href="#table-drug">Drug</a>
@@ -159,7 +156,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -202,60 +201,62 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                     $result1 = $con->query($query1);
                     $rows = $result1->num_rows;
                     ?>
-                    <div class="wrapper" id="table-test">
-                        <h3 style="text-align: center;">Test Cost Information</h3>
-                        <div class="table">
-                            <div class="row headerT">
-                                <div class="cell">Date</div>
-                                <div class="cell">Test name</div>
-                                <div class="cell">Quantity</div>
-                                <div class="cell">Rate</div>
-                                <div class="cell">Status</div>
-                            </div>
-                            <?php
-                            $testSum = 0;
-                            for ($j = 0; $j < $rows; ++$j) {
-                                $result1->data_seek($j);
-                                $row1 = $result1->fetch_array(MYSQLI_ASSOC);
-                                $testSum += $row1['rate'];
-                                ?>
-                                <div class="row">
-                                    <div class="cell" data-title="Date">
-                                        <?php echo $row1['date']; ?>
-                                    </div>
-                                    <div class="cell" data-title="Test name">
-                                        <?php echo $row1['test_name']; ?>
-                                    </div>
-                                    <div class="cell" data-title="Quantity">
-                                        <?php echo $row1['quantity']; ?>
-                                    </div>
-                                    <div class="cell" data-title="Rate">
-                                        <?php echo $row1['rate']; ?>
-                                    </div>
-                                    <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="row total">
-                                <div class="cell" data-title="Rate">
-
-                                </div>
-                                <div class="cell" data-title="Rate">
-
-                                </div>
-                                <div class="cell" data-title="Rate">
-                                    <b>Total amount</b>
-                                </div>
-                                <div class="cell" data-title="Rate">
-                                    <b><?php echo $testSum; ?></b>
-                                </div>
-                                <div class="cell" data-title="Status">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="wrapper" id="table-test">-->
+<!--                        <h3 style="text-align: center;">Test Cost Information</h3>-->
+<!--                        <div class="table">-->
+<!--                            <div class="row headerT">-->
+<!--                                <div class="cell">Date</div>-->
+<!--                                <div class="cell">Test name</div>-->
+<!--                                <div class="cell">Quantity</div>-->
+<!--                                <div class="cell">Rate</div>-->
+<!--                                <div class="cell">Status</div>-->
+<!--                            </div>-->
+<!--                            --><?php
+//                            $testSum = 0;
+//                            for ($j = 0; $j < $rows; ++$j) {
+//                                $result1->data_seek($j);
+//                                $row1 = $result1->fetch_array(MYSQLI_ASSOC);
+//                                $testSum += $row1['rate'];
+//                                ?>
+<!--                                <div class="row">-->
+<!--                                    <div class="cell" data-title="Date">-->
+<!--                                        --><?php //echo $row1['date']; ?>
+<!--                                    </div>-->
+<!--                                    <div class="cell" data-title="Test name">-->
+<!--                                        --><?php //echo $row1['test_name']; ?>
+<!--                                    </div>-->
+<!--                                    <div class="cell" data-title="Quantity">-->
+<!--                                        --><?php //echo $row1['quantity']; ?>
+<!--                                    </div>-->
+<!--                                    <div class="cell" data-title="Rate">-->
+<!--                                        --><?php //echo $row1['rate']; ?>
+<!--                                    </div>-->
+<!--                                    <div class="cell" data-title="Status">-->
+<!--                                        --><?php //if($row1['paid_status'] == "not paid") {
+//                                            echo "Pending";
+//                                        } else { echo $row1['paid_status']; }?>
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            --><?php //} ?>
+<!--                            <div class="row total">-->
+<!--                                <div class="cell" data-title="Rate">-->
+<!---->
+<!--                                </div>-->
+<!--                                <div class="cell" data-title="Rate">-->
+<!---->
+<!--                                </div>-->
+<!--                                <div class="cell" data-title="Rate">-->
+<!--                                    <b>Total amount</b>-->
+<!--                                </div>-->
+<!--                                <div class="cell" data-title="Rate">-->
+<!--                                    <b>--><?php //echo $testSum; ?><!--</b>-->
+<!--                                </div>-->
+<!--                                <div class="cell" data-title="Status">-->
+<!---->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <?php
                     if (@$_GET['startDate'] && @$_GET['endDate'] && @$_GET['status']) {
                         $query1 = "SELECT purchases.date, item.item_name, purchases.quantity, purchases.quantity * item.unit_price as rate, purchases.paid_status from 
@@ -308,7 +309,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -414,7 +417,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                         <?php echo $row1['rate']; ?>
                                     </div>
                                     <div class="cell" data-title="Status">
-                                        <?php echo $row1['paid_status']; ?>
+                                        <?php if($row1['paid_status'] == "not paid") {
+                                            echo "Pending";
+                                        } else { echo $row1['paid_status']; }?>
                                     </div>
                                 </div>
                             <?php } ?>
