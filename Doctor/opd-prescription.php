@@ -121,8 +121,6 @@ if(isset($_GET['patientid'])){
                                 <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
-                        <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
-                        
                         <div class="show-prescription">
                             <table class="table">
                                 <thead>
@@ -163,7 +161,6 @@ if(isset($_GET['patientid'])){
                             </table>
                             
                         </div>
-                    </form>
                     <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
                 </div>
             </div>

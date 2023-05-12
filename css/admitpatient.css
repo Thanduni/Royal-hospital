@@ -7,13 +7,12 @@
     overflow-y: scroll;
 }
 .admit-patient-container{
-    width: 100%;
+    overflow-y: scroll;
     padding: 50px 50px 0 50px;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    height: fit-content;
     justify-content: center;
 }
 .admit-patient-container .admit-patient-detail{
