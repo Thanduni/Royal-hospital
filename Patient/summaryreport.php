@@ -128,6 +128,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 <td><p><?php echo $rows['name']; ?></p></td>
                             </tr>
                             <tr>
+                                <td><label>Patient Type:</label></td>
+                                <td><p><?php echo "Inpatient"; ?></p></td>
+                            </tr>
+                            <tr>
                                 <td><label for="">Impression:</label></td>
                                 <td><p><?php echo $rows['Impression']; ?></p></td>
                             </tr>
@@ -142,6 +146,10 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                              <td><label>Prescribed Date:</label></td>
                              <td><p><?php echo $rows['date']; ?></p></td>
                          </tr>
+                         <tr>
+                                <td><label>Patient Type:</label></td>
+                                <td><p><?php echo "Outpatient"; ?></p></td>
+                            </tr>
                          <tr>
                              <td><label>Doctor Name:</label></td>
                              <td><p><?php echo $rows['name']; ?></p></td>
