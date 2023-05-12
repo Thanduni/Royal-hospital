@@ -75,10 +75,17 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
              ?>
                  <div class="s-content">
                     <div class="t-content"><h2><u><?php echo $rows['title'];?></u></h2></div>
-                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php echo BASEURL.'/images/'.$rows['profile_image'] ?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
+                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img style="width:50px;height:50px;border-radius:50px;" src="<?php echo BASEURL.'/uploads/'.$rows['profile_image'] ?>" > <?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
                     <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
                 </div>
                 
+             <?php
+                }
+                if(mysqli_num_rows($result) == 0)
+                {
+            ?>
+                    <div class="i-image"><img style="width:40%;margin-left:28%;margin-top:-5%;" src="<?php echo BASEURL.'/images/empty.png'?>" >
+                    <h1>Looks like there are no announcement yet!</h1>
             <?php
                 }
             ?>

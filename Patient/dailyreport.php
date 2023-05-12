@@ -27,7 +27,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             display: flex;
             flex: 2;
             box-sizing: unset;
-            width: 1285px;
+            width: 1185px;
             margin: 20px 20px 50px 50px;
             position: relative;
         }
@@ -59,9 +59,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         <div class="cell">Date</div>
                         <div class="cell">Time</div>
                         <div class="cell">Pulse</div>
-                        <div class="cell" style="width:180px;">Temperature</div>
-                        <div class="cell" style="width:180px;">Blood Preasure</div>
-                        <div class="cell" style="width:180px;">O2 Saturation</div>
+                        <div class="cell" style="width:150px;">Temperature</div>
+                        <div class="cell" style="width:150px;">Blood Preasure</div>
+                        <div class="cell" style="width:150px;">O2 Saturation</div>
                     </div>
                     <?php 
                         $nic = $_SESSION['nic'];
@@ -105,6 +105,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                     ?>
             </div>
             </div>
+            </div>
+            <div class="p-img">
+                    <img style="max-width: 600px;height:608px;position:absolute;" src="<?php echo BASEURL.'/images/daily-report.png'?>" alt="">
             </div>
         </div>
 

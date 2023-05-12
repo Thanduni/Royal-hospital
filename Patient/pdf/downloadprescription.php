@@ -100,7 +100,7 @@ $pdf->Cell(50,8,"Patient_Name:",1,0);
 $pdf->Cell(140,8,"$patientname",1,1);
 
 $pdf->Cell(50,8,"Patient_Age:",1,0);
-$pdf->Cell(140,10,"$age",1,1);
+$pdf->Cell(140,8,"$age",1,1);
 
 $pdf->Cell(50,8,"Gender:",1,0);
 $pdf->Cell(140,8,"$gender",1,1);

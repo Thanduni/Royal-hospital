@@ -166,6 +166,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                      <?php }?>
             <?php
                 }
+                if(mysqli_num_rows($result) == 0)
+                {
+            ?>
+                    <div class="i-image"><img style="width:45%;margin-left:28%;margin-top:-5%;" src="<?php echo BASEURL.'/images/empty.png'?>" >
+                    <h1 style="color:black;margin-left:36%;margin-top:-3%">Looks like there are no summary yet!</h1>
+                    <h2 style="color:red;margin-left:35.5%;">You are new patient & you were prescribed not yet.</h2>
+                </div>
+            <?php
+                }
             ?>
         
     </div>

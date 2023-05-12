@@ -317,7 +317,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         <a class="t_cost"><h1>Total Cost:<h2>LKR <?php echo($total+$total1+$total2).'.00'; ?></h2></h1></a>
                         <?php $_SESSION['total'] = $npaid.'.00'; ?>
                         <div class="card-image"><img src="<?php echo BASEURL.'/images/mastercard.jpg' ?>"></div>
-                        <a class="np_cost"><h1>Total pending Cost:<h2 id="pay" style="color:red;">LKR <?php echo$npaid.'.00'; ?></h2></h1></a>
+                        <a class="np_cost"><h1>Total Pending Cost:<h2 id="pay" style="color:red;">LKR <?php echo$npaid.'.00'; ?></h2></h1></a>
                         <button id="pay-btn" class="btn1" onclick="func()">Pay Now</button>
                     </div>
                 </div>
