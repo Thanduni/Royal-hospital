@@ -148,17 +148,29 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
             ?>
             <div class="prescription-container">
 
-
+                    <!-- front and back buttons -->
                     <div class="tab-line">
-                        <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a>
+                        <div class="back-div">
+                            <a href="inpatient.php ?>">
+                            <img src="<?php echo BASEURL . '/images/back-button.png' ?>" alt="">
+                            <div class="button-name">Patient</div class="button-name"></a>
+                        </div>
+                        <div class="front-div">
+                            <a href="prescriptionTest.php?patientid=<?=$patientID?>">
+                            <img src="<?php echo BASEURL . '/images/right-arrow.png' ?>" alt="">
+                            <div class="button-name">Test Prescription</div class="button-name"></a>
+                        </div>
+                        <!-- <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a> -->
                     </div>
 
+                    <!-- error message  -->
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
                         <p>Please enter a doctor Note first</p>
                         <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content" id="prescribe-medicine-content">
+                        <!-- form for enter medicine prescription -->
                         <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
                             <div class="input-feild">
                                 <table id="prescription-table">
@@ -186,6 +198,7 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
                         </form> 
                         <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
                         
+                        <!-- display inserted prescriptions -->
                         <div class="show-prescription">
                             <table class="table">
                                 <thead>
@@ -213,6 +226,7 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
                                     <td><?php echo $row['days'] ?></td>
                                     <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
                                     <td>
+                                        <!-- delete prescription -->
                                         <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
                                         <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
                                     </td>
@@ -236,7 +250,9 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- autocomplete dropdown for medicine names -->
     <script src="../js/medicine.js"></script>
+    <!-- create dynamic table -->
     <script>
         // to add rows
         $(document).ready(function(){

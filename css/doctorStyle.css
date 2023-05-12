@@ -9,7 +9,7 @@
     height: 40px;
 }
 .display-container{
-    margin: 60px;
+    margin: 20px 60px;
     min-width: fit-content;
     left: 260px;
     height: 100vh;
@@ -17,6 +17,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    overflow-y: scroll;
 }
 .doctor-cards{
     width: 100%;
@@ -252,7 +253,7 @@ h3{
     background: #FFFFFF;
     border-radius: 10px;
     overflow: hidden;
-    width: 70%;
+    width: 90%;
     /* margin: 0 auto; */
     position: relative;
     align-items: center;
@@ -310,12 +311,12 @@ h3{
     padding: 8px 10px;
     background: #fff;
 }
-.table td:first-child{
+.doctor-dash-table td:first-child{
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
-.table td:first-child .right-cell{
+.doctor-dash-table td:first-child .right-cell{
     padding:8px;
 }
 .table td img{
@@ -683,3 +684,21 @@ header .current-date{
 .doctorDashInfo{
     display: flex;
 }
+::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #F8F9FF;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #F8F9FF;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F8F9FF;
+  }

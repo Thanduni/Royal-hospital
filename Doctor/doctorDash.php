@@ -130,7 +130,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     <!-- appointmet table -->
                     <h3>Upcomming Appointments</h3>
                     <div class="table-container">
-                        <table class="table">
+                        <table class="doctor-dash-table table">
                             <thead>
                             <th>Patient</th>
                             <th>Date</th>

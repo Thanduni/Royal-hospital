@@ -30,6 +30,9 @@ if(isset($_GET['patientid'])){
     </script>
     <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <style>
+        .user{
+            height:inherit;
+        }
         .next {
             position: initial;
             height: auto;
