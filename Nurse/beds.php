@@ -50,6 +50,9 @@ while(true){
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
+        .user{
+            height:inherit;
+        }
         .next {
             position: initial;
             height: auto;
@@ -71,7 +74,7 @@ while(true){
 
             <div class="main-container">
                 <h3 class="nurse_heads">Room List</h3>
-                <button class="button custom-btn" id="add-room">Add Room</button>
+                <button class="bed-button custom-btn" id="add-room">Add Room</button>
                 <div class="room-cards">                    
                     <?php foreach ($rows as $row):?>
                         <?php $room_no = $row['room_no'];

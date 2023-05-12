@@ -27,22 +27,27 @@ require_once("../conf/config.php");
                                                                                                                                                                                                               align="middle">
                 <p>Dashboard</p>
             </a></li>
-        <li onmouseover="changeImage('patient.svg', 'patient')" onmouseout="restoreImage('patientDef.svg', 'patient')"><a href="<?php echo BASEURL.'/Nurse/display.php'?>" target="_self"><img class="icons butbut" id="patient"
+        <!-- <li onmouseover="changeImage('patient.svg', 'patient')" onmouseout="restoreImage('patientDef.svg', 'patient')"><a href="<?php echo BASEURL.'/Nurse/display.php'?>" target="_self"><img class="icons butbut" id="patient"
                                                                                                                                                                                                      src=<?php echo BASEURL . '/images/patientDef.svg' ?> alt="patient"
                                                                                                                                                                                                      align="middle">
                 <p>Patient</p>
-            </a></li>
+            </a></li> -->
         <li onmouseover="changeImage('room.svg', 'room')" onmouseout="restoreImage('roomDef.svg', 'room')"><a href="<?php echo BASEURL . '/Nurse/beds.php' ?>" target="_self"><img class="icons butbut" id="room"
                                                                                                                                                                                                src=<?php echo BASEURL . '/images/roomDef.svg' ?> alt="room"
                                                                                                                                                                                                align="middle">
                 <p>Rooms</p>
             </a></li>
-        <li onmouseover="changeImage('report.svg', 'report')" onmouseout="restoreImage('reportDef.svg', 'report')"><a href="<?php echo BASEURL . '/Nurse/report.php' ?>" target="_self"><img class="icons butbut" id="report"
+        <!-- <li onmouseover="changeImage('report.svg', 'report')" onmouseout="restoreImage('reportDef.svg', 'report')"><a href="<?php echo BASEURL . '/Nurse/report.php' ?>" target="_self"><img class="icons butbut" id="report"
                                                                                                                                                                                    src=<?php echo BASEURL . '/images/reportDef.svg' ?> alt="report"
                                                                                                                                                                                    align="middle">
                 <p>Report</p>
+
             </a></li>
         <li onmouseover="changeImage('notice-board.png', 'noticeboard')" onmouseout="restoreImage('notice-boardDef.png', 'noticeboard')"><a id="notice" href="<?php echo BASEURL.'/Nurse/nurseNoticeboard.php'?>" target="_self"><img id="noticeboard" class="butbut icons"
+
+            </a></li> -->
+        <li onmouseover="changeImage('notice-board.png', 'noticeboard')" onmouseout="restoreImage('notice-boardDef.png', 'noticeboard')"><a id="notice" href="<?php echo BASEURL.'/Nurse/nurseNoticeboard.php'?>" target="_self"><img id="noticeboard" class="butbut icons"
+
                                             src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>

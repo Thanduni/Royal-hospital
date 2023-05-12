@@ -19,9 +19,11 @@
 .tab-line{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 40px;
     padding: 5px 0;
     height: fit-content;
+    text-decoration: none;
 }
 .error-message{
     padding: 1rem;
@@ -69,11 +71,26 @@
     width: 30px;
     height: 30px;
 }
-.back-button-div .button-name{
+.back-div{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.front-div{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.tab-line img{
+    width: 30px;
+    height: 30px;
+}
+.back-button-div .button-name,.back-div .button-name, .front-div .button-name{
     color: #000;
     float: right;
     padding: 13px 0;
 }
+
 .prescription-group{
     display: flex;
     flex-direction: row;
