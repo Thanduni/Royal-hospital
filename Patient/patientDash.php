@@ -183,10 +183,10 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                     <div class="table_header"><h3 style="color: var(--primary-color);margin-left:125px;">Confirmed Appointments</h3></div></br>
                     <div class="table">
                         <div class="row headerT">
-                            <div class="cell">Date</div>
-                            <div class="cell">Time</div>
-                            <div class="cell">Doctor</div>
-                            <div class="cell">Message</div>
+                            <div class="cell" >Date</div>
+                            <div class="cell" >Time</div>
+                            <div class="cell" style="width:180px;">Doctor Name</div>
+                            <div class="cell" style="width:180px;">Message</div>
                             <div class="cell">Options</div>
                         </div>
 
