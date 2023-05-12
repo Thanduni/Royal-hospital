@@ -85,7 +85,7 @@ if(isset($_GET['patientid'])){
                     $save = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency,prescriptionID,date) VALUES ('$value', '$dosage', '$days', '$frequency', '$prescriptionID', CURDATE());";
                     $stmt = mysqli_query($con, $save);
                     if($stmt){
-                        $insert_purches = "INSERT into purchases(patientID,date,quantity,item,item_flag) VALUES('$patientID',CURDATE(),'$make_bill_quantity','$itemID','d');";
+                        $insert_purches = "INSERT into purchases(patientID,date,quantity,paid_status,paid_status1,item,item_flag) VALUES('$patientID',CURDATE(),'$make_bill_quantity','not paid','Not Paid','$itemID','d');";
                         $insert_purches_query = mysqli_query($con,$insert_purches);
                         if($insert_purches_query){
                             echo "Prescription Added, entered to purchases <br>";
@@ -98,6 +98,26 @@ if(isset($_GET['patientid'])){
                 // outOFStock();
                 header("Location: prescription.php?errorCode=RH0001&patientid=".$patientID);
                 echo $value. " is not available";
+            }
+        }
+    }
+
+    if(isset($_POST['add-any'])){
+        foreach($_POST['drugName'] as $key => $value){
+            $drugName = $_POST['drugName'][$key];
+            $dosage = $_POST['dosage'][$key];
+            $days = $_POST['days'][$key];
+            $frequency = $_POST['frequency'][$key];
+            echo "<br>".$drugName."<br>";
+            echo $dosage."<br>";
+            echo $days."<br>";
+            echo $frequency."<br>";
+
+            $insert_drug = "INSERT INTO prescribed_drugs(drug_name, quantity, days, frequency,prescriptionID,date) VALUES ('$value', '$dosage', '$days', '$frequency', '$prescriptionID', CURDATE());";
+            $insert_drug_query = mysqli_query($con,$insert_drug);
+
+            if($insert_drug_query){
+                header("Location: prescription.php?patientid=".$patientID);
             }
         }
     }

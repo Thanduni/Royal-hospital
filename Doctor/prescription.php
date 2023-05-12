@@ -53,12 +53,12 @@ if(isset($_GET['patientid'])){
     }
 }
 
-function outOFStock($patientID, $prescriptionID, $drugDetails) {
+function outOFStock() {
     echo '<script>
     document.addEventListener("DOMContentLoaded", function() {
       const errorMessage = document.getElementById("success-message");
       if (errorMessage) {
-        errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock. Do you still want to add?</p><div><input type="button" class="redirect-button" value="Yes" onclick="redirectToProcessPrescription(' . $patientID . ', ' . $prescriptionID . ', ' . json_encode($drugDetails) . ')"><input type="button" class="close-button" value="No" onclick="closeErrorMessage()"></div>\';
+        errorMessage.innerHTML = \'<p>Sorry, this medicine is out of stock.</p><div><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()"></div>\';
         errorMessage.style.display = "flex";
       } else {
         console.error("Error: Could not find error message element.");
@@ -73,44 +73,6 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
       refreshURLWithoutErrorCode();
     }
   
-    function redirectToProcessPrescription(patientID, prescriptionID, drugDetails) {
-      const confirmValue = "1";
-      const url = "processPrescription.php?patientid=" + patientID + "&prescriptionid=" + prescriptionID + "&confirmMessage=" + confirmValue;
-      const form = document.createElement("form");
-      form.method = "post";
-      form.action = url;
-  
-      // Create hidden input fields for each drug detail
-      for (let i = 0; i < drugDetails.length; i++) {
-        const drugNameInput = document.createElement("input");
-        drugNameInput.type = "hidden";
-        drugNameInput.name = "drugName[]";
-        drugNameInput.value = drugDetails[i].drugName;
-        form.appendChild(drugNameInput);
-  
-        const dosageInput = document.createElement("input");
-        dosageInput.type = "hidden";
-        dosageInput.name = "dosage[]";
-        dosageInput.value = drugDetails[i].dosage;
-        form.appendChild(dosageInput);
-  
-        const daysInput = document.createElement("input");
-        daysInput.type = "hidden";
-        daysInput.name = "days[]";
-        daysInput.value = drugDetails[i].days;
-        form.appendChild(daysInput);
-  
-        const frequencyInput = document.createElement("input");
-        frequencyInput.type = "hidden";
-        frequencyInput.name = "frequency[]";
-        frequencyInput.value = drugDetails[i].frequency;
-        form.appendChild(frequencyInput);
-      }
-  
-      document.body.appendChild(form);
-      form.submit();
-    }
-  
     function refreshURLWithoutErrorCode() {
       const url = window.location.href;
       const updatedURL = url.replace(/([&?])errorCode=[^&]+&?/, "$1").replace(/&$/, "");
@@ -121,7 +83,7 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
   
   
   if (isset($_GET['errorCode'])) {
-    outOFStock($patientID, $prescriptionID);
+    outOFStock();
   }
   
 ?>  
@@ -134,6 +96,11 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
         <link rel="stylesheet" href="<?php echo BASEURL . '/css/prescription.css' ?>">
+        <style>
+            .user{
+                height:inherit;
+            }
+        </style>
         <title>Prescription</title>
     </head>
     <body>
@@ -146,104 +113,103 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
             $name = urlencode( $_SESSION['name']);
             include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
             ?>
-            <div class="prescription-container">
+            <div class="main-container">
+                <div class="prescription-container">
 
-                    <!-- front and back buttons -->
-                    <div class="tab-line">
-                        <div class="back-div">
-                            <a href="inpatient.php ?>">
-                            <img src="<?php echo BASEURL . '/images/back-button.png' ?>" alt="">
-                            <div class="button-name">Patient</div class="button-name"></a>
+                        <!-- front and back buttons -->
+                        <div class="tab-line">
+                            <div class="back-div">
+                                <a href="inpatient.php ?>">
+                                <img src="<?php echo BASEURL . '/images/back-button.png' ?>" alt="">
+                                <div class="button-name">Patient</div class="button-name"></a>
+                            </div>
+                            <div class="front-div">
+                                <a href="prescriptionTest.php?patientid=<?=$patientID?>">
+                                <img src="<?php echo BASEURL . '/images/right-arrow.png' ?>" alt="">
+                                <div class="button-name">Test Prescription</div class="button-name"></a>
+                            </div>
+                            <!-- <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                            <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a> -->
                         </div>
-                        <div class="front-div">
-                            <a href="prescriptionTest.php?patientid=<?=$patientID?>">
-                            <img src="<?php echo BASEURL . '/images/right-arrow.png' ?>" alt="">
-                            <div class="button-name">Test Prescription</div class="button-name"></a>
-                        </div>
-                        <!-- <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a> -->
-                    </div>
 
-                    <!-- error message  -->
-                    <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
-                        <p>Please enter a doctor Note first</p>
-                        <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
-                    </div>
-                    <div class="prescribe-medicine-content" id="prescribe-medicine-content">
-                        <!-- form for enter medicine prescription -->
-                        <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
-                            <div class="input-feild">
-                                <table id="prescription-table">
-                                    <tr>
+                        <!-- error message  -->
+                        <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
+                            <p>Please enter a doctor Note first</p>
+                            <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
+                        </div>
+                        <div class="prescribe-medicine-content" id="prescribe-medicine-content">
+                            <!-- form for enter medicine prescription -->
+                            <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                                <div class="input-feild">
+                                    <table id="prescription-table">
+                                        <tr>
+                                            <th>Drug Name</th>
+                                            <th>Dosage</th>
+                                            <th>Frequency (per day)</th>
+                                            <th>No of days</th>
+                                        </tr>
+                                        <div class="show-medicine">
+                                        <tr>
+                                            <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
+                                                </div>
+                                            </td>
+                                            <td><input type="number" name="dosage[]" required min=0></td>
+                                            <td><input type="number" name="frequency[]" required min=0></td>
+                                            <td><input type="number" name="days[]" required value=1 readonly></td>
+                                            <td><input type="button" name="addd" class="add" value="Add row"></td>
+                                            <td><input type="submit" class="save-prescription" name="save" id="save" value="Save Prescription"></td>
+                                            <td><input type="submit" class="add-any-prescription" name="add-any" id="add-any" value="Add unavailable medicines"></td>
+                                        </tr>
+                                        </div>
+                                    </table>
+                                </div>  
+                            </form> 
+                            <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
+                            <!-- display inserted prescriptions -->
+                            <div class="show-prescription">
+                                <table class="table">
+                                    <thead>
+                                        <th>Date</th>
                                         <th>Drug Name</th>
                                         <th>Dosage</th>
                                         <th>Frequency (per day)</th>
                                         <th>No of days</th>
-                                    </tr>
-                                    <div class="show-medicine">
-
+                                        <th>Remove</th>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                    if(isset($prescriptionID)){
+                                        $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
+                                        $result = mysqli_query($con,$select);
+                                
+                                        while($row= mysqli_fetch_array($result)){?>
                                     <tr>
-                                        <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text" name="drugName[]" class="autoComplete-input" required>
-                                            </div>
+                                        <td><?php echo $current_date?></td>
+                                        <td><?php echo $row['drug_name'] ?></td>
+                                        <td><?php echo $row['quantity'] ?></td>
+                                        <td><?php echo $row['frequency'] ?></td>
+                                        <td><?php echo $row['days'] ?></td>
+                                        <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
+                                        <td>
+                                            <!-- delete prescription -->
+                                            <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
+                                            <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
                                         </td>
-                                        <td><input type="number" name="dosage[]" required min=0></td>
-                                        <td><input type="number" name="frequency[]" required min=0></td>
-                                        <td><input type="number" name="days[]" required value=1></td>
-                                        <td><input type="button" name="addd" class="add" value="Add"></td>
+                                        
                                     </tr>
-                                    </div>
-                                </table>
-                                <input type="submit" class="save-prescription" name="save" id="save" value="save data">
-                            </div>  
-                        </form> 
-                        <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
-                        
-                        <!-- display inserted prescriptions -->
-                        <div class="show-prescription">
-                            <table class="table">
-                                <thead>
-                                    <th>Date</th>
-                                    <th>ID</th>
-                                    <th>Drug Name</th>
-                                    <th>Dosage</th>
-                                    <th>Frequency (per day)</th>
-                                    <th>No of days</th>
-                                    <th>Remove</th>
-                                </thead>
-                                <tbody>
-                                <?php 
-                                if(isset($prescriptionID)){
-                                    $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
-                                    $result = mysqli_query($con,$select);
-                            
-                                    while($row= mysqli_fetch_array($result)){?>
-                                <tr>
-                                    <td><?php echo $current_date?></td>
-                                    <td><?php echo $prescriptionID ?></td>
-                                    <td><?php echo $row['drug_name'] ?></td>
-                                    <td><?php echo $row['quantity'] ?></td>
-                                    <td><?php echo $row['frequency'] ?></td>
-                                    <td><?php echo $row['days'] ?></td>
-                                    <!-- <td><a href="editPrescription.php?drugName=<?php echo $row['drug_name'];?>&prescriptionID=<?= $prescriptionID ?>"><input type="button" name="edit" class="edit-prescription" value="Edit"></a></td> -->
-                                    <td>
-                                        <!-- delete prescription -->
-                                        <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
-                                        <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
-                                    </td>
-                                    
-                                </tr>
-                                <?php
-                                    }
-                                }else{
-                                    displayErrorMessage();
-                                } ?>
-                                </tbody>
+                                    <?php
+                                        }
+                                    }else{
+                                        displayErrorMessage();
+                                    } ?>
+                                    </tbody>
 
-                            </table>
-                            
-                        </div>
-                    </form>
-                    <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
+                                </table>
+                                
+                            </div>
+                        </form>
+                        <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
+                    </div>
                 </div>
             </div>
         </div>
@@ -262,7 +228,7 @@ function outOFStock($patientID, $prescriptionID, $drugDetails) {
                     <td><input type="text" name="drugName[]" class="autoComplete-input"></td>
                     <td><input type="number" name="dosage[]"></td>
                     <td><input type="number" name="frequency[]"></td>
-                    <td><input type="number" name="days[]"  value=1></td>
+                    <td><input type="number" name="days[]"  value=1 readonly></td>
                     <td><input type="button" name="remove" class="remove" value="Remove"></td>
                     </tr>`);
 
