@@ -78,6 +78,8 @@ if(isset($_POST['discharge-patient'])){
         mysqli_query($con, "UPDATE inpatient SET discharge_date = CURDATE() WHERE patientID= $patientID");
         mysqli_query($con, "UPDATE room SET room_availability='available' WHERE room_no = $room_no ;");
         mysqli_query($con, "UPDATE patient SET patient_type='outpatient' WHERE patientID = $patientID ;");
+        mysqli_query($con, "DELETE from daily_report WHERE patientID = $patientID");
+        mysqli_query($con, "DELETE from prescription WHERE patientID = $patientID");
         mysqli_query($con, "INSERT into purchases(patientID,date,quantity,paid_status,paid_status1,item,item_flag) VALUES ('$patientID','$current_date','$admitted_days','not paid','not paid','2','s');");
 
         //commit transaction
@@ -122,7 +124,7 @@ if(isset($_POST['discharge-patient'])){
                     <div class="admit-patient-detail">
                         <h2>Patient Discharge Details</h2>
                         <div class="success-message" id="success-message" style="display:none;">
-                            <p>Please enter a doctor Note first</p>
+                            <p>Patient discharged successfully!</p>
                             <a href="inpatient.php"><input type="button" value="OK" class="ok-btn " name="ok-btn"></a>
                         </div>
                         <form method="post">

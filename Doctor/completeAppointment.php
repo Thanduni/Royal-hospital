@@ -6,9 +6,15 @@ if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
     $appointmentID = $_GET['appointmentid'];
 
+    //update appointment status to complete
     $update = "UPDATE appointment SET status='Complete' WHERE patientID = $patientID AND appointmentID = $appointmentID;";
     $update_query=mysqli_query($con,$update);
-    if($update_query){
+
+    //insert channeling fee
+    $channel_fee ="INSERT INTO `purchases`(`patientID`, `date`, `quantity`, `paid_status`, `paid_status1`, `item`, `item_flag`) VALUES ('$pid', '$date',1, 'not paid', 'Not paid', 4, 's')";
+    $channel_fee_query = mysqli_query($con,$channel_fee);
+
+    if($update_query&& $channel_fee_query){
         // Set doctorBusy to true
         $_SESSION['doctor_busy'] = false;
         header("Location: doctorDash.php");
