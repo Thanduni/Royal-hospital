@@ -1,3 +1,6 @@
+.main-container{
+    overflow-y: scroll;
+}
 .doctor-note-container{
     width: 70%;
     margin-bottom: 5%;
@@ -8,7 +11,7 @@
 }
 .prescription-container{
     width: 80%;
-    margin: 5%;
+    margin:1% 5%;
     display: flex;
     flex-direction: column;
     padding: 30px ;
@@ -129,6 +132,11 @@
     color: #FFF;
     cursor: pointer;
 }
+.add-any-prescription{
+    background: #6c757d;
+    color: #FFF;
+    cursor: pointer;
+}
 .remove{
     background: #dc3545;
     color: #fff;
@@ -136,11 +144,11 @@
 }
 .edit-prescription{
     background: #ffc107;
-    color: #fff;
+    color: #000;
     cursor: pointer;
 }
 .remove-prescription{
-    background:#6c757d ;
+    background:#dc3545 ;
     color: #fff;
     cursor: pointer
 }

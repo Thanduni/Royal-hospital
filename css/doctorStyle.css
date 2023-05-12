@@ -2,6 +2,7 @@
     top: 170px;
     min-width: fit-content;
     left: 260px;
+    overflow-y: scroll;
     height: 100vh;
 }
 .docimage{
@@ -60,7 +61,6 @@
 }
 h3{
     position: relative;
-    left: 40px;
 }
 .popup{
     background: rgba(0, 0, 0, 0.6);
@@ -683,6 +683,12 @@ header .current-date{
 
 .doctorDashInfo{
     display: flex;
+    overflow-y: scroll;
+    justify-content: space-between;
+}
+.doctordash-heading{
+    display: flex;
+    justify-content: center;
 }
 ::-webkit-scrollbar {
     width: 0;

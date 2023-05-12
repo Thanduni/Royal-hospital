@@ -19,36 +19,35 @@ if(isset($_GET['id'])) {
     }
 ?>
 <?php
-                if(isset($_POST['edit-doctor-note'])) {
-                    $date = $_POST['date'];
-                    $investigation = $_POST['investigation'];
-                    $impression = $_POST['impression'];
-                    $patientID = $_POST['patientID'];
-                    $prescriptionID = $_POST['prescriptionID'];
-                
-                    $update_prescription_query = "UPDATE prescription SET date = '$date', investigation = '$investigation', impression = '$impression' WHERE prescriptionID = $prescriptionID";
-                    
-                    if(mysqli_query($con, $update_prescription_query)){
-                        // Fetch the updated prescription details
-                        $prescription_query = "SELECT patientID, date, investigation, impression FROM prescription WHERE prescriptionID = $prescriptionID";
-                        $result = mysqli_query($con, $prescription_query);
-                        $row = mysqli_fetch_assoc($result);
-                        if ($row) {
-                            $patientID = $row['patientID'];
-                            $date = $row['date'];
-                            $investigation = $row['investigation'];
-                            $impression = $row['impression'];
-                        } else {
-                            echo "Error fetching updated prescription details";
-                        }
-                    } else {
-                        echo "Error updating prescription: " . mysqli_error($con);
-                    }
-                    
-                }
-                
+if(isset($_POST['edit-doctor-note'])) {
+    $date = $_POST['date'];
+    $investigation = $_POST['investigation'];
+    $impression = $_POST['impression'];
+    $patientID = $_POST['patientID'];
+    $prescriptionID = $_POST['prescriptionID'];
 
-                ?>
+    $update_prescription_query = "UPDATE prescription SET date = '$date', investigation = '$investigation', impression = '$impression' WHERE prescriptionID = $prescriptionID";
+    
+    if(mysqli_query($con, $update_prescription_query)){
+        // Fetch the updated prescription details
+        $prescription_query = "SELECT patientID, date, investigation, impression FROM prescription WHERE prescriptionID = $prescriptionID";
+        $result = mysqli_query($con, $prescription_query);
+        $row = mysqli_fetch_assoc($result);
+        if ($row) {
+            $patientID = $row['patientID'];
+            $date = $row['date'];
+            $investigation = $row['investigation'];
+            $impression = $row['impression'];
+        } else {
+            echo "Error fetching updated prescription details";
+        }
+    } else {
+        echo "Error updating prescription: " . mysqli_error($con);
+    }
+    
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,13 +86,9 @@ if(isset($_GET['id'])) {
                 <div class="patient-detail-container">
                     <div class="left-container">
                         <div class="patient-image">
-                            <img src="<?=BASEURL?>/uploads/<?=$profile_image?>" alt="upload profile picture">
-                            <!-- <hr> -->
-                        </div>
-                        <?php
-                            //select patient informations to display
+                            <?php
                             $sql = "SELECT user.profile_image,user.name,patient.weight,patient.height,patient.illness,patient.drug_allergies,patient.medical_history_comments,patient.currently_using_medicine,
-                             YEAR(CURRENT_TIMESTAMP) - YEAR(user.DOB) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(user.DOB, 5)) as age from user join patient on user.nic=patient.nic WHERE patientID = $patientID;";
+                            YEAR(CURRENT_TIMESTAMP) - YEAR(user.DOB) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(user.DOB, 5)) as age from user join patient on user.nic=patient.nic WHERE patientID = $patientID;";
 
                             $result=mysqli_query($con,$sql);
                             if($result){
@@ -107,7 +102,9 @@ if(isset($_GET['id'])) {
                                     $drug_allergies = $row['drug_allergies'];
                                     $medical_history_comments = $row['medical_history_comments'];
                                     $currently_using_medicine = $row['currently_using_medicine'];?>
-
+                            <img src="<?=BASEURL?>/uploads/<?=$profile_image?>" alt="upload profile picture">
+                            <!-- <hr> -->
+                        </div>
                                 <div class="row">
                                     <label for="Name">Name: </label>
                                     <div class="content"><?php echo $patientName ?></div>
