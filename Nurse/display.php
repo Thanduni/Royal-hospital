@@ -69,7 +69,7 @@ if(isset($_POST['submit'])){
                             <div class="cell">Admit Date</div>
                             <div class="cell">Admit Time</div>
                             <div class="cell">Drug Allergies</div>
-                            <div class="cell">Emergancy No</div>
+                            <div class="cell">Option</div>
                         </div>
                         <?php
                                 $sql="select user.name,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";

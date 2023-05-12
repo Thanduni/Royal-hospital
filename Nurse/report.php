@@ -13,6 +13,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
     <style>
+        .user{
+            height:inherit;
+        }
         .next {
             position: initial;
             height: auto;
@@ -34,39 +37,35 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 
             <div class="main-container">
                 <h3 class="nurse_heads">In-patient List</h3>
+                <div class="wrapper">
+                    <div class="table">
+                        <div class="row headerT">
+                            <div class="cell">Name</div>
+                            <div class="cell">Room No</div>
+                            <div class="cell">Option</div>
+                        </div>
+                        <?php 
+                            $sql="select patient.patientID,user.name,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                            $result=mysqli_query($con,$sql);
+                            
+                            if($result){
+                                while($row=mysqli_fetch_assoc($result)){
+                                $name =  $row['name'];
+                                $RoomNo = $row['room_no'];
+                                $admit_date = $row['admit_date'];
+                                $admit_time = $row['admit_time'];
+                                $drug_allergies = $row['drug_allergies'];
+                                $emergency_contact = $row['emergency_contact'];?>
+
+                        <div class="row">
+                            <div class="cell"><?php echo $name?></div>
+                            <div class="cell"><?php echo $RoomNo?></div>
+                            <div class="cell"><button class="button custom-btn" id="report-button"><a href="dailyReport.php?patientid='.$patientID.'&name='.$name.'">View </a></button></div>
+                        </div>
+                        <?php }
+                            }
+                            ?>
                 <div class="table-container" id="reportContainer">
-                    <table class="table">
-                        <thead>    
-                    
-                            <th>Patient ID</th>
-                            <th>Name</th>
-                            <th>Room No</th>
-                            <th>Option</th>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $sql="select patient.patientID,user.name,inpatient.room_no from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
-                                $result=mysqli_query($con,$sql);
-
-                                if($result){
-                                    while($row=mysqli_fetch_assoc($result)){
-                                     $patientID = $row['patientID'];
-                                        $name =  $row['name'];
-                                        $RoomNo = $row['room_no'];
-                                        echo '<tr>
-                                        <td>'.$patientID.'</td>
-                                        <td>'.$name.'</td>
-                                        <td>'.$RoomNo.'</td>
-                                        <td> <button class="button custom-btn" id="report-button"><a href="dailyReport.php?patientid='.$patientID.'&name='.$name.'">
-                                        View </a>
-                                    </button></td>
-
-                                    </tr>';
-                                    }
-                                }
-                            ?>    
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

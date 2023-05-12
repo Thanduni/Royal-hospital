@@ -2,7 +2,126 @@
     top: 170px;
     min-width: fit-content;
     left: 260px;
-    height: 100vh;
+    overflow-y: scroll;
+}
+h3{
+    padding: 20px;
+    font-size: 15px;
+}
+.table-container {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 472px;
+    overflow-y: scroll;
+    max-height: 472px; 
+}
+
+.table {
+    border-collapse: collapse;
+    background: #FFFFFF;
+    border-radius: 10px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.06);
+}
+.table thead{
+    position: sticky;
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    background: #e9e9e9;
+    border-radius: 20px;
+    border-bottom: #A7BBC7;
+}
+.table tr{
+    display: table-row;
+    transition: 0.4s;
+    background: #f6f6f6;
+    vertical-align: inherit;
+    border-color: inherit;
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+
+.table tr:hover{
+    transform: scale(0.97, 0.97);
+    background-color: var(--hover-color);
+}
+.table th{
+    font-family: var(--primary-font);
+    color: #000;
+    font-weight: unset;
+    text-align: left;
+    padding: 15px 10px;
+}
+.table tbody{
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    overflow-y: hidden;
+}
+.table tbody tr{
+    font-family: var(--primary-font);
+    /* font-family: OpenSans-Regular; */
+    font-size: 15px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+    height: 50px;
+}
+.table td{
+    text-align: left;
+    padding: 8px 10px;
+    background: #fff;
+}
+.nursedash-table{
+    margin: 0;
+}
+.nursedash-table td:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.table td:first-child .right-cell{
+    padding:8px;
+}
+.table td img{
+    border-radius: 50%;
+}
+/* Responsive */
+@media(max-width:500px){
+    .table thead{
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+    }
+    .table tr{
+        margin-bottom: 15px;
+    }
+    .table td{
+        text-align: right;
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+    }
+    .table td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
 }
 .prescribe-medicine-content{
     display: flex;
@@ -74,18 +193,34 @@
 .form-group{
     width: 100%;
 }
-.close{
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background: #fff;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    cursor: pointer;
+.remove-daily-report{
+    padding: 1em;
+    line-height: 1;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    background:#6c757d ;
+    color: #fff;
+    cursor: pointer
 }
-
-
+.add-daily-report{
+    padding: 1em;
+    line-height: 1;
+    border: 1px solid #ffc107;
+    border-radius: 3px;
+    background: #ffc107;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer
+}
+.view-prescription{
+    padding: 1em;
+    line-height: 1;
+    border: 1px solid #00A2ED;
+    border-radius: 3px;
+    background: #00A2ED;
+    color: #fff;
+    cursor: pointer
+}
 .popup-content input{
     width: 80%;
     padding: 1em;
@@ -132,36 +267,6 @@
     padding: 10px 15px;
 }
 
-/* Responsive */
-/* @media(max-width:500px){
-    .table thead{
-        display: none;
-    }
-    .table, .table tbody, .table tr, .table td{
-        display: block;
-        width: 100%;
-    }
-    .table tr{
-        margin-bottom: 15px;
-    }
-    .table td{
-        text-align: right;
-        padding-left: 50%;
-        text-align: right;
-        position: relative;
-    }
-    .table td::before{
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 15px;
-        font-size: 15px;
-        font-weight: bold;
-        text-align: left;
-    }
-} */
-
 #report-button{
     background: var(--para-color);
     padding: 10px 15px;
@@ -199,11 +304,11 @@ button a{
 
 .room-cards{
     width: auto;
-    padding: 35px 20px;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
-    height: 316px;
+    height: 585px;
     justify-content: center;
 }
 
@@ -233,79 +338,12 @@ button a{
 
 .table-container{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 30px;
-}
-/* .table-container h2{
-    padding: 20px 10px;
+    height: 472px;
 }
 
-.table{
-    border-collapse: collapse;
-    background: #FFFFFF;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 70%;
-    margin: 30px auto;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-}
-.table thead{
-    display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-    background: #fff;
-    border-radius: 20px;
-    padding: 0 20px;
-    border-bottom: #A7BBC7;
-}
-.table tr{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-    border-top: 1px solid rgba(0,0,0,0.08);
-}
-.table th{
-    font-family: var(--primary-font);
-    color: #000;
-    font-weight: unset;
-    text-align: left;
-    padding: 15px 10px;
-}
-.table tbody{
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-    overflow-y: hidden;
-}
-.table tbody tr{
-    font-family: var(--primary-font);
-    font-size: 15px;
-    color: gray;
-    line-height: 1.2;
-    font-weight: unset;
-    height: 50px;
-}
-.table td{
-    text-align: left;
-    padding: 8px 10px;
-    background: #fff;
-}
-.table td:first-child{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-}
-.table td:first-child .right-cell{
-    padding:8px;
-}
-.table td img{
-    border-radius: 50%;
-} */
 .view-prescription{
     background: #00A2ED;
     color: #FFF;
@@ -468,16 +506,35 @@ select option{
 }
 
 .nurse_heads{
-    margin: 73px 22px 22px 22px;
-    font-size: 37px;
-    padding: 50px 22px 50px 22px;
+    margin: 20px;
+    font-size: 20px;
+    padding: 20px 20pxx;
     text-align: center;
-    font-weight: 1600000;
     width: auto;
-    /* border-style: solid; */
-    background-color: #fff;
     border-radius: 10px;
     border-width: 3px;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #F8F9FF;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #F8F9FF;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F8F9FF;
+  }
+  .bed-button{
+    margin-right: 40px !important;
+  }

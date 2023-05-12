@@ -8,7 +8,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
 if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 
-    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID AND date >= (SELECT admit_date FROM inpatient WHERE patientID = $patientID)";
+    $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = $patientID";
     $prescID_query = mysqli_query($con,$get_prescID);
     if(mysqli_num_rows($prescID_query) > 0) {
         $get_row = mysqli_fetch_assoc($prescID_query);
@@ -52,10 +52,10 @@ if(isset($_GET['patientid'])){
                 <div class="main-container">
 
                     <div class="prescribe-medicine-content">
-                        <div class="show-prescription" id="nurse-view-prescription">
+                        <div class="table-container show-prescription" id="nurse-view-prescription">
                             <table class="table">
                                 <thead>
-                                    <th>ID</th>
+                                    <th>Date</th>
                                     <th>Drug Name</th>
                                     <th>Dosage (per day)</th>
                                     <th>Frequency (per day)</th>
@@ -67,14 +67,14 @@ if(isset($_GET['patientid'])){
                                 $result = mysqli_query($con,$select);
                             
                                 while($row= mysqli_fetch_array($result)){?>
-                                <tr><td><?php  echo $prescriptionID ?></td>
+                                <tr><td><?php echo $row['date'] ?></td>
                                     <td><?php echo $row['drug_name'] ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td><?php echo $row['frequency'] ?></td>
                                     <td><?php echo $row['days'] ?></td>
                                     <td>
                                         <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
-                                        <input type="button" name="remove" class="remove-prescription custom-btn" value="Remove"></a>
+                                        <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
                                     </td>
                                     
                                 </tr>
