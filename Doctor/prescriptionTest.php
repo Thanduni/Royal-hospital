@@ -110,6 +110,7 @@ if(isset($_GET['patientid'])){
                         <thead>
                             <th>Date</th>
                             <th>Test Name</th>
+                            <th>Option</th>
                         </thead>
                         <tbody>
                         <?php

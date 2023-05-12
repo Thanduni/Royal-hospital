@@ -26,6 +26,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     </script>
     <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
     <style>
+        .user{
+            height:inherit;
+        }
         .next {
             position: initial;
             height: auto;
@@ -50,7 +53,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 <input type="text" class="doctor-searchBar" id="myInput" placeholder="Search for Names...">
                 <script src=<?php echo BASEURL . '/js/filterTable.js' ?>></script>
                     <h3>Patient List</h3>
-                    <table class="table">
+                    <table class="doctor-dash-table table">
                         <thead>
                           <th>Patient</th>
                           <th>Room No</th>

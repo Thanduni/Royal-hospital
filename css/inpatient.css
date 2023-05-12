@@ -8,6 +8,10 @@
     background: #fff;
     text-align: left;
 }
+/* .table-wrapper{
+    height: 470px;
+    overflow-y: scroll;
+} */
 .doctor-searchBar{
     background-image: url(../images/search.svg);
     background-position: 4px 6px;
@@ -65,12 +69,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.show-inpatients table td:first-child{
+/* .show-inpatients table td:first-child{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* text-align: center; */
-}
+} */
 .show-inpatients .right-cell {
     padding: 17px 0 !important;
 }

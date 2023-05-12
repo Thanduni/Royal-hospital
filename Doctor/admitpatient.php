@@ -83,6 +83,15 @@ if($get_details){
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/doctorStyle.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/admitpatient.css' ?>">
+    <style>
+        .user{
+            height:inherit;
+        }
+        .next {
+            position: initial;
+            height: auto;
+        }
+    </style>
     <title>Admission</title>
 </head>
 <body>
