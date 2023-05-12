@@ -4,6 +4,36 @@
     left: 260px;
     overflow-y: scroll;
 }
+.sub-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.sub-main .right-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: unset;
+}
+.sub-main .left-container{
+    display: flex;
+    flex-direction: column;
+}
+.sub-main .left-container .patient-details{
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px;
+}
+.sub-main .left-container .patient-details img{
+    border-radius: 50%;
+}
+.sub-main .left-container .patient-details .detail-cell{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 h3{
     padding: 20px;
     font-size: 15px;
@@ -80,7 +110,7 @@ h3{
     background: #fff;
 }
 .nursedash-table{
-    margin: 0;
+    margin: 0!important;
 }
 .nursedash-table td:first-child{
     display: flex;
@@ -280,8 +310,7 @@ h3{
 }
 
 .patient-details{
-    margin-left: 20px;
-    font-size: 20px;
+    margin: 0 60px;
 }
 /* button{
     background-color: var(--para-color);
@@ -506,7 +535,6 @@ select option{
 }
 
 .nurse_heads{
-    margin: 20px;
     font-size: 20px;
     padding: 20px 20pxx;
     text-align: center;

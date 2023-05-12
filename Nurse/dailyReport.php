@@ -12,11 +12,12 @@ if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 }
 
-$get_patient_data = "SELECT user.name from user join patient on patient.nic = user.nic WHERE patientID = $patientID;";
+$get_patient_data = "SELECT name,profile_image from user join patient on patient.nic = user.nic WHERE patientID = $patientID;";
 $get_data_query = mysqli_query($con,$get_patient_data);
 if($get_data_query){
     $data_row = mysqli_fetch_assoc($get_data_query);
     $patientName = $data_row['name'];
+    $patient_image = $data_row['profile_image'];
 }
 ?>
 
@@ -51,7 +52,9 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
     <style>
-        
+        .user{
+            height:inherit;
+        }
         .next {
             position: initial;
             height: auto;
@@ -69,6 +72,9 @@ if(isset($_POST['submit'])){
             margin: 10px;
             border-style: none;
         }
+        .table td{
+            text-align:center;
+        }
     </style> 
     <title>Daily Report</title>
 </head>
@@ -85,55 +91,122 @@ if(isset($_POST['submit'])){
 
             <div class="main-container">
                 <h3 class="nurse_heads">Vital Signs</h3>
-                <div class="patient-details">
-                    <div class="patient-name">Patient Name: <?php  echo $patientName ?>  </div>
-                    <div class="patient-id">Patient ID: <?php echo $patientID?></div>
-                </div>
-                <button class="button custom-btn" id="dailyreportbutton">
-                        New entry
-                </button>
-                <div class="table-container">
-                
-                    <table class="table">
+                <div class="sub-main">
+                    <div class="left-container">
+                        <div class="patient-details">
+                        <div class="patient-image">
+                            <?php echo "<img src='".BASEURL."/uploads/".$patient_image."'width = 40px height=40px>";?>
+                        </div>
+                        <div class="detail-cell">
+                            <div class="patient-name">Patient Name: <?php  echo $patientName ?>  </div>
+                            <div class="patient-id">Patient ID: <?php echo $patientID?></div>
+                        </div>
+                        </div>
+
+                        <div class="table-container">
+                        <style>
+                            .table-container{
+                                align-items: flex-start;
+                            }
+                        </style>
+                        <table class="table">
                         <thead>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>Temperature</th>
-                            <th>Pulse</th>
-                            <th>Blood Preasure</th>
-                            <th>O2 Saturation</th>
+                            <th>Temperature (℃)</th>
+                            <th>Pulse (bpm)</th>
+                            <th>Blood Preasure (mmHg)</th>
+                            <th>O2 Saturation (%)</th>
                             <th>Option</th>
                         </thead>
                         <tbody>
+                            <?php 
+                                $pulseNormalRange = [80,100];
+                                $temperatureNormalRange = [36.5, 37.5]; // Example temperature range
+                                $bloodPressureNormalRange = [80, 120]; // Example blood pressure range
+                                $o2SaturationNormalRange = [95, 100]; // Example oxygen saturation range
 
-                            <?php
-                                $sql="select * from daily_report where patientID = '$patientID'";
-                                $result = $con -> query($sql);
-                                $rows = $result->num_rows; 
+                                $select = "SELECT * from daily_report WHERE patientID = $patientID";
+                                $result = mysqli_query($con,$select);
+                            
+                                while($row= mysqli_fetch_array($result)){
+                                    // Fetch the vital sign values from the database and assign them to variables
+                                    $date = $row['date'];
+                                    $time = $row['time'];
+                                    $pulse = $row['pulse'];
+                                    $temperature = $row['temperature'];
+                                    $bloodPressure = $row['blood_preasure'];
+                                    $o2Saturation = $row['o2_saturation'];
 
-                                if($result){
-                                    while($row=$result->fetch_assoc()){
-                                        $date =  $row['date'];
-                                        $time =  $row['time'];
-                                        $pulse = $row['pulse'];
-                                        $temperature = $row['temperature'];
-                                        $blood_preasure = $row['blood_preasure'];
-                                        $o2_saturation = $row['o2_saturation'];?>
-                                        <tr>
-                                            <td><?php echo $date ?></td>
-                                            <td><?php echo $time ?></td>
-                                            <td><?php echo $pulse ?></td>
-                                            <td><?php echo $temperature ?></td>
-                                            <td><?php echo $blood_preasure ?></td>
-                                            <td><?php echo $o2_saturation ?></td>
-                                            <td><a href="deletedailyreport.php?id=<?php echo $row['reportID']?>&patientid=<?=$patientID?>">
-                                            <input type="button" name="remove" class="remove-daily-report" value="Remove"></a></td>
-                                        </tr>
-                                   <?php }
-                                }
+                                    // Determine the background color based on the value range
+                                    $pulseColor ='';
+                                    if($pulse < $pulseNormalRange[0]){
+                                        $pulseColor = 'low';
+                                    }else if($pulse > $pulseNormalRange[1]){
+                                        $pulseColor = 'high';
+                                    }
+                                    $temperatureColor = '';
+                                    if ($temperature < $temperatureNormalRange[0]) {
+                                        $temperatureColor = 'low';
+                                    } elseif ($temperature > $temperatureNormalRange[1]) {
+                                        $temperatureColor = 'high';
+                                    }
+                                
+                                    $bloodPressureColor = '';
+                                    if ($bloodPressure < $bloodPressureNormalRange[0]) {
+                                        $bloodPressureColor = 'low';
+                                    } elseif ($bloodPressure > $bloodPressureNormalRange[1]) {
+                                        $bloodPressureColor = 'high';
+                                    }
+                                
+                                    $o2SaturationColor = '';
+                                    if ($o2Saturation < $o2SaturationNormalRange[0]) {
+                                        $o2SaturationColor = 'low';
+                                    } elseif ($o2Saturation > $o2SaturationNormalRange[1]) {
+                                        $o2SaturationColor = 'high';
+                                    }
+                                ?>
+                                <style>
+                                    .low {
+                                        background-color: #b6d4fe !important;
+                                        color: #000 !important;
+                                    }
+
+                                    .high {
+                                        background-color: #f8d7da !important;
+                                        color: #000 !important;
+                                    }
+                                </style>
+                                <tr>
+                                    <td><?php echo $date ?></td>
+                                    <td><?php echo $time ?></td>
+                                    <td class="<?php echo $pulseColor ?>"><?php echo $pulse ?></td>
+                                    <td class="<?php echo $temperatureColor ?>"><?php echo $temperature ?></td>
+                                    <td class="<?php echo $bloodPressureColor ?>"><?php echo $bloodPressure ?></td>
+                                    <td class="<?php echo $o2SaturationColor ?>"><?php echo $o2Saturation ?></td>
+                                    <td><a href="deletedailyreport.php?id=<?php echo $row['reportID']?>&patientid=<?=$patientID?>">
+                                        <input type="button" name="remove" class="remove-daily-report" value="Remove"></a></td>
+                                </tr>
+                                <?php
+                                } 
                             ?> 
                         </tbody>
-                    </table>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="right-container">
+                        <button class="button custom-btn" id="dailyreportbutton">
+                        New entry
+                        </button>
+                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/mypzgycw.json"
+                            trigger="loop"
+                            delay="2000"
+                            colors="primary:#121331,secondary:#3c77c6"
+                            style="width:400px;height:400px">
+                        </lord-icon>
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,20 +233,20 @@ if(isset($_POST['submit'])){
                     <!-- <input type="time" class="form-control" placeholder="" name="time" required> -->
             </div>
             <div class="form-group">
-                    <label>Pulse</label>
-                    <input type="number" class="form-control" placeholder="" name="pulse">
+                    <label>Temperature (℃)</label>
+                    <input type="number" step=0.01 class="form-control" placeholder="" name="temperature" min=34.00 max=43.00>
             </div>
             <div class="form-group">
-                    <label>Temperature</label>
-                    <input type="number" class="form-control" placeholder="" name="temperature">
+                    <label>Pulse (bpm)</label>
+                    <input type="number" class="form-control" placeholder="" name="pulse" min=30 max =200>
             </div>
             <div class="form-group">
-                    <label>Blood Preasure</label>
-                    <input type="number" class="form-control" placeholder="" name="blood_preasure">
+                    <label>Blood Preasure (mmHg)</label>
+                    <input type="number" class="form-control" placeholder="" name="blood_preasure" min= 70 max=250>
             </div>
             <div class="form-group">
-                    <label>O2 Saturation</label>
-                    <input type="number" class="form-control" placeholder="" name="o2_saturation">
+                    <label>O2 Saturation (%)</label>
+                    <input type="number" class="form-control" placeholder="" name="o2_saturation" min=70 max =100>
             </div>
             <button type="submit" class="close custom-btn" id="form-btn" name ="close">Close</button>
             <button type="submit" class="custom-btn" id="form-btn" name ="submit">Submit</button>

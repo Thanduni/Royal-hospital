@@ -22,6 +22,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
       .user{
             height:inherit;
         }
+        .table-container{
+          align-items: flex-start;
+        }
         .next {
             position: initial;
             height: auto;
@@ -65,6 +68,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                         </div>
                     </div>
                     <div class="icon-box">
+                    <!-- <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/mbcrjouw.json"
+                        trigger="hover"
+                        colors="primary:#121331,secondary:#3c77c6"
+                        stroke="85"
+                        style="width:70px;height:70px">
+                    </lord-icon> -->
                         <i class="fas fa-user-injured"></i>
                     </div>
                   </div>
@@ -107,7 +118,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                         </thead>
                         <tbody>
                           <?php
-                              $sql="select user.profile_image,user.name,inpatient.patientID,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID;";
+                              $sql="SELECT user.profile_image,user.name,inpatient.patientID,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID WHERE inpatient.discharge_date is NULL;";
                               $result=mysqli_query($con,$sql);
                               if($result){
                               while($row=mysqli_fetch_assoc($result)){
