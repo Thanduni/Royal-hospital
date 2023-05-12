@@ -47,8 +47,9 @@ if(isset($_GET['patientid'])){
         include(BASEURL . '/Components/doctorSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
         <div class="userContents" id="center">
         <?php
-          include(BASEURL.'/Components/topbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
-          ?>
+            $name = urlencode( $_SESSION['name']);
+            include(BASEURL.'/Components/doctorTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
+            ?>
             <div class="display-container">
                 <div class="show-inpatients">
                     <h3>Daily Reports</h3>
@@ -56,22 +57,76 @@ if(isset($_GET['patientid'])){
                         <thead>
                           <th>Date</th>
                           <th>Time</th>
+                          <th>Pulse</th>
                           <th>Temperature</th>
                           <th>Blood Preasure</th>
                           <th>O2 Saturation</th>
                         </thead>
                         <tbody>
                             <?php 
-                                $select = "SELECT daily_report.*, inpatient.admit_date from daily_report join inpatient on inpatient.patientID=daily_report.patientID WHERE date between inpatient.admit_date and CURDATE();";
+                                $pulseNormalRange = [80,100];
+                                $temperatureNormalRange = [36.5, 37.5]; // Example temperature range
+                                $bloodPressureNormalRange = [80, 120]; // Example blood pressure range
+                                $o2SaturationNormalRange = [95, 100]; // Example oxygen saturation range
+
+                                $select = "SELECT * from daily_report WHERE patientID = $patientID";
                                 $result = mysqli_query($con,$select);
                             
-                                while($row= mysqli_fetch_array($result)){?>
+                                while($row= mysqli_fetch_array($result)){
+                                    // Fetch the vital sign values from the database and assign them to variables
+                                    $date = $row['date'];
+                                    $time = $row['time'];
+                                    $pulse = $row['pulse'];
+                                    $temperature = $row['temperature'];
+                                    $bloodPressure = $row['blood_preasure'];
+                                    $o2Saturation = $row['o2_saturation'];
+
+                                    // Determine the background color based on the value range
+                                    $pulseColor ='';
+                                    if($pulse < $pulseNormalRange[0]){
+                                        $pulseColor = 'low';
+                                    }else if($pulse > $pulseNormalRange[1]){
+                                        $pulseColor = 'high';
+                                    }
+                                    $temperatureColor = '';
+                                    if ($temperature < $temperatureNormalRange[0]) {
+                                        $temperatureColor = 'low';
+                                    } elseif ($temperature > $temperatureNormalRange[1]) {
+                                        $temperatureColor = 'high';
+                                    }
+                                
+                                    $bloodPressureColor = '';
+                                    if ($bloodPressure < $bloodPressureNormalRange[0]) {
+                                        $bloodPressureColor = 'low';
+                                    } elseif ($bloodPressure > $bloodPressureNormalRange[1]) {
+                                        $bloodPressureColor = 'high';
+                                    }
+                                
+                                    $o2SaturationColor = '';
+                                    if ($o2Saturation < $o2SaturationNormalRange[0]) {
+                                        $o2SaturationColor = 'low';
+                                    } elseif ($o2Saturation > $o2SaturationNormalRange[1]) {
+                                        $o2SaturationColor = 'high';
+                                    }
+                                ?>
+                                <style>
+                                    .low {
+                                        background-color: #b6d4fe !important;
+                                        color: #000 !important;
+                                    }
+
+                                    .high {
+                                        background-color: #f1aeb5 !important;
+                                        color: #000 !important;
+                                    }
+                                </style>
                                 <tr>
-                                    <td><?php echo $row['date'] ?></td>
-                                    <td><?php echo $row['time'] ?></td>
-                                    <td><?php echo $row['temperature'] ?></td>
-                                    <td><?php echo $row['blood_preasure'] ?></td>
-                                    <td><?php echo $row['o2_saturation'] ?></td>
+                                    <td><?php echo $date ?></td>
+                                    <td><?php echo $time ?></td>
+                                    <td class="<?php echo $pulseColor ?>"><?php echo $pulse ?></td>
+                                    <td class="<?php echo $temperatureColor ?>"><?php echo $temperature ?></td>
+                                    <td class="<?php echo $bloodPressureColor ?>"><?php echo $bloodPressure ?></td>
+                                    <td class="<?php echo $o2SaturationColor ?>"><?php echo $o2Saturation ?></td>
                                 </tr>
                                 <?php
                                 } ?>
