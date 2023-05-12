@@ -161,7 +161,7 @@ if (!isset($_SESSION['mailaddress'])) {
             ?>
         </div>
         <?php } ?>
-        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm">
+        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm" autocomplete="on">
             <div class="content">
                 <div class="box" style="padding-bottom: 0px">
                     <label for="">Name</label><br><br>

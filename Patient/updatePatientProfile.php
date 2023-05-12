@@ -120,12 +120,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 </script>
                             </tr>
                             <tr>
-                                <td><label for="height">Height: </label></td>
-                                <td colspan="2"><input type="text" name="height" value="<?php echo $row1['height'] ?>" required><div class="alert" id="height"></div></td>
+                                <td><label for="height">Height(kg): </label></td>
+                                <td colspan="2"><input type="number" name="height" value="<?php echo $row1['height'] ?>" required><div class="alert" id="height"></div></td>
                             </tr>
                             <tr>
-                                <td><label for="weight">Weight: </label></td>
-                                <td colspan="2"><input type="text" name="weight" value="<?php echo $row1['weight'] ?>" required><div class="alert" id="weight"></div></td>
+                                <td><label for="weight">Weight(cm): </label></td>
+                                <td colspan="2"><input type="number" name="weight" value="<?php echo $row1['weight'] ?>" required><div class="alert" id="weight"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="blood">Blood: </label></td>
