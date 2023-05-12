@@ -30,9 +30,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
         </script>
         <script src="https://kit.fontawesome.com/04b61c29c2.js" crossorigin="anonymous"></script>
         <style>
+            .user{
+                height:inherit;
+            }
             .next {
                 position: initial;
                 height: auto;
+            }
+            .doctordash-heading{
+                padding: 5px; 
             }
         </style>
         <title>Doctor Dashboard</title>
@@ -128,7 +134,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     </div>
 
                     <!-- appointmet table -->
-                    <h3>Upcomming Appointments</h3>
+                    <div class="doctordash-heading"><h3>Upcomming Appointments</h3></div>
+                    
                     <div class="table-container">
                         <table class="doctor-dash-table table">
                             <thead>
