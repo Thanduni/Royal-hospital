@@ -93,9 +93,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 <td colspan="2"><textarea name="address" cols="30"
                                                           rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="address"></div></td>
                             </tr>
-                            <tr>
+                            <tr></tr>
                                 <td><label for="contactnum">Contact number: </label></td>
-                                <td colspan="2"><input type="text" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
+                                <td colspan="2"><input type="number" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="dob">Date of birth: </label></td>
