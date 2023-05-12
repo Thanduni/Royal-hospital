@@ -95,7 +95,7 @@ table {
     height: 500px;
     border-style: none;
     border-radius: 10px;
-    overflow: visible;
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 1229px) {

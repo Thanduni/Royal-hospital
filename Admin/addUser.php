@@ -113,9 +113,9 @@ if (isset($_POST['addUser'])) {
     }
 
     if ($userRole == "Nurse"){
-        $query = "INSERT INTO nurse(nic) VALUES ('$nic');";
-        $result = mysqli_query($con, $query);
-        header("location:" . BASEURL . "/Admin/adminUsersPage.php?result=The user nurse added to the system successfully.");
+//        $query = "INSERT INTO nurse(nic) VALUES ('$nic');";
+//        $result = mysqli_query($con, $query);
+        header("location:" . BASEURL . "/Admin/adminNursePage.php?task=insertNurse&nic=$nic");
         exit();
     }
     else if($userRole == "Receptionist"){

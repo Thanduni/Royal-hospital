@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
 
 
     $query = "INSERT INTO `purchases`(`patientID`, `date`, `quantity`, `paid_status`, `paid_status1`, `item`, `item_flag`) 
-    VALUES ('$pid', '$date',1, 'not paid', 'Not paid', 4, 's')";
+    VALUES ('$pid', '$date',1, 'not paid', 'Not paid', 3, 's')";
     $result = mysqli_query($con, $query);
 
     $query = "INSERT INTO `notification`( `nic`, `Message`, `Timestamp`) 

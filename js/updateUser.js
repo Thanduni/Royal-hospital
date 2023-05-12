@@ -84,6 +84,34 @@ function displayDoctorUpdateForm(nic) {
     // }, false);
 }
 
+function displayNurseUpdateForm(nic) {
+    let form = document.getElementById("addForm");
+    form.action = '/royalhospital/Admin/updateNurse.php?id=' + nic;
+    document.getElementById("nicRow").classList.add("hide");
+
+    let tableCon = document.getElementsByClassName(nic + "_tableCon");
+
+    document.getElementById("titleOperation").innerHTML = "Update User | NIC : " + nic;
+
+    let department = tableCon[0].textContent;
+
+
+    let userForm = document.getElementById('userForm');
+    // userForm.classList.add("active");
+
+    let IN_department = document.getElementById("IN_department");
+
+    IN_department.value = department;
+    form.scrollIntoView();
+
+
+    // let close = document.getElementById('cancel');
+    // close.addEventListener('click', function() {
+    //     userForm.classList.remove("active");
+    //     // document.getElementById("passToJS").innerHTML = "";
+    // }, false);
+}
+
 function displayPatientUpdateForm(nic) {
     let form = document.getElementById("addForm");
 

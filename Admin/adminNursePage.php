@@ -65,7 +65,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 
             <div class="userClass">
                 <?php
-                $query = " SELECT user.nic, nurse.nurseID, user.name, user.profile_image FROM nurse inner join user where nurse.nic=user.nic;";
+                $query = " SELECT user.nic, nurse.nurseID, user.name, nurse.department, user.profile_image FROM nurse inner join user where nurse.nic=user.nic;";
                 $result = $con->query($query);
                 if (!$result) die("Database access failed: " . $con->error);
                 $rows = $result->num_rows;
@@ -77,6 +77,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                             <div class="cell">NIC</div>
                             <div class="cell">NurseID</div>
                             <div class="cell">Nurse Name</div>
+                            <div class="cell">Department</div>
                             <div class="cell">Profile image</div>
                             <div class="cell">Options</div>
                         </div>
@@ -96,12 +97,25 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 <div class="cell" data-title="Nurse Name">
                                     <?php echo $row[2]; ?>
                                 </div>
+                                <div class="cell" data-title="Department">
+                                    <?php echo $row[3]; ?>
+                                </div>
                                 <div class="cell" style="width:100px" data-title="Profile image">
                                     <?php
-                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[3]' alt='Upload Image' width=150px>";
+                                    echo "<img class='profilePic' src='" . BASEURL . "/uploads/$row[4]' alt='Upload Image' width=150px>";
                                     ?>
                                 </div>
                                 <div class="cell" style="100px" data-title="Options">
+                                    <button class="operation" id="<?php echo $row[0] ?>" onclick="displayNurseUpdateForm(<?php echo $row[0] ?>);"><img src="<?php echo BASEURL . '/images/edit.svg' ?>" alt="Edit">
+
+                                    </button>
+                                    <script type="text/javascript">
+                                        $(function(){
+                                            $('#<?php echo $row[0] ?>').click(function(){
+                                                $('#userForm').fadeIn().css("display","flex");
+                                            });
+                                        });
+                                    </script>
                                     <a href="<?php echo BASEURL . '/Admin/delEdiUser.php?op=deleteNurse&id=' . $row[0] ?>">
                                         <button class="operation"><img src="<?php echo BASEURL . '/images/trash.svg' ?>" alt="Delete">
                                         </button>
@@ -109,7 +123,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                 </div>
 
                                 <ul class="tableCon">
-                                    <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[2] ?></li>
                                     <li class="<?php echo $row[0] ?>_tableCon"><?php echo $row[3] ?></li>
                                 </ul>
 
@@ -138,6 +151,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="department">Department:</label>
+                        </td>
+                        <td colspan="2">
+                            <select name="department" id="IN_department">
+                                <option value="">Please A Select Department</option>
+                                <option value="Anesthetics">Anesthetics</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Gastroentology">Gastroentology</option>
+                            </select><br><br>
+                        </td>
+                    </tr>
+                    <tr>
                     <td></td>
                     <td colspan="2">
                         <button class="custom-btn" type="submit" id="submit" name="addNurse">Apply</button>
@@ -151,6 +177,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
 
     <script src=<?php echo BASEURL . '/js/filterElements.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/validateRecepStoreNurse.js' ?>></script>
+    <?php
+    if (@$_GET['task'] == "insertNurse") {
+        $nic = $_GET['nic'];
+        echo
+            "<script>
+                $('#userForm').fadeIn().css('display','flex');
+                displayNurseAddForm();
+                document.getElementById('IN_nic').value = ". $nic. ";
+            </script>";
+    } ?>
     <script type="text/javascript">
         $(function(){
             $('#addButton').click(function(){

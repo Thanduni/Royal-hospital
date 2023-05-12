@@ -47,7 +47,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
             <div class="filter">
                 <input type="text" id="myInputName" onkeyup="filterByMedicine()" placeholder="Search for names.." title="Type in a name">
                 <div style="position: relative; color: green; top: 8px; margin: 14px;font-weight: 600;"> In Stock </div>
-                <input class="filter" type="checkbox" id="switch" /><label for="switch">Toggle</label>
+                <input class="filter" type="checkbox" id="switch" onchange="filterExpired()" /><label for="switch">Toggle</label>
                 <div style="position: relative;color: red; top: 5px; margin: 14px; font-weight: 600;">Expired</div>
             </div>
 
@@ -215,17 +215,20 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
     <!-- content start -->
 
     <script>
-        let switchButton = document.getElementById("switch");
+        // alert("asfsdfsdf");
+        // let switchButton = document.getElementById("switch");
+        // alert(switchButton);
 
-        switchButton.addEventListener("change", function(){
+
+        function filterExpired(){
             var table, row, cell, i;
             table = document.getElementsByClassName("table")[0];
-            // alert(table);
             row = table.getElementsByClassName("row");
-            if(this.checked){
+            let switchButton = document.getElementById("switch");
+            if(switchButton.checked){
                 // alert("Checked");
                 for (i = 1; i < row.length; i++) {
-                    cell = row[i].getElementsByClassName("cell")[9];
+                    cell = row[i].getElementsByClassName("cell")[8];
                     if(cell.textContent.trim() === "Expired"){
                         row[i].style.display = "";
                     }
@@ -235,7 +238,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                 }
             }else{
                 for (i = 1; i < row.length; i++) {
-                    cell = row[i].getElementsByClassName("cell")[9];
+                    cell = row[i].getElementsByClassName("cell")[8];
                     if(cell.textContent.trim() === "In Stock".trim()){
                         row[i].style.display = "";
                     }
@@ -244,7 +247,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     }
                 }
             }
-        })
+        }
     </script>
     <script src=<?php echo BASEURL . '/js/ValidateForm.js' ?>></script>
     <script src=<?php echo BASEURL . '/js/updateMedicine.js' ?>></script>

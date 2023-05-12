@@ -7,10 +7,11 @@ if (isset($_POST['addNurse'])) {
     $query = "Select count(*) from user where nic = " . $nic . " and user_role='Nurse'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
+    $department = $_POST['department'];
 
     if ($row['count(*)']) {
 
-        $query = "INSERT INTO nurse(nic) VALUES ('$nic');";
+        $query = "INSERT INTO nurse(nic, department) VALUES ('$nic', '$department');";
         $result = mysqli_query($con, $query);
 
         header("location:" . BASEURL . "/Admin/adminNursePage.php");

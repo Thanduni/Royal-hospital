@@ -93,9 +93,10 @@ table {
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 500px;
+    overflow-y: scroll;
     border-style: none;
     border-radius: 10px;
-    overflow: visible;
+    /*overflow: visible;*/
 }
 
 @media screen and (max-width: 1229px) {
@@ -116,7 +117,6 @@ table {
 @media screen and (max-width: 1229px) {
     .table {
         display: block;
-        overflow-y: scroll;
     }
 }
 

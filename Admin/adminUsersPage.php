@@ -319,6 +319,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
         }
     if (@$_GET['click'] == "addNurse") {
         $_SESSION['nic'] = $_GET['nic'];
+        $_SESSION['department'] = $_GET['department'];
         $_SESSION['which_user'] = "Nurse";
         echo
             "<script>

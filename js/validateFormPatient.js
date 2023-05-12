@@ -198,6 +198,10 @@ function validatePasswordForm() {
 
 
 function validateUpdateForm() {
+    let address = addressDiv.previousSibling.value;
+    let contactNum = contactNumDiv.previousSibling.value;
+    let name = nameDiv.previousSibling.value;
+
     if (regContactNum.test(contactNum) &&
         regAddress.test(address) &&
         regName.test(name)) {
@@ -221,7 +225,7 @@ function validateUpdateForm() {
             address.classList.remove("hint");
             address.classList.add("alert");
             address.innerHTML = "<ul class='inputMsg'>\n" +
-                "    <li>Please enter a valid name.</li>\n" +
+                "    <li>Please enter a valid address.</li>\n" +
                 "</ul>"
         }
         form.scrollIntoView();
