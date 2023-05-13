@@ -44,7 +44,7 @@ require_once("../conf/config.php");
                 <p>Stock</p>
             </a></li>
         <li onmouseover="changeImage('notice-board.png', 'noticeboard')" onmouseout="restoreImage('notice-boardDef.png', 'noticeboard')"><a id="notice" href="<?php echo BASEURL.'/Storekeeper/storekeeperNoticeBoard.php'?>" target="_self"><img id="noticeboard" class="butbut icons"
-                                            src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
+                                            src=<?php echo BASEURL . '/images/notice-boardDef.svg' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>
             </a></li>
