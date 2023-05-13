@@ -44,6 +44,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
     $pdf->Cell(190,10,"Receipt ID:$ResceiptID",0,1,'C');
 
     $pdf->SetTextColor(0,0,0);
+    $pdf->SetFont("Arial","",12);
     $pdf->Cell(38,10,"Date",1,0,'C');
     $pdf->Cell(38,10,"Type",1,0,'C');
     $pdf->Cell(58,10,"Name",1,0,'C');
