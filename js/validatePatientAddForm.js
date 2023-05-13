@@ -11,7 +11,7 @@ let drugAllergiesDiv = document.getElementById("drugAllergies");
 
 let regName = /^[a-zA-Z]{3,}/;
 let regNic = /^\d{12}[A-Z]?$/;
-let regAddress = /^[\W\s\w]{3,},[\s\w]{3,},[\s\w]{3,}\.$/;
+let regAddress = /^[\W\s\w]{1,},[\s\w]{3,},[\s\S\w]{3,}\.$/;
 let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regContactNum = /^[0-9]{10}$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
