@@ -71,7 +71,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         </div>
                         <?php
                     } ?>
-                    <form action="updateProfile.php" onsubmit="return validateUpdateForm()"  method="post" enctype="multipart/form-data">
+                    <form action="updateProfile.php" onsubmit="return validatePatientUpdateForm()"  method="post" enctype="multipart/form-data">
                         <?php
                         $nic =$_SESSION['nic'];
                         $q1 = "select * from patient where nic = $nic";
@@ -142,7 +142,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                             </select>
                                 <div class="alert" id="blood"></div></td>
                             </tr>
-                            <script>
+                           <!-- <script>
                                 document.getElementById("blood_type")[7].setAttribute('selected','selected');
                                 if('<?php echo $row1['blood']?>' == 'A+')
                                     document.getElementById("blood_type")[0].setAttribute('selected','selected');
@@ -160,7 +160,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                     document.getElementById("blood_type")[6].setAttribute('selected','selected');
                                 else if('<?php echo $row1['blood']?>' == 'O-')
                                     document.getElementById("blood_type")[7].setAttribute('selected','selected');
-                            </script>
+                            </script>-->
                             <tr>
                                 <td><label for="illness">Illness: </label></td>
                                 <td colspan="2"><input type="text" name="illness" value="<?php echo $row1['illness'] ?>" required><div class="alert" id="illness"></div></td>
@@ -209,7 +209,6 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
     <?php include(BASEURL . '/Components/Footer.php'); ?>
 
     <script src=<?php echo BASEURL . '/js/validateFormPatient.js' ?>>
-    //<script src=<?php //echo BASEURL . '/js/validateFormReceptionist.js' ?>
 
     
     $(function(){

@@ -200,7 +200,7 @@ function validatePasswordForm() {
 }
 
 
-function validateUpdateForm() {
+function validatePatientUpdateForm() {
     let address = addressDiv.previousSibling.value;
     let contactNum = contactNumDiv.previousSibling.value;
     let name = nameDiv.previousSibling.value;
@@ -211,23 +211,23 @@ function validateUpdateForm() {
         return true;}
     else{
         if(!regContactNum.test(contactNum)){
-            contactNum.classList.remove("hint");
-            contactNum.classList.add("alert");
-            contactNum.innerHTML = "<ul class='inputMsg'>\n" +
+            contactNumDiv.classList.remove("hint");
+            contactNumDiv.classList.add("alert");
+            contactNumDiv.innerHTML = "<ul class='inputMsg'>\n" +
                 "    <li>Please enter a valid contact number.</li>\n" +
                 "</ul>"
         }
         if(!regName.test(name)){
-            name.classList.remove("hint");
-            name.classList.add("alert");
-            name.innerHTML = "<ul class='inputMsg'>\n" +
+            nameDiv.classList.remove("hint");
+            nameDiv.classList.add("alert");
+            nameDiv.innerHTML = "<ul class='inputMsg'>\n" +
                 "    <li>Please enter a valid name.</li>\n" +
                 "</ul>"
         }
         if(!regAddress.test(address)){
-            address.classList.remove("hint");
-            address.classList.add("alert");
-            address.innerHTML = "<ul class='inputMsg'>\n" +
+            addressDiv.classList.remove("hint");
+            addressDiv.classList.add("alert");
+            addressDiv.innerHTML = "<ul class='inputMsg'>\n" +
                 "    <li>Please enter a valid address.</li>\n" +
                 "</ul>"
         }
