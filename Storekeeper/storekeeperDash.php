@@ -69,7 +69,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     <a href="<?php echo BASEURL . '/Storekeeper/storekeeperAddStock.php' ?>">
                         <li class="tab-cards" id="bills">Stock
                             <div>
-                                <img class="cardIcon" right" src="<?php echo BASEURL."/images/stock.png"?>" alt="">
+                                <img class="cardIcon" style="float:right" src="<?php echo BASEURL."/images/stock.png"?>" alt="">
                             </div>
                         </li>
                     </a>
