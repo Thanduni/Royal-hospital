@@ -67,6 +67,10 @@ if(isset($_POST['edit-doctor-note'])) {
             position: initial;
             height: auto;
         }
+        .disable{
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
     <title>Display Patient</title>
 </head>
@@ -154,7 +158,7 @@ if(isset($_POST['edit-doctor-note'])) {
                                 </div>
                                 <input type="hidden" name="prescriptionID" value="<?php echo $prescriptionID ?>">
                                 <button class="addPrescription-button custom-btn" name ="edit-doctor-note" >Save Changes</button>
-                                <button class="addPrescription-button custom-btn" type="submit" name="submit-doctor-note" disabled>Submit</button>
+                                <button class="addPrescription-button custom-btn disable" type="submit" name="submit-doctor-note">Submit</button>
                             </form>
                         </div>
                     </div>

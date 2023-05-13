@@ -87,8 +87,18 @@ if(isset($_GET['patientid'])){
 
 
                     <div class="tab-line">
-                        <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a>
+                        <div class="back-div">
+                            <a href="doctorDash.php.php ?>">
+                            <img src="<?php echo BASEURL . '/images/back-button.png' ?>" alt="">
+                            <div class="button-name">Dashboard</div class="button-name"></a>
+                        </div>
+                        <div class="front-div">
+                            <a href="prescriptionTest.php?patientid=<?=$patientID?>">
+                            <img src="<?php echo BASEURL . '/images/right-arrow.png' ?>" alt="">
+                            <div class="button-name">Test Prescription</div class="button-name"></a>
+                        </div>
+                        <!-- <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a> -->
                     </div>
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
@@ -114,11 +124,11 @@ if(isset($_GET['patientid'])){
                                         <td><input type="number" name="dosage[]" required min=0></td>
                                         <td><input type="number" name="frequency[]" required min=0></td>
                                         <td><input type="number" name="days[]" required min=0></td>
-                                        <td><input type="button" name="addd" class="add" value="Add"></td>
+                                        <td><input type="button" name="addd" class="add" value="Add row"></td>
+                                        <td><input type="submit" class="save-prescription" name="save" id="save" value="Save Prescription"></td>
                                     </tr>
                                     </div>
                                 </table>
-                                <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
                         <div class="show-prescription">

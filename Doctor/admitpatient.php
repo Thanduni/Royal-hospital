@@ -9,13 +9,53 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
     $doctorID = $row["doctorID"];
 ?>
 <?php
+//get patientID from url
+if(isset($_GET['patientid'])){
+    $patientID = $_GET['patientid'];
+}
+
+//function to display error message
+function displayRemove() {
+    echo '<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const errorMessage = document.getElementById("success-message");
+      if (errorMessage) {
+        errorMessage.innerHTML = \'<p>Previously added prescription will be removed</p><div><input type="button" class="close-button" value="Close" onclick="closeErrorMessage()"></div>\';
+        errorMessage.style.display = "flex";
+      } else {
+        console.error("Error: Could not find error message element.");
+      }
+    });
+  
+    function closeErrorMessage() {
+      const errorMessage = document.getElementById("success-message");
+      if (errorMessage) {
+        errorMessage.style.display = "none";
+      }
+    }
+    </script>';
+}
+
+//check for added medical prescriptions
+$checkid = 0;
+$get_opd_prescriptionID = "SELECT MAX(prescriptionID) from prescription WHERE patientID =$patientID";
+$get_opd_prescriptionID_query = mysqli_query($con,$get_opd_prescriptionID);
+$presID_row = mysqli_fetch_array($get_opd_prescriptionID_query);
+if(isset($presID_row[0])){
+    $prescriptionID = $presID_row[0];
+    $check_pdID = mysqli_query($con,"SELECT pdID from prescribed_drugs WHERE prescriptionID = $prescriptionID");
+    if(mysqli_num_rows($check_pdID)>0){
+        displayRemove();
+        $checkid = 1;
+    }
+    
+}
+
 //get date and time
 date_default_timezone_set('Asia/Colombo');
 $mindate = date("Y-m-d");
 $mintime = date("h:i");
-if(isset($_GET['patientid'])){
-    $patientID = $_GET['patientid'];
-}
+
 //get patient details from database
 $patient_sql = "SELECT user.name,
                 user.profile_image,
@@ -57,18 +97,13 @@ if($get_details){
         $update_bed_query = mysqli_query($con,$update_bed);
 
         if($get_result && $update_bed_query && $update_status_query){ 
+            if($checkid ==1){
+                //if a prescription added delete it
+                $delete = "DELETE from prescribed_drugs WHERE prescriptionID = $prescriptionID ";
+                $delete_query = mysqli_query($con,$delete);
+            }
             header("Location: inpatient.php");
-            //DOMContentLoaded event listener ensure that the code is executed only after the HTML document has loaded
-        //     echo '<script>
-        //     document.addEventListener("DOMContentLoaded", function() {          
-        //         var admitForm = document.querySelector(".admit-patient-container .admit-patient-detail .admit-patient-form");
-        //         if(admitForm) {
-        //             admitForm.style.display = "none";
-        //         } else {
-        //             console.error("Error: Could not find success message element.");
-        //         }
-        //     });
-        //   </script>';
+
         }
     }
 ?>
@@ -91,6 +126,9 @@ if($get_details){
             position: initial;
             height: auto;
         }
+        .error-message {
+            margin: 0.6em 0 0 0
+        }
     </style>
     <title>Admission</title>
 </head>
@@ -107,6 +145,10 @@ if($get_details){
             <!-- <div class="display-container"> -->
                 <div class="admit-patient-container">
                     <div class="admit-patient-detail ">
+                        <div class="error-message admit-patient-container-error-message" id="success-message" style="display:none;">
+                            <p>Previously added prescription will be removed</p>
+                            <input type="button" class="close-button" value="Okay" onclick="closeErrorMessage()">
+                        </div>
                         <h2>Patient Admission Details</h2>
                         <form method="post" class="admit-patient-form">
                             <div class="form-group">
