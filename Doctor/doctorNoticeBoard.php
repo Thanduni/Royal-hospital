@@ -73,7 +73,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
              ?>
                  <div class="s-content">
                     <div class="t-content"><h2><u><?php echo $rows['title'];?></u></h2></div>
-                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img src="<?php echo BASEURL.'/uploads/'.$rows['profile_image'] ?>" ><?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
+                    <div class="n-header" style="font-size:20px;font-weight: 600;"><img style="width:50px;height:50px;border-radius:50px;" src="<?php echo BASEURL.'/uploads/'.$rows['profile_image'] ?>" ><?php echo " by "."<span style='color:var(--primary-color);'>".$rows['name']."</span>"." - ".date("l, j F Y",strtotime($rows['date']))." , ".$rows['time']; ?></div><br><br>
                     <div class="n-content"><pre><textarea><?php echo "".$rows['message']; ?></textarea></pre></div>
                     
                 </div>
