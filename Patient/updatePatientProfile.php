@@ -95,7 +95,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                             </tr>
                             <tr></tr>
                                 <td><label for="contactnum">Contact number: </label></td>
-                                <td colspan="2"><input type="number" name="contactNum" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
+                                <td colspan="2"><input type="text" name="contactNum" maxlength="10" pattern="d\{10}" value="<?php echo $row['contact_num'] ?>" required><div class="alert" id="contactNum"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="dob">Date of birth: </label></td>
@@ -144,21 +144,21 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                             </tr>
                             <script>
                                 document.getElementById("blood_type")[7].setAttribute('selected','selected');
-                                if('<?php echo $row1['bood']?>' == 'A+')
+                                if('<?php echo $row1['blood']?>' == 'A+')
                                     document.getElementById("blood_type")[0].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'A-')
+                                else if('<?php echo $row1['blood']?>' == 'A-')
                                     document.getElementById("blood_type")[1].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'B+')
+                                else if('<?php echo $row1['blood']?>' == 'B+')
                                     document.getElementById("blood_type")[2].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'B-')
+                                else if('<?php echo $row1['blood']?>' == 'B-')
                                     document.getElementById("blood_type")[3].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'AB+')
+                                else if('<?php echo $row1['blood']?>' == 'AB+')
                                     document.getElementById("blood_type")[4].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'AB-')
+                                else if('<?php echo $row1['blood']?>' == 'AB-')
                                     document.getElementById("blood_type")[5].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'O+')
+                                else if('<?php echo $row1['blood']?>' == 'O+')
                                     document.getElementById("blood_type")[6].setAttribute('selected','selected');
-                                else if('<?php echo $row1['bood']?>' == 'O-')
+                                else if('<?php echo $row1['blood']?>' == 'O-')
                                     document.getElementById("blood_type")[7].setAttribute('selected','selected');
                             </script>
                             <tr>

@@ -1,6 +1,7 @@
 let form = document.getElementsByTagName("form")[0];
-let nameDiv = document.getElementById("name");
-let addressDiv = document.getElementById("address");
+let nameDiv = document.getElementById("nameDiv");
+let contactNum = document.getElementById("contactNum");
+let addressDiv = document.getElementById("addressDiv");
 let contactNumDiv = document.getElementById("contactNum");
 let pass1 = document.getElementsByClassName("password")[0];
 let pass2 = document.getElementsByClassName("password")[1];
@@ -12,30 +13,7 @@ let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regContactNum = /^[0-9]{10}$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
 
-function validateAddress() {
-    addressDiv.innerHTML = "";
-    let address = addressDiv.previousSibling.value;
-    if (address == "" || !regAddress.test(address)) {
-        addressDiv.classList.remove("hint");
-        addressDiv.classList.add("alert");
-        addressDiv.innerHTML = "<ul>\n" +
-            "    <li>Please enter a valid address.</li>\n" +
-            "</ul>"
-    }
-}
 
-addressDiv.previousSibling.addEventListener("blur", validateAddress, false)
-
-addressDiv.previousSibling.addEventListener("focus", function () {
-    addressDiv.classList.remove("alert");
-    addressDiv.classList.add("hint");
-    addressDiv.innerHTML = "<ul class='inputMsg'>\n" +
-        "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
-        "</ul>";
-    ;
-
-    // alert("Hai");
-}, false)
 
 function validateName() {
     nameDiv.innerHTML = "";
@@ -56,6 +34,31 @@ nameDiv.previousSibling.addEventListener("focus", function () {
     nameDiv.classList.add("hint");
     nameDiv.innerHTML = "<ul class='inputMsg'>\n" +
         "    <li>Name should contain more than 2 characters and no numbers.</li>\n" +
+        "</ul>";
+    ;
+
+    // alert("Hai");
+}, false)
+
+function validateAddress() {
+    addressDiv.innerHTML = "";
+    let address = addressDiv.previousSibling.value;
+    if (address == "" || !regAddress.test(address)) {
+        addressDiv.classList.remove("hint");
+        addressDiv.classList.add("alert");
+        addressDiv.innerHTML = "<ul>\n" +
+            "    <li>Please enter a valid address.</li>\n" +
+            "</ul>"
+    }
+}
+
+addressDiv.previousSibling.addEventListener("blur", validateAddress, false)
+
+addressDiv.previousSibling.addEventListener("focus", function () {
+    addressDiv.classList.remove("alert");
+    addressDiv.classList.add("hint");
+    addressDiv.innerHTML = "<ul class='inputMsg'>\n" +
+        "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
         "</ul>";
     ;
 
