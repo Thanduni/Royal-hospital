@@ -27,6 +27,17 @@ if(isset($_POST['updateRoom'])){
         die(mysqli_error($con));
     }
 }
+
+if(isset($_POST['deleteRoom'])){
+    $delete = "DELETE from room WHERE room_no = $room_no";
+    $delete_query = mysqli_query($con,$delete);
+
+    if($delete_query){
+        header("location: beds.php");
+    }else{
+        die(mysqli_error($con));
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +50,9 @@ if(isset($_POST['updateRoom'])){
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/roominfo.css' ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
+        .custom-btn{
+            color: var(--primary-color);
+        }
         .user{
             height:inherit;
         }
@@ -73,7 +87,8 @@ if(isset($_POST['updateRoom'])){
                         }elseif($room_availability == 'not_available'){ ?>
                             <!-- get patient details -->
                             <?php
-                            $sql="select ip.patientID, ip.admit_date, ip.doctorID, u.name as patientName from inpatient ip join user u on u.nic=ip.nic where ip.room_no =$room_no LIMIT 1;";
+                            $sql = "SELECT ip.patientID, ip.admit_date, ip.doctorID, p.investigation, u.name as patientName from inpatient ip join user u on u.nic=ip.nic join prescription p on p.patientID=ip.patientID;";
+                            // $sql="SELECT ip.patientID, ip.admit_date, ip.doctorID, p.investigation, u.name as patientName from inpatient ip join user u on u.nic=ip.nic where ip.room_no =$room_no LIMIT 1;";
                             $result=mysqli_query($con,$sql);
 
                             if($result){
@@ -82,6 +97,7 @@ if(isset($_POST['updateRoom'])){
                                     $admit_date = $row['admit_date'];
                                     $patientID = $row['patientID'];
                                     $doctorID = $row['doctorID']; 
+                                    $investigation = $row['investigation'];
                             }
                             ?>
 
@@ -103,25 +119,35 @@ if(isset($_POST['updateRoom'])){
                             <div class="patient-row">
                             <div class="name">Doctor Name</div>:<div class="value"> <?php echo $doctor_name ?></div></div>
                             <div class="patient-row">
-                            <div class="name">Doctor ID</div>:<div class="value"><?php echo $doctorID?></div></div>
+                            <div class="name">Investigation</div>:<div class="value"><?php echo $investigation?></div></div>
                             <div class="patient-row">
                             <div class="name">Admit Date</div>:<div class="value"> <?php echo $admit_date?></div></div>
                             <?php }
                             ?>
                         </div>
-                        <!-- <button class="button" id="update-room">Update Room</button> -->
+                        <button class="button" id="remove-room">Remove</button>
                     </div>
                 </div>
-            </div>
-
-
+                
             </div>
         </div>
     </div>
 </body>
-
+<div class="add-rooms">
+    <div class="popup" id="update-room-popup" style="display:none">
+        <div class="popup-content">
+            <form method="post">
+                <h1>Do you want to delete this room?</h1>
+                <div class="button-container">
+                    <button type="submit" name ="deleteRoom" class="">Yes</button>
+                    <button class="close-button "  name ="close">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
-   document.getElementById("update-room").addEventListener("click", function(){
+   document.getElementById("remove-room").addEventListener("click", function(){
         document.querySelector("#update-room-popup").style.display = "flex";
     })
     document.querySelector(".close-button").addEventListener("click", function(){

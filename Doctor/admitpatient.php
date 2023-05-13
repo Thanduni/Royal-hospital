@@ -113,25 +113,29 @@ if($get_details){
                                 <label for="">Patient Name</label>
                                 <input type="text" name="patientName" value ="<?php echo $patientName ?>" readonly>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="">Patient ID</label>
                                 <input type="text" name="patientID" value ="<?php echo $patientID?>" readonly>
+                            </div> -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="">Age</label>
+                                    <input type="number" name="age" value ="<?php echo $age?>" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Room No</label>
+                                    <input type="number" name="roomNo" value ="<?php echo $room_no?>" readonly>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="">Age</label>
-                                <input type="number" name="age" value ="<?php echo $age?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Room No</label>
-                                <input type="number" name="roomNo" value ="<?php echo $room_no?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Admit Date</label>
-                                <input type="date" name="admitDate" value ="<?php echo $mindate?>" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Admit Time</label>
-                                <input type="time" name="admitTime" value ="<?php echo $mintime?>" readonly>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="">Admit Date</label>
+                                    <input type="date" name="admitDate" value ="<?php echo $mindate?>" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Admit Time</label>
+                                    <input type="time" name="admitTime" value ="<?php echo $mintime?>" readonly>
+                                </div>
                             </div>
                             <button id="admit-btn" class="admit-patient-btn custom-btn" type="submit" name="admit-patient">Admit Patient</button>
                         </form>
