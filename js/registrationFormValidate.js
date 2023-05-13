@@ -11,6 +11,7 @@ let EphoneDiv = document.getElementById("EphoneDiv");
 
 let regName = /^[a-zA-Z]{3,}/;
 let regNic = /^\d{12}[A-Z]?$/;
+let regAddress = /^[\W\s\w]{3,},[\s\w]{3,},[\s\w]{3,}\.$/;
 let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
 let regContactNum = /^[0-9]{10}$/;
