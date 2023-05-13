@@ -44,8 +44,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 display: flex;
                 flex-direction: column;
             }
-            
+            .table{
+                width:96%;
+            }
             .table-container{
+                align-items: flex-start;
                 height: 500px;
                 overflow-y: scroll;
             }
@@ -215,6 +218,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 }
                                 ?>
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
