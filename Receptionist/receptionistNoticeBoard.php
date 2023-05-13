@@ -18,7 +18,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
     <link rel="stylesheet" href="<?php echo BASEURL.'/css/patientAppointment.css' ?>">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Patient's Summary</title>
+    <title>Noticeboard</title>
     <style>
         body{
             background-color: #f9f8ff;
@@ -52,7 +52,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
 
     <?php
     $name = urlencode( $_SESSION['name']);
-    include(BASEURL.'/Components/receptinistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
+    include(BASEURL.'/Components/receptionistSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name); ?>
     <!-- <?php //include(BASEURL.'/Components/PatientSidebar.php?profilePic='.$_SESSION['profilePic']."&name".$_SESSION['name']); ?> -->
     
     <div class="userContents"  id="center">
