@@ -110,13 +110,28 @@ if($get_data_query){
                                     $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
                                     $result = mysqli_query($con,$select);
 
-                                    while($row= mysqli_fetch_array($result)){?>
+                                    while($row= mysqli_fetch_array($result)){
+                                        $med_name = $row['drug_name'];?>
                                     <tr><td><?php echo $row['date'] ?></td>
-                                        <td><?php echo $row['drug_name'] ?></td>
+                                        <?php 
+                                            $td_color ='';
+                                            $check_item = mysqli_query($con,"SELECT * from item WHERE item_name = '$med_name'");
+                                            if(mysqli_num_rows($check_item) >0){
+                                                $td_color = 'no';
+                                            }else{
+                                                $td_color = 'yes';
+                                            }
+                                        ?>
+                                        <td class="<?php echo $td_color ?>"><?php echo $row['drug_name'] ?></td>
                                         <td><?php echo $row['quantity'] ?></td>
                                         <td><?php echo $row['frequency'] ?></td>
                                         <td><?php echo $row['days'] ?></td>
                                     </tr>
+                                        <style>
+                                            .yes{
+                                                color: red;
+                                            }
+                                        </style>
                                     <?php
                                     } 
                                     ?> 

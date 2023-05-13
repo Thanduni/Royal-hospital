@@ -40,6 +40,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             .doctordash-heading{
                 padding: 5px; 
             }
+            .main-container{
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .table-container{
+                height: 500px;
+                overflow-y: scroll;
+            }
         </style>
         <title>Doctor Dashboard</title>
     </head>
@@ -134,78 +143,80 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                     </div>
 
                     <!-- appointmet table -->
-                    <div class="doctordash-heading"><h3>Upcomming Appointments</h3></div>
-                    
-                    <div class="table-container">
-                        <table class="doctor-dash-table table">
-                            <thead>
-                            <th>Patient</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Message</th>
-                            <th colspan="2">Option</th>
-                            </thead>
-                            <tbody>
-                            <?php
-                            //select patient details from database
-                            $sql="SELECT user.profile_image,user.name,appointment.appointmentID,appointment.date,appointment.time,appointment.message,appointment.patientID,prescription.prescriptionID FROM appointment JOIN patient ON appointment.patientID=patient.patientID JOIN user ON user.nic=patient.nic LEFT JOIN prescription ON appointment.patientID = prescription.patientID WHERE appointment.doctorID =$doctorID AND appointment.status='confirmed' AND appointment.date=CURDATE();";
-                            $result=mysqli_query($con,$sql);
+                    <div class="appointmet-wrapper">
+                        <div class="doctordash-heading"><h3>Upcomming Appointments</h3></div>
+                        
+                        <div class="table-container">
+                            <table class="doctor-dash-table table">
+                                <thead>
+                                <th>Patient</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Message</th>
+                                <th colspan="2">Option</th>
+                                </thead>
+                                <tbody>
+                                <?php
+                                //select patient details from database
+                                $sql="SELECT user.profile_image,user.name,appointment.appointmentID,appointment.date,appointment.time,appointment.message,appointment.patientID,prescription.prescriptionID FROM appointment JOIN patient ON appointment.patientID=patient.patientID JOIN user ON user.nic=patient.nic LEFT JOIN prescription ON appointment.patientID = prescription.patientID WHERE appointment.doctorID =$doctorID AND appointment.status='confirmed' AND appointment.date=CURDATE();";
+                                $result=mysqli_query($con,$sql);
 
-                            if($result){
-                                while($row=mysqli_fetch_assoc($result)){
-                                    $profile_image = $row['profile_image'];
-                                    $name =  $row['name'];
-                                    $date = $row['date'];
-                                    $time = $row['time'];
-                                    $message = $row['message'];
-                                    $patientID= $row['patientID'];
-                                    $appointmentID = $row['appointmentID'];?>
-                                    <tr>
-                                        <td><div class="left-cell">
-                                                <?php echo "<img src='".BASEURL."/uploads/".$profile_image."'width = 40px height=40px>";?>
-                                            </div>
-                                            <div class="right-cell">
-                                                <div class="up-cell"><?php echo $name ?></div>
-                                                <div class="down-cell">id :<?php echo $patientID ?></div>
-                                            </div>
-                                        </td>
-                                        <td><?php echo $date ?></td>
-                                        <td><?php echo $time ?></td>
-                                        <td><?php echo $message ?></td>
-                                        <style>
-                                          .disabled-link {
-                                            /* opacity: 0.5; */
-                                            /* pointer-events: none; */
-                                          }
-                                        </style>
-                                        <?php
-                                        //if a doctor note is not added
-                                        if($row['prescriptionID'] == null) {
-                                            ?>
-                                            <td>
-                                                <a href="<?php echo $doctorBusy ? '#' : 'displayPatient.php?patientid=' . $patientID; ?>" class="<?php echo $doctorBusy ? 'disabled-link' : ''; ?>">
-                                                    <img class="view-btn-image" src="../images/eye.png" width="40px" height="40px">
-                                                </a>
+                                if($result){
+                                    while($row=mysqli_fetch_assoc($result)){
+                                        $profile_image = $row['profile_image'];
+                                        $name =  $row['name'];
+                                        $date = $row['date'];
+                                        $time = $row['time'];
+                                        $message = $row['message'];
+                                        $patientID= $row['patientID'];
+                                        $appointmentID = $row['appointmentID'];?>
+                                        <tr>
+                                            <td><div class="left-cell">
+                                                    <?php echo "<img src='".BASEURL."/uploads/".$profile_image."'width = 40px height=40px>";?>
+                                                </div>
+                                                <div class="right-cell">
+                                                    <div class="up-cell"><?php echo $name ?></div>
+                                                    <div class="down-cell">id :<?php echo $patientID ?></div>
+                                                </div>
                                             </td>
-                                        <?php 
-                                        }
-                                        else if($row['prescriptionID'] != null) {?>
-                                         <!-- if a doctor note is added direct to viewP-->
-                                         <td><a href="viewPrescription.php?id=<?=$row['prescriptionID']?>">
-                                                <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
-                                        </td>
-                                            <td><a href="completeAppointment.php?patientid=<?=$patientID?>&appointmentid=<?=$appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
-                                            <?php
+                                            <td><?php echo $date ?></td>
+                                            <td><?php echo $time ?></td>
+                                            <td><?php echo $message ?></td>
+                                            <style>
+                                            .disabled-link {
+                                                opacity: 0.5;
+                                                cursor: not-allowed;
                                             }
-                                            ?>
-                                                                              
-                                    </tr>
-                                    <?php
+                                            </style>
+                                            <?php
+                                            //if a doctor note is not added
+                                            if($row['prescriptionID'] == null) {
+                                                ?>
+                                                <td>
+                                                    <a href="<?php echo $doctorBusy ? '#' : 'displayPatient.php?patientid=' . $patientID; ?>" class="<?php echo $doctorBusy ? 'disabled-link' : ''; ?>">
+                                                        <img class="view-btn-image" src="../images/eye.png" width="40px" height="40px">
+                                                    </a>
+                                                </td>
+                                            <?php 
+                                            }
+                                            else if($row['prescriptionID'] != null) {?>
+                                            <!-- if a doctor note is added direct to viewP-->
+                                            <td><a href="viewPrescription.php?id=<?=$row['prescriptionID']?>">
+                                                    <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
+                                            </td>
+                                                <td><a href="completeAppointment.php?patientid=<?=$patientID?>&appointmentid=<?=$appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
+                                                <?php
+                                                }
+                                                ?>
+                                                                                
+                                        </tr>
+                                        <?php
+                                    }
                                 }
-                            }
-                            ?>
-                            </tbody>
-                        </table>
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="calendar">
