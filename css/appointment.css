@@ -94,7 +94,7 @@ label{
     .advertise::before {
         content: '';
         position: absolute;
-        top: 159px;
+        top: 84px;
         left: 0;
         right: 0;
         bottom: 0;

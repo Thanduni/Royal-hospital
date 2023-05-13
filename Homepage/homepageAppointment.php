@@ -27,7 +27,7 @@ if (!isset($_SESSION['mailaddress'])) {
         </div>
         <div style="display: flex; justify-content: center">
             <div id="appointmentForm">
-                <form method="post" action="<?php echo BASEURL.'/Homepage/addAppointment.php' ?>" enctype="multipart/form-data" id="addForm"
+                <form method="post" onsubmit="return validateAppointmentForm()" action="<?php echo BASEURL.'/Homepage/addAppointment.php' ?>" enctype="multipart/form-data" id="addForm"
                       name="userForm">
                     <table>
                         <tr colspan="3">
@@ -80,7 +80,7 @@ if (!isset($_SESSION['mailaddress'])) {
                                 <label>NIC</label>
                             </td>
                             <td colspan="2">
-                                <input type="text" name="nic">
+                                <input type="text" name="nic"><div class="alert" style="width: 351px" id="nic"></div>
                             </td>
                         </tr>
                         <tr>
@@ -113,7 +113,50 @@ if (!isset($_SESSION['mailaddress'])) {
 
         <?php include(BASEURL.'/Components/Footer.php'); ?>
     </section>
-    <script src="<?php echo BASEURL.'/js/registrationFormValidate.js' ?>"></script>
+    <script>
+        let form = document.getElementById("addForm");
+        let nicDiv = document.getElementById("nic");
+        let regNic = /^\d{12}[A-Z]?$/;
+
+        function validateNIC() {
+            nicDiv.innerHTML = "";
+            let nic = nicDiv.previousSibling.value;
+            if (nic == "" || !regNic.test(nic)) {
+                nicDiv.classList.remove("hint");
+                nicDiv.classList.add("alert");
+                nicDiv.innerHTML = "<ul>\n" +
+                    "    <li>Please enter your NIC properly.</li>\n" +
+                    "</ul>"
+            }
+        }
+
+        nicDiv.previousSibling.addEventListener("blur", validateNIC, false)
+
+        nicDiv.previousSibling.addEventListener("focus", function () {
+            nicDiv.classList.remove("alert");
+            nicDiv.classList.add("hint");
+            nicDiv.innerHTML = "<ul>\n" +
+                "    <li>NIC should contain only 12 digits or with character at last after the digits.</li>\n" +
+                "</ul>"
+        }, false)
+
+        function validateAppointmentForm(){
+            let nic = nicDiv.previousSibling.value;
+            if (regNic.test(nic))
+                return true
+            else{
+                if (!regNic.test(nic)) {
+                    nicDiv.classList.remove("hint");
+                    nicDiv.classList.add("alert");
+                    nicDiv.innerHTML = "<ul>\n" +
+                        "    <li>Please enter your NIC properly.</li>\n" +
+                        "</ul>"
+                }
+                form.scrollIntoView();
+                return false;
+            }
+        }
+    </script>
     </body>
     </html>
 

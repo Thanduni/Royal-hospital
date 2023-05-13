@@ -50,7 +50,7 @@ h2{
 }
 .box{
     padding: 50px;
-    /*width: 220px;*/
+    width: 50%;
     /*height: 50px;*/
     display: flex;
     flex-direction: column;
@@ -163,10 +163,14 @@ select{
         flex-direction: column;
     }
 
+    .box{
+        width: auto;
+    }
+
     .advertise::before {
         content: '';
         position: absolute;
-        top: 159px;
+        top: 84px;
         left: 0;
         right: 0;
         bottom: 0;
