@@ -33,7 +33,7 @@ if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
     // $get_prescID = "SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")";
     // $prescID_query = mysqli_query($con,$get_prescID);
-    $prescID_query = mysqli_query($con,"SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT admit_date FROM inpatient WHERE patientID = " . $patientID . ")");
+    $prescID_query = mysqli_query($con,"SELECT MAX(prescriptionID) FROM prescription WHERE patientID = " . $patientID . " AND date >= (SELECT MAX(admit_date) FROM inpatient WHERE patientID = " . $patientID . " AND discharge_date is NULL)");
     // Fetch the result of the query (query can return a row with NULL)
     $row = mysqli_fetch_array($prescID_query);
     // Check if the value is not null
@@ -182,10 +182,20 @@ function outOFStock() {
                                         $select = "SELECT * from prescribed_drugs where prescriptionID ='$prescriptionID';";
                                         $result = mysqli_query($con,$select);
                                 
-                                        while($row= mysqli_fetch_array($result)){?>
+                                        while($row= mysqli_fetch_array($result)){
+                                            $med_name = $row['drug_name'];?>
                                     <tr>
                                         <td><?php echo $current_date?></td>
-                                        <td><?php echo $row['drug_name'] ?></td>
+                                        <?php 
+                                            $td_color ='';
+                                            $check_item = mysqli_query($con,"SELECT * from item WHERE item_name = '$med_name'");
+                                            if(mysqli_num_rows($check_item) >0){
+                                                $td_color = 'no';
+                                            }else{
+                                                $td_color = 'yes';
+                                            }
+                                        ?>
+                                        <td class="<?php echo $td_color ?>"><?php echo $row['drug_name'] ?></td>
                                         <td><?php echo $row['quantity'] ?></td>
                                         <td><?php echo $row['frequency'] ?></td>
                                         <td><?php echo $row['days'] ?></td>
@@ -195,7 +205,11 @@ function outOFStock() {
                                             <a href="deletePrescription.php?pdID=<?php echo $row['pdID'];?>&patientID=<?php echo $patientID ?>">
                                             <input type="button" name="remove" class="remove-prescription" value="Remove"></a>
                                         </td>
-                                        
+                                        <style>
+                                            .yes{
+                                                color: red;
+                                            }
+                                        </style>
                                     </tr>
                                     <?php
                                         }

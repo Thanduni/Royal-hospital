@@ -3,7 +3,19 @@ session_start();
 //die( $_SESSION['profilePic']);
 require_once("../conf/config.php");
 if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
-    ?>
+  //get nurse ID
+  $nic = $_SESSION['nic'];
+  $nurseID_query = "select NurseID from nurse join user on user.nic = nurse.nic where user.nic = $nic";
+  $get_nurseID = mysqli_query($con,$nurseID_query);
+  $row = mysqli_fetch_assoc($get_nurseID);
+  $nurseID = $row["NurseID"];
+
+  //get nurse department
+  $department = "SELECT department from nurse WHERE NurseID=$nurseID";
+  $get_department = mysqli_query($con,$department);
+  $dep_row = mysqli_fetch_assoc($get_department);
+  $nurse_dep = $dep_row['department'];
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,13 +65,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                     <div class="card-content">
                         <div class="number">
                           <?php
-                          $dash_patient_query = "select * from patient where patient_type = 'inpatient';";
+                          $dash_patient_query = "select * from inpatient join doctor on doctor.doctorID = inpatient.doctorID where doctor.department= '$nurse_dep' AND discharge_date is null;";
                           $dash_patient_query_run = mysqli_query($con,$dash_patient_query);
                           if($total_patient = mysqli_num_rows($dash_patient_query_run)){
                             echo $total_patient ;
                           }
                           else{
-                            echo 'No Data';
+                            echo '0';
                           }
                           ?>
                         </div>
@@ -91,7 +103,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                             echo $total_available_beds;
                           }
                           else{
-                            echo 'No data';
+                            echo '0';
                           }
                           ?>
                         </div>
@@ -106,7 +118,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                 </a>
               </div>
 
-              <div class="table-container">
+                <div class="table-container">
                     <table class="nursedash-table table">
                         <thead>
                             <th>Patient</th>
@@ -118,8 +130,15 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Nurse') {
                         </thead>
                         <tbody>
                           <?php
-                              $sql="SELECT user.profile_image,user.name,inpatient.patientID,inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact from user join patient on user.nic=patient.nic join inpatient on inpatient.patientID=patient.patientID WHERE inpatient.discharge_date is NULL;";
-                              $result=mysqli_query($con,$sql);
+
+                          $sql = "SELECT user.name, user.profile_image,inpatient.patientID, inpatient.room_no,inpatient.admit_date,inpatient.admit_time,patient.drug_allergies,patient.emergency_contact
+                                  FROM inpatient
+                                  JOIN doctor ON doctor.doctorID = inpatient.doctorID
+                                  JOIN patient ON patient.patientID = inpatient.patientID
+                                  JOIN user ON user.nic = patient.nic
+                                  WHERE doctor.department = '$nurse_dep' AND inpatient.discharge_date IS NULL;
+                                  ";
+                          $result=mysqli_query($con,$sql);
                               if($result){
                               while($row=mysqli_fetch_assoc($result)){
                                 $profile_image = $row['profile_image'];

@@ -50,6 +50,9 @@ while(true){
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/nurseStyle.css' ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
+        .custom-btn{
+            color: var(--primary-color);
+        }
         .user{
             height:inherit;
         }
@@ -83,7 +86,7 @@ while(true){
                     <div class="room">
                         <div class="room-content">
                             <div class="room-no">Room No: <?php print $row['room_no']; ?></div>
-                            <div class="room-availability">Availability: <?php if($row['room_availability']=='available'){echo "<p style='color:Green;'>Yes </p>";} else{echo "<p style='color:red;'>No </p>";} ?></div>
+                            <div class="room-availability"><?php if($row['room_availability']=='available'){echo "<p style='color:Green;'>Available </p>";} else{echo "<p style='color:red;'>Not Available </p>";} ?></div>
                         </div>
                         <div class="icon-box">
                             <?php if($row['room_availability']=='available'){?>
@@ -122,7 +125,7 @@ while(true){
                     <div class="popup" id="add-room-popup">
                         <div class="popup-content">
                             <form method="post">
-                                <h1>Dp you want to add a room?</h1>
+                                <h1>Do you want to add a room?</h1>
                                 <div class="button-container">
                                     <button type="submit" name ="addRoom" class="custom-btn">Yes</button>
                                     <button class="close-button custom-btn"  name ="close">No</button>
