@@ -13,8 +13,6 @@ let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regContactNum = /^[0-9]{10}$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
 
-
-
 function validateName() {
     nameDiv.innerHTML = "";
     var name = nameDiv.previousSibling.value;
