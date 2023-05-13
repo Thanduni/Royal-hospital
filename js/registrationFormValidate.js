@@ -1,6 +1,7 @@
 let form = document.getElementById("validateForm");
 let nameDiv = document.getElementById("nameDiv");
 let nicDiv = document.getElementById("nicDiv");
+let addressDiv = document.getElementById("addressDiv");
 let emailDiv = document.getElementById("emailDiv");
 let passwordDiv = document.getElementById("passwordDiv");
 let cpasswordDiv = document.getElementById("cpasswordDiv");
@@ -13,6 +14,32 @@ let regNic = /^\d{12}[A-Z]?$/;
 let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let regPassword = /(?=.*\d.*)(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[!#\$%_&\?].*).{8,}/;
 let regContactNum = /^[0-9]{10}$/;
+
+
+function validateAddress() {
+    addressDiv.innerHTML = "";
+    let address = addressDiv.previousSibling.value;
+    if (address == "" || !regAddress.test(address)) {
+        addressDiv.classList.remove("hint");
+        addressDiv.classList.add("alert");
+        addressDiv.innerHTML = "<ul>\n" +
+            "    <li>Please enter a valid address.</li>\n" +
+            "</ul>"
+    }
+}
+
+addressDiv.previousSibling.addEventListener("blur", validateAddress, false)
+
+addressDiv.previousSibling.addEventListener("focus", function () {
+    addressDiv.classList.remove("alert");
+    addressDiv.classList.add("hint");
+    addressDiv.innerHTML = "<ul class='inputMsg'>\n" +
+        "    <li>Address should contain 3 parts ending with a fullstop(.).</li>\n" +
+        "</ul>";
+    ;
+
+    // alert("Hai");
+}, false)
 
 function validateName() {
     nameDiv.innerHTML = "";

@@ -86,12 +86,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                         <table>
                             <tr>
                                 <td><label for="Name">Name: </label></td>
-                                <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="name"></div></td>
+                                <td colspan="2"><input type="text" name="name" value="<?php echo $row['name'] ?> " required><div class="alert" id="nameDiv"></div></td>
                             </tr>
                             <tr>
                                 <td><label for="address">Address: </label></td>
                                 <td colspan="2"><textarea name="address" cols="30"
-                                                          rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="address"></div></td>
+                                                          rows="3" required><?php echo $row['address'] ?></textarea><div class="alert" id="addressDiv"></div></td>
                             </tr>
                             <tr></tr>
                                 <td><label for="contactnum">Contact number: </label></td>

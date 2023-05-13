@@ -161,7 +161,7 @@ if (!isset($_SESSION['mailaddress'])) {
             ?>
         </div>
         <?php } ?>
-        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm" autocomplete="on">
+        <form action=" " method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="validateForm">
             <div class="content">
                 <div class="box" style="padding-bottom: 0px">
                     <label for="">Name</label><br><br>
@@ -187,7 +187,7 @@ if (!isset($_SESSION['mailaddress'])) {
                     <input type="date"  max="<?php echo date("2005-m-d") ?>" name="dob" id="dob"required><br><br>
 
                     <label for="">Address</label><br><br>
-                    <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"required><br><br>
+                    <input type="text" name="address" id="address" placeholder="eg:- 119/1/A, Willmot Street, Colombo-07"required><div id="addressDiv"required></div><br><br>
 
                     <label for="">Gender</label><br><br>
                     <select name="gender" id="gender"required>
