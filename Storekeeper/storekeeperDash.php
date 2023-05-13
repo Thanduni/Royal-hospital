@@ -218,7 +218,13 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
 
                         <div class="card-m">
                             <?php
-                            $sql = "select * from inventory where expiredDate > CURRENT_DATE group by itemID having sum(quantity)=0";
+                            $sql = "SELECT DISTINCT item_name
+FROM item
+WHERE item.itemID NOT IN (
+  SELECT itemID
+  FROM inventory
+  WHERE expiredDate > CURRENT_DATE
+);";
                             $result = mysqli_query($con,$sql);
                             $row = mysqli_num_rows($result);
                             echo '<h1>'.$row.'</h1>';

@@ -125,7 +125,7 @@ if(isset($_POST['deleteRoom'])){
                             <?php }
                             ?>
                         </div>
-                        <button class="button" id="remove-room">Remove</button>
+                        <button class="button custom-btn" id="remove-room">Remove</button>
                     </div>
                 </div>
                 

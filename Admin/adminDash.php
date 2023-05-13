@@ -74,8 +74,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                                     foreach ($row as $rows) {
                                         ?>
                                         <tr>
-                                            <td><?php echo $rows['COUNT(appointment.appointmentID)'] ?></td>
                                             <td><?php echo $rows['name'] ?></td>
+                                            <td><?php echo $rows['COUNT(appointment.appointmentID)'] ?></td>
                                         </tr>
                                     <?php } ?>
                             </table>
