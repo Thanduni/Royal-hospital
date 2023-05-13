@@ -138,13 +138,13 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
           <div class="not-paid"><h1 style="color:red;">Pending</h1>
           <h1 style="color:red;">Balance</h1></div>
           <h3>Total Amount</h3>
-          <h3 style="font-weight:700;">LKR <?php echo $npaid.'.00';?></h3>
+          <h3 id="n-paid" style="font-weight:700;">LKR <?php echo $npaid.'.00';?></h3>
         </div>
       </div>
       
-      <form action="http://localhost:8080/ROYALHOSPITAL/Patient/stripe/checkout_process.php" method="POST">
+      <form name="paymentform" action="" method="POST">
         
-        <a class="arrow1">Click to pay now <i class="fa fa-arrow-right" aria-hidden="true"></i></a><button type="submit" id="checkout-button">Checkout</button>
+        <a class="arrow1">Click to pay now <i class="fa fa-arrow-right" aria-hidden="true"></i></a><button type="submit" id="checkout-button" onclick="func()">Checkout</button>
       </form>
     </div>
 
@@ -179,6 +179,21 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                 $('#login-modal').fadeOut();
             });
         });
+
+        function func(){
+            if(document.getElementById("n-paid").innerHTML == 'LKR 0.00')
+            {
+                document.getElementById("checkout-button").addEventListener("click", function(event){
+                    event.preventDefault()
+                });
+
+                alert("No payments yet!.");
+            }
+            else{
+                document.paymentform.action = 'http://localhost:8080/ROYALHOSPITAL/Patient/stripe/checkout_process.php';
+  
+            }
+        }
   </script>
 </html>
 <?php

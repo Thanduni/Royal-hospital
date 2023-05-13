@@ -372,6 +372,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 document.getElementById("pay-btn").addEventListener("click", function(event){
                     event.preventDefault()
                 });
+
+                alert("No payments yet!.");
             }
             else{
                 location.href='<?php echo BASEURL.'/Patient/stripe/checkout.php'?>';
