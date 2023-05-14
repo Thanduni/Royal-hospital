@@ -24,7 +24,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             background-color: #f9f8ff;
         }
 
-        .s-content table{
+        .userContents .s-content table{
             overflow-y: hidden;
             max-width: 1700px;
             float: left;
@@ -37,7 +37,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
-        .s-content table tr{
+        .userContents .s-content table tr{
             
             background-color: #ffffff;
             height: 65px;
@@ -47,7 +47,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             border-radius: 10px;
             border-color: black;
         }
-        .s-content table tr td{
+        .userContents .s-content table tr td{
             float: left;
             background-color: #ffffff;
             color: black;
@@ -59,7 +59,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             
         }
 
-        .s-content table tr label{
+        .userContents .s-content table tr label{
             color:var(--primary-color);
             font-size: 22px;
             font-weight: 500;
@@ -104,16 +104,19 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             // echo $d_arr[1]."<br>";
             // $docnic = array();
 
-                $query = "select i.admit_date,i.admit_time,i.admitID,i.discharge_date,i.admit_duration,u.name,p.date,p.investigation,p.Impression from inpatient i inner join patient t on i.patientID=t.patientID
-                 inner join prescription p on t.patientID=p.patientID inner join doctor d on d.doctorID=p.doctorID inner join user u on u.nic=d.nic where i.patientID=$pid";
+                $query = "select i.admit_date,i.admit_time,i.admitID,i.discharge_date,i.admit_duration,u.name,p.investigation,p.Impression from inpatient i inner join patient t on i.patientID=t.patientID
+                 inner join prescription p on t.patientID=p.patientID inner join doctor d on d.doctorID=p.doctorID inner join user u on u.nic=d.nic where i.patientID=$pid and patient_type = 'inpatient'";
 
-                 $result = mysqli_query($con,$query);
+                $q1 = "select p.date,u.name,p.investigation,p.Impression,t.patient_type from patient t inner join prescription p on p.patientID=t.patientID inner join doctor d on p.doctorID=d.doctorID inner join user u on d.nic=u.nic where t.patientID=$pid and patient_type = 'outpatient';";
+
+                $res = mysqli_query($con,$q1);
+                $result = mysqli_query($con,$query);
            
 
-                 while($rows = mysqli_fetch_assoc($result)){
-             ?>
+                while($rows = mysqli_fetch_assoc($result)){
+                ?>
                  <div class="s-content">
-                    <?php if(count($rows['admitID'])){ ?>
+                    <?php if($rows['admitID']){ ?>
                     <table>
                             <tr>
                                 <td><label>Admit Date:</label></td>
@@ -140,11 +143,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 <td><p><?php echo $rows['investigation']; ?></p></td>
                             </tr>
                         </table>
-                    <?php } else{?>
+                    <?php } }
+                        while($rows1 = mysqli_fetch_assoc($res)){
+                            if($rows1['patient_type']=='outpatient'){
+                    ?>
                      <table>
                          <tr>
                              <td><label>Prescribed Date:</label></td>
-                             <td><p><?php echo $rows['date']; ?></p></td>
+                             <td><p><?php echo $rows1['date']; ?></p></td>
                          </tr>
                          <tr>
                                 <td><label>Patient Type:</label></td>
@@ -152,21 +158,22 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                             </tr>
                          <tr>
                              <td><label>Doctor Name:</label></td>
-                             <td><p><?php echo $rows['name']; ?></p></td>
+                             <td><p><?php echo $rows1['name']; ?></p></td>
                          </tr>
                          <tr>
                              <td><label for="">Impression:</label></td>
-                             <td><p><?php echo $rows['Impression']; ?></p></td>
+                             <td><p><?php echo $rows1['Impression']; ?></p></td>
                          </tr>
                          <tr>
                              <td><label for="">Investigation:</label></td>
-                             <td><p><?php echo $rows['investigation']; ?></p></td>
+                             <td><p><?php echo $rows1['investigation']; ?></p></td>
                          </tr>
                      </table>
-                     <?php }?>
+                     <?php 
+                    }?>
             <?php
                 }
-                if(mysqli_num_rows($result) == 0)
+                if(mysqli_num_rows($result) == 0 and mysqli_num_rows($res) == 0)
                 {
             ?>
                     <div class="i-image"><img style="width:45%;margin-left:28%;margin-top:-5%;" src="<?php echo BASEURL.'/images/empty.png'?>" >
