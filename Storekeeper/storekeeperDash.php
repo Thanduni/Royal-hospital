@@ -105,6 +105,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                         <div class="cell">Use state</div>
                         
                     </div>
+
+                    
                     <?php
                     $sql = "SELECT q.itemID, q.item_name, q.companyName, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE > p.expiredDate GROUP BY p.itemID;";
                     $result = mysqli_query($con, $sql);
