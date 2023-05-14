@@ -135,7 +135,7 @@ if(isset($_POST['submit-doctor-note'])) {
                     <div class="right-container">
                         <div class="doctor-note">
                             <h2>Doctor Note</h2>
-                            <form action="" method="post">
+                            <form action="" method="post" onsubmit="return validateForm()">
                                 <div class="form-group">
                                     <label for="">Patient ID</label>
                                     <input type="text" name="patientID" value ="<?php echo $patientID?>" readonly>
@@ -156,6 +156,25 @@ if(isset($_POST['submit-doctor-note'])) {
                                 <!-- <button class="addPrescription-button custom-btn" type="submit" name="edit-doctor-note">Edit</button> -->
                                 <button class="addPrescription-button custom-btn" type="submit" name="submit-doctor-note">Submit</button>
                             </form>
+                            <script>
+                                function validateForm() {
+                                var investigation = document.querySelector('input[name="investigation"]').value.trim();
+                                var impression = document.querySelector('input[name="impression"]').value.trim();
+
+                                var numericRegex = /^\d+$/;
+                                if (investigation === '' || impression === '') {
+                                    alert('Please fill in all fields.');
+                                    return false; // Prevent form submission
+                                }
+
+                                if (numericRegex.test(investigation) || numericRegex.test(impression)) {
+                                    alert('Investigation and Impression fields should not contain only numbers.');
+                                    return false; // Prevent form submission
+                                }
+
+                                return true; // Allow form submission
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>

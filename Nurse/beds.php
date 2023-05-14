@@ -86,14 +86,14 @@ while(true){
                     <div class="room">
                         <div class="room-content">
                             <div class="room-no">Room No: <?php print $row['room_no']; ?></div>
-                            <div class="room-availability"><?php if($row['room_availability']=='available'){echo "<p style='color:Green;'>Available </p>";} else{echo "<p style='color:red;'>Not Available </p>";} ?></div>
+                            <div class="room-availability"><?php if($row['room_availability']=='available'){echo "<p style='color:#3c77c6;'>Available </p>";} else{echo "<p style='color:grey;'>Not Available </p>";} ?></div>
                         </div>
                         <div class="icon-box">
                             <?php if($row['room_availability']=='available'){?>
-                                <i style='color:Green;' class="fas fa-bed"></i>
+                                <i style='color:#3c77c6;' class="fas fa-bed"></i>
                             <?php }
                             else if($row['room_availability']=='not_available'){?>
-                                <i style='color:Red;' class="fas fa-bed"></i>
+                                <i style='color:grey;' class="fas fa-bed"></i>
                             <?php }?>
                         </div>
                     </div>

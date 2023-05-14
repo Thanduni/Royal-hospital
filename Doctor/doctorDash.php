@@ -44,8 +44,11 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                 display: flex;
                 flex-direction: column;
             }
-            
+            .table{
+                width:96%;
+            }
             .table-container{
+                align-items: flex-start;
                 height: 500px;
                 overflow-y: scroll;
             }
@@ -158,7 +161,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 <tbody>
                                 <?php
                                 //select patient details from database
-                                $sql="SELECT user.profile_image,user.name,appointment.appointmentID,appointment.date,appointment.time,appointment.message,appointment.patientID,prescription.prescriptionID FROM appointment JOIN patient ON appointment.patientID=patient.patientID JOIN user ON user.nic=patient.nic LEFT JOIN prescription ON appointment.patientID = prescription.patientID WHERE appointment.doctorID =$doctorID AND appointment.status='confirmed' AND appointment.date=CURDATE();";
+                                $sql="SELECT user.profile_image,user.name,appointment.appointmentID,appointment.date,appointment.time,appointment.message,appointment.patientID,prescription.prescriptionID FROM appointment JOIN patient ON appointment.patientID=patient.patientID JOIN user ON user.nic=patient.nic LEFT JOIN prescription ON appointment.patientID = prescription.patientID WHERE appointment.doctorID =$doctorID AND appointment.status='confirmed' AND appointment.date=CURDATE() ORDER BY appointment.time;;";
                                 $result=mysqli_query($con,$sql);
 
                                 if($result){
@@ -215,6 +218,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                 }
                                 ?>
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>

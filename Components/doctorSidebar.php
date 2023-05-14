@@ -38,7 +38,7 @@ require_once("../conf/config.php");
                 <p>Schedule</p>
             </a></li>
         <li onmouseover="changeImage('notice-board.png', 'noticeboard')" onmouseout="restoreImage('notice-boardDef.png', 'noticeboard')"><a id="notice" href="<?php echo BASEURL.'/Doctor/doctorNoticeBoard.php'?>" target="_self"><img id="noticeboard" class="butbut icons"
-                                            src=<?php echo BASEURL . '/images/noticeboardDef.svg' ?> alt="noticeboard"
+                                            src=<?php echo BASEURL . '/images/notice-boardDef.png' ?> alt="noticeboard"
                                             align="middle">
                 <p>Noticeboard</p>
             </a></li>

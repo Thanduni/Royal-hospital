@@ -87,8 +87,8 @@ if(isset($_POST['deleteRoom'])){
                         }elseif($room_availability == 'not_available'){ ?>
                             <!-- get patient details -->
                             <?php
-                            $sql = "SELECT ip.patientID, ip.admit_date, ip.doctorID, p.investigation, u.name as patientName from inpatient ip join user u on u.nic=ip.nic join prescription p on p.patientID=ip.patientID;";
-                            // $sql="SELECT ip.patientID, ip.admit_date, ip.doctorID, p.investigation, u.name as patientName from inpatient ip join user u on u.nic=ip.nic where ip.room_no =$room_no LIMIT 1;";
+                            //$sql = "SELECT ip.patientID, ip.admit_date, ip.doctorID, p.investigation, u.name as patientName from inpatient ip join user u on u.nic=ip.nic join prescription p on p.patientID=ip.patientID;";
+                             $sql="SELECT ip.patientID, ip.admit_date, ip.doctorID,p.investigation,p.impression, u.name as patientName from inpatient ip join user u on u.nic=ip.nic join prescription p on p.patientID=ip.patientID where ip.room_no =$room_no LIMIT 1;";
                             $result=mysqli_query($con,$sql);
 
                             if($result){
@@ -125,7 +125,8 @@ if(isset($_POST['deleteRoom'])){
                             <?php }
                             ?>
                         </div>
-                        <button class="button" id="remove-room">Remove</button>
+                        <?php if($room_availability =='available'){?>
+                        <button class="button custom-btn" id="remove-room">Remove</button> <?php } ?>
                     </div>
                 </div>
                 

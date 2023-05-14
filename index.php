@@ -89,7 +89,7 @@ if (!isset($_SESSION['mailaddress'])) {
                 <img src="<?php echo BASEURL . '/images/homepageDoctor.jpg' ?>" alt="homepageDoctor">
             </div>
             <div class="hospitalArticle">
-                <p style="font-size:26px;text-align: center;font-weight: 900; font-family:'Lato'">About Bayanno Diagnostic Center</p>
+                <p style="font-size:26px;text-align: center;font-weight: 900; font-family:'Lato'">About Royal hospital</p>
                 <br>
                 <p>Royal Hospital has been a trusted name in Sri Lankan healthcare
                     for more than seven Decades. Since our foundation in 1946, we have

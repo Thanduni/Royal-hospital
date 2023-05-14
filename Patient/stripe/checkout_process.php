@@ -23,7 +23,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
       'unit_amount' => $total,//1000lkr = 100000
       'product_data' => [
         'name' => 'Bill Payment',
-        'images' => ["https://image.isu.pub/191130173733-5a8475ac3d94714cf55d7a05296b3d63/jpg/page_1.jpg"],
+        'images' => ["https://github.com/Nareash20010150/Royal-hospital/raw/main/images/image.jpg"],
       ],
     ],
     # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell

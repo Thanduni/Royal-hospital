@@ -78,11 +78,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         </div>
                                     </td>
                                     <td><?php echo $row['room_no'] ?></td>
-                                    <td><?php 
+                                    <td style="text-align: left;"><a href="#" style="color: inherit;"><?php 
                                         $get_investigation = "SELECT investigation, impression FROM prescription WHERE patientID = $patientID  AND date = (
                                           SELECT MAX(date) FROM prescription WHERE patientID = $patientID )";
                                         $investigation_query = mysqli_query($con,$get_investigation);
-                                    ?></td>
+                                        $investigation_row = mysqli_fetch_array($investigation_query);
+                                        $investigation = $investigation_row[0];
+                                        echo $investigation;
+                                    ?></a></td>
                                     <td><a href="viewReport.php?patientid=<?=$row['patientID']?>"><input type="button" name="view-reports" class="view-reports" value="View Reports"></a>
                                     <a href="prescription.php?patientid=<?=$row['patientID']?>"><input type="button" name="prescription" class="prescription-btn" value="Prescribe"></a>
                                     <a href="discharge.php?patientid=<?=$row['patientID']?>"><input type="button" name="discharge" class="discharge" value="Discharge"></a></td>

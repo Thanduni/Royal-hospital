@@ -32,7 +32,7 @@ if(isset($_GET['patientid'])){
     $patientID = $_GET['patientid'];
 
     //if a inpatient re direct to prescription.php
-    $check_patientType = "SELECT * from inpatient WHERE patientID = $patientID;";
+    $check_patientType = "SELECT * from inpatient WHERE patientID = $patientID AND discharge_date is NULL;";
     $check_query = mysqli_query($con,$check_patientType);
     if(mysqli_num_rows($check_query)>0){
         header("Location: prescription.php?patientid=".$patientID);
@@ -87,8 +87,18 @@ if(isset($_GET['patientid'])){
 
 
                     <div class="tab-line">
-                        <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
-                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a>
+                        <div class="back-div">
+                            <a href="doctorDash.php ?>">
+                            <img src="<?php echo BASEURL . '/images/back-button.png' ?>" alt="">
+                            <div class="button-name">Dashboard</div class="button-name"></a>
+                        </div>
+                        <div class="front-div">
+                            <a href="prescriptionTest.php?patientid=<?=$patientID?>">
+                            <img src="<?php echo BASEURL . '/images/right-arrow.png' ?>" alt="">
+                            <div class="button-name">Test Prescription</div class="button-name"></a>
+                        </div>
+                        <!-- <div class="medicine-button " id="medicine-button" onclick ="drugPrescription()">Prescribe Medicine</div>
+                        <a href="prescriptionTest.php?patientid=<?=$patientID?>"><div class="test-button" id="test-button">Prescribe Test</div></a> -->
                     </div>
 
                     <div class="error-message prescription-container-error-message" id="success-message" style="display:none;">
@@ -96,7 +106,7 @@ if(isset($_GET['patientid'])){
                         <a href="displayPatient.php?patientid=<?=$patientID?>"><input type="button" value="Add" class="add-note " name="add-note"></a>
                     </div>
                     <div class="prescribe-medicine-content" id="prescribe-medicine-content">
-                        <form action="processOPDPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                        <form action="processOPDPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off" onsubmit="return validateForm()">
                             <div class="input-feild">
                                 <table id="prescription-table">
                                     <tr>
@@ -114,17 +124,35 @@ if(isset($_GET['patientid'])){
                                         <td><input type="number" name="dosage[]" required min=0></td>
                                         <td><input type="number" name="frequency[]" required min=0></td>
                                         <td><input type="number" name="days[]" required min=0></td>
-                                        <td><input type="button" name="addd" class="add" value="Add"></td>
+                                        <td><input type="button" name="addd" class="add" value="Add row"></td>
+                                        <td><input type="submit" class="save-prescription" name="save" id="save" value="Save Prescription"></td>
                                     </tr>
                                     </div>
                                 </table>
-                                <input type="submit" class="save-prescription" name="save" id="save" value="save data">
                             </div>  
                         </form> 
+                        <script>
+                                function validateForm() {
+                                // Get the input field values
+                                var drugName = document.querySelector('input[name="drugName[]"]').value.trim();
+                                var dosage = document.querySelector('input[name="dosage[]"]').value.trim();
+                                var frequency = document.querySelector('input[name="frequency[]"]').value.trim();
+                                var days = document.querySelector('input[name="days[]"]').value.trim();
+
+                                // Check if any input field contains only whitespace
+                                if (drugName === '' || dosage === '' || frequency === '' || days === '') {
+                                    alert('Please fill in all fields.');
+                                    //displayError();
+                                    return false; // Prevent form submission
+                                }
+
+                                // All input fields have valid values, allow form submission
+                                return true;
+                                }
+                            </script>
                         <div class="show-prescription">
                             <table class="table">
                                 <thead>
-                                    <th>ID</th>
                                     <th>Drug Name</th>
                                     <th>Dosage</th>
                                     <th>Frequency (per day)</th>
@@ -139,7 +167,7 @@ if(isset($_GET['patientid'])){
                                     $result = mysqli_query($con,$select);
                             
                                     while($row= mysqli_fetch_array($result)){?>
-                                <tr><td><?php  echo $prescriptionID ?></td>
+                                <tr>
                                     <td><?php echo $row['drug_name'] ?></td>
                                     <td><?php echo $row['quantity'] ?></td>
                                     <td><?php echo $row['frequency'] ?></td>

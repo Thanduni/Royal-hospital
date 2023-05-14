@@ -1,6 +1,7 @@
 <?php 
 session_start();
-require_once("/xampp/htdocs/Royalhospital/conf/config.php");
+
+require_once("../../conf/config.php");
 $_SESSION['appID_array'][] = '';
 if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 ?>
@@ -38,11 +39,11 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
 <div class="user">
 
     <?php
-          $name = urlencode( $_SESSION['name']);
-          include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);   
+    $name = urlencode( $_SESSION['name']);
+    include(BASEURL.'/Components/PatientSidebar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name);
     ?>
           <div class="userContents"  id="center">
-    <?php
+            <?php
           $name = urlencode( $_SESSION['name']);
           include(BASEURL.'/Components/patientTopbar.php?profilePic=' . $_SESSION['profilePic'] . "&name=" . $name . "&userRole=" . $_SESSION['userRole']. "&nic=" . $_SESSION['nic']);
 

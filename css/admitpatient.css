@@ -44,6 +44,14 @@
     cursor: pointer;
     font-weight: 600;
 }
+.close-button{
+    padding: 0.5em;
+    border: 1px solid #dc3545 !important;
+    background: #f1aeb5 !important;
+    color: #dc3545 !important;
+    cursor: pointer;
+    font-weight: 600;
+}
 .admit-patient-container .admit-patient-detail form{
     padding: 0 20px;
     margin-bottom: 45px;

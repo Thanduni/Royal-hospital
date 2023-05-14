@@ -139,7 +139,7 @@ function outOFStock() {
                         </div>
                         <div class="prescribe-medicine-content" id="prescribe-medicine-content">
                             <!-- form for enter medicine prescription -->
-                            <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                            <form action="processPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off" onsubmit="return validateForm()">
                                 <div class="input-feild">
                                     <table id="prescription-table">
                                         <tr>
@@ -163,8 +163,27 @@ function outOFStock() {
                                         </div>
                                     </table>
                                 </div>  
+                                <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
                             </form> 
-                            <script type="module" src=<?php echo BASEURL . '/js/medicine.js' ?>></script>
+                            <script>
+                                function validateForm() {
+                                // Get the input field values
+                                var drugName = document.querySelector('input[name="drugName[]"]').value.trim();
+                                var dosage = document.querySelector('input[name="dosage[]"]').value.trim();
+                                var frequency = document.querySelector('input[name="frequency[]"]').value.trim();
+                                var days = document.querySelector('input[name="days[]"]').value.trim();
+
+                                // Check if any input field contains only whitespace
+                                if (drugName === '' || dosage === '' || frequency === '' || days === '') {
+                                    alert('Please fill in all fields.');
+                                    return false; // Prevent form submission
+                                }
+
+                                // All input fields have valid values, allow form submission
+                                return true;
+                                }
+                            </script>
+                            
                             <!-- display inserted prescriptions -->
                             <div class="show-prescription">
                                 <table class="table">

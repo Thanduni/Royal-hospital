@@ -11,9 +11,10 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
-    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperViewStock.css' ?>">
     <link rel="stylesheet" href="<?php echo BASEURL . '/css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperStyle.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASEURL . '/css/storekeeperAddMedicine.css' ?>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         .next {
@@ -37,36 +38,52 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
             <img src=<?php echo BASEURL . '/images/arrow-right-circle.svg' ?> alt="arrow">Out of Stock
         </div>
 
-        <div class="wrapper">
-            <div class="table">
-                <div class="row headerT">
-                    <div class="cell">Medicine name</div>
-                    <div class="cell">Options</div>
-                </div>
-                <?php
-                $sql = "select item.item_name from inventory inner join item on inventory.itemID=item.itemID where inventory.expiredDate > CURRENT_DATE 
-                        group by inventory.itemID having sum(quantity)=0;";
-                $result = mysqli_query($con, $sql);
-                $num = mysqli_num_rows($result);
+        <div class="userClass">
+            <div class="wrapper">
+                <div class="table">
+                    <div class="row headerT">
+                        <div class="cell">Medicine name</div>
+                        <div class="cell">Options</div>
+                    </div>
+                    <?php
+                    $sql = "SELECT item_name, itemID
+FROM item
+WHERE item.itemID NOT IN (
+  SELECT itemID
+  FROM inventory
+  WHERE expiredDate > CURRENT_DATE
+) group by item_name;";
+                    $result = mysqli_query($con, $sql);
+                    $num = mysqli_num_rows($result);
 
-                if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $item_name = $row['item_name'];
-                        ?>
-                        <div class="row">
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $item_name = $row['item_name'];
+                            $item_ID = $row['itemID'];
+                            ?>
+                            <div class="row">
 
-                            <div class="cell" data-title="Medicine name">
-                                <?php echo $item_name; ?>
+                                <div class="cell" data-title="Medicine name">
+                                    <?php echo $item_name; ?>
+                                </div>
+                                <div class="cell" data-title="Options">
+                                    <button class="custom-btn" id="<?php echo $item_ID ?>">+Add stock</button>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#<?php echo $item_ID ?>').click(function(){
+                                            $('#userForm').fadeIn().css("display","flex");
+                                        });
+                                    });
+                                </script>
                             </div>
-                            <div class="cell" data-title="Options">
-                                <button class="custom-btn">+Add stock</button>
-                            </div>
-                        </div>
-                        <?php
+                            <?php
+                        }
                     }
-                }
-                ?>
+                    ?>
+                </div>
             </div>
+
         </div>
 
         </div>
@@ -74,7 +91,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
 
 <div id="userForm">
     <div id="form">
-        <form method="post" onsubmit="return validateForm()" enctype="multipart/form-data" id="addForm"
+        <form method="post" action="<?php echo BASEURL . '/Storekeeper/addStock.php' ?>" enctype="multipart/form-data" id="addForm"
               name="userForm">
             <div class="banner">
                 <h1>Stock</h1>
@@ -90,14 +107,15 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         <label for="medicineName">Medicine name:</label>
                     </td>
                     <td colspan="2">
-                        <select name="item_name" id="">
+                        <select name="item_name" id="" required>
                             <?php
                             $sql="Select * from `item`";
                             $result=mysqli_query($con,$sql);
                             while($row=mysqli_fetch_assoc($result)){
                                 $medicineName = $row['item_name'];
+                                $medicineID = $row['itemID'];
                                 ?>
-                                <option value=<?php echo $medicineName ?>><?php echo $medicineName?></option>
+                                <option value='<?php echo $medicineID ?>'><?php echo $medicineName?></option>
                             <?php } ?>
                         </select>
                     </td>
@@ -107,7 +125,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         <label>Quantity</label>
                     </td>
                     <td colspan="2">
-                        <input name="quantity" type="number" id="contact" placeholder="Enter Quantity here">
+                        <input name="quantity" type="number" min="1" id="contact" placeholder="Enter Quantity here" required>
                     </td>
                 </tr>
                 <tr>
@@ -115,7 +133,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         <label for="Manufactured date">Manufactured date:</label>
                     </td>
                     <td colspan="2">
-                        <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>">
+                        <input name="manufacturedDate" type="date" id="name" placeholder="Enter Manufactured date here" max="<?php echo date("Y-m-d") ?>" required>
                     </td>
                 </tr>
                 <tr>
@@ -123,15 +141,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
                         <label>Expired date</label>
                     </td>
                     <td colspan="2">
-                        <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="issue">Describe your issue</label>
-                    </td>
-                    <td colspan="2">
-                        <textarea id="issue" placeholder="Describe your issue in detail here" rows="3"></textarea>
+                        <input name="expiredDate" type="date" id="name" placeholder="Enter Expired date here" min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>" required>
                     </td>
                 </tr>
                 <tr>
@@ -145,6 +155,7 @@ if (isset($_SESSION['mailaddress']) && isset($_SESSION['userRole']) && $_SESSION
         </form>
     </div>
 </div>
+
 <script src=<?php echo BASEURL . '/js/updateMedicine.js' ?>></script>
 <script type="text/javascript">
     $(function(){
