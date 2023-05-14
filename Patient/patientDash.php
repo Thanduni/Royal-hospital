@@ -270,9 +270,9 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                         <label for="">Department</label><br>
                         <select name="department" id="department">
                             <option value="">Please A Select Department</option>
-                            <option value="Anesthetics">Anesthetics</option>
-                            <option value="Cardiology">Cardiology</option>
-                            <option value="Gastroentology">Gastroentology</option>
+                            <option value="ENT">ENT</option>
+                            <option value="General medicine">General medicine</option>
+                            <option value="Orthopedic">Orthopedic</option>
                         </select>
                     </div>
 
