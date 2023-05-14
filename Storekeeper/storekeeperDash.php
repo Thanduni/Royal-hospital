@@ -96,11 +96,14 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole']=="Storekeeper") {
                     <input class="filter" type="checkbox" id="switch" /><label for="switch">Toggle</label>
                     <div style="position: relative;color: red; top: 5px; margin: 14px; font-weight: 600;">Expired</div>
                 </div>
+
+                <!-- stock details table -->
                 <div class="table">
                     <div class="row headerT">
                         <div class="cell">Medicine name</div>
                         <div class="cell">Items remaining</div>
                         <div class="cell">Use state</div>
+                        
                     </div>
                     <?php
                     $sql = "SELECT q.itemID, q.item_name, q.companyName, q.unit_price, SUM(quantity) FROM inventory p inner join item q on p.itemID = q.itemID where CURRENT_DATE > p.expiredDate GROUP BY p.itemID;";
