@@ -90,7 +90,7 @@ if(isset($_GET['patientid'])){
             </div>
             <!-- dynamic form for test prescription -->
             <div class="prescribe-test-content" id="prescribe-test-content">
-                <form action="processTestPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off">
+                <form action="processTestPrescription.php?patientid=<?=$patientID?>&prescriptionid=<?=$prescriptionID?>" class="insert-form" id="insert_form" method="post" autocomplete="off" onsubmit="return validateForm()">
                     <table class="prescription-test-table">
                         <thead>
                             <th>Test Name</th>
@@ -99,11 +99,27 @@ if(isset($_GET['patientid'])){
                             <tr>
                                 <td><div id="autocomplete-wrapper" class="autocomplete-wrapper"><input type="text"  name="Testname[]" class="autoComplete-input" required></div></td>
                                 <td><input type="button" name="addd" class="add-test" value="Add"></td>
+                                <td><input type="submit" value="Save Prescription" name="Save-test" class="save-prescription" id="save-test"></td>
                             </tr>
                         </tbody>
                     </table>
-                    <input type="submit" value="Save Prescription" name="Save-test" class="save-prescription" id="save-test">
                 </form>
+                <script src="../js/medical-tests.js"></script>
+                <script>
+                    function validateForm() {
+                    // Get the input field values
+                    var testName = document.querySelector('input[name="Testname[]"]').value.trim();
+
+                    // Check if any input field contains only whitespace
+                    if (testName === '') {
+                        alert('Please fill in all fields.');
+                        return false; // Prevent form submission
+                    }
+
+                    // All input fields have valid values, allow form submission
+                    return true;
+                    }
+                </script>
                 <!-- display added prescriptions -->
                 <div class="show-test-prescription">
                     <table class="table">
@@ -142,7 +158,7 @@ if(isset($_GET['patientid'])){
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="../js/medical-tests.js"></script>
+
 <script>
     // to add rows
     $(document).ready(function(){
