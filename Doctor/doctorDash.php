@@ -207,7 +207,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                             <td><a href="viewPrescription.php?id=<?=$row['prescriptionID']?>">
                                                     <img class="view-btn-image" src="../images/eye.png "width = 40px height=40px> </a>
                                             </td>
-                                                <td><a href="completeAppointment.php?patientid=<?=$patientID?>&appointmentid=<?=$appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
+                                                <td><a href="completeAppointment.php?patientid=<?php echo $patientID?>&appointmentid=<?php echo $appointmentID?>"><input type="button" name="mark-complete" class="mark-complete" value="Complete"></a></td>
                                                 <?php
                                                 }
                                                 ?>

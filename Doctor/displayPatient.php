@@ -84,10 +84,7 @@ if(isset($_POST['submit-doctor-note'])) {
             <div class="display-container">
                 <div class="patient-detail-container">
                     <div class="left-container">
-                        <div class="patient-image">
-                            <img src="<?=BASEURL?>/uploads/<?=$profile_image?>" alt="upload profile picture">
-                            <!-- <hr> -->
-                        </div>
+                        
                         <?php
                             //select patient informations to display
                             $sql = "SELECT user.profile_image,user.name,patient.weight,patient.height,patient.illness,patient.drug_allergies,patient.medical_history_comments,patient.currently_using_medicine,
@@ -106,6 +103,10 @@ if(isset($_POST['submit-doctor-note'])) {
                                     $medical_history_comments = $row['medical_history_comments'];
                                     $currently_using_medicine = $row['currently_using_medicine'];?>
 
+                            <div class="patient-image">
+                            <?php echo "<img src='".BASEURL."/uploads/".$profile_image."'width = 40px height=40px>";?>
+                                <!-- <hr> -->
+                            </div>
                                 <div class="row">
                                     <label for="Name">Name: </label>
                                     <div class="content"><?php echo $patientName ?></div>
@@ -146,33 +147,28 @@ if(isset($_POST['submit-doctor-note'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="">Investigation</label>
-                                    <input type="text" name="investigation" placeholder="Investigation" id="">
+                                    <input type="text" name="investigation" placeholder="Investigation" id="investigation" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Impression</label>
-                                    <input type="text" name="impression" placeholder="Impression" id="">
-                                    <!-- <textarea name="impression" id="" cols="30" rows="4" placeholder="Impression"></textarea> -->
+                                    <!-- <input type="text" name="impression" placeholder="Impression" id=""> -->
+                                    <textarea name="impression" id="impression" cols="30" rows="2" placeholder="Impression" required></textarea>
                                 </div>
                                 <!-- <button class="addPrescription-button custom-btn" type="submit" name="edit-doctor-note">Edit</button> -->
                                 <button class="addPrescription-button custom-btn" type="submit" name="submit-doctor-note">Submit</button>
                             </form>
                             <script>
                                 function validateForm() {
-                                var investigation = document.querySelector('input[name="investigation"]').value.trim();
-                                var impression = document.querySelector('input[name="impression"]').value.trim();
+                                    var investigation = document.getElementById('investigation').value.trim();
+                                    var impression = document.getElementById('impression').value.trim();
 
-                                var numericRegex = /^\d+$/;
-                                if (investigation === '' || impression === '') {
-                                    alert('Please fill in all fields.');
-                                    return false; // Prevent form submission
-                                }
+                                    if (investigation === '' || impression === '') {
+                                        alert('Please enter the Investigation.');
+                                        return false;
+                                    }
 
-                                if (numericRegex.test(investigation) || numericRegex.test(impression)) {
-                                    alert('Investigation and Impression fields should not contain only numbers.');
-                                    return false; // Prevent form submission
-                                }
-
-                                return true; // Allow form submission
+                                    // All validations passed, form can be submitted
+                                    return true;
                                 }
                             </script>
                         </div>
