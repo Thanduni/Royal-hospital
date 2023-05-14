@@ -141,9 +141,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                             <td colspan="2">
                                 <select name="department" id="department" required>
                                     <option value="">Please A Select Department</option>
-                                    <option value="Anesthetics">Anesthetics</option>
-                                    <option value="Cardiology">Cardiology</option>
-                                    <option value="Gastroentology">Gastroentology</option>
+                                    <option value="ENT">ENT</option>
+                                    <option value="General medicine">General medicine</option>
+                                    <option value="Orthopedic">Orthopedic</option>
                                 </select>
                             </td>
                         </tr>

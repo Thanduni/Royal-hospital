@@ -24,7 +24,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             background-color: #f9f8ff;
         }
 
-        .userContents .s-content table{
+        .userContents .s-box table{
             overflow-y: hidden;
             max-width: 1700px;
             float: left;
@@ -37,17 +37,18 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
-        .userContents .s-content table tr{
-            
+        .userContents  .s-box table tr{
             background-color: #ffffff;
-            height: 65px;
-            font-size: 20px;
+            border-color: white;
+            height: 60px;
+            font-size: 18px;
+            float: left;
             font-weight: 500;
-            width: auto;
-            border-radius: 10px;
-            border-color: black;
+            width: 100%;
+            border-radius: 5px;
+            border-color: var(--para-color);
         }
-        .userContents .s-content table tr td{
+        .userContents .s-box table tr td{
             float: left;
             background-color: #ffffff;
             color: black;
@@ -58,12 +59,12 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
             border-color: none;
             
         }
-
-        .userContents .s-content table tr label{
+        .userContents .s-box table tr label{
             color:var(--primary-color);
             font-size: 22px;
             font-weight: 500;
         }
+
     </style>
 </head>
 <body>
@@ -82,6 +83,8 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
         <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Patient's Summary
         </div>
+
+        <div class="s-box">
         <?php 
             $nic = $_SESSION['nic'];
             $res1 = mysqli_query($con,"select patientID from patient where nic=$nic");
@@ -115,7 +118,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
 
                 while($rows = mysqli_fetch_assoc($result)){
                 ?>
-                 <div class="s-content">
+                
                     <?php if($rows['admitID']){ ?>
                     <table>
                             <tr>
@@ -135,15 +138,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 <td><p><?php echo "Inpatient"; ?></p></td>
                             </tr>
                             <tr>
-                                <td><label for="">Impression:</label></td>
-                                <td><p><?php echo $rows['Impression']; ?></p></td>
-                            </tr>
-                            <tr>
                                 <td><label for="">Investigation:</label></td>
                                 <td><p><?php echo $rows['investigation']; ?></p></td>
                             </tr>
+                            <tr>
+                                <td><label for="">Impression:</label></td>
+                                <td><p><?php echo $rows['Impression']; ?></p></td>
+                            </tr>
                         </table>
-                    <?php } }
+                    <?php } 
+                    }
                         while($rows1 = mysqli_fetch_assoc($res)){
                             if($rows1['patient_type']=='outpatient'){
                     ?>
@@ -161,17 +165,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                              <td><p><?php echo $rows1['name']; ?></p></td>
                          </tr>
                          <tr>
-                             <td><label for="">Impression:</label></td>
-                             <td><p><?php echo $rows1['Impression']; ?></p></td>
-                         </tr>
-                         <tr>
                              <td><label for="">Investigation:</label></td>
                              <td><p><?php echo $rows1['investigation']; ?></p></td>
                          </tr>
+                         <tr>
+                                <td><label for="">Impression:</label></td>
+                                <td><p><?php echo $rows1['Impression']; ?></p></td>
+                            </tr>
                      </table>
                      <?php 
-                    }?>
-            <?php
+                    }
                 }
                 if(mysqli_num_rows($result) == 0 and mysqli_num_rows($res) == 0)
                 {
@@ -196,9 +199,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                 <label for="">Department</label><br><br>
                 <select name="department" id="department">
                     <option value="">Please A Select Department</option>
-                    <option value="Anesthetics">Anesthetics</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Gastroentology">Gastroentology</option>
+                    <option value="ENT">ENT</option>
+                    <option value="General medicine">General medicine</option>
+                    <option value="Orthopedic">Orthopedic</option>
                 </select><br><br>
                 <label for="">Doctor</label><br><br>
                 <select name="doctor" id="doctor">

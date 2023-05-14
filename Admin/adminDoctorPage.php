@@ -148,9 +148,9 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Admin') {
                         <td colspan="2">
                             <select name="department" id="IN_department">
                                 <option value="">Please A Select Department</option>
-                                <option value="Anesthetics">Anesthetics</option>
-                                <option value="Cardiology">Cardiology</option>
-                                <option value="Gastroentology">Gastroentology</option>
+                                <option value="ENT">ENT</option>
+                                <option value="General medicine">General medicine</option>
+                                <option value="Orthopedic">Orthopedic</option>
                             </select><br><br>
                         </td>
                     </tr>

@@ -1,15 +1,15 @@
 // $(document).ready(function(){
 //     $("#department").change(function(){
 //         var val = $(this).val();
-//         if(val == "Anesthetics")
+//         if(val == "ENT")
 //         {
 //             $("#doctor").html("<option value='Dr.Thaduni'>Dr.Thaduni</option><option value='Dr.Kalana'>Dr.Kalana</option>");
 //         }
-//         else if(val == "Cardiology")
+//         else if(val == "General medicine")
 //         {
 //             $("#doctor").html("<option value='Predeep'>Pradeep</option><option value='Dr.Dhathchaya'>Dr.Dhathchaya</option>");
 //         }
-//         else if(val == "Gastroentology"){
+//         else if(val == "Orthopedic"){
 //             $("#doctor").html("<option value='Dr.Anjana'>Dr.Anjana</option><option value='Dr.Saduni'>Dr.Saduni</option>");
 //         }
 //         else{

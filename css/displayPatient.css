@@ -121,7 +121,7 @@ button:disabled{
     padding: 5px 10px;
 }
 .patient-detail-container .right-container .doctor-note{
-    padding: 20px;
+    padding: 20px 20px 0 20px;
 }
 .patient-detail-container .right-container h2{
     padding: 20px;

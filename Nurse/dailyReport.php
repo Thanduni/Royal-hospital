@@ -113,8 +113,8 @@ if(isset($_POST['submit'])){
                         <thead>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>Temperature (℃)</th>
                             <th>Pulse (bpm)</th>
+                            <th>Temperature (℃)</th>
                             <th>Blood Preasure (mmHg)</th>
                             <th>O2 Saturation (%)</th>
                             <th>Option</th>

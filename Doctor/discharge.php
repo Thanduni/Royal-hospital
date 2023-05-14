@@ -79,7 +79,7 @@ if(isset($_POST['discharge-patient'])){
         mysqli_query($con, "UPDATE room SET room_availability='available' WHERE room_no = $room_no ;");
         mysqli_query($con, "UPDATE patient SET patient_type='outpatient' WHERE patientID = $patientID ;");
         mysqli_query($con, "DELETE from daily_report WHERE patientID = $patientID");
-        mysqli_query($con, "DELETE from prescription WHERE patientID = $patientID");
+        //mysqli_query($con, "DELETE from prescription WHERE patientID = $patientID");
         mysqli_query($con, "INSERT into purchases(patientID,date,quantity,paid_status,paid_status1,item,item_flag) VALUES ('$patientID','$current_date','$admitted_days','not paid','not paid','2','s');");
 
         //commit transaction

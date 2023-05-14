@@ -148,19 +148,19 @@ if (!isset($_SESSION['mailaddress'])) {
                 <div class="card">
                     <div class="card__background" style="background-image: url(images/gas.jpg);    box-shadow: 8px 8px 22px var(--primary-color), -8px -8px 22px var(--primary-color);"></div>
                     <div class="card__content">
-                        <h3 class="card__heading">Gastroenterology</h3>
+                        <h3 class="card__heading">ENT</h3>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card__background" style="background-image: url(images/neurology.jpg);    box-shadow: 8px 8px 22px var(--primary-color), -8px -8px 22px var(--primary-color);"></div>
                     <div class="card__content">
-                        <h3 class="card__heading">Neurology</h3>
+                        <h3 class="card__heading">Orthopedic</h3>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card__background" style="background-image: url(images/heart.jpg);    box-shadow: 8px 8px 22px var(--primary-color), -8px -8px 22px var(--primary-color);"></div>
                     <div class="card__content">
-                        <h3 class="card__heading">Cardiology</h3>
+                        <h3 class="card__heading">General medicine</h3>
                     </div>
                 </div>
                     <div>
