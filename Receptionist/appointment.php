@@ -13,6 +13,10 @@ if (isset($_POST["submit"])) {
     $msg = $_POST['msg'];
     $nic = $_SESSION['nic'];
 
+
+    $time = date('H:i:s', strtotime($time));
+
+
     $docNIC_query = "SELECT nic FROM doctor WHERE doctorID = '$doctor'";
     $result_docNIC = mysqli_query($con, $docNIC_query);
     $docNIC = mysqli_fetch_assoc($result_docNIC)['nic'];

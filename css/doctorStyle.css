@@ -667,13 +667,14 @@ header .current-date{
     border-style: none;
     border-radius: 20px;
     /*width: 450px;*/
-    margin: 10px;
+    margin: 28px;
     padding: 10px;
     background-color: white;
 }
 
 .card-Appointment table{
     margin: 0 auto;
+    width: 100%;
 }
 
 #close{

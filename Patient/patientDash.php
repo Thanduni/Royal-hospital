@@ -220,7 +220,7 @@ if(isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient'){
                                     ?>
                                 </div>
                                 <div id="current_time" class="cell time" data-title="Time">
-                                    <?php echo $rows['time']; ?>
+                                    <?php echo date('h:i A', strtotime($rows['time'])); ?>
                                 </div>
                                 <div class="cell" data-title="Doctor">
                                     <?php echo $rows['name']; ?>

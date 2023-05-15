@@ -95,7 +95,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Receptionist') 
                                 <?php echo $rows['date']; ?>
                             </div>
                             <div class="cell" data-title="Time">
-                                <?php echo $rows['time']; ?>
+                                <?php echo date('h:i A', strtotime($rows['time'])); ?>
                             </div>
                             <div class="cell" data-title="Message">
                                 <?php echo $rows['message']; ?>

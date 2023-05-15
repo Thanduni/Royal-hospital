@@ -97,13 +97,16 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
             <div class="arrow">
                 <img src="../images/arrow-right-circle.svg" alt="arrow">Edit schedule
             </div>
-            <h3>Update Schedule</h3>
-            <?php
+            <h3 style="margin: 20px 20px 0px 20px">Update Schedule</h3>
+            <p style="margin-left: 20px">
+                <?php
 
-            echo date("Y/m/d");
-            date_default_timezone_set("Asia/Colombo");
-            echo date("h:i:sa");
-            ?>
+                echo date("Y/m/d")."<br>";
+                date_default_timezone_set("Asia/Colombo");
+                echo date('h:i A');
+                ?>
+            </p>
+
             <div class="editRegion">
                 <div class="editForm">
                     <h2>Edit working hours</h2>

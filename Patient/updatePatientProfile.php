@@ -176,7 +176,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Patient') {
                                 </td>
                             </tr>
                         </table>
-                        <button name="updatePatient" type="submit" onclick="get()">Save changes</button>
+                        <button class="custom-btn" name="updatePatient" type="submit" onclick="get()">Save changes</button>
                     </form>
                 </div>
             </div>

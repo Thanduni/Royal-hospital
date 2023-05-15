@@ -169,7 +169,7 @@ if (isset($_SESSION['mailaddress']) && $_SESSION['userRole'] == 'Doctor') {
                                         $profile_image = $row['profile_image'];
                                         $name =  $row['name'];
                                         $date = $row['date'];
-                                        $time = $row['time'];
+                                        $time = date('h:i A', strtotime($row['time']));
                                         $message = $row['message'];
                                         $patientID= $row['patientID'];
                                         $appointmentID = $row['appointmentID'];?>
